@@ -6,7 +6,7 @@ export const lesson03 = {
   id: 'variables', icon: '📦', title: 'Variables: Names for Values', shortTitle: 'Variables',
   subtitle: 'Store a value, change it and inspect memory one line at a time.', tags: ['Memory', 'Variables', '15 min'],
   blocks: [
-    { type: 'image', src: image, file: 'src/assets/variables-memory.jpg', w: 1536, h: 1024, alt: 'A name tag points to memory boxes as a value changes.', caption: 'Legend: 1 = choose a name. 2 = store a value. 3 = assign again so the name points to the new value.' },
+    { type: 'image', src: image, file: 'src/assets/variables-memory.jpg', w: 1536, h: 1024, alt: 'A name tag points to memory boxes as a value changes.', caption: 'A variable name can refer to a new value.', points: ['Choose a useful name such as `score`.', 'Assign the first value to that name.', 'Assign again when the value changes.'] },
     { type: 'mission', title: 'Keep track of a score', text: 'Our program needs to remember a score and then add five.', weKnow: ['Python can display a value.'], weNeed: ['A name for the value.', 'A way to replace the stored value.'] },
     { type: 'think', prompt: 'If the score changes, should we edit every old number by hand?', answer: 'No. We use one variable name. Later code reads the current value through that name.' },
     { type: 'heading', text: 'Assignment connects a name and a value' },
@@ -14,7 +14,7 @@ export const lesson03 = {
     { type: 'callout', variant: 'analogy', title: 'A label, not a locked box', paragraphs: ['Imagine a reusable label named score. First it refers to 10. A later assignment can make the same name refer to 15.', 'This picture is more accurate than imagining that Python permanently locks one value inside one box. Names and values are separate parts of the story.'] },
     { type: 'heading', text: 'Read assignment from right to left' },
     { type: 'paragraph', text: 'For `score = score + 5`, Python finishes the right side first. It reads the current value 10. It calculates 10 + 5. Only then does it assign the result 15 back to the name score.' },
-    { type: 'image', src: assignmentImage, file: 'src/assets/assignment-right-to-left.jpg', w: 1536, h: 1024, alt: 'Three numbered stages show score being read as 10, increased by 5 and assigned the result 15.', caption: 'Read the picture from right to left: 1 = read the current score, 10. 2 = calculate 10 + 5 to get 15. 3 = assign 15 back to the name score.' },
+    { type: 'image', src: assignmentImage, file: 'src/assets/assignment-right-to-left.jpg', w: 1536, h: 1024, alt: 'Three numbered stages show score being read as 10, increased by 5 and assigned the result 15.', caption: 'Python finishes the right side before changing the left side.', points: ['Read the current value of `score`: 10.', 'Calculate `10 + 5`: the result is 15.', 'Assign 15 back to the name `score`.'] },
     { type: 'callout', variant: 'note', title: 'Names that help the next reader', paragraphs: ['A name may use letters, digits and underscores. It cannot begin with a digit. Python treats score and Score as different names.', 'Choose names that reveal meaning. `score` helps us more than `s`, even though both are legal.'] },
     { type: 'blueprint', purpose: 'Add five to a score.', input: 'Starting score: 10.', processing: 'Read score, add 5, assign the result back.', output: '15', files: ['score.py'] },
     { type: 'code', filename: 'score.py', lines: codeLines },

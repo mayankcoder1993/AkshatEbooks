@@ -1362,3 +1362,17 @@ kbd {
     page-break-after: avoid;
   }
 }
+
+/* Image explanations: a short caption plus readable numbered notes. */
+.lesson-figure figcaption { padding: .9rem 1rem 1rem; }
+.figure-summary { margin: 0; color: var(--text); font-weight: 700; text-align: center; }
+.figure-points { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:.55rem; margin:.75rem 0 0; padding:0; list-style:none; text-align:left; }
+.figure-points li { display:flex; align-items:flex-start; gap:.55rem; padding:.6rem .7rem; border:1px solid var(--border); border-radius:9px; background:var(--panel-soft); color:var(--text); }
+.figure-points li>span { flex:0 0 1.45rem; width:1.45rem; height:1.45rem; display:grid; place-items:center; border-radius:50%; background:var(--accent); color:#fff; font-size:.72rem; font-weight:800; }
+.figure-points p { margin:0; font-size:.82rem; line-height:1.45; }
+@media(max-width:600px){.figure-points{grid-template-columns:1fr}}
+@media print{.figure-points li{break-inside:avoid}.figure-points{grid-template-columns:repeat(2,1fr)}}
+
+.cover-imprint { margin:.25rem 0 .8rem; color:#8a6a20; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+.cp-brand-mark { width:4rem; height:4rem; margin:0 auto 1rem; display:grid; place-items:center; border:1px solid #d8c89d; border-radius:12px; background:#faf6ec; color:#a8842c; font-family:Georgia,serif; font-weight:800; }
+.copyright-page { text-align:left; }

@@ -3,7 +3,7 @@ import Header from './components/Header.jsx'
 import LessonShell from './components/LessonShell.jsx'
 import PrintBook from './components/PrintBook.jsx'
 import Blocks from './components/Blocks.jsx'
-import lessons, { BOOK } from './content/index.js'
+import lessons, { BOOK, BRAND } from './content/index.js'
 
 export default function App() {
   const [theme, setTheme] = useState(() => { try { return localStorage.getItem('aeb-theme') || 'light' } catch { return 'light' } })
@@ -25,7 +25,7 @@ export default function App() {
     <div className="screen-only"><Header theme={theme} onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')} lessons={lessons} active={active} onSelect={setActive} onBookPreview={() => setPreview(true)} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
       <main className="page"><div key={lesson.id}><LessonShell lesson={lesson} index={active} total={lessons.length}><Blocks blocks={lesson.blocks}/></LessonShell></div>
       <nav className="lesson-nav"><button className="btn" disabled={!active} onClick={() => setActive(x=>x-1)}>← Previous</button><span>Lesson {active+1} of {lessons.length}</span><button className="btn primary" disabled={active===lessons.length-1} onClick={() => setActive(x=>x+1)}>Next →</button></nav>
-      <footer className="site-footer">{BOOK.title} · Designed once, published for web, PDF and Word.</footer></main>
+      <footer className="site-footer"><strong>{BRAND.imprint}</strong> · {BRAND.tagline}</footer></main>
       {exporting && <div className="toast">Preparing the editable Word book…</div>}
     </div>
     <div className="print-only"><PrintBook lessons={lessons}/></div>

@@ -1,4 +1,6 @@
-# Akshat EBooks — Python for Absolute Beginners
+# Sarva Gyana Koshah Books — Python for Absolute Beginners
+
+**The First Code Series · Book 1**, by Akshat Sinha.
 
 A light-first interactive ebook built from one structured content source.
 
@@ -28,7 +30,7 @@ npm run build:single
 
 Generated deliverables:
 
-- `public/Akshat-EBooks-Python-for-Absolute-Beginners.docx`
+- `public/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`
 - `public/AkshatEBooks-Interactive-Book.html`
 
 Read `AGENTS.md` before adding content or changing the publishing system.
