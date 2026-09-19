@@ -1300,3 +1300,42 @@ kbd {
   .book-view-screen .book-sheet::after { display: none; }
   .book-view-screen .book-sheet:not(:first-child) { break-before: page; }
 }
+
+/* Rich route visualizer: concrete artifacts and examples at every stage. */
+.pipeline { padding: 1.15rem; overflow: hidden; }
+.pipeline-tabs { gap: .65rem; overflow-x: auto; }
+.pipeline-tabs button { display:flex; align-items:center; gap:.4rem; font-weight:750; white-space:nowrap; }
+.pipeline-tabs button span { font-size:1.15rem; }
+.pipeline-track { --route:#4659a7; margin-top:.9rem; }
+.pipeline-track.route-teal { --route:#168a8a; }
+.pipeline-track.route-amber { --route:#b87518; }
+.pipeline-track.route-indigo { --route:#4659a7; }
+.pipeline-track-header { display:flex; justify-content:space-between; align-items:center; gap:1rem; padding:.85rem 1rem; color:#fff; background:linear-gradient(120deg,var(--route),color-mix(in srgb,var(--route) 72%,#17233f)); border-radius:12px 12px 4px 4px; }
+.route-title { display:flex; align-items:center; gap:.75rem; }
+.route-title h4 { margin:0; color:#fff; }
+.route-title p { margin:.12rem 0 0; max-width:38rem; font-size:.82rem; color:rgba(255,255,255,.86); }
+.route-icon { display:grid; place-items:center; width:2.6rem; height:2.6rem; border-radius:10px; background:rgba(255,255,255,.15); font-size:1.45rem; }
+.route-finish { font-size:.65rem; letter-spacing:.12em; font-weight:800; white-space:nowrap; opacity:.82; }
+.pipeline-stages { gap:.85rem; margin-top:.8rem; }
+.pipeline-stage { min-height:18rem; padding:.85rem; border-top:4px solid var(--route); background:linear-gradient(180deg,color-mix(in srgb,var(--route) 7%,var(--panel)),var(--panel-soft)); }
+.pipeline-stage:not(:last-child)::after { content:none; }
+.stage-top { display:flex; align-items:center; gap:.45rem; margin-bottom:.45rem; }
+.stage-top .stage-number { position:static; flex:0 0 auto; background:var(--route); }
+.stage-top .stage-icon { font-size:1.35rem; }
+.stage-kind { margin-left:auto; font-size:.6rem; letter-spacing:.1em; font-weight:800; color:var(--muted); }
+.pipeline-stage>strong { display:block; font-size:1rem; color:var(--text); }
+.artifact-label { display:block; margin-top:.45rem; color:var(--muted); font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
+.stage-artifact { display:block; min-height:2.4rem; margin:.2rem 0 .45rem; padding:.32rem .45rem; border:1px solid color-mix(in srgb,var(--route) 35%,var(--border)); border-radius:7px; color:var(--route); background:var(--panel); white-space:normal; overflow-wrap:anywhere; }
+.pipeline-stage p { min-height:4.6rem; }
+.stage-example { min-height:3.7rem; margin:.55rem 0 0; padding:.55rem; overflow:auto; border:1px solid var(--border); border-radius:8px; color:var(--text); background:var(--panel); font-size:.72rem; line-height:1.45; white-space:pre-wrap; }
+.route-arrow { position:absolute; top:47%; right:-.85rem; z-index:3; display:grid; place-items:center; width:1.6rem; height:1.6rem; border-radius:50%; color:#fff; background:var(--route); box-shadow:0 0 0 4px var(--panel); font-weight:900; }
+.pipeline-route-key { display:flex; flex-wrap:wrap; gap:.7rem 1rem; margin-top:.9rem; color:var(--muted); font-size:.74rem; }
+.pipeline-route-key span { display:flex; align-items:center; gap:.35rem; }
+.key-dot { width:.55rem; height:.55rem; border-radius:50%; background:var(--route); }
+.key-dot.source { background:#4659a7; }.key-dot.artifact { background:#b87518; }.key-dot.result { background:#168a8a; }
+.pipeline-print-note { color:var(--muted); font-size:.75rem; }
+.static-pipeline { display:grid; gap:1.2rem; }
+.static-pipeline .pipeline-track { margin-top:0; }
+@media(max-width:900px) { .pipeline-stages { grid-template-columns:repeat(2,1fr); }.route-arrow{display:none}.pipeline-stage p{min-height:0} }
+@media(max-width:560px) { .pipeline-stages { grid-template-columns:1fr; }.pipeline-track-header{align-items:flex-start}.route-finish{display:none}.pipeline-stage{min-height:0} }
+@media print { .pipeline-track-header { background:#eef1f8!important; color:#17233f; border:1px solid #cfd6e2; }.route-title h4,.route-title p{color:#17233f}.pipeline-stages{grid-template-columns:repeat(2,1fr)}.pipeline-stage{min-height:0}.stage-example{min-height:0}.route-arrow{display:none} }

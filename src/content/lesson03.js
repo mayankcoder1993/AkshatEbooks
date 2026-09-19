@@ -10,7 +10,10 @@ export const lesson03 = {
     { type: 'think', prompt: 'If the score changes, should we edit every old number by hand?', answer: 'No. We use one variable name. Later code reads the current value through that name.' },
     { type: 'heading', text: 'Assignment connects a name and a value' },
     { type: 'paragraph', text: 'A **variable** is a name that refers to a value. In `score = 10`, the equals sign means **assign**. It does not ask a maths question.' },
-    { type: 'callout', variant: 'analogy', title: 'A label, not a locked box', paragraphs: ['Imagine a reusable label named score. First it points to 10. A later assignment can make it point to 15.'] },
+    { type: 'callout', variant: 'analogy', title: 'A label, not a locked box', paragraphs: ['Imagine a reusable label named score. First it refers to 10. A later assignment can make the same name refer to 15.', 'This picture is more accurate than imagining that Python permanently locks one value inside one box. Names and values are separate parts of the story.'] },
+    { type: 'heading', text: 'Read assignment from right to left' },
+    { type: 'paragraph', text: 'For `score = score + 5`, Python finishes the right side first. It reads the current value 10. It calculates 10 + 5. Only then does it assign the result 15 back to the name score.' },
+    { type: 'callout', variant: 'note', title: 'Names that help the next reader', paragraphs: ['A name may use letters, digits and underscores. It cannot begin with a digit. Python treats score and Score as different names.', 'Choose names that reveal meaning. `score` helps us more than `s`, even though both are legal.'] },
     { type: 'blueprint', purpose: 'Add five to a score.', input: 'Starting score: 10.', processing: 'Read score, add 5, assign the result back.', output: '15', files: ['score.py'] },
     { type: 'code', filename: 'score.py', lines: codeLines },
     { type: 'runviz', filename: 'score.py', codeLines, steps: [
@@ -27,7 +30,7 @@ export const lesson03 = {
     { type: 'bug', prompt: 'Which line uses the wrong variable name?', lines: ['points = 8', 'point = points + 1', 'print(points)'], bugLine: 2, explain: 'Line 2 creates a different name, point. The original points remains 8.' },
     { type: 'quiz', items: [['What does = mean in Python?', 'It assigns the value on the right to the name on the left.'], ['Why does print(score) have no quotes?', 'We want Python to read the value named score.']] },
     { type: 'takeaways', items: ['A variable is a name for a value.', '= performs assignment.', 'A later assignment can change what a name refers to.'] },
-    { type: 'resources', items: [['Python assignment statements', 'https://docs.python.org/3/reference/simple_stmts.html#assignment-statements']] },
+    { type: 'resources', items: [['Python assignment statements', 'https://docs.python.org/3/reference/simple_stmts.html#assignment-statements'], ['Python identifiers and naming rules', 'https://docs.python.org/3/reference/lexical_analysis.html#identifiers']] },
     { type: 'cliffhanger', title: 'Values are not all alike', text: 'Next, we discover why 5 and "5" behave differently.' },
   ],
 }

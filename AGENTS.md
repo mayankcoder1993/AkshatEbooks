@@ -38,6 +38,8 @@ Read this before changing the book. This repository builds a sellable interactiv
 
 `heading`, `paragraph`, `image`, `mission`, `think`, `guess`, `bug`, `callout`, `flow`, `blueprint`, `code`, `runviz`, `terminal`, `pipeline`, `steps`, `mistakes`, `quiz`, `takeaways`, `aha`, `cliffhanger`, `resources`.
 
+Pipeline tracks may include a short `summary` and display `color`. Each stage may include a concrete `example` alongside its name, artifact and explanation. Keep examples short enough to scan inside a visual card.
+
 A new block type requires: lesson data, a `Blocks.jsx` case, a `docx.js` case, CSS, and verification in all outputs.
 
 ## Mandatory static transformations
