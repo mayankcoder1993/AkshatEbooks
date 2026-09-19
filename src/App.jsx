@@ -16,13 +16,13 @@ export default function App() {
   const savePdf = () => { setPreview(true); setTimeout(() => window.print(), 700) }
   const saveWord = async () => { setExporting(true); try { const { exportBookToWord } = await import('./export/docx.js'); await exportBookToWord() } catch (e) { console.error(e); alert(`Word export failed: ${e.message}`) } finally { setExporting(false) } }
   return <>
-    <div className="screen-only"><Header theme={theme} onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')} lessons={lessons} active={active} onSelect={setActive} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
+    <div className="screen-only"><Header theme={theme} onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')} lessons={lessons} active={active} onSelect={setActive} onBookPreview={() => setPreview(true)} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
       <main className="page"><div key={lesson.id}><LessonShell lesson={lesson} index={active} total={lessons.length}><Blocks blocks={lesson.blocks}/></LessonShell></div>
       <nav className="lesson-nav"><button className="btn" disabled={!active} onClick={() => setActive(x=>x-1)}>← Previous</button><span>Lesson {active+1} of {lessons.length}</span><button className="btn primary" disabled={active===lessons.length-1} onClick={() => setActive(x=>x+1)}>Next →</button></nav>
       <footer className="site-footer">{BOOK.title} · Designed once, published for web, PDF and Word.</footer></main>
       {exporting && <div className="toast">Preparing the editable Word book…</div>}
     </div>
     <div className="print-only"><PrintBook lessons={lessons}/></div>
-    {preview && <div className="preview-overlay force-light"><div className="preview-toolbar no-print"><span>Book View · choose “Save as PDF” in the print dialog.</span><button className="btn" onClick={()=>setPreview(false)}>Close</button></div><div className="preview-paper"><PrintBook lessons={lessons}/></div></div>}
+    {preview && <div className="preview-overlay force-light"><div className="preview-toolbar no-print"><span>📖 Book View · every interactive answer is expanded for reading and print.</span><div className="preview-actions"><button className="btn primary" onClick={() => window.print()}>🖨 Save as PDF</button><button className="btn" onClick={()=>setPreview(false)}>✕ Close</button></div></div><div className="preview-paper"><PrintBook lessons={lessons}/></div></div>}
   </>
 }
