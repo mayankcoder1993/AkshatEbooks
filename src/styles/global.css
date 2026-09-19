@@ -1249,3 +1249,54 @@ kbd {
 .book-view-screen { min-height:100vh; background:#eef1f6; padding-bottom:2rem; color:#1a1d27; }
 .book-view-screen .preview-toolbar { z-index:100; }
 @media print { .book-view-screen { background:#fff; padding:0; } .book-view-screen .preview-paper { max-width:none; margin:0; padding:0; box-shadow:none; border-radius:0; } }
+
+/* Book preview uses clearly separated paper sheets. */
+.book-view-screen .preview-paper {
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+  background: transparent;
+  box-shadow: none;
+}
+.book-view-screen .book {
+  display: grid;
+  gap: 1.5rem;
+}
+.book-view-screen .book-sheet {
+  position: relative;
+  width: min(100%, 794px);
+  min-height: 1080px;
+  margin: 0 auto;
+  padding: 3.5rem 4rem;
+  background: #fff;
+  border: 1px solid #d9dee8;
+  border-radius: 4px;
+  box-shadow: 0 12px 35px rgba(31, 42, 68, .14);
+}
+.book-view-screen .book-sheet::after {
+  content: attr(data-page-label);
+  position: absolute;
+  top: 1.1rem;
+  right: 1.35rem;
+  color: #687386;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.book-view-screen .book-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.book-view-screen .front-page { max-width: none; }
+@media(max-width:680px) {
+  .book-view-screen .preview-paper { padding: 0 .55rem; }
+  .book-view-screen .book-sheet { min-height: 760px; padding: 3rem 1.25rem 2rem; }
+}
+@media print {
+  .book-view-screen .book { display: block; }
+  .book-view-screen .book-sheet { width: auto; min-height: 0; margin: 0; padding: 0; border: 0; box-shadow: none; }
+  .book-view-screen .book-sheet::after { display: none; }
+  .book-view-screen .book-sheet:not(:first-child) { break-before: page; }
+}
