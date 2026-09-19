@@ -10,7 +10,8 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "generate:docx": "node --import ./scripts/register-jpg.mjs scripts/generate-docx.mjs",
-    "build:single": "vite build --config vite.singlefile.config.mjs && cp single-build/index.html public/AkshatEBooks-Interactive-Book.html"
+    "build:single": "vite build --config vite.singlefile.config.mjs && cp single-build/index.html public/AkshatEBooks-Interactive-Book.html",
+    "generate:crest": "node scripts/generate-crest-variants.mjs"
   },
   "dependencies": {
     "docx": "^9.5.1",
@@ -18,6 +19,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@vitejs/plugin-react": "^4.3.4",
     "vite": "^6.3.5",
     "vite-plugin-singlefile": "^2.3.0"

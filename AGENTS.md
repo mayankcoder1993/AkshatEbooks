@@ -21,7 +21,7 @@ Read this before changing the book. This repository builds a sellable interactiv
 8. **No server is needed by readers.** The generated HTML, DOCX and PDF are deliverables. Vite is only a development tool.
 9. **Show, then name.** Terms such as bytecode, class file, compiler and linker require a concrete code or command example. Never teach them as definitions alone.
 10. **User-visible brand.** Author = Akshat Sinha. Imprint = Sarva Gyana Koshah Books. Publisher = Sarva Gyana Koshah Books, a division of The Sinha Family Group. Never show “AkshatEBooks” in reader-facing copy.
-11. **Crest placement is minimal.** The exact Sinha Family crest may appear on the title and copyright pages only. Never redraw or retype its SVG path. Generate color variants from `brand/sinha-crest-template.svg`. The active variant is ivory (`#FAF6EC` background, `#A8842C` antique-gold ink, fixed red accents `#D9383A`).
+11. **Crest placement is minimal.** The exact Sinha Family crest may appear on the title and copyright pages only. Never redraw or retype its SVG path. Generate color variants from `brand/sinha-crest-template.svg` with `npm run generate:crest`; never hand-edit a derived crest or overwrite the master. The active variant is ivory (`#FAF6EC` background, `#A8842C` antique-gold ink, fixed red accents `#D9383A`).
 12. **Imprint logo is a separate asset.** Never invent or redraw it. When the owner uploads `final logo.png`, copy it without recoloring to the paths documented in the AI Share Pack.
 
 ## Architecture
