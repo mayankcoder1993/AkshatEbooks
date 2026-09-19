@@ -1,4 +1,5 @@
 import image from '../assets/variables-memory.jpg'
+import assignmentImage from '../assets/assignment-right-to-left.jpg'
 
 const codeLines = ['score = 10', 'score = score + 5', 'print(score)']
 export const lesson03 = {
@@ -13,6 +14,7 @@ export const lesson03 = {
     { type: 'callout', variant: 'analogy', title: 'A label, not a locked box', paragraphs: ['Imagine a reusable label named score. First it refers to 10. A later assignment can make the same name refer to 15.', 'This picture is more accurate than imagining that Python permanently locks one value inside one box. Names and values are separate parts of the story.'] },
     { type: 'heading', text: 'Read assignment from right to left' },
     { type: 'paragraph', text: 'For `score = score + 5`, Python finishes the right side first. It reads the current value 10. It calculates 10 + 5. Only then does it assign the result 15 back to the name score.' },
+    { type: 'image', src: assignmentImage, file: 'src/assets/assignment-right-to-left.jpg', w: 1536, h: 1024, alt: 'Three numbered stages show score being read as 10, increased by 5 and assigned the result 15.', caption: 'Read the picture from right to left: 1 = read the current score, 10. 2 = calculate 10 + 5 to get 15. 3 = assign 15 back to the name score.' },
     { type: 'callout', variant: 'note', title: 'Names that help the next reader', paragraphs: ['A name may use letters, digits and underscores. It cannot begin with a digit. Python treats score and Score as different names.', 'Choose names that reveal meaning. `score` helps us more than `s`, even though both are legal.'] },
     { type: 'blueprint', purpose: 'Add five to a score.', input: 'Starting score: 10.', processing: 'Read score, add 5, assign the result back.', output: '15', files: ['score.py'] },
     { type: 'code', filename: 'score.py', lines: codeLines },

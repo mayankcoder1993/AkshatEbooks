@@ -1,4 +1,5 @@
 import image from '../assets/data-types.jpg'
+import plusByType from '../assets/type-changes-plus.jpg'
 
 const codeLines = ['name = "Asha"', 'age = 12', 'height = 1.52', 'is_learning = True', 'print(type(name))', 'print(age + 1)']
 export const lesson04 = {
@@ -13,6 +14,7 @@ export const lesson04 = {
     { type: 'callout', variant: 'note', title: 'Four types to begin with', paragraphs: ['`str` means string, which is text. `int` means integer, which is a whole number. `float` is a number with a decimal point. `bool` is either `True` or `False`.', 'The type belongs to the value. A variable name can later refer to a value of another type. This is called **dynamic typing**. Python tracks the type while the program runs.'] },
     { type: 'heading', text: 'The same symbol can mean a different operation' },
     { type: 'paragraph', text: 'For integers, `3 + 4` means number addition and produces 7. For strings, `"3" + "4"` means joining text and produces `"34"`. Type gives the `+` symbol enough context to choose the operation.' },
+    { type: 'image', src: plusByType, file: 'src/assets/type-changes-plus.jpg', w: 1264, h: 843, alt: 'Two lanes compare integer addition with string joining using the plus symbol.', caption: 'Top lane: int values 3 + 4 produce the int value 7. Bottom lane: str values "3" + "4" join to produce the str value "34".' },
     { type: 'callout', variant: 'analogy', title: 'Type is a safety clue', paragraphs: ['A label saying “paint” changes how we handle a tin. A type gives Python a similar clue. It prevents unclear requests such as adding the number 1 directly to the text "two".', 'When types do not match our intention, Python stops with an error instead of silently inventing an answer.'] },
     { type: 'flow', input: ['Values', '"Asha", 12, 1.52, True'], process: ['Python', 'keeps each type'], output: ['Safe operations', 'join text, add numbers, test truth'] },
     { type: 'blueprint', purpose: 'Store a small learner profile.', input: 'Text, a whole number, a decimal and a truth value.', processing: 'Python stores each value with its type.', output: 'The type of name and next year’s age.', files: ['types.py'] },

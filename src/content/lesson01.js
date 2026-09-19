@@ -1,4 +1,5 @@
 import image from '../assets/hello-world-infographic.jpg'
+import printAnatomy from '../assets/print-anatomy.jpg'
 
 const codeLines = ['print("Hello, World!")']
 
@@ -14,6 +15,7 @@ export const lesson01 = {
     { type: 'callout', variant: 'analogy', title: 'Precise like a recipe, active like a remote control', paragraphs: ['A recipe describes actions. It does nothing until someone follows it. Source code is similar: the file stores instructions, and the Python runtime performs them.', 'Unlike a person, Python does not quietly repair a missing quote or guess a misspelled action. That strictness helps every reader get the same result.'] },
     { type: 'heading', text: 'Step 2 — Meet every character' },
     { type: 'paragraph', text: '`print` is a **built-in function**—a ready-made action supplied by Python. The round brackets call that action. The quotes mark text. The exclamation mark and comma inside the quotes are ordinary characters, so Python displays them too.' },
+    { type: 'image', src: printAnatomy, file: 'src/assets/print-anatomy.jpg', w: 1536, h: 1024, alt: 'Numbered callouts identify the function name, brackets, quotes and text value in print("Hello").', caption: 'Legend: 1 = print is the ready-made action. 2 = the brackets call it. 3 = quotes mark the text boundary. 4 = Hello is the value passed into the action.' },
     { type: 'flow', input: ['Value', '"Hello, World!"'], process: ['Function call', 'print(...)'], output: ['stdout', 'Hello, World!'] },
     { type: 'callout', variant: 'note', title: 'What is stdout?', paragraphs: ['stdout means **standard output**. It is the normal stream a program uses to send results outward. In our terminal, that stream appears as text on the screen.'] },
     { type: 'heading', text: 'Step 3 — Plan before we type' },

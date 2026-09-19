@@ -1,4 +1,5 @@
 import image from '../assets/code-machine-pipeline.jpg'
+import pythonRoute from '../assets/python-hidden-route.jpg'
 
 const PYTHON_CODE = ['message = "Hello"', 'print(message)']
 
@@ -12,6 +13,7 @@ export const lesson02 = {
     { type: 'heading', text: 'First, keep one simple picture in your head' },
     { type: 'flow', input: ['Our file', 'instructions we can read'], process: ['Language helper', 'prepares and runs them'], output: ['Computer result', 'Hello appears'] },
     { type: 'paragraph', text: 'That middle helper is not identical for every language. The details change, but the reason stays the same: **human-friendly code must become machine work**.' },
+    { type: 'image', src: pythonRoute, file: 'src/assets/python-hidden-route.jpg', w: 1536, h: 1024, alt: 'Four numbered stages show a Python file being checked, changed into smaller instructions and run to display Hello.', caption: 'Python route legend: 1 = our source file. 2 = Python checks its rules. 3 = Python prepares smaller internal instructions. 4 = the runtime performs them and Hello reaches the terminal.' },
     { type: 'callout', variant: 'analogy', title: 'The note and the musician', paragraphs: ['Sheet music is useful to a musician, but a piano does not read the paper by itself. The musician reads the notes and presses the keys.', 'Our source file is like the sheet music. A language tool reads it. The processor performs the final operations.'] },
     { type: 'heading', text: 'Now compare three routes—one at a time' },
     { type: 'paragraph', text: 'Every route below prints `Hello`. Select a tab. Read only the four numbered cards from left to right. The small box answers one question: **what do we have at this step?**' },
