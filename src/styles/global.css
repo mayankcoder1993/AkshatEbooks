@@ -1339,3 +1339,26 @@ kbd {
 @media(max-width:900px) { .pipeline-stages { grid-template-columns:repeat(2,1fr); }.route-arrow{display:none}.pipeline-stage p{min-height:0} }
 @media(max-width:560px) { .pipeline-stages { grid-template-columns:1fr; }.pipeline-track-header{align-items:flex-start}.route-finish{display:none}.pipeline-stage{min-height:0} }
 @media print { .pipeline-track-header { background:#eef1f8!important; color:#17233f; border:1px solid #cfd6e2; }.route-title h4,.route-title p{color:#17233f}.pipeline-stages{grid-template-columns:repeat(2,1fr)}.pipeline-stage{min-height:0}.stage-example{min-height:0}.route-arrow{display:none} }
+
+/* A chapter owns its page boundary. Never let a new lesson continue on the
+   same printed page as the previous lesson. */
+.book-view-screen .chapter-wrapper {
+  border-top: 6px solid #4659a7;
+}
+@media print {
+  .chapter-wrapper {
+    display: block !important;
+    page-break-before: always !important;
+    break-before: page !important;
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+  .chapter-wrapper .lesson-page {
+    page-break-before: auto !important;
+    break-before: auto !important;
+  }
+  .chapter-wrapper .lesson-page-header {
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+}
