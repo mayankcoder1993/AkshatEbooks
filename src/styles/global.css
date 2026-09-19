@@ -1246,3 +1246,6 @@ kbd {
 @keyframes step-enter { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
 .preview-actions { display:flex; gap:.55rem; align-items:center; flex-shrink:0; }
 @media(max-width:680px) { .preview-toolbar { align-items:flex-start; flex-direction:column; } .preview-actions { width:100%; } }
+.book-view-screen { min-height:100vh; background:#eef1f6; padding-bottom:2rem; color:#1a1d27; }
+.book-view-screen .preview-toolbar { z-index:100; }
+@media print { .book-view-screen { background:#fff; padding:0; } .book-view-screen .preview-paper { max-width:none; margin:0; padding:0; box-shadow:none; border-radius:0; } }

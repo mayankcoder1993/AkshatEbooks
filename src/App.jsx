@@ -15,6 +15,12 @@ export default function App() {
   const lesson = lessons[active]
   const savePdf = () => { setPreview(true); setTimeout(() => window.print(), 700) }
   const saveWord = async () => { setExporting(true); try { const { exportBookToWord } = await import('./export/docx.js'); await exportBookToWord() } catch (e) { console.error(e); alert(`Word export failed: ${e.message}`) } finally { setExporting(false) } }
+
+  if (preview) return <div className="book-view-screen force-light">
+    <div className="preview-toolbar no-print"><span>📖 Book View · every interactive answer is expanded for reading and print.</span><div className="preview-actions"><button className="btn primary" onClick={() => window.print()}>🖨 Save as PDF</button><button className="btn" onClick={() => setPreview(false)}>✕ Back to Web View</button></div></div>
+    <div className="preview-paper"><PrintBook lessons={lessons}/></div>
+  </div>
+
   return <>
     <div className="screen-only"><Header theme={theme} onToggleTheme={() => setTheme(t => t === 'light' ? 'dark' : 'light')} lessons={lessons} active={active} onSelect={setActive} onBookPreview={() => setPreview(true)} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
       <main className="page"><div key={lesson.id}><LessonShell lesson={lesson} index={active} total={lessons.length}><Blocks blocks={lesson.blocks}/></LessonShell></div>
@@ -23,6 +29,5 @@ export default function App() {
       {exporting && <div className="toast">Preparing the editable Word book…</div>}
     </div>
     <div className="print-only"><PrintBook lessons={lessons}/></div>
-    {preview && <div className="preview-overlay force-light"><div className="preview-toolbar no-print"><span>📖 Book View · every interactive answer is expanded for reading and print.</span><div className="preview-actions"><button className="btn primary" onClick={() => window.print()}>🖨 Save as PDF</button><button className="btn" onClick={()=>setPreview(false)}>✕ Close</button></div></div><div className="preview-paper"><PrintBook lessons={lessons}/></div></div>}
   </>
 }
