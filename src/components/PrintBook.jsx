@@ -1,54 +1,14 @@
-/**
- * Renders the whole book: cover, table of contents and every lesson
- * in its static, print-friendly form. Used for:
- *   - browser printing (Ctrl+P)          → light mode, content only
- *   - "Save all as PDF" preview overlay
- *   - Word export (server-rendered to HTML)
- */
+import Blocks from './Blocks.jsx'
+import { BOOK, PREFACE } from '../content/index.js'
+
 export default function PrintBook({ lessons }) {
-  const today = new Date().toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-
-  return (
-    <div className="book">
-      <section className="book-cover">
-        <div className="cover-badge">📚</div>
-        <h1>Akshat EBooks</h1>
-        <h2>Interactive Course Notes — Book Edition</h2>
-        <p className="cover-date">Generated on {today}</p>
-        <div className="toc">
-          <h3>Contents</h3>
-          <ol>
-            {lessons.map(l => (
-              <li key={l.id}>
-                <strong>{l.title}</strong> <span>— {l.subtitle}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {lessons.map((L, idx) => (
-        <article key={L.id} className="lesson-page">
-          <header className="lesson-page-header">
-            <p className="lesson-page-kicker">
-              Lesson {String(idx + 1).padStart(2, '0')} · Akshat EBooks
-            </p>
-            <h1>
-              {L.icon} {L.title}
-            </h1>
-            <p className="lesson-page-sub">{L.subtitle}</p>
-          </header>
-          <L.Body staticMode />
-        </article>
-      ))}
-
-      <footer className="book-footer">
-        <p>— End of notes · Akshat EBooks · keep learning ✨ —</p>
-      </footer>
-    </div>
-  )
+  return <main className="book force-light">
+    <section className="book-cover"><p className="cover-series">{BOOK.series}</p><div className="cover-mark">AE</div><h1>{BOOK.title}</h1><h2>{BOOK.subtitle}</h2><p className="cover-author">{BOOK.author}</p><p>{BOOK.edition} · {BOOK.year}</p></section>
+    <section className="front-page"><h1>{BOOK.title}</h1><p><strong>Copyright © {BOOK.year} {BOOK.author}</strong></p><p>{BOOK.rights}</p><p>{BOOK.disclaimer}</p><blockquote>{BOOK.dedication}</blockquote></section>
+    <section className="front-page toc"><h1>Contents</h1><ol><li><a href="#print-preface">Preface — Why Python?</a></li><li><a href="#print-how-to">How to use this book</a></li>{lessons.map((l,i)=><li key={l.id}><a href={`#print-${l.id}`}>Lesson {i+1}: {l.title}</a><span>{l.subtitle}</span></li>)}</ol></section>
+    <section className="front-page" id="print-preface"><h1>{PREFACE.title}</h1><Blocks blocks={PREFACE.blocks} staticMode/></section>
+    <section className="front-page" id="print-how-to"><h1>How to use this book</h1><p>First, make a guess. Then run the code. Finally, compare what happened with your guess.</p><p>In Web View, buttons reveal answers and visualizers move one step at a time. In this Book View, every answer and every step is already visible.</p><p>Type the code yourself. Small typing mistakes teach you how Python responds.</p></section>
+    {lessons.map((l,i)=><article className="lesson-page" id={`print-${l.id}`} key={l.id}><header className="lesson-page-header"><p className="lesson-page-kicker">Lesson {String(i+1).padStart(2,'0')} · {BOOK.title}</p><h1>{l.icon} {l.title}</h1><p className="lesson-page-sub">{l.subtitle}</p></header><Blocks blocks={l.blocks} staticMode/></article>)}
+    <section className="front-page about"><h1>About the author</h1><p>{BOOK.aboutAuthor}</p><h2>Keep learning</h2><p>Your next useful program begins with one small question. Keep guessing, running and checking.</p></section>
+  </main>
 }

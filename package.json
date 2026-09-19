@@ -1,22 +1,26 @@
 {
   "name": "akshat-ebooks-notes",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "Akshat EBooks — interactive, animated course notes that can be exported to PDF and Word.",
+  "description": "A single-source interactive ebook system for absolute beginners.",
   "scripts": {
-    "dev": "vite",
+    "predev": "npm run generate:docx && npm run build:single",
+    "dev": "vite --host 0.0.0.0",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host 0.0.0.0",
+    "generate:docx": "node --import ./scripts/register-jpg.mjs scripts/generate-docx.mjs",
+    "build:single": "vite build --config vite.singlefile.config.mjs && cp single-build/index.html public/AkshatEBooks-Interactive-Book.html"
   },
   "dependencies": {
+    "docx": "^9.5.1",
     "framer-motion": "^11.11.17",
-    "html-docx-js-typescript": "^0.1.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.3.5"
+    "vite": "^6.3.5",
+    "vite-plugin-singlefile": "^2.3.0"
   }
 }

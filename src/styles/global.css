@@ -1154,3 +1154,88 @@ kbd {
     margin: 14mm;
   }
 }
+
+/* ===== Single-source publishing additions ===== */
+[data-theme='light'] {
+  --code-bg: #f4f6f9;
+}
+[data-theme='light'] .code-titlebar,
+.force-light .code-titlebar,
+[data-theme='light'] .term-titlebar,
+.force-light .term-titlebar { background:#e9edf3; border-color:#d4dbe5; }
+[data-theme='light'] .code-line .lc,
+.force-light .code-line .lc,
+[data-theme='light'] .term-line.prompt .cmd,
+.force-light .term-line.prompt .cmd { color:#172033; }
+[data-theme='light'] .code-filename,
+.force-light .code-filename,
+[data-theme='light'] .term-title,
+.force-light .term-title { color:#4d596b; }
+[data-theme='light'] .mini-console-body,
+.force-light .mini-console-body,
+[data-theme='light'] .memory-chip,
+.force-light .memory-chip { background:#edf1f5; border-color:#cbd4df; color:#172033; }
+[data-theme='light'] .term-line.out,
+.force-light .term-line.out,
+[data-theme='light'] .mini-console-body,
+.force-light .mini-console-body { color:#08745c; }
+[data-theme='light'] .term-line.prompt .ps,
+.force-light .term-line.prompt .ps { color:#08745c; }
+
+.brand-badge { width:2.2rem; height:2.2rem; display:grid; place-items:center; border-radius:10px; background:var(--accent); color:white; font-weight:800; font-size:.8rem; letter-spacing:.06em; }
+.lesson-figure { margin:0 0 1.4rem; border:1px solid var(--border); border-radius:18px; overflow:hidden; background:var(--panel); box-shadow:var(--shadow); }
+.lesson-figure img { display:block; width:100%; aspect-ratio:3/2; object-fit:cover; }
+.lesson-figure figcaption { padding:.75rem 1rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
+.mission { background:linear-gradient(135deg,#233963,#3f5d9d); color:white; border-radius:18px; padding:1.35rem 1.5rem; margin:1rem 0 1.6rem; box-shadow:var(--shadow); }
+.mission h2 { margin:.25rem 0; }
+.mission .eyebrow,.journey-card>span,.aha>span,.cliffhanger>span { font-size:.72rem; letter-spacing:.14em; font-weight:800; }
+.mission-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
+.mission-grid>div { background:rgba(255,255,255,.11); padding:.8rem 1rem; border-radius:12px; }
+.mission-grid ul { margin:.35rem 0 0; padding-left:1.2rem; }
+.journey-card { margin:1rem 0; border:1px solid var(--border); border-left:5px solid var(--warn); background:var(--panel); border-radius:14px; padding:1rem 1.15rem; break-inside:avoid; }
+.journey-card h3 { margin:.3rem 0 .7rem; }
+.journey-card.guess { border-left-color:var(--accent); }
+.journey-card.bug { border-left-color:#c65a4a; }
+.reveal-button { border:0; border-radius:8px; padding:.5rem .8rem; color:white; background:var(--accent); font:inherit; font-weight:700; cursor:pointer; }
+.reveal-answer { margin-top:.65rem; padding:.55rem .75rem; background:var(--panel-soft); border-radius:8px; }
+.aha,.cliffhanger { margin:1.4rem 0; border-radius:16px; padding:1.1rem 1.25rem; break-inside:avoid; }
+.aha { background:#e8f7f2; border:1px solid #b8dfd4; color:#164f46; }
+.cliffhanger { background:linear-gradient(135deg,var(--accent-soft),var(--panel)); border:1px solid var(--border); }
+.cliffhanger h3 { margin:.2rem 0; }
+.resources { display:grid; gap:.55rem; }
+.resources a { color:var(--accent); background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:.7rem .9rem; font-weight:700; text-decoration:none; }
+.resources small { display:block; color:var(--muted); font-weight:400; word-break:break-all; }
+.pipeline { border:1px solid var(--border); border-radius:16px; padding:1rem; background:var(--panel); box-shadow:var(--shadow); }
+.pipeline-tabs { display:flex; gap:.5rem; border-bottom:1px solid var(--border); padding-bottom:.75rem; }
+.pipeline-tabs button { border:1px solid var(--border); background:var(--panel-soft); color:var(--text); border-radius:8px; padding:.5rem .9rem; font:inherit; cursor:pointer; }
+.pipeline-tabs button.active { background:var(--accent); color:white; }
+.pipeline-track h4 { font-size:1.1rem; margin:1rem 0 .7rem; }
+.pipeline-stages { display:grid; grid-template-columns:repeat(4,1fr); gap:.65rem; }
+.pipeline-stage { position:relative; border:1px solid var(--border); background:var(--panel-soft); border-radius:12px; padding:.8rem; min-height:9rem; }
+.pipeline-stage:not(:last-child)::after { content:'→'; position:absolute; right:-.65rem; top:42%; z-index:2; color:var(--accent); font-weight:900; }
+.stage-number { position:absolute; top:.45rem; right:.55rem; width:1.35rem; height:1.35rem; border-radius:50%; display:grid; place-items:center; background:var(--accent); color:white; font-size:.72rem; }
+.stage-icon { display:block; font-size:1.5rem; }
+.pipeline-stage strong,.pipeline-stage code { display:block; }
+.pipeline-stage p { color:var(--muted); font-size:.82rem; line-height:1.4; }
+.static-pipeline .pipeline-track { break-inside:avoid; }
+.cover-mark { width:5rem;height:5rem;margin:1.5rem auto;display:grid;place-items:center;border-radius:22px;background:#4659a7;color:white;font-size:1.5rem;font-weight:800; }
+.cover-series { color:var(--accent); text-transform:uppercase; letter-spacing:.15em; font-weight:800; }
+.cover-author { margin-top:2rem; font-weight:700; }
+.front-page { max-width:46rem; margin:0 auto; padding:2rem 0; }
+.front-page blockquote { margin:2rem 0; padding:1rem 1.2rem; border-left:4px solid var(--accent); background:var(--panel-soft); }
+.toc ol { padding-left:1.25rem; }
+.toc li { padding:.6rem 0; border-bottom:1px solid var(--border); }
+.toc a { color:var(--text); font-weight:700; text-decoration:none; }
+.toc span { display:block; }
+.about { text-align:left; }
+
+@media(max-width:760px){ .pipeline-stages,.mission-grid{grid-template-columns:1fr}.pipeline-stage:not(:last-child)::after{content:'↓';right:50%;top:auto;bottom:-.8rem}.actions{width:100%;justify-content:flex-end}.header-inner{gap:.6rem}.lesson-chips{order:3;width:100%} }
+@media print {
+  .front-page { break-after:page; }
+  .lesson-figure,.mission,.journey-card,.aha,.cliffhanger,.pipeline-track,.resources a,.takeaways,.mistake,.rv-timeline li { break-inside:avoid; }
+  .pipeline-stages { grid-template-columns:repeat(4,1fr); }
+  .reveal-button { display:none!important; }
+  .book { font-size:10pt; }
+  .book-cover { min-height:245mm; display:flex;flex-direction:column;justify-content:center; }
+  .lesson-figure img { max-height:105mm; object-fit:contain; }
+}
