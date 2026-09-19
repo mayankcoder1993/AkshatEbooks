@@ -6,7 +6,7 @@ function Track({ track, staticMode = false }) {
     <div className="pipeline-stages">
       {track.stages.map((stage, index) => <article className="pipeline-stage" key={stage.name}>
         <div className="stage-top"><span className="stage-number">{index + 1}</span><span className="stage-icon">{stage.icon}</span><span className="stage-kind">STAGE {index + 1}</span></div>
-        <strong>{stage.name}</strong><span className="artifact-label">Creates or uses</span><code className="stage-artifact">{stage.artifact}</code><p>{stage.description}</p>
+        <strong>{stage.name}</strong><span className="artifact-label">What we have now</span><code className="stage-artifact">{stage.artifact}</code><p>{stage.description}</p>
         {stage.example && <pre className="stage-example" aria-label={`${stage.name} example`}>{stage.example}</pre>}
         {index < track.stages.length - 1 && <span className="route-arrow" aria-hidden>→</span>}
       </article>)}
@@ -22,6 +22,6 @@ export default function PipelineVisualizer({ tracks, staticMode }) {
   return <div className="pipeline">
     <div className="pipeline-tabs" role="tablist" aria-label="Programming language routes">{tracks.map(t => <button role="tab" aria-selected={active === t.id} key={t.id} className={active === t.id ? 'active' : ''} onClick={() => setActive(t.id)}><span>{t.icon}</span>{t.label}</button>)}</div>
     <Track track={track} />
-    <div className="pipeline-route-key"><span><i className="key-dot source"/>Human-readable source</span><span><i className="key-dot artifact"/>Artifact made or used</span><span><i className="key-dot result"/>Visible result</span></div>
+    <div className="pipeline-route-key"><span><i className="key-dot source"/>File we write</span><span><i className="key-dot artifact"/>Middle step</span><span><i className="key-dot result"/>Result we see</span></div>
   </div>
 }
