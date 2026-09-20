@@ -29,32 +29,24 @@ Use the layered instruction system in `docs/agents/README.md`: read this root pl
 14. **Do not split chapters by character count.** Length may trigger an editorial warning, but boundaries must follow meaning: objectives, concepts, prerequisites, source sections, assessment units and reader workload.
 15. **Use authentic domain evidence.** Programming uses executable examples and visible output; economics uses sourced real applications and dated data; history uses verified events and responsible stories; polity uses actual constitutional provisions, judgments and institutional cases; exam books use verified PYQs; other domains use the equivalent strongest real evidence. Never force code-style pedagogy onto a non-technical subject.
 
-## Active book rules — Python for Absolute Beginners
+## Active book package
 
-These rules apply to the current `python-absolute-beginners` package, not automatically to future titles:
-
-1. Book 1 teaches Python only. C and Java may appear only as short route comparisons.
-2. Motivation and “Why Python?” belong in the one-page Preface. Lessons teach concepts, code and visualization.
-3. Write for a complete beginner around age 12. Use one idea per sentence and define technical terms immediately.
-4. Prefer numbered professional infographics in navy, teal and amber; avoid whimsical cartoons.
-5. Show the job and a concrete example before naming bytecode, class files, compilers, linkers or other technical machinery.
+The current title’s custom rules live in `src/books/technical/programming/python-absolute-beginners/AGENTS.md` and its `BOOK_BRIEF.md`. Load them through `book.manifest.json`. Never copy those technical rules automatically into another book.
 
 ## Architecture
 
-- `src/books/python-absolute-beginners/BOOK_BRIEF.md`: active reader, scope, profile and completion contract.
-- `docs/agents/`: core editorial standard and category-specific profiles.
-- `src/books/python-absolute-beginners/content/index.js`: active-book metadata and ordered lesson registry.
-- `src/books/python-absolute-beginners/content/lesson*.js`: pure block data. No JSX.
-- `src/books/python-absolute-beginners/content/preface.js`: one-page orientation.
-- `src/books/python-absolute-beginners/assets/`: teaching images used only by this book.
-- `src/catalog/books.js`: public library registry, status and live architecture description.
-- `src/components/LibraryHome.jsx`: catalog home, book details and project architecture view.
-- `src/components/Blocks.jsx`: topic-neutral blocks to Web/Book View.
-- `src/components/PrintBook.jsx`: complete static book.
-- `src/export/docx.js`: blocks to native Word.
-- `src/styles/global.css`: both themes and print rules.
-- `scripts/generate-docx.mjs`: Node Word generator.
-- `vite.singlefile.config.mjs`: offline one-file HTML build.
+- `src/books/<domain>/<subdomain>/<book-id>/book.manifest.json`: lightweight catalog, status and active-edition metadata.
+- `src/books/<domain>/<subdomain>/<book-id>/BOOK_BRIEF.md`: reader, scope, profile and completion contract.
+- `src/books/<domain>/<subdomain>/<book-id>/editions/<edition-id>/edition.manifest.json`: version, verification date, source module and outputs.
+- `src/books/technical/programming/python-absolute-beginners/editions/edition-01/content/`: current book's pure block data. No JSX.
+- `src/catalog/generated/`: generated lightweight catalog and lazy book registry; never edit by hand.
+- `src/components/`: reusable catalog, Web and static Book renderers.
+- `src/export/docx.js`: profile-aware blocks to native Word.
+- `src/publishing/`: publisher-wide metadata and future shared publishing services.
+- `src/schemas/`: validated book, edition and release contracts.
+- `src/styles/core/`, `src/styles/catalog/`, `src/styles/profiles/`: separated style layers.
+- `scripts/generate-catalog.mjs`, `scripts/validate-books.mjs`: registry generation and content quality gate.
+- `scripts/generate-docx.mjs`, `vite.singlefile.config.mjs`: edition-selected output builders.
 
 `staticMode={false}` means Web View. `staticMode={true}` means Book View.
 
@@ -80,9 +72,9 @@ A new block type requires: lesson data, a `Blocks.jsx` case, a `docx.js` case, C
 This checklist implements the active book's `TECHNICAL` profile. Other book types must use their selected profile rather than forcing code, terminals or run visualizers into unsuitable material.
 
 1. Value-check the source.
-2. Add `src/books/python-absolute-beginners/content/lessonX.js` as pure data.
+2. Add the lesson inside the active edition's `content/` directory as pure data.
 3. Use this journey: professional image → mission → think → core idea → blueprint/code → run visualizer or pipeline → expected output → aha → try it → mistakes/guess/bug → quiz → takeaways → resources → cliffhanger.
-4. Register the lesson in `src/books/python-absolute-beginners/content/index.js`.
+4. Register the lesson in the edition content index and mirror its identity/title/subtitle in `book.manifest.json`; validation must pass.
 5. If code appears, include a `runviz` or `pipeline`.
 6. Import each image for browser inlining. Also add `file`, `w`, `h`, `alt`, a short `caption`, and optional `points` for separate numbered explanations in Web, PDF and Word.
 7. Run `npm run build`, `npm run generate:docx`, and `npm run build:single`.
@@ -118,10 +110,13 @@ When another AI agent supplies notes or instructions, follow the intake process 
 
 ## Commands
 
-- `npm run dev`: regenerate deliverables and start development UI.
-- `npm run build`: regular production build.
-- `npm run generate:docx`: write `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`.
-- `npm run build:single`: write `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-Interactive.html`.
+- `npm run create:book -- --id <id> --title "<title>" --domain <domain> --subdomain <group> --profile <PROFILE>`: scaffold a planned, non-readable book package.
+- `npm run prepare:books`: validate manifests/content and regenerate the lightweight catalog and lazy registry.
+- `npm run dev`: validate, regenerate the default edition deliverables and start the development UI.
+- `npm run build`: validate and build the lazy-loaded library website.
+- `BOOK_ID=<id> npm run generate:docx`: build the selected edition's editable Word file.
+- `BOOK_ID=<id> npm run build:single`: build one self-contained HTML file for the selected edition.
+- `BOOK_ID=<id> npm run release:book`: create an immutable checksummed release record; blocked until edition and branding are ready.
 
 ## Professional book structure
 

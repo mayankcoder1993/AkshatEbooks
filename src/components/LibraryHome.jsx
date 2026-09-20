@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BRAND } from '../books/python-absolute-beginners/content/index.js'
+import { BRAND } from '../publishing/publisher.js'
 import { BOOK_CATALOG, LIVE_FOLDER_TREE, PUBLISHING_LAYERS } from '../catalog/books.js'
 
 function Status({ children, tone = '' }) {
@@ -14,11 +14,11 @@ function BookDetails({ book, onOpenBook }) {
         <h2 id={`${book.id}-details-title`}>{book.title}</h2>
         <p>{book.subtitle}</p>
       </div>
-      <button className="btn primary" onClick={() => onOpenBook(book)}>Open interactive book →</button>
+      <button className="btn primary" disabled={!book.readable} onClick={() => onOpenBook(book)}>{book.readable ? 'Open interactive book →' : 'Reader coming soon'}</button>
     </div>
 
     <div className="catalog-detail-grid">
-      <div><h3>Lessons completed</h3><ol>{book.lessons.map((lesson, index) => <li key={lesson.id}><strong>{index + 1}. {lesson.title}</strong><span>{lesson.subtitle}</span></li>)}</ol></div>
+      <div><h3>Registered chapters</h3>{book.lessons.length ? <ol>{book.lessons.map((lesson, index) => <li key={lesson.id}><strong>{index + 1}. {lesson.title}</strong><span>{lesson.subtitle}</span></li>)}</ol> : <p className="catalog-empty">Chapter blueprint pending.</p>}</div>
       <div><h3>Publishing outputs</h3><ul className="catalog-checks">{book.formats.map(item => <li key={item.label}><span>✓</span><div><strong>{item.label}</strong><small>{item.state}</small></div></li>)}</ul></div>
       <div><h3>Branding readiness</h3><ul className="catalog-readiness">{book.branding.map(item => <li key={item.label}><strong>{item.label}</strong><span>{item.state}</span></li>)}</ul></div>
     </div>
@@ -47,7 +47,7 @@ export default function LibraryHome({ theme, onToggleTheme, onOpenBook }) {
           <h1>Books that make difficult ideas visible.</h1>
           <p>Track every title from structured lessons to interactive, print, Word and offline editions.</p>
         </div>
-        <div className="library-summary"><strong>{BOOK_CATALOG.length}</strong><span>book in the library</span><small>{BOOK_CATALOG.filter(book => book.status === 'In progress').length} currently in progress</small></div>
+        <div className="library-summary"><strong>{BOOK_CATALOG.length}</strong><span>{BOOK_CATALOG.length === 1 ? 'book' : 'books'} in the library</span><small>{BOOK_CATALOG.filter(book => book.status === 'In progress').length} currently in progress</small></div>
       </section>
 
       <section className="catalog-section" aria-labelledby="books-title">
@@ -56,10 +56,10 @@ export default function LibraryHome({ theme, onToggleTheme, onOpenBook }) {
           {BOOK_CATALOG.map(book => <article className={`catalog-card ${selectedId === book.id ? 'selected' : ''}`} key={book.id}>
             <div className="catalog-cover" aria-hidden="true"><span>{book.series}</span><strong>{book.title}</strong><small>{book.author}</small></div>
             <div className="catalog-card-body">
-              <div className="catalog-card-meta"><Status tone={book.statusTone}>{book.status}</Status><span>{book.completedLessons} lessons complete</span></div>
-              <h3>{book.title}</h3><p>{book.subtitle}</p>
+              <div className="catalog-card-meta"><Status tone={book.statusTone}>{book.status}</Status><span>{book.completedLessons} {book.completedLessons === 1 ? 'chapter' : 'chapters'} registered</span></div>
+              <h3>{book.title}</h3><p>{book.subtitle}</p><p className="catalog-version">{book.editionLabel} · v{book.contentVersion} · verified through {book.verifiedThrough} · {book.latestRelease ? `latest release ${book.latestRelease}` : 'not yet released'}</p>
               <div className="catalog-progress"><span><i style={{ width: `${book.progress}%` }}/></span><strong>{book.progress}%</strong></div>
-              <div className="catalog-card-actions"><button className="btn" onClick={() => setSelectedId(book.id)}>View details</button><button className="btn primary" onClick={() => onOpenBook(book)}>Open book</button></div>
+              <div className="catalog-card-actions"><button className="btn" onClick={() => setSelectedId(book.id)}>View details</button><button className="btn primary" disabled={!book.readable} onClick={() => onOpenBook(book)}>{book.readable ? 'Open book' : 'Planned'}</button></div>
             </div>
           </article>)}
         </div>

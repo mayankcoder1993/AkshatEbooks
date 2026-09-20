@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../../../../schemas/edition-manifest.schema.json",
+  "schemaVersion": 1,
+  "bookId": "python-absolute-beginners",
+  "id": "edition-01",
+  "label": "First Edition",
+  "contentVersion": "0.8.0",
+  "publicationYear": 2026,
+  "status": "drafting",
+  "technology": "Python 3",
+  "verifiedThrough": "2026-09-20",
+  "contentModule": "editions/edition-01/content/index.js",
+  "outputDir": "public/books/python-absolute-beginners/edition-01",
+  "outputs": {
+    "docx": "Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
+    "offlineHtml": "Python-for-Absolute-Beginners-Interactive.html"
+  }
+}

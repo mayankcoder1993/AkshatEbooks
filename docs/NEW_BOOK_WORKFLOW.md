@@ -26,10 +26,11 @@ This repository may be used from environments that pin the current branch. Such 
    ```
 
 4. Read the layered instruction stack in `docs/agents/README.md`.
-5. Copy `docs/BOOK_BRIEF_TEMPLATE.md` to `src/books/<book-id>/BOOK_BRIEF.md` and complete it before writing chapters.
-6. Select the primary profile: technical, exam preparation, school textbook or wellbeing. Use a second profile only for a genuinely hybrid title.
+5. Scaffold the planned package with `npm run create:book -- --id <id> --title "<title>" --domain <domain> --subdomain <group> --profile <PROFILE>`.
+6. Complete the generated `BOOK_BRIEF.md` before writing chapters.
+7. Select the primary profile: technical, exam preparation, school textbook or wellbeing. Use a second profile only for a genuinely hybrid title.
 
-The brief must define identity, selected profile, reader, promise, measurable outcomes, source authority, version/syllabus/curriculum, chapter plan, exclusions, safety review, outputs and approved brand assets.
+The brief must define identity, selected profile, reader, promise, measurable outcomes, source authority, version/syllabus/curriculum, chapter plan, exclusions, safety review, outputs and approved brand assets. Planned packages remain `readable: false` until their content module exists and passes validation.
 
 ## Current architecture boundary
 
@@ -42,20 +43,25 @@ Keep these reusable and topic-neutral:
 - `src/components/RunVisualizer.jsx`
 - `src/components/PipelineVisualizer.jsx`
 - `src/export/docx.js`
-- `src/styles/global.css`
+- `src/publishing/`
+- `src/schemas/`
+- `src/styles/core/`, `src/styles/catalog/` and `src/styles/profiles/`
+- `scripts/generate-catalog.mjs` and `scripts/validate-books.mjs`
 - `scripts/generate-docx.mjs`
 - `vite.singlefile.config.mjs`
 
 ### Book package
 
-The active book is already isolated as a package. These may change on its book branch:
+Every title is isolated by domain, subdomain, permanent book ID and edition:
 
-- `src/books/python-absolute-beginners/content/index.js`
-- `src/books/python-absolute-beginners/content/preface.js`
-- `src/books/python-absolute-beginners/content/lesson*.js`
-- `src/books/python-absolute-beginners/assets/`
-- Reader-facing metadata in `index.html`
-- `public/books/python-absolute-beginners/` for generated deliverables
+- `src/books/<domain>/<subdomain>/<book-id>/book.manifest.json`
+- `src/books/<domain>/<subdomain>/<book-id>/BOOK_BRIEF.md`
+- `src/books/<domain>/<subdomain>/<book-id>/AGENTS.md` when title-specific rules exist
+- `src/books/<domain>/<subdomain>/<book-id>/shared/`
+- `src/books/<domain>/<subdomain>/<book-id>/editions/<edition-id>/content/`
+- `src/books/<domain>/<subdomain>/<book-id>/editions/<edition-id>/assets/`
+- `src/books/<domain>/<subdomain>/<book-id>/editions/<edition-id>/edition.manifest.json`
+- `public/books/<book-id>/<edition-id>/` for generated deliverables
 
 ### Publisher package
 
@@ -66,26 +72,13 @@ Treat owner-provided brand assets as shared but controlled:
 - The imprint logo is copied from the owner's exact master without recoloring.
 - Crest placement remains limited to cover/title and copyright pages unless the owner changes the policy.
 
-## Directory evolution when several books are active
+## Multi-book and edition operation
 
-Book content and outputs are already grouped by book ID. Shared components and exporters remain in their existing `src/components/` and `src/export/` locations to avoid unnecessary churn. When several books must build simultaneously, evolve toward:
+The system discovers `book.manifest.json` files recursively, validates each current edition, generates a lightweight catalog, and creates lazy content loaders. The library therefore does not import every chapter and image at startup.
 
-```text
-src/
-  publishing/             shared renderers, exporters and schemas
-  books/
-    python-absolute-beginners/
-      content/            metadata, Preface and ordered lessons
-      assets/
-    another-book/
-      content/
-      assets/
-brand/                    protected publisher masters
-scripts/                  generic build and scaffold commands
-public/books/<book-id>/   generated deliverables
-```
+Use `BOOK_ID=<id>` to build one selected edition without editing imports. One self-contained HTML normally represents one edition; exceptionally large works split by meaningful volumes rather than arbitrary chapter files.
 
-Select a book with a build-time `BOOK_ID`, not by repeatedly editing renderer imports. Add this selection layer only when a second simultaneous book needs it; until then, the branch-per-book model is simpler and safer.
+Patch and minor revisions update the active edition's semantic `contentVersion`. Create a new `edition-XX/` when a major syllabus, curriculum, technology, promise or structure change must coexist with the previous edition. Published release records are immutable and include checksums.
 
 ## Source-to-book authoring pipeline
 

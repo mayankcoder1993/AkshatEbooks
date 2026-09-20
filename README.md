@@ -1,55 +1,81 @@
-# Sarva Gyana Koshah Books — Python for Absolute Beginners
+# Sarva Gyana Koshah Books — Publishing System
 
-**The First Code Series · Book 1**, by Akshat Sinha.
+A scalable light-first library that turns one approved structured source per edition into an interactive Web View, static Book/PDF View, native editable Word document and self-contained offline HTML ebook.
 
-A light-first interactive ebook built from one structured content source.
+The current title is **Python for Absolute Beginners — The First Code Series · Book 1**, by Akshat Sinha.
 
-## Repository layout
+## Architecture
 
-- `src/books/python-absolute-beginners/BOOK_BRIEF.md` — this title's reader, scope and selected editorial profile.
-- `src/books/python-absolute-beginners/content/` — this book's metadata, Preface and lessons.
-- `src/books/python-absolute-beginners/assets/` — this book's teaching images.
-- `src/catalog/` — public book registry, status, milestones, and architecture data.
-- `src/components/` — reusable library, Web, and Book View renderers.
+- `src/books/<domain>/<subdomain>/<book-id>/` — isolated book brief, instructions, shared material and edition packages.
+- `book.manifest.json` — permanent identity, profile, status, catalog data and current edition.
+- `editions/<edition-id>/edition.manifest.json` — version, verification date, content module and output names.
+- `src/catalog/generated/` — generated lightweight catalog and lazy content registry.
+- `src/components/` — reusable library, interactive and static renderers.
 - `src/export/` — reusable native Word exporter.
-- `scripts/` — generation and publishing commands.
-- `public/books/python-absolute-beginners/` — generated reader deliverables.
-- `brand/` — protected owner brand masters when supplied.
-- `docs/agents/` — the combined AI authoring workflow, shared editorial rules, and technical, exam, school and wellbeing profiles.
-- `docs/BOOK_BRIEF_TEMPLATE.md` — required starting contract for every new title.
-- `docs/NEW_BOOK_WORKFLOW.md` — branch and production workflow for future books.
+- `src/publishing/` — publisher-wide metadata.
+- `src/schemas/` — machine-validated book, edition and release contracts.
+- `src/styles/core/`, `catalog/`, `profiles/` — separated style layers.
+- `scripts/` — scaffolding, validation, catalog, export and release commands.
+- `docs/agents/` — agent-led authoring workflow and category profiles.
+- `public/books/<book-id>/<edition-id>/` — generated reader deliverables.
 
-## Deliverables
+The current edition source lives at:
 
-- Interactive React Web View with reveals, bug hunts, quizzes, pipelines and run visualizers.
-- Static Book View for browser printing and PDF.
-- Native editable Word document with real headings, TOC, headers, page numbers and images.
-- Self-contained offline HTML file.
-
-## Develop
-
-```bash
-npm install
-npm run dev
+```text
+src/books/technical/programming/python-absolute-beginners/editions/edition-01/
 ```
 
-`predev` regenerates the DOCX and offline HTML. Readers do not need the development server.
-
-The development site opens with the publishing library at `/`. The active book is available at `/books/python-absolute-beginners`. The downloaded self-contained HTML opens directly as the book.
-
-## Build outputs
+## Quality gates
 
 ```bash
+npm ci
+npm run prepare:books
 npm run build
 npm run generate:docx
 npm run build:single
 ```
 
-Generated deliverables:
+`prepare:books` validates manifests, chapter identity/order, supported block types, image paths, alt text, edition metadata and output configuration. It then regenerates the catalog and lazy loader.
 
-- `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`
-- `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-Interactive.html`
+## Develop
 
-Read `AGENTS.md` before adding content or changing the publishing system. It includes the required transcript-and-internet-research workflow.
+```bash
+npm run dev
+```
 
-For another title, follow `docs/NEW_BOOK_WORKFLOW.md`. The intended model is one shared publishing engine with a dedicated branch for each active book.
+The library opens at `/`. The current book opens at `/books/python-absolute-beginners`. Downloaded self-contained HTML opens directly as its selected book edition and needs no server.
+
+## Create another book
+
+```bash
+npm run create:book -- \
+  --id upsc-indian-polity \
+  --title "Indian Polity for UPSC" \
+  --domain exams \
+  --subdomain upsc \
+  --profile EXAM_PREPARATION
+```
+
+This creates a planned, non-readable package that appears in the management catalog without pretending content is ready. Complete its brief and blueprint, add a validated content module, then mark it reader-accessible.
+
+## Build a selected book
+
+```bash
+BOOK_ID=python-absolute-beginners npm run generate:docx
+BOOK_ID=python-absolute-beginners npm run build:single
+```
+
+Current outputs:
+
+- `public/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`
+- `public/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-Interactive.html`
+
+## Release gate
+
+```bash
+BOOK_ID=python-absolute-beginners npm run release:book
+```
+
+A release is blocked until the edition status and required branding are ready. Successful releases create immutable records with commit, version, verification date, byte sizes and SHA-256 checksums.
+
+Read `AGENTS.md` and `docs/agents/README.md` before changing content or architecture.

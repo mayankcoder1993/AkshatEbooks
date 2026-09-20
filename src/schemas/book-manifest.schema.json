@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sarvagyanakoshah.example/schemas/book-manifest.schema.json",
+  "type": "object",
+  "required": ["schemaVersion", "id", "domain", "profile", "title", "author", "status", "progress", "readable", "currentEdition", "route", "chapters", "formats", "branding"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": { "type": "string" },
+    "schemaVersion": { "const": 1 },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "domain": { "type": "string", "minLength": 1 },
+    "subdomain": { "type": "string", "minLength": 1 },
+    "profile": { "enum": ["TECHNICAL", "EXAM_PREPARATION", "SCHOOL_TEXTBOOK", "WELLBEING"] },
+    "title": { "type": "string", "minLength": 1 },
+    "subtitle": { "type": "string" },
+    "series": { "type": "string" },
+    "author": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["planned", "research", "in-progress", "review", "ready", "published", "update-due", "archived"] },
+    "statusLabel": { "type": "string" },
+    "progress": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "readable": { "type": "boolean" },
+    "currentEdition": { "type": "string", "pattern": "^edition-[0-9]{2}$" },
+    "route": { "type": "string", "pattern": "^/books/" },
+    "nextMilestone": { "type": "string" },
+    "instructionFiles": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "subtitle"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "subtitle": { "type": "string" }
+        }
+      }
+    },
+    "formats": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "state"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "state": { "enum": ["planned", "in-progress", "ready", "blocked", "failed"] }
+        }
+      }
+    },
+    "branding": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "state", "stateLabel"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "state": { "enum": ["ready", "in-progress", "blocked"] },
+          "stateLabel": { "type": "string" }
+        }
+      }
+    }
+  }
+}

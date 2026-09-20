@@ -3,14 +3,23 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "A single-source interactive ebook system for absolute beginners.",
+  "description": "A scalable single-source multi-book publishing system.",
   "scripts": {
-    "predev": "npm run generate:docx && npm run build:single",
+    "catalog": "node scripts/generate-catalog.mjs",
+    "styles": "node scripts/generate-styles.mjs",
+    "validate:books": "node --import ./scripts/register-jpg.mjs scripts/validate-books.mjs",
+    "prepare:books": "npm run styles && npm run catalog && npm run validate:books",
+    "create:book": "node scripts/create-book.mjs",
+    "predev": "npm run prepare:books && npm run generate:docx && npm run build:single",
     "dev": "vite --host 0.0.0.0",
+    "prebuild": "npm run prepare:books",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
+    "pregenerate:docx": "npm run prepare:books",
     "generate:docx": "node --import ./scripts/register-jpg.mjs scripts/generate-docx.mjs",
+    "prebuild:single": "npm run prepare:books",
     "build:single": "vite build --config vite.singlefile.config.mjs && node --import ./scripts/register-jpg.mjs scripts/copy-single.mjs",
+    "release:book": "node scripts/release-book.mjs",
     "generate:crest": "node scripts/generate-crest-variants.mjs"
   },
   "dependencies": {
@@ -21,6 +30,8 @@
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "@vitejs/plugin-react": "^4.3.4",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
     "vite": "^6.3.5",
     "vite-plugin-singlefile": "^2.3.0"
   }

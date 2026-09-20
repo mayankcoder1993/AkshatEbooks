@@ -29,6 +29,7 @@
 .catalog-status.progress { color:#8a5a09; background:#fff2cb; }
 .catalog-card h3 { margin:1rem 0 .1rem; font-size:1.25rem; }
 .catalog-card-body>p { margin:0; color:var(--muted); font-size:.9rem; }
+.catalog-card-body>.catalog-version { margin-top:.45rem; font-size:.7rem; }
 .catalog-progress { display:flex; align-items:center; gap:.7rem; margin:auto 0 .85rem; padding-top:1rem; }
 .catalog-progress>span { height:7px; flex:1; overflow:hidden; border-radius:99px; background:var(--bg-soft); }
 .catalog-progress i { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,#4659a7,#168a8a); }
@@ -43,6 +44,7 @@
 .catalog-detail-grid ol { margin:0; padding-left:1.2rem; }
 .catalog-detail-grid ol li { margin:.55rem 0; padding-left:.25rem; }
 .catalog-detail-grid ol span { display:block; color:var(--muted); font-size:.78rem; }
+.catalog-empty { color:var(--muted); font-size:.85rem; font-style:italic; }
 .catalog-checks,.catalog-readiness { margin:0; padding:0; list-style:none; }
 .catalog-checks li { display:flex; gap:.55rem; margin:.5rem 0; }
 .catalog-checks li>span { color:#08745c; font-weight:900; }

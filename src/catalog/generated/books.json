@@ -1,0 +1,79 @@
+[
+  {
+    "id": "python-absolute-beginners",
+    "domain": "technical",
+    "subdomain": "programming",
+    "profile": "TECHNICAL",
+    "title": "Python for Absolute Beginners",
+    "subtitle": "Learn Programming the Visual Way",
+    "series": "The First Code Series · Book 1",
+    "author": "Akshat Sinha",
+    "status": "In progress",
+    "statusTone": "progress",
+    "progress": 80,
+    "readable": true,
+    "currentEdition": "edition-01",
+    "editionLabel": "First Edition",
+    "contentVersion": "0.8.0",
+    "verifiedThrough": "2026-09-20",
+    "releaseCount": 0,
+    "latestRelease": null,
+    "route": "/books/python-absolute-beginners",
+    "nextMilestone": "Add the input() lesson and integrate the owner-supplied crest and imprint logo.",
+    "completedLessons": 4,
+    "lessons": [
+      {
+        "id": "hello-world",
+        "title": "Your First Program — Hello, World!",
+        "subtitle": "We begin with an empty file and end with a real result—understanding every character we typed."
+      },
+      {
+        "id": "code-to-machine",
+        "title": "How Does Our Code Reach the Computer?",
+        "subtitle": "Follow one tiny message from our file to the screen. No hidden knowledge required."
+      },
+      {
+        "id": "variables",
+        "title": "Variables: Names for Values",
+        "subtitle": "Store a value, change it and inspect memory one line at a time."
+      },
+      {
+        "id": "data-types",
+        "title": "Data Types: What Kind of Value?",
+        "subtitle": "Meet strings, integers, floats and booleans—and see why type changes what Python can do."
+      }
+    ],
+    "formats": [
+      {
+        "label": "Interactive Web View",
+        "state": "Ready"
+      },
+      {
+        "label": "Book / PDF View",
+        "state": "Ready"
+      },
+      {
+        "label": "Editable Word",
+        "state": "Ready"
+      },
+      {
+        "label": "Offline HTML",
+        "state": "Ready"
+      }
+    ],
+    "branding": [
+      {
+        "label": "Publisher identity",
+        "state": "Ready"
+      },
+      {
+        "label": "Family crest",
+        "state": "Waiting for exact SVG"
+      },
+      {
+        "label": "Imprint logo",
+        "state": "Waiting for final logo PNG"
+      }
+    ]
+  }
+]

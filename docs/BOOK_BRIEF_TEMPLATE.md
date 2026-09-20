@@ -45,7 +45,7 @@ Complete this before drafting. Replace every bracketed field. This file belongs 
 ## Publication
 
 - Required outputs: `[Web, Book/PDF, DOCX, offline HTML]`
-- Output folder: `public/books/[book-id]/`
+- Output folder: `public/books/[book-id]/[edition-id]/`
 - Approved brand assets: `[assets]`
 - Filename slug: `[slug]`
 - Definition of complete: `[specific gate]`

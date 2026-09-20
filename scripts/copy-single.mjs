@@ -1,8 +1,10 @@
 import fs from 'node:fs/promises'
-import { BOOK } from '../src/books/python-absolute-beginners/content/index.js'
+import { DEFAULT_BOOK_ID, loadBookPackage } from '../src/catalog/generated/registry.js'
 
+const bookId = process.env.BOOK_ID || DEFAULT_BOOK_ID
+const publication = await loadBookPackage(bookId)
 const source = 'single-build/index.html'
-const output = `${BOOK.outputDir}/${BOOK.offlineFilename}`
-await fs.mkdir(BOOK.outputDir, { recursive: true })
+const output = `${publication.BOOK.outputDir}/${publication.BOOK.offlineFilename}`
+await fs.mkdir(publication.BOOK.outputDir, { recursive: true })
 await fs.copyFile(source, output)
-console.log(`Generated ${output}`)
+console.log(`Generated ${output} (${bookId} ${publication.BOOK.editionId} v${publication.BOOK.version})`)

@@ -4,7 +4,7 @@ Updated 2026-09-20.
 
 ## Current repository state
 
-This branch contains the publishing-library home at `/`, the active book at `/books/python-absolute-beginners`, the block-based publishing system, native DOCX renderer, static Book View, offline single-file HTML, light-mode-first design and four lessons. The library displays book status, details, output readiness, architecture and the live folder structure from `src/catalog/books.js`.
+This branch contains the publishing-library home at `/`, the active book at `/books/python-absolute-beginners`, domain- and edition-isolated book packages, validated manifests, generated lightweight catalog data, lazy book loading, edition-selected DOCX/offline builds, immutable release gates, the static Book View, light-mode-first design and four current lessons. Planned books can be scaffolded into the management catalog without being falsely marked reader-ready.
 
 ## Brand authority
 
@@ -28,7 +28,7 @@ Next planned lesson: `input()`, including the important rule that user input sta
 
 ## Sources of truth
 
-Read the layered instruction stack in `docs/agents/README.md`: root `AGENTS.md`, `CORE_EDITORIAL.md`, the active `BOOK_BRIEF.md`, its selected category profile, and the new-book workflow. This book lives in `src/books/python-absolute-beginners/`. Generated files in `public/books/python-absolute-beginners/` are deliverables, not source.
+Read the layered instruction stack in `docs/agents/README.md`: root `AGENTS.md`, `CORE_EDITORIAL.md`, the active `BOOK_BRIEF.md`, its selected category profile, and the new-book workflow. This book lives in `src/books/technical/programming/python-absolute-beginners/`; its active source is `editions/edition-01/`. Generated files in `public/books/python-absolute-beginners/edition-01/` are deliverables, not source.
 
 For a different title, use the branch-per-book process in `docs/NEW_BOOK_WORKFLOW.md`. Keep shared renderers topic-neutral and do not mix multiple books' content in one branch.
 

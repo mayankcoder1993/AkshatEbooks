@@ -28,4 +28,4 @@ Completed chapters cover Hello World, code-to-machine routes, variables and data
 
 ## Publication
 
-Required outputs are interactive Web View, static Book/PDF View, editable DOCX and self-contained offline HTML. Outputs live in `public/books/python-absolute-beginners/`. Completion requires all planned beginner chapters, validated outputs, and the exact owner-provided family crest and imprint logo integrated according to `AGENTS.md`.
+Required outputs are interactive Web View, static Book/PDF View, editable DOCX and self-contained offline HTML. First-edition outputs live in `public/books/python-absolute-beginners/edition-01/`. Completion requires all planned beginner chapters, validated outputs, and the exact owner-provided family crest and imprint logo integrated according to `AGENTS.md`.
