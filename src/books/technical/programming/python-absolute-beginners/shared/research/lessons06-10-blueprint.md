@@ -1,6 +1,6 @@
 # Lessons 6 to 10 Blueprint
 
-Status: approved sequence, implementation plan
+Status: superseded by `curriculum-mission-arc-redesign.md`; retained as source mapping
 
 Verified: 2026-09-21
 
