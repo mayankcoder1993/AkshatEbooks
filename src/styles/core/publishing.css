@@ -765,7 +765,6 @@ kbd {
 .pipeline-stage strong,.pipeline-stage code { display:block; }
 .pipeline-stage p { color:var(--muted); font-size:.82rem; line-height:1.4; }
 .static-pipeline .pipeline-track { break-inside:avoid; }
-.cover-mark { width:5rem;height:5rem;margin:1.5rem auto;display:grid;place-items:center;border-radius:22px;background:#4659a7;color:white;font-size:1.5rem;font-weight:800; }
 .cover-series { color:var(--accent); text-transform:uppercase; letter-spacing:.15em; font-weight:800; }
 .cover-author { margin-top:2rem; font-weight:700; }
 .front-page { max-width:46rem; margin:0 auto; padding:2rem 0; }

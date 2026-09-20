@@ -47,7 +47,6 @@ export default function LibraryHome({ theme, onToggleTheme, onOpenBook }) {
   return <div className="library-shell screen-only">
     <header className="library-header">
       <a className="brand" href="/" onClick={event => event.preventDefault()} aria-label={`${BRAND.imprint} home`}>
-        <span className="brand-badge">SGK</span>
         <span className="brand-text"><strong>{BRAND.imprint}</strong><span>{BRAND.tagline}</span></span>
       </a>
       <button className="icon-btn" onClick={onToggleTheme} title="Toggle theme" aria-label="Toggle light and dark theme">{theme === 'light' ? '🌙' : '☀️'}</button>

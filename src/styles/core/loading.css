@@ -9,17 +9,14 @@
 .load-state h1 { margin: .8rem 0 .2rem; }
 .load-state p { color: var(--muted); }
 .loading-mark {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 2rem;
+  height: 2rem;
   margin: 0 auto;
-  display: grid;
-  place-items: center;
-  border-radius: 14px;
-  color: #fff;
-  background: var(--accent);
-  font-weight: 850;
-  letter-spacing: .06em;
-  animation: loading-pulse 1.2s ease-in-out infinite alternate;
+  display: block;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: loading-spin .8s linear infinite;
 }
-@keyframes loading-pulse { to { transform: translateY(-4px); opacity: .75; } }
+@keyframes loading-spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .loading-mark { animation: none; } }

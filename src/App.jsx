@@ -74,7 +74,7 @@ export default function App() {
 
   if (view === 'library') return <LibraryHome theme={theme} onToggleTheme={toggleTheme} onOpenBook={openBook}/>
   if (loadError) return <main className="load-state"><h1>Book unavailable</h1><p>{loadError.message}</p><button className="btn" onClick={openLibrary}>Back to library</button></main>
-  if (!publication) return <main className="load-state"><span className="loading-mark">SGK</span><h1>Opening book…</h1><p>Loading this edition’s structured content and teaching assets.</p></main>
+  if (!publication) return <main className="load-state"><span className="loading-mark" aria-hidden="true"/><h1>Opening book…</h1><p>Loading this edition’s structured content and teaching assets.</p></main>
 
   const { lessons, BOOK, BRAND } = publication
   const lesson = lessons[active]
