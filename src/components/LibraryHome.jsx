@@ -14,7 +14,12 @@ function BookDetails({ book, onOpenBook }) {
         <h2 id={`${book.id}-details-title`}>{book.title}</h2>
         <p>{book.subtitle}</p>
       </div>
-      <button className="btn primary" disabled={!book.readable} onClick={() => onOpenBook(book)}>{book.readable ? 'Open interactive book →' : 'Reader coming soon'}</button>
+      <div className="catalog-output-actions">
+        <button className="btn primary" disabled={!book.readable} onClick={() => onOpenBook(book)}>{book.readable ? 'Open Web View →' : 'Reader coming soon'}</button>
+        <button className="btn" disabled={!book.readable} onClick={() => onOpenBook(book, book.currentEdition, { preview: true })}>Book / PDF Preview</button>
+        {book.readable ? <a className="btn" href={book.downloads.offlineHtml} target="_blank" rel="noreferrer">Offline HTML</a> : <span className="btn disabled-link">Offline HTML</span>}
+        {book.readable ? <a className="btn" href={book.downloads.docx} download>Editable Word</a> : <span className="btn disabled-link">Editable Word</span>}
+      </div>
     </div>
 
     <div className="catalog-detail-grid">

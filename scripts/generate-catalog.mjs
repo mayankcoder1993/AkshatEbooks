@@ -26,6 +26,10 @@ const catalog = books.map(({ manifest, edition, editions, releases }) => ({
   verifiedThrough: edition.verifiedThrough,
   releaseCount: releases.length,
   latestRelease: releases.at(-1)?.release?.contentVersion || null,
+  downloads: {
+    docx: `/${path.posix.join(edition.outputDir.replace(/^public\//, ''), edition.outputs.docx)}`,
+    offlineHtml: `/${path.posix.join(edition.outputDir.replace(/^public\//, ''), edition.outputs.offlineHtml)}`,
+  },
   editions: editions.map(item => ({
     id: item.edition.id,
     label: item.edition.label,
@@ -35,6 +39,10 @@ const catalog = books.map(({ manifest, edition, editions, releases }) => ({
     readable: Boolean(item.contentFile),
     chapterCount: item.edition.chapters.length,
     releaseCount: item.releases.length,
+    downloads: {
+      docx: `/${path.posix.join(item.edition.outputDir.replace(/^public\//, ''), item.edition.outputs.docx)}`,
+      offlineHtml: `/${path.posix.join(item.edition.outputDir.replace(/^public\//, ''), item.edition.outputs.offlineHtml)}`,
+    },
   })),
   route: manifest.route,
   nextMilestone: manifest.nextMilestone || '',

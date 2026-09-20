@@ -13,9 +13,10 @@ const routeBookLocation = () => {
   return match ? { bookId: match[1], editionId: match[2] || null } : null
 }
 const initialLocation = () => {
-  if (window.location.protocol === 'file:') return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID }
+  const preview = new URLSearchParams(window.location.search).get('view') === 'book'
+  if (window.location.protocol === 'file:') return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false }
   const location = routeBookLocation()
-  return location ? { view: 'book', ...location } : { view: 'library', bookId: null, editionId: null }
+  return location ? { view: 'book', ...location, preview } : { view: 'library', bookId: null, editionId: null, preview: false }
 }
 
 export default function App() {
@@ -27,14 +28,14 @@ export default function App() {
   const [publication, setPublication] = useState(null)
   const [loadError, setLoadError] = useState(null)
   const [active, setActive] = useState(0)
-  const [preview, setPreview] = useState(false)
+  const [preview, setPreview] = useState(initial.preview)
   const [exporting, setExporting] = useState(false)
 
   useEffect(() => { document.documentElement.dataset.theme = theme; try { localStorage.setItem('sgk-theme', theme) } catch { /* optional preference storage may be blocked */ } }, [theme])
   useEffect(() => {
     const onPopState = () => {
       const location = initialLocation()
-      setPreview(false)
+      setPreview(location.preview)
       setView(location.view)
       setBookId(location.bookId)
       setEditionId(location.editionId)
@@ -55,16 +56,18 @@ export default function App() {
   }, [view, bookId, editionId])
   useEffect(() => window.scrollTo({ top: 0 }), [active, view, bookId, editionId])
 
-  const navigate = (nextView, path, nextBookId = null, nextEditionId = null) => {
+  const navigate = (nextView, path, nextBookId = null, nextEditionId = null, nextPreview = false) => {
     if (window.location.protocol !== 'file:') window.history.pushState({}, '', path)
-    setPreview(false)
+    setPreview(nextPreview)
+    if (nextView === 'book') setPublication(null)
     setView(nextView)
     setBookId(nextBookId)
     setEditionId(nextEditionId)
   }
-  const openBook = (book, requestedEdition = null) => {
-    const path = requestedEdition ? `${book.route}/editions/${requestedEdition}` : book.route
-    navigate('book', path, book.id, requestedEdition)
+  const openBook = (book, requestedEdition = null, options = {}) => {
+    const basePath = requestedEdition ? `${book.route}/editions/${requestedEdition}` : book.route
+    const path = options.preview ? `${basePath}?view=book` : basePath
+    navigate('book', path, book.id, requestedEdition, Boolean(options.preview))
   }
   const openLibrary = () => navigate('library', '/')
   const toggleTheme = () => setTheme(value => value === 'light' ? 'dark' : 'light')

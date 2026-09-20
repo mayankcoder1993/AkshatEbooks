@@ -18,6 +18,10 @@
     "verifiedThrough": "2026-09-20",
     "releaseCount": 0,
     "latestRelease": null,
+    "downloads": {
+      "docx": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
+      "offlineHtml": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-Interactive.html"
+    },
     "editions": [
       {
         "id": "edition-01",
@@ -27,7 +31,11 @@
         "verifiedThrough": "2026-09-20",
         "readable": true,
         "chapterCount": 4,
-        "releaseCount": 0
+        "releaseCount": 0,
+        "downloads": {
+          "docx": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
+          "offlineHtml": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-Interactive.html"
+        }
       }
     ],
     "route": "/books/python-absolute-beginners",

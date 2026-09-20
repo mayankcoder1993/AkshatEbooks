@@ -28,6 +28,7 @@ Use the layered instruction system in `docs/agents/README.md`: read this root pl
 13. **Browser storage is never the source of truth.** Local storage or IndexedDB may provide temporary recovery or caching, but permanent book source, research, versions and approvals must live in the versioned project system.
 14. **Do not split chapters by character count.** Length may trigger an editorial warning, but boundaries must follow meaning: objectives, concepts, prerequisites, source sections, assessment units and reader workload.
 15. **Use authentic domain evidence.** Programming uses executable examples and visible output; economics uses sourced real applications and dated data; history uses verified events and responsible stories; polity uses actual constitutional provisions, judgments and institutional cases; exam books use verified PYQs; other domains use the equivalent strongest real evidence. Never force code-style pedagogy onto a non-technical subject.
+16. **Isolate book work from the core.** Ordinary transcript, chapter, image and edition work stays inside that book's package plus its edition manifest. Change shared components, exporters, schemas, publisher tokens or catalog generation only for a genuinely reusable capability, and validate every registered book afterward.
 
 ## Active book package
 

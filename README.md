@@ -47,7 +47,7 @@ npm run build:all
 npm run dev
 ```
 
-The library opens at `/`. The current edition opens at `/books/python-absolute-beginners`; a historical or preview edition uses `/books/python-absolute-beginners/editions/<edition-id>`. Downloaded self-contained HTML opens directly as its selected book edition and needs no server.
+The library opens at `/` and provides direct buttons for interactive Web View, Book/PDF Preview, offline HTML and editable Word. The current edition opens at `/books/python-absolute-beginners`; an explicit edition uses `/books/python-absolute-beginners/editions/<edition-id>`, and `?view=book` opens static Book/PDF Preview directly. Downloaded self-contained HTML opens directly as its selected book edition and needs no server.
 
 ## Create another book
 
