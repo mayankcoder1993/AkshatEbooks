@@ -54,7 +54,7 @@ export default function App() {
       .catch(error => { if (current) setLoadError(error) })
     return () => { current = false }
   }, [view, bookId, editionId])
-  useEffect(() => window.scrollTo({ top: 0 }), [active, view, bookId, editionId])
+  useEffect(() => { window.scrollTo({ top: 0 }) }, [active, view, bookId, editionId])
 
   const navigate = (nextView, path, nextBookId = null, nextEditionId = null, nextPreview = false) => {
     if (window.location.protocol !== 'file:') window.history.pushState({}, '', path)
