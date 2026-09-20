@@ -25,20 +25,11 @@ This repository may be used from environments that pin the current branch. Such 
    git switch -c book/first-code-input-and-decisions
    ```
 
-4. Read `AGENTS.md` completely.
-5. Write a short book brief before writing lessons.
+4. Read the layered instruction stack in `docs/agents/README.md`.
+5. Copy `docs/BOOK_BRIEF_TEMPLATE.md` to `src/books/<book-id>/BOOK_BRIEF.md` and complete it before writing chapters.
+6. Select the primary profile: technical, exam preparation, school textbook or wellbeing. Use a second profile only for a genuinely hybrid title.
 
-Recommended brief fields:
-
-- Working title and series position
-- Author, imprint and edition
-- Reader age and assumed knowledge
-- Promise to the reader
-- Learning outcomes
-- Chapter sequence
-- Topics explicitly out of scope
-- Required formats and filename slug
-- Brand assets approved for this title
+The brief must define identity, selected profile, reader, promise, measurable outcomes, source authority, version/syllabus/curriculum, chapter plan, exclusions, safety review, outputs and approved brand assets.
 
 ## Current architecture boundary
 
@@ -109,22 +100,18 @@ Select a book with a build-time `BOOK_ID`, not by repeatedly editing renderer im
 9. Convert accepted material into pure lesson data blocks.
 10. Validate every output.
 
-## Lesson creation gate
+## Chapter creation gate
 
-A lesson is ready only when it has:
+Every chapter needs a clear purpose and prerequisite, progressive explanation, a concrete example, a profile-appropriate learner activity, feedback or solution, concise summary, transition, accessible visuals and correct static rendering in Book/PDF and Word.
 
-- A clear learning goal and prerequisite
-- One concept introduced at a time
-- Concrete code and visible expected output
-- A run visualizer or route pipeline where execution is taught
-- At least one prediction or retrieval opportunity
-- Guided practice and a concise check for understanding
-- Common mistakes or a bug hunt where useful
-- A short summary and transition
-- Correct static rendering in Book/PDF and Word
-- Useful alt text and print-safe treatment for each image
+Apply the selected profile's specific gate:
 
-Do not add a new block type unless the educational behavior cannot be represented cleanly by the existing schema.
+- Technical books require visible input/output and execution or system state where relevant.
+- Exam books require syllabus mapping, marks/time/difficulty where useful, and synchronized worked solutions.
+- School books require curriculum alignment, guided-to-independent practice and age-appropriate safeguarding.
+- Wellbeing books require evidence/claim boundaries, optional practices, non-diagnostic language and professional/crisis escalation where relevant.
+
+Do not add a new block type unless the educational behavior cannot be represented cleanly by the existing schema. A non-technical title will need profile-appropriate blocks before production; do not misuse code-oriented blocks merely because they already exist.
 
 ## Build and quality gate
 

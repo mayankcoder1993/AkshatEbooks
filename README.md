@@ -6,6 +6,7 @@ A light-first interactive ebook built from one structured content source.
 
 ## Repository layout
 
+- `src/books/python-absolute-beginners/BOOK_BRIEF.md` — this title's reader, scope and selected editorial profile.
 - `src/books/python-absolute-beginners/content/` — this book's metadata, Preface and lessons.
 - `src/books/python-absolute-beginners/assets/` — this book's teaching images.
 - `src/catalog/` — public book registry, status, milestones, and architecture data.
@@ -14,7 +15,9 @@ A light-first interactive ebook built from one structured content source.
 - `scripts/` — generation and publishing commands.
 - `public/books/python-absolute-beginners/` — generated reader deliverables.
 - `brand/` — protected owner brand masters when supplied.
-- `docs/` — workflows for future books and agents.
+- `docs/agents/` — shared editorial rules plus technical, exam, school and wellbeing profiles.
+- `docs/BOOK_BRIEF_TEMPLATE.md` — required starting contract for every new title.
+- `docs/NEW_BOOK_WORKFLOW.md` — branch and production workflow for future books.
 
 ## Deliverables
 

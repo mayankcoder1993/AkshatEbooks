@@ -28,7 +28,7 @@ Next planned lesson: `input()`, including the important rule that user input sta
 
 ## Sources of truth
 
-Read `AGENTS.md` first. It contains the standing transcript, internet-research, editorial and branding rules. This book lives in `src/books/python-absolute-beginners/`. Generated files in `public/books/python-absolute-beginners/` are deliverables, not source.
+Read the layered instruction stack in `docs/agents/README.md`: root `AGENTS.md`, `CORE_EDITORIAL.md`, the active `BOOK_BRIEF.md`, its selected category profile, and the new-book workflow. This book lives in `src/books/python-absolute-beginners/`. Generated files in `public/books/python-absolute-beginners/` are deliverables, not source.
 
 For a different title, use the branch-per-book process in `docs/NEW_BOOK_WORKFLOW.md`. Keep shared renderers topic-neutral and do not mix multiple books' content in one branch.
 

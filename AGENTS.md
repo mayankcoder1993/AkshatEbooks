@@ -1,6 +1,8 @@
 # Sarva Gyana Koshah Books — AI Agent Playbook
 
-Read this before changing the book. This repository builds a sellable interactive ebook for absolute beginners from one structured content source.
+Read this before changing any book. This repository builds sellable multi-format books from structured content sources.
+
+Use the layered instruction system in `docs/agents/README.md`: read this root playbook, `docs/agents/CORE_EDITORIAL.md`, the active book's `BOOK_BRIEF.md`, its selected profile, and `docs/NEW_BOOK_WORKFLOW.md`. Do not apply a technical profile to an exam, school or wellbeing title unless its brief genuinely requires it.
 
 ## Product outputs
 
@@ -9,25 +11,34 @@ Read this before changing the book. This repository builds a sellable interactiv
 3. Native editable Word `.docx`, generated with `docx`.
 4. A self-contained offline HTML file.
 
-## Non-negotiable rules
+## Publisher-wide non-negotiable rules
 
 1. **Light mode first.** Every component must be clear on white. Dark mode is optional.
 2. **Value-check sources.** Keep lasting teaching. Skip course logistics, support links and platform instructions.
-3. **Book 1 is Python only.**
-4. **Lessons teach. The Preface orients.** Motivation belongs in the one-page Preface. Each lesson needs a concept, code and visualization.
-5. **Write for a 12-year-old.** Use one idea per sentence. Explain each technical term where it appears.
-6. **Use professional infographics.** Prefer numbered steps, clear icons and navy/teal/amber. Avoid cartoons. Make the image understandable on its own with short, accurate labels. If more explanation is needed, use a short caption plus separate numbered notes below the image—never one crowded “Legend 1… Legend 2…” sentence.
-7. **Never break the three-renderer rule.** Each block must work in Web View, Book View and Word.
-8. **No server is needed by readers.** The generated HTML, DOCX and PDF are deliverables. Vite is only a development tool.
-9. **Show, then name.** Terms such as bytecode, class file, compiler and linker require a concrete code or command example. Never teach them as definitions alone.
-10. **User-visible brand.** Author = Akshat Sinha. Imprint = Sarva Gyana Koshah Books. Publisher = Sarva Gyana Koshah Books, a division of The Sinha Family Group. Never show “AkshatEBooks” in reader-facing copy.
-11. **Crest placement is minimal.** The exact Sinha Family crest may appear on the title and copyright pages only. Never redraw or retype its SVG path. Generate color variants from `brand/sinha-crest-template.svg` with `npm run generate:crest`; never hand-edit a derived crest or overwrite the master. The active variant is ivory (`#FAF6EC` background, `#A8842C` antique-gold ink, fixed red accents `#D9383A`).
-12. **Imprint logo is a separate asset.** Never invent or redraw it. When the owner uploads `final logo.png`, copy it without recoloring to the paths documented in the AI Share Pack.
-13. **Temporary marks are not final logos.** The `SGK` text blocks currently keep layouts stable while the exact owner assets are unavailable. Replace them—not the owner artwork—when both masters arrive. A book is not branding-complete until the actual crest and imprint logo render in Web/Book View, DOCX and offline HTML.
-14. **Keep the library truthful.** `src/catalog/books.js` is the public status registry. Update its status, progress, lesson list, formats, branding readiness and next milestone whenever the book changes. Never mark missing branding or unbuilt outputs as complete.
+3. **Never break the renderer rule.** Every content block must have an appropriate Web, static Book/PDF and Word representation.
+4. **No server is needed by readers.** Generated HTML, DOCX and PDF are deliverables. Vite is only a development tool.
+5. **Use professional, purposeful visuals.** Make each image understandable with short labels, meaningful alt text and print-safe contrast. Use a short caption plus separate numbered notes rather than one crowded legend sentence.
+6. **User-visible brand.** Author = Akshat Sinha unless a book brief names another approved author. Imprint = Sarva Gyana Koshah Books. Publisher = Sarva Gyana Koshah Books, a division of The Sinha Family Group. Never show “AkshatEBooks” in reader-facing copy.
+7. **Crest placement is minimal.** The exact Sinha Family crest may appear on title/cover and copyright pages only. Never redraw or retype its SVG path. Generate variants from `brand/sinha-crest-template.svg` with `npm run generate:crest`; never hand-edit a derived crest or overwrite the master. The active light-book variant is ivory (`#FAF6EC` background, `#A8842C` antique-gold ink, fixed red accents `#D9383A`).
+8. **Imprint logo is a separate asset.** Never invent or redraw it. When the owner uploads `final logo.png`, copy it without recoloring.
+9. **Temporary marks are not final logos.** The `SGK` text blocks currently keep layouts stable while exact owner assets are unavailable. A book is not branding-complete until the actual approved assets render in Web/Book View, DOCX and offline HTML.
+10. **Keep the library truthful.** `src/catalog/books.js` is the public status registry. Update its status, progress, lesson list, formats, branding readiness and next milestone whenever a book changes. Never mark missing branding or unbuilt outputs as complete.
+11. **Respect profile safety rules.** Exam claims, child safeguarding, medical or mental-health boundaries, copyright and confidential source material must follow the selected profile and `CORE_EDITORIAL.md`.
+
+## Active book rules — Python for Absolute Beginners
+
+These rules apply to the current `python-absolute-beginners` package, not automatically to future titles:
+
+1. Book 1 teaches Python only. C and Java may appear only as short route comparisons.
+2. Motivation and “Why Python?” belong in the one-page Preface. Lessons teach concepts, code and visualization.
+3. Write for a complete beginner around age 12. Use one idea per sentence and define technical terms immediately.
+4. Prefer numbered professional infographics in navy, teal and amber; avoid whimsical cartoons.
+5. Show the job and a concrete example before naming bytecode, class files, compilers, linkers or other technical machinery.
 
 ## Architecture
 
+- `src/books/python-absolute-beginners/BOOK_BRIEF.md`: active reader, scope, profile and completion contract.
+- `docs/agents/`: core editorial standard and category-specific profiles.
 - `src/books/python-absolute-beginners/content/index.js`: active-book metadata and ordered lesson registry.
 - `src/books/python-absolute-beginners/content/lesson*.js`: pure block data. No JSX.
 - `src/books/python-absolute-beginners/content/preface.js`: one-page orientation.
@@ -60,7 +71,9 @@ A new block type requires: lesson data, a `Blocks.jsx` case, a `docx.js` case, C
 - Links show a usable label and visible URL.
 - No information may require click, hover or JavaScript in Book View.
 
-## Lesson checklist
+## Active technical lesson checklist
+
+This checklist implements the active book's `TECHNICAL` profile. Other book types must use their selected profile rather than forcing code, terminals or run visualizers into unsuitable material.
 
 1. Value-check the source.
 2. Add `src/books/python-absolute-beginners/content/lessonX.js` as pure data.
@@ -82,8 +95,8 @@ A transcript is source material, not finished book copy. Never paste it into a l
 5. Verify consequential technical claims with more than one source when practical. Never copy a source's wording; synthesize and rewrite it for this book.
 6. Record source URLs and their relevant takeaway in working notes or the handoff so another agent can audit important claims. Do not clutter beginner pages with unnecessary academic citations.
 7. Rewrite for a complete beginner around age 12: one idea at a time, immediate definitions, concrete examples, then the technical name.
-8. Fit retained material into the existing learning journey. Motivation stays in the Preface. Book 1 remains Python-only; C and Java appear only as short route comparisons.
-9. Turn the material into testable learning: prediction, code, visible output, execution steps, memory state, practice, bug hunt, quiz and concise takeaways as appropriate.
+8. Fit retained material into the active book brief and selected profile. For the current Python book, motivation stays in the Preface and C/Java remain short route comparisons.
+9. Turn the material into testable learning using profile-appropriate activities. For technical lessons this may include prediction, code, visible output, execution steps, memory state, practice, bug hunts and quizzes.
 10. Add content only through pure data blocks and confirm that interactive material flattens fully in Book/PDF and Word output.
 11. Run all validation commands and inspect all four outputs before considering the transcript integrated.
 
@@ -95,7 +108,9 @@ This repository is intended to become a publishing engine that can support many 
 
 For a new book, a future agent should create a dedicated branch from an up-to-date `main` after the publishing-system changes have been merged. Do not mix two books' content in one branch. In environments that pin an agent to a specific branch, obey the pinned branch and ask the owner or open a PR rather than switching branches.
 
-Follow `docs/NEW_BOOK_WORKFLOW.md`. Do not duplicate or fork shared renderer components merely to change book content. Improve the shared engine on a separate focused change when a genuinely reusable capability is needed.
+Start every title from `docs/BOOK_BRIEF_TEMPLATE.md`, select the appropriate profile in `docs/agents/profiles/`, and follow `docs/NEW_BOOK_WORKFLOW.md`. Do not duplicate or fork shared renderer components merely to change book content. Improve the shared engine on a separate focused change when a genuinely reusable capability is needed.
+
+When another AI agent supplies notes or instructions, follow the intake process in `docs/agents/README.md`: classify, verify and rewrite useful ideas rather than merging its prompt wholesale.
 
 ## Commands
 

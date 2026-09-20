@@ -25,15 +25,17 @@ export const BOOK_CATALOG = [
 ]
 
 export const PUBLISHING_LAYERS = [
-  ['Book packages', 'Metadata, lessons, Preface and teaching images remain isolated by book ID.'],
-  ['Publishing engine', 'Shared React renderers turn pure data blocks into Web View and static Book View.'],
-  ['Export engine', 'The same blocks become a native editable DOCX and self-contained offline HTML.'],
-  ['Public catalog', 'The library shows status, milestones, formats and links for every registered book.'],
+  ['Brief and profile', 'Each title defines its reader, promise, scope and category-specific editorial rules before drafting.'],
+  ['Book packages', 'Metadata, chapters, front matter and teaching assets remain isolated by book ID.'],
+  ['Publishing engine', 'Shared React renderers turn structured blocks into Web View and static Book View.'],
+  ['Export engine', 'The same structured source becomes a native editable DOCX and self-contained offline HTML.'],
+  ['Public catalog', 'The library shows truthful status, milestones, formats and links for every registered book.'],
 ]
 
 export const LIVE_FOLDER_TREE = `src/
 ├── books/
 │   └── python-absolute-beginners/
+│       ├── BOOK_BRIEF.md  reader, scope and selected profile
 │       ├── content/       metadata, Preface and lessons
 │       └── assets/        book-specific teaching images
 ├── catalog/
@@ -49,5 +51,8 @@ public/
         └── Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx
 
 brand/                     protected owner masters when supplied
-docs/                      AI and new-book workflows
+docs/
+├── agents/                core rules and category profiles
+├── BOOK_BRIEF_TEMPLATE.md new-title contract
+└── NEW_BOOK_WORKFLOW.md   branch and production workflow
 scripts/                   build, export and brand generation tools`
