@@ -16,7 +16,12 @@ export const lesson01 = {
     { type: 'heading', text: 'Step 2: Meet every character' },
     { type: 'paragraph', text: '`print` is a **built-in function**, a ready-made action supplied by Python. The round brackets call that action. The quotes mark text. The exclamation mark and comma inside the quotes are ordinary characters, so Python displays them too.' },
     { type: 'image', src: printAnatomy, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/print-anatomy.jpg', w: 1536, h: 1024, alt: 'Numbered callouts identify the function name, brackets, quotes and text value in print("Hello").', caption: 'One short line contains four different jobs.', points: ['`print` names the ready-made action.', 'The round brackets call that action.', 'The quotes mark where the text begins and ends.', '`Hello` is the value given to print().'] },
-    { type: 'flow', input: ['Value', '"Hello, World!"'], process: ['Function call', 'print(...)'], output: ['stdout', 'Hello, World!'] },
+    { type: 'flow', title: 'What actually happens when print() runs?', stages: [
+      { eyebrow: 'SOURCE CODE', title: 'Python reaches the instruction', detail: 'Python executes print("Hello, World!") in hello.py.' },
+      { eyebrow: 'VALUE', title: 'Python creates the string', detail: 'The characters inside the quotes become one text value: Hello, World!' },
+      { eyebrow: 'FUNCTION CALL', title: 'print() writes the value', detail: 'The built-in print function sends the text and a new-line character to standard output, also called stdout.' },
+      { eyebrow: 'TERMINAL', title: 'The terminal displays the result', detail: 'In this run, stdout is connected to the terminal. The terminal draws Hello, World! on the screen.' },
+    ], caption: 'This is the visible route for our first program. Python and the operating system perform more work inside, which we explore in the next lesson.' },
     { type: 'callout', variant: 'note', title: 'What is stdout?', paragraphs: ['stdout means **standard output**. It is the normal stream a program uses to send results outward. In our terminal, that stream appears as text on the screen.'] },
     { type: 'heading', text: 'Step 3: Plan before we type' },
     { type: 'blueprint', purpose: 'Prove that Python can run our instruction and show a greeting.', input: 'The string "Hello, World!" written inside the program.', processing: 'Call print() with that string.', output: 'The exact characters Hello, World!', files: ['hello.py'] },

@@ -6,6 +6,7 @@ import { loadBookPackage } from '../src/catalog/generated/registry.js'
 
 const publication = await loadBookPackage('python-absolute-beginners', 'edition-01')
 if (publication.BOOK.editionId !== 'edition-01' || publication.lessons.length !== 4) throw new Error('Edition registry did not load the expected current book')
+if (publication.HOW_TO_READ?.title !== 'How to read this book') throw new Error('Edition registry did not load the reading guide')
 
 const synthetic = {
   BRAND: publication.BRAND,
@@ -18,6 +19,7 @@ const synthetic = {
   lessons: [{
     id: 'profile-blocks', title: 'Profile Blocks', subtitle: 'Cross-domain rendering', shortTitle: 'Blocks',
     blocks: [
+      { type: 'flow', title: 'A real route', stages: [{ eyebrow: 'START', title: 'Begin', detail: 'The first step.' }, { eyebrow: 'RESULT', title: 'Finish', detail: 'The visible result.' }], caption: 'A tested route.' },
       { type: 'definition', term: 'Inflation', text: 'A broad rise in prices.', example: 'The same basket costs more.' },
       { type: 'worked-example', title: 'Percentage', problem: 'Find ten percent of 50.', steps: ['Multiply 50 by 0.10.'], result: '5' },
       { type: 'case-study', kind: 'REAL CASE', title: 'A sourced event', context: 'Context.', points: ['Verified point.'], source: { label: 'Official source', url: 'https://example.com' } },

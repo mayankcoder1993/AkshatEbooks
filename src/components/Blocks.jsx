@@ -26,13 +26,13 @@ export function Block({ block: b, staticMode = false }) {
     case 'guess': return <section className="journey-card guess"><span>MAKE A GUESS</span><h3>{b.prompt}</h3>{b.code && <pre>{b.code}</pre>}<ol>{b.options.map(x=><li key={x}>{x}</li>)}</ol><Reveal label="Show the answer" staticMode={staticMode}><p><strong>Answer: {b.options[b.answerIndex]}.</strong> {b.explain}</p></Reveal></section>
     case 'bug': return <section className="journey-card bug"><span>BUG HUNT</span><h3>{b.prompt}</h3><CodeBlock filename="bug_hunt.py" lines={b.lines}/><Reveal label="Find the bug" staticMode={staticMode}><p><strong>Line {b.bugLine}.</strong> {b.explain}</p></Reveal></section>
     case 'callout': return <section className={`callout ${b.variant || 'note'}`}>{b.title && <h3>{b.title}</h3>}{b.paragraphs.map(p=><p key={p}><RichText text={p}/></p>)}</section>
-    case 'flow': return <><Heading>Input → Process → Output</Heading><FlowDiagram inputLabel={b.input[0]} inputDetail={b.input[1]} processLabel={b.process[0]} processDetail={b.process[1]} outputLabel={b.output[0]} outputDetail={b.output[1]}/></>
+    case 'flow': return <><Heading>{b.title || 'Input → Process → Output'}</Heading><FlowDiagram stages={b.stages} inputLabel={b.input?.[0]} inputDetail={b.input?.[1]} processLabel={b.process?.[0]} processDetail={b.process?.[1]} outputLabel={b.output?.[0]} outputDetail={b.output?.[1]} caption={b.caption}/></>
     case 'blueprint': return <><Heading>Plan before we type</Heading><ProgramCard {...b}/></>
     case 'code': return <><Heading>The code</Heading><CodeBlock lines={b.lines} filename={b.filename}/></>
     case 'runviz': return <><Heading>{staticMode ? 'Program run: every step' : 'Watch the program run'}</Heading><RunVisualizer staticMode={staticMode} file={b.filename} codeLines={b.codeLines} steps={b.steps}/></>
     case 'terminal': return <><Heading>Expected output</Heading><TerminalWindow staticMode={staticMode} command={b.command} lines={b.lines} title="Terminal"/></>
     case 'pipeline': return <><Heading>Compare the routes</Heading><PipelineVisualizer tracks={b.tracks} staticMode={staticMode}/></>
-    case 'steps': return <><Heading>Try it yourself</Heading><ol className="steps-list">{b.items.map(x=><li key={x}><RichText text={x}/></li>)}</ol></>
+    case 'steps': return <><Heading>{b.title || 'Try it yourself'}</Heading><ol className="steps-list">{b.items.map(x=><li key={x}><RichText text={x}/></li>)}</ol></>
     case 'mistakes': return <><Heading>Common mistakes and fixes</Heading><div className="mistakes">{b.items.map(([bad,why])=><div className="mistake" key={bad}><code className="bad">✗ {bad}</code><p>{why}</p></div>)}</div></>
     case 'quiz': return <><Heading>Check your understanding</Heading><div className="quiz">{b.items.map(([q,a])=><details className="quiz-item" key={q} open={staticMode}><summary>{q}</summary><p><strong>Answer:</strong> {a}</p></details>)}</div></>
     case 'takeaways': return <><Heading>Key takeaways</Heading><div className="takeaways">{b.items.map(x=><p className="takeaway" key={x}>◆ {x}</p>)}</div></>

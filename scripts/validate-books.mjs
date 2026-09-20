@@ -68,6 +68,7 @@ for (const entry of books) {
     assert(Array.isArray(chapters), `${prefix}: default export must be a chapter array`)
     assert(!containsEmDash(module.BOOK), `${prefix}: Unicode em dash (U+2014) is not allowed in book content metadata`)
     assert(!containsEmDash(module.PREFACE?.title), `${prefix}: Unicode em dash (U+2014) is not allowed in the Preface title`)
+    assert(!containsEmDash(module.HOW_TO_READ?.title), `${prefix}: Unicode em dash (U+2014) is not allowed in the reading-guide title`)
     assert(module.BOOK?.id === entry.manifest.id, `${prefix}: content BOOK.id does not match manifest`)
     assert(module.BOOK?.editionId === edition.id, `${prefix}: content edition does not match manifest`)
     assert(module.BOOK?.version === edition.contentVersion, `${prefix}: content version does not match edition manifest`)
@@ -88,6 +89,7 @@ for (const entry of books) {
       chapterCount += 1
     }
     await validateBlocks(module.PREFACE?.blocks, `${prefix}/preface`, entry.directory)
+    if (module.HOW_TO_READ) await validateBlocks(module.HOW_TO_READ.blocks, `${prefix}/how-to-read`, entry.directory)
     console.log(`✓ ${prefix}: ${chapters.length} chapters, ${edition.label} v${edition.contentVersion}`)
   }
 }

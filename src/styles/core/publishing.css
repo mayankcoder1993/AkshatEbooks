@@ -299,28 +299,73 @@ p {
   box-shadow: var(--shadow);
 }
 
-.flow-svg {
-  width: 100%;
-  height: auto;
+.flow-stages {
+  display: grid;
+  gap: 1.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.flow-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: .85rem;
+  align-items: start;
+  padding: .95rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel-soft);
+}
+
+.flow-stage:not(:last-child)::after {
+  content: '↓';
+  position: absolute;
+  left: 1.72rem;
+  bottom: -1.45rem;
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+.flow-number {
+  display: grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+}
+
+.flow-eyebrow {
   display: block;
+  margin-bottom: .18rem;
+  color: var(--accent);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .1em;
 }
 
-.flow-line {
-  stroke-dasharray: 7 6;
-  animation: dashmove 1.2s linear infinite;
+.flow-stage strong {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
 }
 
-@keyframes dashmove {
-  to {
-    stroke-dashoffset: -13;
-  }
+.flow-stage p {
+  margin: .28rem 0 0;
+  color: var(--muted);
+  line-height: 1.5;
 }
 
 .flow-caption {
   color: var(--muted);
   font-size: 0.9rem;
   text-align: center;
-  margin: 0.4rem 0 0;
+  margin: 1rem 0 0;
 }
 
 /* ---------------- Steps / mistakes / quiz / takeaways ---------------- */

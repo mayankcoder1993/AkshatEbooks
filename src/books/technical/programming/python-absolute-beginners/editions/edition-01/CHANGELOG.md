@@ -7,7 +7,8 @@
 - Added concrete Python bytecode and Java class-file route examples.
 - Added professional teaching visuals and static explanation cards.
 - Split the Preface explanation into two large-label infographics for better readability at book-page size.
-- Removed the separate “How to use this book” section.
+- Removed the former generic “How to use this book” section.
+- Added a focused “How to read this book” guide built around chapter missions and learning steps.
 - Rebranded the reader experience for Sarva Gyana Koshah Books.
 
 ## Pending for 1.0.0
