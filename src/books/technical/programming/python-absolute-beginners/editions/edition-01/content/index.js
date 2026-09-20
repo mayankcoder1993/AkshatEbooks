@@ -3,6 +3,7 @@ import { lesson02 } from './lesson02.js'
 import { lesson03 } from './lesson03.js'
 import { lesson04 } from './lesson04.js'
 export { PREFACE } from './preface.js'
+export { CURRICULUM_ROADMAP } from './curriculum.js'
 export { BRAND } from '../../../../../../../publishing/publisher.js'
 import { PUBLISHER } from '../../../../../../../publishing/publisher.js'
 
