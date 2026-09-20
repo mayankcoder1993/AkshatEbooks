@@ -23,7 +23,8 @@
     "prebuild:single": "npm run prepare:books",
     "build:single": "vite build --config vite.singlefile.config.mjs && node --import ./scripts/register-jpg.mjs scripts/copy-single.mjs",
     "release:book": "node scripts/release-book.mjs",
-    "generate:crest": "node scripts/generate-crest-variants.mjs"
+    "generate:crest": "node scripts/generate-crest-variants.mjs",
+    "generate:imprint-mark": "node scripts/generate-imprint-mark.mjs"
   },
   "dependencies": {
     "docx": "^9.5.1",

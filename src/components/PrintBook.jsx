@@ -8,7 +8,7 @@ function RichLine({ text }) {
 export default function PrintBook({ publication }) {
   const { lessons, BOOK, BRAND, PREFACE } = publication
   return <main className="book force-light">
-    <section className="book-cover book-sheet" data-page-label="Cover"><p className="cover-series">{BOOK.series}</p><p className="cover-imprint">{BRAND.imprint}</p><h1>{BOOK.title}</h1><h2>{BOOK.subtitle}</h2><p className="cover-author">{BOOK.author}</p><p>{BOOK.edition} · {BOOK.year}</p></section>
+    <section className="book-cover book-sheet" data-page-label="Cover"><img className="cover-publisher-mark" src={BRAND.imprintMark} alt={`${BRAND.imprint} publisher mark`}/><p className="cover-series">{BOOK.series}</p><p className="cover-imprint">{BRAND.imprint}</p><h1>{BOOK.title}</h1><h2>{BOOK.subtitle}</h2><p className="cover-author">{BOOK.author}</p><p>{BOOK.edition} · {BOOK.year}</p></section>
     <section className="front-page book-sheet copyright-page" data-page-label="Copyright"><h1>{BOOK.title}</h1><p><strong>© {BOOK.year} by {BOOK.author}. All rights reserved.</strong></p><p>Published by {BOOK.publisher}.</p><p>{BOOK.rights}</p><p>{BOOK.disclaimer}</p><blockquote>{BOOK.dedication}</blockquote></section>
     <section className="front-page book-sheet" data-page-label="Acknowledgements"><h1>Acknowledgements</h1>{BOOK.acknowledgements.map(text=><p key={text}>{text}</p>)}</section>
     <section className="front-page toc book-sheet" data-page-label="Contents"><h1>Contents</h1><ol><li><a href="#print-preface">Preface — Why Python?</a></li><li><a href="#print-how-to">How to use this book</a></li>{lessons.map((l,i)=><li key={l.id}><a href={`#print-${l.id}`}>{BOOK.unitLabel} {i+1}: {l.title}</a><span>{l.subtitle}</span></li>)}</ol></section>

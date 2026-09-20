@@ -14,7 +14,7 @@ This branch contains the filterable publishing-library home at `/`, current-edit
 - Series: The First Code Series · Book 1.
 - Active family crest variant: ivory.
 - Crest use: title and copyright pages only.
-- Do not recreate the separate imprint logo. Wire it only after the owner uploads `final logo.png`.
+- The exact imprint master is `public/brand/sarva-gyana-koshah-logo.png`. Preserve it byte-for-byte; use `npm run generate:imprint-mark` for the approved circular opening-page treatment.
 - Read the branding section in `AGENTS.md` before changing reader-facing text.
 
 ## Current lessons

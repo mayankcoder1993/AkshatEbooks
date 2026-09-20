@@ -15,7 +15,7 @@
   "readable": true,
   "currentEdition": "edition-01",
   "route": "/books/python-absolute-beginners",
-  "nextMilestone": "Add the input() lesson and integrate the owner-supplied crest and imprint logo.",
+  "nextMilestone": "Add the input() lesson and integrate the owner-supplied family crest.",
   "instructionFiles": [
     "AGENTS.md",
     "docs/agents/CORE_EDITORIAL.md",
@@ -62,8 +62,8 @@
     {
       "id": "imprint-logo",
       "label": "Imprint logo",
-      "state": "blocked",
-      "stateLabel": "Waiting for final logo PNG"
+      "state": "ready",
+      "stateLabel": "Exact PNG preserved; circular opening mark integrated"
     }
   ]
 }
