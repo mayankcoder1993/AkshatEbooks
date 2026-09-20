@@ -53,7 +53,7 @@ const manifest = {
   branding: [
     { id: 'publisher', label: 'Publisher identity', state: 'ready', stateLabel: 'Ready' },
     { id: 'crest', label: 'Family crest', state: 'blocked', stateLabel: 'Waiting for exact SVG' },
-    { id: 'imprint-logo', label: 'Imprint logo', state: 'blocked', stateLabel: 'Waiting for final logo PNG' },
+    { id: 'imprint-logo', label: 'Imprint logo', state: 'ready', stateLabel: 'Shared exact PNG and circular opening mark ready' },
   ],
 }
 const date = new Date().toISOString().slice(0, 10)

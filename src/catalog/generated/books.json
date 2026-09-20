@@ -39,7 +39,7 @@
       }
     ],
     "route": "/books/python-absolute-beginners",
-    "nextMilestone": "Add the input() lesson and integrate the owner-supplied crest and imprint logo.",
+    "nextMilestone": "Add the input() lesson and integrate the owner-supplied family crest.",
     "completedLessons": 4,
     "lessons": [
       {
@@ -92,7 +92,7 @@
       },
       {
         "label": "Imprint logo",
-        "state": "Waiting for final logo PNG"
+        "state": "Exact PNG preserved; circular opening mark integrated"
       }
     ]
   }

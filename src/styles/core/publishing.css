@@ -880,8 +880,8 @@ kbd {
 @media(max-width:600px){.figure-points{grid-template-columns:1fr}}
 @media print{.figure-points li{break-inside:avoid}.figure-points{grid-template-columns:repeat(2,1fr)}}
 
+.cover-publisher-mark { width:7rem; height:7rem; margin:0 auto 1.25rem; display:block; object-fit:contain; }
 .cover-imprint { margin:.25rem 0 .8rem; color:#8a6a20; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
-.cp-brand-mark { width:4rem; height:4rem; margin:0 auto 1rem; display:grid; place-items:center; border:1px solid #d8c89d; border-radius:12px; background:#faf6ec; color:#a8842c; font-family:Georgia,serif; font-weight:800; }
 .copyright-page { text-align:left; }
 
 /* ---------------- Table of Contents Curriculum Roadmap ---------------- */

@@ -1,5 +1,7 @@
+import fs from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
 import { Packer } from 'docx'
-import { buildBookDocument } from '../src/export/docx.js'
+import { buildBookDocument, setImageLoader } from '../src/export/docx.js'
 import { loadBookPackage } from '../src/catalog/generated/registry.js'
 
 const publication = await loadBookPackage('python-absolute-beginners', 'edition-01')
@@ -29,6 +31,7 @@ const synthetic = {
     ],
   }],
 }
+setImageLoader(async source => new Uint8Array(await fs.readFile(source.startsWith('file:') ? fileURLToPath(source) : source)))
 const buffer = await Packer.toBuffer(await buildBookDocument(synthetic))
 if (buffer.length < 5000) throw new Error('Profile-block DOCX renderer produced an unexpectedly small document')
 console.log(`System tests passed: edition registry and profile-block DOCX (${buffer.length} bytes).`)
