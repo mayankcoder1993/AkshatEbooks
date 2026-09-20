@@ -20,6 +20,33 @@ function humanErrors(errors = []) {
   return errors.map(error => `${error.instancePath || '/'} ${error.message}`).join('; ')
 }
 
+async function discoverEdition({ directory, manifest, editionFile, validateEdition, validateRelease }) {
+  const edition = await readJson(editionFile)
+  if (!validateEdition(edition)) throw new Error(`${path.relative(ROOT, editionFile)}: ${humanErrors(validateEdition.errors)}`)
+  if (edition.bookId !== manifest.id) throw new Error(`${path.relative(ROOT, editionFile)}: edition bookId does not match ${manifest.id}`)
+  if (path.basename(path.dirname(editionFile)) !== edition.id) throw new Error(`${path.relative(ROOT, editionFile)}: edition folder and id differ`)
+  const chapterIds = edition.chapters.map(chapter => chapter.id)
+  if (new Set(chapterIds).size !== chapterIds.length) throw new Error(`${manifest.id}/${edition.id}: duplicate chapter id`)
+
+  const contentFile = edition.contentModule ? path.join(directory, edition.contentModule) : null
+  if (contentFile) await fs.access(contentFile)
+
+  const releases = []
+  const releaseDirectory = path.join(path.dirname(editionFile), 'releases')
+  try {
+    for (const name of (await fs.readdir(releaseDirectory)).filter(name => name.endsWith('.json')).sort()) {
+      const file = path.join(releaseDirectory, name)
+      const release = await readJson(file)
+      if (!validateRelease(release)) throw new Error(`${path.relative(ROOT, file)}: ${humanErrors(validateRelease.errors)}`)
+      if (release.bookId !== manifest.id || release.editionId !== edition.id) throw new Error(`${path.relative(ROOT, file)}: release identity mismatch`)
+      releases.push({ file, release })
+    }
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error
+  }
+  return { edition, editionFile, contentFile, releases }
+}
+
 export async function discoverBooks() {
   const [bookSchema, editionSchema, releaseSchema, manifestFiles] = await Promise.all([
     readJson(path.join(ROOT, 'src/schemas/book-manifest.schema.json')),
@@ -42,34 +69,24 @@ export async function discoverBooks() {
     if (ids.has(manifest.id)) throw new Error(`Duplicate book id: ${manifest.id}`)
     ids.add(manifest.id)
 
-    const editionFile = path.join(directory, 'editions', manifest.currentEdition, 'edition.manifest.json')
-    const edition = await readJson(editionFile)
-    if (!validateEdition(edition)) throw new Error(`${path.relative(ROOT, editionFile)}: ${humanErrors(validateEdition.errors)}`)
-    if (edition.bookId !== manifest.id || edition.id !== manifest.currentEdition) throw new Error(`${manifest.id}: current edition identity does not match its book manifest`)
-
-    const contentFile = edition.contentModule ? path.join(directory, edition.contentModule) : null
-    if (manifest.readable && !contentFile) throw new Error(`${manifest.id}: readable books require an edition contentModule`)
-    if (contentFile) await fs.access(contentFile)
     for (const instruction of manifest.instructionFiles || []) await fs.access(path.join(ROOT, instruction))
 
-    const chapterIds = manifest.chapters.map(chapter => chapter.id)
-    if (new Set(chapterIds).size !== chapterIds.length) throw new Error(`${manifest.id}: duplicate chapter id in manifest`)
-
-    const releases = []
-    const releaseDirectory = path.join(path.dirname(editionFile), 'releases')
-    try {
-      for (const name of (await fs.readdir(releaseDirectory)).filter(name => name.endsWith('.json')).sort()) {
-        const file = path.join(releaseDirectory, name)
-        const release = await readJson(file)
-        if (!validateRelease(release)) throw new Error(`${path.relative(ROOT, file)}: ${humanErrors(validateRelease.errors)}`)
-        if (release.bookId !== manifest.id || release.editionId !== edition.id) throw new Error(`${path.relative(ROOT, file)}: release identity mismatch`)
-        releases.push({ file, release })
-      }
-    } catch (error) {
-      if (error.code !== 'ENOENT') throw error
+    const editionFiles = await walk(path.join(directory, 'editions'), 'edition.manifest.json')
+    if (!editionFiles.length) throw new Error(`${manifest.id}: no edition manifests found`)
+    const editions = []
+    const editionIds = new Set()
+    for (const editionFile of editionFiles.sort()) {
+      const discovered = await discoverEdition({ directory, manifest, editionFile, validateEdition, validateRelease })
+      if (editionIds.has(discovered.edition.id)) throw new Error(`${manifest.id}: duplicate edition id ${discovered.edition.id}`)
+      editionIds.add(discovered.edition.id)
+      editions.push(discovered)
     }
 
-    books.push({ manifest, edition, releases, directory, manifestFile, editionFile, contentFile })
+    const current = editions.find(item => item.edition.id === manifest.currentEdition)
+    if (!current) throw new Error(`${manifest.id}: current edition ${manifest.currentEdition} was not found`)
+    if (manifest.readable && !current.contentFile) throw new Error(`${manifest.id}: readable current edition requires a contentModule`)
+
+    books.push({ manifest, editions, edition: current.edition, releases: current.releases, directory, manifestFile, editionFile: current.editionFile, contentFile: current.contentFile })
   }
 
   if (!books.length) throw new Error('No book manifests found under src/books')

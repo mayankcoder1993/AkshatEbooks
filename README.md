@@ -17,6 +17,7 @@ The current title is **Python for Absolute Beginners — The First Code Series �
 - `src/styles/core/`, `catalog/`, `profiles/` — separated style layers.
 - `scripts/` — scaffolding, validation, catalog, export and release commands.
 - `docs/agents/` — agent-led authoring workflow and category profiles.
+- `docs/CONTENT_BLOCKS.md` — reusable cross-domain, exam, school, wellbeing and technical data blocks.
 - `public/books/<book-id>/<edition-id>/` — generated reader deliverables.
 
 The current edition source lives at:
@@ -30,9 +31,12 @@ src/books/technical/programming/python-absolute-beginners/editions/edition-01/
 ```bash
 npm ci
 npm run prepare:books
+npm test
 npm run build
 npm run generate:docx
 npm run build:single
+# or build the library and every readable edition:
+npm run build:all
 ```
 
 `prepare:books` validates manifests, chapter identity/order, supported block types, image paths, alt text, edition metadata and output configuration. It then regenerates the catalog and lazy loader.
@@ -43,7 +47,7 @@ npm run build:single
 npm run dev
 ```
 
-The library opens at `/`. The current book opens at `/books/python-absolute-beginners`. Downloaded self-contained HTML opens directly as its selected book edition and needs no server.
+The library opens at `/`. The current edition opens at `/books/python-absolute-beginners`; a historical or preview edition uses `/books/python-absolute-beginners/editions/<edition-id>`. Downloaded self-contained HTML opens directly as its selected book edition and needs no server.
 
 ## Create another book
 
@@ -58,11 +62,23 @@ npm run create:book -- \
 
 This creates a planned, non-readable package that appears in the management catalog without pretending content is ready. Complete its brief and blueprint, add a validated content module, then mark it reader-accessible.
 
-## Build a selected book
+## Create another edition
 
 ```bash
-BOOK_ID=python-absolute-beginners npm run generate:docx
-BOOK_ID=python-absolute-beginners npm run build:single
+npm run create:edition -- \
+  --book python-absolute-beginners \
+  --id edition-02 \
+  --label "Second Edition" \
+  --version 2.0.0
+```
+
+The planned edition appears in edition history but does not replace the current edition. Add and validate its own chapter registry and content module before updating `currentEdition`.
+
+## Build a selected book edition
+
+```bash
+BOOK_ID=python-absolute-beginners EDITION_ID=edition-01 npm run generate:docx
+BOOK_ID=python-absolute-beginners EDITION_ID=edition-01 npm run build:single
 ```
 
 Current outputs:
@@ -73,7 +89,7 @@ Current outputs:
 ## Release gate
 
 ```bash
-BOOK_ID=python-absolute-beginners npm run release:book
+BOOK_ID=python-absolute-beginners EDITION_ID=edition-01 npm run release:book
 ```
 
 A release is blocked until the edition status and required branding are ready. Successful releases create immutable records with commit, version, verification date, byte sizes and SHA-256 checksums.

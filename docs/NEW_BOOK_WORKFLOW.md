@@ -74,9 +74,9 @@ Treat owner-provided brand assets as shared but controlled:
 
 ## Multi-book and edition operation
 
-The system discovers `book.manifest.json` files recursively, validates each current edition, generates a lightweight catalog, and creates lazy content loaders. The library therefore does not import every chapter and image at startup.
+The system discovers `book.manifest.json` files and every nested edition recursively, validates each edition independently, generates a lightweight catalog, and creates lazy content loaders keyed by `book-id@edition-id`. The library therefore does not import every chapter and image at startup.
 
-Use `BOOK_ID=<id>` to build one selected edition without editing imports. One self-contained HTML normally represents one edition; exceptionally large works split by meaningful volumes rather than arbitrary chapter files.
+Use `BOOK_ID=<id> EDITION_ID=<edition-id>` to build one selected edition without editing imports; omitting `EDITION_ID` selects the current edition. One self-contained HTML normally represents one edition; exceptionally large works split by meaningful volumes rather than arbitrary chapter files.
 
 Patch and minor revisions update the active edition's semantic `contentVersion`. Create a new `edition-XX/` when a major syllabus, curriculum, technology, promise or structure change must coexist with the previous edition. Published release records are immutable and include checksums.
 

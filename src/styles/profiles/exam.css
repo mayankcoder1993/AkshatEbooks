@@ -1,0 +1,4 @@
+.question-card { border-left-color:#b87518; }
+.question-card.verified-pyq { border-left-color:#168a8a; }
+.question-meta { display:flex; flex-wrap:wrap; gap:.35rem; margin:.35rem 0; }
+.question-meta span { padding:.18rem .48rem; border-radius:99px; color:var(--muted); background:var(--panel-soft); font-size:.68rem; font-weight:700; }

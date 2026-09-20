@@ -23,13 +23,21 @@ function BookDetails({ book, onOpenBook }) {
       <div><h3>Branding readiness</h3><ul className="catalog-readiness">{book.branding.map(item => <li key={item.label}><strong>{item.label}</strong><span>{item.state}</span></li>)}</ul></div>
     </div>
 
+    <div className="catalog-editions"><h3>Edition history</h3><div>{book.editions.map(edition => <article key={edition.id}><span><strong>{edition.label}</strong><small>{edition.id} · v{edition.contentVersion} · {edition.status}</small></span><span><small>{edition.chapterCount} chapters · {edition.releaseCount} releases</small><button className="btn" disabled={!edition.readable} onClick={() => onOpenBook(book, edition.id)}>{edition.id === book.currentEdition ? 'Open current' : edition.readable ? 'Open edition' : 'Not readable'}</button></span></article>)}</div></div>
     <div className="catalog-next"><strong>Next milestone</strong><p>{book.nextMilestone}</p></div>
   </section>
 }
 
 export default function LibraryHome({ theme, onToggleTheme, onOpenBook }) {
   const [selectedId, setSelectedId] = useState(BOOK_CATALOG[0]?.id)
+  const [query, setQuery] = useState('')
+  const [domain, setDomain] = useState('all')
+  const [status, setStatus] = useState('all')
   const selectedBook = BOOK_CATALOG.find(book => book.id === selectedId)
+  const domains = [...new Set(BOOK_CATALOG.map(book => book.domain))].sort()
+  const statuses = [...new Set(BOOK_CATALOG.map(book => book.status))].sort()
+  const normalizedQuery = query.trim().toLowerCase()
+  const visibleBooks = BOOK_CATALOG.filter(book => (domain === 'all' || book.domain === domain) && (status === 'all' || book.status === status) && (!normalizedQuery || `${book.title} ${book.subtitle} ${book.author} ${book.series} ${book.domain} ${book.subdomain}`.toLowerCase().includes(normalizedQuery)))
 
   return <div className="library-shell screen-only">
     <header className="library-header">
@@ -51,9 +59,16 @@ export default function LibraryHome({ theme, onToggleTheme, onOpenBook }) {
       </section>
 
       <section className="catalog-section" aria-labelledby="books-title">
-        <div className="catalog-section-head"><div><p className="catalog-eyebrow">Library</p><h2 id="books-title">Book status</h2></div><p>Select a title to inspect its lessons, formats and next milestone.</p></div>
+        <div className="catalog-section-head"><div><p className="catalog-eyebrow">Library</p><h2 id="books-title">Book status</h2></div><p>Select a title to inspect its chapters, editions, formats and next milestone.</p></div>
+        <div className="catalog-filters">
+          <label><span>Search books</span><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Title, author, series or subject"/></label>
+          <label><span>Domain</span><select value={domain} onChange={event => setDomain(event.target.value)}><option value="all">All domains</option>{domains.map(value => <option value={value} key={value}>{value}</option>)}</select></label>
+          <label><span>Status</span><select value={status} onChange={event => setStatus(event.target.value)}><option value="all">All statuses</option>{statuses.map(value => <option value={value} key={value}>{value}</option>)}</select></label>
+          <strong>{visibleBooks.length} shown</strong>
+        </div>
         <div className="book-catalog">
-          {BOOK_CATALOG.map(book => <article className={`catalog-card ${selectedId === book.id ? 'selected' : ''}`} key={book.id}>
+          {!visibleBooks.length && <p className="catalog-no-results">No books match these filters.</p>}
+          {visibleBooks.map(book => <article className={`catalog-card ${selectedId === book.id ? 'selected' : ''}`} key={book.id}>
             <div className="catalog-cover" aria-hidden="true"><span>{book.series}</span><strong>{book.title}</strong><small>{book.author}</small></div>
             <div className="catalog-card-body">
               <div className="catalog-card-meta"><Status tone={book.statusTone}>{book.status}</Status><span>{book.completedLessons} {book.completedLessons === 1 ? 'chapter' : 'chapters'} registered</span></div>

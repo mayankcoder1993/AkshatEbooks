@@ -9,13 +9,17 @@ if (!bookId) throw new Error('Choose a book with BOOK_ID=<book-id> npm run relea
 const books = await discoverBooks()
 const book = books.find(entry => entry.manifest.id === bookId)
 if (!book) throw new Error(`Unknown book id: ${bookId}`)
-if (!['ready', 'published'].includes(book.edition.status)) throw new Error(`${bookId}/${book.edition.id} is ${book.edition.status}; an edition must be ready before release`)
+const editionId = process.env.EDITION_ID || book.manifest.currentEdition
+const editionEntry = book.editions.find(item => item.edition.id === editionId)
+if (!editionEntry) throw new Error(`Unknown edition: ${bookId}/${editionId}`)
+const { edition } = editionEntry
+if (!['ready', 'published'].includes(edition.status)) throw new Error(`${bookId}/${edition.id} is ${edition.status}; an edition must be ready before release`)
 if (book.manifest.branding.some(item => item.state !== 'ready')) throw new Error(`${bookId}: all required branding must be ready before release`)
 
-const formats = [['docx', book.edition.outputs.docx], ['offlineHtml', book.edition.outputs.offlineHtml]]
+const formats = [['docx', edition.outputs.docx], ['offlineHtml', edition.outputs.offlineHtml]]
 const artifacts = []
 for (const [format, filename] of formats) {
-  const file = path.join(process.cwd(), book.edition.outputDir, filename)
+  const file = path.join(process.cwd(), edition.outputDir, filename)
   const data = await fs.readFile(file)
   artifacts.push({ format, filename, bytes: data.length, sha256: createHash('sha256').update(data).digest('hex') })
 }
@@ -24,20 +28,20 @@ const release = {
   $schema: '../../../../../../../schemas/release-manifest.schema.json',
   schemaVersion: 1,
   bookId,
-  editionId: book.edition.id,
-  contentVersion: book.edition.contentVersion,
+  editionId: edition.id,
+  contentVersion: edition.contentVersion,
   commit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
   releasedAt: new Date().toISOString(),
-  verifiedThrough: book.edition.verifiedThrough,
+  verifiedThrough: edition.verifiedThrough,
   artifacts,
 }
-const directory = path.join(book.directory, 'editions', book.edition.id, 'releases')
-const output = path.join(directory, `${book.edition.contentVersion}.json`)
+const directory = path.join(book.directory, 'editions', edition.id, 'releases')
+const output = path.join(directory, `${edition.contentVersion}.json`)
 await fs.mkdir(directory, { recursive: true })
 try {
   await fs.writeFile(output, `${JSON.stringify(release, null, 2)}\n`, { flag: 'wx' })
 } catch (error) {
-  if (error.code === 'EEXIST') throw new Error(`Release ${book.edition.contentVersion} already exists and is immutable`)
+  if (error.code === 'EEXIST') throw new Error(`Release ${bookId}/${edition.id} v${edition.contentVersion} already exists and is immutable`)
   throw error
 }
 console.log(`Created immutable release record ${path.relative(process.cwd(), output)}`)

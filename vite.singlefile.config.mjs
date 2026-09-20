@@ -7,6 +7,7 @@ export default defineConfig({
   base: './',
   define: {
     'import.meta.env.VITE_BOOK_ID': JSON.stringify(process.env.BOOK_ID || ''),
+    'import.meta.env.VITE_EDITION_ID': JSON.stringify(process.env.EDITION_ID || ''),
   },
   build: {
     outDir: 'single-build',

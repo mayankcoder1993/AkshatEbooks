@@ -44,7 +44,6 @@ const manifest = {
   route: `/books/${args.id}`,
   nextMilestone: 'Complete and approve the book brief, source plan and first-edition blueprint.',
   instructionFiles: ['AGENTS.md', 'docs/agents/CORE_EDITORIAL.md', 'docs/agents/AI_AUTHORING_WORKFLOW.md', `docs/agents/profiles/${args.profile}.md`, `${bookPath}/AGENTS.md`, `${bookPath}/BOOK_BRIEF.md`],
-  chapters: [],
   formats: [
     { id: 'web', label: 'Interactive Web View', state: 'planned' },
     { id: 'book', label: 'Book / PDF View', state: 'planned' },
@@ -68,6 +67,7 @@ const edition = {
   publicationYear: Number(args.year || date.slice(0, 4)),
   status: 'planned',
   verifiedThrough: date,
+  chapters: [],
   outputDir: `public/books/${args.id}/edition-01`,
   outputs: { docx: `${safeName}-Edition-01.docx`, offlineHtml: `${safeName}-Edition-01.html` },
 }

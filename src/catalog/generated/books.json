@@ -18,6 +18,18 @@
     "verifiedThrough": "2026-09-20",
     "releaseCount": 0,
     "latestRelease": null,
+    "editions": [
+      {
+        "id": "edition-01",
+        "label": "First Edition",
+        "contentVersion": "0.8.0",
+        "status": "drafting",
+        "verifiedThrough": "2026-09-20",
+        "readable": true,
+        "chapterCount": 4,
+        "releaseCount": 0
+      }
+    ],
     "route": "/books/python-absolute-beginners",
     "nextMilestone": "Add the input() lesson and integrate the owner-supplied crest and imprint logo.",
     "completedLessons": 4,

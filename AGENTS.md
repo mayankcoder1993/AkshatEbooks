@@ -52,7 +52,11 @@ The current title’s custom rules live in `src/books/technical/programming/pyth
 
 ## Block schema
 
-`heading`, `paragraph`, `image`, `mission`, `think`, `guess`, `bug`, `callout`, `flow`, `blueprint`, `code`, `runviz`, `terminal`, `pipeline`, `steps`, `mistakes`, `quiz`, `takeaways`, `aha`, `cliffhanger`, `resources`.
+Core: `heading`, `paragraph`, `image`, `definition`, `worked-example`, `case-study`, `timeline`, `comparison`, `source-note`, `callout`, `steps`, `quiz`, `takeaways`, `resources`, `cliffhanger`.
+
+Technical: `mission`, `think`, `guess`, `bug`, `flow`, `blueprint`, `code`, `runviz`, `terminal`, `pipeline`, `mistakes`, `aha`.
+
+Profile-aware: `question` (verified PYQ or practice), `activity`, `reflection`, `safety-notice`.
 
 Pipeline tracks may include a short `summary` and display `color`. Each stage may include a concrete `example` alongside its name, artifact and explanation. Keep examples short enough to scan inside a visual card.
 
@@ -60,7 +64,7 @@ A new block type requires: lesson data, a `Blocks.jsx` case, a `docx.js` case, C
 
 ## Mandatory static transformations
 
-- Reveals (`think`, `guess`, `bug`) show question and answer.
+- Reveals (`think`, `guess`, `bug`, `question`, `reflection`) show their answers or guidance.
 - Quizzes are open.
 - Run visualizers show every numbered step, memory state and output.
 - Pipelines show every track and stage.
@@ -74,7 +78,7 @@ This checklist implements the active book's `TECHNICAL` profile. Other book type
 1. Value-check the source.
 2. Add the lesson inside the active edition's `content/` directory as pure data.
 3. Use this journey: professional image → mission → think → core idea → blueprint/code → run visualizer or pipeline → expected output → aha → try it → mistakes/guess/bug → quiz → takeaways → resources → cliffhanger.
-4. Register the lesson in the edition content index and mirror its identity/title/subtitle in `book.manifest.json`; validation must pass.
+4. Register the lesson in the edition content index and mirror its identity/title/subtitle in that edition's `edition.manifest.json`; validation must pass.
 5. If code appears, include a `runviz` or `pipeline`.
 6. Import each image for browser inlining. Also add `file`, `w`, `h`, `alt`, a short `caption`, and optional `points` for separate numbered explanations in Web, PDF and Word.
 7. Run `npm run build`, `npm run generate:docx`, and `npm run build:single`.
@@ -111,12 +115,15 @@ When another AI agent supplies notes or instructions, follow the intake process 
 ## Commands
 
 - `npm run create:book -- --id <id> --title "<title>" --domain <domain> --subdomain <group> --profile <PROFILE>`: scaffold a planned, non-readable book package.
-- `npm run prepare:books`: validate manifests/content and regenerate the lightweight catalog and lazy registry.
+- `npm run create:edition -- --book <book-id> --id edition-02 --label "Second Edition" --version 2.0.0`: scaffold a planned edition without changing the current edition.
+- `npm run prepare:books`: validate every manifest/content edition and regenerate the lightweight catalog and lazy registry.
 - `npm run dev`: validate, regenerate the default edition deliverables and start the development UI.
 - `npm run build`: validate and build the lazy-loaded library website.
-- `BOOK_ID=<id> npm run generate:docx`: build the selected edition's editable Word file.
-- `BOOK_ID=<id> npm run build:single`: build one self-contained HTML file for the selected edition.
-- `BOOK_ID=<id> npm run release:book`: create an immutable checksummed release record; blocked until edition and branding are ready.
+- `npm test`: validate manifests/content plus the edition registry and cross-profile DOCX blocks.
+- `npm run build:all`: build the library and every non-archived readable edition.
+- `BOOK_ID=<id> EDITION_ID=<edition-id> npm run generate:docx`: build the selected edition's editable Word file; omit `EDITION_ID` for current.
+- `BOOK_ID=<id> EDITION_ID=<edition-id> npm run build:single`: build one self-contained HTML file for the selected edition.
+- `BOOK_ID=<id> EDITION_ID=<edition-id> npm run release:book`: create an immutable checksummed release record; blocked until edition and branding are ready.
 
 ## Professional book structure
 

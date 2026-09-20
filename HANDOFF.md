@@ -4,7 +4,7 @@ Updated 2026-09-20.
 
 ## Current repository state
 
-This branch contains the publishing-library home at `/`, the active book at `/books/python-absolute-beginners`, domain- and edition-isolated book packages, validated manifests, generated lightweight catalog data, lazy book loading, edition-selected DOCX/offline builds, immutable release gates, the static Book View, light-mode-first design and four current lessons. Planned books can be scaffolded into the management catalog without being falsely marked reader-ready.
+This branch contains the filterable publishing-library home at `/`, current-edition and explicit-edition routes, domain- and edition-isolated packages, validated manifests, generated lightweight catalog data, lazy book loading, edition-selected and build-all outputs, immutable release gates, reusable cross-profile blocks, the static Book View, light-mode-first design and four current Python lessons. Planned books and planned editions can be scaffolded without being falsely marked reader-ready.
 
 ## Brand authority
 

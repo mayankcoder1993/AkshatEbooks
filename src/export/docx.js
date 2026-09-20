@@ -34,6 +34,16 @@ async function blockToDocx(b) {
     case 'aha': return [tableBox('THE AHA MOMENT',[p([new TextRun({text:b.text,bold:true,color:colors.teal})])],'EAF8F4')]
     case 'cliffhanger': return [tableBox(`NEXT DISCOVERY · ${b.title}`,[p(b.text)],'EEF1FA')]
     case 'resources': return [h('Keep exploring'),...b.items.map(([label,url])=>new Paragraph({children:[new ExternalHyperlink({link:url,children:[new TextRun({text:label,style:'Hyperlink'})]}),new TextRun({text:` — ${url}`,color:'657084',size:18})]}))]
+    case 'definition': return [tableBox(`DEFINITION · ${b.term}`,[p(b.text),...(b.example?[p([new TextRun({text:'Example: ',bold:true}),...rich(b.example)])]:[])],'EEF1FA')]
+    case 'worked-example': return [tableBox(`WORKED EXAMPLE · ${b.title}`,[p([new TextRun({text:'Problem: ',bold:true}),...rich(b.problem)]),...list(b.steps,'steps'),p([new TextRun({text:'Result: ',bold:true,color:colors.teal}),...rich(b.result)])],'F3F6FA')]
+    case 'case-study': return [tableBox(`${(b.kind||'REAL CASE').toUpperCase()} · ${b.title}`,[p(b.context),...list(b.points||[]),...(b.source?[p(`Source: ${b.source.label}${b.source.url?` — ${b.source.url}`:''}`)]:[])],'FFF8E8')]
+    case 'timeline': return [h(b.title),new Table({width:{size:100,type:WidthType.PERCENTAGE},rows:b.items.map(item=>new TableRow({children:[new TableCell({borders,width:{size:22,type:WidthType.PERCENTAGE},shading:{type:ShadingType.CLEAR,fill:'EEF1FA'},children:[p([new TextRun({text:item.date,bold:true,color:colors.indigo})])]}),new TableCell({borders,children:[p([new TextRun({text:item.title,bold:true})]),p(item.text)]})]}))})]
+    case 'comparison': return [h(b.title),new Table({width:{size:100,type:WidthType.PERCENTAGE},rows:[new TableRow({children:b.columns.map(column=>new TableCell({borders,shading:{type:ShadingType.CLEAR,fill:'EEF1FA'},children:[p([new TextRun({text:column,bold:true})])]}))}),...b.rows.map(row=>new TableRow({children:row.map(cell=>new TableCell({borders,children:[p(cell)]}))}))]})]
+    case 'source-note': return [tableBox(b.label||'SOURCE NOTE',[p(b.claim),...(b.url?[p(b.url)]:[]),...(b.verifiedThrough?[p(`Verified through ${b.verifiedThrough}`)]:[])],'EEF8F6')]
+    case 'question': return [tableBox(b.kind==='verified-pyq'?'VERIFIED PAST-YEAR QUESTION':'PRACTICE QUESTION',[p([new TextRun({text:[b.exam,b.year,b.paper,b.marks&&`${b.marks} marks`].filter(Boolean).join(' · '),italics:true,color:'596579'})]),p([new TextRun({text:b.prompt,bold:true})]),p([new TextRun({text:'Model answer: ',bold:true,color:colors.teal}),...rich(b.answer)]),...list(b.marking||[]),...(b.sourceUrl?[p(`Official source: ${b.sourceUrl}`)]:[])],b.kind==='verified-pyq'?'EEF8F6':'FFF8E8')]
+    case 'activity': return [tableBox(`ACTIVITY · ${b.title}`,[...(b.materials?.length?[p(`Materials: ${b.materials.join(', ')}`)]:[]),...list(b.steps,'steps'),...(b.safety?[p([new TextRun({text:'Safety: ',bold:true,color:'9A5B00'}),...rich(b.safety)])]:[])],'EEF8F6')]
+    case 'reflection': return [tableBox('OPTIONAL REFLECTION',[p(b.prompt),p(b.permission||'You may pause, skip this exercise or return later.'),...list(b.guidance||[])],'F3F0FA')]
+    case 'safety-notice': return [tableBox(b.title||'IMPORTANT SUPPORT NOTE',[p(b.text),...(b.resources||[]).map(([label,url])=>p(`${label} — ${url}`))],'FFF0F0')]
     default:return []
   }
 }

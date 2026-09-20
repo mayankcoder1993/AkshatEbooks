@@ -5,7 +5,8 @@ import { DEFAULT_BOOK_ID, loadBookPackage } from '../src/catalog/generated/regis
 import { buildBookDocument, setImageLoader } from '../src/export/docx.js'
 
 const bookId = process.env.BOOK_ID || DEFAULT_BOOK_ID
-const publication = await loadBookPackage(bookId)
+const editionId = process.env.EDITION_ID
+const publication = await loadBookPackage(bookId, editionId)
 setImageLoader(async (source, block) => {
   const selected = block?.file || source
   const path = selected.startsWith('file:') ? fileURLToPath(selected) : selected

@@ -1,5 +1,9 @@
 @import './core/tokens.css';
 @import './core/publishing.css';
 @import './core/loading.css';
+@import './core/pedagogy.css';
 @import './profiles/technical.css';
+@import './profiles/exam.css';
+@import './profiles/school.css';
+@import './profiles/wellbeing.css';
 @import './catalog/library.css';

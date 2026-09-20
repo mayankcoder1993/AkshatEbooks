@@ -14,5 +14,27 @@
   "outputs": {
     "docx": "Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
     "offlineHtml": "Python-for-Absolute-Beginners-Interactive.html"
-  }
+  },
+  "chapters": [
+    {
+      "id": "hello-world",
+      "title": "Your First Program — Hello, World!",
+      "subtitle": "We begin with an empty file and end with a real result—understanding every character we typed."
+    },
+    {
+      "id": "code-to-machine",
+      "title": "How Does Our Code Reach the Computer?",
+      "subtitle": "Follow one tiny message from our file to the screen. No hidden knowledge required."
+    },
+    {
+      "id": "variables",
+      "title": "Variables: Names for Values",
+      "subtitle": "Store a value, change it and inspect memory one line at a time."
+    },
+    {
+      "id": "data-types",
+      "title": "Data Types: What Kind of Value?",
+      "subtitle": "Meet strings, integers, floats and booleans—and see why type changes what Python can do."
+    }
+  ]
 }

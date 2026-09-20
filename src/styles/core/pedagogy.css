@@ -1,0 +1,25 @@
+.pedagogy-card,.timeline-block,.comparison-block,.source-note,.safety-notice { margin:1.15rem 0; break-inside:avoid; }
+.pedagogy-card { padding:1rem 1.15rem; border:1px solid var(--border); border-left:4px solid var(--accent); border-radius:14px; background:var(--panel); box-shadow:var(--shadow); }
+.pedagogy-card h3,.timeline-block h3,.comparison-block h3 { margin:.25rem 0 .6rem; }
+.pedagogy-label { color:var(--accent); font-size:.68rem; font-weight:850; letter-spacing:.12em; }
+.pedagogy-example,.worked-result { padding:.6rem .75rem; border-radius:8px; background:var(--panel-soft); }
+.worked-example ol,.activity-card ol { padding-left:1.35rem; }
+.worked-example li,.activity-card li { margin:.4rem 0; }
+.case-study { border-left-color:#a8842c; }
+.case-source { color:var(--muted); font-size:.78rem; }
+.case-source a,.source-note a,.safety-notice a { color:var(--accent); overflow-wrap:anywhere; }
+.timeline-block { padding:1rem; border:1px solid var(--border); border-radius:14px; background:var(--panel); }
+.timeline-block ol { margin:0; padding:0; list-style:none; }
+.timeline-block li { display:grid; grid-template-columns:7rem 1fr; gap:.85rem; padding:.65rem 0; border-bottom:1px solid var(--border); }
+.timeline-block li:last-child { border-bottom:0; }
+.timeline-block time { color:var(--accent); font-weight:800; }
+.timeline-block p { margin:.15rem 0; color:var(--muted); }
+.table-scroll { max-width:100%; overflow:auto; }
+.comparison-block table { width:100%; border-collapse:collapse; background:var(--panel); }
+.comparison-block th,.comparison-block td { padding:.65rem; border:1px solid var(--border); text-align:left; vertical-align:top; }
+.comparison-block th { color:var(--text); background:var(--panel-soft); }
+.source-note { padding:.75rem .9rem; border-left:3px solid #168a8a; border-radius:7px; background:var(--panel-soft); font-size:.8rem; }
+.source-note p { margin:.25rem 0; }
+.source-note small { display:block; margin-top:.3rem; color:var(--muted); }
+@media(max-width:600px){.timeline-block li{grid-template-columns:1fr;gap:.15rem}}
+@media print{.pedagogy-card,.timeline-block,.comparison-block,.source-note,.safety-notice{break-inside:avoid}.table-scroll{overflow:visible}.comparison-block table{font-size:8.5pt}}

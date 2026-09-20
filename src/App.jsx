@@ -7,11 +7,15 @@ import Blocks from './components/Blocks.jsx'
 import { DEFAULT_BOOK_ID, loadBookPackage } from './catalog/generated/registry.js'
 
 const BUILD_BOOK_ID = import.meta.env.VITE_BOOK_ID || DEFAULT_BOOK_ID
-const routeBookId = () => window.location.pathname.match(/^\/books\/([^/]+)/)?.[1]
+const BUILD_EDITION_ID = import.meta.env.VITE_EDITION_ID || null
+const routeBookLocation = () => {
+  const match = window.location.pathname.match(/^\/books\/([^/]+)(?:\/editions\/([^/]+))?/)
+  return match ? { bookId: match[1], editionId: match[2] || null } : null
+}
 const initialLocation = () => {
-  if (window.location.protocol === 'file:') return { view: 'book', bookId: BUILD_BOOK_ID }
-  const bookId = routeBookId()
-  return bookId ? { view: 'book', bookId } : { view: 'library', bookId: null }
+  if (window.location.protocol === 'file:') return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID }
+  const location = routeBookLocation()
+  return location ? { view: 'book', ...location } : { view: 'library', bookId: null, editionId: null }
 }
 
 export default function App() {
@@ -19,6 +23,7 @@ export default function App() {
   const [theme, setTheme] = useState(() => { try { return localStorage.getItem('sgk-theme') || 'light' } catch { return 'light' } })
   const [view, setView] = useState(initial.view)
   const [bookId, setBookId] = useState(initial.bookId)
+  const [editionId, setEditionId] = useState(initial.editionId)
   const [publication, setPublication] = useState(null)
   const [loadError, setLoadError] = useState(null)
   const [active, setActive] = useState(0)
@@ -32,6 +37,7 @@ export default function App() {
       setPreview(false)
       setView(location.view)
       setBookId(location.bookId)
+      setEditionId(location.editionId)
     }
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
@@ -42,20 +48,24 @@ export default function App() {
     setPublication(null)
     setLoadError(null)
     setActive(0)
-    loadBookPackage(bookId)
+    loadBookPackage(bookId, editionId || undefined)
       .then(book => { if (current) setPublication(book) })
       .catch(error => { if (current) setLoadError(error) })
     return () => { current = false }
-  }, [view, bookId])
-  useEffect(() => window.scrollTo({ top: 0 }), [active, view, bookId])
+  }, [view, bookId, editionId])
+  useEffect(() => window.scrollTo({ top: 0 }), [active, view, bookId, editionId])
 
-  const navigate = (nextView, path, nextBookId = null) => {
+  const navigate = (nextView, path, nextBookId = null, nextEditionId = null) => {
     if (window.location.protocol !== 'file:') window.history.pushState({}, '', path)
     setPreview(false)
     setView(nextView)
     setBookId(nextBookId)
+    setEditionId(nextEditionId)
   }
-  const openBook = book => navigate('book', book.route, book.id)
+  const openBook = (book, requestedEdition = null) => {
+    const path = requestedEdition ? `${book.route}/editions/${requestedEdition}` : book.route
+    navigate('book', path, book.id, requestedEdition)
+  }
   const openLibrary = () => navigate('library', '/')
   const toggleTheme = () => setTheme(value => value === 'light' ? 'dark' : 'light')
 
