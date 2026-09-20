@@ -6,10 +6,11 @@ Do not load every instruction file as if every book were the same. Use a layered
 
 1. Root `AGENTS.md` — publisher, source, branding, output and repository rules.
 2. `docs/agents/CORE_EDITORIAL.md` — rules shared by every kind of book.
-3. The book's `BOOK_BRIEF.md` — reader, promise, scope, structure and selected profile.
-4. Exactly one primary profile from `docs/agents/profiles/`.
-5. Any additional profile only when the brief explicitly describes a genuine hybrid book.
-6. `docs/NEW_BOOK_WORKFLOW.md` — branch, package, build and validation procedure.
+3. `docs/agents/AI_AUTHORING_WORKFLOW.md` — transcript understanding, research, blueprint, reusable-component selection, drafting, review and publishing sequence.
+4. The book's `BOOK_BRIEF.md` — reader, promise, scope, structure and selected profile.
+5. Exactly one primary profile from `docs/agents/profiles/`.
+6. Any additional profile only when the brief explicitly describes a genuine hybrid book.
+7. `docs/NEW_BOOK_WORKFLOW.md` — branch, package, build and validation procedure.
 
 The nearest book-specific brief may narrow a general recommendation, but it may not override safety, copyright, truthful research, owner-brand protection or required-output rules.
 

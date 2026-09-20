@@ -2,7 +2,7 @@
 
 Read this before changing any book. This repository builds sellable multi-format books from structured content sources.
 
-Use the layered instruction system in `docs/agents/README.md`: read this root playbook, `docs/agents/CORE_EDITORIAL.md`, the active book's `BOOK_BRIEF.md`, its selected profile, and `docs/NEW_BOOK_WORKFLOW.md`. Do not apply a technical profile to an exam, school or wellbeing title unless its brief genuinely requires it.
+Use the layered instruction system in `docs/agents/README.md`: read this root playbook, `docs/agents/CORE_EDITORIAL.md`, `docs/agents/AI_AUTHORING_WORKFLOW.md`, the active book's `BOOK_BRIEF.md`, its selected profile, and `docs/NEW_BOOK_WORKFLOW.md`. Do not apply a technical profile to an exam, school or wellbeing title unless its brief genuinely requires it.
 
 ## Product outputs
 

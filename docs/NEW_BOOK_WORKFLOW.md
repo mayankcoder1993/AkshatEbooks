@@ -91,7 +91,7 @@ Select a book with a build-time `BOOK_ID`, not by repeatedly editing renderer im
 
 Use this staged workflow for transcripts, uploaded documents, topic briefs and research collections:
 
-1. **Ingest:** register source files, transcripts or the approved topic brief without overwriting originals.
+1. **Receive through the AI agent:** register source files, transcript parts, links, notes or the approved topic brief without overwriting originals. A separate browser intake application is not required.
 2. **Extract and audit:** extract text, detect missing/garbled material and record page or section provenance. Cleanup must be reviewable against the original.
 3. **Understand:** classify purpose, profile, domain, authority, reader, concepts, evidence and source gaps.
 4. **Decompose semantically:** propose parts and chapters from objectives, concept dependencies, source/syllabus structure and reader workload—not character counts.
