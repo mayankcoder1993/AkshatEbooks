@@ -1,6 +1,6 @@
 # Curriculum and Mission Arc Redesign
 
-Status: proposed for approval
+Status: superseded by `end-to-end-book-plan.md`; retained for design history
 
 Verified: 2026-09-21
 

@@ -1,6 +1,6 @@
 # Chapter Engagement Blueprint
 
-Status: approved for implementation
+Status: superseded by `end-to-end-book-plan.md`; retained for design history
 
 Verified: 2026-09-21
 

@@ -1,6 +1,6 @@
 # Engagement Architecture for Python Foundations
 
-Status: proposed alongside the eight-chapter curriculum
+Status: incorporated into `end-to-end-book-plan.md`; retained as the detailed engagement reference
 
 Verified: 2026-09-21
 
