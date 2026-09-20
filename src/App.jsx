@@ -82,7 +82,7 @@ export default function App() {
   const saveWord = async () => { setExporting(true); try { const { exportBookToWord } = await import('./export/docx.js'); await exportBookToWord(publication) } catch (error) { console.error(error); alert(`Word export failed: ${error.message}`) } finally { setExporting(false) } }
 
   if (preview) return <div className="book-view-screen force-light">
-    <div className="preview-toolbar no-print"><span>📖 Book View · every interactive answer is expanded for reading and print.</span><div className="preview-actions"><button className="btn primary" onClick={() => window.print()}>🖨 Save as PDF</button><button className="btn" onClick={() => setPreview(false)}>✕ Back to Web View</button></div></div>
+    <div className="preview-toolbar no-print"><span>📖 Book View · every interactive answer is expanded for reading and print.</span><div className="preview-actions"><button className="btn" onClick={openLibrary}>⌂ Library</button><button className="btn primary" onClick={() => window.print()}>🖨 Save as PDF</button><button className="btn" onClick={() => setPreview(false)}>✕ Back to Web View</button></div></div>
     <div className="preview-paper"><PrintBook publication={publication}/></div>
   </div>
 
