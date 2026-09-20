@@ -4,7 +4,7 @@ Updated 2026-09-20.
 
 ## Current repository state
 
-This branch contains the block-based publishing system, native DOCX renderer, static Book View, offline single-file HTML, light-mode-first design and four lessons.
+This branch contains the publishing-library home at `/`, the active book at `/books/python-absolute-beginners`, the block-based publishing system, native DOCX renderer, static Book View, offline single-file HTML, light-mode-first design and four lessons. The library displays book status, details, output readiness, architecture and the live folder structure from `src/catalog/books.js`.
 
 ## Brand authority
 

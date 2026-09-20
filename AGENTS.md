@@ -23,6 +23,8 @@ Read this before changing the book. This repository builds a sellable interactiv
 10. **User-visible brand.** Author = Akshat Sinha. Imprint = Sarva Gyana Koshah Books. Publisher = Sarva Gyana Koshah Books, a division of The Sinha Family Group. Never show “AkshatEBooks” in reader-facing copy.
 11. **Crest placement is minimal.** The exact Sinha Family crest may appear on the title and copyright pages only. Never redraw or retype its SVG path. Generate color variants from `brand/sinha-crest-template.svg` with `npm run generate:crest`; never hand-edit a derived crest or overwrite the master. The active variant is ivory (`#FAF6EC` background, `#A8842C` antique-gold ink, fixed red accents `#D9383A`).
 12. **Imprint logo is a separate asset.** Never invent or redraw it. When the owner uploads `final logo.png`, copy it without recoloring to the paths documented in the AI Share Pack.
+13. **Temporary marks are not final logos.** The `SGK` text blocks currently keep layouts stable while the exact owner assets are unavailable. Replace them—not the owner artwork—when both masters arrive. A book is not branding-complete until the actual crest and imprint logo render in Web/Book View, DOCX and offline HTML.
+14. **Keep the library truthful.** `src/catalog/books.js` is the public status registry. Update its status, progress, lesson list, formats, branding readiness and next milestone whenever the book changes. Never mark missing branding or unbuilt outputs as complete.
 
 ## Architecture
 
@@ -30,6 +32,8 @@ Read this before changing the book. This repository builds a sellable interactiv
 - `src/books/python-absolute-beginners/content/lesson*.js`: pure block data. No JSX.
 - `src/books/python-absolute-beginners/content/preface.js`: one-page orientation.
 - `src/books/python-absolute-beginners/assets/`: teaching images used only by this book.
+- `src/catalog/books.js`: public library registry, status and live architecture description.
+- `src/components/LibraryHome.jsx`: catalog home, book details and project architecture view.
 - `src/components/Blocks.jsx`: topic-neutral blocks to Web/Book View.
 - `src/components/PrintBook.jsx`: complete static book.
 - `src/export/docx.js`: blocks to native Word.

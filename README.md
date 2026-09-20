@@ -8,7 +8,8 @@ A light-first interactive ebook built from one structured content source.
 
 - `src/books/python-absolute-beginners/content/` — this book's metadata, Preface and lessons.
 - `src/books/python-absolute-beginners/assets/` — this book's teaching images.
-- `src/components/` — reusable Web and Book View renderers.
+- `src/catalog/` — public book registry, status, milestones, and architecture data.
+- `src/components/` — reusable library, Web, and Book View renderers.
 - `src/export/` — reusable native Word exporter.
 - `scripts/` — generation and publishing commands.
 - `public/books/python-absolute-beginners/` — generated reader deliverables.
@@ -30,6 +31,8 @@ npm run dev
 ```
 
 `predev` regenerates the DOCX and offline HTML. Readers do not need the development server.
+
+The development site opens with the publishing library at `/`. The active book is available at `/books/python-absolute-beginners`. The downloaded self-contained HTML opens directly as the book.
 
 ## Build outputs
 
