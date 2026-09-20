@@ -25,6 +25,10 @@ These rules apply to every Sarva Gyana Koshah Books title.
 
 Every chapter should have a purpose, prerequisite, explanation, concrete example, active learner task, feedback or solution, summary and transition. Choose activities appropriate to the selected profile; code execution is not mandatory outside technical books.
 
+Use the strongest authentic evidence available for the subject. Examples must match the domain: executable code and output for programming; sourced real applications and dated data for economics; verified events, primary evidence and responsibly told stories for history; actual constitutional provisions, judgments and institutional cases for polity; verified official past questions for exam preparation; and equivalent real evidence for other domains. Clearly distinguish a verified real case from an invented teaching scenario.
+
+Chapter boundaries must be semantic. Split by learning objective, concept dependency, source or syllabus unit, assessment boundary and reasonable reader workload. Character or token counts may warn that a chapter is unwieldy, but must never decide where meaning is cut.
+
 Use progressive disclosure:
 
 1. Familiar situation or question
@@ -43,6 +47,12 @@ Use progressive disclosure:
 - Preserve readable contrast and light-mode print quality.
 - Tables require clear headers and should flatten sensibly on narrow screens.
 - Interactive information must remain available in static PDF and Word outputs.
+
+## Authoring-system boundaries
+
+- Never expose AI-provider credentials in client-side code, generated ebooks, browser storage or repository files. A future AI authoring service must use controlled server-side secrets.
+- Browser local storage and IndexedDB may be used only for temporary recovery, offline drafts or caches. They are not authoritative storage for manuscripts, research, approvals, versions or releases.
+- Malformed or truncated AI output must not be silently promoted to finished content. Validate structured output against a schema, request missing sections again and show an incomplete state for human review.
 
 ## Integrity and safety
 

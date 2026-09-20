@@ -87,6 +87,23 @@ public/books/<book-id>/   generated deliverables
 
 Select a book with a build-time `BOOK_ID`, not by repeatedly editing renderer imports. Add this selection layer only when a second simultaneous book needs it; until then, the branch-per-book model is simpler and safer.
 
+## Source-to-book authoring pipeline
+
+Use this staged workflow for transcripts, uploaded documents, topic briefs and research collections:
+
+1. **Ingest:** register source files, transcripts or the approved topic brief without overwriting originals.
+2. **Extract and audit:** extract text, detect missing/garbled material and record page or section provenance. Cleanup must be reviewable against the original.
+3. **Understand:** classify purpose, profile, domain, authority, reader, concepts, evidence and source gaps.
+4. **Decompose semantically:** propose parts and chapters from objectives, concept dependencies, source/syllabus structure and reader workload—not character counts.
+5. **Blueprint:** define chapter goals, evidence, examples, activities, visuals, assessments and research needs; require approval before full drafting.
+6. **Draft by approved unit:** generate or write one reviewable unit at a time and preserve source links.
+7. **Review surgically:** apply targeted revisions with a visible change history rather than regenerating approved material wholesale.
+8. **Validate:** run factual, profile, source, safety, accessibility, schema and output checks.
+9. **Publish:** render the same approved structured source to Web, Book/PDF, DOCX and self-contained offline HTML.
+10. **Release:** record edition/version, checksums, review status, verified-through dates and update schedule.
+
+AI output that is truncated, schema-invalid or missing required sections remains incomplete. Do not make missing content appear valid merely by balancing JSON brackets.
+
 ## Transcript intake
 
 1. Preserve transcript parts in order during the working session.

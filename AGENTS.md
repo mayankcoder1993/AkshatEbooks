@@ -24,6 +24,10 @@ Use the layered instruction system in `docs/agents/README.md`: read this root pl
 9. **Temporary marks are not final logos.** The `SGK` text blocks currently keep layouts stable while exact owner assets are unavailable. A book is not branding-complete until the actual approved assets render in Web/Book View, DOCX and offline HTML.
 10. **Keep the library truthful.** `src/catalog/books.js` is the public status registry. Update its status, progress, lesson list, formats, branding readiness and next milestone whenever a book changes. Never mark missing branding or unbuilt outputs as complete.
 11. **Respect profile safety rules.** Exam claims, child safeguarding, medical or mental-health boundaries, copyright and confidential source material must follow the selected profile and `CORE_EDITORIAL.md`.
+12. **Never expose AI credentials.** Do not put provider API keys in browser code, generated HTML, local storage or book files. Any future AI-assisted authoring service must keep credentials in controlled server-side secret storage.
+13. **Browser storage is never the source of truth.** Local storage or IndexedDB may provide temporary recovery or caching, but permanent book source, research, versions and approvals must live in the versioned project system.
+14. **Do not split chapters by character count.** Length may trigger an editorial warning, but boundaries must follow meaning: objectives, concepts, prerequisites, source sections, assessment units and reader workload.
+15. **Use authentic domain evidence.** Programming uses executable examples and visible output; economics uses sourced real applications and dated data; history uses verified events and responsible stories; polity uses actual constitutional provisions, judgments and institutional cases; exam books use verified PYQs; other domains use the equivalent strongest real evidence. Never force code-style pedagogy onto a non-technical subject.
 
 ## Active book rules — Python for Absolute Beginners
 
