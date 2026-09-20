@@ -731,7 +731,7 @@ kbd {
 
 .brand-badge { width:2.2rem; height:2.2rem; display:grid; place-items:center; border-radius:10px; background:var(--accent); color:white; font-weight:800; font-size:.8rem; letter-spacing:.06em; }
 .lesson-figure { margin:0 0 1.4rem; border:1px solid var(--border); border-radius:18px; overflow:hidden; background:var(--panel); box-shadow:var(--shadow); }
-.lesson-figure img { display:block; width:100%; aspect-ratio:3/2; object-fit:cover; }
+.lesson-figure img { display:block; width:100%; height:auto; object-fit:contain; }
 .lesson-figure figcaption { padding:.75rem 1rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
 .mission { background:linear-gradient(135deg,#233963,#3f5d9d); color:white; border-radius:18px; padding:1.35rem 1.5rem; margin:1rem 0 1.6rem; box-shadow:var(--shadow); }
 .mission h2 { margin:.25rem 0; }
