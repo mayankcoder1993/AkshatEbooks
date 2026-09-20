@@ -28,7 +28,9 @@ Next planned lesson: `input()`, including the important rule that user input sta
 
 ## Sources of truth
 
-Read `AGENTS.md` first. Content lives in `src/content/`. Generated files in `public/` are deliverables, not source.
+Read `AGENTS.md` first. It contains the standing transcript, internet-research, editorial and branding rules. Content lives in `src/content/`. Generated files in `public/` are deliverables, not source.
+
+For a different title, use the branch-per-book process in `docs/NEW_BOOK_WORKFLOW.md`. Keep shared renderers topic-neutral and do not mix multiple books' content in one branch.
 
 ## Verify before handoff
 

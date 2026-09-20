@@ -66,11 +66,37 @@ A new block type requires: lesson data, a `Blocks.jsx` case, a `docx.js` case, C
 7. Run `npm run build`, `npm run generate:docx`, and `npm run build:single`.
 8. Audit light mode, static output and 12-year-old language.
 
+## Transcript and research workflow
+
+A transcript is source material, not finished book copy. Never paste it into a lesson without editorial work.
+
+1. Read the complete transcript and classify its concepts, examples, analogies, exercises and claims.
+2. Value-check every part. Remove greetings, promotions, repetition, platform instructions, support links, course logistics and material that does not teach the book's reader.
+3. Research the concept on the internet. Prefer official language documentation, specifications, standards and first-party historical sources. Use reputable secondary sources only when they add useful context.
+4. Keep useful information discovered during research even when it was not present in the transcript, provided it belongs at the reader's current level and supports the lesson goal.
+5. Verify consequential technical claims with more than one source when practical. Never copy a source's wording; synthesize and rewrite it for this book.
+6. Record source URLs and their relevant takeaway in working notes or the handoff so another agent can audit important claims. Do not clutter beginner pages with unnecessary academic citations.
+7. Rewrite for a complete beginner around age 12: one idea at a time, immediate definitions, concrete examples, then the technical name.
+8. Fit retained material into the existing learning journey. Motivation stays in the Preface. Book 1 remains Python-only; C and Java appear only as short route comparisons.
+9. Turn the material into testable learning: prediction, code, visible output, execution steps, memory state, practice, bug hunt, quiz and concise takeaways as appropriate.
+10. Add content only through pure data blocks and confirm that interactive material flattens fully in Book/PDF and Word output.
+11. Run all validation commands and inspect all four outputs before considering the transcript integrated.
+
+If a transcript is sent in parts, acknowledge the part numbers, preserve their order and wait for the user to confirm the final part before making a full-book editorial pass unless they explicitly request incremental integration.
+
+## Reusable book system
+
+This repository is intended to become a publishing engine that can support many books. Shared renderers, export code, block schemas and styles should remain topic-neutral. Book metadata, lessons, Preface and teaching assets must remain isolated from engine code.
+
+For a new book, a future agent should create a dedicated branch from an up-to-date `main` after the publishing-system changes have been merged. Do not mix two books' content in one branch. In environments that pin an agent to a specific branch, obey the pinned branch and ask the owner or open a PR rather than switching branches.
+
+Follow `docs/NEW_BOOK_WORKFLOW.md`. Do not duplicate or fork shared renderer components merely to change book content. Improve the shared engine on a separate focused change when a genuinely reusable capability is needed.
+
 ## Commands
 
 - `npm run dev`: regenerate deliverables and start development UI.
 - `npm run build`: regular production build.
-- `npm run generate:docx`: write `public/Akshat-EBooks-Python-for-Absolute-Beginners.docx`.
+- `npm run generate:docx`: write `public/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`.
 - `npm run build:single`: write `public/AkshatEBooks-Interactive-Book.html`.
 
 ## Professional book structure

@@ -33,4 +33,6 @@ Generated deliverables:
 - `public/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`
 - `public/AkshatEBooks-Interactive-Book.html`
 
-Read `AGENTS.md` before adding content or changing the publishing system.
+Read `AGENTS.md` before adding content or changing the publishing system. It includes the required transcript-and-internet-research workflow.
+
+For another title, follow `docs/NEW_BOOK_WORKFLOW.md`. The intended model is one shared publishing engine with a dedicated branch for each active book.
