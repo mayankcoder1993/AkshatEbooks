@@ -1,9 +1,9 @@
-import image from '../assets/why-python-origin.jpg'
+import image from '../assets/why-python-origin.png'
 
 export const PREFACE = {
   title: 'Preface — Why Was Python Needed?',
   blocks: [
-    { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/why-python-origin.jpg', w: 1536, h: 1024, alt: 'A difficult choice leads to a simpler Python bridge and then many kinds of useful work.', caption: 'Python filled the missing middle path.', points: ['Quick scripts were useful, but some jobs outgrew them.', 'C offered more control, but small tools could take much more code.', 'Python made many everyday programs easier to read and build.', 'The same language now supports automation, websites, data, science and AI.'] },
+    { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/why-python-origin.png', w: 1536, h: 1024, alt: 'A three-step infographic contrasts quick shell scripts and powerful C programs, presents Python as a readable middle path that connects to existing tools, and branches to automation, web backends, data, science and AI.', caption: 'Python offered a clearer middle path for many useful programs while keeping access to powerful tools.' },
     { type: 'paragraph', text: 'Python was created to solve a real problem. Programmers wanted to build useful tools without writing a large, difficult program for every small job.' },
     { type: 'callout', variant: 'analogy', title: 'The missing middle path', paragraphs: ['One option was a quick shell script. It was handy, but some jobs were too large for it.', 'Another option was a C program. It offered more control, but even a small tool could need much more code.', 'Guido van Rossum began Python as a clearer path between those choices.'] },
     { type: 'heading', text: 'What made the idea useful?' },
