@@ -24,17 +24,33 @@ Build an internal source map:
 - Gaps, outdated statements and misleading simplifications
 - Profile, subject domain, curriculum/exam authority and version sensitivity
 - Safety, privacy, copyright and professional-review concerns
+- Ambiguities whose resolution could change meaning, scope, placement, audience or output
 
-Do not equate summarizing with understanding. The agent must be able to explain why each retained item belongs in the book and where it fits in the learning sequence.
+Do not equate summarizing with understanding. The agent must be able to explain why each retained item belongs in the book and where it fits in the learning sequence. Research factual uncertainty first. When consequential ambiguity depends on owner intent rather than evidence, ask a clear question before drafting; never silently choose an interpretation.
 
 ## 3. Research beyond the source
 
-- Research the concept on the internet when it improves accuracy, context or teaching.
+Internet research is mandatory for every teaching topic, not only for claims that look suspicious. A fluent transcript can still be incomplete, outdated or overconfident.
+
 - Prefer official documentation, specifications, curricula, exam authorities, statutes, judgments, public datasets and first-party historical sources.
-- Use reputable secondary sources for explanation and synthesis.
-- Keep useful researched material even when it was not in the transcript if it fits the book brief and reader level.
-- Record URL, authority, date/version and a short takeaway for consequential claims.
+- Use reputable secondary sources for explanation, context, synthesis and responsible disagreement.
+- Create a topic-appropriate fact matrix covering: definition, mechanism, origin/history, evidence, concrete examples, applications, limitations, exceptions, misconceptions, safety/ethics and date/version sensitivity. Mark a category not applicable when necessary; never fill it with invented material.
+- Seek all materially relevant facts required for correct understanding within the approved scope. “All facts” does not mean copying everything found or overwhelming the reader with unrelated detail.
+- Keep useful researched material even when it was not in the transcript. Teach it now when it matches the objective and prerequisites; otherwise record it for a later chapter, sidebar, advanced note, research ledger or future edition.
+- Cross-check consequential or disputed claims with more than one independent authoritative source when practical.
+- Record URL, authority, access date/version, supported claim and a short takeaway for consequential facts.
 - Never copy distinctive wording or treat search-grounded AI output as verified merely because it contains links.
+- Separate factual uncertainty from preference ambiguity: research can resolve the former, while unresolved questions about the owner's intent, desired scope, audience, placement or presentation must be asked directly.
+
+## 3A. Clarification gate: ask instead of assuming
+
+Before changing structured content, stop and ask the user when reasonable interpretations would produce materially different results. This includes uncertainty about intended audience, depth, edition, chapter placement, treatment of supplied material, branding, sensitive facts, permissions, or whether a request replaces an earlier decision.
+
+- Ask the smallest focused question that resolves the decision and explain briefly why it matters.
+- Do not ask the user to resolve an objective fact that authoritative research can settle.
+- Do not hide a guess behind confident prose, silently select a preferred interpretation, or repair incomplete source material into apparently complete content.
+- If work can proceed safely around the unresolved point, isolate and label it. Otherwise pause that part.
+- If clarification never arrives, preserve unresolved status in notes, manifests or release gates; do not mark the content complete.
 
 ## 4. Value-check and scope the material
 

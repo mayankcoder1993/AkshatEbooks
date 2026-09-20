@@ -29,6 +29,8 @@ Use the layered instruction system in `docs/agents/README.md`: read this root pl
 14. **Do not split chapters by character count.** Length may trigger an editorial warning, but boundaries must follow meaning: objectives, concepts, prerequisites, source sections, assessment units and reader workload.
 15. **Use authentic domain evidence.** Programming uses executable examples and visible output; economics uses sourced real applications and dated data; history uses verified events and responsible stories; polity uses actual constitutional provisions, judgments and institutional cases; exam books use verified PYQs; other domains use the equivalent strongest real evidence. Never force code-style pedagogy onto a non-technical subject.
 16. **Isolate book work from the core.** Ordinary transcript, chapter, image and edition work stays inside that book's package plus its edition manifest. Change shared components, exporters, schemas, publisher tokens or catalog generation only for a genuinely reusable capability, and validate every registered book afterward.
+17. **Research every teaching topic for fact completeness.** Search authoritative internet sources even when the supplied transcript appears complete. Identify all materially relevant facts needed for correct understanding: definition, mechanism, history, examples, applications, limits, exceptions, misconceptions, safety, and date/version sensitivity as applicable. “All facts” means all relevant verified facts within the approved scope—not an unfiltered encyclopedia dump. Preserve valuable facts not yet suitable for the reader in research notes or a later-unit plan rather than silently losing them.
+18. **Never resolve consequential doubt by assumption.** Research factual uncertainty first. If doubt remains about user intent, scope, audience, source meaning, chapter placement, branding, safety, or a choice that would materially alter the deliverable, stop and ask a clear question. Do not silently choose. If an answer is unavailable, preserve the item as unresolved and keep the work incomplete rather than presenting an assumption as approved fact.
 
 ## Active book package
 
@@ -91,15 +93,17 @@ A transcript is source material, not finished book copy. Never paste it into a l
 
 1. Read the complete transcript and classify its concepts, examples, analogies, exercises and claims.
 2. Value-check every part. Remove greetings, promotions, repetition, platform instructions, support links, course logistics and material that does not teach the book's reader.
-3. Research the concept on the internet. Prefer official language documentation, specifications, standards and first-party historical sources. Use reputable secondary sources only when they add useful context.
-4. Keep useful information discovered during research even when it was not present in the transcript, provided it belongs at the reader's current level and supports the lesson goal.
-5. Verify consequential technical claims with more than one source when practical. Never copy a source's wording; synthesize and rewrite it for this book.
-6. Record source URLs and their relevant takeaway in working notes or the handoff so another agent can audit important claims. Do not clutter beginner pages with unnecessary academic citations.
-7. Rewrite for a complete beginner around age 12: one idea at a time, immediate definitions, concrete examples, then the technical name.
-8. Fit retained material into the active book brief and selected profile. For the current Python book, motivation stays in the Preface and C/Java remain short route comparisons.
-9. Turn the material into testable learning using profile-appropriate activities. For technical lessons this may include prediction, code, visible output, execution steps, memory state, practice, bug hunts and quizzes.
-10. Add content only through pure data blocks and confirm that interactive material flattens fully in Book/PDF and Word output.
-11. Run all validation commands and inspect all four outputs before considering the transcript integrated.
+3. Research every teaching topic on the internet, even when the transcript sounds complete. Prefer official language documentation, specifications, standards and first-party historical sources. Use reputable secondary sources when they add explanation, context or responsible disagreement.
+4. Run a fact-completeness audit appropriate to the topic: definition, how it works, origin/history, concrete uses, limits, exceptions, common misconceptions, risks/safety, and current date/version. Mark categories that are genuinely not applicable instead of inventing material.
+5. Keep useful information discovered during research even when it was not present in the transcript. Teach it now when it fits the reader and objective; otherwise record it for a later section, sidebar, advanced note or future edition. Do not overload a beginner merely to display research.
+6. Verify consequential technical claims with more than one independent authoritative source when practical. Never copy a source's wording; synthesize and rewrite it for this book.
+7. Record source URLs, authority, access date or version, claim supported and relevant takeaway in working notes or the handoff so another agent can audit important claims. Do not clutter beginner pages with unnecessary academic citations.
+8. Resolve factual doubt through research. If any consequential ambiguity remains about owner intent, source meaning, scope, placement, audience, safety or presentation, ask the user before drafting or changing the book. Never substitute an unstated assumption.
+9. Rewrite for a complete beginner around age 12: one idea at a time, immediate definitions, concrete examples, then the technical name.
+10. Fit retained material into the active book brief and selected profile. For the current Python book, motivation stays in the Preface and C/Java remain short route comparisons.
+11. Turn the material into testable learning using profile-appropriate activities. For technical lessons this may include prediction, code, visible output, execution steps, memory state, practice, bug hunts and quizzes.
+12. Add content only through pure data blocks and confirm that interactive material flattens fully in Book/PDF and Word output.
+13. Run all validation commands and inspect all four outputs before considering the transcript integrated.
 
 If a transcript is sent in parts, acknowledge the part numbers, preserve their order and wait for the user to confirm the final part before making a full-book editorial pass unless they explicitly request incremental integration.
 

@@ -14,10 +14,13 @@ These rules apply to every Sarva Gyana Koshah Books title.
 ## Source and research standard
 
 - Treat transcripts, notes and AI output as leads rather than verified truth.
-- Research beyond supplied material when doing so improves accuracy, context or teaching.
-- Prefer primary and official sources; use reputable secondary sources for explanation or synthesis.
+- Research every teaching topic beyond the supplied material using current internet sources, even when the source appears complete.
+- Prefer primary and official sources; use reputable secondary sources for explanation, synthesis and responsible disagreement.
+- Perform a scope-aware fact-completeness audit. Check definition, mechanism, history, evidence, examples, applications, limits, exceptions, misconceptions, safety and date/version sensitivity wherever applicable.
+- Include all materially relevant verified facts needed for correct understanding within the approved reader level and chapter objective. Preserve advanced or out-of-sequence facts in research notes or a later-unit plan rather than either overloading the chapter or silently discarding them.
 - Distinguish established fact, interpretation, analogy, opinion and advice.
-- Keep a research ledger containing URL, publisher/author, access date, claim supported and one-line takeaway.
+- Keep a research ledger containing URL, publisher/author, access date or version, claim supported and one-line takeaway.
+- Research factual uncertainty before proceeding. If consequential doubt remains about owner intent, scope, audience, source meaning, placement, safety or presentation, ask the user instead of making an unstated assumption. If clarification is unavailable, mark the item unresolved and the content incomplete.
 - Never copy a source's distinctive wording or structure without permission and attribution.
 - Check image, quotation and question-bank rights before publication.
 

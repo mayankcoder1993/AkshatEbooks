@@ -13,3 +13,4 @@ Read root `AGENTS.md`, the core editorial standard, AI authoring workflow, `TECH
 9. Interactive reveals, quizzes and visualizers must flatten completely in Book/PDF and Word.
 10. The next planned lesson is `input()`, including the rule that user input begins as a string.
 11. The title remains in drafting status until the planned first-edition sequence and exact owner branding are complete.
+12. For every Python concept, research the official current documentation plus additional authoritative context, complete the global fact audit, and retain important limits or exceptions. If the intended depth or placement is unclear after research, ask the owner rather than assuming.
