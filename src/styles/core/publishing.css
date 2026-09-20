@@ -204,9 +204,10 @@ p {
 }
 
 .lesson-title {
-  font-size: clamp(1.7rem, 4vw, 2.5rem);
-  margin: 0.2rem 0;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.3rem, 6vw, 3.8rem);
+  line-height: 1.05;
+  margin: 0.35rem 0 .65rem;
+  letter-spacing: -0.035em;
 }
 
 .lesson-subtitle {
@@ -367,6 +368,112 @@ p {
   text-align: center;
   margin: 1rem 0 0;
 }
+
+/* ---------------- Bytecode source-to-action map ---------------- */
+.bytecode-map {
+  margin: 1rem 0 1.6rem;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.bytecode-version {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: .35rem .7rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.bytecode-group {
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--panel-soft);
+}
+
+.bytecode-group + .bytecode-group { margin-top: 1rem; }
+
+.bytecode-source {
+  display: grid;
+  gap: .35rem;
+}
+
+.bytecode-source span,
+.bytecode-command span {
+  color: var(--muted);
+  font-size: .7rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.bytecode-source code {
+  display: block;
+  padding: .75rem 1rem;
+  border-radius: 10px;
+  background: #182847;
+  color: #fff;
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.bytecode-down {
+  margin: .3rem 0;
+  color: var(--accent);
+  text-align: center;
+  font-size: 1.45rem;
+  font-weight: 900;
+}
+
+.bytecode-actions {
+  display: grid;
+  gap: .65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bytecode-actions li {
+  display: grid;
+  grid-template-columns: 2rem minmax(0,1fr);
+  gap: .7rem;
+  align-items: start;
+  padding: .72rem;
+  border-left: 3px solid var(--accent);
+  border-radius: 9px;
+  background: var(--panel);
+}
+
+.bytecode-step {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+}
+
+.bytecode-actions code {
+  display: inline-block;
+  margin: 0 .65rem .25rem 0;
+  color: var(--accent);
+  font-weight: 800;
+}
+
+.bytecode-actions strong { color: var(--text); }
+.bytecode-actions p { margin: .3rem 0 0; color: var(--muted); font-size: .86rem; }
+.bytecode-command { display:grid; gap:.4rem; margin:1rem 0 0; padding:.8rem; border-radius:10px; background:var(--accent-soft); }
+.bytecode-command code { color:var(--text); overflow-wrap:anywhere; }
+.bytecode-caption { margin: .8rem 0 0; color: var(--muted); text-align:center; font-size:.88rem; }
 
 /* ---------------- Steps / mistakes / quiz / takeaways ---------------- */
 .steps-list li {
@@ -603,8 +710,10 @@ kbd {
 }
 
 .lesson-page-header h1 {
-  margin: 0.25rem 0;
-  font-size: 1.7rem;
+  margin: .4rem 0 .65rem;
+  font-size: clamp(2.35rem, 5vw, 3.35rem);
+  line-height: 1.05;
+  letter-spacing: -.035em;
 }
 
 .lesson-page-sub {
@@ -779,7 +888,7 @@ kbd {
 .lesson-figure img { display:block; width:100%; height:auto; object-fit:contain; }
 .lesson-figure figcaption { padding:.75rem 1rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
 .mission { background:linear-gradient(135deg,#233963,#3f5d9d); color:white; border-radius:18px; padding:1.35rem 1.5rem; margin:1rem 0 1.6rem; box-shadow:var(--shadow); }
-.mission h2 { margin:.25rem 0; }
+.mission h2 { margin:.3rem 0 .55rem; font-size:clamp(1.65rem,3.5vw,2.2rem); line-height:1.1; }
 .mission .eyebrow,.journey-card>span,.aha>span,.cliffhanger>span { font-size:.72rem; letter-spacing:.14em; font-weight:800; }
 .mission-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
 .mission-grid>div { background:rgba(255,255,255,.11); padding:.8rem 1rem; border-radius:12px; }
@@ -823,7 +932,7 @@ kbd {
 @media(max-width:760px){ .pipeline-stages,.mission-grid{grid-template-columns:1fr}.pipeline-stage:not(:last-child)::after{content:'↓';right:50%;top:auto;bottom:-.8rem}.actions{width:100%;justify-content:flex-end}.header-inner{gap:.6rem}.lesson-chips{order:3;width:100%} }
 @media print {
   .front-page { break-after:page; }
-  .lesson-figure,.mission,.journey-card,.aha,.cliffhanger,.pipeline-track,.resources a,.takeaways,.mistake,.rv-timeline li { break-inside:avoid; }
+  .lesson-figure,.mission,.journey-card,.aha,.cliffhanger,.pipeline-track,.bytecode-group,.bytecode-actions li,.resources a,.takeaways,.mistake,.rv-timeline li { break-inside:avoid; }
   .pipeline-stages { grid-template-columns:repeat(4,1fr); }
   .reveal-button { display:none!important; }
   .book { font-size:10pt; }

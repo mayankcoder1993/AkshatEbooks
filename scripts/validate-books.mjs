@@ -3,7 +3,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { discoverBooks, projectRelative } from './lib/book-system.mjs'
 
-const allowedBlocks = new Set(['heading','paragraph','image','mission','think','guess','bug','callout','flow','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','reflection','safety-notice'])
+const allowedBlocks = new Set(['heading','paragraph','image','mission','think','guess','bug','callout','flow','bytecode-map','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','reflection','safety-notice'])
 const books = await discoverBooks()
 let editionCount = 0
 let chapterCount = 0
@@ -35,6 +35,7 @@ async function validateBlocks(blocks, context, bookDirectory) {
     }
     if (block.type === 'quiz') assert(Array.isArray(block.items) && block.items.every(item => Array.isArray(item) && item.length === 2), `${label}: quiz items require question and answer`)
     if (block.type === 'runviz') assert(Array.isArray(block.steps) && block.steps.length, `${label}: run visualizer requires steps`)
+    if (block.type === 'bytecode-map') assert(block.version && block.groups?.length && block.groups.every(group => group.source && group.actions?.length && group.actions.every(action => action.opcode && action.action)), `${label}: bytecode map requires a version and source groups with named actions`)
     if (block.type === 'definition') assert(block.term && block.text, `${label}: definition requires term and text`)
     if (block.type === 'worked-example') assert(block.title && block.problem && block.result && block.steps?.length, `${label}: worked example requires title, problem, steps and result`)
     if (block.type === 'case-study') assert(block.title && block.context, `${label}: case study requires title and context`)
@@ -85,6 +86,7 @@ for (const entry of books) {
       assert(chapterData.id === chapterManifest.id, `${context}: chapter id/order does not match edition manifest`)
       assert(chapterData.title === chapterManifest.title && chapterData.subtitle === chapterManifest.subtitle, `${context}: title or subtitle does not match edition manifest`)
       assert(chapterData.shortTitle, `${context}: short title is required`)
+      assert(chapterData.blocks?.[0]?.type === 'mission', `${context}: the mission must be the first teaching block`)
       await validateBlocks(chapterData.blocks, context, entry.directory)
       chapterCount += 1
     }

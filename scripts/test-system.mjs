@@ -20,6 +20,7 @@ const synthetic = {
     id: 'profile-blocks', title: 'Profile Blocks', subtitle: 'Cross-domain rendering', shortTitle: 'Blocks',
     blocks: [
       { type: 'flow', title: 'A real route', stages: [{ eyebrow: 'START', title: 'Begin', detail: 'The first step.' }, { eyebrow: 'RESULT', title: 'Finish', detail: 'The visible result.' }], caption: 'A tested route.' },
+      { type: 'bytecode-map', version: 'Test runtime', groups: [{ source: 'value = 1', actions: [{ opcode: 'LOAD_CONST', action: 'Load one.', state: 'Stack: [1]' }] }], command: 'python -m dis test.py', caption: 'Test map.' },
       { type: 'definition', term: 'Inflation', text: 'A broad rise in prices.', example: 'The same basket costs more.' },
       { type: 'worked-example', title: 'Percentage', problem: 'Find ten percent of 50.', steps: ['Multiply 50 by 0.10.'], result: '5' },
       { type: 'case-study', kind: 'REAL CASE', title: 'A sourced event', context: 'Context.', points: ['Verified point.'], source: { label: 'Official source', url: 'https://example.com' } },

@@ -28,4 +28,6 @@ Every block is pure data and must render in interactive Web, static Book/PDF, ed
 
 Technical titles may use code, terminal, execution visualizer, pipeline, bug hunt, prediction and program-blueprint blocks documented in the active technical book.
 
+`bytecode-map` contains a verified runtime/version label and one or more source groups. Each group has a source line and an ordered list of named opcode actions with plain-language explanations and optional visible state. It must distinguish a learning map from literal version-sensitive disassembler output.
+
 A new block needs data validation, Web/static rendering, DOCX rendering, accessible styles, tests and an update to root `AGENTS.md`.

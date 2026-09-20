@@ -6,8 +6,8 @@ export const lesson03 = {
   id: 'variables', icon: '📦', title: 'Variables: Names for Values', shortTitle: 'Variables',
   subtitle: 'Store a value, change it and inspect memory one line at a time.', tags: ['Memory', 'Variables', '15 min'],
   blocks: [
-    { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/variables-memory.jpg', w: 1536, h: 1024, alt: 'A name tag points to memory boxes as a value changes.', caption: 'A variable name can refer to a new value.', points: ['Choose a useful name such as `score`.', 'Assign the first value to that name.', 'Assign again when the value changes.'] },
     { type: 'mission', title: 'Keep track of a score', text: 'Our program needs to remember a score and then add five.', weKnow: ['Python can display a value.'], weNeed: ['A name for the value.', 'A way to replace the stored value.'] },
+    { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/variables-memory.jpg', w: 1536, h: 1024, alt: 'A name tag points to memory boxes as a value changes.', caption: 'A variable name can refer to a new value.', points: ['Choose a useful name such as `score`.', 'Assign the first value to that name.', 'Assign again when the value changes.'] },
     { type: 'think', prompt: 'If the score changes, should we edit every old number by hand?', answer: 'No. We use one variable name. Later code reads the current value through that name.' },
     { type: 'heading', text: 'Assignment connects a name and a value' },
     { type: 'paragraph', text: 'A **variable** is a name that refers to a value. In `score = 10`, the equals sign means **assign**. It does not ask a maths question.' },

@@ -81,7 +81,7 @@ This checklist implements the active book's `TECHNICAL` profile. Other book type
 
 1. Value-check the source.
 2. Add the lesson inside the active edition's `content/` directory as pure data.
-3. Use this journey: professional image → mission → think → core idea → blueprint/code → run visualizer or pipeline → expected output → aha → try it → mistakes/guess/bug → quiz → takeaways → resources → cliffhanger.
+3. Use this journey: mission → professional image → think → core idea → blueprint/code → run visualizer, bytecode map, or pipeline → expected output → aha → try it → mistakes/guess/bug → quiz → takeaways → resources → cliffhanger. The mission must be the first teaching block in every chapter.
 4. Register the lesson in the edition content index and mirror its identity/title/subtitle in that edition's `edition.manifest.json`; validation must pass.
 5. If code appears, include a `runviz` or `pipeline`.
 6. Import each image for browser inlining. Also add `file`, `w`, `h`, `alt`, a short `caption`, and optional `points` for separate numbered explanations in Web, PDF and Word.
