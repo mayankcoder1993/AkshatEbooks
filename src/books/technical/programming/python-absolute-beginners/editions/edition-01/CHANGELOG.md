@@ -1,11 +1,13 @@
 # First Edition Changelog
 
-## 0.8.0 — 2026-09-20
+## 0.8.0: 2026-09-20
 
 - Established the single-source Web, Book/PDF, DOCX and offline HTML outputs.
 - Completed Preface and Lessons 1–4.
 - Added concrete Python bytecode and Java class-file route examples.
 - Added professional teaching visuals and static explanation cards.
+- Split the Preface explanation into two large-label infographics for better readability at book-page size.
+- Removed the separate “How to use this book” section.
 - Rebranded the reader experience for Sarva Gyana Koshah Books.
 
 ## Pending for 1.0.0

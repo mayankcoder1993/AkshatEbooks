@@ -21,16 +21,11 @@ export const BOOK = {
   rights: 'No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except for brief quotations in reviews.',
   disclaimer: 'Code examples are provided for learning. Test and review code before using it in an important system.',
   unitLabel: 'Lesson',
-  howToUse: [
-    'First, make a guess. Then run the code. Finally, compare what happened with your guess.',
-    'In Web View, buttons reveal answers and visualizers move one step at a time. In Book View, every answer and every step is already visible.',
-    'Type the code yourself. Small typing mistakes teach you how Python responds.',
-  ],
   aboutAuthor: [
-    '**Akshat Sinha** is the founder of The Sinha Family Group and the creator of Sarva Gyana Koshah — the treasury of all knowledge — which teaches through books, videos, and hands-on learning.',
-    'This book was written for the reader who has never written a line of code, and wants to finally understand what the computer is doing — not just copy-paste.',
+    '**Akshat Sinha** is the founder of The Sinha Family Group and the creator of Sarva Gyana Koshah, the treasury of all knowledge, which teaches through books, videos, and hands-on learning.',
+    'This book was written for the reader who has never written a line of code and wants to finally understand what the computer is doing, not just copy and paste.',
   ],
-  dedication: 'To my parents and grandparents — whose love, patience, and unwavering belief made this journey possible. Everything I build carries your blessings. This first book is for you.',
+  dedication: 'To my parents and grandparents, whose love, patience, and unwavering belief made this journey possible. Everything I build carries your blessings. This first book is for you.',
   acknowledgements: [
     'My deepest gratitude to my parents and grandparents, my first teachers, for their endless encouragement.',
     'To every reader of Sarva Gyana Koshah: your curiosity is the reason these pages exist.',

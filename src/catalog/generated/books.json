@@ -44,8 +44,8 @@
     "lessons": [
       {
         "id": "hello-world",
-        "title": "Your First Program — Hello, World!",
-        "subtitle": "We begin with an empty file and end with a real result—understanding every character we typed."
+        "title": "Your First Program: Hello, World!",
+        "subtitle": "We begin with an empty file and end with a real result, understanding every character we typed."
       },
       {
         "id": "code-to-machine",
@@ -60,7 +60,7 @@
       {
         "id": "data-types",
         "title": "Data Types: What Kind of Value?",
-        "subtitle": "Meet strings, integers, floats and booleans—and see why type changes what Python can do."
+        "subtitle": "Meet strings, integers, floats and booleans, and see why type changes what Python can do."
       }
     ],
     "formats": [

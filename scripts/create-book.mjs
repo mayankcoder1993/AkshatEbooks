@@ -71,15 +71,15 @@ const edition = {
   outputDir: `public/books/${args.id}/edition-01`,
   outputs: { docx: `${safeName}-Edition-01.docx`, offlineHtml: `${safeName}-Edition-01.html` },
 }
-const brief = `# Book Brief — ${args.title}\n\n## Identity\n\n- Book ID: \`${args.id}\`\n- Primary profile: \`${args.profile}\`\n- Domain: \`${args.domain}\`\n- Subdomain: \`${subdomain}\`\n- Status: planned\n\n## Reader\n\nDefine the exact reader, context, assumed knowledge, language and accessibility needs.\n\n## Promise and limits\n\nDefine the reader promise, measurable outcomes, in-scope topics, exclusions and professional-review needs.\n\n## Source authority\n\nList primary authorities, applicable versions or years, research-ledger location and permissions requirements.\n\n## Structure\n\nAdd the approved part and chapter blueprint before drafting.\n\n## Publication\n\nRequired outputs are Web, Book/PDF, editable DOCX and self-contained offline HTML. Set \`readable\` to true only after a valid content module exists and passes validation.\n`
-const agents = `# ${args.title} — Book-Specific AI Instructions\n\nRead the root playbook, core editorial standard, AI authoring workflow, \`${args.profile}\` profile and this book's brief first.\n\nRecord only title-specific rules here. Do not duplicate publisher-wide instructions.\n`
+const brief = `# Book Brief: ${args.title}\n\n## Identity\n\n- Book ID: \`${args.id}\`\n- Primary profile: \`${args.profile}\`\n- Domain: \`${args.domain}\`\n- Subdomain: \`${subdomain}\`\n- Status: planned\n\n## Reader\n\nDefine the exact reader, context, assumed knowledge, language and accessibility needs.\n\n## Promise and limits\n\nDefine the reader promise, measurable outcomes, in-scope topics, exclusions and professional-review needs.\n\n## Source authority\n\nList primary authorities, applicable versions or years, research-ledger location and permissions requirements.\n\n## Structure\n\nAdd the approved part and chapter blueprint before drafting.\n\n## Publication\n\nRequired outputs are Web, Book/PDF, editable DOCX and self-contained offline HTML. Set \`readable\` to true only after a valid content module exists and passes validation.\n`
+const agents = `# ${args.title}: Book-Specific AI Instructions\n\nRead the root playbook, core editorial standard, AI authoring workflow, \`${args.profile}\` profile and this book's brief first.\n\nRecord only title-specific rules here. Do not duplicate publisher-wide instructions.\n`
 
 await Promise.all([
   fs.writeFile(path.join(directory, 'book.manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`),
   fs.writeFile(path.join(directory, 'BOOK_BRIEF.md'), brief),
   fs.writeFile(path.join(directory, 'AGENTS.md'), agents),
   fs.writeFile(path.join(editionDir, 'edition.manifest.json'), `${JSON.stringify(edition, null, 2)}\n`),
-  fs.writeFile(path.join(editionDir, 'CHANGELOG.md'), `# First Edition Changelog\n\n## 0.1.0 — ${date}\n\n- Created the planned book package.\n`),
+  fs.writeFile(path.join(editionDir, 'CHANGELOG.md'), `# First Edition Changelog\n\n## 0.1.0: ${date}\n\n- Created the planned book package.\n`),
 ])
 console.log(`Created planned book package: ${directory}`)
 console.log('Next: complete BOOK_BRIEF.md, approve the blueprint, add structured content, then set readable=true and contentModule in the edition manifest.')

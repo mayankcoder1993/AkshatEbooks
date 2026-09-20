@@ -1,4 +1,4 @@
-# Sarva Gyana Koshah Books — AI Agent Playbook
+# Sarva Gyana Koshah Books: AI Agent Playbook
 
 Read this before changing any book. This repository builds sellable multi-format books from structured content sources.
 
@@ -29,8 +29,9 @@ Use the layered instruction system in `docs/agents/README.md`: read this root pl
 14. **Do not split chapters by character count.** Length may trigger an editorial warning, but boundaries must follow meaning: objectives, concepts, prerequisites, source sections, assessment units and reader workload.
 15. **Use authentic domain evidence.** Programming uses executable examples and visible output; economics uses sourced real applications and dated data; history uses verified events and responsible stories; polity uses actual constitutional provisions, judgments and institutional cases; exam books use verified PYQs; other domains use the equivalent strongest real evidence. Never force code-style pedagogy onto a non-technical subject.
 16. **Isolate book work from the core.** Ordinary transcript, chapter, image and edition work stays inside that book's package plus its edition manifest. Change shared components, exporters, schemas, publisher tokens or catalog generation only for a genuinely reusable capability, and validate every registered book afterward.
-17. **Research every teaching topic for fact completeness.** Search authoritative internet sources even when the supplied transcript appears complete. Identify all materially relevant facts needed for correct understanding: definition, mechanism, history, examples, applications, limits, exceptions, misconceptions, safety, and date/version sensitivity as applicable. “All facts” means all relevant verified facts within the approved scope—not an unfiltered encyclopedia dump. Preserve valuable facts not yet suitable for the reader in research notes or a later-unit plan rather than silently losing them.
+17. **Research every teaching topic for fact completeness.** Search authoritative internet sources even when the supplied transcript appears complete. Identify all materially relevant facts needed for correct understanding: definition, mechanism, history, examples, applications, limits, exceptions, misconceptions, safety, and date/version sensitivity as applicable. “All facts” means all relevant verified facts within the approved scope, not an unfiltered encyclopedia dump. Preserve valuable facts not yet suitable for the reader in research notes or a later-unit plan rather than silently losing them.
 18. **Never resolve consequential doubt by assumption.** Research factual uncertainty first. If doubt remains about user intent, scope, audience, source meaning, chapter placement, branding, safety, or a choice that would materially alter the deliverable, stop and ask a clear question. Do not silently choose. If an answer is unavailable, preserve the item as unresolved and keep the work incomplete rather than presenting an assumption as approved fact.
+19. **Do not use the Unicode em dash (U+2014).** This applies to book prose, titles, captions, diagrams, interfaces, metadata, documentation and generated outputs. Use a comma, colon, parentheses, or a new sentence according to meaning. A hyphen is permitted only where grammatically appropriate. Validation must reject reader content containing U+2014.
 
 ## Active book package
 

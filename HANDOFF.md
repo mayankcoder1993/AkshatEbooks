@@ -1,4 +1,4 @@
-# Handoff — Sarva Gyana Koshah Books
+# Handoff: Sarva Gyana Koshah Books
 
 Updated 2026-09-20.
 
@@ -19,7 +19,7 @@ This branch contains the filterable publishing-library home at `/`, current-edit
 
 ## Current lessons
 
-1. Your First Program — Hello, World!
+1. Your First Program: Hello, World!
 2. How Does Our Code Reach the Computer?
 3. Variables: Names for Values
 4. Data Types: What Kind of Value?

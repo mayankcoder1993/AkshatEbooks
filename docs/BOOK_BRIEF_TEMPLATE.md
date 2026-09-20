@@ -1,4 +1,4 @@
-# Book Brief — [Working Title]
+# Book Brief: [Working Title]
 
 Complete this before drafting. Replace every bracketed field. This file belongs inside the book package as `BOOK_BRIEF.md`.
 

@@ -13,11 +13,19 @@ function assert(condition, message) {
   if (!condition) throw new Error(message)
 }
 
+function containsEmDash(value) {
+  if (typeof value === 'string') return value.includes('\u2014')
+  if (Array.isArray(value)) return value.some(containsEmDash)
+  if (value && typeof value === 'object') return Object.values(value).some(containsEmDash)
+  return false
+}
+
 async function validateBlocks(blocks, context, bookDirectory) {
   assert(Array.isArray(blocks) && blocks.length, `${context}: blocks must be a non-empty array`)
   for (const [index, block] of blocks.entries()) {
     const label = `${context} block ${index + 1}`
     assert(block && allowedBlocks.has(block.type), `${label}: unknown block type ${block?.type}`)
+    assert(!containsEmDash(block), `${label}: Unicode em dash (U+2014) is not allowed`)
     blockCount += 1
     if (block.type === 'image') {
       assert(block.alt && block.w > 0 && block.h > 0 && block.file, `${label}: image requires file, dimensions and alt text`)
@@ -44,9 +52,11 @@ async function validateBlocks(blocks, context, bookDirectory) {
 }
 
 for (const entry of books) {
+  assert(!containsEmDash(entry.manifest), `${entry.manifest.id}: Unicode em dash (U+2014) is not allowed in the book manifest`)
   for (const editionEntry of entry.editions) {
     const { edition, contentFile } = editionEntry
     const prefix = `${entry.manifest.id}/${edition.id}`
+    assert(!containsEmDash(edition), `${prefix}: Unicode em dash (U+2014) is not allowed in the edition manifest`)
     editionCount += 1
     if (!contentFile) {
       console.log(`○ ${prefix}: ${edition.status} edition (no reader content yet)`)
@@ -56,6 +66,8 @@ for (const entry of books) {
     const module = await import(pathToFileURL(contentFile))
     const chapters = module.default
     assert(Array.isArray(chapters), `${prefix}: default export must be a chapter array`)
+    assert(!containsEmDash(module.BOOK), `${prefix}: Unicode em dash (U+2014) is not allowed in book content metadata`)
+    assert(!containsEmDash(module.PREFACE?.title), `${prefix}: Unicode em dash (U+2014) is not allowed in the Preface title`)
     assert(module.BOOK?.id === entry.manifest.id, `${prefix}: content BOOK.id does not match manifest`)
     assert(module.BOOK?.editionId === edition.id, `${prefix}: content edition does not match manifest`)
     assert(module.BOOK?.version === edition.contentVersion, `${prefix}: content version does not match edition manifest`)
@@ -68,6 +80,7 @@ for (const entry of books) {
       const chapterData = chapters[index]
       const chapterManifest = edition.chapters[index]
       const context = `${prefix}/${chapterData.id || `chapter-${index + 1}`}`
+      assert(!containsEmDash({ title: chapterData.title, subtitle: chapterData.subtitle, shortTitle: chapterData.shortTitle }), `${context}: Unicode em dash (U+2014) is not allowed in chapter metadata`)
       assert(chapterData.id === chapterManifest.id, `${context}: chapter id/order does not match edition manifest`)
       assert(chapterData.title === chapterManifest.title && chapterData.subtitle === chapterManifest.subtitle, `${context}: title or subtitle does not match edition manifest`)
       assert(chapterData.shortTitle, `${context}: short title is required`)

@@ -4,6 +4,7 @@ These rules apply to every Sarva Gyana Koshah Books title.
 
 ## Reader contract
 
+- Do not use the Unicode em dash (U+2014). Choose a comma, colon, parentheses or a separate sentence based on meaning.
 - Define the exact reader before drafting.
 - State what the reader will be able to understand or do.
 - State prerequisites and exclusions.

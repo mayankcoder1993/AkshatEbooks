@@ -40,7 +40,7 @@ const edition = {
 }
 await Promise.all([
   fs.writeFile(path.join(directory, 'edition.manifest.json'), `${JSON.stringify(edition, null, 2)}\n`),
-  fs.writeFile(path.join(directory, 'CHANGELOG.md'), `# ${args.label} Changelog\n\n## ${args.version} — ${date}\n\n- Created the planned edition package.\n`),
+  fs.writeFile(path.join(directory, 'CHANGELOG.md'), `# ${args.label} Changelog\n\n## ${args.version}: ${date}\n\n- Created the planned edition package.\n`),
   fs.writeFile(path.join(directory, 'theme/README.md'), '# Edition Theme Overrides\n\nAdd only differences from publisher and profile styles.\n'),
 ])
 console.log(`Created planned edition: ${book.manifest.id}/${args.id}`)

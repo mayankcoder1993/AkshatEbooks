@@ -4,22 +4,22 @@ Do not load every instruction file as if every book were the same. Use a layered
 
 ## Required reading order
 
-1. Root `AGENTS.md` — publisher, source, branding, output and repository rules.
-2. `docs/agents/CORE_EDITORIAL.md` — rules shared by every kind of book.
-3. `docs/agents/AI_AUTHORING_WORKFLOW.md` — transcript understanding, research, blueprint, reusable-component selection, drafting, review and publishing sequence.
-4. The book's `BOOK_BRIEF.md` — reader, promise, scope, structure and selected profile.
+1. Root `AGENTS.md`: publisher, source, branding, output and repository rules.
+2. `docs/agents/CORE_EDITORIAL.md`: rules shared by every kind of book.
+3. `docs/agents/AI_AUTHORING_WORKFLOW.md`: transcript understanding, research, blueprint, reusable-component selection, drafting, review and publishing sequence.
+4. The book's `BOOK_BRIEF.md`: reader, promise, scope, structure and selected profile.
 5. Exactly one primary profile from `docs/agents/profiles/`.
 6. Any additional profile only when the brief explicitly describes a genuine hybrid book.
-7. `docs/NEW_BOOK_WORKFLOW.md` — branch, package, build and validation procedure.
+7. `docs/NEW_BOOK_WORKFLOW.md`: branch, package, build and validation procedure.
 
 The nearest book-specific brief may narrow a general recommendation, but it may not override safety, copyright, truthful research, owner-brand protection or required-output rules.
 
 ## Available profiles
 
-- `TECHNICAL.md` — programming, software, computing and engineering instruction.
-- `EXAM_PREPARATION.md` — syllabus-led study guides, practice books and mock exams.
-- `SCHOOL_TEXTBOOK.md` — grade-, subject- and curriculum-aligned learning.
-- `WELLBEING.md` — self-reflection, habits, emotional wellbeing and self-help.
+- `TECHNICAL.md`: programming, software, computing and engineering instruction.
+- `EXAM_PREPARATION.md`: syllabus-led study guides, practice books and mock exams.
+- `SCHOOL_TEXTBOOK.md`: grade-, subject- and curriculum-aligned learning.
+- `WELLBEING.md`: self-reflection, habits, emotional wellbeing and self-help.
 
 Add a new profile only when a book category has genuinely different evidence, pedagogy, safety or assessment needs. Do not create a new agent file merely for a different title.
 

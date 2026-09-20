@@ -87,7 +87,7 @@ Use this staged workflow for transcripts, uploaded documents, topic briefs and r
 1. **Receive through the AI agent:** register source files, transcript parts, links, notes or the approved topic brief without overwriting originals. A separate browser intake application is not required.
 2. **Extract and audit:** extract text, detect missing/garbled material and record page or section provenance. Cleanup must be reviewable against the original.
 3. **Understand:** classify purpose, profile, domain, authority, reader, concepts, evidence and source gaps.
-4. **Decompose semantically:** propose parts and chapters from objectives, concept dependencies, source/syllabus structure and reader workload—not character counts.
+4. **Decompose semantically:** propose parts and chapters from objectives, concept dependencies, source/syllabus structure and reader workload, not character counts.
 5. **Blueprint:** define chapter goals, evidence, examples, activities, visuals, assessments and research needs; require approval before full drafting.
 6. **Draft by approved unit:** generate or write one reviewable unit at a time and preserve source links.
 7. **Review surgically:** apply targeted revisions with a visible change history rather than regenerating approved material wholesale.

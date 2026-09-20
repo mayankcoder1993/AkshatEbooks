@@ -24,7 +24,7 @@ export default function ProgramCard({ purpose, input, processing, output, files 
       <div className="pc-files">
         <span className="pc-files-label">📁 External files needed:</span>
         {files.length === 0 ? (
-          <em> none — this program is fully self-contained.</em>
+          <em> none: this program is fully self-contained.</em>
         ) : (
           files.map(f => (
             <code key={f} className="file-chip">

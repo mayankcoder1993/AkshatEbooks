@@ -4,7 +4,7 @@ import plusByType from '../assets/type-changes-plus.jpg'
 const codeLines = ['name = "Asha"', 'age = 12', 'height = 1.52', 'is_learning = True', 'print(type(name))', 'print(age + 1)']
 export const lesson04 = {
   id: 'data-types', icon: '🧬', title: 'Data Types: What Kind of Value?', shortTitle: 'Data Types',
-  subtitle: 'Meet strings, integers, floats and booleans—and see why type changes what Python can do.', tags: ['Types', 'Memory', '18 min'],
+  subtitle: 'Meet strings, integers, floats and booleans, and see why type changes what Python can do.', tags: ['Types', 'Memory', '18 min'],
   blocks: [
     { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/data-types.jpg', w: 1536, h: 1024, alt: 'A memory hub connects to cards for text, whole numbers, decimals and true-or-false values.', caption: 'A type tells Python what kind of value it is handling.', points: ['`str` stores text.', '`int` stores whole numbers.', '`float` stores decimal numbers.', '`bool` stores `True` or `False`.'] },
     { type: 'mission', title: 'Sort our values', text: 'A profile needs a name, age, height and learning status. These values are different kinds of data.', weKnow: ['Variables give values names.'], weNeed: ['A way to identify each kind of value.', 'Rules for what each kind can do.'] },

@@ -12,7 +12,7 @@ const synthetic = {
   BOOK: {
     ...publication.BOOK,
     id: 'renderer-test', title: 'Renderer Test', subtitle: 'Profile blocks', series: 'Test', author: 'Test',
-    unitLabel: 'Chapter', howToUse: ['Read and check the examples.'], acknowledgements: [], aboutAuthor: [],
+    unitLabel: 'Chapter', acknowledgements: [], aboutAuthor: [],
   },
   PREFACE: { title: 'Preface', blocks: [{ type: 'paragraph', text: 'Synthetic validation only.' }] },
   lessons: [{

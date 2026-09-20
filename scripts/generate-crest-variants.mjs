@@ -3,10 +3,10 @@ import { Resvg } from '@resvg/resvg-js'
 
 const TEMPLATE = 'brand/sinha-crest-template.svg'
 const VARIANTS = [
-  { name: 'classic', label: 'Classic — gold on warm black', bg: '#070707', metal: '#D4AF37' },
-  { name: 'royal-indigo', label: 'Royal Indigo — gold on deep indigo', bg: '#1E1B4B', metal: '#D4AF37' },
-  { name: 'maroon', label: 'Heritage Maroon — gold on maroon', bg: '#4A0D1F', metal: '#D4AF37' },
-  { name: 'ivory', label: 'Ivory — antique gold on ivory', bg: '#FAF6EC', metal: '#A8842C' },
+  { name: 'classic', label: 'Classic: gold on warm black', bg: '#070707', metal: '#D4AF37' },
+  { name: 'royal-indigo', label: 'Royal Indigo: gold on deep indigo', bg: '#1E1B4B', metal: '#D4AF37' },
+  { name: 'maroon', label: 'Heritage Maroon: gold on maroon', bg: '#4A0D1F', metal: '#D4AF37' },
+  { name: 'ivory', label: 'Ivory: antique gold on ivory', bg: '#FAF6EC', metal: '#A8842C' },
 ]
 
 const template = readFileSync(TEMPLATE, 'utf8')

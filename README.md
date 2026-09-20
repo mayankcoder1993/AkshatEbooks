@@ -1,24 +1,24 @@
-# Sarva Gyana Koshah Books — Publishing System
+# Sarva Gyana Koshah Books: Publishing System
 
 A scalable light-first library that turns one approved structured source per edition into an interactive Web View, static Book/PDF View, native editable Word document and self-contained offline HTML ebook.
 
-The current title is **Python for Absolute Beginners — The First Code Series · Book 1**, by Akshat Sinha.
+The current title is **Python for Absolute Beginners: The First Code Series · Book 1**, by Akshat Sinha.
 
 ## Architecture
 
-- `src/books/<domain>/<subdomain>/<book-id>/` — isolated book brief, instructions, shared material and edition packages.
-- `book.manifest.json` — permanent identity, profile, status, catalog data and current edition.
-- `editions/<edition-id>/edition.manifest.json` — version, verification date, content module and output names.
-- `src/catalog/generated/` — generated lightweight catalog and lazy content registry.
-- `src/components/` — reusable library, interactive and static renderers.
-- `src/export/` — reusable native Word exporter.
-- `src/publishing/` — publisher-wide metadata.
-- `src/schemas/` — machine-validated book, edition and release contracts.
-- `src/styles/core/`, `catalog/`, `profiles/` — separated style layers.
-- `scripts/` — scaffolding, validation, catalog, export and release commands.
-- `docs/agents/` — agent-led authoring workflow and category profiles.
-- `docs/CONTENT_BLOCKS.md` — reusable cross-domain, exam, school, wellbeing and technical data blocks.
-- `public/books/<book-id>/<edition-id>/` — generated reader deliverables.
+- `src/books/<domain>/<subdomain>/<book-id>/`: isolated book brief, instructions, shared material and edition packages.
+- `book.manifest.json`: permanent identity, profile, status, catalog data and current edition.
+- `editions/<edition-id>/edition.manifest.json`: version, verification date, content module and output names.
+- `src/catalog/generated/`: generated lightweight catalog and lazy content registry.
+- `src/components/`: reusable library, interactive and static renderers.
+- `src/export/`: reusable native Word exporter.
+- `src/publishing/`: publisher-wide metadata.
+- `src/schemas/`: machine-validated book, edition and release contracts.
+- `src/styles/core/`, `catalog/`, `profiles/`: separated style layers.
+- `scripts/`: scaffolding, validation, catalog, export and release commands.
+- `docs/agents/`: agent-led authoring workflow and category profiles.
+- `docs/CONTENT_BLOCKS.md`: reusable cross-domain, exam, school, wellbeing and technical data blocks.
+- `public/books/<book-id>/<edition-id>/`: generated reader deliverables.
 
 The current edition source lives at:
 

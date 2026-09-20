@@ -1,4 +1,4 @@
-# Book Brief — Python for Absolute Beginners
+# Book Brief: Python for Absolute Beginners
 
 ## Identity
 
