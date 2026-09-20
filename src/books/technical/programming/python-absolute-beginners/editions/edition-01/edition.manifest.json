@@ -4,7 +4,7 @@
   "bookId": "python-absolute-beginners",
   "id": "edition-01",
   "label": "First Edition",
-  "contentVersion": "0.8.0",
+  "contentVersion": "0.9.0",
   "publicationYear": 2026,
   "status": "drafting",
   "technology": "Python 3",
@@ -35,6 +35,11 @@
       "id": "data-types",
       "title": "Data Types: What Kind of Value?",
       "subtitle": "Meet strings, integers, floats and booleans, and see why type changes what Python can do."
+    },
+    {
+      "id": "numbers",
+      "title": "Numbers: Build a 100-Point Score",
+      "subtitle": "Use Python’s number operators, predict each step and land exactly on 100."
     }
   ]
 }

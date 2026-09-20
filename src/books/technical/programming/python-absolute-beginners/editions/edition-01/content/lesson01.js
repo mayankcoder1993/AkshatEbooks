@@ -5,7 +5,7 @@ const codeLines = ['print("Hello, World!")']
 
 export const lesson01 = {
   id: 'hello-world', icon: '👋', title: 'Your First Program: Hello, World!', shortTitle: 'Hello, World',
-  subtitle: 'We begin with an empty file and end with a real result, understanding every character we typed.', tags: ['Python', 'Lesson 01', 'Beginner'],
+  subtitle: 'We begin with an empty file and end with a real result, understanding every character we typed.', tags: ['Python', 'First Program', 'Beginner'],
   blocks: [
     { type: 'mission', title: 'Make the silent machine answer us', text: 'We start with no code and no hidden knowledge. Our first win is simple: ask the computer to show one exact message.', weKnow: ['A computer follows precise instructions.', 'It will not guess what we meant.'], weNeed: ['A way to mark text.', 'An action that sends text to the screen.', 'A command that starts our program.'] },
     { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/hello-world-infographic.jpg', w: 1536, h: 1024, alt: 'A three-stage path from a Python file to the interpreter and a terminal.', caption: 'One instruction travels from our file to the screen.', points: ['We save the instruction in `hello.py`.', 'Python reads the file and performs the instruction.', 'The terminal receives and displays the result.'] },

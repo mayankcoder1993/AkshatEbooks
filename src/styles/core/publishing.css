@@ -204,10 +204,10 @@ p {
 }
 
 .lesson-title {
-  font-size: clamp(2.3rem, 6vw, 3.8rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  line-height: 1.08;
   margin: 0.35rem 0 .65rem;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.025em;
 }
 
 .lesson-subtitle {
@@ -888,8 +888,15 @@ kbd {
 .lesson-figure img { display:block; width:100%; height:auto; object-fit:contain; }
 .lesson-figure figcaption { padding:.75rem 1rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
 .mission { background:linear-gradient(135deg,#233963,#3f5d9d); color:white; border-radius:18px; padding:1.35rem 1.5rem; margin:1rem 0 1.6rem; box-shadow:var(--shadow); }
-.mission h2 { margin:.3rem 0 .55rem; font-size:clamp(1.65rem,3.5vw,2.2rem); line-height:1.1; }
-.mission .eyebrow,.journey-card>span,.aha>span,.cliffhanger>span { font-size:.72rem; letter-spacing:.14em; font-weight:800; }
+.mission.mystery { background:linear-gradient(135deg,#30304f,#65548d); }
+.mission.simulation { background:linear-gradient(135deg,#164d56,#217883); }
+.mission.classification { background:linear-gradient(135deg,#563d21,#8a6733); }
+.mission.build { background:linear-gradient(135deg,#244b3b,#287358); }
+.mission h2 { margin:.3rem 0 .55rem; font-size:clamp(1.55rem,3vw,2rem); line-height:1.15; letter-spacing:-.015em; }
+.mission .eyebrow,.journey-card>span,.aha>span,.cliffhanger>span { font-size:.72rem; line-height:1.3; letter-spacing:.14em; font-weight:800; }
+.journey-card h3,.pedagogy-card h3,.comparison-block h3,.callout h3 { font-size:1.08rem; line-height:1.3; letter-spacing:-.005em; }
+.lesson-body p,.lesson-body li,.lesson-body td { line-height:1.65; }
+.lesson-figure figcaption,.source-note small,.question-meta { line-height:1.45; }
 .mission-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
 .mission-grid>div { background:rgba(255,255,255,.11); padding:.8rem 1rem; border-radius:12px; }
 .mission-grid ul { margin:.35rem 0 0; padding-left:1.2rem; }

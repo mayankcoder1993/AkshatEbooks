@@ -6,7 +6,7 @@ export const lesson03 = {
   id: 'variables', icon: '📦', title: 'Variables: Names for Values', shortTitle: 'Variables',
   subtitle: 'Store a value, change it and inspect memory one line at a time.', tags: ['Memory', 'Variables', '15 min'],
   blocks: [
-    { type: 'mission', title: 'Keep track of a score', text: 'Our program needs to remember a score and then add five.', weKnow: ['Python can display a value.'], weNeed: ['A name for the value.', 'A way to replace the stored value.'] },
+    { type: 'mission', variant: 'simulation', label: 'SCORE SIMULATION', title: 'Keep track of a changing score', text: 'Our player begins with 10 points and earns 5 more. We need one useful name that continues to work as the score changes.', weKnowLabel: 'Starting facts', weNeedLabel: 'Simulation goals', weKnow: ['Python can calculate and display a value.', 'The starting score is 10.'], weNeed: ['Give the score a meaningful name.', 'Update the value without editing every later instruction.'] },
     { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/variables-memory.jpg', w: 1536, h: 1024, alt: 'A name tag points to memory boxes as a value changes.', caption: 'A variable name can refer to a new value.', points: ['Choose a useful name such as `score`.', 'Assign the first value to that name.', 'Assign again when the value changes.'] },
     { type: 'think', prompt: 'If the score changes, should we edit every old number by hand?', answer: 'No. We use one variable name. Later code reads the current value through that name.' },
     { type: 'heading', text: 'Assignment connects a name and a value' },

@@ -2,6 +2,7 @@ import { lesson01 } from './lesson01.js'
 import { lesson02 } from './lesson02.js'
 import { lesson03 } from './lesson03.js'
 import { lesson04 } from './lesson04.js'
+import { lesson05 } from './lesson05.js'
 export { PREFACE } from './preface.js'
 export { HOW_TO_READ } from './readingGuide.js'
 export { CURRICULUM_ROADMAP } from './curriculum.js'
@@ -16,7 +17,7 @@ export const BOOK = {
   author: 'Akshat Sinha',
   edition: 'First Edition',
   editionId: 'edition-01',
-  version: '0.8.0',
+  version: '0.9.0',
   year: 2026,
   publisher: PUBLISHER,
   rights: 'No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except for brief quotations in reviews.',
@@ -36,5 +37,5 @@ export const BOOK = {
   offlineFilename: 'Python-for-Absolute-Beginners-Interactive.html',
 }
 
-const lessons = [lesson01, lesson02, lesson03, lesson04]
+const lessons = [lesson01, lesson02, lesson03, lesson04, lesson05]
 export default lessons

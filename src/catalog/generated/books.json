@@ -14,7 +14,7 @@
     "readable": true,
     "currentEdition": "edition-01",
     "editionLabel": "First Edition",
-    "contentVersion": "0.8.0",
+    "contentVersion": "0.9.0",
     "verifiedThrough": "2026-09-20",
     "releaseCount": 0,
     "latestRelease": null,
@@ -26,11 +26,11 @@
       {
         "id": "edition-01",
         "label": "First Edition",
-        "contentVersion": "0.8.0",
+        "contentVersion": "0.9.0",
         "status": "drafting",
         "verifiedThrough": "2026-09-20",
         "readable": true,
-        "chapterCount": 4,
+        "chapterCount": 5,
         "releaseCount": 0,
         "downloads": {
           "docx": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
@@ -40,7 +40,7 @@
     ],
     "route": "/books/python-absolute-beginners",
     "nextMilestone": "Add the input() lesson and integrate the owner-supplied family crest.",
-    "completedLessons": 4,
+    "completedLessons": 5,
     "lessons": [
       {
         "id": "hello-world",
@@ -61,6 +61,11 @@
         "id": "data-types",
         "title": "Data Types: What Kind of Value?",
         "subtitle": "Meet strings, integers, floats and booleans, and see why type changes what Python can do."
+      },
+      {
+        "id": "numbers",
+        "title": "Numbers: Build a 100-Point Score",
+        "subtitle": "Use Python’s number operators, predict each step and land exactly on 100."
       }
     ],
     "formats": [

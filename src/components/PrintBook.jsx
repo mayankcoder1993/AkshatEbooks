@@ -67,7 +67,7 @@ export default function PrintBook({ publication }) {
     </section>
     <section className="front-page book-sheet" data-page-label="Preface" id="print-preface"><h1>{PREFACE.title}</h1><Blocks blocks={PREFACE.blocks} staticMode/></section>
     {HOW_TO_READ && <section className="front-page book-sheet" data-page-label="How to Read" id="print-how-to-read"><h1>{HOW_TO_READ.title}</h1><Blocks blocks={HOW_TO_READ.blocks} staticMode/></section>}
-    {lessons.map((l,i)=><section className="chapter-wrapper book-sheet" data-page-label={`${BOOK.unitLabel} ${String(i+1).padStart(2,'0')}`} id={`print-${l.id}`} key={l.id}><article className="lesson-page"><header className="lesson-page-header"><p className="lesson-page-kicker">{BOOK.unitLabel} {String(i+1).padStart(2,'0')} · {BOOK.title}</p><h1>{l.icon} {l.title}</h1><p className="lesson-page-sub">{l.subtitle}</p></header><Blocks blocks={l.blocks} staticMode/></article></section>)}
+    {lessons.map((l,i)=><section className="chapter-wrapper book-sheet" data-page-label={`${BOOK.unitLabel} ${String(i+1).padStart(2,'0')}`} id={`print-${l.id}`} key={l.id}><article className="lesson-page"><header className="lesson-page-header"><p className="lesson-page-kicker">{BOOK.unitLabel} {String(i+1).padStart(2,'0')}</p><h1>{l.title}</h1><p className="lesson-page-sub">{l.subtitle}</p></header><Blocks blocks={l.blocks} staticMode/></article></section>)}
     <section className="front-page about book-sheet" data-page-label="About the Author"><h1>About the author</h1>{BOOK.aboutAuthor.map(text=><RichLine text={text} key={text}/>)}<h2>Keep learning</h2><p>Your next useful program begins with one small question. Keep guessing, running and checking.</p><p><strong>{BRAND.imprint}</strong> · {BRAND.tagline}</p></section>
   </main>
 }
