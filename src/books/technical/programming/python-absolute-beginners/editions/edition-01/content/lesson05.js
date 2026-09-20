@@ -49,7 +49,7 @@ export const lesson05 = {
       { line: 4, title: 'Display the result', explain: 'print() displays the current value.', vars: [{ name: 'score', value: '100' }], console: ['100'] },
     ] },
     { type: 'terminal', command: 'python score_100.py', lines: ['100'] },
-    { type: 'activity', title: 'Design a different route to 100', steps: ['Choose a positive starting integer other than 25.', 'Write one assignment for the starting score.', 'Use at least two of these operators: `+`, `-`, `*`, `//`, `%` or `**`.', 'Predict the score after each line on paper.', 'Print the final score. It must be exactly `100`.', 'Trade programs with a partner. Check each other’s predictions before running the files.'] },
+    { type: 'arithmetic-exercise' },
     { type: 'callout', variant: 'warning', title: 'Division by zero stops the calculation', paragraphs: ['Python cannot calculate `10 / 0`, `10 // 0` or `10 % 0`. Each raises a `ZeroDivisionError`.', 'When a divisor might come from a changing value, check that it is not zero before dividing. We will learn decision-making code in a later lesson.'] },
     { type: 'callout', variant: 'note', title: 'Some decimal results are approximations', paragraphs: ['Computers store most floating-point values in a finite binary form. Some familiar decimals cannot be represented exactly.', 'For example, Python may display `0.1 + 0.2` as `0.30000000000000004`. This is normal floating-point approximation, not a broken addition operator. We will learn suitable comparison and rounding tools later.'] },
     { type: 'bug', prompt: 'Which line causes the program to stop?', lines: ['points = 100', 'teams = points // 0', 'print(teams)'], bugLine: 2, explain: 'Floor division by zero raises ZeroDivisionError.' },

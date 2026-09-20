@@ -5,6 +5,7 @@ import ProgramCard from './ProgramCard.jsx'
 import RunVisualizer from './RunVisualizer.jsx'
 import TerminalWindow from './TerminalWindow.jsx'
 import PipelineVisualizer from './PipelineVisualizer.jsx'
+import ArithmeticExercise from './ArithmeticExercise.jsx'
 
 function RichText({ text = '' }) {
   const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g)
@@ -48,6 +49,7 @@ export function Block({ block: b, staticMode = false }) {
     case 'source-note': return <aside className="source-note"><strong>{b.label || 'Source note'}</strong><p><RichText text={b.claim}/></p>{b.url && <a href={b.url} target="_blank" rel="noreferrer">{b.url}</a>}{b.verifiedThrough && <small>Verified through {b.verifiedThrough}</small>}</aside>
     case 'question': return <section className={`pedagogy-card question-card ${b.kind || 'practice'}`}><span className="pedagogy-label">{b.kind === 'verified-pyq' ? 'VERIFIED PAST-YEAR QUESTION' : 'PRACTICE QUESTION'}</span><div className="question-meta">{[b.exam,b.year,b.paper,b.marks && `${b.marks} marks`].filter(Boolean).map(item=><span key={item}>{item}</span>)}</div><h3>{b.prompt}</h3><Reveal label="Show model answer" staticMode={staticMode}><p><RichText text={b.answer}/></p>{b.marking?.length > 0 && <ul>{b.marking.map(point=><li key={point}><RichText text={point}/></li>)}</ul>}{b.sourceUrl && <a href={b.sourceUrl} target="_blank" rel="noreferrer">Official source</a>}</Reveal></section>
     case 'activity': return <section className="pedagogy-card activity-card"><span className="pedagogy-label">ACTIVITY</span><h3>{b.title}</h3>{b.materials?.length > 0 && <p><strong>Materials:</strong> {b.materials.join(', ')}</p>}<ol>{b.steps.map(step=><li key={step}><RichText text={step}/></li>)}</ol>{b.safety && <p className="activity-safety"><strong>Safety:</strong> <RichText text={b.safety}/></p>}</section>
+    case 'arithmetic-exercise': return <ArithmeticExercise staticMode={staticMode}/>
     case 'reflection': return <section className="pedagogy-card reflection-card"><span className="pedagogy-label">OPTIONAL REFLECTION</span><h3>{b.prompt}</h3><p>{b.permission || 'You may pause, skip this exercise or return later.'}</p>{b.guidance?.length > 0 && <Reveal label="Show gentle guidance" staticMode={staticMode}><ul>{b.guidance.map(point=><li key={point}><RichText text={point}/></li>)}</ul></Reveal>}</section>
     case 'safety-notice': return <aside className="safety-notice"><strong>{b.title || 'Important support note'}</strong><p><RichText text={b.text}/></p>{b.resources?.map(([label,url])=><a href={url} key={url} target="_blank" rel="noreferrer">{label}</a>)}</aside>
     default: return null

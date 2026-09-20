@@ -3,6 +3,12 @@ import { fileURLToPath } from 'node:url'
 import { Packer } from 'docx'
 import { buildBookDocument, setImageLoader } from '../src/export/docx.js'
 import { loadBookPackage } from '../src/catalog/generated/registry.js'
+import { evaluateArithmeticExpression } from '../src/utils/arithmeticExpression.js'
+
+if (evaluateArithmeticExpression('25 * 3 + 25') !== 100) throw new Error('Arithmetic exercise did not evaluate a valid route to 100')
+if (evaluateArithmeticExpression('7 // 4') !== 1 || evaluateArithmeticExpression('7 % 4') !== 3) throw new Error('Arithmetic exercise does not match Python division semantics')
+if (evaluateArithmeticExpression('-2 ** 2') !== -4 || evaluateArithmeticExpression('2 ** 3 ** 2') !== 512) throw new Error('Arithmetic exercise does not match Python exponent precedence')
+try { evaluateArithmeticExpression('alert(100)'); throw new Error('Arithmetic exercise accepted non-arithmetic code') } catch (error) { if (error.message === 'Arithmetic exercise accepted non-arithmetic code') throw error }
 
 const publication = await loadBookPackage('python-absolute-beginners', 'edition-01')
 if (publication.BOOK.editionId !== 'edition-01' || publication.lessons.length !== 5) throw new Error('Edition registry did not load the expected current book')

@@ -1256,3 +1256,17 @@ kbd {
   }
 }
 
+/* ---------------- Interactive arithmetic exercise ---------------- */
+.arithmetic-exercise { border-left:5px solid var(--accent-2); }
+.arithmetic-exercise form { margin-top:1rem; }
+.arithmetic-exercise label { display:block; margin-bottom:.45rem; font-size:.84rem; font-weight:800; color:var(--text); }
+.exercise-entry { display:flex; gap:.65rem; align-items:stretch; }
+.exercise-entry input { min-width:0; flex:1; border:1px solid var(--border); border-radius:9px; padding:.72rem .8rem; background:var(--panel); color:var(--text); font:600 1rem/1.2 Consolas, monospace; }
+.exercise-entry input:focus { outline:3px solid color-mix(in srgb,var(--accent) 22%,transparent); border-color:var(--accent); }
+.exercise-entry button { border:0; border-radius:9px; padding:.7rem 1rem; background:var(--accent); color:#fff; font:inherit; font-size:.9rem; font-weight:700; cursor:pointer; }
+.exercise-feedback,.exercise-print-note { margin:.8rem 0 0; padding:.72rem .85rem; border-radius:9px; font-weight:700; }
+.exercise-feedback.success { background:#e8f7f2; color:#164f46; border:1px solid #b8dfd4; }
+.exercise-feedback.retry { background:#fff7e8; color:#714b0d; border:1px solid #efd6a3; }
+.exercise-print-note { background:var(--panel-soft); border:1px solid var(--border); }
+@media(max-width:600px){.exercise-entry{flex-direction:column}}
+

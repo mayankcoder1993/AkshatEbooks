@@ -3,7 +3,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { discoverBooks, projectRelative } from './lib/book-system.mjs'
 
-const allowedBlocks = new Set(['heading','paragraph','image','mission','think','guess','bug','callout','flow','bytecode-map','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','reflection','safety-notice'])
+const allowedBlocks = new Set(['heading','paragraph','image','mission','think','guess','bug','callout','flow','bytecode-map','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','arithmetic-exercise','reflection','safety-notice'])
 const books = await discoverBooks()
 let editionCount = 0
 let chapterCount = 0
