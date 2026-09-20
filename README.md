@@ -4,6 +4,17 @@
 
 A light-first interactive ebook built from one structured content source.
 
+## Repository layout
+
+- `src/books/python-absolute-beginners/content/` — this book's metadata, Preface and lessons.
+- `src/books/python-absolute-beginners/assets/` — this book's teaching images.
+- `src/components/` — reusable Web and Book View renderers.
+- `src/export/` — reusable native Word exporter.
+- `scripts/` — generation and publishing commands.
+- `public/books/python-absolute-beginners/` — generated reader deliverables.
+- `brand/` — protected owner brand masters when supplied.
+- `docs/` — workflows for future books and agents.
+
 ## Deliverables
 
 - Interactive React Web View with reveals, bug hunts, quizzes, pipelines and run visualizers.
@@ -30,8 +41,8 @@ npm run build:single
 
 Generated deliverables:
 
-- `public/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`
-- `public/AkshatEBooks-Interactive-Book.html`
+- `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`
+- `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-Interactive.html`
 
 Read `AGENTS.md` before adding content or changing the publishing system. It includes the required transcript-and-internet-research workflow.
 

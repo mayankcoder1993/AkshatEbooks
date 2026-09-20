@@ -1,5 +1,5 @@
 import { AlignmentType, BorderStyle, Document, ExternalHyperlink, Footer, Header, HeadingLevel, ImageRun, PageBreak, PageNumber, Paragraph, Packer, ShadingType, Table, TableCell, TableOfContents, TableRow, TextRun, WidthType } from 'docx'
-import lessons, { BOOK, BRAND, PREFACE } from '../content/index.js'
+import lessons, { BOOK, BRAND, PREFACE } from '../books/python-absolute-beginners/content/index.js'
 
 let imageLoader = async source => new Uint8Array(await (await fetch(source)).arrayBuffer())
 export function setImageLoader(loader) { imageLoader = loader }

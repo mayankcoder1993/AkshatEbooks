@@ -1,4 +1,4 @@
-import { BRAND } from '../content/index.js'
+import { BRAND } from '../books/python-absolute-beginners/content/index.js'
 
 export default function Header({theme,onToggleTheme,lessons,active,onSelect,onBookPreview,onSavePdf,onSaveWord,exporting}) {
   return <header className="site-header"><div className="header-inner"><div className="brand"><span className="brand-badge">SGK</span><div className="brand-text"><strong>{BRAND.imprint}</strong><span>{BRAND.tagline}</span></div></div><nav className="lesson-chips" aria-label="Lessons">{lessons.map((l,i)=><button key={l.id} className={i===active?'chip active':'chip'} onClick={()=>onSelect(i)}><span className="chip-num">{String(i+1).padStart(2,'0')}</span>{l.shortTitle}</button>)}</nav><div className="actions"><button className="icon-btn" onClick={onToggleTheme} title="Toggle theme">{theme==='light'?'🌙':'☀️'}</button><button className="btn" onClick={onBookPreview}>📖 Book preview</button><button className="btn" onClick={onSaveWord} disabled={exporting}>{exporting?'Preparing…':'📄 Word'}</button><button className="btn primary" onClick={onSavePdf}>🖨 PDF</button></div></div></header>

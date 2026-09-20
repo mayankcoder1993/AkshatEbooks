@@ -1,5 +1,5 @@
 import Blocks from './Blocks.jsx'
-import { BOOK, BRAND, PREFACE } from '../content/index.js'
+import { BOOK, BRAND, PREFACE } from '../books/python-absolute-beginners/content/index.js'
 
 function RichLine({ text }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)

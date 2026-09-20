@@ -3,7 +3,7 @@ import Header from './components/Header.jsx'
 import LessonShell from './components/LessonShell.jsx'
 import PrintBook from './components/PrintBook.jsx'
 import Blocks from './components/Blocks.jsx'
-import lessons, { BOOK, BRAND } from './content/index.js'
+import lessons, { BOOK, BRAND } from './books/python-absolute-beginners/content/index.js'
 
 export default function App() {
   const [theme, setTheme] = useState(() => { try { return localStorage.getItem('aeb-theme') || 'light' } catch { return 'light' } })

@@ -26,10 +26,11 @@ Read this before changing the book. This repository builds a sellable interactiv
 
 ## Architecture
 
-- `src/content/index.js`: book metadata and ordered lesson registry.
-- `src/content/lesson*.js`: pure block data. No JSX.
-- `src/content/preface.js`: one-page orientation.
-- `src/components/Blocks.jsx`: blocks to Web/Book View.
+- `src/books/python-absolute-beginners/content/index.js`: active-book metadata and ordered lesson registry.
+- `src/books/python-absolute-beginners/content/lesson*.js`: pure block data. No JSX.
+- `src/books/python-absolute-beginners/content/preface.js`: one-page orientation.
+- `src/books/python-absolute-beginners/assets/`: teaching images used only by this book.
+- `src/components/Blocks.jsx`: topic-neutral blocks to Web/Book View.
 - `src/components/PrintBook.jsx`: complete static book.
 - `src/export/docx.js`: blocks to native Word.
 - `src/styles/global.css`: both themes and print rules.
@@ -58,9 +59,9 @@ A new block type requires: lesson data, a `Blocks.jsx` case, a `docx.js` case, C
 ## Lesson checklist
 
 1. Value-check the source.
-2. Add `src/content/lessonX.js` as pure data.
+2. Add `src/books/python-absolute-beginners/content/lessonX.js` as pure data.
 3. Use this journey: professional image → mission → think → core idea → blueprint/code → run visualizer or pipeline → expected output → aha → try it → mistakes/guess/bug → quiz → takeaways → resources → cliffhanger.
-4. Register the lesson in `src/content/index.js`.
+4. Register the lesson in `src/books/python-absolute-beginners/content/index.js`.
 5. If code appears, include a `runviz` or `pipeline`.
 6. Import each image for browser inlining. Also add `file`, `w`, `h`, `alt`, a short `caption`, and optional `points` for separate numbered explanations in Web, PDF and Word.
 7. Run `npm run build`, `npm run generate:docx`, and `npm run build:single`.
@@ -96,8 +97,8 @@ Follow `docs/NEW_BOOK_WORKFLOW.md`. Do not duplicate or fork shared renderer com
 
 - `npm run dev`: regenerate deliverables and start development UI.
 - `npm run build`: regular production build.
-- `npm run generate:docx`: write `public/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`.
-- `npm run build:single`: write `public/AkshatEBooks-Interactive-Book.html`.
+- `npm run generate:docx`: write `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx`.
+- `npm run build:single`: write `public/books/python-absolute-beginners/Python-for-Absolute-Beginners-Interactive.html`.
 
 ## Professional book structure
 

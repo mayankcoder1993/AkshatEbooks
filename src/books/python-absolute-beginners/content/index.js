@@ -14,6 +14,7 @@ export const BRAND = {
 }
 
 export const BOOK = {
+  id: 'python-absolute-beginners',
   title: 'Python for Absolute Beginners',
   subtitle: 'Learn Programming the Visual Way',
   series: 'The First Code Series · Book 1',
@@ -32,7 +33,9 @@ export const BOOK = {
     'My deepest gratitude to my parents and grandparents, my first teachers, for their endless encouragement.',
     'To every reader of Sarva Gyana Koshah: your curiosity is the reason these pages exist.',
   ],
+  outputDir: 'public/books/python-absolute-beginners',
   filename: 'Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx',
+  offlineFilename: 'Python-for-Absolute-Beginners-Interactive.html',
 }
 
 const lessons = [lesson01, lesson02, lesson03, lesson04]

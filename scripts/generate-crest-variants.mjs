@@ -10,7 +10,7 @@ const VARIANTS = [
 ]
 
 const template = readFileSync(TEMPLATE, 'utf8')
-mkdirSync('src/assets/brand', { recursive: true })
+mkdirSync('src/brand/generated', { recursive: true })
 mkdirSync('public/brand', { recursive: true })
 
 for (const variant of VARIANTS) {
@@ -25,16 +25,16 @@ for (const variant of VARIANTS) {
 
   const svgName = `sinha-crest-${variant.name}.svg`
   const pngName = `sinha-crest-${variant.name}.png`
-  writeFileSync(`src/assets/brand/${svgName}`, svg)
-  copyFileSync(`src/assets/brand/${svgName}`, `public/brand/${svgName}`)
+  writeFileSync(`src/brand/generated/${svgName}`, svg)
+  copyFileSync(`src/brand/generated/${svgName}`, `public/brand/${svgName}`)
 
   const png = new Resvg(svg, {
     background: variant.bg,
     fitTo: { mode: 'width', value: 1200 },
   }).render().asPng()
 
-  writeFileSync(`src/assets/brand/${pngName}`, png)
-  copyFileSync(`src/assets/brand/${pngName}`, `public/brand/${pngName}`)
+  writeFileSync(`src/brand/generated/${pngName}`, png)
+  copyFileSync(`src/brand/generated/${pngName}`, `public/brand/${pngName}`)
   console.log(`✓ ${variant.label} -> ${svgName} + ${pngName} (${(png.length / 1024).toFixed(0)} KB)`)
 }
 

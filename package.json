@@ -1,5 +1,5 @@
 {
-  "name": "akshat-ebooks-notes",
+  "name": "sarva-gyana-koshah-publishing",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
     "generate:docx": "node --import ./scripts/register-jpg.mjs scripts/generate-docx.mjs",
-    "build:single": "vite build --config vite.singlefile.config.mjs && cp single-build/index.html public/AkshatEBooks-Interactive-Book.html",
+    "build:single": "vite build --config vite.singlefile.config.mjs && node --import ./scripts/register-jpg.mjs scripts/copy-single.mjs",
     "generate:crest": "node scripts/generate-crest-variants.mjs"
   },
   "dependencies": {

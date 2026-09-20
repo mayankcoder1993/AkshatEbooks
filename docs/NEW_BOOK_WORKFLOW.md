@@ -57,14 +57,14 @@ Keep these reusable and topic-neutral:
 
 ### Book package
 
-These currently define the active book and may change on a book branch:
+The active book is already isolated as a package. These may change on its book branch:
 
-- `src/content/index.js`
-- `src/content/preface.js`
-- `src/content/lesson*.js`
-- Book-specific files in `src/assets/`
+- `src/books/python-absolute-beginners/content/index.js`
+- `src/books/python-absolute-beginners/content/preface.js`
+- `src/books/python-absolute-beginners/content/lesson*.js`
+- `src/books/python-absolute-beginners/assets/`
 - Reader-facing metadata in `index.html`
-- Generated files in `public/`
+- `public/books/python-absolute-beginners/` for generated deliverables
 
 ### Publisher package
 
@@ -75,30 +75,26 @@ Treat owner-provided brand assets as shared but controlled:
 - The imprint logo is copied from the owner's exact master without recoloring.
 - Crest placement remains limited to cover/title and copyright pages unless the owner changes the policy.
 
-## Recommended future directory evolution
+## Directory evolution when several books are active
 
-Do not perform this migration casually in the middle of a book release. When multiple books are active at the same time, move toward:
+Book content and outputs are already grouped by book ID. Shared components and exporters remain in their existing `src/components/` and `src/export/` locations to avoid unnecessary churn. When several books must build simultaneously, evolve toward:
 
 ```text
 src/
   publishing/             shared renderers, exporters and schemas
   books/
     python-absolute-beginners/
-      book.js             metadata and ordered lesson registry
-      preface.js
-      lessons/
+      content/            metadata, Preface and ordered lessons
       assets/
     another-book/
-      book.js
-      preface.js
-      lessons/
+      content/
       assets/
 brand/                    protected publisher masters
 scripts/                  generic build and scaffold commands
 public/books/<book-id>/   generated deliverables
 ```
 
-Select a book with a build-time `BOOK_ID`, not by editing renderer imports. Add this only when a second simultaneous book needs it; until then, the branch-per-book model is simpler and safer.
+Select a book with a build-time `BOOK_ID`, not by repeatedly editing renderer imports. Add this selection layer only when a second simultaneous book needs it; until then, the branch-per-book model is simpler and safer.
 
 ## Transcript intake
 
