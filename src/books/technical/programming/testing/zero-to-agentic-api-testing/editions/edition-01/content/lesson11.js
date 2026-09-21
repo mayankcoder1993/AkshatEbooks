@@ -134,7 +134,7 @@ export const lesson11 = {
     },
     {
       type: 'paragraph',
-      text: 'Now our client backend (or Postman collection) takes that temporary code and exchanges it for the actual Bearer token via HTTP POST. You can download the completed exchange request: [Download token-exchange.http](/materials/zero-to-agentic-api-testing/lesson-11/token-exchange.http):',
+      text: 'Now our client backend (or Postman collection) takes that temporary code and exchanges it for the actual Bearer token via HTTP POST. You can download the completed exchange request: [Download Token Exchange HTTP Request](/materials/zero-to-agentic-api-testing/lesson-11/token-exchange.http):',
     },
     {
       type: 'code',
@@ -196,7 +196,7 @@ export const lesson11 = {
     },
     {
       type: 'paragraph',
-      text: 'When executing test collections automatedly in CI CD pipelines, you cannot open a browser window to click login buttons. Instead, we configure an automated token exchange request as the very first step in our collection. In its Tests script, we extract the access token and save it into a global variable so every subsequent request inherits it automatically. You can download the script: [Download capture-bearer-token.js](/materials/zero-to-agentic-api-testing/lesson-11/capture-bearer-token.js):',
+      text: 'When executing test collections automatedly in CI CD pipelines, you cannot open a browser window to click login buttons. Instead, we configure an automated token exchange request as the very first step in our collection. In its Tests script, we extract the access token and save it into a global variable so every subsequent request inherits it automatically. You can download the script: [Download Capture Bearer Token Script](/materials/zero-to-agentic-api-testing/lesson-11/capture-bearer-token.js):',
     },
     {
       type: 'code',
@@ -279,6 +279,26 @@ export const lesson11 = {
         'Bearer tokens are stored in global or environment variables and injected into the Authorization header.',
         'Token lifetimes require test suites to validate both valid authorization and 401 expiration handling.',
       ],
+    },
+    {
+      type: 'victory-milestone',
+      badge: 'MISSION 3 PHASE 3 CLEARED',
+      rank: 'ENTERPRISE SECURITY AUTOMATION ARCHITECT',
+      title: 'Architectural Triumph: Enterprise OAuth 2.0 Token Vault Deployed',
+      summary: 'You dismantled the most misunderstood protocol in modern web engineering: OAuth 2.0. You mapped the 4 roles, mastered the two step Authorization Code grant, automated the token exchange POST request, chained Bearer tokens into secured headers, and verified 401 expiration challenges with absolute precision.',
+      powers: [
+        'Dissecting the four OAuth 2.0 roles: Resource Owner, Client, Authorization Server, and Resource Server',
+        'Executing the full Authorization Code grant handshake: exchanging temporary auth codes for scoped Bearer tokens',
+        'Automating token extraction in Tests scripts and injecting dynamic Bearer tokens into downstream request headers',
+        'Auditing token expiration boundaries and asserting 401 Unauthorized WWW Authenticate challenges',
+        'Defending enterprise secrets by enforcing client_secret confidentiality rules across test suites',
+      ],
+      disastersPrevented: [
+        'Averted catastrophic enterprise credential theft by replacing static user passwords with scoped, short lived tokens',
+        'Stopped broken authentication logic that leaves protected APIs wide open to unauthorized third party access',
+        'Eliminated fragile manual token copy paste that causes automated CI CD pipeline runs to fail mid execution',
+      ],
+      warRoomTakeaway: 'Security is not an afterthought added at deployment. When your automated test suites validate token issuance, header injection, scope enforcement, and 401 expirations, your enterprise endpoints are fortified against unauthorized intrusion.',
     },
     {
       type: 'cliffhanger',

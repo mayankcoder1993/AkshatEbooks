@@ -86,7 +86,7 @@ export const lesson07 = {
     },
     {
       type: 'paragraph',
-      text: 'Real enterprise APIs rarely return flat, simple objects. Instead, responses contain nested hierarchies with multiple layers of parent objects, metadata summaries, and arrays of detailed items. Consider the Campus Library department audit endpoint below. You can download the sample payload: [Download department-audit-response.json](/materials/zero-to-agentic-api-testing/lesson-07/department-audit-response.json):',
+      text: 'Real enterprise APIs rarely return flat, simple objects. Instead, responses contain nested hierarchies with multiple layers of parent objects, metadata summaries, and arrays of detailed items. Consider the Campus Library department audit endpoint below. You can download the sample payload: [Download Department Audit Response JSON](/materials/zero-to-agentic-api-testing/lesson-07/department-audit-response.json):',
     },
     {
       type: 'code',
@@ -160,7 +160,7 @@ export const lesson07 = {
     },
     {
       type: 'paragraph',
-      text: 'Here is how we use these modern JavaScript methods inside Postman test scripts to verify complete schemas, locate target records, and validate mathematical integrity. You can download the script: [Download advanced-array-assertions.js](/materials/zero-to-agentic-api-testing/lesson-07/advanced-array-assertions.js):',
+      text: 'Here is how we use these modern JavaScript methods inside Postman test scripts to verify complete schemas, locate target records, and validate mathematical integrity. You can download the script: [Download Advanced Array Assertions Script](/materials/zero-to-agentic-api-testing/lesson-07/advanced-array-assertions.js):',
     },
     {
       type: 'code',
@@ -298,6 +298,26 @@ export const lesson07 = {
         'Use reduce to compute mathematical sums across nested arrays and assert business logic.',
         'Automated teardown steps clean up created resources, keeping test databases pure and idempotent.',
       ],
+    },
+    {
+      type: 'victory-milestone',
+      badge: 'MISSION 2 PHASE 4 CLEARED',
+      rank: 'PRINCIPAL API TEST ARCHITECT',
+      title: 'Architectural Triumph: Deep Array Pipelines & Request Chaining Mastered',
+      summary: 'You linked disconnected HTTP requests into a living, breathing autonomous transaction pipeline. You extracted dynamic IDs, traversed multilevel nested objects without crash errors, performed high speed array transformations (find, filter, map), and mathematically verified financial balance totals using reduce. You operate at the highest echelon of API automation.',
+      powers: [
+        'Dynamic property transfer: piping tokens, session cookies, and resource IDs across multi request suites',
+        'Deep nested JSON parsing: safely traversing multilevel object trees and arrays without null reference exceptions',
+        'Functional array pipelines: wielding find, filter, and map to isolate specific records in complex payloads',
+        'Mathematical business logic verification: aggregating invoice and catalog totals dynamically using reduce',
+        'Zero footprint test execution: deploying automated teardown deletions that leave databases perfectly pristine',
+      ],
+      disastersPrevented: [
+        'Averted silent financial balance discrepancies by verifying computed cart totals against backend invoices',
+        'Stopped catastrophic test database pollution where uncleaned test orders exhaust database storage and IDs',
+        'Eliminated brittle hardcoded test suites that crash whenever upstream backend developers alter resource IDs',
+      ],
+      warRoomTakeaway: 'Isolated API checks only test plumbing. Chained request pipelines test real world user journeys and business reality. When your chained suite passes, the entire business flow is guaranteed.',
     },
     {
       type: 'cliffhanger',

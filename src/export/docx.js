@@ -30,6 +30,15 @@ async function blockToDocx(b) {
     }
     case 'mission-tracker': return [tableBox(`MISSION PROGRESS · ${b.title}`,[p(b.text)],'EBF5FB')]
     case 'mission-accomplished': return [tableBox(`★ MISSION ACCOMPLISHED · ${b.title}`,[p(b.text)],'EAFAF1')]
+    case 'victory-milestone':
+      return [tableBox(`⚡ ${b.badge || 'ARCHITECTURAL TRIUMPH'} · ${b.title}`,[
+        p(b.summary),
+        p([new TextRun({text:'Tactical Superpowers Mastered: ',bold:true,color:colors.indigo})]),
+        ...list(b.powers || [],'steps'),
+        p([new TextRun({text:'Enterprise Disasters Prevented: ',bold:true,color:'9A1B1B'})]),
+        ...list(b.disastersPrevented || [],'steps'),
+        ...(b.warRoomTakeaway ? [p([new TextRun({text:'War Room Takeaway: ',bold:true}),...rich(b.warRoomTakeaway)])] : [])
+      ],'F0F4FA')]
     case 'think': return [tableBox('PAUSE & THINK',[p(b.prompt),p([new TextRun({text:'Answer: ',bold:true}),...rich(b.answer)])],'FFF8E8')]
     case 'guess': return [tableBox('MAKE A GUESS',[p(b.prompt),...(b.code?code(b.code.split('\n'),'prediction.py'):[]),...list(b.options.map((x,i)=>`${String.fromCharCode(65+i)}. ${x}`)),p([new TextRun({text:`Answer: ${b.options[b.answerIndex]}. `,bold:true}),...rich(b.explain)])],'F3F0FA')]
     case 'bug': return [tableBox('BUG HUNT',[p(b.prompt),...code(b.lines,'bug_hunt.py'),p([new TextRun({text:`Answer: line ${b.bugLine}. `,bold:true}),...rich(b.explain)])],'FFF4E8')]

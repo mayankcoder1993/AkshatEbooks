@@ -151,6 +151,25 @@ export const lesson08 = {
       ],
     },
     {
+      type: 'victory-milestone',
+      badge: 'MISSION 2 CONQUERED · BULK ENGINE ONLINE',
+      rank: 'DATA DRIVEN AUTOMATION ARCHITECT',
+      title: 'Major Milestone Cleared: Autonomous High Throughput Ingestion Engine Deployed',
+      summary: 'You have conquered Mission 2! You transformed a slow manual copy paste test into an autonomous data driven engine. By feeding external CSV and JSON datasets into the Collection Runner and accessing Data Scope with pm.iterationData, you tested hundreds of records across complete CRUD lifecycles in seconds with zero manual friction.',
+      powers: [
+        'Decoupling business test logic completely from external test data parameters',
+        'Ingesting external CSV and JSON rows dynamically via pm.iterationData.get() without hardcoding',
+        'Executing high throughput collection runs with hundreds of iterations in under a minute',
+        'Pinpoint console debugging: catching silent undefined variable interpolation traps before CI execution',
+      ],
+      disastersPrevented: [
+        'Eliminated hundreds of hours of manual, mind numbing test data entry across release cycles',
+        'Caught obscure boundary and special character defects that only manifest across large external datasets',
+        'Prevented massive test database bloat by executing automated teardown deletions at the end of every iteration',
+      ],
+      warRoomTakeaway: 'When leadership asks whether the new release can handle bulk real world catalog migrations, you do not guess. You point to a 500 row Data Driven run that passed with 100% green assertions in seconds.',
+    },
+    {
       type: 'cliffhanger',
       title: 'A new challenge begins: Enterprise Production Hardening',
       text: 'Happy paths pass at scale. But what happens in production when networks drop, tokens expire, or malformed inputs arrive? In Chapter 9, we launch Mission 3: Advanced Error Handling, negative test matrices, and self healing recovery loops!',

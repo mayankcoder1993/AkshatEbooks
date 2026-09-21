@@ -41,6 +41,40 @@ export function Block({ block: b, staticMode = false }) {
     case 'mission': return <section className="mission"><span className="eyebrow">OUR MISSION</span><h2>{b.title}</h2><p>{b.text}</p><div className="mission-grid"><div><strong>What we know</strong><ul>{b.weKnow.map(x=><li key={x}>{x}</li>)}</ul></div><div><strong>What we need</strong><ul>{b.weNeed.map(x=><li key={x}>{x}</li>)}</ul></div></div></section>
     case 'mission-tracker': return <section className="mission-tracker"><span className="eyebrow">{b.badge || 'ACTIVE MISSION PROGRESS'}</span><h2>{b.title}</h2><p>{b.text}</p></section>
     case 'mission-accomplished': return <section className="mission-accomplished"><span className="eyebrow">★ MISSION ACCOMPLISHED</span><h3>{b.title}</h3><p>{b.text}</p></section>
+    case 'victory-milestone':
+      return (
+        <section className="victory-milestone-card">
+          <div className="victory-milestone-header">
+            <span className="victory-badge">{b.badge || '⚡ ARCHITECTURAL TRIUMPH UNLOCKED'}</span>
+            <span className="victory-rank">{b.rank || 'LEAD API ARCHITECT LEVEL'}</span>
+          </div>
+          <h2 className="victory-title">{b.title}</h2>
+          <p className="victory-summary"><RichText text={b.summary} /></p>
+          <div className="victory-grid">
+            <div className="victory-col tactical">
+              <span className="victory-col-label">⚔️ Tactical Superpowers Mastered</span>
+              <ul>
+                {b.powers.map(x => (
+                  <li key={x}><RichText text={x} /></li>
+                ))}
+              </ul>
+            </div>
+            <div className="victory-col prevented">
+              <span className="victory-col-label">🛡️ Enterprise Disasters Prevented</span>
+              <ul>
+                {b.disastersPrevented.map(x => (
+                  <li key={x}><RichText text={x} /></li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          {b.warRoomTakeaway && (
+            <div className="victory-war-room-note">
+              <strong>War Room Takeaway:</strong> <RichText text={b.warRoomTakeaway} />
+            </div>
+          )}
+        </section>
+      )
     case 'think': return <section className="journey-card think"><span>PAUSE & THINK</span><h3>{b.prompt}</h3><Reveal label="Reveal our thinking" staticMode={staticMode}><p>{b.answer}</p></Reveal></section>
     case 'guess': return <section className="journey-card guess"><span>MAKE A GUESS</span><h3>{b.prompt}</h3>{b.code && <pre>{b.code}</pre>}<ol>{b.options.map(x=><li key={x}>{x}</li>)}</ol><Reveal label="Show the answer" staticMode={staticMode}><p><strong>Answer: {b.options[b.answerIndex]}.</strong> {b.explain}</p></Reveal></section>
     case 'bug': return <section className="journey-card bug"><span>BUG HUNT</span><h3>{b.prompt}</h3><CodeBlock filename="bug_hunt.py" lines={b.lines}/><Reveal label="Find the bug" staticMode={staticMode}><p><strong>Line {b.bugLine}.</strong> {b.explain}</p></Reveal></section>

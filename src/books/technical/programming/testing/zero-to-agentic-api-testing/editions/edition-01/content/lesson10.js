@@ -60,7 +60,7 @@ export const lesson10 = {
     },
     {
       type: 'paragraph',
-      text: 'Postman includes the industry standard schema validator library **tv4** directly in its test sandbox. Here is how we validate that incoming server responses strictly comply with our agreed architectural contract. You can download the contract schema: [Download contract-schema.json](/materials/zero-to-agentic-api-testing/lesson-10/contract-schema.json):',
+      text: 'Postman includes the industry standard schema validator library **tv4** directly in its test sandbox. Here is how we validate that incoming server responses strictly comply with our agreed architectural contract. You can download the contract schema: [Download Contract Schema JSON](/materials/zero-to-agentic-api-testing/lesson-10/contract-schema.json):',
     },
     {
       type: 'code',
@@ -118,7 +118,7 @@ export const lesson10 = {
     },
     {
       type: 'paragraph',
-      text: 'A Postman Mock Server functions by inspecting **Examples** attached to requests in your collection. You can create multiple Examples for a single endpoint to simulate different business scenarios and query parameters. You can download our sample mock response examples: [Download mock-example-science.json](/materials/zero-to-agentic-api-testing/lesson-10/mock-example-science.json) and [Download mock-example-literature.json](/materials/zero-to-agentic-api-testing/lesson-10/mock-example-literature.json):',
+      text: 'A Postman Mock Server functions by inspecting **Examples** attached to requests in your collection. You can create multiple Examples for a single endpoint to simulate different business scenarios and query parameters. You can download our sample mock response examples: [Download Science Mock Example JSON](/materials/zero-to-agentic-api-testing/lesson-10/mock-example-science.json) and [Download Literature Mock Example JSON](/materials/zero-to-agentic-api-testing/lesson-10/mock-example-literature.json):',
     },
     {
       type: 'steps',
@@ -345,6 +345,26 @@ export const lesson10 = {
         'Toggling base_url environment variables transitions test suites seamlessly from Mock to live QA.',
         'GraphQL eliminates over fetching and under fetching by allowing clients to request exact fields across multiple domains in a single POST query.',
       ],
+    },
+    {
+      type: 'victory-milestone',
+      badge: 'MISSION 3 PHASE 2 CLEARED',
+      rank: 'ENTERPRISE CONTRACT & PROTOCOL ARCHITECT',
+      title: 'Architectural Triumph: Agile Mock Simulation & Dual REST GraphQL Contracts Mastered',
+      summary: 'You solved the universal Agile sprint dilemma! Instead of idling for weeks waiting for backend developers to finish server code, you authored formal JSON Schema contracts, spun up hosted Postman Mock Servers, parameterized response Examples, and conquered modern GraphQL query architectures alongside REST.',
+      powers: [
+        'Authoring formal JSON Schema specifications that enforce field types, mandatory properties, and data bounds',
+        'Deploying Postman hosted Mock Servers to simulate edge cases and unblock frontend and QA teams on Day 1 of sprints',
+        'Fine tuning mock responses using query parameter matching and custom Example payloads',
+        'Executing dual protocol automation: commanding both traditional REST endpoints and modern GraphQL queries and mutations',
+        'Seamless environment switching: transitioning automated suites from Mock to Live servers with one variable swap',
+      ],
+      disastersPrevented: [
+        'Eliminated two week sprint bottlenecks where testers sit idle waiting for backend database deployments',
+        'Prevented mobile application crashes caused by unexpected field type mutations (such as string IDs turning into integers)',
+        'Stopped mobile network throttling and payload bloat by leveraging GraphQL targeted field resolution',
+      ],
+      warRoomTakeaway: 'The highest leverage QA engineers do not wait for software to be built. They write the contract, stand up the mock server, and have the full automated regression suite ready the second the backend goes live.',
     },
     {
       type: 'cliffhanger',

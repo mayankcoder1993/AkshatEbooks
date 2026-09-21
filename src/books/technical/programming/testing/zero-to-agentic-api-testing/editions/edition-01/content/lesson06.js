@@ -143,6 +143,25 @@ export const lesson06 = {
       ],
     },
     {
+      type: 'victory-milestone',
+      badge: 'MISSION 2 PHASE 3 CLEARED',
+      rank: 'ENTERPRISE TEST DATA ARCHITECT',
+      title: 'Architectural Triumph: Multi Scope Hierarchy & Dynamic Data Engine Deployed',
+      summary: 'You shattered hardcoded server URLs and eliminated duplicate database constraint collisions forever. By mastering the 5 variable scopes, scope precedence rules, and runtime Pre request scripting, your test suites now adapt seamlessly across QA, UAT, and Staging without a single manual edit.',
+      powers: [
+        'Navigating the 5 variable scopes hierarchy: Local, Data, Environment, Collection, and Global with zero conflict ambiguity',
+        'Parameterizing network calls using double curly brace syntax {{base_url}} across URLs, headers, and payloads',
+        'Generating dynamic unique primary keys at runtime using Pre request scripts and Postman dynamic tokens',
+        'Guarding enterprise credentials using Initial Value vs Current Value memory isolation',
+      ],
+      disastersPrevented: [
+        'Averted catastrophic accidental execution of destructive test scripts against live Production databases',
+        'Blocked confidential API keys and client secrets from leaking to public GitHub repositories via team exports',
+        'Eliminated duplicate ISBN collision failures that halt automated regression test runs in CI pipelines',
+      ],
+      warRoomTakeaway: 'Hardcoded test data is a ticking time bomb. The moment your tests generate their own unique identities and dynamically resolve their target environment, they become truly portable and unstoppable.',
+    },
+    {
       type: 'cliffhanger',
       title: 'Continuing Mission 2: Assembling the autonomous pipeline',
       text: 'We now generate dynamic ISBNs and switch between QA and UAT seamlessly. But when AddBook creates a book ID, we still need to pass it to GetBook and DeleteBook. In Chapter 7, we advance Mission 2: automatically piping response data downstream with Request Chaining!',

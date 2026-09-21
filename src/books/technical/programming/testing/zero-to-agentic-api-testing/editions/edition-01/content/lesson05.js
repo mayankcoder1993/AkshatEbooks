@@ -226,6 +226,25 @@ export const lesson05 = {
       ],
     },
     {
+      type: 'victory-milestone',
+      badge: 'MISSION 2 PHASE 2 CLEARED',
+      rank: 'SENIOR AUTOMATION SCRIPTING ENGINEER',
+      title: 'Architectural Triumph: Autonomous JavaScript Assertion Engine Armed',
+      summary: 'You fired up the embedded Node.js sandbox, banished manual visual inspections forever, and transformed raw responses into razor sharp automated assertions. With Chai BDD matchers, sub second latency budgets, and JSON Schema validation, your tests now execute with mathematical precision in milliseconds.',
+      powers: [
+        'Authoring robust Chai BDD assertions using pm.test and pm.expect without syntax ambiguity',
+        'Enforcing microsecond to millisecond latency budgets to prevent backend performance degradation',
+        'Validating wire security headers (Content Type, Cache Control, CORS) on every response packet',
+        'Executing contract level structural verification using strict JSON Schema definitions and Ajv matchers',
+      ],
+      disastersPrevented: [
+        'Eliminated human verification fatigue where missed null fields trigger downstream frontend crashes',
+        'Stopped memory leaking, slow database queries from sneaking past QA by enforcing response time ceilings',
+        'Prevented silent payload schema mutations from reaching production unnoticed by automated pipelines',
+      ],
+      warRoomTakeaway: 'An unasserted API test is just a hollow ping. The moment you combine status checks, property assertions, and schema validation, you hold an unbreakable contract guarantee.',
+    },
+    {
       type: 'cliffhanger',
       title: 'Continuing Mission 2: Eliminating hardcoded URLs and ISBNs',
       text: 'Our assertions are written, but our URLs and ISBN values are still hardcoded. In Chapter 6, we advance Mission 2: creating dynamic environments and generating random unique ISBNs in Pre request scripts!',

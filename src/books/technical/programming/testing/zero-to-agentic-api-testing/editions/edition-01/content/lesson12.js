@@ -93,7 +93,7 @@ export const lesson12 = {
     },
     {
       type: 'paragraph',
-      text: 'The documentation offers both SOAP 1.1 and SOAP 1.2 specifications. In modern enterprise testing, SOAP 1.2 is the recommended standard. You can download the ready to use request envelope file: [Download soap-number-conversion.xml](/materials/zero-to-agentic-api-testing/lesson-12/soap-number-conversion.xml). Here is the exact SOAP 1.2 request envelope we paste into Postman:',
+      text: 'The documentation offers both SOAP 1.1 and SOAP 1.2 specifications. In modern enterprise testing, SOAP 1.2 is the recommended standard. You can download the ready to use request envelope file: [Download SOAP Number Conversion XML](/materials/zero-to-agentic-api-testing/lesson-12/soap-number-conversion.xml). Here is the exact SOAP 1.2 request envelope we paste into Postman:',
     },
     {
       type: 'code',
@@ -168,7 +168,7 @@ export const lesson12 = {
     },
     {
       type: 'paragraph',
-      text: 'In JavaScript, navigating XML tags manually requires clumsy string parsing. Fortunately, Postman provides a built in utility called **xml2Json** that transforms raw XML text into a traversable JavaScript object in one step. You can download the completed script: [Download parse-soap-response.js](/materials/zero-to-agentic-api-testing/lesson-12/parse-soap-response.js).',
+      text: 'In JavaScript, navigating XML tags manually requires clumsy string parsing. Fortunately, Postman provides a built in utility called **xml2Json** that transforms raw XML text into a traversable JavaScript object in one step. You can download the completed script: [Download Parse SOAP Response Script](/materials/zero-to-agentic-api-testing/lesson-12/parse-soap-response.js).',
     },
     {
       type: 'code',
@@ -208,7 +208,7 @@ export const lesson12 = {
     },
     {
       type: 'paragraph',
-      text: 'In professional regression suites, we do not hardcode 400 in our XML request body or assertions. Instead, we store the input number and expected result in Postman collection variables and reference them dynamically. You can download the dynamic test script: [Download dynamic-soap-assertions.js](/materials/zero-to-agentic-api-testing/lesson-12/dynamic-soap-assertions.js):',
+      text: 'In professional regression suites, we do not hardcode 400 in our XML request body or assertions. Instead, we store the input number and expected result in Postman collection variables and reference them dynamically. You can download the dynamic test script: [Download Dynamic SOAP Assertions Script](/materials/zero-to-agentic-api-testing/lesson-12/dynamic-soap-assertions.js):',
     },
     {
       type: 'code',
@@ -243,7 +243,7 @@ export const lesson12 = {
         'Set the HTTP method to POST and the URL to: https://www.dataaccess.com/webservicesserver/NumberConversion.wso',
         'In the Headers tab, configure Content Type to application/soap+xml; charset=utf 8',
         'In the Body tab, select raw and XML, then wrap `<NumberToDollars><dNum>123</dNum></NumberToDollars>` inside the SOAP 1.2 envelope.',
-        'In the Tests tab, convert the response with xml2Json and write an assertion verifying that the returned string equals "one hundred and twenty three dollars". You can download the completed solution file: [Download soap-number-dollars.xml](/materials/zero-to-agentic-api-testing/lesson-12/soap-number-dollars.xml).',
+        'In the Tests tab, convert the response with xml2Json and write an assertion verifying that the returned string equals "one hundred and twenty three dollars". You can download the completed solution file: [Download SOAP Number to Dollars XML](/materials/zero-to-agentic-api-testing/lesson-12/soap-number-dollars.xml).',
       ],
     },
     {
@@ -284,6 +284,26 @@ export const lesson12 = {
         'The built in xml2Json utility converts complex XML trees into traversable JavaScript objects.',
         'Use bracket notation with string quotes to access namespace prefixed XML elements without syntax errors.',
       ],
+    },
+    {
+      type: 'victory-milestone',
+      badge: 'MISSION 3 PHASE 4 CLEARED',
+      rank: 'MULTI PROTOCOL ENTERPRISE ARCHITECT',
+      title: 'Architectural Triumph: Legacy SOAP WebServices & XML Parsing Conquered',
+      summary: 'You shattered the modern myth that QA engineers only test JSON REST APIs. When confronted with legacy enterprise banking, healthcare, and government mainframes, you crafted valid SOAP 1.2 XML envelopes, outmaneuvered hidden header traps, converted complex XML trees with xml2Json, and extracted deeply nested namespaces with bracket notation.',
+      powers: [
+        'Bridging the architectural divide: commanding both modern REST microservices and legacy enterprise SOAP WebServices',
+        'Authoring valid SOAP 1.2 and SOAP 1.1 XML envelopes with headers, bodies, and target namespaces',
+        'Defeating hidden header traps by enforcing exact Content Type application/soap+xml wire specifications',
+        'Transforming raw XML strings into traversable JavaScript objects using the built in xml2Json utility',
+        'Traversing complex XML namespaces using JavaScript string bracket notation without syntax exceptions',
+      ],
+      disastersPrevented: [
+        'Averted multi million dollar enterprise integration outages during legacy banking and accounting migrations',
+        'Prevented silent test suite failures caused by Postman overriding XML Content Type headers',
+        'Eliminated costly contractor dependencies by proving that Postman can automate legacy XML just as easily as JSON',
+      ],
+      warRoomTakeaway: 'The vast majority of global enterprise wealth still flows through legacy SOAP web services. When you can seamlessly test both modern GraphQL REST APIs and legacy SOAP mainframes, your market value as a Lead Test Architect is peerless.',
     },
     {
       type: 'cliffhanger',

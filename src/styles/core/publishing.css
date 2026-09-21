@@ -918,6 +918,130 @@ kbd {
   line-height: 1.5;
 }
 
+/* ==========================================================================
+   Victory Milestone & Architectural Triumph Cards
+   ========================================================================== */
+.victory-milestone-card {
+  margin: 1.8rem 0;
+  padding: 1.6rem 1.8rem;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 55%, #172554 100%);
+  color: #f8fafc;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 35px rgba(15, 23, 42, 0.4);
+  break-inside: avoid;
+}
+
+.victory-milestone-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.victory-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f59e0b;
+  color: #000000;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.victory-rank {
+  color: #93c5fd;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.victory-title {
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin: 0.4rem 0 0.6rem;
+  line-height: 1.3;
+}
+
+.victory-summary {
+  color: #cbd5e1;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.victory-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 760px) {
+  .victory-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.victory-col {
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.victory-col.tactical {
+  border-left: 3px solid #10b981;
+}
+
+.victory-col.prevented {
+  border-left: 3px solid #ef4444;
+}
+
+.victory-col-label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.6rem;
+  color: #ffffff;
+}
+
+.victory-col ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.victory-col li {
+  margin-bottom: 0.4rem;
+}
+
+.victory-war-room-note {
+  margin-top: 1rem;
+  padding: 0.8rem 1.1rem;
+  background: rgba(99, 102, 241, 0.18);
+  border-left: 4px solid #818cf8;
+  border-radius: 6px;
+  color: #e0e7ff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.victory-war-room-note strong {
+  color: #a5b4fc;
+}
+
 /* ---------------- Compact Journey Cards & Interactive Q&A ---------------- */
 .journey-card {
   margin: 0.65rem 0;

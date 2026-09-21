@@ -79,7 +79,7 @@ export const lesson13 = {
       paragraphs: [
         'When you export files from Postman, the default filename often contains spaces (such as `Campus Library Suite.postman_collection.json`).',
         'In terminal environments like bash or Windows PowerShell, spaces act as argument separators. The terminal treats `Campus` as one file and `Library` as another, immediately crashing with a file not found error!',
-        'Always rename exported files using underscores or hyphens before running terminal commands: `Campus_Library_Collection.json`.',
+        'Always rename exported files using underscores or clean alphanumeric names before running terminal commands: `Campus_Library_Collection.json`.',
       ],
     },
     {
@@ -132,7 +132,7 @@ export const lesson13 = {
     },
     {
       type: 'paragraph',
-      text: 'Terminal output is great for developers, but engineering directors and quality assurance managers need visual dashboards. We install the `newman-reporter-htmlextra` plugin to generate publication grade reports. You can download the complete runner script: [Download install-and-run-htmlextra.sh](/materials/zero-to-agentic-api-testing/lesson-13/install-and-run-htmlextra.sh).',
+      text: 'Terminal output is great for developers, but engineering directors and quality assurance managers need visual dashboards. We install the `newman-reporter-htmlextra` plugin to generate publication grade reports. You can download the complete runner script: [Download HTML Extra Runner Script](/materials/zero-to-agentic-api-testing/lesson-13/install-and-run-htmlextra.sh).',
     },
     {
       type: 'code',
@@ -166,14 +166,14 @@ export const lesson13 = {
     },
     {
       type: 'paragraph',
-      text: 'To automate execution without opening a terminal manually, we set up **Jenkins**, the enterprise standard continuous integration server. You can download the Jenkins build script: [Download jenkins-build-step.sh](/materials/zero-to-agentic-api-testing/lesson-13/jenkins-build-step.sh).',
+      text: 'To automate execution without opening a terminal manually, we set up **Jenkins**, the enterprise standard continuous integration server. You can download the Jenkins build script: [Download Jenkins Build Step Script](/materials/zero-to-agentic-api-testing/lesson-13/jenkins-build-step.sh).',
     },
     {
       type: 'steps',
       items: [
         'Download the generic Java package: `jenkins.war` from https://www.jenkins.io.',
         'Start Jenkins from your command prompt on port 9090: `java -jar jenkins.war --httpPort=9090`.',
-        'Open your browser and navigate to: http://localhost:9090.',
+        'Open your local browser to access the running Jenkins administrative setup dashboard on your assigned port.',
         'Enter the initial administrator password, complete setup, and click New Item to create a Freestyle Project named "Campus Library Regression Pipeline".',
         'In the Build section, click Add build step and select Execute shell (on Linux or Mac) or Execute Windows batch command (on Windows).',
       ],
@@ -224,7 +224,7 @@ export const lesson13 = {
     },
     {
       type: 'paragraph',
-      text: 'Now, update the Jenkins build script to reference the parameter dynamically using `${ENV}`. You can download the parameterized script: [Download parameterized-jenkins-build.sh](/materials/zero-to-agentic-api-testing/lesson-13/parameterized-jenkins-build.sh):',
+      text: 'Now, update the Jenkins build script to reference the parameter dynamically using `${ENV}`. You can download the parameterized script: [Download Parameterized Jenkins Build Script](/materials/zero-to-agentic-api-testing/lesson-13/parameterized-jenkins-build.sh):',
     },
     {
       type: 'code',
@@ -252,7 +252,7 @@ export const lesson13 = {
     },
     {
       type: 'paragraph',
-      text: 'For modern cloud engineering teams that host repositories on GitHub, you can execute this identical pipeline automatically on every git commit without hosting a local Jenkins server. You can download the ready to use GitHub workflow: [Download api-tests-workflow.yml](/materials/zero-to-agentic-api-testing/lesson-13/api-tests-workflow.yml):',
+      text: 'For modern cloud engineering teams that host repositories on GitHub, you can execute this identical pipeline automatically on every git commit without hosting a local Jenkins server. You can download the ready to use GitHub workflow: [Download GitHub Actions Workflow](/materials/zero-to-agentic-api-testing/lesson-13/api-tests-workflow.yml):',
     },
     {
       type: 'code',
@@ -350,6 +350,26 @@ export const lesson13 = {
         'Use Jenkins Choice Parameters to switch target test environments dynamically with a single dropdown selection.',
         'Postman Monitors provide scheduled cloud watchdogs running health checks without requiring local machines.',
       ],
+    },
+    {
+      type: 'victory-milestone',
+      badge: '★ FINAL CAPSTONE CONQUERED · CI CD DEFENDER',
+      rank: 'CHIEF API AUTOMATION & QUALITY ARCHITECT',
+      title: 'Ultimate Enterprise Capstone: Autonomous CI CD Quality Gate Deployed',
+      summary: 'You have conquered the entire Zero to Agentic API Testing journey! You took full command of the testing pyramid, automated multi tier campus services, secured microservices with OAuth 2.0, bridged legacy SOAP XML WebServices, and engineered an autonomous continuous integration pipeline powered by Newman, Jenkins, GitHub Actions, and HTML Extra reporting. You stand at the pinnacle of modern software quality engineering.',
+      powers: [
+        'Orchestrating zero click headless test execution across containerized CI CD pipelines via Newman CLI',
+        'Automating strict quality gates with the fail fast bail flag to block breaking commits before deployment',
+        'Generating publication grade interactive HTML Extra dashboards with visual charts and granular wire traces',
+        'Engineering parameterized Jenkins pipelines with dynamic Choice Parameters for instant QA and UAT switching',
+        'Deploying round the clock scheduled cloud watchdogs and automated alerts using Postman Monitors',
+      ],
+      disastersPrevented: [
+        'Averted catastrophic midnight production outages by intercepting breaking backend commits in the pipeline',
+        'Eliminated hundreds of hours of manual release signoff delays, enabling true continuous delivery at enterprise scale',
+        'Protected live production environments by establishing rigorous automated UAT gating before customer release',
+      ],
+      warRoomTakeaway: 'You are no longer someone who merely checks if an application works. You are the architect who builds the autonomous shields that guarantee software never fails in production. You command the wire, the contract, the assertion, and the pipeline.',
     },
     {
       type: 'cliffhanger',
