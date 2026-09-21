@@ -1,3 +1,4 @@
+import cicdGateImg from '../assets/enterprise-cicd-quality-gate.jpg'
 import resilienceImg from '../assets/api-resilience-error-handling.jpg'
 
 export const lesson09 = {
@@ -12,6 +13,19 @@ export const lesson09 = {
       type: 'mission',
       title: 'Mission 3: Hardening for Enterprise Production and CI CD',
       text: 'Our library automation runs smoothly on happy paths. But real world production systems operate in an unpredictable environment: users submit blank forms, network connections drop, authentication tokens expire, and duplicate records collide in the database. If an API returns a generic 500 error instead of a helpful 400 Bad Request, or leaks database passwords in a crash stack trace, the application is fragile and insecure. Across the next five chapters, our mission is to enterprise harden our test suite: validating error status codes, parsing non JSON failure pages safely with try catch blocks, building self healing teardown scripts, creating Postman Mock Servers and validating JSON Schema contracts, securing workflows with OAuth 2.0 token authentication, querying legacy enterprise SOAP WebServices, and integrating our test suite into automated continuous integration pipelines with Newman.',
+      image: {
+        src: cicdGateImg,
+        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/enterprise-cicd-quality-gate.jpg',
+        w: 1408,
+        h: 768,
+        alt: 'Enterprise operations command center during midnight deployment showing CI CD deployment gate with green pass shields.',
+        caption: 'The Midnight Operations Center: Hardening enterprise workflows with automated quality gates.',
+        points: [
+          'Production Battle Testing: Subjecting campus services to invalid inputs, edge cases, and network dropouts.',
+          'Headless Test Automation: Executing full regression collections without human intervention in deployment pipelines.',
+          'Resilience Safeguards: Catching security leaks and database collisions before live users encounter them.',
+        ],
+      },
       weKnow: [
         'Bugs overwhelmingly hide in negative scenarios and edge cases rather than happy paths.',
         'Calling pm.response.json() directly will crash your test script if the server returns an HTML error page.',
