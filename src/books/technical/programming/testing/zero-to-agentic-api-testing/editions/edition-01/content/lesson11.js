@@ -45,12 +45,11 @@ export const lesson11 = {
       text: 'Step 2: The Four Roles in the OAuth 2.0 Architecture',
     },
     {
-      type: 'paragraph',
-      text: 'OAuth 2.0 delegates authority across four distinct participants. Understanding each role is essential when configuring test environments in Postman.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'SECURITY ARCHITECTURE',
+      title: 'OAuth 2.0 Security Architecture: The Four Party Token Handshake',
+      text: 'OAuth 2.0 delegates authority across four distinct participants: the Resource Owner (the student), the Client Application (our web or mobile interface), the Authorization Server (campus identity login), and the Resource Server (the protected library microservice). Access tokens expire automatically, protecting university resources without exposing student credentials.',
       src: oauth2Img,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/oauth2-handshake-flow.jpg',
       w: 1408,

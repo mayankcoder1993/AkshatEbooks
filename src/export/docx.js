@@ -15,8 +15,65 @@ async function blockToDocx(b) {
   switch(b.type) {
     case 'heading': return [h(b.text)]
     case 'paragraph': return [p(b.text)]
-    case 'image': { const data=await imageLoader(b.src, b); const width=560; return [new Paragraph({alignment:AlignmentType.CENTER,children:[new ImageRun({data,type:b.file?.toLowerCase().endsWith('.png')?'png':'jpg',transformation:{width,height:Math.round(width*b.h/b.w)},altText:{title:b.alt,description:b.alt,name:b.alt}})]}),...(b.caption?[p([new TextRun({text:b.caption,italics:true,color:'5B6575',size:19})],{alignment:AlignmentType.CENTER})]:[]),...(b.points||[]).map((point,index)=>p([new TextRun({text:`${index+1}  `,bold:true,color:colors.indigo}),...rich(point)]))] }
-    case 'mission': return [tableBox(`OUR MISSION · ${b.title}`,[p(b.text),p([new TextRun({text:'What we know: ',bold:true}),...rich(b.weKnow.join(' • '))]),p([new TextRun({text:'What we need: ',bold:true}),...rich(b.weNeed.join(' • '))])],'EEF5FA')]
+    case 'image': {
+      const data = await imageLoader(b.src, b);
+      const width = 560;
+      const items = [];
+      if (b.badge || b.title) {
+        items.push(p([new TextRun({ text: (b.badge ? `${b.badge} · ` : '') + (b.title || ''), bold: true, color: colors.indigo, size: 22 })]));
+      }
+      if (b.text) {
+        items.push(p(rich(b.text)));
+      }
+      if (b.paragraphs?.length) {
+        b.paragraphs.forEach(pr => items.push(p(rich(pr))));
+      }
+      items.push(new Paragraph({
+        alignment: AlignmentType.CENTER,
+        children: [new ImageRun({
+          data,
+          type: b.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
+          transformation: { width, height: Math.round(width * b.h / b.w) },
+          altText: { title: b.alt, description: b.alt, name: b.alt }
+        })]
+      }));
+      if (b.caption) {
+        items.push(p([new TextRun({ text: b.caption, italics: true, color: '5B6575', size: 19 })], { alignment: AlignmentType.CENTER }));
+      }
+      if (b.points?.length) {
+        b.points.forEach((point, index) => {
+          items.push(p([new TextRun({ text: `${index + 1}  `, bold: true, color: colors.indigo }), ...rich(point)]));
+        });
+      }
+      return [tableBox(b.title ? `ARCHITECTURE · ${b.title}` : 'ARCHITECTURAL BLUEPRINT', items, 'F8FAFC')];
+    }
+    case 'mission': {
+      const items = [p(b.text)];
+      if (b.image) {
+        const data = await imageLoader(b.image.src, b.image);
+        const width = 520;
+        items.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new ImageRun({
+            data,
+            type: b.image.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
+            transformation: { width, height: Math.round(width * (b.image.h || 768) / (b.image.w || 1408)) },
+            altText: { title: b.image.alt, description: b.image.alt, name: b.image.alt }
+          })]
+        }));
+        if (b.image.caption) {
+          items.push(p([new TextRun({ text: b.image.caption, italics: true, color: '5B6575', size: 19 })], { alignment: AlignmentType.CENTER }));
+        }
+        if (b.image.points?.length) {
+          b.image.points.forEach((point, index) => {
+            items.push(p([new TextRun({ text: `${index + 1}  `, bold: true, color: colors.indigo }), ...rich(point)]));
+          });
+        }
+      }
+      items.push(p([new TextRun({ text: 'What we know: ', bold: true }), ...rich(b.weKnow.join(' • '))]));
+      items.push(p([new TextRun({ text: 'What we need: ', bold: true }), ...rich(b.weNeed.join(' • '))]));
+      return [tableBox(`OUR MISSION · ${b.title}`, items, 'EEF5FA')];
+    }
     case 'api-inspector': {
       const respStr = typeof b.responseBody === 'string' ? b.responseBody : JSON.stringify(b.responseBody, null, 2);
       const items = [
@@ -28,7 +85,31 @@ async function blockToDocx(b) {
       ];
       return [tableBox(b.title || 'LIVE API WIRE INSPECTION', items, 'EEF5FA')];
     }
-    case 'mission-tracker': return [tableBox(`MISSION PROGRESS · ${b.title}`,[p(b.text)],'EBF5FB')]
+    case 'mission-tracker': {
+      const items = [p(b.text)];
+      if (b.image) {
+        const data = await imageLoader(b.image.src, b.image);
+        const width = 520;
+        items.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new ImageRun({
+            data,
+            type: b.image.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
+            transformation: { width, height: Math.round(width * (b.image.h || 768) / (b.image.w || 1408)) },
+            altText: { title: b.image.alt, description: b.image.alt, name: b.image.alt }
+          })]
+        }));
+        if (b.image.caption) {
+          items.push(p([new TextRun({ text: b.image.caption, italics: true, color: '5B6575', size: 19 })], { alignment: AlignmentType.CENTER }));
+        }
+        if (b.image.points?.length) {
+          b.image.points.forEach((point, index) => {
+            items.push(p([new TextRun({ text: `${index + 1}  `, bold: true, color: colors.indigo }), ...rich(point)]));
+          });
+        }
+      }
+      return [tableBox(`MISSION PROGRESS · ${b.title}`, items, 'EBF5FB')];
+    }
     case 'mission-accomplished': return [tableBox(`★ MISSION ACCOMPLISHED · ${b.title}`,[p(b.text)],'EAFAF1')]
     case 'victory-milestone':
       return [tableBox(`⚡ ${b.badge || 'ARCHITECTURAL TRIUMPH'} · ${b.title}`,[

@@ -62,6 +62,9 @@ export const lesson03 = {
     {
       type: 'image',
       layout: 'stacked',
+      badge: 'WORKBENCH ARCHITECTURE',
+      title: 'Postman Workbench Architecture: The Four Operational Zones',
+      text: 'The Postman application organizes testing into four specialized zones: the left sidebar for navigation and collection hierarchies, the top bar for environments and workspaces, the center request builder for constructing HTTP transactions, and the bottom panel for inspecting live response headers and payloads.',
       src: workbenchImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-workbench-overview.jpg',
       w: 1408,
@@ -127,12 +130,11 @@ export const lesson03 = {
       text: 'Step 5: Team Collaboration: Forking Collections and Reviewing Pull Requests',
     },
     {
-      type: 'paragraph',
-      text: 'In real world software projects, multiple engineers work on the same API test collection simultaneously. If everyone edits the main collection directly, tests overwrite each other and breaking changes enter production test runs. Postman solves this with Git style version control:',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'TEAM COLLABORATION',
+      title: 'Postman Collaboration Lifecycle: Forking, Branching, and Merging',
+      text: 'In real world software projects, multiple engineers work on the same API test collection simultaneously. If everyone edits the main collection directly, tests overwrite each other and breaking changes enter production test runs. Postman provides an enterprise branching workflow mirroring Git: engineers fork a parent collection into their personal workspace, make atomic updates, submit pull requests with visual change diffs, and merge back into the verified team source of truth.',
       src: collaborationImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-team-collaboration-fork-pr.jpg',
       w: 1408,

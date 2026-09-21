@@ -20,12 +20,11 @@ export const lesson07 = {
       text: 'Step 1: The Three Stage Request Chaining Pipeline',
     },
     {
-      type: 'paragraph',
-      text: 'By storing dynamic outputs into variables, a collection can execute dozens of interdependent requests in complete harmony.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'REQUEST PIPELINE',
+      title: 'Dynamic Request Chaining: Passing Identity Between Dependent Calls',
+      text: 'By storing dynamic outputs into variables, a collection can execute dozens of interdependent requests in complete harmony. Subsequent requests consume dynamic keys in their URLs, headers, or request bodies automatically, eliminating all manual copy paste intervention.',
       src: chainingImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-request-chaining-pipeline.jpg',
       w: 1408,
@@ -141,6 +140,9 @@ export const lesson07 = {
     {
       type: 'image',
       layout: 'stacked',
+      badge: 'DATA TRANSFORMATION',
+      title: 'JavaScript Array Transformation Pipeline: Filtering, Mapping, and Aggregating',
+      text: 'Modern enterprise APIs deliver deep hierarchical payloads. Understanding how find, map, filter, and reduce transform JSON arrays allows automation engineers to locate specific records, compute expected financial aggregates, and assert mathematical integrity across entire catalogs.',
       src: arrayPipelineImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/javascript-array-pipeline-transform.jpg',
       w: 1408,

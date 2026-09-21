@@ -53,12 +53,11 @@ export const lesson12 = {
       text: 'Step 2: Anatomy of a SOAP XML Message',
     },
     {
-      type: 'paragraph',
-      text: 'Every SOAP transaction is packaged inside a standardized XML container known as the **SOAP Envelope**.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'PROTOCOL SPECIFICATION',
+      title: 'SOAP 1.2 Architecture: Envelope, Header, and Body Protocol Anatomy',
+      text: 'Every SOAP transaction is packaged inside a standardized XML container known as the **SOAP Envelope**. Unlike JSON, which is flexible and loosely structured, SOAP enforces a rigid XML schema defined by an enterprise WSDL contract.',
       src: soapImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/soap-xml-architecture.jpg',
       w: 1408,

@@ -93,12 +93,11 @@ export const lesson10 = {
       text: 'Step 3: The Agile Dilemma and Postman Mock Servers',
     },
     {
-      type: 'paragraph',
-      text: 'When starting a sprint, waiting ten days for backend microservices stalls everyone. Postman Mock Servers eliminate this blocker by simulating real web servers in the cloud.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'AGILE SIMULATION',
+      title: 'Postman Mock Servers: Enabling Fast Parallel Agile Development',
+      text: 'When starting a sprint, waiting ten days for backend microservices stalls everyone. Postman Mock Servers eliminate this blocker by simulating real web servers in the cloud. By defining JSON request examples, frontend and testing teams simulate production behavior weeks before real code lands.',
       src: mockServerImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-mock-servers-agile.jpg',
       w: 1408,
@@ -194,19 +193,11 @@ export const lesson10 = {
       text: 'In enterprise architectures, QA engineers increasingly encounter **GraphQL** alongside standard REST endpoints. To understand why GraphQL exists, consider the student academic portal on our university campus.',
     },
     {
-      type: 'paragraph',
-      text: 'To display a single student profile screen, a mobile client might have to call four separate REST endpoints: `GET /students/101` for the student name, `GET /departments/5` for their advisor, `GET /courses?student=101` for their schedule, and `GET /loans?student=101` for their borrowed books. This leads to two major architectural problems:',
-    },
-    {
-      type: 'steps',
-      items: [
-        '1. Under fetching (The N+1 Network Problem): The client must execute four separate HTTP requests over mobile networks, causing visible screen lag.',
-        '2. Over fetching: Each REST endpoint returns dozens of unneeded database fields (such as internal security hashes or audit logs) that the mobile app discards, wasting bandwidth.',
-      ],
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'QUERY ARCHITECTURES',
+      title: 'REST vs GraphQL Architecture: Single Request Precise Data Resolution',
+      text: 'To display a single student profile screen, a REST client might call four separate endpoints (students, departments, courses, loans), multiplying mobile network latency and returning unwanted fields. GraphQL solves this by exposing a single endpoint where clients declare the exact fields required in one roundtrip.',
       src: graphqlImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/graphql-vs-rest-architecture.jpg',
       w: 1408,

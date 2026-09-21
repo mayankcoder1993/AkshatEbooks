@@ -19,12 +19,11 @@ export const lesson08 = {
       text: 'Step 1: The Data Driven Iteration Loop',
     },
     {
-      type: 'paragraph',
-      text: 'In Data Driven Testing, your request sequence acts as a reusable engine. When you feed an external data file into the Collection Runner, Postman executes the entire collection once for every single row in the file.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'DATA DRIVEN TESTING',
+      title: 'Data Driven Testing Loop: Executing Parameterized Iterations',
+      text: 'In Data Driven Testing, your request sequence acts as a reusable engine. When you feed an external data file into the Collection Runner, Postman executes the entire collection once for every single row in the file, automatically binding values to data variables.',
       src: ddtImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/data-driven-testing-iteration.jpg',
       w: 1408,

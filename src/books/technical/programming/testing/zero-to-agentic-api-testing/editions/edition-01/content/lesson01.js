@@ -16,6 +16,19 @@ export const lesson01 = {
       type: 'mission',
       title: 'Mission 1: The Core Protocol and Campus Cloud Integration',
       text: 'Welcome to the Apex Campus Enterprise Cloud Platform. As our Lead API Test Automation Architect, you are stepping directly into an urgent engineering crisis: our university is launching a flagship digital campus across web, mobile, and external academic partners. The frontend engineering team built a student mobile application in TypeScript and React Native. The backend infrastructure team built the core academic catalog and transit services in Java Spring Boot and Python, storing records in an enterprise PostgreSQL database. On launch day preview, the mobile application crashed repeatedly because data contracts were mismatched and unverified over the wire. Infosec strictly forbids sharing database passwords with frontend devices or external partners. Across our opening three chapters, your mission is to investigate the invisible network wire: mastering what APIs are, decoding HTTP requests and responses, establishing the single source of truth contract, examining backend code blueprints, validating live payloads across the web, and setting up an automated Postman testing workbench for the entire engineering organization.',
+      image: {
+        src: warRoomImg,
+        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+        w: 1408,
+        h: 768,
+        alt: 'Apex University Transit and Safety Gateway command center showing live campus incident monitoring and HTTP packet inspector.',
+        caption: 'The Apex Campus War Room: Diagnosing frontend and backend communication failures during the semester transit launch.',
+        points: [
+          'Crisis Dashboard: Real time telemetry tracking bus arrivals, student mobile geolocation pings, and dispatch latency.',
+          'The Blind Spot: While the student mobile app displayed spinning loaders, the root failure was an unhandled 500 error on the coordinate lookup endpoint.',
+          'Wire Auditing: The Lead API Test Automation Architect bypasses the visual UI to inspect raw HTTP packets and JSON payloads directly over the wire.',
+        ],
+      },
       weKnow: [
         'Web pages and mobile applications never store entire university databases inside client device memory.',
         'Whenever an application displays student grades, courses, or campus transit locations, it dispatches background network requests across the wire.',
@@ -26,21 +39,6 @@ export const lesson01 = {
         'An inspection of how backend engineers construct APIs using modern route decorators and automatic JSON serializers.',
         'Hands on experience inspecting live, authentic API payloads directly in your browser without requiring local server setup or complex tooling.',
         'A clear architectural foundation of why API testing is the highest leverage tier in the modern testing pyramid.',
-      ],
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      src: warRoomImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Apex University Transit and Safety Gateway command center showing live campus incident monitoring and HTTP packet inspector.',
-      caption: 'The Apex Campus War Room: Diagnosing frontend and backend communication failures during the semester transit launch.',
-      points: [
-        'Crisis Dashboard: Real time telemetry tracking bus arrivals, student mobile geolocation pings, and dispatch latency.',
-        'The Blind Spot: While the student mobile app displayed spinning loaders, the root failure was an unhandled 500 error on the coordinate lookup endpoint.',
-        'Wire Auditing: The Lead API Test Automation Architect bypasses the visual UI to inspect raw HTTP packets and JSON payloads directly over the wire.',
       ],
     },
     {
@@ -56,12 +54,11 @@ export const lesson01 = {
       text: 'To understand why APIs are the backbone of modern software, consider the architectural reality of our Apex Campus platform. The student mobile application is compiled into mobile device packages written in TypeScript and React Native. The core course catalog runs on remote enterprise servers written in Java Spring Boot. Can the mobile phone directly invoke a Java method or execute raw SQL against the production PostgreSQL database? Absolutely not. A mobile operating system cannot execute remote Java bytecode. Furthermore, embedding database connection strings inside mobile apps would allow any malicious actor to decompile the app and steal the entire campus student directory.',
     },
     {
-      type: 'paragraph',
-      text: 'Think of visiting a busy campus dining hall or ordering a meal at a restaurant. You do not walk into the kitchen, open the industrial refrigerator, turn on the stove, or assemble your own dish. Doing so would violate health safety rules and cause complete operational chaos. Instead, you look at the printed menu, select your meal, and give your order to the waiter. The waiter carries your request to the kitchen, the chefs prepare your food according to the recipe, and the waiter delivers the finished dish back to your table.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'ARCHITECTURAL MENTAL MODEL',
+      title: 'The Restaurant Analogy: An API Acts as the Waiter',
+      text: 'Think of visiting a busy campus dining hall or ordering a meal at a restaurant. You do not walk into the kitchen, open the industrial refrigerator, turn on the stove, or assemble your own dish. Doing so would violate health safety rules and cause complete operational chaos. Instead, you look at the printed menu, select your meal, and give your order to the waiter. The waiter carries your request to the kitchen, the chefs prepare your food according to the recipe, and the waiter delivers the finished dish back to your table.',
       src: restaurantImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-concept-restaurant.jpg',
       w: 1408,
@@ -100,12 +97,11 @@ export const lesson01 = {
       text: 'Step 3: How Frontends and Backends Communicate Across Networks',
     },
     {
-      type: 'paragraph',
-      text: 'In enterprise engineering, systems are deliberately separated into distinct tiers: user facing client applications, the API network contract wire, backend microservices, and persistent databases. The API serves as the universal bridge uniting these tiers across the network.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'DECOUPLED ARCHITECTURE',
+      title: 'The API Network Bridge: Decoupling Clients from Backends',
+      text: 'In enterprise engineering, systems are deliberately separated into distinct tiers: user facing client applications, the API network contract wire, backend microservices, and persistent databases. The API serves as the universal bridge uniting these tiers across the network.',
       src: bridgeImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/frontend-backend-api-bridge.jpg',
       w: 1408,
@@ -246,12 +242,11 @@ export const lesson01 = {
       text: 'Step 6: Why UI Automation Fails: The Testing Pyramid',
     },
     {
-      type: 'paragraph',
-      text: 'Why did the campus launch day test fail even though the team wrote automated browser tests? The answer lies in the **Testing Pyramid**, a fundamental software engineering doctrine formulated by Mike Cohn.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'AUTOMATION STRATEGY',
+      title: 'The Testing Pyramid: Prioritizing High Leverage API Gates',
+      text: 'Why did the campus launch day test fail even though the team wrote automated browser tests? The answer lies in the **Testing Pyramid**, a fundamental software engineering doctrine formulated by Mike Cohn. UI automation scripts click buttons, enter form fields, and render pixels in a simulated browser. These tests are notoriously slow, taking seconds per action, and notoriously brittle because a small visual redesign can break dozens of automated browser tests even when backend logic works perfectly. By focusing our automation strategy on the API layer, we validate actual business contracts at machine speed directly across the wire.',
       src: pyramidImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/testing-pyramid-focus.jpg',
       w: 1408,
@@ -265,20 +260,15 @@ export const lesson01 = {
       ],
     },
     {
-      type: 'paragraph',
-      text: 'By focusing our automation strategy on the API layer, we catch critical bugs early in the deployment pipeline. API tests do not wait for browsers to render CSS styles or load heavy JavaScript bundles. They validate the actual business contracts at machine speed.',
-    },
-    {
       type: 'heading',
       text: 'Step 7: The Four Major Enterprise API Architectural Styles',
     },
     {
-      type: 'paragraph',
-      text: 'While REST represents the most dominant architectural style across modern cloud applications, enterprise ecosystems like our campus utilize multiple specialized API paradigms:',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'ENTERPRISE PATTERNS',
+      title: 'Architectural Comparison: The Four Major API Styles',
+      text: 'While REST represents the most dominant architectural style across modern cloud applications, enterprise ecosystems like our campus utilize multiple specialized API paradigms based on throughput, latency, and contract strictness. Understanding these four architectural styles gives you the tactical versatility to test any endpoint across the enterprise.',
       src: matrixImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-architectures-matrix.jpg',
       w: 1408,

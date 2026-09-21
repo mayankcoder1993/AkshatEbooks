@@ -25,6 +25,12 @@ async function validateBlocks(blocks, context, bookDirectory) {
       await fs.access(absolute)
       assert(absolute.startsWith(bookDirectory + path.sep), `${label}: image must stay inside its book package`)
     }
+    if ((block.type === 'mission' || block.type === 'mission-tracker') && block.image) {
+      assert(block.image.alt && block.image.w > 0 && block.image.h > 0 && block.image.file, `${label}: mission image requires file, dimensions and alt text`)
+      const absolute = path.resolve(block.image.file)
+      await fs.access(absolute)
+      assert(absolute.startsWith(bookDirectory + path.sep), `${label}: mission image must stay inside its book package`)
+    }
     if (block.type === 'victory-milestone') assert(block.title && block.summary && Array.isArray(block.powers) && Array.isArray(block.disastersPrevented), `${label}: victory milestone requires title, summary, powers and disastersPrevented`)
     if (block.type === 'quiz') assert(Array.isArray(block.items) && block.items.every(item => Array.isArray(item) && item.length === 2), `${label}: quiz items require question and answer`)
     if (block.type === 'runviz') assert(Array.isArray(block.steps) && block.steps.length, `${label}: run visualizer requires steps`)

@@ -19,12 +19,11 @@ export const lesson05 = {
       text: 'Step 1: The Request and Response Execution Lifecycle',
     },
     {
-      type: 'paragraph',
-      text: 'Postman separates script execution into two distinct phases that sandwich the network call.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'EXECUTION LIFECYCLE',
+      title: 'Postman Execution Lifecycle: Pre Request, Network Wire, and Assertions',
+      text: 'Postman separates execution into three distinct phases for every HTTP transaction: Pre request Script to seed dynamic parameters, Network Transmission over the wire, and Tests script to parse responses and assert business contracts at machine speed.',
       src: lifecycleImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-assertion-lifecycle.jpg',
       w: 1408,

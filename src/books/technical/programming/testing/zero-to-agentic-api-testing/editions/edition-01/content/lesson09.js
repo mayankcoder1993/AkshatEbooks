@@ -29,12 +29,11 @@ export const lesson09 = {
       text: 'Step 1: The Production Negative Testing Matrix',
     },
     {
-      type: 'paragraph',
-      text: 'Professional API testers design negative test cases deliberately. Never accept any arbitrary 4xx code; assert the exact numerical status code and error structure expected by the API contract.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'RESILIENCE MATRIX',
+      title: 'Defensive API Testing: The Negative and Edge Case Resilience Matrix',
+      text: 'Professional API test architects design negative and edge case suites to prove that systems fail safely. The Production Negative Testing Matrix categorizes critical defense vectors: invalid inputs, boundary violations, authentication denial, and graceful error responses.',
       src: resilienceImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-resilience-error-handling.jpg',
       w: 1408,

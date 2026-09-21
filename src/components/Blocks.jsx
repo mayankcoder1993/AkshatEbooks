@@ -36,10 +36,108 @@ export function Block({ block: b, staticMode = false }) {
   switch (b.type) {
     case 'heading': return <Heading>{b.text}</Heading>
     case 'paragraph': return <p className="section-intro"><RichText text={b.text}/></p>
-    case 'image': return <figure className={`lesson-figure ${b.layout || 'side-by-side'}`}><div className="figure-media"><img src={b.src} alt={b.alt}/></div>{(b.caption || b.points?.length) && <figcaption>{b.caption && <p className="figure-summary">{b.caption}</p>}{b.points?.length > 0 && <ol className="figure-points">{b.points.map((point,index)=><li key={point}><span>{index+1}</span><p><RichText text={point}/></p></li>)}</ol>}</figcaption>}</figure>
+    case 'image':
+      return (
+        <figure className={`modern-ui-box lesson-figure ${b.layout || 'stacked'}`}>
+          {(b.title || b.badge) && (
+            <div className="ui-box-header">
+              {b.badge && <span className="ui-box-badge">{b.badge}</span>}
+              {b.title && <h3 className="ui-box-title">{b.title}</h3>}
+            </div>
+          )}
+          {(b.text || b.paragraphs?.length > 0) && (
+            <div className="ui-box-intro">
+              {b.text && <p className="figure-intro-text"><RichText text={b.text} /></p>}
+              {b.paragraphs?.map((p, idx) => (
+                <p key={idx} className="figure-intro-text"><RichText text={p} /></p>
+              ))}
+            </div>
+          )}
+          <div className="figure-media">
+            <img src={b.src} alt={b.alt}/>
+          </div>
+          {(b.caption || b.points?.length > 0) && (
+            <figcaption className="ui-box-caption">
+              {b.caption && <p className="figure-summary">{b.caption}</p>}
+              {b.points?.length > 0 && (
+                <ol className="figure-points">
+                  {b.points.map((point,index)=>(
+                    <li key={point}>
+                      <span>{index+1}</span>
+                      <p><RichText text={point}/></p>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </figcaption>
+          )}
+        </figure>
+      )
     case 'api-inspector': return <ApiInspector {...b} staticMode={staticMode}/>
-    case 'mission': return <section className="mission"><span className="eyebrow">OUR MISSION</span><h2>{b.title}</h2><p>{b.text}</p><div className="mission-grid"><div><strong>What we know</strong><ul>{b.weKnow.map(x=><li key={x}>{x}</li>)}</ul></div><div><strong>What we need</strong><ul>{b.weNeed.map(x=><li key={x}>{x}</li>)}</ul></div></div></section>
-    case 'mission-tracker': return <section className="mission-tracker"><span className="eyebrow">{b.badge || 'ACTIVE MISSION PROGRESS'}</span><h2>{b.title}</h2><p>{b.text}</p></section>
+    case 'mission':
+      return (
+        <section className="mission modern-mission-box">
+          <span className="eyebrow">{b.badge || 'OUR MISSION'}</span>
+          <h2>{b.title}</h2>
+          <div className="mission-content-wrap">
+            <p className="mission-description"><RichText text={b.text} /></p>
+            {b.image && (
+              <div className="mission-inner-media-box">
+                <div className="mission-image-frame">
+                  <img src={b.image.src || b.image} alt={b.image.alt || b.title} />
+                </div>
+                {b.image.caption && (
+                  <p className="mission-image-caption">{b.image.caption}</p>
+                )}
+                {b.image.points?.length > 0 && (
+                  <ul className="mission-image-points">
+                    {b.image.points.map((pt, idx) => (
+                      <li key={idx}><RichText text={pt} /></li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+            <div className="mission-grid">
+              <div>
+                <strong>What we know</strong>
+                <ul>{b.weKnow.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
+              </div>
+              <div>
+                <strong>What we need</strong>
+                <ul>{b.weNeed.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      )
+    case 'mission-tracker':
+      return (
+        <section className="mission-tracker modern-mission-box">
+          <span className="eyebrow">{b.badge || 'ACTIVE MISSION PROGRESS'}</span>
+          <h2>{b.title}</h2>
+          <div className="mission-content-wrap">
+            <p className="mission-description"><RichText text={b.text} /></p>
+            {b.image && (
+              <div className="mission-inner-media-box">
+                <div className="mission-image-frame">
+                  <img src={b.image.src || b.image} alt={b.image.alt || b.title} />
+                </div>
+                {b.image.caption && (
+                  <p className="mission-image-caption">{b.image.caption}</p>
+                )}
+                {b.image.points?.length > 0 && (
+                  <ul className="mission-image-points">
+                    {b.image.points.map((pt, idx) => (
+                      <li key={idx}><RichText text={pt} /></li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      )
     case 'mission-accomplished': return <section className="mission-accomplished"><span className="eyebrow">★ MISSION ACCOMPLISHED</span><h3>{b.title}</h3><p>{b.text}</p></section>
     case 'victory-milestone':
       return (

@@ -19,16 +19,11 @@ export const lesson06 = {
       text: 'Step 1: The Five Variable Scopes Hierarchy',
     },
     {
-      type: 'paragraph',
-      text: 'Imagine your college campus. You have your personal student ID card in your pocket (Local Scope), your class attendance register (Data Scope), your college campus WiFi settings (Environment Scope), your department syllabus (Collection Scope), and the universal laws of mathematics (Global Scope).',
-    },
-    {
-      type: 'paragraph',
-      text: 'Postman provides five distinct variable tiers, organized from the broadest workspace level down to individual requests.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'SCOPE ARCHITECTURE',
+      title: 'Postman Variable Scopes Hierarchy: Precedence and Scope Boundaries',
+      text: 'Imagine your college campus. You have your personal student ID card in your pocket (Local Scope), your class attendance register (Data Scope), your college campus WiFi settings (Environment Scope), your department syllabus (Collection Scope), and universal constants (Global Scope). Postman organizes variables across these five tiers with strict precedence rules: narrower scopes override broader scopes whenever variable names match.',
       src: scopesImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-variable-scopes-hierarchy.jpg',
       w: 1408,

@@ -818,6 +818,88 @@ kbd {
   color: var(--accent-hover, #4f46e5);
 }
 
+/* ---------------- Modern UI Box: Unified Concept Cards ---------------- */
+.modern-ui-box {
+  margin: 1.4rem 0 1.8rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.modern-ui-box .ui-box-header {
+  padding: 1rem 1.25rem 0.65rem;
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.6) 100%);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+[data-theme='dark'] .modern-ui-box .ui-box-header {
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.6) 100%);
+}
+.modern-ui-box .ui-box-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: #e0e7ff;
+  color: #4338ca;
+}
+[data-theme='dark'] .modern-ui-box .ui-box-badge {
+  background: rgba(99, 102, 241, 0.25);
+  color: #a5b4fc;
+}
+.modern-ui-box .ui-box-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--heading);
+  letter-spacing: -0.01em;
+}
+.modern-ui-box .ui-box-intro {
+  padding: 1.1rem 1.35rem 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+  background: var(--panel);
+}
+.modern-ui-box .ui-box-intro p {
+  margin: 0 0 0.6rem;
+}
+.modern-ui-box .ui-box-intro p:last-child {
+  margin-bottom: 0;
+}
+.modern-ui-box .figure-media {
+  padding: 1rem;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modern-ui-box .figure-media img {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.modern-ui-box figcaption.ui-box-caption {
+  padding: 1rem 1.35rem 1.25rem;
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+}
+.modern-ui-box .figure-summary {
+  font-weight: 600;
+  color: var(--heading);
+  font-size: 0.95rem;
+  margin: 0 0 0.75rem;
+}
+
 .lesson-figure { margin:0 0 1.4rem; border:1px solid var(--border); border-radius:18px; overflow:hidden; background:var(--panel); box-shadow:var(--shadow); }
 .lesson-figure .figure-media { display:flex; align-items:center; justify-content:center; background:#ffffff; }
 .lesson-figure img { display:block; width:100%; height:auto; max-height:480px; object-fit:contain; }
@@ -836,6 +918,65 @@ kbd {
   padding: 1rem 1.25rem;
   margin: 0.75rem 0 1.2rem;
   box-shadow: var(--shadow);
+}
+.mission.modern-mission-box,
+.mission-tracker.modern-mission-box {
+  background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.4), 0 0 20px rgba(59, 130, 246, 0.08);
+  border-radius: 18px;
+  padding: 1.4rem 1.65rem;
+  margin: 1rem 0 1.5rem;
+}
+.modern-mission-box .mission-content-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modern-mission-box .mission-description {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+.modern-mission-box .mission-inner-media-box {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+.modern-mission-box .mission-image-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #090d16;
+  padding: 0.5rem;
+}
+.modern-mission-box .mission-image-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 460px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.modern-mission-box .mission-image-caption {
+  margin: 0;
+  padding: 0.85rem 1.25rem 0.4rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #93c5fd;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.modern-mission-box .mission-image-points {
+  margin: 0;
+  padding: 0.4rem 1.25rem 1rem 2.2rem;
+  font-size: 0.88rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  display: grid;
+  gap: 0.45rem;
 }
 .mission h2 {
   margin: 0.2rem 0 0.4rem;

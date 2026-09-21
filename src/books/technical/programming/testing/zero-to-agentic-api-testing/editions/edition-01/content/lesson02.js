@@ -39,12 +39,11 @@ export const lesson02 = {
       text: 'Step 2: Anatomy of the HTTP Wire',
     },
     {
-      type: 'paragraph',
-      text: 'Every HTTP transaction consists of two halves: the Request sent by the client, and the Response sent back by the server.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'PROTOCOL SPECIFICATION',
+      title: 'HTTP Wire Anatomy: Dissecting the Protocol Request and Response',
+      text: 'Every HTTP transaction consists of two halves: the Request sent by the client, and the Response sent back by the server. When an API call fails, Lead API Test Automation Architects do not guess or blame the network. We dissect the raw request and response anatomy to locate the exact breakdown across method, headers, and payload.',
       src: wireImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/http-wire-anatomy.jpg',
       w: 1408,
@@ -95,12 +94,11 @@ export const lesson02 = {
       text: 'Step 4: The 5 Status Code Families and Live Verification',
     },
     {
-      type: 'paragraph',
-      text: 'When a server answers an API call, it returns a three digit status code grouped into five families.',
-    },
-    {
       type: 'image',
       layout: 'stacked',
+      badge: 'RESPONSE STATUS CODES',
+      title: 'HTTP Status Codes Matrix: The Five Diagnostic Families',
+      text: 'When a server answers an API call, it returns a three digit status code grouped into five fundamental families. Memorizing the five status code families is essential for writing accurate test assertions and diagnosing whether a problem stems from an invalid request or a crashing server.',
       src: crudImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/restful-crud-status-guide.jpg',
       w: 1408,
