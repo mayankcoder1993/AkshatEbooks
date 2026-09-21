@@ -1,3 +1,66 @@
-export default function Header({brand,theme,onToggleTheme,onHome,lessons,active,onSelect,onBookPreview,onSavePdf,onSaveWord,exporting}) {
-  return <header className="site-header"><div className="header-inner"><button className="brand brand-button" onClick={onHome} title="Back to book library"><span className="brand-text"><strong>{brand.imprint}</strong><span>{brand.tagline}</span></span></button><nav className="lesson-chips" aria-label="Lessons">{lessons.map((lesson,index)=><button key={lesson.id} className={index===active?'chip active':'chip'} onClick={()=>onSelect(index)}><span className="chip-num">{String(index+1).padStart(2,'0')}</span>{lesson.shortTitle}</button>)}</nav><div className="actions"><button className="icon-btn" onClick={onToggleTheme} title="Toggle theme">{theme==='light'?'🌙':'☀️'}</button><a className="btn" href="/curriculum-planning.html" target="_blank" rel="noreferrer" title="View Curriculum Architecture & Syllabus Checklist">📋 Curriculum Blueprint</a><button className="btn" onClick={onHome}>⌂ Library</button><button className="btn" onClick={onBookPreview}>📖 Book preview</button><button className="btn" onClick={onSaveWord} disabled={exporting}>{exporting?'Preparing…':'📄 Word'}</button><button className="btn primary" onClick={onSavePdf}>🖨 PDF</button></div></div></header>
+export default function Header({
+  brand,
+  theme,
+  onToggleTheme,
+  onHome,
+  lessons,
+  active,
+  onSelect,
+  onBookPreview,
+  onSavePdf,
+  onSaveWord,
+  exporting,
+  onOpenBlueprint
+}) {
+  return (
+    <header className="site-header">
+      <div className="header-inner">
+        <button className="brand brand-button" onClick={onHome} title="Back to book library">
+          <span className="brand-text">
+            <strong>{brand.imprint}</strong>
+            <span>{brand.tagline}</span>
+          </span>
+        </button>
+
+        <nav className="lesson-chips" aria-label="Lessons">
+          {lessons.map((lesson, index) => (
+            <button
+              key={lesson.id}
+              className={index === active ? 'chip active' : 'chip'}
+              onClick={() => onSelect(index)}
+            >
+              <span className="chip-num">{String(index + 1).padStart(2, '0')}</span>
+              {lesson.shortTitle}
+            </button>
+          ))}
+        </nav>
+
+        <div className="actions">
+          <button className="icon-btn" onClick={onToggleTheme} title="Toggle theme">
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
+          <button
+            type="button"
+            className="btn"
+            onClick={onOpenBlueprint}
+            title="View Curriculum Architecture & Syllabus Checklist"
+          >
+            📋 Curriculum Blueprint
+          </button>
+          <button type="button" className="btn" onClick={onHome}>
+            ⌂ Library
+          </button>
+          <button type="button" className="btn" onClick={onBookPreview}>
+            📖 Book preview
+          </button>
+          <button type="button" className="btn" onClick={onSaveWord} disabled={exporting}>
+            {exporting ? 'Preparing…' : '📄 Word'}
+          </button>
+          <button type="button" className="btn primary" onClick={onSavePdf}>
+            🖨 PDF
+          </button>
+        </div>
+      </div>
+    </header>
+  )
 }
