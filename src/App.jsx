@@ -46,6 +46,8 @@ export default function App() {
   const [active, setActive] = useState(0)
   const [preview, setPreview] = useState(initial.preview)
   const [exporting, setExporting] = useState(false)
+  const [isWide, setIsWide] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -55,6 +57,14 @@ export default function App() {
       /* optional preference storage */
     }
   }, [theme])
+
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement))
+    }
+    document.addEventListener('fullscreenchange', onFullscreenChange)
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange)
+  }, [])
 
   useEffect(() => {
     const onPopState = () => {
@@ -108,6 +118,17 @@ export default function App() {
   const openLibrary = () => navigate('library', '/')
   const openBlueprint = () => navigate('blueprint', '/?view=blueprint')
   const toggleTheme = () => setTheme(value => (value === 'light' ? 'dark' : 'light'))
+  const toggleWideMode = () => setIsWide(value => !value)
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {})
+      setIsFullscreen(true)
+      setIsWide(true)
+    } else {
+      if (document.exitFullscreen) document.exitFullscreen().catch(() => {})
+      setIsFullscreen(false)
+    }
+  }
 
   if (view === 'blueprint') {
     return (
@@ -180,17 +201,35 @@ export default function App() {
 
   if (preview) {
     return (
-      <div className="book-view-screen force-light">
+      <div className={`book-view-screen force-light ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
         <div className="preview-toolbar no-print">
-          <span>📖 Book View · every interactive answer is expanded for reading and print.</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+            <span className="preview-tag">📖 Book View</span>
+            <button
+              type="button"
+              className="btn"
+              onClick={toggleWideMode}
+              title="Expand book width across screen"
+            >
+              {isWide ? '⊟ Standard Width' : '⊞ Full Width'}
+            </button>
+            <button
+              type="button"
+              className="btn"
+              onClick={toggleFullscreen}
+              title="Toggle browser fullscreen"
+            >
+              {isFullscreen ? '⛶ Exit Full' : '⛶ Fullscreen'}
+            </button>
+          </div>
           <div className="preview-actions">
-            <button className="btn" onClick={openLibrary}>⌂ Library</button>
-            <button className="btn" onClick={openBlueprint}>📋 Curriculum Blueprint</button>
-            <button className="btn primary" onClick={() => window.print()}>🖨 Save as PDF</button>
-            <button className="btn" onClick={() => setPreview(false)}>✕ Back to Web View</button>
+            <button type="button" className="btn" onClick={openLibrary}>⌂ Library</button>
+            <button type="button" className="btn" onClick={openBlueprint}>📋 Blueprint</button>
+            <button type="button" className="btn primary" onClick={() => window.print()}>🖨 PDF</button>
+            <button type="button" className="btn" onClick={() => setPreview(false)}>✕ Web View</button>
           </div>
         </div>
-        <div className="preview-paper">
+        <div className={`preview-paper ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
           <PrintBook publication={publication} />
         </div>
       </div>
@@ -213,8 +252,12 @@ export default function App() {
           onSaveWord={saveWord}
           exporting={exporting}
           onOpenBlueprint={openBlueprint}
+          isWide={isWide}
+          onToggleWideMode={toggleWideMode}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={toggleFullscreen}
         />
-        <main className="page">
+        <main className={`page ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
           <div key={lesson.id}>
             <LessonShell lesson={lesson} index={active} total={lessons.length} unitLabel={BOOK.unitLabel}>
               <Blocks blocks={lesson.blocks} />

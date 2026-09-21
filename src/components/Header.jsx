@@ -10,7 +10,11 @@ export default function Header({
   onSavePdf,
   onSaveWord,
   exporting,
-  onOpenBlueprint
+  onOpenBlueprint,
+  isWide = false,
+  onToggleWideMode = () => {},
+  isFullscreen = false,
+  onToggleFullscreen = () => {}
 }) {
   return (
     <header className="site-header">
@@ -42,10 +46,26 @@ export default function Header({
           <button
             type="button"
             className="btn"
+            onClick={onToggleWideMode}
+            title="Expand reading view width"
+          >
+            {isWide ? '⊟ Standard' : '⊞ Full Width'}
+          </button>
+          <button
+            type="button"
+            className="btn"
+            onClick={onToggleFullscreen}
+            title="Toggle fullscreen reading mode"
+          >
+            {isFullscreen ? '⛶ Exit Full' : '⛶ Fullscreen'}
+          </button>
+          <button
+            type="button"
+            className="btn"
             onClick={onOpenBlueprint}
             title="View Curriculum Architecture & Syllabus Checklist"
           >
-            📋 Curriculum Blueprint
+            📋 Blueprint
           </button>
           <button type="button" className="btn" onClick={onHome}>
             ⌂ Library
