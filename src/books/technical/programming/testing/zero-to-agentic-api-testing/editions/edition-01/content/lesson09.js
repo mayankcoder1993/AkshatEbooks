@@ -19,11 +19,11 @@ export const lesson09 = {
         w: 1408,
         h: 768,
         alt: 'Enterprise operations command center during midnight deployment showing CI CD deployment gate with green pass shields.',
-        caption: 'The Midnight Operations Center: Hardening enterprise workflows with automated quality gates.',
+        caption: 'The Midnight Operations Center: Protecting campus services with automated safety checks.',
         points: [
-          'Production Battle Testing: Subjecting campus services to invalid inputs, edge cases, and network dropouts.',
-          'Headless Test Automation: Executing full regression collections without human intervention in deployment pipelines.',
-          'Resilience Safeguards: Catching security leaks and database collisions before live users encounter them.',
+          'Stress Testing: Checking what happens when users enter bad data or lose their internet connection.',
+          'Hands Free Automation: Running all checks automatically in the background without needing a person to click buttons.',
+          'Safety Shield: Catching password leaks and server crashes before real students ever see them.',
         ],
       },
       weKnow: [

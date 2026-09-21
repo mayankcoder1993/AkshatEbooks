@@ -19,11 +19,11 @@ export const lesson04 = {
         w: 1376,
         h: 768,
         alt: 'Automated campus library inventory center showing REST API operations, shelf mapping matrix, and request chaining pipeline.',
-        caption: 'The Campus Library Digital Operations Center: Transforming physical circulation into an autonomous automated API pipeline.',
+        caption: 'The Campus Library Operations Center: Moving from manual book checking to fast automated testing.',
         points: [
-          'Circulation Telemetry: Tracking textbook inventory, physical shelf coordinates, and automated borrowing status in real time.',
-          'REST Operations Stream: Dissecting live AddBook POST, GetBook GET, and DeleteBook cleanup calls across campus stacks.',
-          'Autonomous Pipeline: Chaining dynamic identifiers and eliminating manual copy paste bottlenecks before scaling to bulk data.',
+          'Live Book Tracking: Keeping track of textbook copies, shelf locations, and checkout status in real time.',
+          'The Three Core Actions: Adding new books, checking where they sit on the shelf, and deleting old copies safely.',
+          'Smart Automation: Passing book details automatically from one step to the next without copying and pasting by hand.',
         ],
       },
       weKnow: [

@@ -45,7 +45,7 @@
       {
         "id": "understanding-apis",
         "title": "Understanding APIs from First Principles",
-        "subtitle": "The campus interoperability crisis, client server decoupling, the restaurant analogy, and inspecting live payloads across the network wire."
+        "subtitle": "The campus launch crisis, how phone apps and servers talk, the friendly restaurant analogy, and inspecting live web messages."
       },
       {
         "id": "rest-crud-status",
