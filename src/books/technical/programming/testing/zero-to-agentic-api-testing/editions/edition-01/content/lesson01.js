@@ -14,14 +14,15 @@ export const lesson01 = {
     {
       type: 'mission',
       title: 'Mission 1: The Core Protocol and Campus Cloud Integration',
-      text: 'Welcome to the Apex Campus Enterprise Cloud Platform. As our Lead API Test Automation Architect, you are stepping directly into an urgent engineering crisis: our university is launching a flagship digital campus across web, mobile, and external academic partners. The frontend engineering team built a mobile application in TypeScript and React Native. The backend infrastructure team built the core academic catalog and registrar in Java with Spring Boot, storing records in an enterprise PostgreSQL database. On launch day preview, the mobile application crashed repeatedly because data contracts were mismatched and unverified. Infosec strictly forbids sharing database passwords with frontend devices or external partners. Across our opening three chapters, your mission is to investigate the invisible network wire: mastering what APIs are, decoding HTTP requests and responses, establishing the single source of truth contract, validating live payloads across the web, and setting up an automated Postman testing workbench for the entire engineering organization.',
+      text: 'Welcome to the Apex Campus Enterprise Cloud Platform. As our Lead API Test Automation Architect, you are stepping directly into an urgent engineering crisis: our university is launching a flagship digital campus across web, mobile, and external academic partners. The frontend engineering team built a student mobile application in TypeScript and React Native. The backend infrastructure team built the core academic catalog and transit services in Java Spring Boot and Python, storing records in an enterprise PostgreSQL database. On launch day preview, the mobile application crashed repeatedly because data contracts were mismatched and unverified over the wire. Infosec strictly forbids sharing database passwords with frontend devices or external partners. Across our opening three chapters, your mission is to investigate the invisible network wire: mastering what APIs are, decoding HTTP requests and responses, establishing the single source of truth contract, examining backend code blueprints, validating live payloads across the web, and setting up an automated Postman testing workbench for the entire engineering organization.',
       weKnow: [
         'Web pages and mobile applications never store entire university databases inside client device memory.',
-        'Whenever an application displays student grades, courses, or library books, it dispatches background network requests across the wire.',
+        'Whenever an application displays student grades, courses, or campus transit locations, it dispatches background network requests across the wire.',
         'Without inspecting the API layer directly, quality engineering teams cannot distinguish between user interface glitches and serious backend server crashes.',
       ],
       weNeed: [
         'An intuitive mental model explaining how decoupled clients and servers communicate without sharing internal code or database credentials.',
+        'An inspection of how backend engineers construct APIs using modern route decorators and automatic JSON serializers.',
         'Hands on experience inspecting live, authentic API payloads directly in your browser without requiring local server setup or complex tooling.',
         'A clear architectural foundation of why API testing is the highest leverage tier in the modern testing pyramid.',
       ],
@@ -72,7 +73,11 @@ export const lesson01 = {
     },
     {
       type: 'paragraph',
-      text: 'Instead, Marriott exposes a secure public API endpoint. Travel aggregators send an authorized HTTP request specifying dates and room criteria. The hotel API verifies the request credentials, retrieves real time inventory from internal databases, and returns a clean, structured JSON response. In the exact same way, our Apex Campus platform exposes secure API endpoints like `/v1/catalog` and `/v1/students/{id}/status`, allowing legitimate partners to verify records instantly without ever accessing internal infrastructure.',
+      text: 'Instead, Marriott exposes a secure public API endpoint. Travel aggregators send an authorized HTTP request specifying dates and room criteria. The hotel API verifies the request credentials, retrieves real time inventory from internal databases, and returns a clean, structured JSON response.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Similarly, when our campus mobile app verifies student transit discounts or detects whether a student is currently within campus boundaries, we do not build a global mapping satellite network from scratch. Instead, our application integrates with commercial grade geolocation services such as the **BigDataCloud Free Reverse Geocoding API**. The mobile device passes geographical latitude and longitude coordinates over HTTP, and the remote edge service instantly resolves the administrative locality, city, and postal code in clean JSON format.',
     },
     {
       type: 'heading',
@@ -122,7 +127,53 @@ export const lesson01 = {
     },
     {
       type: 'heading',
-      text: 'Step 4: Inspecting Live API Payloads Across the Global Web',
+      text: 'Step 4: The Developer Blueprint: How Backends Build APIs',
+    },
+    {
+      type: 'paragraph',
+      text: 'To test an API with confidence, it helps to demystify what happens on the server side. Fresh testers often view backend APIs as mysterious black boxes. In reality, building an API endpoint requires only a few lines of code.',
+    },
+    {
+      type: 'paragraph',
+      text: 'Here is an authentic backend blueprint showing how our engineering team builds a campus location resolver service using Python and FastAPI. You do not need to execute or write backend code; studying this blueprint reveals exactly how servers receive requests and return responses:',
+    },
+    {
+      type: 'code',
+      filename: 'campus-location-service.py',
+      lines: [
+        'from fastapi import FastAPI',
+        '',
+        'app = FastAPI(title="Apex Campus Geolocation Service")',
+        '',
+        '# Define an HTTP GET route for resolving student campus boundaries',
+        '@app.get("/v1/location/resolve")',
+        'def resolve_campus_location(latitude: float, longitude: float):',
+        '    # The server inspects the query parameters and evaluates campus zones',
+        '    is_on_main_campus = (37.40 <= latitude <= 37.45) and (-122.10 <= longitude <= -122.05)',
+        '    ',
+        '    return {',
+        '        "status": "success",',
+        '        "campus": "North Innovation Campus",',
+        '        "coordinates": {"latitude": latitude, "longitude": longitude},',
+        '        "city": "Mountain View",',
+        '        "verified_on_campus": is_on_main_campus',
+        '    }',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      title: 'Three Server Side Secrets Every API Tester Should Know',
+      paragraphs: [
+        '1. The Route Decorator: Notice `@app.get("/v1/location/resolve")`. This instructs the web server to listen specifically for HTTP GET requests matching that exact URL path.',
+        '2. Automatic Query Parameter Mapping: The function arguments `latitude` and `longitude` are automatically populated from the incoming URL query string (such as `?latitude=37.42&longitude=-122.08`).',
+        '3. Automatic JSON Serialization: When the function returns a native dictionary, the framework automatically converts it into structured JSON text and sets the HTTP status code to 200 OK.',
+        'As Lead Test Automation Architects, we do not need to maintain their backend code. Our mission is to test the contract from the outside, verifying that valid inputs return expected data and invalid inputs are caught safely before reaching users.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 5: Inspecting Live API Payloads Across the Global Web',
     },
     {
       type: 'paragraph',
@@ -135,9 +186,9 @@ export const lesson01 = {
     {
       type: 'steps',
       items: [
-        '1. Apex Campus Academic Catalog Contract: Open [Campus Academic Catalog JSON](https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/lesson-01/campus-catalog.json). Notice how the response delivers all four campus courses (Computer Systems, Data Structures, Agentic API Automation, Digital Logic) as clean, structured JSON key value pairs.',
-        '2. Global Developer Profile API: Open [GitHub Octocat Profile](https://api.github.com/users/octocat). The remote GitHub server answers with a structured JSON object detailing login username, public repository counts, and account creation timestamps.',
-        '3. Global Meteorological Service API: Open [Open Meteo Weather API](https://api.open-meteo.com/v1/forecast?latitude=37.7749&longitude=-122.4194&current_weather=true). The server returns real time weather telemetry including temperature, wind speed, and weather codes in structured JSON format.',
+        '1. BigDataCloud Reverse Geocoding API: Open [BigDataCloud Geocoding Endpoint](https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=37.42159&longitude=-122.0837&localityLanguage=en). Notice how the public service accepts geographical coordinates and returns immediate locality data: continent, country, subdivision, city, and postal code in clean JSON format.',
+        '2. Apex Campus Academic Catalog Contract: Open [Campus Academic Catalog JSON](https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/lesson-01/campus-catalog.json). Notice how the response delivers all four campus courses (Computer Systems, Data Structures, Agentic API Automation, Digital Logic) as clean, structured JSON key value pairs.',
+        '3. Global Developer Profile API: Open [GitHub Octocat Profile](https://api.github.com/users/octocat). The remote GitHub server answers with a structured JSON object detailing login username, public repository counts, and account creation timestamps.',
       ],
     },
     {
@@ -176,7 +227,7 @@ export const lesson01 = {
     },
     {
       type: 'heading',
-      text: 'Step 5: Why UI Automation Fails: The Testing Pyramid',
+      text: 'Step 6: Why UI Automation Fails: The Testing Pyramid',
     },
     {
       type: 'paragraph',
@@ -203,7 +254,7 @@ export const lesson01 = {
     },
     {
       type: 'heading',
-      text: 'Step 6: The Four Major Enterprise API Architectural Styles',
+      text: 'Step 7: The Four Major Enterprise API Architectural Styles',
     },
     {
       type: 'paragraph',
@@ -227,7 +278,7 @@ export const lesson01 = {
     },
     {
       type: 'heading',
-      text: 'Step 7: Mission 1 Execution Plan: The Road to Automated Quality',
+      text: 'Step 8: Mission 1 Execution Plan: The Road to Automated Quality',
     },
     {
       type: 'paragraph',
@@ -236,14 +287,14 @@ export const lesson01 = {
     {
       type: 'steps',
       items: [
-        'Chapter 1 (Complete): You established why APIs exist, demystified client server decoupling, inspected live JSON payloads in your browser, and positioned API testing at the core of our quality strategy.',
+        'Chapter 1 (Complete): You established why APIs exist, demystified client server decoupling, examined the FastAPI backend blueprint, inspected live JSON payloads in your browser, and positioned API testing at the core of our quality strategy.',
         'Chapter 2 (Next Step): We decode the HTTP wire itself. You will master the five HTTP methods (GET, POST, PUT, PATCH, DELETE), inspect headers, query parameters, request bodies, and understand all five HTTP status code families from 200 success to 500 server crashes.',
         'Chapter 3 (Mission Milestone): We install Postman, configure personal and team collaboration workspaces, practice forking and pull requests, and execute our very first collaborative automated test collection to declare Mission 1 fully accomplished.',
       ],
     },
     {
       type: 'heading',
-      text: 'Step 8: Review and Practice',
+      text: 'Step 9: Review and Practice',
     },
     {
       type: 'guess',
@@ -265,12 +316,16 @@ export const lesson01 = {
           'An API acts as a software messenger and formal contract that enables independent applications to exchange data securely without knowing each other internal code or database implementation.',
         ],
         [
+          'In the Python FastAPI blueprint, what is the role of the route decorator @app.get?',
+          'The route decorator instructs the web framework to bind a specific HTTP method and URL path to a Python function, automatically mapping incoming network requests to executable code.',
+        ],
+        [
           'Why is API testing considered higher leverage than UI testing in continuous integration pipelines?',
           'API tests execute in milliseconds, remain stable against visual user interface redesigns, and validate the actual business logic and data payloads directly over the network wire.',
         ],
         [
-          'How do external partners like scholarship agencies verify student data without accessing internal campus databases?',
-          'Partners send authenticated HTTP requests to secure API endpoints. The campus API validates the request, retrieves the necessary data, and returns structured JSON without exposing internal databases.',
+          'How do external services like BigDataCloud return locality details to client mobile applications?',
+          'Clients transmit latitude and longitude coordinates over standard HTTP GET requests. The remote service evaluates the coordinates and returns structured JSON containing continent, country, state, city, and postal code.',
         ],
       ],
     },
@@ -279,14 +334,14 @@ export const lesson01 = {
       items: [
         'An API is a software contract that enables decoupled systems to communicate securely across networks.',
         'In the restaurant analogy, the customer represents the client, the waiter represents the API messenger, and the kitchen represents backend microservices and databases.',
-        'APIs provide complete language independence: frontends in TypeScript and backends in Java communicate seamlessly using standardized JSON over HTTP.',
+        'Backends build APIs by binding route decorators to functions that return structured dictionaries automatically serialized as JSON.',
         'In the testing pyramid, API testing provides the sweet spot of high execution speed, total test reliability, and deep business validation.',
       ],
     },
     {
       type: 'cliffhanger',
       title: 'Advancing Mission 1: The Language of the Wire',
-      text: 'You now understand why APIs are indispensable and have inspected raw JSON payloads. But how do clients ask servers to create, update, or remove records? In Chapter 2, we advance Mission 1 by decoding the language of the wire: mastering GET, POST, PUT, and DELETE methods alongside status codes from 200 success to 500 server crashes!',
+      text: 'You now understand why APIs are indispensable, how backends construct them, and have inspected raw JSON payloads. But how do clients ask servers to create, update, or remove records? In Chapter 2, we advance Mission 1 by decoding the language of the wire: mastering GET, POST, PUT, and DELETE methods alongside status codes from 200 success to 500 server crashes!',
     },
   ],
 }
