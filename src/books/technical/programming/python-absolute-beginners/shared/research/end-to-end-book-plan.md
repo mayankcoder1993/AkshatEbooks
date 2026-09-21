@@ -131,13 +131,13 @@ Goal: get the reader to a working saved Python file without turning setup into a
 
 The reader can reopen the project, run the file and find the output.
 
-## 6. Learning Arc 1: Create an Interactive Terminal Game
+## 6. Learning Arc 1: Create an Interactive Terminal Assistant
 
 Arc type: build quest
 
-Arc goal: build a terminal game that greets a player, stores game data, applies rules, repeats turns and validates input.
+Arc goal: build a deterministic local study assistant that greets a user, recognizes simple commands, stores notes or tasks, repeats until asked to stop and validates input. It does not claim to use AI yet. Later books will replace its response adapter with an LLM and agent workflow.
 
-Arc opening appears once before Chapter 1. It shows a short final-game preview and five capability gaps. Chapters 2 through 5 use a compact progress strip instead of another mission card.
+Arc opening appears once before Chapter 1. It shows a short final-assistant preview and five capability gaps. Chapters 2 through 5 use a compact progress strip instead of another mission card.
 
 ## 7. Chapter 1: Make Python Run
 
@@ -177,7 +177,7 @@ Start with an empty saved file and make the computer display an exact response.
 
 ### Arc build step
 
-Display the game title and first instruction.
+Display the assistant title and first instruction.
 
 ### Evidence
 
@@ -201,7 +201,7 @@ Dominant experience: score laboratory
 
 ### Promise
 
-Represent the game state, calculate a score and shape the text the player sees.
+Represent assistant state, calculate useful values and shape the text the user sees.
 
 ### Part A: names and types
 
@@ -259,7 +259,7 @@ Represent the game state, calculate a score and shape the text the player sees.
 
 ### Arc build step
 
-Create the player name, score, messages and formatted score display.
+Create the user name, practice score, messages and formatted status display.
 
 ### Evidence
 
@@ -279,7 +279,7 @@ Dominant experience: packing and lookup challenge
 
 ### Promise
 
-Choose the right collection for each part of the game.
+Choose the right collection for notes, commands, tags and assistant settings.
 
 ### Lists
 
@@ -329,17 +329,17 @@ Choose the right collection for each part of the game.
 
 ### Engagement
 
-- Pack inventory into a list.
-- Store a fixed board coordinate in a tuple.
-- Match player names to scores in a dictionary.
-- Remove repeated collected items with a set.
+- Pack command history into a list.
+- Store a fixed result pair in a tuple.
+- Match note titles to note text in a dictionary.
+- Remove repeated tags with a set.
 - Choose a collection for a problem.
 - Repair `saved = items.sort()`.
 - Trace a mutation before and after.
 
 ### Arc build step
 
-Store inventory, player data, unique items and an optional saved score.
+Store command history, user data, notes, unique tags and an optional saved session.
 
 ### Evidence
 
@@ -353,7 +353,7 @@ Dominant experience: decision maze and loop simulation
 
 ### Promise
 
-Make the game choose a route and repeat turns.
+Make the assistant choose a command route and continue the conversation.
 
 ### Comparisons
 
@@ -381,7 +381,7 @@ Make the game choose a route and repeat turns.
 - `range()`
 - `while` based on a condition
 - Loop variables and changing state
-- `break` and `continue` through real game needs
+- `break` and `continue` through real command-loop needs
 - Infinite-loop diagnosis
 - `enumerate()` where numbered items improve clarity
 - List comprehensions only after the equivalent loop is understood
@@ -412,7 +412,7 @@ Dominant experience: assembly workshop
 
 ### Promise
 
-Turn the separate game pieces into a reusable playable program.
+Turn the separate assistant pieces into one reusable local program.
 
 ### Input and conversion
 
@@ -448,20 +448,22 @@ Turn the separate game pieces into a reusable playable program.
 - Trace local variables.
 - Validate one response.
 - Assemble shuffled program parts.
-- Run the full game.
-- Create one independent variation.
+- Run the full assistant.
+- Create one independent command or response variation.
 
 ### Arc completion
 
-The finished game must:
+The finished assistant must:
 
-- Greet the player.
-- Track score.
+- Greet the user.
+- Recognize at least three deterministic commands.
+- Store notes or tasks.
 - Use at least two collection types for real reasons.
 - Make decisions.
-- Repeat at least one action.
+- Continue until the user chooses to exit.
 - Use functions.
 - Validate at least one input.
+- Save and load useful local data.
 - End cleanly.
 
 ### Assessment
@@ -846,7 +848,7 @@ Completion gate:
 
 Completion gate:
 
-- Interactive terminal game meets the arc checklist.
+- Interactive terminal assistant meets the arc checklist.
 - Chapter checkpoints are compact and validated.
 
 ## Phase 4: author Chapters 6 through 8

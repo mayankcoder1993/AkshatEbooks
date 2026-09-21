@@ -24,9 +24,9 @@ Use current official Python documentation as the main technical authority. Use G
 
 ## Structure
 
-The approved redesign uses eight substantial chapters across two multi-chapter learning arcs. Arc 1 builds an interactive terminal game through first execution, values, collections, control flow, functions and input. Arc 2 rescues and strengthens an application through OOP, modules, packages, exception handling and tests. Only an arc-opening chapter receives a full goal card. Middle chapters use compact progress strips and varied experiences such as laboratories, decision mazes, assembly workshops, design studios and reliability trials.
+The approved redesign uses eight substantial chapters across two multi-chapter learning arcs. Arc 1 builds a deterministic local study assistant through first execution, values, collections, control flow, functions and input. Arc 2 rescues and strengthens that application through OOP, modules, packages, exception handling and tests. Only an arc-opening chapter receives a full goal card. Middle chapters use compact progress strips and varied experiences such as laboratories, decision mazes, assembly workshops, design studios and reliability trials.
 
-The master scope, migration, authoring phases and publication gates are defined in `shared/research/end-to-end-book-plan.md`. The current five published lessons are source material for consolidation into the first two redesigned chapters.
+The assistant is the first stage of a continuing project. Later books can add an LLM adapter, LangChain, LangGraph, FastAPI, an optional desktop GUI, a Django portal and deployment without discarding the Python core. The master Book 1 scope is defined in `shared/research/end-to-end-book-plan.md`. The cross-book architecture is defined in `/docs/shared-agent-series-plan.md`. The current five published lessons are source material for consolidation into the first two redesigned chapters.
 
 ## Publication
 
