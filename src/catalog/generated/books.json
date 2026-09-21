@@ -1,0 +1,119 @@
+[
+  {
+    "id": "python-absolute-beginners",
+    "domain": "technical",
+    "subdomain": "programming",
+    "profile": "TECHNICAL",
+    "title": "Python for Absolute Beginners",
+    "subtitle": "Learn Programming the Visual Way",
+    "series": "The First Code Series · Book 1",
+    "author": "Akshat Sinha",
+    "status": "In progress",
+    "statusTone": "progress",
+    "progress": 80,
+    "readable": true,
+    "currentEdition": "edition-01",
+    "editionLabel": "First Edition",
+    "contentVersion": "1.0.0",
+    "verifiedThrough": "2026-09-21",
+    "releaseCount": 0,
+    "latestRelease": null,
+    "downloads": {
+      "docx": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
+      "offlineHtml": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-Interactive.html"
+    },
+    "editions": [
+      {
+        "id": "edition-01",
+        "label": "First Edition",
+        "contentVersion": "1.0.0",
+        "status": "drafting",
+        "verifiedThrough": "2026-09-21",
+        "readable": true,
+        "chapterCount": 8,
+        "releaseCount": 0,
+        "downloads": {
+          "docx": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
+          "offlineHtml": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-Interactive.html"
+        }
+      }
+    ],
+    "route": "/books/python-absolute-beginners",
+    "nextMilestone": "Add the input() lesson and integrate the owner-supplied family crest.",
+    "completedLessons": 8,
+    "lessons": [
+      {
+        "id": "make-python-run",
+        "title": "Make Python Run",
+        "subtitle": "Start with a saved file, display an exact response and follow the route from source code to screen."
+      },
+      {
+        "id": "work-with-values",
+        "title": "Work with Values",
+        "subtitle": "Represent assistant state, calculate useful values and shape the text a learner sees."
+      },
+      {
+        "id": "organize-data",
+        "title": "Organize Data",
+        "subtitle": "Choose a collection for commands, fixed records, note lookups and unique tags."
+      },
+      {
+        "id": "control-the-program",
+        "title": "Control the Program",
+        "subtitle": "Make the assistant choose a command route and continue until the learner exits."
+      },
+      {
+        "id": "functions-and-input",
+        "title": "Build with Functions and Input",
+        "subtitle": "Turn the separate assistant pieces into one reusable local program."
+      },
+      {
+        "id": "model-with-objects",
+        "title": "Model Behavior with Objects",
+        "subtitle": "Group related data and actions so the assistant becomes easier to understand and extend."
+      },
+      {
+        "id": "split-and-share-code",
+        "title": "Split and Share Code",
+        "subtitle": "Split one crowded file into understandable modules and run it in an isolated environment."
+      },
+      {
+        "id": "handle-and-prove",
+        "title": "Handle Problems and Prove Behavior",
+        "subtitle": "Handle expected failures and prove that important assistant behavior still works."
+      }
+    ],
+    "formats": [
+      {
+        "label": "Interactive Web View",
+        "state": "Ready"
+      },
+      {
+        "label": "Book / PDF View",
+        "state": "Ready"
+      },
+      {
+        "label": "Editable Word",
+        "state": "Ready"
+      },
+      {
+        "label": "Offline HTML",
+        "state": "Ready"
+      }
+    ],
+    "branding": [
+      {
+        "label": "Publisher identity",
+        "state": "Ready"
+      },
+      {
+        "label": "Family crest",
+        "state": "Waiting for exact SVG"
+      },
+      {
+        "label": "Imprint logo",
+        "state": "Exact PNG preserved; circular opening mark integrated"
+      }
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" role="img" aria-labelledby="title desc">
+  <title id="title">What can Python help build?</title>
+  <desc id="desc">Python and additional libraries can support automation, web backends, data work, science and artificial intelligence.</desc>
+  <defs><filter id="shadow"><feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#172b4d" flood-opacity=".13"/></filter></defs>
+  <rect width="1200" height="440" fill="#fbf8f0"/>
+  <text x="600" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-size="48" font-weight="700" fill="#172b4d">What can Python help build?</text>
+  <text x="600" y="101" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#506174">The language grows through its standard library and additional packages.</text>
+
+  <g filter="url(#shadow)">
+    <rect x="28" y="142" width="215" height="205" rx="22" fill="white" stroke="#d8d1c3" stroke-width="2"/>
+    <rect x="260" y="142" width="215" height="205" rx="22" fill="white" stroke="#d8d1c3" stroke-width="2"/>
+    <rect x="492" y="142" width="215" height="205" rx="22" fill="white" stroke="#d8d1c3" stroke-width="2"/>
+    <rect x="724" y="142" width="215" height="205" rx="22" fill="white" stroke="#d8d1c3" stroke-width="2"/>
+    <rect x="956" y="142" width="215" height="205" rx="22" fill="white" stroke="#d8d1c3" stroke-width="2"/>
+  </g>
+
+  <!-- Automation -->
+  <circle cx="136" cy="217" r="39" fill="none" stroke="#c58b22" stroke-width="12"/><circle cx="136" cy="217" r="12" fill="#c58b22"/>
+  <path d="M136 163v22M136 249v22M82 217h22M168 217h22M98 179l16 16M158 239l16 16M174 179l-16 16M114 239l-16 16" stroke="#c58b22" stroke-width="8" stroke-linecap="round"/>
+  <text x="136" y="305" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#172b4d">Automation</text>
+
+  <!-- Web -->
+  <circle cx="368" cy="217" r="48" fill="none" stroke="#197b83" stroke-width="7"/><path d="M320 217h96M368 169c-24 25-24 71 0 96M368 169c24 25 24 71 0 96M327 193h82M327 241h82" fill="none" stroke="#197b83" stroke-width="5"/>
+  <text x="368" y="296" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#172b4d"><tspan x="368">Web</tspan><tspan x="368" dy="34">backends</tspan></text>
+
+  <!-- Data -->
+  <rect x="540" y="226" width="25" height="47" fill="#197b83"/><rect x="579" y="199" width="25" height="74" fill="#c58b22"/><rect x="618" y="166" width="25" height="107" fill="#172b4d"/>
+  <path d="M527 274h132" stroke="#506174" stroke-width="5"/>
+  <text x="600" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#172b4d">Data</text>
+
+  <!-- Science -->
+  <path d="M815 169v54l-47 72c-9 14 1 24 18 24h92c17 0 27-10 18-24l-47-72v-54M802 169h60M791 273h82" fill="none" stroke="#197b83" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="816" cy="293" r="7" fill="#c58b22"/><circle cx="847" cy="288" r="6" fill="#b83a3a"/>
+  <text x="832" y="339" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#172b4d">Science</text>
+
+  <!-- AI -->
+  <circle cx="1007" cy="183" r="12" fill="#b83a3a"/><circle cx="1114" cy="183" r="12" fill="#197b83"/><circle cx="1060" cy="222" r="12" fill="#c58b22"/><circle cx="1007" cy="261" r="12" fill="#172b4d"/><circle cx="1114" cy="261" r="12" fill="#c58b22"/>
+  <path d="M1019 187l83-1M1017 191l32 23M1071 214l33-23M1071 230l33 23M1019 257l83 1M1016 251l34-22" stroke="#506174" stroke-width="6"/>
+  <text x="1064" y="320" text-anchor="middle" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#172b4d">AI</text>
+
+  <rect x="0" y="383" width="1200" height="57" fill="#172b4d"/>
+  <text x="600" y="420" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="white">Learn the language first. Add specialized tools when a project needs them.</text>
+</svg>

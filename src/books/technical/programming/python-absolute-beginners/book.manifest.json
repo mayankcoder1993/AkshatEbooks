@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../schemas/book-manifest.schema.json",
+  "schemaVersion": 1,
+  "id": "python-absolute-beginners",
+  "domain": "technical",
+  "subdomain": "programming",
+  "profile": "TECHNICAL",
+  "title": "Python for Absolute Beginners",
+  "subtitle": "Learn Programming the Visual Way",
+  "series": "The First Code Series · Book 1",
+  "author": "Akshat Sinha",
+  "status": "in-progress",
+  "statusLabel": "In progress",
+  "progress": 80,
+  "readable": true,
+  "currentEdition": "edition-01",
+  "route": "/books/python-absolute-beginners",
+  "nextMilestone": "Add the input() lesson and integrate the owner-supplied family crest.",
+  "instructionFiles": [
+    "AGENTS.md",
+    "docs/agents/CORE_EDITORIAL.md",
+    "docs/agents/AI_AUTHORING_WORKFLOW.md",
+    "docs/agents/profiles/TECHNICAL.md",
+    "src/books/technical/programming/python-absolute-beginners/AGENTS.md",
+    "src/books/technical/programming/python-absolute-beginners/BOOK_BRIEF.md"
+  ],
+  "formats": [
+    {
+      "id": "web",
+      "label": "Interactive Web View",
+      "state": "ready"
+    },
+    {
+      "id": "book",
+      "label": "Book / PDF View",
+      "state": "ready"
+    },
+    {
+      "id": "docx",
+      "label": "Editable Word",
+      "state": "ready"
+    },
+    {
+      "id": "offline-html",
+      "label": "Offline HTML",
+      "state": "ready"
+    }
+  ],
+  "branding": [
+    {
+      "id": "publisher",
+      "label": "Publisher identity",
+      "state": "ready",
+      "stateLabel": "Ready"
+    },
+    {
+      "id": "crest",
+      "label": "Family crest",
+      "state": "blocked",
+      "stateLabel": "Waiting for exact SVG"
+    },
+    {
+      "id": "imprint-logo",
+      "label": "Imprint logo",
+      "state": "ready",
+      "stateLabel": "Exact PNG preserved; circular opening mark integrated"
+    }
+  ]
+}

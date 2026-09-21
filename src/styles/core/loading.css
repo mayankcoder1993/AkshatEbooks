@@ -1,0 +1,22 @@
+.load-state {
+  min-height: 70vh;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8rem 1.25rem 3rem;
+  text-align: center;
+}
+
+.load-state h1 { margin: .8rem 0 .2rem; }
+.load-state p { color: var(--muted); }
+.loading-mark {
+  width: 2rem;
+  height: 2rem;
+  margin: 0 auto;
+  display: block;
+  border: 3px solid var(--line);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: loading-spin .8s linear infinite;
+}
+@keyframes loading-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .loading-mark { animation: none; } }

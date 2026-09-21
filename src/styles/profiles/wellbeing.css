@@ -1,0 +1,4 @@
+.reflection-card { border-left-color:#7b6aa8; background:linear-gradient(135deg,var(--panel),color-mix(in srgb,#ede9fe 35%,var(--panel))); }
+.safety-notice { padding:.9rem 1rem; border:1px solid #e6b9b9; border-left:4px solid #b94b4b; border-radius:10px; color:var(--text); background:#fff5f5; }
+.safety-notice a { display:block; margin-top:.3rem; }
+[data-theme='dark'] .safety-notice { background:#2b1b20; }

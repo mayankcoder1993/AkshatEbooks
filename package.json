@@ -1,22 +1,43 @@
 {
-  "name": "akshat-ebooks-notes",
+  "name": "sarva-gyana-koshah-publishing",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "Akshat EBooks — interactive, animated course notes that can be exported to PDF and Word.",
+  "description": "A scalable single-source multi-book publishing system.",
   "scripts": {
-    "dev": "vite",
+    "catalog": "node scripts/generate-catalog.mjs",
+    "styles": "node scripts/generate-styles.mjs",
+    "validate:books": "node --import ./scripts/register-jpg.mjs scripts/validate-books.mjs",
+    "test": "npm run prepare:books && node --import ./scripts/register-jpg.mjs scripts/test-system.mjs && npm run test:book-examples",
+    "test:book-examples": "python3 -m unittest discover -s src/books/technical/programming/python-absolute-beginners/editions/edition-01/examples/study_assistant/tests -v",
+    "prepare:books": "npm run styles && npm run catalog && npm run validate:books",
+    "create:book": "node scripts/create-book.mjs",
+    "create:edition": "node scripts/create-edition.mjs",
+    "predev": "npm run prepare:books && npm run generate:docx && npm run build:single",
+    "dev": "vite --host 0.0.0.0",
+    "prebuild": "npm run prepare:books",
     "build": "vite build",
-    "preview": "vite preview"
+    "build:all": "node scripts/build-all.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "pregenerate:docx": "npm run prepare:books",
+    "generate:docx": "node --import ./scripts/register-jpg.mjs scripts/generate-docx.mjs",
+    "prebuild:single": "npm run prepare:books",
+    "build:single": "vite build --config vite.singlefile.config.mjs && node --import ./scripts/register-jpg.mjs scripts/copy-single.mjs",
+    "release:book": "node scripts/release-book.mjs",
+    "generate:crest": "node scripts/generate-crest-variants.mjs",
+    "generate:imprint-mark": "node scripts/generate-imprint-mark.mjs"
   },
   "dependencies": {
-    "framer-motion": "^11.11.17",
-    "html-docx-js-typescript": "^0.1.5",
+    "docx": "^9.5.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.3.5"
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "vite": "^6.3.5",
+    "vite-plugin-singlefile": "^2.3.0"
   }
 }

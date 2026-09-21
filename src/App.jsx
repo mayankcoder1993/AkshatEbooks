@@ -1,133 +1,98 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
 import Header from './components/Header.jsx'
+import LibraryHome from './components/LibraryHome.jsx'
 import LessonShell from './components/LessonShell.jsx'
 import PrintBook from './components/PrintBook.jsx'
-import lessons from './lessons'
-import { exportBookToWord } from './export/word.jsx'
+import Blocks from './components/Blocks.jsx'
+import { DEFAULT_BOOK_ID, loadBookPackage } from './catalog/generated/registry.js'
+
+const BUILD_BOOK_ID = import.meta.env.VITE_BOOK_ID || DEFAULT_BOOK_ID
+const BUILD_EDITION_ID = import.meta.env.VITE_EDITION_ID || null
+const routeBookLocation = () => {
+  const match = window.location.pathname.match(/^\/books\/([^/]+)(?:\/editions\/([^/]+))?/)
+  return match ? { bookId: match[1], editionId: match[2] || null } : null
+}
+const initialLocation = () => {
+  const preview = new URLSearchParams(window.location.search).get('view') === 'book'
+  if (window.location.protocol === 'file:') return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false }
+  const location = routeBookLocation()
+  return location ? { view: 'book', ...location, preview } : { view: 'library', bookId: null, editionId: null, preview: false }
+}
 
 export default function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('aeb-theme') || 'dark')
+  const initial = initialLocation()
+  const [theme, setTheme] = useState(() => { try { return localStorage.getItem('sgk-theme') || 'light' } catch { return 'light' } })
+  const [view, setView] = useState(initial.view)
+  const [bookId, setBookId] = useState(initial.bookId)
+  const [editionId, setEditionId] = useState(initial.editionId)
+  const [publication, setPublication] = useState(null)
+  const [loadError, setLoadError] = useState(null)
   const [active, setActive] = useState(0)
-  const [preview, setPreview] = useState(false)
+  const [preview, setPreview] = useState(initial.preview)
   const [exporting, setExporting] = useState(false)
 
+  useEffect(() => { document.documentElement.dataset.theme = theme; try { localStorage.setItem('sgk-theme', theme) } catch { /* optional preference storage may be blocked */ } }, [theme])
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
-    localStorage.setItem('aeb-theme', theme)
-  }, [theme])
-
-  useEffect(() => {
-    window.scrollTo({ top: 0 })
-  }, [active])
-
-  const lesson = lessons[active]
-
-  const onSavePdf = () => {
-    setPreview(true)
-    // Give the preview a moment to paint, then open the browser's
-    // print dialog — the user picks "Save as PDF" there.
-    setTimeout(() => window.print(), 900)
-  }
-
-  const onSaveWord = async () => {
-    setExporting(true)
-    try {
-      await exportBookToWord(lessons)
-    } catch (err) {
-      console.error(err)
-      alert('Sorry, the Word export failed: ' + err.message)
-    } finally {
-      setExporting(false)
+    const onPopState = () => {
+      const location = initialLocation()
+      setPreview(location.preview)
+      setView(location.view)
+      setBookId(location.bookId)
+      setEditionId(location.editionId)
     }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
+  useEffect(() => {
+    if (view !== 'book' || !bookId) return
+    let current = true
+    setPublication(null)
+    setLoadError(null)
+    setActive(0)
+    loadBookPackage(bookId, editionId || undefined)
+      .then(book => { if (current) setPublication(book) })
+      .catch(error => { if (current) setLoadError(error) })
+    return () => { current = false }
+  }, [view, bookId, editionId])
+  useEffect(() => { window.scrollTo({ top: 0 }) }, [active, view, bookId, editionId])
+
+  const navigate = (nextView, path, nextBookId = null, nextEditionId = null, nextPreview = false) => {
+    if (window.location.protocol !== 'file:') window.history.pushState({}, '', path)
+    setPreview(nextPreview)
+    if (nextView === 'book') setPublication(null)
+    setView(nextView)
+    setBookId(nextBookId)
+    setEditionId(nextEditionId)
   }
+  const openBook = (book, requestedEdition = null, options = {}) => {
+    const basePath = requestedEdition ? `${book.route}/editions/${requestedEdition}` : book.route
+    const path = options.preview ? `${basePath}?view=book` : basePath
+    navigate('book', path, book.id, requestedEdition, Boolean(options.preview))
+  }
+  const openLibrary = () => navigate('library', '/')
+  const toggleTheme = () => setTheme(value => value === 'light' ? 'dark' : 'light')
 
-  return (
-    <>
-      {/* ---------- Interactive screen UI (hidden when printing) ---------- */}
-      <div className="screen-only">
-        <Header
-          theme={theme}
-          onToggleTheme={() => setTheme(t => (t === 'dark' ? 'light' : 'dark'))}
-          lessons={lessons}
-          active={active}
-          onSelect={setActive}
-          onSavePdf={onSavePdf}
-          onSaveWord={onSaveWord}
-          exporting={exporting}
-        />
-        <main className="page">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={lesson.id}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.35, ease: 'easeOut' }}
-            >
-              <LessonShell lesson={lesson} index={active} total={lessons.length}>
-                <lesson.Body staticMode={false} />
-              </LessonShell>
-            </motion.div>
-          </AnimatePresence>
+  if (view === 'library') return <LibraryHome theme={theme} onToggleTheme={toggleTheme} onOpenBook={openBook}/>
+  if (loadError) return <main className="load-state"><h1>Book unavailable</h1><p>{loadError.message}</p><button className="btn" onClick={openLibrary}>Back to library</button></main>
+  if (!publication) return <main className="load-state"><span className="loading-mark" aria-hidden="true"/><h1>Opening book…</h1><p>Loading this edition’s structured content and teaching assets.</p></main>
 
-          <div className="lesson-nav no-print">
-            <button
-              className="btn"
-              disabled={active === 0}
-              onClick={() => setActive(a => Math.max(0, a - 1))}
-            >
-              ← Previous lesson
-            </button>
-            <span className="lesson-nav-pos">
-              Lesson {active + 1} of {lessons.length}
-            </span>
-            <button
-              className="btn primary"
-              disabled={active === lessons.length - 1}
-              onClick={() => setActive(a => Math.min(lessons.length - 1, a + 1))}
-            >
-              Next lesson →
-            </button>
-          </div>
+  const { lessons, BOOK, BRAND, QUICK_START } = publication
+  const lesson = active === -1 ? { id: 'quick-start', title: QUICK_START.title, subtitle: QUICK_START.subtitle, blocks: QUICK_START.blocks } : lessons[active]
+  const savePdf = () => { setPreview(true); setTimeout(() => window.print(), 700) }
+  const saveWord = async () => { setExporting(true); try { const { exportBookToWord } = await import('./export/docx.js'); await exportBookToWord(publication) } catch (error) { console.error(error); alert(`Word export failed: ${error.message}`) } finally { setExporting(false) } }
 
-          <footer className="site-footer no-print">
-            <p>
-              📚 <strong>Akshat EBooks</strong> — notes that you can <em>see</em>. Tip: press{' '}
-              <kbd>Ctrl</kbd>+<kbd>P</kbd> any time for a clean, light-mode, content-only print.
-            </p>
-          </footer>
-        </main>
+  if (preview) return <div className="book-view-screen force-light">
+    <div className="preview-toolbar no-print"><span>📖 Book View · every interactive answer is expanded for reading and print.</span><div className="preview-actions"><button className="btn" onClick={openLibrary}>⌂ Library</button><button className="btn primary" onClick={() => window.print()}>🖨 Save as PDF</button><button className="btn" onClick={() => setPreview(false)}>✕ Back to Web View</button></div></div>
+    <div className="preview-paper"><PrintBook publication={publication}/></div>
+  </div>
 
-        {exporting && (
-          <div className="toast" role="status">
-            ⏳ Preparing your Word document… converting diagrams to images
-          </div>
-        )}
-      </div>
-
-      {/* ---------- Book version: used by Ctrl+P / browser printing ---------- */}
-      <div className="print-only">
-        <PrintBook lessons={lessons} />
-      </div>
-
-      {/* ---------- Full-book print preview (Save as PDF flow) ---------- */}
-      {preview && (
-        <div className="preview-overlay force-light">
-          <div className="preview-toolbar no-print">
-            <span>
-              🖨 Print preview — in the dialog choose <strong>“Save as PDF”</strong>. Every lesson
-              starts on a new page.
-            </span>
-            <button className="btn" onClick={() => setPreview(false)}>
-              ✕ Close preview
-            </button>
-          </div>
-          <div className="preview-paper">
-            <PrintBook lessons={lessons} />
-          </div>
-        </div>
-      )}
-    </>
-  )
+  return <>
+    <div className="screen-only"><Header brand={BRAND} theme={theme} onToggleTheme={toggleTheme} onHome={openLibrary} lessons={lessons} active={active} onSelect={setActive} quickStart={QUICK_START} onQuickStart={() => setActive(-1)} onBookPreview={() => setPreview(true)} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
+      <main className="page"><div key={lesson.id}><LessonShell lesson={lesson} index={active} total={lessons.length}><Blocks blocks={lesson.blocks}/></LessonShell></div>
+      <nav className="lesson-nav"><button className="btn" disabled={active <= -1} onClick={() => setActive(value => value - 1)}>← Previous</button><span>{active === -1 ? 'Quick Start' : `${BOOK.unitLabel} ${active + 1} of ${lessons.length}`}</span><button className="btn primary" disabled={active === lessons.length - 1} onClick={() => setActive(value => value + 1)}>Next →</button></nav>
+      <footer className="site-footer"><strong>{BRAND.imprint}</strong> · {BRAND.tagline}</footer></main>
+      {exporting && <div className="toast">Preparing the editable Word book…</div>}
+    </div>
+    <div className="print-only"><PrintBook publication={publication}/></div>
+  </>
 }

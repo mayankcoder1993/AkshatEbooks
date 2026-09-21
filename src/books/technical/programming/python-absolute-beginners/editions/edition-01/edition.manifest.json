@@ -1,0 +1,28 @@
+{
+  "$schema": "../../../../../../schemas/edition-manifest.schema.json",
+  "schemaVersion": 1,
+  "bookId": "python-absolute-beginners",
+  "id": "edition-01",
+  "label": "First Edition",
+  "contentVersion": "1.0.0",
+  "publicationYear": 2026,
+  "status": "drafting",
+  "technology": "Python 3",
+  "verifiedThrough": "2026-09-21",
+  "contentModule": "editions/edition-01/content/index.js",
+  "outputDir": "public/books/python-absolute-beginners/edition-01",
+  "outputs": {
+    "docx": "Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
+    "offlineHtml": "Python-for-Absolute-Beginners-Interactive.html"
+  },
+  "chapters": [
+    { "id": "make-python-run", "title": "Make Python Run", "subtitle": "Start with a saved file, display an exact response and follow the route from source code to screen." },
+    { "id": "work-with-values", "title": "Work with Values", "subtitle": "Represent assistant state, calculate useful values and shape the text a learner sees." },
+    { "id": "organize-data", "title": "Organize Data", "subtitle": "Choose a collection for commands, fixed records, note lookups and unique tags." },
+    { "id": "control-the-program", "title": "Control the Program", "subtitle": "Make the assistant choose a command route and continue until the learner exits." },
+    { "id": "functions-and-input", "title": "Build with Functions and Input", "subtitle": "Turn the separate assistant pieces into one reusable local program." },
+    { "id": "model-with-objects", "title": "Model Behavior with Objects", "subtitle": "Group related data and actions so the assistant becomes easier to understand and extend." },
+    { "id": "split-and-share-code", "title": "Split and Share Code", "subtitle": "Split one crowded file into understandable modules and run it in an isolated environment." },
+    { "id": "handle-and-prove", "title": "Handle Problems and Prove Behavior", "subtitle": "Handle expected failures and prove that important assistant behavior still works." }
+  ]
+}

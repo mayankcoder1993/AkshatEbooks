@@ -1,2 +1,7 @@
 node_modules
 dist
+single-build
+
+# Python bytecode
+__pycache__/
+*.py[cod]
