@@ -14,8 +14,8 @@
     "readable": true,
     "currentEdition": "edition-01",
     "editionLabel": "First Edition",
-    "contentVersion": "0.9.0",
-    "verifiedThrough": "2026-09-20",
+    "contentVersion": "1.0.0",
+    "verifiedThrough": "2026-09-21",
     "releaseCount": 0,
     "latestRelease": null,
     "downloads": {
@@ -26,11 +26,11 @@
       {
         "id": "edition-01",
         "label": "First Edition",
-        "contentVersion": "0.9.0",
+        "contentVersion": "1.0.0",
         "status": "drafting",
-        "verifiedThrough": "2026-09-20",
+        "verifiedThrough": "2026-09-21",
         "readable": true,
-        "chapterCount": 5,
+        "chapterCount": 8,
         "releaseCount": 0,
         "downloads": {
           "docx": "/books/python-absolute-beginners/edition-01/Python-for-Absolute-Beginners-The-First-Code-Series-Book-1.docx",
@@ -40,32 +40,47 @@
     ],
     "route": "/books/python-absolute-beginners",
     "nextMilestone": "Add the input() lesson and integrate the owner-supplied family crest.",
-    "completedLessons": 5,
+    "completedLessons": 8,
     "lessons": [
       {
-        "id": "hello-world",
-        "title": "Your First Program: Hello, World!",
-        "subtitle": "We begin with an empty file and end with a real result, understanding every character we typed."
+        "id": "make-python-run",
+        "title": "Make Python Run",
+        "subtitle": "Start with a saved file, display an exact response and follow the route from source code to screen."
       },
       {
-        "id": "code-to-machine",
-        "title": "How Does Our Code Reach the Computer?",
-        "subtitle": "Follow one tiny message from our file to the screen. No hidden knowledge required."
+        "id": "work-with-values",
+        "title": "Work with Values",
+        "subtitle": "Represent assistant state, calculate useful values and shape the text a learner sees."
       },
       {
-        "id": "variables",
-        "title": "Variables: Names for Values",
-        "subtitle": "Store a value, change it and inspect memory one line at a time."
+        "id": "organize-data",
+        "title": "Organize Data",
+        "subtitle": "Choose a collection for commands, fixed records, note lookups and unique tags."
       },
       {
-        "id": "data-types",
-        "title": "Data Types: What Kind of Value?",
-        "subtitle": "Meet strings, integers, floats and booleans, and see why type changes what Python can do."
+        "id": "control-the-program",
+        "title": "Control the Program",
+        "subtitle": "Make the assistant choose a command route and continue until the learner exits."
       },
       {
-        "id": "numbers",
-        "title": "Numbers: Build a 100-Point Score",
-        "subtitle": "Use Python’s number operators, predict each step and land exactly on 100."
+        "id": "functions-and-input",
+        "title": "Build with Functions and Input",
+        "subtitle": "Turn the separate assistant pieces into one reusable local program."
+      },
+      {
+        "id": "model-with-objects",
+        "title": "Model Behavior with Objects",
+        "subtitle": "Group related data and actions so the assistant becomes easier to understand and extend."
+      },
+      {
+        "id": "split-and-share-code",
+        "title": "Split and Share Code",
+        "subtitle": "Split one crowded file into understandable modules and run it in an isolated environment."
+      },
+      {
+        "id": "handle-and-prove",
+        "title": "Handle Problems and Prove Behavior",
+        "subtitle": "Handle expected failures and prove that important assistant behavior still works."
       }
     ],
     "formats": [

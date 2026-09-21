@@ -516,29 +516,19 @@ p {
   font-size: 0.9rem;
 }
 
-.quiz {
-  display: grid;
-  gap: 0.6rem;
-}
-
-.quiz-item {
-  border: 1px solid var(--border);
-  background: var(--panel);
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
-  box-shadow: var(--shadow);
-}
-
-.quiz-item summary {
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-.quiz-item p {
-  color: var(--muted);
-  margin: 0.4rem 0 0.1rem;
-}
+.quiz-section { margin:2rem 0 1.25rem; border:1px solid var(--border); border-radius:14px; background:var(--panel); overflow:hidden; break-inside:avoid; }
+.quiz-heading { display:flex; align-items:baseline; gap:.75rem; padding:.7rem .9rem; border-bottom:1px solid var(--border); background:var(--panel-soft); }
+.quiz-heading span { color:var(--accent); font-size:.68rem; font-weight:800; letter-spacing:.12em; }
+.quiz-heading h2 { margin:0; font-size:1.05rem; }
+.quiz { margin:0; padding:0; list-style:none; counter-reset:checkpoint; }
+.quiz-item { counter-increment:checkpoint; border-bottom:1px solid var(--border); background:var(--panel); }
+.quiz-item:last-child { border-bottom:0; }
+.quiz-item details { padding:.62rem .85rem; }
+.quiz-item summary { display:flex; gap:.65rem; cursor:pointer; font-weight:650; color:var(--text); list-style:none; }
+.quiz-item summary::-webkit-details-marker { display:none; }
+.quiz-item summary::before { content:counter(checkpoint); flex:0 0 1.45rem; width:1.45rem; height:1.45rem; display:grid; place-items:center; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:.75rem; font-weight:800; }
+.quiz-item p { color:var(--muted); margin:.5rem 0 .05rem 2.1rem; padding:.5rem .65rem; background:var(--panel-soft); border-radius:8px; }
+@media(max-width:600px){.quiz-heading{display:block}.quiz-heading span{display:block;margin-bottom:.2rem}}
 
 .takeaways {
   background: linear-gradient(135deg, var(--accent-soft), var(--panel));
@@ -887,6 +877,25 @@ kbd {
 .lesson-figure { margin:0 0 1.4rem; border:1px solid var(--border); border-radius:18px; overflow:hidden; background:var(--panel); box-shadow:var(--shadow); }
 .lesson-figure img { display:block; width:100%; height:auto; object-fit:contain; }
 .lesson-figure figcaption { padding:.75rem 1rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
+.arc-start { margin:1rem 0 1.4rem; padding:1.25rem 1.35rem; border-radius:16px; color:#fff; background:linear-gradient(135deg,#233963,#315f72); box-shadow:var(--shadow); }
+.arc-start-top,.arc-progress>div:first-child { display:flex; justify-content:space-between; align-items:center; gap:1rem; }
+.arc-start .eyebrow,.arc-progress span { font-size:.7rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+.arc-count { padding:.2rem .55rem; border:1px solid rgba(255,255,255,.35); border-radius:999px; font-size:.72rem; }
+.arc-start h2 { margin:.25rem 0; font-size:clamp(1.55rem,3vw,2rem); }
+.arc-start h3 { margin:.2rem 0 .45rem; font-size:1.05rem; color:#dff6ef; }
+.arc-start-grid { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; margin-top:.8rem; }
+.arc-start-grid>div { padding:.65rem .75rem; border-radius:10px; background:rgba(255,255,255,.1); }
+.arc-start-grid ul { margin:.3rem 0 0; padding-left:1.15rem; }
+.arc-meter { display:grid; grid-template-columns:repeat(auto-fit,minmax(1.5rem,1fr)); gap:.28rem; margin-top:.75rem; }
+.arc-meter span { height:.3rem; border-radius:999px; background:var(--border); }
+.arc-start .arc-meter span { background:rgba(255,255,255,.25); }
+.arc-meter span.complete { background:var(--accent-2); }
+.arc-progress { margin:.7rem 0 1rem; padding:.65rem .85rem; border:1px solid var(--border); border-left:4px solid var(--accent-2); border-radius:10px; background:var(--panel); }
+.arc-progress strong { font-size:.78rem; color:var(--muted); }
+.arc-progress .arc-meter { margin:.42rem 0 0; }
+.arc-progress p { margin:.45rem 0 0; font-size:.88rem; color:var(--muted); line-height:1.45; }
+@media(max-width:600px){.arc-start-grid{grid-template-columns:1fr}.arc-start-top{align-items:flex-start}.arc-count{white-space:nowrap}}
+
 .mission { background:linear-gradient(135deg,#233963,#3f5d9d); color:white; border-radius:18px; padding:1.35rem 1.5rem; margin:1rem 0 1.6rem; box-shadow:var(--shadow); }
 .mission.mystery { background:linear-gradient(135deg,#30304f,#65548d); }
 .mission.simulation { background:linear-gradient(135deg,#164d56,#217883); }

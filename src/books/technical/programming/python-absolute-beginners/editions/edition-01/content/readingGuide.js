@@ -1,16 +1,14 @@
 export const HOW_TO_READ = {
   title: 'How to read this book',
   blocks: [
-    { type: 'paragraph', text: 'Each lesson gives us one clear **mission**. We begin with a result we want, such as making the computer display a message or remember a score. Then we learn only the ideas and tools needed to complete that mission.' },
-    { type: 'steps', title: 'How each mission works', items: [
-      '**Meet the mission.** See what we already know and what we still need to discover.',
-      '**Pause and predict.** Think about the next result before the explanation appears.',
-      '**Learn one idea.** Read a short explanation and connect it to a visual example.',
-      '**Build the solution.** Write the code in small, understandable steps.',
-      '**Run and observe.** Follow what Python does and compare the output with your prediction.',
-      '**Test the mission.** Change the code, find mistakes and answer a few questions.',
-      '**Carry the discovery forward.** Use what we learned as the starting point for the next mission.',
+    { type: 'paragraph', text: 'You will build one useful assistant, one clear step at a time. You will not abandon one tiny project and start another in every chapter. Several chapters work together toward one larger goal.' },
+    { type: 'heading', text: 'Follow the learning arc' },
+    { type: 'steps', showHeading: false, items: [
+      '**See the shared goal.** A full opening card appears only when a new learning arc begins. It shows what you are building, what you already know and what the next chapters will add.',
+      '**Learn one tool.** Each chapter teaches a focused Python idea. Short examples and visuals show what the computer does before you use that idea in the continuing project.',
+      '**Move the project forward.** A compact strip marks your place in the arc. The chapter may use a build, trace, bug hunt, comparison or test rather than repeating the same mission.',
+      '**Prove what works.** Run the code, inspect the evidence and complete the compact checkpoint. At the end of the arc, combine the chapter tools into a larger working result.'
     ] },
-    { type: 'callout', variant: 'note', title: 'The goal is understanding', paragraphs: ['Do not rush to copy every answer. Stop at each prediction, make your own guess and then check it.', 'A wrong guess is useful. It shows us exactly which idea to examine before moving forward.'] },
-  ],
+    { type: 'callout', variant: 'note', title: 'Your first journey through the book', paragraphs: ['Read the chapters in order. Every new chapter begins on a fresh page in Book View and print.', 'If code behaves differently from the page, trust the program output. Compare it with the example and investigate the difference. That investigation is part of programming.'] }
+  ]
 }

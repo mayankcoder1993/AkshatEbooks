@@ -76,8 +76,8 @@ export default function App() {
   if (loadError) return <main className="load-state"><h1>Book unavailable</h1><p>{loadError.message}</p><button className="btn" onClick={openLibrary}>Back to library</button></main>
   if (!publication) return <main className="load-state"><span className="loading-mark" aria-hidden="true"/><h1>Opening book…</h1><p>Loading this edition’s structured content and teaching assets.</p></main>
 
-  const { lessons, BOOK, BRAND } = publication
-  const lesson = lessons[active]
+  const { lessons, BOOK, BRAND, QUICK_START } = publication
+  const lesson = active === -1 ? { id: 'quick-start', title: QUICK_START.title, subtitle: QUICK_START.subtitle, blocks: QUICK_START.blocks } : lessons[active]
   const savePdf = () => { setPreview(true); setTimeout(() => window.print(), 700) }
   const saveWord = async () => { setExporting(true); try { const { exportBookToWord } = await import('./export/docx.js'); await exportBookToWord(publication) } catch (error) { console.error(error); alert(`Word export failed: ${error.message}`) } finally { setExporting(false) } }
 
@@ -87,9 +87,9 @@ export default function App() {
   </div>
 
   return <>
-    <div className="screen-only"><Header brand={BRAND} theme={theme} onToggleTheme={toggleTheme} onHome={openLibrary} lessons={lessons} active={active} onSelect={setActive} onBookPreview={() => setPreview(true)} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
+    <div className="screen-only"><Header brand={BRAND} theme={theme} onToggleTheme={toggleTheme} onHome={openLibrary} lessons={lessons} active={active} onSelect={setActive} quickStart={QUICK_START} onQuickStart={() => setActive(-1)} onBookPreview={() => setPreview(true)} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
       <main className="page"><div key={lesson.id}><LessonShell lesson={lesson} index={active} total={lessons.length}><Blocks blocks={lesson.blocks}/></LessonShell></div>
-      <nav className="lesson-nav"><button className="btn" disabled={!active} onClick={() => setActive(value => value - 1)}>← Previous</button><span>{BOOK.unitLabel} {active + 1} of {lessons.length}</span><button className="btn primary" disabled={active === lessons.length - 1} onClick={() => setActive(value => value + 1)}>Next →</button></nav>
+      <nav className="lesson-nav"><button className="btn" disabled={active <= -1} onClick={() => setActive(value => value - 1)}>← Previous</button><span>{active === -1 ? 'Quick Start' : `${BOOK.unitLabel} ${active + 1} of ${lessons.length}`}</span><button className="btn primary" disabled={active === lessons.length - 1} onClick={() => setActive(value => value + 1)}>Next →</button></nav>
       <footer className="site-footer"><strong>{BRAND.imprint}</strong> · {BRAND.tagline}</footer></main>
       {exporting && <div className="toast">Preparing the editable Word book…</div>}
     </div>

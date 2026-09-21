@@ -58,7 +58,9 @@ The current title’s custom rules live in `src/books/technical/programming/pyth
 
 Core: `heading`, `paragraph`, `image`, `definition`, `worked-example`, `case-study`, `timeline`, `comparison`, `source-note`, `callout`, `steps`, `quiz`, `takeaways`, `resources`, `cliffhanger`.
 
-Technical: `mission`, `think`, `guess`, `bug`, `flow`, `blueprint`, `code`, `runviz`, `terminal`, `pipeline`, `mistakes`, `aha`.
+Technical: `arc-start`, `arc-progress`, `mission` (legacy compatibility only), `think`, `guess`, `bug`, `flow`, `blueprint`, `code`, `runviz`, `terminal`, `pipeline`, `mistakes`, `aha`.
+
+Use `arc-start` once when a multi-chapter learning goal begins. Use `arc-progress` as the compact first block in the remaining chapters of that arc. A checkpoint uses one compact `quiz` block with no more than four question-answer pairs.
 
 Profile-aware: `question` (verified PYQ or practice), `activity`, `reflection`, `safety-notice`.
 
@@ -81,7 +83,7 @@ This checklist implements the active book's `TECHNICAL` profile. Other book type
 
 1. Value-check the source.
 2. Add the lesson inside the active edition's `content/` directory as pure data.
-3. Use this journey: mission → professional image → think → core idea → blueprint/code → run visualizer, bytecode map, or pipeline → expected output → aha → try it → mistakes/guess/bug → quiz → takeaways → resources → cliffhanger. The mission must be the first teaching block in every chapter.
+3. Begin with `arc-start` only when a multi-chapter goal begins. Otherwise begin with `arc-progress`. Give each chapter a visible promise and vary its dominant experience, such as a launch, laboratory, packing challenge, maze, assembly, design studio, codebase map or reliability trial. Use prediction, representation, worked evidence, reduced-support practice, an independent change or repair, one compact checkpoint, takeaways, sources and a transition in the order that best fits the content. Do not force every chapter into one mission template.
 4. Register the lesson in the edition content index and mirror its identity/title/subtitle in that edition's `edition.manifest.json`; validation must pass.
 5. If code appears, include a `runviz` or `pipeline`.
 6. Import each image for browser inlining. Also add `file`, `w`, `h`, `alt`, a short `caption`, and optional `points` for separate numbered explanations in Web, PDF and Word.
@@ -133,8 +135,8 @@ When another AI agent supplies notes or instructions, follow the intake process 
 
 ## Professional book structure
 
-Front matter: cover → copyright/disclaimer → clickable contents → Preface → how to use. Each lesson includes a hook, learning goal, core concept, code, expected output, practice, mistakes, takeaways, links and a transition. End with about the author.
+Front matter: cover, copyright/disclaimer, clickable contents, one-page Preface, how to read, and an unnumbered Quick Start when setup is required. Each chapter includes a visible goal, core concept, appropriate evidence, practice, a compact checkpoint, takeaways, links and a transition. End with suitable reference matter and about the author.
 
-Keep callouts, code, tables and figures from splitting when possible. Every lesson begins on a new printed page. PDF and Word use a light palette.
+Keep callouts, code, tables and figures from splitting when possible. Every chapter begins on a new printed page. PDF and Word use a light palette.
 
 When product rules or architecture change, update this file in the same commit.

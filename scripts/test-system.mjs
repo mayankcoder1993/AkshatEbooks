@@ -11,7 +11,7 @@ if (evaluateArithmeticExpression('-2 ** 2') !== -4 || evaluateArithmeticExpressi
 try { evaluateArithmeticExpression('alert(100)'); throw new Error('Arithmetic exercise accepted non-arithmetic code') } catch (error) { if (error.message === 'Arithmetic exercise accepted non-arithmetic code') throw error }
 
 const publication = await loadBookPackage('python-absolute-beginners', 'edition-01')
-if (publication.BOOK.editionId !== 'edition-01' || publication.lessons.length !== 5) throw new Error('Edition registry did not load the expected current book')
+if (publication.BOOK.editionId !== 'edition-01' || publication.lessons.length !== 8) throw new Error('Edition registry did not load the expected current book')
 if (publication.HOW_TO_READ?.title !== 'How to read this book') throw new Error('Edition registry did not load the reading guide')
 
 const synthetic = {
