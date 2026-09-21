@@ -1,0 +1,234 @@
+import lifecycleImg from '../assets/postman-assertion-lifecycle.jpg'
+
+export const lesson05 = {
+  id: 'javascript-assertions',
+  icon: '',
+  title: 'Writing JavaScript Assertions and the pm Object',
+  shortTitle: 'JavaScript Assertions',
+  subtitle: 'Automating response validation, JavaScript fundamentals for testers, Chai matchers, and JSON schema verification.',
+  tags: ['JavaScript', 'Assertions', 'pm Object', 'Chai', 'Schema'],
+  blocks: [
+    {
+      type: 'mission-tracker',
+      badge: 'MISSION 2 PROGRESS · STEP 2 OF 5',
+      title: 'Continuing Mission 2: Replacing the Manual Eyeball Test',
+      text: 'In Chapter 4, we added a book to our campus catalog, but we verified the response by visually inspecting the screen. Humans cannot inspect thousands of JSON responses by eye without missing missing properties or slow response times. Our next step in Mission 2 is replacing eyeball checks with automated JavaScript assertions: mastering the JavaScript fundamentals that power the Postman sandbox, writing code in the Tests tab to validate status codes, response headers, latency budgets, and data schemas in milliseconds.',
+    },
+    {
+      type: 'heading',
+      text: 'Step 1: The Request and Response Execution Lifecycle',
+    },
+    {
+      type: 'paragraph',
+      text: 'Postman separates script execution into two distinct phases that sandwich the network call.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      src: lifecycleImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-assertion-lifecycle.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Postman script execution lifecycle: Pre request script runs before network call, HTTP request and response travel across the wire, Tests script runs assertions after response arrives.',
+      caption: 'The complete three stage execution lifecycle of every Postman request.',
+      points: [
+        'Stage 1 (Pre request Script): Runs before the HTTP request is built. Ideal for calculating timestamps, generating unique numbers, and configuring headers.',
+        'Stage 2 (Network Transmission): The HTTP packet travels across the wire and the server returns status code, headers, and body.',
+        'Stage 3 (Tests Script): Runs immediately after the response arrives. This is where we write assertions to validate data.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 2: JavaScript Fundamentals for API Automation Engineers',
+    },
+    {
+      type: 'paragraph',
+      text: 'Why do API automation engineers need JavaScript? Because Postman contains a full Node.js execution sandbox. Every time you write code in the Pre request Script or Tests tabs, Postman executes your JavaScript directly. Understanding fundamental language mechanics prevents subtle bugs in your test suites.',
+    },
+    {
+      type: 'steps',
+      items: [
+        'Loosely Typed Nature: In languages like Java or C#, you must declare types explicitly like int a = 4. In JavaScript, variables are loosely typed and determine their data type dynamically at runtime.',
+        'The typeof Operator: To inspect any variable type, use typeof. In JavaScript, both integers and floating point decimals share a single data type called number. Other primary types include string, boolean, null, and undefined.',
+        'The Three Variable Keywords: Modern JavaScript provides var, let, and const. Knowing their exact differences is vital for reliable test scripting.',
+      ],
+    },
+    {
+      type: 'comparison',
+      title: 'Comparing JavaScript Variable Keywords: var vs let vs const',
+      columns: ['Keyword', 'Scope Boundary', 'Allows Redeclaration?', 'Allows Reassignment?'],
+      rows: [
+        ['var', 'Function or Global Scope (leaks out of if blocks)', 'Yes (can accidentally overwrite existing variables)', 'Yes'],
+        ['let', 'Block Scope (confined strictly within braces { })', 'No (prevents accidental naming collisions)', 'Yes (ideal for counters and mutable accumulators)'],
+        ['const', 'Block Scope (confined strictly within braces { })', 'No (immutable reference)', 'No (ideal for holding parsed JSON responses and fixed configs)'],
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      title: 'Classic Interview Trap: Negating a Constant in an If Condition',
+      paragraphs: [
+        'Consider a constant boolean flag: `const isAvailable = true;`. What happens if you write `if (!isAvailable) { ... }`?',
+        'Does the exclamation mark negation operator throw an error because the variable was declared with const?',
+        'No! The negation operator inverts the boolean evaluation of the expression for that comparison, but does not alter the stored variable value. The variable remains true in memory while the expression evaluates to false.',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'When structuring test logic, modern JavaScript uses arrow functions for concise syntax:',
+    },
+    {
+      type: 'code',
+      filename: 'javascript-basics-for-testers.js',
+      lines: [
+        '// Modern arrow function vs traditional function declaration',
+        'const addNumbers = (first, second) => first + second;',
+        '',
+        '// Checking data types with typeof',
+        'const bookTitle = "Zero to Agentic API Testing";',
+        'const price = 49.99;',
+        'const isAvailable = true;',
+        '',
+        'console.log(typeof bookTitle); // prints "string"',
+        'console.log(typeof price);     // prints "number"',
+        'console.log(typeof isAvailable); // prints "boolean"',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 3: Anatomy of the pm.test Function',
+    },
+    {
+      type: 'paragraph',
+      text: 'To register an automated test case in Postman, we use the `pm.test` wrapper function with a description string and an assertion callback.',
+    },
+    {
+      type: 'code',
+      filename: 'first-assertion.js',
+      lines: [
+        '// Line 1: Define the test name shown in the Test Results tab',
+        'pm.test("Status code is 200 OK", function () {',
+        '    // Line 2: The actual condition that must be true for the test to pass',
+        '    pm.response.to.have.status(200);',
+        '});',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Micro Chunk Breakdown: Understanding the 3 Lines',
+      paragraphs: [
+        '• Line 1: `pm.test("...", function () {` tells Postman to register a new test card in the Test Results panel with your chosen label.',
+        '• Line 2: `pm.response.to.have.status(200);` is the assertion. If the server returned 200, the test turns GREEN. If the server returned 404 or 500, it turns RED and displays the discrepancy.',
+        '• Line 3: `});` cleanly closes the JavaScript callback function block.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 4: Drilling into Response Bodies and Validating Headers',
+    },
+    {
+      type: 'paragraph',
+      text: 'Use `pm.response.json()` to parse structured objects, and `pm.response.text()` for raw string searches.',
+    },
+    {
+      type: 'code',
+      filename: 'response-assertions.js',
+      lines: [
+        '// Parse the incoming JSON body into a JavaScript object',
+        'const responseData = pm.response.json();',
+        '',
+        '// Test 1: Verify exact property values inside the object',
+        'pm.test("Response contains successfully added message", function () {',
+        '    pm.expect(responseData.msg).to.eql("successfully added");',
+        '});',
+        '',
+        '// Test 2: Check wire headers and latency budgets',
+        'pm.test("Content Type is application/json and latency under 1200ms", function () {',
+        '    pm.response.to.have.header("Content-Type");',
+        '    pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json");',
+        '    pm.expect(pm.response.responseTime).to.be.below(1200);',
+        '});',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      title: 'Fresher Trap to Avoid: Forgetting Parentheses on json()',
+      paragraphs: [
+        'A very common mistake is typing `const data = pm.response.json;` instead of `const data = pm.response.json();`.',
+        'Without parentheses, JavaScript returns a reference to the function definition rather than executing it to parse the payload. When you then try to read `data.msg`, your test script crashes with undefined!',
+        'Always include parentheses: `pm.response.json()` to invoke the JSON parser.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 5: JSON Schema Validation with Ajv',
+    },
+    {
+      type: 'paragraph',
+      text: 'JSON Schema validation checks the entire structural contract: verifying that required fields exist and data types remain stable.',
+    },
+    {
+      type: 'code',
+      filename: 'schema-validation.js',
+      lines: [
+        'const bookSchema = {',
+        '    type: "object",',
+        '    required: ["msg", "ID"],',
+        '    properties: {',
+        '        msg: { type: "string" },',
+        '        ID: { type: "string" }',
+        '    }',
+        '};',
+        '',
+        'pm.test("AddBook response matches strict JSON Schema", function () {',
+        '    pm.response.to.have.jsonSchema(bookSchema);',
+        '});',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 6: Review and Practice',
+    },
+    {
+      type: 'guess',
+      prompt: 'Which Postman object is the unified gateway to access request metadata, response data, and test runner assertions?',
+      options: [
+        'The request object',
+        'The pm object',
+        'The testSuite object',
+        'The chai object',
+      ],
+      answerIndex: 1,
+      explain: 'The pm object is the universal namespace in modern Postman. It consolidates request parameters, response data (pm.response), test creation (pm.test), and assertion logic (pm.expect).',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'What is the primary difference between let and const in Postman test scripts?',
+          'Variables declared with let can be reassigned new values during iteration, whereas const variables cannot be reassigned once initialized.',
+        ],
+        [
+          'Why should performance tests check response latency with to.be.below() rather than exact equality?',
+          'Network latency fluctuates on every call. Asserting that responseTime is below a budget verifies performance consistently without false failures.',
+        ],
+      ],
+    },
+    {
+      type: 'takeaways',
+      items: [
+        'Postman runs an embedded Node.js sandbox that executes your JavaScript code in Pre request and Tests scripts.',
+        'Use const for immutable references like parsed JSON bodies, and let for mutable counters and accumulators.',
+        'Automated assertions replace manual visual inspection, running in milliseconds to catch regressions instantly.',
+        'The pm.test wrapper takes a description string and an executable callback function containing Chai assertions.',
+      ],
+    },
+    {
+      type: 'cliffhanger',
+      title: 'Continuing Mission 2: Eliminating hardcoded URLs and ISBNs',
+      text: 'Our assertions are written, but our URLs and ISBN values are still hardcoded. In Chapter 6, we advance Mission 2: creating dynamic environments and generating random unique ISBNs in Pre request scripts!',
+    },
+  ],
+}

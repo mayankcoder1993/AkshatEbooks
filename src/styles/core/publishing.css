@@ -548,6 +548,15 @@ kbd {
   margin-bottom: 1rem;
 }
 
+.lesson-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin: 0.45rem 0 0.15rem;
+}
+
 .lesson-page-kicker {
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -730,25 +739,230 @@ kbd {
 .force-light .term-line.prompt .ps { color:#08745c; }
 
 .brand-badge { width:2.2rem; height:2.2rem; display:grid; place-items:center; border-radius:10px; background:var(--accent); color:white; font-weight:800; font-size:.8rem; letter-spacing:.06em; }
+.inline-link {
+  color: var(--accent, #6366f1);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+.inline-link:hover {
+  color: var(--accent-hover, #4f46e5);
+}
+
 .lesson-figure { margin:0 0 1.4rem; border:1px solid var(--border); border-radius:18px; overflow:hidden; background:var(--panel); box-shadow:var(--shadow); }
-.lesson-figure img { display:block; width:100%; aspect-ratio:3/2; object-fit:cover; }
-.lesson-figure figcaption { padding:.75rem 1rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
-.mission { background:linear-gradient(135deg,#233963,#3f5d9d); color:white; border-radius:18px; padding:1.35rem 1.5rem; margin:1rem 0 1.6rem; box-shadow:var(--shadow); }
-.mission h2 { margin:.25rem 0; }
-.mission .eyebrow,.journey-card>span,.aha>span,.cliffhanger>span { font-size:.72rem; letter-spacing:.14em; font-weight:800; }
-.mission-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem; }
-.mission-grid>div { background:rgba(255,255,255,.11); padding:.8rem 1rem; border-radius:12px; }
-.mission-grid ul { margin:.35rem 0 0; padding-left:1.2rem; }
-.journey-card { margin:1rem 0; border:1px solid var(--border); border-left:5px solid var(--warn); background:var(--panel); border-radius:14px; padding:1rem 1.15rem; break-inside:avoid; }
-.journey-card h3 { margin:.3rem 0 .7rem; }
-.journey-card.guess { border-left-color:var(--accent); }
-.journey-card.bug { border-left-color:#c65a4a; }
-.reveal-button { border:0; border-radius:8px; padding:.5rem .8rem; color:white; background:var(--accent); font:inherit; font-weight:700; cursor:pointer; }
-.reveal-answer { margin-top:.65rem; padding:.55rem .75rem; background:var(--panel-soft); border-radius:8px; }
-.aha,.cliffhanger { margin:1.4rem 0; border-radius:16px; padding:1.1rem 1.25rem; break-inside:avoid; }
-.aha { background:#e8f7f2; border:1px solid #b8dfd4; color:#164f46; }
-.cliffhanger { background:linear-gradient(135deg,var(--accent-soft),var(--panel)); border:1px solid var(--border); }
-.cliffhanger h3 { margin:.2rem 0; }
+.lesson-figure .figure-media { display:flex; align-items:center; justify-content:center; background:#ffffff; }
+.lesson-figure img { display:block; width:100%; height:auto; max-height:480px; object-fit:contain; }
+.lesson-figure figcaption { padding:.9rem 1.15rem; color:var(--muted); font-size:.88rem; border-top:1px solid var(--border); }
+@media (min-width: 768px) {
+  .lesson-figure.side-by-side { display:grid; grid-template-columns: 1.1fr 0.9fr; align-items:stretch; }
+  .lesson-figure.side-by-side .figure-media { border-right:1px solid var(--border); padding:0.75rem; }
+  .lesson-figure.side-by-side img { max-height:360px; object-fit:contain; }
+  .lesson-figure.side-by-side figcaption { border-top:none; display:flex; flex-direction:column; justify-content:center; padding:1.25rem 1.4rem; }
+}
+/* ---------------- Mission and Mission Progress Tracker ---------------- */
+.mission {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  color: white;
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0 1.2rem;
+  box-shadow: var(--shadow);
+}
+.mission h2 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1.25rem;
+}
+.mission p {
+  margin: 0 0 0.6rem;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.mission .eyebrow,
+.mission-tracker .eyebrow,
+.journey-card > span,
+.aha > span,
+.cliffhanger > span {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.6rem;
+}
+.mission-grid > div {
+  background: rgba(255, 255, 255, 0.09);
+  padding: 0.6rem 0.85rem;
+  border-radius: 10px;
+}
+.mission-grid strong {
+  font-size: 0.85rem;
+  color: #93c5fd;
+}
+.mission-grid ul {
+  margin: 0.25rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.mission-tracker {
+  background: linear-gradient(135deg, #f0fdf4, #e0f2fe);
+  border: 1px solid #bbf7d0;
+  color: #166534;
+  border-radius: 12px;
+  padding: 0.75rem 1.1rem;
+  margin: 0.65rem 0 1.1rem;
+  box-shadow: var(--shadow);
+}
+.mission-tracker h2 {
+  font-size: 1.1rem;
+  color: #0f172a;
+  margin: 0.15rem 0 0.35rem;
+}
+.mission-tracker p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.45;
+}
+.mission-accomplished {
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+  border: 2px solid #10b981;
+  color: #065f46;
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  box-shadow: var(--shadow);
+}
+.mission-accomplished h3 {
+  color: #047857;
+  margin: 0.2rem 0 0.4rem;
+  font-size: 1.2rem;
+}
+.mission-accomplished p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ---------------- Compact Journey Cards & Interactive Q&A ---------------- */
+.journey-card {
+  margin: 0.65rem 0;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--warn);
+  background: var(--panel);
+  border-radius: 10px;
+  padding: 0.65rem 0.9rem;
+  break-inside: avoid;
+}
+.journey-card h3 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+.journey-card.guess {
+  border-left-color: var(--accent);
+}
+.journey-card.guess ol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.2rem 0.6rem;
+  margin: 0.3rem 0;
+  padding-left: 1.15rem;
+  font-size: 0.88rem;
+}
+@media (max-width: 640px) {
+  .journey-card.guess ol {
+    grid-template-columns: 1fr;
+  }
+}
+.journey-card.bug {
+  border-left-color: #c65a4a;
+}
+.reveal-button {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.35rem 0.7rem;
+  color: white;
+  background: var(--accent);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.reveal-button:hover {
+  opacity: 0.9;
+}
+.reveal-answer {
+  margin-top: 0.45rem;
+  padding: 0.45rem 0.65rem;
+  background: var(--panel-soft);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+/* ---------------- Efficient Quiz Grid ---------------- */
+.quiz {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+}
+@media (min-width: 760px) {
+  .quiz {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.quiz-item {
+  border: 1px solid var(--border);
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.quiz-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--accent);
+}
+.quiz-item p {
+  color: var(--muted);
+  margin: 0.35rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.aha,
+.cliffhanger {
+  margin: 0.9rem 0;
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  break-inside: avoid;
+}
+.aha {
+  background: #e8f7f2;
+  border: 1px solid #b8dfd4;
+  color: #164f46;
+}
+.cliffhanger {
+  background: linear-gradient(135deg, var(--accent-soft), var(--panel));
+  border: 1px solid var(--border);
+}
+.cliffhanger h3 {
+  margin: 0.15rem 0 0.3rem;
+  font-size: 1.05rem;
+}
+.cliffhanger p {
+  margin: 0;
+  font-size: 0.9rem;
+}
 .resources { display:grid; gap:.55rem; }
 .resources a { color:var(--accent); background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:.7rem .9rem; font-weight:700; text-decoration:none; }
 .resources small { display:block; color:var(--muted); font-weight:400; word-break:break-all; }
@@ -1093,5 +1307,286 @@ kbd {
     box-shadow: none;
     border: 1px solid #cbd5e0;
   }
+  .copy-btn {
+    display: none !important;
+  }
 }
+
+/* Interactive Copy Buttons on Code and Terminal Blocks */
+.copy-btn {
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  color: #9aa3b5;
+  font-size: 0.72rem;
+  font-family: inherit;
+  font-weight: 600;
+  padding: 0.22rem 0.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.18s ease;
+  user-select: none;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.copy-btn.copied {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #10b981;
+}
+
+[data-theme='light'] .copy-btn,
+.force-light .copy-btn {
+  background: #e2e7ef;
+  border-color: #cbd5e1;
+  color: #4b5563;
+}
+
+[data-theme='light'] .copy-btn:hover,
+.force-light .copy-btn:hover {
+  background: #d1d9e6;
+  color: #111827;
+}
+
+[data-theme='light'] .copy-btn.copied,
+.force-light .copy-btn.copied {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #15803d;
+}
+
+/* ---------------- Enhanced Callouts for Tips and Traps ---------------- */
+.callout.tip {
+  border-left-color: #f59e0b;
+  background: linear-gradient(135deg, var(--panel), color-mix(in srgb, #fef3c7 40%, var(--panel)));
+}
+.callout.tip code {
+  background: #fef3c7;
+  color: #b45309;
+}
+.callout.note {
+  border-left-color: #0284c7;
+  background: linear-gradient(135deg, var(--panel), color-mix(in srgb, #e0f2fe 35%, var(--panel)));
+}
+.callout.note code {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+/* ---------------- Figure Layout Enhancements ---------------- */
+.lesson-figure.stacked {
+  display: block;
+}
+.lesson-figure.stacked .figure-media {
+  padding: 1rem;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+}
+.lesson-figure.stacked img {
+  max-height: 520px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.lesson-figure.stacked figcaption {
+  padding: 1.25rem 1.5rem;
+}
+.lesson-figure.side-by-side .figure-points {
+  grid-template-columns: 1fr;
+}
+
+/* ---------------- Interactive Live API Wire Inspector ---------------- */
+.api-inspector {
+  margin: 1.4rem 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+.api-inspector-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.6rem 0.9rem;
+  background: #1e293b;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.api-inspector-title {
+  margin-left: 0.4rem;
+  color: #cbd5e1;
+}
+.api-url-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--panel-soft);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.method-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.method-badge.get { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.method-badge.post { background: #e0f2fe; color: #0369a1; border: 1px solid #7dd3fc; }
+.method-badge.put { background: #fef3c7; color: #b45309; border: 1px solid #fde68a; }
+.method-badge.delete { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+.url-text {
+  flex: 1;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.send-btn {
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  background: var(--accent, #6366f1);
+  color: #ffffff;
+  border: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  white-space: nowrap;
+}
+.send-btn:hover { opacity: 0.9; }
+.send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.api-inspector-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem 0;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+.tab-btn {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active {
+  color: var(--accent, #6366f1);
+  border-bottom-color: var(--accent, #6366f1);
+}
+
+.api-inspector-body {
+  padding: 1rem 1.15rem;
+}
+.response-meta-bar {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+.meta-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.meta-badge.status { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+.meta-badge.time, .meta-badge.size { background: var(--panel-soft); color: var(--muted); border: 1px solid var(--border); }
+.payload-box {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 10px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+.headers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.8rem;
+}
+.header-row {
+  display: flex;
+  gap: 0.5rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+}
+.header-key { color: var(--accent, #6366f1); font-weight: 600; }
+.header-val { color: var(--text); }
+.pane-section h6 {
+  margin: 0 0 0.4rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+.assertions-summary {
+  margin-bottom: 0.6rem;
+}
+.assertions-pass-count {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  background: #dcfce7;
+  color: #15803d;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+.assertions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.assertion-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.assertion-item.pass {
+  background: rgba(16, 185, 129, 0.08);
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+.assertion-check {
+  font-weight: 800;
+  color: #10b981;
+}
+
+
 

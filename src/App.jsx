@@ -16,7 +16,7 @@ const initialLocation = () => {
   const preview = new URLSearchParams(window.location.search).get('view') === 'book'
   if (window.location.protocol === 'file:') return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false }
   const location = routeBookLocation()
-  return location ? { view: 'book', ...location, preview } : { view: 'library', bookId: null, editionId: null, preview: false }
+  return location ? { view: 'book', ...location, preview } : { view: 'book', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview: false }
 }
 
 export default function App() {
@@ -88,8 +88,8 @@ export default function App() {
 
   return <>
     <div className="screen-only"><Header brand={BRAND} theme={theme} onToggleTheme={toggleTheme} onHome={openLibrary} lessons={lessons} active={active} onSelect={setActive} onBookPreview={() => setPreview(true)} onSavePdf={savePdf} onSaveWord={saveWord} exporting={exporting}/>
-      <main className="page"><div key={lesson.id}><LessonShell lesson={lesson} index={active} total={lessons.length}><Blocks blocks={lesson.blocks}/></LessonShell></div>
-      <nav className="lesson-nav"><button className="btn" disabled={!active} onClick={() => setActive(value => value - 1)}>← Previous</button><span>{BOOK.unitLabel} {active + 1} of {lessons.length}</span><button className="btn primary" disabled={active === lessons.length - 1} onClick={() => setActive(value => value + 1)}>Next →</button></nav>
+      <main className="page"><div key={lesson.id}><LessonShell lesson={lesson} index={active} total={lessons.length} unitLabel={BOOK.unitLabel}><Blocks blocks={lesson.blocks}/></LessonShell></div>
+      <nav className="lesson-nav"><button className="btn" disabled={!active} onClick={() => setActive(value => value - 1)}>← Previous</button><span>Chapter {active + 1} of {lessons.length}</span><button className="btn primary" disabled={active === lessons.length - 1} onClick={() => setActive(value => value + 1)}>Next →</button></nav>
       <footer className="site-footer"><strong>{BRAND.imprint}</strong> · {BRAND.tagline}</footer></main>
       {exporting && <div className="toast">Preparing the editable Word book…</div>}
     </div>

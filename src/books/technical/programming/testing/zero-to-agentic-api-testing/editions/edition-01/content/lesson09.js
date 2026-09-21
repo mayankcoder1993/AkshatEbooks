@@ -1,0 +1,169 @@
+import resilienceImg from '../assets/api-resilience-error-handling.jpg'
+
+export const lesson09 = {
+  id: 'error-handling-resilience',
+  icon: '',
+  title: 'Advanced Error Handling and Resilience Testing',
+  shortTitle: 'Error Handling',
+  subtitle: 'Negative testing matrix, safe JSON parsing, preventing secret leaks, and self healing workflow loops.',
+  tags: ['Error Handling', 'Negative Testing', 'Try Catch', 'Resilience', 'Workflow Control'],
+  blocks: [
+    {
+      type: 'mission',
+      title: 'Mission 3: Hardening for Enterprise Production and CI CD',
+      text: 'Our library automation runs smoothly on happy paths. But real world production systems operate in an unpredictable environment: users submit blank forms, network connections drop, authentication tokens expire, and duplicate records collide in the database. If an API returns a generic 500 error instead of a helpful 400 Bad Request, or leaks database passwords in a crash stack trace, the application is fragile and insecure. Across the next five chapters, our mission is to enterprise harden our test suite: validating error status codes, parsing non JSON failure pages safely with try catch blocks, building self healing teardown scripts, creating Postman Mock Servers and validating JSON Schema contracts, securing workflows with OAuth 2.0 token authentication, querying legacy enterprise SOAP WebServices, and integrating our test suite into automated continuous integration pipelines with Newman.',
+      weKnow: [
+        'Bugs overwhelmingly hide in negative scenarios and edge cases rather than happy paths.',
+        'Calling pm.response.json() directly will crash your test script if the server returns an HTML error page.',
+        'APIs must return standard 4xx error codes with structured messages without leaking sensitive backend details.',
+      ],
+      weNeed: [
+        'A comprehensive Negative Testing Matrix covering 400, 401, 403, 404, 409, 429, and 500.',
+        'A defensive try catch pattern that safely inspects responses without crashing the test runner.',
+        'A security assertion ensuring that crash responses never expose passwords, tokens, or SQL stack traces.',
+        'A self healing retry workflow using collection flags and postman.setNextRequest to resolve duplicate collisions.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 1: The Production Negative Testing Matrix',
+    },
+    {
+      type: 'paragraph',
+      text: 'Professional API testers design negative test cases deliberately. Never accept any arbitrary 4xx code; assert the exact numerical status code and error structure expected by the API contract.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      src: resilienceImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-resilience-error-handling.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Negative testing matrix showing 400 Bad Request, 401 Unauthorized, 404 Not Found, 429 Rate Limit, and 500 Server Error cards with try catch workflow.',
+      caption: 'The core error testing matrix and defensive assertion architecture.',
+      points: [
+        'Client Validation Errors (400 or 422): Missing required fields, wrong data types, or out of range values.',
+        'Security Errors (401 and 403): Missing or expired authentication tokens (401), or insufficient user permissions (403).',
+        'State Conflicts (404 and 409): Querying missing resource IDs (404), or duplicate records colliding in the database (409).',
+        'Throughput & Resilience (429 and 500): Rate limit throttling (429), and catching unhandled server exceptions (500).',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 2: Defensive Scripting: Safe Parsing with Try Catch',
+    },
+    {
+      type: 'paragraph',
+      text: 'When servers crash or time out, gateways like Nginx or cloud load balancers return raw HTML error pages rather than JSON. Attempting to parse HTML as JSON throws a fatal SyntaxError unless guarded by a defensive try catch block.',
+    },
+    {
+      type: 'code',
+      filename: 'defensive-safe-parsing.js',
+      lines: [
+        'let parsedBody = null;',
+        '',
+        '// Safely attempt to parse JSON without throwing fatal exceptions',
+        'try {',
+        '    parsedBody = pm.response.json();',
+        '} catch (exception) {',
+        '    console.warn("Server returned non JSON response: " + exception.message);',
+        '    parsedBody = null;',
+        '}',
+        '',
+        '// Step 1: Assert that the response is valid JSON',
+        'pm.test("Response arrives in valid JSON format", function () {',
+        '    pm.expect(parsedBody, "Parsed JSON body").to.not.equal(null);',
+        '});',
+        '',
+        '// Step 2: Security check that stack traces are not leaked',
+        'pm.test("Response does not leak sensitive internal secrets", function () {',
+        '    const rawText = pm.response.text();',
+        '    pm.expect(rawText).to.not.match(/password|database|stack trace|syntax error/i);',
+        '});',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 3: Beware of Soft Errors (Status 200 with Error Content)',
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      title: 'Fresher Trap to Avoid: Believing Status 200 Always Means Success',
+      paragraphs: [
+        'A soft error occurs when a developer configures an endpoint to return HTTP 200 OK, but the JSON payload body says: `{"status": "failed", "message": "Record not found"}`.',
+        'If your automated test only asserts `pm.response.to.have.status(200)`, your test suite will report GREEN PASS even though the business transaction completely failed!',
+        'Always combine status code assertions with body message assertions to protect against deceptive soft errors.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 4: Self Healing Workflows: Handling Duplicate Collisions',
+    },
+    {
+      type: 'paragraph',
+      text: 'What happens if a test run is aborted midway, leaving a book record stuck in the database? On the next run, AddBook will fail with "book already exist". We write an intelligent self healing script using a collection flag and `postman.setNextRequest`.',
+    },
+    {
+      type: 'code',
+      filename: 'self-healing-retry-workflow.js',
+      lines: [
+        'const responseText = pm.response.text();',
+        '',
+        'if (responseText.includes("book already exist")) {',
+        '    console.log("Collision detected! Initiating self healing cleanup...");',
+        '    pm.collectionVariables.set("recovery_flag", "true");',
+        '    postman.setNextRequest("Delete Book");',
+        '} else {',
+        '    pm.collectionVariables.set("recovery_flag", "false");',
+        '    pm.test("Book added successfully", function () {',
+        '        pm.response.to.have.status(200);',
+        '    });',
+        '}',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 5: Review and Practice',
+    },
+    {
+      type: 'guess',
+      prompt: 'Why should you wrap pm.response.json() in a try catch block when testing error scenarios?',
+      options: [
+        'Because try catch makes the network call run faster',
+        'Because server errors (such as 502 or 503) often return HTML pages that cause pm.response.json() to throw a SyntaxError and crash the test suite',
+        'Because Postman requires try catch for all HTTP GET requests',
+        'Because try catch automatically encrypts the response',
+      ],
+      answerIndex: 1,
+      explain: 'When servers crash or time out, gateways like Nginx or cloud load balancers return raw HTML error pages. Attempting to parse HTML as JSON throws a fatal SyntaxError unless guarded by try catch.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'What is a soft error in API testing?',
+          'A soft error happens when an endpoint incorrectly returns a 200 OK status code despite the business action failing. Testers must inspect body properties to catch them.',
+        ],
+        [
+          'Why must API tests assert that response bodies never leak database stack traces?',
+          'Stack traces expose database table names, SQL query syntax, and server file paths to potential attackers, creating serious security vulnerabilities.',
+        ],
+      ],
+    },
+    {
+      type: 'takeaways',
+      items: [
+        'Negative testing validates that APIs fail safely, return correct 4xx codes, and never crash with unhandled 500 exceptions.',
+        'Use defensive try catch blocks around pm.response.json() to handle HTML error pages gracefully.',
+        'Assert both status codes and response body fields to detect deceptive soft errors.',
+        'Use collection state flags and postman.setNextRequest() to build self healing test workflows.',
+      ],
+    },
+    {
+      type: 'cliffhanger',
+      title: 'Continuing Mission 3: Postman Mock Servers and Contracts',
+      text: 'Our test suite is resilient and self healing. In Chapter 10, we advance into Postman Mock Servers and JSON Schema Contracts: validating structural data integrity before servers even exist, simulating dependencies, and unblocking parallel QA workflows in Agile sprints!',
+    },
+  ],
+}

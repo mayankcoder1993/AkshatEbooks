@@ -1,0 +1,2 @@
+GET https://api.campuslibrary.org/v1/books?id=9781227 HTTP/1.1
+Accept: application/json

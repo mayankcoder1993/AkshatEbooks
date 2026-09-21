@@ -1,0 +1,33 @@
+{
+  "department": "Computer Science and Systems",
+  "budget": {
+    "total_allocated": 1500,
+    "currency": "USD"
+  },
+  "books": [
+    {
+      "id": "BK101",
+      "title": "Full Stack API Automation",
+      "author": "Dr. Sarah Chen",
+      "price": 45,
+      "copies": 12,
+      "tags": ["api", "testing", "javascript"]
+    },
+    {
+      "id": "BK102",
+      "title": "Postman Architecture Patterns",
+      "author": "Marcus Vance",
+      "price": 55,
+      "copies": 8,
+      "tags": ["postman", "architecture"]
+    },
+    {
+      "id": "BK103",
+      "title": "Distributed Systems Reliability",
+      "author": "Elena Rostova",
+      "price": 65,
+      "copies": 8,
+      "tags": ["cloud", "reliability"]
+    }
+  ]
+}

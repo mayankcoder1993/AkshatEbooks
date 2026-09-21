@@ -1,0 +1,18 @@
+{
+  "id": "env-campus-qa",
+  "name": "Campus Library QA Environment",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "https://qa-api.campuslibrary.org",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "company_code",
+      "value": "LIB",
+      "type": "default",
+      "enabled": true
+    }
+  ]
+}

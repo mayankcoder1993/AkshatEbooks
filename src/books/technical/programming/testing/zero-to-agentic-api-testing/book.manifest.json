@@ -1,0 +1,69 @@
+{
+  "$schema": "../../../../../schemas/book-manifest.schema.json",
+  "schemaVersion": 1,
+  "id": "zero-to-agentic-api-testing",
+  "domain": "technical",
+  "subdomain": "programming/testing",
+  "profile": "TECHNICAL",
+  "title": "Zero to Agentic API Testing",
+  "subtitle": "The Modern Guide to Testing APIs with Postman, JavaScript and Newman",
+  "series": "Standalone",
+  "author": "Akshat Sinha",
+  "status": "in-progress",
+  "statusLabel": "In progress",
+  "progress": 100,
+  "readable": true,
+  "currentEdition": "edition-01",
+  "route": "/books/zero-to-agentic-api-testing",
+  "nextMilestone": "All 10 core transcript units completed and verified.",
+  "instructionFiles": [
+    "AGENTS.md",
+    "docs/agents/CORE_EDITORIAL.md",
+    "docs/agents/AI_AUTHORING_WORKFLOW.md",
+    "docs/agents/profiles/TECHNICAL.md",
+    "src/books/technical/programming/testing/zero-to-agentic-api-testing/AGENTS.md",
+    "src/books/technical/programming/testing/zero-to-agentic-api-testing/BOOK_BRIEF.md"
+  ],
+  "formats": [
+    {
+      "id": "web",
+      "label": "Interactive Web View",
+      "state": "ready"
+    },
+    {
+      "id": "book",
+      "label": "Book / PDF View",
+      "state": "ready"
+    },
+    {
+      "id": "docx",
+      "label": "Editable Word",
+      "state": "ready"
+    },
+    {
+      "id": "offline-html",
+      "label": "Offline HTML",
+      "state": "ready"
+    }
+  ],
+  "branding": [
+    {
+      "id": "publisher",
+      "label": "Publisher identity",
+      "state": "ready",
+      "stateLabel": "Ready"
+    },
+    {
+      "id": "crest",
+      "label": "Family crest",
+      "state": "blocked",
+      "stateLabel": "Waiting for exact SVG"
+    },
+    {
+      "id": "imprint-logo",
+      "label": "Imprint logo",
+      "state": "ready",
+      "stateLabel": "Shared exact PNG and circular opening mark ready"
+    }
+  ]
+}

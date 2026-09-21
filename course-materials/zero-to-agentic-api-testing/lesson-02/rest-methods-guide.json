@@ -1,0 +1,22 @@
+{
+  "rest_principles": [
+    "Client Server Separation",
+    "Statelessness",
+    "Cacheability",
+    "Uniform Interface"
+  ],
+  "crud_mapping": {
+    "POST": { "database_action": "Create", "safe": false, "idempotent": false },
+    "GET": { "database_action": "Read", "safe": true, "idempotent": true },
+    "PUT": { "database_action": "Update (Full)", "safe": false, "idempotent": true },
+    "PATCH": { "database_action": "Update (Partial)", "safe": false, "idempotent": false },
+    "DELETE": { "database_action": "Delete", "safe": false, "idempotent": true }
+  },
+  "status_code_families": {
+    "1xx": "Informational",
+    "2xx": "Success (200 OK, 201 Created, 204 No Content)",
+    "3xx": "Redirection (301 Moved Permanently, 302 Found)",
+    "4xx": "Client Errors (400 Bad Request, 401 Unauthorized, 404 Not Found, 409 Conflict)",
+    "5xx": "Server Errors (500 Internal Server Error, 502 Bad Gateway, 503 Unavailable)"
+  }
+}

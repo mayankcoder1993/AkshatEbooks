@@ -1,0 +1,287 @@
+{
+  "info": {
+    "_postman_id": "zero-to-agentic-api-collection-2026",
+    "name": "Zero to Agentic API Testing Course Collection",
+    "description": "Complete executable test collection for Zero to Agentic API Testing across 13 chapters and 3 progressive missions.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Mission 1: Global Open Data and Web Wire Audit",
+      "item": [
+        {
+          "name": "01 - UN SDG Goals List",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{sdg_host}}/SDGAPI/v1/sdg/Goal/List?includechildren=false"
+          }
+        },
+        {
+          "name": "01 - GitHub Octocat Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "https://api.github.com/users/octocat"
+          }
+        },
+        {
+          "name": "02 - HTTPBin Status 200 Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{httpbin_host}}/status/200"
+          }
+        },
+        {
+          "name": "03 - JSONPlaceholder Create Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Automating APIs with Postman\",\n  \"body\": \"Step by step guide to sending HTTP requests\",\n  \"userId\": 1\n}"
+            },
+            "url": "{{jsonplaceholder_host}}/posts"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mission 2: Automating Student and Campus Services",
+      "item": [
+        {
+          "name": "04 - AddBook POST",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const companyCode = pm.globals.get('company_code') || 'LIB';",
+                  "const randomDigits = pm.variables.replaceIn('{{$randomInt}}');",
+                  "pm.collectionVariables.set('ISBN', companyCode + randomDigits);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "pm.test('Status code is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test('Response contains successfully added message', function () {",
+                  "    pm.expect(responseData.msg).to.eql('successfully added');",
+                  "});",
+                  "pm.environment.set('book_id', responseData.ID);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Zero to Agentic API Testing\",\n  \"isbn\": \"{{ISBN}}\",\n  \"aisle\": \"227\",\n  \"author\": \"Alex Mercer\"\n}"
+            },
+            "url": "{{base_url}}/v1/books"
+          }
+        },
+        {
+          "name": "04 - GetBook GET",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('GetBook returns 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": "{{base_url}}/v1/books?id={{book_id}}"
+          }
+        },
+        {
+          "name": "07 - Department Audit Nested Parsing",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "pm.test('Validate department and books array', function () {",
+                  "    pm.expect(responseData.books).to.be.an('array');",
+                  "});",
+                  "const targetBook = responseData.books.find(b => b.title === 'Postman Architecture Patterns');",
+                  "if (targetBook) {",
+                  "    pm.test('Target book price and keys exist', function () {",
+                  "        pm.expect(targetBook.price).to.eql(55);",
+                  "        pm.expect(targetBook).to.have.all.keys('id', 'title', 'author', 'price', 'copies', 'tags');",
+                  "    });",
+                  "}",
+                  "const total = responseData.books.reduce((sum, b) => sum + (b.price * b.copies), 0);",
+                  "pm.test('Computed total matches budget', function () {",
+                  "    pm.expect(total).to.eql(responseData.budget.total_allocated);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{base_url}}/v1/departments/audit"
+          }
+        },
+        {
+          "name": "04 - DeleteBook POST",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('DeleteBook returns 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ID\": \"{{book_id}}\"\n}"
+            },
+            "url": "{{base_url}}/v1/books/delete"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mission 3: Enterprise Resilience and CI CD",
+      "item": [
+        {
+          "name": "10 - Postman Mock Server Query Example",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{mock_url}}/v1/books?category=science"
+          }
+        },
+        {
+          "name": "11 - OAuth 2.0 Automated Token Exchange",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "pm.globals.set('access_token', responseData.access_token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                },
+                {
+                  "key": "code",
+                  "value": "{{auth_code}}"
+                },
+                {
+                  "key": "client_id",
+                  "value": "{{client_id}}"
+                },
+                {
+                  "key": "client_secret",
+                  "value": "{{client_secret}}"
+                }
+              ]
+            },
+            "url": "{{auth_host}}/oauth/v2/token"
+          }
+        },
+        {
+          "name": "12 - SOAP NumberToWords Service",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const rawXmlResponse = pm.response.text();",
+                  "const jsonEquivalent = xml2Json(rawXmlResponse);",
+                  "pm.test('SOAP status is 200 OK', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "text/xml; charset=utf-8"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <NumberToWords xmlns=\"http://www.dataaccess.com/webservicesserver/\">\n      <ubiNum>500</ubiNum>\n    </NumberToWords>\n  </soap:Body>\n</soap:Envelope>"
+            },
+            "url": "{{soap_host}}/webservicesserver/NumberConversion.wso"
+          }
+        }
+      ]
+    }
+  ]
+}

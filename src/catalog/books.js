@@ -13,15 +13,24 @@ export const PUBLISHING_LAYERS = [
 export const LIVE_FOLDER_TREE = `src/
 ├── books/
 │   └── technical/programming/
-│       └── python-absolute-beginners/
-│           ├── book.manifest.json
-│           ├── BOOK_BRIEF.md
-│           ├── shared/
-│           └── editions/edition-01/
-│               ├── edition.manifest.json
-│               ├── content/
-│               ├── assets/
-│               └── CHANGELOG.md
+│       ├── python-absolute-beginners/
+│       │   ├── book.manifest.json
+│       │   ├── BOOK_BRIEF.md
+│       │   ├── shared/
+│       │   └── editions/edition-01/
+│       │       ├── edition.manifest.json
+│       │       ├── content/
+│       │       ├── assets/
+│       │       └── CHANGELOG.md
+│       └── testing/
+│           └── zero-to-agentic-api-testing/
+│               ├── book.manifest.json
+│               ├── BOOK_BRIEF.md
+│               ├── shared/
+│               └── editions/edition-01/
+│                   ├── edition.manifest.json
+│                   ├── content/
+│                   └── CHANGELOG.md
 ├── catalog/
 │   ├── generated/books.json     lightweight library index
 │   └── generated/registry.js    lazy book loaders
