@@ -826,6 +826,7 @@ kbd {
   overflow: hidden;
   background: var(--panel);
   box-shadow: 0 6px 24px -4px rgba(15, 23, 42, 0.07), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  display: block;
 }
 .modern-ui-box .ui-box-header {
   padding: 1rem 1.4rem 0.75rem;
@@ -864,12 +865,15 @@ kbd {
 }
 .modern-ui-box .ui-box-body {
   padding: 1.25rem 1.4rem;
+  display: block;
+  width: 100%;
 }
 .modern-ui-box .ui-box-intro {
   font-size: 0.98rem;
   line-height: 1.65;
   color: var(--text);
   margin-bottom: 1.1rem;
+  width: 100%;
 }
 .modern-ui-box .ui-box-intro p {
   margin: 0 0 0.65rem;
@@ -878,8 +882,11 @@ kbd {
   margin-bottom: 0;
 }
 .modern-ui-box .ui-box-media-wrap {
-  margin: 0.75rem auto 1.25rem;
+  margin: 1rem auto 1.4rem;
+  width: 100%;
   max-width: 840px;
+  float: none;
+  clear: both;
 }
 .modern-ui-box .figure-media {
   display: flex;
@@ -911,6 +918,8 @@ kbd {
   margin-top: 1.25rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border);
+  width: 100%;
+  clear: both;
 }
 .modern-ui-box .breakdown-title {
   display: block;
