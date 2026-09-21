@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header.jsx'
 import LibraryHome from './components/LibraryHome.jsx'
 import LessonShell from './components/LessonShell.jsx'
@@ -48,6 +48,44 @@ export default function App() {
   const [exporting, setExporting] = useState(false)
   const [isWide, setIsWide] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const isNativeFullscreenRef = useRef(false)
+
+  const enterFullscreen = () => {
+    setIsFullscreen(true)
+    try {
+      if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
+        document.documentElement.requestFullscreen()
+          .then(() => {
+            isNativeFullscreenRef.current = true
+          })
+          .catch(() => {
+            // Viewport takeover is active via isFullscreen state
+          })
+      }
+    } catch {
+      // Ignore iframe restrictions
+    }
+  }
+
+  const exitFullscreen = () => {
+    setIsFullscreen(false)
+    try {
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {})
+      }
+    } catch {
+      // Ignore
+    }
+    isNativeFullscreenRef.current = false
+  }
+
+  const toggleFullscreen = () => {
+    if (isFullscreen) {
+      exitFullscreen()
+    } else {
+      enterFullscreen()
+    }
+  }
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -60,11 +98,24 @@ export default function App() {
 
   useEffect(() => {
     const onFullscreenChange = () => {
-      setIsFullscreen(Boolean(document.fullscreenElement))
+      if (!document.fullscreenElement && isNativeFullscreenRef.current) {
+        isNativeFullscreenRef.current = false
+        setIsFullscreen(false)
+      }
     }
     document.addEventListener('fullscreenchange', onFullscreenChange)
     return () => document.removeEventListener('fullscreenchange', onFullscreenChange)
   }, [])
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape' && isFullscreen) {
+        exitFullscreen()
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [isFullscreen])
 
   useEffect(() => {
     const onPopState = () => {
@@ -119,15 +170,8 @@ export default function App() {
   const openBlueprint = () => navigate('blueprint', '/?view=blueprint')
   const toggleTheme = () => setTheme(value => (value === 'light' ? 'dark' : 'light'))
   const toggleWideMode = () => setIsWide(value => !value)
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen().catch(() => {})
-      setIsFullscreen(true)
-      setIsWide(true)
-    } else {
-      if (document.exitFullscreen) document.exitFullscreen().catch(() => {})
-      setIsFullscreen(false)
-    }
+  const openInNewTab = () => {
+    window.open(window.location.href, '_blank', 'noopener,noreferrer')
   }
 
   if (view === 'blueprint') {
@@ -203,30 +247,75 @@ export default function App() {
     return (
       <div className={`book-view-screen force-light ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
         <div className="preview-toolbar no-print">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
-            <span className="preview-tag">📖 Book View</span>
+          <div className="preview-toolbar-left">
+            <span className="preview-tag">📖 {isFullscreen ? 'Fullscreen Book View' : 'Book View'}</span>
+            <select
+              className="preview-jump-select"
+              aria-label="Jump to chapter or section"
+              onChange={(e) => {
+                const target = document.getElementById(e.target.value)
+                if (target) {
+                  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+              }}
+              defaultValue=""
+            >
+              <option value="" disabled>Jump to section…</option>
+              <option value="print-cover">Cover</option>
+              <option value="print-toc">Table of Contents</option>
+              <option value="print-preface">Preface</option>
+              <option value="print-how-to">How to use this book</option>
+              {lessons.map((l, i) => (
+                <option key={l.id} value={`print-${l.id}`}>
+                  Chapter {i + 1}: {l.title}
+                </option>
+              ))}
+              <option value="print-about">About the Author</option>
+            </select>
+          </div>
+
+          <div className="preview-actions">
             <button
               type="button"
               className="btn"
               onClick={toggleWideMode}
-              title="Expand book width across screen"
+              title={isWide ? 'Switch to centered page width' : 'Expand book across screen width'}
             >
               {isWide ? '⊟ Standard Width' : '⊞ Full Width'}
             </button>
             <button
               type="button"
-              className="btn"
+              className={`btn ${isFullscreen ? 'active-fullscreen-btn' : ''}`}
               onClick={toggleFullscreen}
-              title="Toggle browser fullscreen"
+              title={isFullscreen ? 'Exit fullscreen reading mode (Esc)' : 'Enter true fullscreen reading mode'}
             >
-              {isFullscreen ? '⛶ Exit Full' : '⛶ Fullscreen'}
+              {isFullscreen ? '✕ Exit Full (Esc)' : '⛶ Fullscreen'}
             </button>
-          </div>
-          <div className="preview-actions">
-            <button type="button" className="btn" onClick={openLibrary}>⌂ Library</button>
-            <button type="button" className="btn" onClick={openBlueprint}>📋 Blueprint</button>
-            <button type="button" className="btn primary" onClick={() => window.print()}>🖨 PDF</button>
-            <button type="button" className="btn" onClick={() => setPreview(false)}>✕ Web View</button>
+            <button
+              type="button"
+              className="btn"
+              onClick={openInNewTab}
+              title="Open book in a standalone browser window"
+            >
+              ↗ New Tab
+            </button>
+            <button type="button" className="btn" onClick={openBlueprint} title="Curriculum roadmap">
+              📋 Blueprint
+            </button>
+            <button type="button" className="btn primary" onClick={() => window.print()} title="Print or save as PDF">
+              🖨 PDF
+            </button>
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                exitFullscreen()
+                setPreview(false)
+              }}
+              title="Return to single-chapter interactive mode"
+            >
+              ✕ Web View
+            </button>
           </div>
         </div>
         <div className={`preview-paper ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
