@@ -17,6 +17,7 @@ function BookDetails({ book, onOpenBook }) {
       <div className="catalog-output-actions">
         <button className="btn primary" disabled={!book.readable} onClick={() => onOpenBook(book)}>{book.readable ? 'Open Web View →' : 'Reader coming soon'}</button>
         <button className="btn" disabled={!book.readable} onClick={() => onOpenBook(book, book.currentEdition, { preview: true })}>Book / PDF Preview</button>
+        <a className="btn" href="/curriculum-planning.html" target="_blank" rel="noreferrer">📋 Curriculum Blueprint</a>
         {book.readable ? <a className="btn" href={book.downloads.offlineHtml} target="_blank" rel="noreferrer">Offline HTML</a> : <span className="btn disabled-link">Offline HTML</span>}
         {book.readable ? <a className="btn" href={book.downloads.docx} download>Editable Word</a> : <span className="btn disabled-link">Editable Word</span>}
       </div>
@@ -49,7 +50,10 @@ export default function LibraryHome({ theme, onToggleTheme, onOpenBook }) {
       <a className="brand" href="/" onClick={event => event.preventDefault()} aria-label={`${BRAND.imprint} home`}>
         <span className="brand-text"><strong>{BRAND.imprint}</strong><span>{BRAND.tagline}</span></span>
       </a>
-      <button className="icon-btn" onClick={onToggleTheme} title="Toggle theme" aria-label="Toggle light and dark theme">{theme === 'light' ? '🌙' : '☀️'}</button>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <a className="btn" href="/curriculum-planning.html" target="_blank" rel="noreferrer" title="Curriculum Architecture & Syllabus Checklist">📋 Curriculum Blueprint</a>
+        <button className="icon-btn" onClick={onToggleTheme} title="Toggle theme" aria-label="Toggle light and dark theme">{theme === 'light' ? '🌙' : '☀️'}</button>
+      </div>
     </header>
 
     <main className="library-main">
