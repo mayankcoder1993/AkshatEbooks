@@ -45,7 +45,7 @@
       {
         "id": "understanding-apis",
         "title": "Understanding APIs from First Principles",
-        "subtitle": "What APIs are, how frontends and backends communicate, the restaurant analogy, and inspecting live data in your browser."
+        "subtitle": "The campus interoperability crisis, client server decoupling, the restaurant analogy, and inspecting live payloads across the network wire."
       },
       {
         "id": "rest-crud-status",

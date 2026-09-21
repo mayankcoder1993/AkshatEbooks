@@ -132,7 +132,7 @@ export const lesson13 = {
     },
     {
       type: 'paragraph',
-      text: 'Terminal output is great for developers, but engineering directors and quality assurance managers need visual dashboards. We install the **newman-reporter-htmlextra** plugin to generate publication grade reports. You can download the complete runner script: [Download install-and-run-htmlextra.sh](/materials/zero-to-agentic-api-testing/lesson-13/install-and-run-htmlextra.sh).',
+      text: 'Terminal output is great for developers, but engineering directors and quality assurance managers need visual dashboards. We install the `newman-reporter-htmlextra` plugin to generate publication grade reports. You can download the complete runner script: [Download install-and-run-htmlextra.sh](/materials/zero-to-agentic-api-testing/lesson-13/install-and-run-htmlextra.sh).',
     },
     {
       type: 'code',

@@ -119,7 +119,7 @@ export const lesson12 = {
       paragraphs: [
         'When you open Postman, set the method to POST, select Body > raw, and choose XML from the dropdown, Postman automatically generates a hidden header: `Content-Type: application/xml`.',
         'However, the SOAP 1.2 server specification strictly requires `Content-Type: application/soap+xml; charset=utf-8` (or `text/xml; charset=utf-8` for SOAP 1.1). If you leave Postman default header in place, the server immediately rejects your request with a 415 Unsupported Media Type or protocol fault!',
-        'How to fix: Go to the Headers tab in Postman, click the eye icon to show hidden headers, uncheck the default Content-Type header, and create your own header with key Content-Type and value `application/soap+xml; charset=utf-8`.',
+        'How to fix: Go to the Headers tab in Postman, click the eye icon to show hidden headers, uncheck the default `Content-Type` header, and create your own header with key `Content-Type` and value `application/soap+xml; charset=utf-8`.',
       ],
     },
     {

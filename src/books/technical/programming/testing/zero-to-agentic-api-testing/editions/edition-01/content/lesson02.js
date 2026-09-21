@@ -120,9 +120,9 @@ export const lesson02 = {
       variant: 'note',
       title: 'Diagnosing Wire Failures and Server Crashes Live',
       paragraphs: [
-        'When an endpoint functions normally, a successful GET returns 200 OK and a created resource returns 201 Created. You can verify a healthy campus catalog by clicking [http://localhost:5050/v1/catalog](http://localhost:5050/v1/catalog).',
-        'If you request a book or course that does not exist, such as [http://localhost:5050/status/404](http://localhost:5050/status/404), the server returns 404 Not Found.',
-        'If the server suffers an unhandled exception or database failure, it returns 500 Internal Server Error. You can test a real 500 error response right now by clicking [http://localhost:5050/status/500](http://localhost:5050/status/500). Notice how the server immediately alerts the client that the database connection pool was exhausted.',
+        'When an endpoint functions normally, a successful GET returns 200 OK and a created resource returns 201 Created. You can verify a healthy live response by opening [Campus Catalog JSON](https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/lesson-01/campus-catalog.json).',
+        'If you request a resource that does not exist, such as querying an absent profile on GitHub via [GitHub Query Check](https://api.github.com/users/campus-test-nonexistent-user-query), the server answers with 404 Not Found and a structured error payload.',
+        'If a server experiences an unhandled code exception or database pool exhaustion, it returns 500 Internal Server Error. In our upcoming test automation suites, we validate that applications handle 500 errors gracefully with clear user alerts rather than crashing abruptly.',
       ],
     },
     {
