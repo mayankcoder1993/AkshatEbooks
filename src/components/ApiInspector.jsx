@@ -10,10 +10,10 @@ export default function ApiInspector({
   size = '1.2 kB',
   responseBody = {},
   assertions = [],
-  title = 'Interactive Live API Wire Inspector',
+  title = 'Live API Wire Inspection Blueprint',
   staticMode = false
 }) {
-  const [activeTab, setActiveTab] = useState('response')
+  const [activeTab, setActiveTab] = useState(staticMode ? 'all' : 'all')
   const [sent, setSent] = useState(true)
   const [sending, setSending] = useState(false)
 
@@ -27,13 +27,18 @@ export default function ApiInspector({
     setTimeout(() => {
       setSending(false)
       setSent(true)
-      setActiveTab('response')
+      setActiveTab('all')
     }, 400)
   }
 
   const responseString = typeof responseBody === 'string'
     ? responseBody
     : JSON.stringify(responseBody, null, 2)
+
+  // In static mode or eBook view, show all sections so print and eBook readers see everything
+  const showRequest = staticMode || activeTab === 'request' || activeTab === 'all'
+  const showResponse = staticMode || activeTab === 'response' || activeTab === 'all'
+  const showTests = (staticMode || activeTab === 'tests' || activeTab === 'all') && assertions.length > 0
 
   return (
     <div className="api-inspector">
@@ -59,53 +64,61 @@ export default function ApiInspector({
         )}
       </div>
 
-      <div className="api-inspector-tabs">
-        <button
-          type="button"
-          className={`tab-btn ${activeTab === 'response' ? 'active' : ''}`}
-          onClick={() => setActiveTab('response')}
-        >
-          Response Payload
-        </button>
-        <button
-          type="button"
-          className={`tab-btn ${activeTab === 'request' ? 'active' : ''}`}
-          onClick={() => setActiveTab('request')}
-        >
-          Request Details
-        </button>
-        {assertions.length > 0 && (
+      {!staticMode && (
+        <div className="api-inspector-tabs">
           <button
             type="button"
-            className={`tab-btn ${activeTab === 'tests' ? 'active' : ''}`}
-            onClick={() => setActiveTab('tests')}
+            className={`tab-btn ${activeTab === 'all' ? 'active' : ''}`}
+            onClick={() => setActiveTab('all')}
           >
-            Test Results ({assertions.length})
+            Full eBook View (All)
           </button>
-        )}
-      </div>
+          <button
+            type="button"
+            className={`tab-btn ${activeTab === 'response' ? 'active' : ''}`}
+            onClick={() => setActiveTab('response')}
+          >
+            Response Payload
+          </button>
+          <button
+            type="button"
+            className={`tab-btn ${activeTab === 'request' ? 'active' : ''}`}
+            onClick={() => setActiveTab('request')}
+          >
+            Request Details
+          </button>
+          {assertions.length > 0 && (
+            <button
+              type="button"
+              className={`tab-btn ${activeTab === 'tests' ? 'active' : ''}`}
+              onClick={() => setActiveTab('tests')}
+            >
+              Test Results ({assertions.length})
+            </button>
+          )}
+        </div>
+      )}
 
       <div className="api-inspector-body">
-        {activeTab === 'request' && (
-          <div className="request-pane">
-            <div className="pane-section">
-              <h6>Headers</h6>
-              <div className="headers-list">
-                {Object.entries(headers).length > 0 ? (
-                  Object.entries(headers).map(([k, v]) => (
-                    <div key={k} className="header-row">
-                      <span className="header-key">{k}:</span>
-                      <span className="header-val">{v}</span>
-                    </div>
-                  ))
-                ) : (
-                  <p className="empty-notice">Accept: application/json</p>
-                )}
-              </div>
+        {showRequest && (
+          <div className="request-pane" style={{ marginBottom: activeTab === 'all' || staticMode ? '1.25rem' : '0' }}>
+            <h6 style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', margin: '0 0 0.5rem' }}>
+              1. The Request (Sent Over the Wire)
+            </h6>
+            <div className="headers-list">
+              {Object.entries(headers).length > 0 ? (
+                Object.entries(headers).map(([k, v]) => (
+                  <div key={k} className="header-row">
+                    <span className="header-key">{k}:</span>
+                    <span className="header-val">{v}</span>
+                  </div>
+                ))
+              ) : (
+                <p className="empty-notice">Accept: application/json</p>
+              )}
             </div>
             {requestBody && (
-              <div className="pane-section">
-                <h6>Payload Body</h6>
+              <div className="pane-section" style={{ marginTop: '0.5rem' }}>
                 <pre className="payload-box">
                   <code>{typeof requestBody === 'string' ? requestBody : JSON.stringify(requestBody, null, 2)}</code>
                 </pre>
@@ -114,8 +127,11 @@ export default function ApiInspector({
           </div>
         )}
 
-        {activeTab === 'response' && (
-          <div className="response-pane">
+        {showResponse && (
+          <div className="response-pane" style={{ marginBottom: (activeTab === 'all' || staticMode) && showTests ? '1.25rem' : '0' }}>
+            <h6 style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', margin: '0 0 0.5rem' }}>
+              2. The Server Response (Received Over the Wire)
+            </h6>
             <div className="response-meta-bar">
               <span className="meta-badge status">{status}</span>
               <span className="meta-badge time">⏱ {time}</span>
@@ -127,10 +143,13 @@ export default function ApiInspector({
           </div>
         )}
 
-        {activeTab === 'tests' && (
+        {showTests && (
           <div className="tests-pane">
+            <h6 style={{ fontSize: '0.78rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)', margin: '0 0 0.5rem' }}>
+              3. Automated Quality Verification (Assertions Checked)
+            </h6>
             <div className="assertions-summary">
-              <span className="assertions-pass-count">✓ {assertions.length} of {assertions.length} Passed</span>
+              <span className="assertions-pass-count">✓ {assertions.length} of {assertions.length} Tests Passed</span>
             </div>
             <ul className="assertions-list">
               {assertions.map((a, i) => (
