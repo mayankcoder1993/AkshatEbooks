@@ -38,38 +38,15 @@ export function Block({ block: b, staticMode = false }) {
     case 'paragraph': return <p className="section-intro"><RichText text={b.text}/></p>
     case 'image':
       return (
-        <figure className={`modern-ui-box lesson-figure ${b.layout || 'side-by-side'}`}>
+        <figure className="modern-ui-box lesson-figure">
           {(b.title || b.badge) && (
             <div className="ui-box-header">
               {b.badge && <span className="ui-box-badge">{b.badge}</span>}
               {b.title && <h3 className="ui-box-title">{b.title}</h3>}
             </div>
           )}
-          <div className="ui-box-split-grid">
-            <div className="ui-box-text-col">
-              {(b.text || b.paragraphs?.length > 0) && (
-                <div className="ui-box-intro">
-                  {b.text && <p className="figure-intro-text"><RichText text={b.text} /></p>}
-                  {b.paragraphs?.map((p, idx) => (
-                    <p key={idx} className="figure-intro-text"><RichText text={p} /></p>
-                  ))}
-                </div>
-              )}
-              {b.points?.length > 0 && (
-                <div className="ui-box-breakdown">
-                  <span className="breakdown-title">Architectural Breakdown:</span>
-                  <ol className="figure-points">
-                    {b.points.map((point, index) => (
-                      <li key={point}>
-                        <span>{index + 1}</span>
-                        <p><RichText text={point} /></p>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-              )}
-            </div>
-            <div className="ui-box-media-col">
+          <div className="ui-box-body">
+            <div className="ui-box-media-wrap">
               <div className="figure-media">
                 <img src={b.src} alt={b.alt}/>
               </div>
@@ -77,6 +54,27 @@ export function Block({ block: b, staticMode = false }) {
                 <p className="figure-summary">{b.caption}</p>
               )}
             </div>
+            {(b.text || b.paragraphs?.length > 0) && (
+              <div className="ui-box-intro">
+                {b.text && <p className="figure-intro-text"><RichText text={b.text} /></p>}
+                {b.paragraphs?.map((p, idx) => (
+                  <p key={idx} className="figure-intro-text"><RichText text={p} /></p>
+                ))}
+              </div>
+            )}
+            {b.points?.length > 0 && (
+              <div className="ui-box-breakdown">
+                <span className="breakdown-title">Architectural Breakdown:</span>
+                <ol className="figure-points">
+                  {b.points.map((point, index) => (
+                    <li key={point}>
+                      <span>{index + 1}</span>
+                      <p><RichText text={point} /></p>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
           </div>
         </figure>
       )
@@ -88,20 +86,7 @@ export function Block({ block: b, staticMode = false }) {
             <span className="eyebrow">{b.badge || 'OUR MISSION'}</span>
             <h2>{b.title}</h2>
           </div>
-          <div className={`mission-content-wrap ${b.image ? 'has-media-layout' : ''}`}>
-            <div className="mission-text-column">
-              <p className="mission-description"><RichText text={b.text} /></p>
-              <div className="mission-grid">
-                <div>
-                  <strong>What we know</strong>
-                  <ul>{b.weKnow.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
-                </div>
-                <div>
-                  <strong>What we need</strong>
-                  <ul>{b.weNeed.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
-                </div>
-              </div>
-            </div>
+          <div className="mission-content-wrap">
             {b.image && (
               <div className="mission-inner-media-box">
                 <div className="mission-image-frame">
@@ -119,6 +104,17 @@ export function Block({ block: b, staticMode = false }) {
                 )}
               </div>
             )}
+            <p className="mission-description"><RichText text={b.text} /></p>
+            <div className="mission-grid">
+              <div>
+                <strong>What we know</strong>
+                <ul>{b.weKnow.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
+              </div>
+              <div>
+                <strong>What we need</strong>
+                <ul>{b.weNeed.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
+              </div>
+            </div>
           </div>
         </section>
       )
@@ -129,10 +125,7 @@ export function Block({ block: b, staticMode = false }) {
             <span className="eyebrow">{b.badge || 'ACTIVE MISSION PROGRESS'}</span>
             <h2>{b.title}</h2>
           </div>
-          <div className={`mission-content-wrap ${b.image ? 'has-media-layout' : ''}`}>
-            <div className="mission-text-column">
-              <p className="mission-description"><RichText text={b.text} /></p>
-            </div>
+          <div className="mission-content-wrap">
             {b.image && (
               <div className="mission-inner-media-box">
                 <div className="mission-image-frame">
@@ -150,6 +143,7 @@ export function Block({ block: b, staticMode = false }) {
                 )}
               </div>
             )}
+            <p className="mission-description"><RichText text={b.text} /></p>
           </div>
         </section>
       )
