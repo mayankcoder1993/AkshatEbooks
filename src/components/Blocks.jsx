@@ -46,14 +46,6 @@ export function Block({ block: b, staticMode = false }) {
             </div>
           )}
           <div className="ui-box-body">
-            <div className="ui-box-media-wrap">
-              <div className="figure-media">
-                <img src={b.src} alt={b.alt}/>
-              </div>
-              {b.caption && (
-                <p className="figure-summary">{b.caption}</p>
-              )}
-            </div>
             {(b.text || b.paragraphs?.length > 0) && (
               <div className="ui-box-intro">
                 {b.text && <p className="figure-intro-text"><RichText text={b.text} /></p>}
@@ -62,6 +54,14 @@ export function Block({ block: b, staticMode = false }) {
                 ))}
               </div>
             )}
+            <div className="ui-box-media-wrap">
+              <div className="figure-media">
+                <img src={b.src} alt={b.alt}/>
+              </div>
+              {b.caption && (
+                <p className="figure-summary">{b.caption}</p>
+              )}
+            </div>
             {b.points?.length > 0 && (
               <div className="ui-box-breakdown">
                 <span className="breakdown-title">Architectural Breakdown:</span>

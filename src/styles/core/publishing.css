@@ -864,34 +864,38 @@ kbd {
 }
 .modern-ui-box .ui-box-body {
   padding: 1.25rem 1.4rem;
-  display: flow-root;
+}
+.modern-ui-box .ui-box-intro {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text);
+  margin-bottom: 1.1rem;
+}
+.modern-ui-box .ui-box-intro p {
+  margin: 0 0 0.65rem;
+}
+.modern-ui-box .ui-box-intro p:last-child {
+  margin-bottom: 0;
 }
 .modern-ui-box .ui-box-media-wrap {
-  margin-bottom: 1rem;
-}
-@media (min-width: 640px) {
-  .modern-ui-box .ui-box-media-wrap {
-    float: right;
-    width: 48%;
-    max-width: 440px;
-    margin: 0 0 1rem 1.4rem;
-  }
+  margin: 0.75rem auto 1.25rem;
+  max-width: 840px;
 }
 .modern-ui-box .figure-media {
   display: flex;
   align-items: center;
   justify-content: center;
   background: #ffffff;
-  padding: 0.5rem;
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  padding: 0.75rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 .modern-ui-box .figure-media img {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 360px;
+  max-height: 420px;
   object-fit: contain;
   border-radius: 8px;
 }
@@ -901,61 +905,61 @@ kbd {
   font-size: 0.85rem;
   font-style: italic;
   text-align: center;
-  margin: 0.6rem 0 0;
-}
-.modern-ui-box .ui-box-intro {
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--text);
-  margin-bottom: 0.9rem;
-}
-.modern-ui-box .ui-box-intro p {
-  margin: 0 0 0.65rem;
-}
-.modern-ui-box .ui-box-intro p:last-child {
-  margin-bottom: 0;
+  margin: 0.65rem 0 0;
 }
 .modern-ui-box .ui-box-breakdown {
-  margin-top: 0.75rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
 }
 .modern-ui-box .breakdown-title {
   display: block;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.75rem;
 }
 .modern-ui-box .figure-points {
   margin: 0;
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 0.55rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+@media (max-width: 640px) {
+  .modern-ui-box .figure-points {
+    grid-template-columns: 1fr;
+  }
 }
 .modern-ui-box .figure-points li {
   display: flex;
   align-items: flex-start;
   gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--panel-soft);
 }
 .modern-ui-box .figure-points li span {
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   background: #4f46e5;
   color: #ffffff;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 .modern-ui-box .figure-points li p {
   margin: 0;
-  font-size: 0.86rem;
+  font-size: 0.88rem;
   line-height: 1.5;
   color: var(--text);
 }
