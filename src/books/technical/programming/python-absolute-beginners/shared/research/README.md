@@ -10,5 +10,6 @@ Record consequential sources with URL, authority, publication/version date, acce
 - `agentic-ai-course-syllabus-audit.md`: agent-course topic map and routing into the continuing project series.
 - `/docs/shared-agent-series-plan.md`: cross-book architecture from deterministic Python assistant to deployed agent product.
 - Transcript audit files: verified corrections, exclusions and placement notes for supplied source batches.
+- `collections-files-comparisons-transcript-audit.md`: approved routing and factual corrections for lists, dictionaries, tuples, sets, Booleans, files, comparisons, logic and the supplied quiz screenshots.
 
 Documents marked superseded remain design history and must not override the master plan.
