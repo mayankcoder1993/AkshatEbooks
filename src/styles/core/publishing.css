@@ -1279,3 +1279,10 @@ kbd {
 .exercise-print-note { background:var(--panel-soft); border:1px solid var(--border); }
 @media(max-width:600px){.exercise-entry{flex-direction:column}}
 
+
+/* Skill trials create challenge energy without adding timers or pressure. */
+.power-challenge{display:grid;grid-template-columns:minmax(8.5rem,.28fr) 1fr;border:1px solid #d7b45a;border-left:6px solid #b98212;border-radius:14px;background:linear-gradient(135deg,#fff9e8 0%,#fff 64%);margin:1.25rem 0;overflow:hidden;box-shadow:0 10px 24px rgba(75,56,12,.08)}
+.challenge-rank{display:flex;flex-direction:column;justify-content:center;gap:.45rem;padding:1.2rem;background:#17243b;color:#fff}.challenge-rank span,.victory-panel>div>span{font-size:.7rem;letter-spacing:.13em;font-weight:800}.challenge-rank strong{font-size:1.05rem;line-height:1.2;color:#f4d47b}.challenge-copy{padding:1.15rem 1.3rem}.challenge-copy h2{margin:0 0 .45rem;color:#17243b}.challenge-copy>p{margin:.35rem 0 .75rem}.challenge-copy ol{margin:.65rem 0;padding-left:1.35rem}.challenge-copy li{margin:.36rem 0}.win-condition,.stretch-goal{padding:.65rem .75rem;border-radius:8px}.win-condition{background:#eaf8f3;color:#164f3e}.stretch-goal{background:#f0f2fa;color:#2f3e72}
+.victory-panel{display:grid;grid-template-columns:4rem 1fr;gap:1rem;align-items:start;margin:1.25rem 0;padding:1.1rem 1.25rem;border:1px solid #add7c7;border-radius:14px;background:linear-gradient(135deg,#e9f8f2,#fff)}.victory-mark{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:50%;background:#176f52;color:#fff;font-size:1.75rem;font-weight:900}.victory-panel h2{margin:.15rem 0 .35rem;color:#155f48}.victory-panel ul{margin:.45rem 0;padding-left:1.25rem}.next-target{margin:.65rem 0 0;padding-top:.65rem;border-top:1px solid #cce5db}
+@media(max-width:640px){.power-challenge{grid-template-columns:1fr}.challenge-rank{padding:.8rem 1rem}.victory-panel{grid-template-columns:3rem 1fr}.victory-mark{width:2.5rem;height:2.5rem}}
+@media print{.power-challenge,.victory-panel{break-inside:avoid;box-shadow:none}.challenge-rank{-webkit-print-color-adjust:exact;print-color-adjust:exact}}

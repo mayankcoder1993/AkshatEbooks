@@ -64,6 +64,8 @@ Use `arc-start` once when a multi-chapter learning goal begins. Use `arc-progres
 
 Profile-aware: `question` (verified PYQ or practice), `activity`, `reflection`, `safety-notice`.
 
+Achievement: `challenge` defines a chapter skill trial with a rank, steps and observable win condition. `victory` records evidence-based skills earned and the next target. Never claim physiological or hormonal effects. Challenge energy must come from real competence, visible evidence and meaningful independence rather than pressure or empty praise.
+
 Pipeline tracks may include a short `summary` and display `color`. Each stage may include a concrete `example` alongside its name, artifact and explanation. Keep examples short enough to scan inside a visual card.
 
 A new block type requires: lesson data, a `Blocks.jsx` case, a `docx.js` case, CSS, and verification in all outputs.

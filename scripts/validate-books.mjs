@@ -3,7 +3,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { discoverBooks, projectRelative } from './lib/book-system.mjs'
 
-const allowedBlocks = new Set(['heading','paragraph','image','mission','arc-start','arc-progress','think','guess','bug','callout','flow','bytecode-map','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','arithmetic-exercise','reflection','safety-notice'])
+const allowedBlocks = new Set(['heading','paragraph','image','mission','arc-start','arc-progress','think','guess','bug','callout','flow','bytecode-map','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','challenge','victory','arithmetic-exercise','reflection','safety-notice'])
 const books = await discoverBooks()
 let editionCount = 0
 let chapterCount = 0
@@ -49,6 +49,8 @@ async function validateBlocks(blocks, context, bookDirectory) {
       if (block.kind === 'verified-pyq') assert(block.exam && block.year && block.sourceUrl, `${label}: verified PYQ requires exam, year and official source URL`)
     }
     if (block.type === 'activity') assert(block.title && block.steps?.length, `${label}: activity requires title and steps`)
+    if (block.type === 'challenge') assert(block.rank && block.title && block.brief && block.steps?.length && block.winCondition, `${label}: challenge requires rank, title, brief, steps and win condition`)
+    if (block.type === 'victory') assert(block.rank && block.proof?.length && block.next, `${label}: victory requires rank, proof and next target`)
     if (block.type === 'reflection') assert(block.prompt, `${label}: reflection requires prompt`)
     if (block.type === 'safety-notice') assert(block.text, `${label}: safety notice requires text`)
   }

@@ -1,6 +1,6 @@
 # Transcript Audit: Collections, Files, Booleans and Comparisons
 
-Status: implementation plan, not yet integrated into chapter source
+Status: integrated into Chapters 2 through 4 and the all-chapter skill-trial system
 
 Audited: 2026-09-21
 
@@ -11,6 +11,14 @@ Target chapters:
 - Chapter 2: Work with Values
 - Chapter 3: Organize Data
 - Chapter 4: Control the Program
+
+Implementation result:
+
+- Chapter 2 now bridges explicit Boolean values and `None` into learner state.
+- Chapter 3 now includes corrected list, dictionary, tuple, set and safe-file instruction with executable evidence.
+- Chapter 4 now includes comparison edge cases, chained comparisons, truthiness and short-circuit logic.
+- Every chapter now ends with an evidence-based skill trial and earned-rank panel.
+- Shared Web, print, DOCX and offline renderers support the new achievement blocks.
 
 ## 1. Intake summary
 

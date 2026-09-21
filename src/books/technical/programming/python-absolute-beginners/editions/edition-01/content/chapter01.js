@@ -15,8 +15,10 @@ export const chapter01 = {
     { type: 'heading', text: 'Assistant build step' },
     { type: 'code', filename: 'assistant.py', lines: ['print("STUDY ASSISTANT")', 'print("Type help to see a command.")'] },
     { type: 'terminal', command: 'python assistant.py', lines: ['STUDY ASSISTANT', 'Type help to see a command.'] },
+    { type: 'challenge', rank: 'Python Launcher', title: 'Launch without the training wheels', brief: 'Create a new saved file and make its exact output appear without copying the chapter program.', steps: ['Create `launch.py` in the project folder.', 'Display an assistant title and one instruction.', 'Predict the two output lines before running.', 'Run the saved file and repair any case, quote or parenthesis error.'], winCondition: 'The terminal output exactly matches your prediction after a fresh run.', stretch: 'Use `dis.dis()` to inspect the actions for one `print()` call and identify the call stage.' },
     { type: 'quiz', items: [['What is stored in a `.py` file?', 'Python source code written as text.'], ['Which quoted text becomes output in `print("Ready")`?', '`Ready`'], ['Why does `Print("Hi")` fail?', 'Python is case-sensitive. The built-in name is `print`.'], ['Put these in order: screen, Python, saved file.', 'Saved file, Python, screen.']] },
     { type: 'takeaways', items: ['A program is a sequence of instructions.', 'Python is case-sensitive.', 'CPython can compile source to bytecode before its interpreter runs the actions.'] },
+    { type: 'victory', rank: 'Python Launcher', proof: ['Create and run a saved Python file.', 'Predict exact terminal output.', 'Repair a syntax or capitalization mistake using evidence.'], next: 'Give the assistant meaningful values and state.' },
     { type: 'cliffhanger', title: 'The assistant needs state', text: 'Next, names and values let the assistant remember who is studying and shape a useful status message.' }
   ]
 }

@@ -13,6 +13,11 @@ try { evaluateArithmeticExpression('alert(100)'); throw new Error('Arithmetic ex
 const publication = await loadBookPackage('python-absolute-beginners', 'edition-01')
 if (publication.BOOK.editionId !== 'edition-01' || publication.lessons.length !== 8) throw new Error('Edition registry did not load the expected current book')
 if (publication.HOW_TO_READ?.title !== 'How to read this book') throw new Error('Edition registry did not load the reading guide')
+if (!publication.QUICK_START?.blocks?.length) throw new Error('Edition registry did not load the Quick Start')
+for (const chapter of publication.lessons) {
+  if (chapter.blocks.filter(block => block.type === 'challenge').length !== 1) throw new Error(`${chapter.id} requires exactly one skill trial`)
+  if (chapter.blocks.filter(block => block.type === 'victory').length !== 1) throw new Error(`${chapter.id} requires exactly one earned-rank panel`)
+}
 
 const synthetic = {
   BRAND: publication.BRAND,
@@ -35,6 +40,8 @@ const synthetic = {
       { type: 'source-note', claim: 'A claim.', url: 'https://example.com', verifiedThrough: '2026-09-20' },
       { type: 'question', kind: 'verified-pyq', exam: 'Example Exam', year: 2025, sourceUrl: 'https://example.com', prompt: 'Explain.', answer: 'Model answer.', marking: ['One mark.'] },
       { type: 'activity', title: 'Observe', materials: ['Paper'], steps: ['Write one observation.'], safety: 'Use safe materials.' },
+      { type: 'challenge', rank: 'Evidence Builder', title: 'Prove one result', brief: 'Complete one observable task.', steps: ['Run the example.'], winCondition: 'The expected result appears.', stretch: 'Change one input.' },
+      { type: 'victory', rank: 'Evidence Builder', proof: ['Run and inspect one result.'], next: 'Test a harder case.' },
       { type: 'reflection', prompt: 'What did you notice?', guidance: ['Name one small detail.'] },
       { type: 'safety-notice', title: 'Support', text: 'Seek qualified help when needed.', resources: [['Resource','https://example.com']] },
     ],
