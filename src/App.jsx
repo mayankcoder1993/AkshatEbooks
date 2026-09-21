@@ -15,18 +15,59 @@ const routeBookLocation = () => {
   return match ? { bookId: match[1], editionId: match[2] || null } : null
 }
 
+const requestNativeFullscreen = (element) => {
+  try {
+    if (element.requestFullscreen) {
+      const p = element.requestFullscreen()
+      if (p && typeof p.catch === 'function') p.catch(() => {})
+      return true
+    } else if (element.webkitRequestFullscreen) {
+      element.webkitRequestFullscreen()
+      return true
+    } else if (element.mozRequestFullScreen) {
+      element.mozRequestFullScreen()
+      return true
+    } else if (element.msRequestFullscreen) {
+      element.msRequestFullscreen()
+      return true
+    }
+  } catch {
+    // Cross-origin iframe or browser permission exception
+  }
+  return false
+}
+
+const exitNativeFullscreen = () => {
+  try {
+    if (document.exitFullscreen) {
+      const p = document.exitFullscreen()
+      if (p && typeof p.catch === 'function') p.catch(() => {})
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen()
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen()
+    }
+  } catch {
+    // Ignore
+  }
+}
+
 const initialLocation = () => {
   if (window.location.search.includes('view=blueprint') || window.location.pathname.includes('blueprint')) {
-    return { view: 'blueprint', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview: false }
+    return { view: 'blueprint', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview: false, fullscreen: false }
   }
-  const preview = new URLSearchParams(window.location.search).get('view') === 'book'
+  const search = new URLSearchParams(window.location.search)
+  const isFsParam = search.get('fullscreen') === 'true'
+  const preview = search.get('view') === 'book' || isFsParam
   if (window.location.protocol === 'file:') {
-    return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false }
+    return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false, fullscreen: false }
   }
   const location = routeBookLocation()
   return location
-    ? { view: 'book', ...location, preview }
-    : { view: 'book', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview: false }
+    ? { view: 'book', ...location, preview, fullscreen: isFsParam }
+    : { view: 'book', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview, fullscreen: isFsParam }
 }
 
 export default function App() {
@@ -47,36 +88,26 @@ export default function App() {
   const [preview, setPreview] = useState(initial.preview)
   const [exporting, setExporting] = useState(false)
   const [isWide, setIsWide] = useState(false)
-  const [isFullscreen, setIsFullscreen] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(initial.fullscreen)
   const isNativeFullscreenRef = useRef(false)
 
   const enterFullscreen = () => {
     setIsFullscreen(true)
-    try {
-      if (document.documentElement.requestFullscreen && !document.fullscreenElement) {
-        document.documentElement.requestFullscreen()
-          .then(() => {
-            isNativeFullscreenRef.current = true
-          })
-          .catch(() => {
-            // Viewport takeover is active via isFullscreen state
-          })
-      }
-    } catch {
-      // Ignore iframe restrictions
+    const url = new URL(window.location.href)
+    url.searchParams.set('fullscreen', 'true')
+    window.history.replaceState({}, '', url.toString())
+    if (requestNativeFullscreen(document.documentElement)) {
+      isNativeFullscreenRef.current = true
     }
   }
 
   const exitFullscreen = () => {
     setIsFullscreen(false)
-    try {
-      if (document.fullscreenElement && document.exitFullscreen) {
-        document.exitFullscreen().catch(() => {})
-      }
-    } catch {
-      // Ignore
-    }
+    exitNativeFullscreen()
     isNativeFullscreenRef.current = false
+    const url = new URL(window.location.href)
+    url.searchParams.delete('fullscreen')
+    window.history.replaceState({}, '', url.toString())
   }
 
   const toggleFullscreen = () => {
@@ -85,6 +116,35 @@ export default function App() {
     } else {
       enterFullscreen()
     }
+  }
+
+  const openFullscreenBook = () => {
+    setPreview(true)
+    setIsFullscreen(true)
+    const url = new URL(window.location.href)
+    url.searchParams.set('view', 'book')
+    url.searchParams.set('fullscreen', 'true')
+    window.history.pushState({}, '', url.toString())
+    if (requestNativeFullscreen(document.documentElement)) {
+      isNativeFullscreenRef.current = true
+    }
+  }
+
+  const openBookPreview = () => {
+    setPreview(true)
+    const url = new URL(window.location.href)
+    url.searchParams.set('view', 'book')
+    url.searchParams.delete('fullscreen')
+    window.history.pushState({}, '', url.toString())
+  }
+
+  const closeBookPreview = () => {
+    exitFullscreen()
+    setPreview(false)
+    const url = new URL(window.location.href)
+    url.searchParams.delete('view')
+    url.searchParams.delete('fullscreen')
+    window.history.pushState({}, '', url.toString())
   }
 
   useEffect(() => {
@@ -111,6 +171,17 @@ export default function App() {
     const onKeyDown = (e) => {
       if (e.key === 'Escape' && isFullscreen) {
         exitFullscreen()
+      }
+      if ((e.key === 'f' || e.key === 'F') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : ''
+        if (activeTag !== 'input' && activeTag !== 'textarea' && activeTag !== 'select') {
+          e.preventDefault()
+          if (isFullscreen) {
+            exitFullscreen()
+          } else {
+            openFullscreenBook()
+          }
+        }
       }
     }
     window.addEventListener('keydown', onKeyDown)
@@ -277,6 +348,14 @@ export default function App() {
           <div className="preview-actions">
             <button
               type="button"
+              className={`btn ${isFullscreen ? 'active-fullscreen-btn' : 'highlight-fullscreen-btn'}`}
+              onClick={toggleFullscreen}
+              title={isFullscreen ? 'Exit fullscreen reading mode (Esc)' : 'Enter true fullscreen reading mode (Shortcut: F)'}
+            >
+              {isFullscreen ? '✕ Exit Full (Esc)' : '⛶ Fullscreen'}
+            </button>
+            <button
+              type="button"
               className="btn"
               onClick={toggleWideMode}
               title={isWide ? 'Switch to centered page width' : 'Expand book across screen width'}
@@ -285,17 +364,9 @@ export default function App() {
             </button>
             <button
               type="button"
-              className={`btn ${isFullscreen ? 'active-fullscreen-btn' : ''}`}
-              onClick={toggleFullscreen}
-              title={isFullscreen ? 'Exit fullscreen reading mode (Esc)' : 'Enter true fullscreen reading mode'}
-            >
-              {isFullscreen ? '✕ Exit Full (Esc)' : '⛶ Fullscreen'}
-            </button>
-            <button
-              type="button"
               className="btn"
               onClick={openInNewTab}
-              title="Open book in a standalone browser window"
+              title="Open book in a standalone browser window (native F11)"
             >
               ↗ New Tab
             </button>
@@ -308,10 +379,7 @@ export default function App() {
             <button
               type="button"
               className="btn"
-              onClick={() => {
-                exitFullscreen()
-                setPreview(false)
-              }}
+              onClick={closeBookPreview}
               title="Return to single-chapter interactive mode"
             >
               ✕ Web View
@@ -321,6 +389,16 @@ export default function App() {
         <div className={`preview-paper ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
           <PrintBook publication={publication} />
         </div>
+        {isFullscreen && (
+          <button
+            type="button"
+            className="floating-exit-fab no-print"
+            onClick={exitFullscreen}
+            title="Exit Full Screen (Esc)"
+          >
+            ✕ Exit Fullscreen (Esc)
+          </button>
+        )}
       </div>
     )
   }
@@ -336,7 +414,8 @@ export default function App() {
           lessons={lessons}
           active={active}
           onSelect={setActive}
-          onBookPreview={() => setPreview(true)}
+          onBookPreview={openBookPreview}
+          onOpenFullscreenBook={openFullscreenBook}
           onSavePdf={savePdf}
           onSaveWord={saveWord}
           exporting={exporting}
@@ -369,6 +448,17 @@ export default function App() {
             <strong>{BRAND.imprint}</strong> · {BRAND.tagline}
           </footer>
         </main>
+        {!preview && (
+          <button
+            type="button"
+            className="floating-fullscreen-fab no-print"
+            onClick={openFullscreenBook}
+            title="Read complete book in true Full Screen (Shortcut: F)"
+          >
+            <span className="fab-icon">⛶</span>
+            <span className="fab-label">Fullscreen Book (F)</span>
+          </button>
+        )}
         {exporting && <div className="toast">Preparing the editable Word book…</div>}
       </div>
       <div className="print-only">

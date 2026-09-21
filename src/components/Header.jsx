@@ -7,6 +7,7 @@ export default function Header({
   active,
   onSelect,
   onBookPreview,
+  onOpenFullscreenBook,
   onSavePdf,
   onSaveWord,
   exporting,
@@ -45,19 +46,27 @@ export default function Header({
           </button>
           <button
             type="button"
+            className="btn highlight-fullscreen-btn"
+            onClick={onOpenFullscreenBook}
+            title="Read complete book in true full screen (Shortcut: F)"
+          >
+            ⛶ Fullscreen Book
+          </button>
+          <button
+            type="button"
+            className="btn"
+            onClick={onBookPreview}
+            title="Open complete multi-chapter book view"
+          >
+            📖 Book View
+          </button>
+          <button
+            type="button"
             className="btn"
             onClick={onToggleWideMode}
             title="Expand reading view width"
           >
             {isWide ? '⊟ Standard' : '⊞ Full Width'}
-          </button>
-          <button
-            type="button"
-            className="btn"
-            onClick={onToggleFullscreen}
-            title="Toggle fullscreen reading mode"
-          >
-            {isFullscreen ? '⛶ Exit Full' : '⛶ Fullscreen'}
           </button>
           <button
             type="button"
@@ -69,9 +78,6 @@ export default function Header({
           </button>
           <button type="button" className="btn" onClick={onHome}>
             ⌂ Library
-          </button>
-          <button type="button" className="btn" onClick={onBookPreview}>
-            📖 Book preview
           </button>
           <button type="button" className="btn" onClick={onSaveWord} disabled={exporting}>
             {exporting ? 'Preparing…' : '📄 Word'}

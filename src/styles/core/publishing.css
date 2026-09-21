@@ -508,6 +508,19 @@ kbd {
   border-color: #b91c1c !important;
 }
 
+.btn.highlight-fullscreen-btn {
+  background: #4f46e5 !important;
+  color: #ffffff !important;
+  border-color: #6366f1 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.35) !important;
+}
+
+.btn.highlight-fullscreen-btn:hover {
+  background: #4338ca !important;
+  border-color: #4f46e5 !important;
+}
+
 .preview-tag {
   font-size: 0.8rem;
   font-weight: 700;
@@ -1164,8 +1177,8 @@ kbd {
 }
 
 .book-view-screen.fullscreen-mode .preview-paper {
-  max-width: 960px !important;
-  width: 92% !important;
+  max-width: min(96%, 1440px) !important;
+  width: 96% !important;
   margin: 1.5rem auto 5rem !important;
   padding: 0 !important;
   background: transparent !important;
@@ -1175,8 +1188,8 @@ kbd {
 
 .book-view-screen.fullscreen-mode.wide-mode .preview-paper,
 .book-view-screen.fullscreen-mode .preview-paper.wide-mode {
-  max-width: 95% !important;
-  width: 95% !important;
+  max-width: 98% !important;
+  width: 98% !important;
 }
 
 .book-view-screen.fullscreen-mode .book-sheet {
@@ -1196,6 +1209,58 @@ kbd {
   max-width: 100% !important;
   width: 100% !important;
   padding: 3rem 4rem !important;
+}
+
+/* Floating Fullscreen Action Buttons */
+.floating-fullscreen-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 99990;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 20px;
+  background: #4f46e5;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.5);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.floating-fullscreen-fab:hover {
+  background: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.65);
+}
+
+.floating-exit-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000002;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: #dc2626;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.55);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.floating-exit-fab:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
 }
 
 /* Fullscreen for Web View mode */
@@ -1231,7 +1296,7 @@ body:has(.page.fullscreen-mode) .site-header,
 
 /* Book preview uses clearly separated paper sheets. */
 .book-view-screen .preview-paper {
-  max-width: 900px;
+  max-width: 1080px;
   margin: 1.5rem auto;
   padding: 0 1rem;
   background: transparent;
@@ -1244,13 +1309,14 @@ body:has(.page.fullscreen-mode) .site-header,
 }
 .book-view-screen .book-sheet {
   position: relative;
-  width: min(100%, 794px);
+  width: 100%;
+  max-width: 1040px;
   min-height: 1080px;
   margin: 0 auto;
   padding: 3.5rem 4rem;
   background: #fff;
   border: 1px solid #d9dee8;
-  border-radius: 4px;
+  border-radius: 6px;
   box-shadow: 0 12px 35px rgba(31, 42, 68, .14);
 }
 .book-view-screen .book-sheet::after {
