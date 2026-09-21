@@ -1,3 +1,4 @@
+import cicdGateImg from '../assets/enterprise-cicd-quality-gate.jpg'
 import newmanImg from '../assets/newman-ci-cd-pipeline.jpg'
 
 export const lesson13 = {
@@ -13,6 +14,21 @@ export const lesson13 = {
       badge: 'MISSION 3 PROGRESS · STEP 5 OF 5',
       title: 'Completing Mission 3: Continuous Integration and Automated Gating',
       text: 'Tomorrow morning is the first day of semester enrollment, when ten thousand students and faculty members will flood the campus library portal to register books, access digital research archives, and process inter library loans. The university engineering director calls an emergency team briefing: developers are pushing hotfixes late into the night, and we cannot have a human being sitting at a laptop clicking Postman buttons manually at two in the morning. We need an automated robot watchdog that runs our test suite automatically on every code push, generates a visual dashboard for university directors, lets us flip between the Campus QA staging server and the live UAT production cluster with a single dropdown click, and runs scheduled cloud smoke checks. In our final chapter, we build that complete continuous integration pipeline using Newman, Jenkins, GitHub Actions, and Postman Cloud Monitors.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      src: cicdGateImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/enterprise-cicd-quality-gate.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Enterprise operations command center during midnight deployment showing CI CD deployment gate with green pass shields.',
+      caption: 'The Midnight Enrollment Quality Gate: Autonomous Newman execution containers defending production stability.',
+      points: [
+        'Automated Deployment Gate: Blocking broken code commits before they reach live student and faculty enrollment clusters.',
+        'Headless Execution Matrix: Running complete collection suites across isolated Docker containers via Newman CLI.',
+        'Executive Visibility: Generating interactive HTML Extra dashboards and real time telemetry for engineering directors.',
+      ],
     },
     {
       type: 'heading',

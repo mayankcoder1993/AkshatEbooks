@@ -1,3 +1,4 @@
+import libraryEngineImg from '../assets/campus-library-automation-engine.jpg'
 import lifecycleImg from '../assets/library-api-crud-lifecycle.jpg'
 
 export const lesson04 = {
@@ -22,6 +23,21 @@ export const lesson04 = {
         'A configured GET GetBook request using query parameters to verify coordinates.',
         'A configured POST DeleteBook request to verify safe cleanup.',
         'The ability to diagnose unique database constraint collisions.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      src: libraryEngineImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/campus-library-automation-engine.jpg',
+      w: 1376,
+      h: 768,
+      alt: 'Automated campus library inventory center showing REST API operations, shelf mapping matrix, and request chaining pipeline.',
+      caption: 'The Campus Library Digital Operations Center: Transforming physical circulation into an autonomous automated API pipeline.',
+      points: [
+        'Circulation Telemetry: Tracking textbook inventory, physical shelf coordinates, and automated borrowing status in real time.',
+        'REST Operations Stream: Dissecting live AddBook POST, GetBook GET, and DeleteBook cleanup calls across campus stacks.',
+        'Autonomous Pipeline: Chaining dynamic identifiers and eliminating manual copy paste bottlenecks before scaling to bulk data.',
       ],
     },
     {

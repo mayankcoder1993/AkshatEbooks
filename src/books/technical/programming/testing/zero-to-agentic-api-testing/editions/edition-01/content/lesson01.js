@@ -1,3 +1,4 @@
+import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 import restaurantImg from '../assets/api-concept-restaurant.jpg'
 import bridgeImg from '../assets/frontend-backend-api-bridge.jpg'
 import matrixImg from '../assets/api-architectures-matrix.jpg'
@@ -25,6 +26,21 @@ export const lesson01 = {
         'An inspection of how backend engineers construct APIs using modern route decorators and automatic JSON serializers.',
         'Hands on experience inspecting live, authentic API payloads directly in your browser without requiring local server setup or complex tooling.',
         'A clear architectural foundation of why API testing is the highest leverage tier in the modern testing pyramid.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      src: warRoomImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Apex University Transit and Safety Gateway command center showing live campus incident monitoring and HTTP packet inspector.',
+      caption: 'The Apex Campus War Room: Diagnosing frontend and backend communication failures during the semester transit launch.',
+      points: [
+        'Crisis Dashboard: Real time telemetry tracking bus arrivals, student mobile geolocation pings, and dispatch latency.',
+        'The Blind Spot: While the student mobile app displayed spinning loaders, the root failure was an unhandled 500 error on the coordinate lookup endpoint.',
+        'Wire Auditing: The Lead API Test Automation Architect bypasses the visual UI to inspect raw HTTP packets and JSON payloads directly over the wire.',
       ],
     },
     {
