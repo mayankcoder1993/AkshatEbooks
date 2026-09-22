@@ -85,6 +85,30 @@ async function blockToDocx(b) {
       ];
       return [tableBox(b.title || 'LIVE API WIRE INSPECTION', items, 'EEF5FA')];
     }
+    case 'mission-hud': {
+      const items = [
+        p([new TextRun({text: `PHASE: ${b.phase} · RANK: ${b.rank}`, bold: true, color: colors.teal})]),
+        p([new TextRun({text: `ACTIVE MISSION: ${b.mission}`, bold: true, color: colors.navy})])
+      ];
+      return [tableBox('MISSION COMMAND HUD', items, 'EEF5FA')];
+    }
+    case 'triage': {
+      const items = [
+        p([new TextRun({text: b.title, bold: true, color: colors.navy})]),
+        p(b.scenario),
+        ...b.options.map((opt, i) => p([new TextRun({text: `${String.fromCharCode(65 + i)}. `, bold: true}), ...rich(opt)])),
+        p([new TextRun({text: 'TACTICAL TRIUMPH: ', bold: true, color: colors.teal}), ...rich(b.debrief)])
+      ];
+      return [tableBox('WAR ROOM INCIDENT TRIAGE', items, 'FFF0F0')];
+    }
+    case 'battle-scar': {
+      const items = [
+        p([new TextRun({text: b.title, bold: true, color: colors.navy})]),
+        p(b.context),
+        p([new TextRun({text: 'Key Architectural Lesson: ', bold: true, color: '9A5B00'}), ...rich(b.takeaway)])
+      ];
+      return [tableBox(`WAR ROOM BATTLE SCAR · ${b.metric || 'PRODUCTION LESSON'}`, items, 'FFF8E8')];
+    }
     case 'mission-tracker': {
       const items = [p(b.text)];
       if (b.image) {

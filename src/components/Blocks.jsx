@@ -32,6 +32,82 @@ function Reveal({ label, children, staticMode }) {
 }
 function Heading({ children }) { return <h2 className="section-heading">{children}</h2> }
 
+function MissionHud({ mission, phase, rank, status = 'ACTIVE' }) {
+  return (
+    <aside className="mission-hud-banner">
+      <div className="hud-phase-col">
+        <span className="hud-phase-badge">{phase}</span>
+        <h4 className="hud-mission-title">{mission}</h4>
+      </div>
+      <div className="hud-rank-pill">
+        <span>★</span>
+        <span>{rank}</span>
+      </div>
+    </aside>
+  )
+}
+
+function WarRoomTriage({ title, scenario, options, answerIndex, debrief, traps = [], staticMode }) {
+  const [selected, setSelected] = useState(staticMode ? answerIndex : null)
+  const isAnswered = selected !== null
+  const isCorrect = selected === answerIndex
+
+  return (
+    <section className="war-room-triage">
+      <div className="triage-header-bar">
+        <span className="triage-alarm-badge">WAR ROOM INCIDENT TRIAGE</span>
+        <span className="triage-mode-tag">DIAGNOSTIC CHALLENGE</span>
+      </div>
+      <div className="triage-body">
+        <h3 className="triage-title">{title}</h3>
+        <p className="triage-scenario"><RichText text={scenario} /></p>
+        <div className="triage-options-list">
+          {options.map((opt, i) => (
+            <button
+              key={i}
+              type="button"
+              className={`triage-option-btn ${selected === i ? 'selected' : ''}`}
+              onClick={() => setSelected(i)}
+            >
+              <span className="triage-option-letter">{String.fromCharCode(65 + i)}</span>
+              <span><RichText text={opt} /></span>
+            </button>
+          ))}
+        </div>
+        {(isAnswered || staticMode) && (
+          <div className={`triage-debrief-box ${isCorrect || staticMode ? 'triumph' : 'trap'}`}>
+            <div className="triage-debrief-header">
+              {isCorrect || staticMode ? '✓ TACTICAL TRIUMPH: THE WINNING MOVE' : '✗ DIAGNOSTIC TRAP: WHY THIS FAILS'}
+            </div>
+            <p className="triage-debrief-text">
+              <RichText text={isCorrect || staticMode ? debrief : (traps[selected] || debrief)} />
+            </p>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+function BattleScar({ title, context, takeaway, metric = 'PRODUCTION LESSON' }) {
+  return (
+    <section className="battle-scar-card">
+      <div className="battle-scar-header">
+        <span>⚡ WAR ROOM BATTLE SCAR</span>
+        <span>•</span>
+        <span>{metric}</span>
+      </div>
+      <div className="battle-scar-body">
+        <h3 className="battle-scar-title">{title}</h3>
+        <p className="battle-scar-context"><RichText text={context} /></p>
+        <p className="battle-scar-takeaway">
+          <strong>Key Architectural Lesson:</strong> <RichText text={takeaway} />
+        </p>
+      </div>
+    </section>
+  )
+}
+
 export function Block({ block: b, staticMode = false }) {
   switch (b.type) {
     case 'heading': return <Heading>{b.text}</Heading>
@@ -79,6 +155,9 @@ export function Block({ block: b, staticMode = false }) {
         </figure>
       )
     case 'api-inspector': return <ApiInspector {...b} staticMode={staticMode}/>
+    case 'mission-hud': return <MissionHud {...b} />
+    case 'triage': return <WarRoomTriage {...b} staticMode={staticMode} />
+    case 'battle-scar': return <BattleScar {...b} />
     case 'mission':
       return (
         <section className="mission modern-mission-box">

@@ -13,6 +13,13 @@ export const lesson01 = {
   tags: ['APIs', 'Client Server', 'JSON', 'REST', 'Fundamentals', 'Architecture'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 1: The Core Protocol and Campus Cloud Integration',
+      phase: 'Phase 1 of 3: The Foundation',
+      rank: 'Rank: Junior Wire Auditor',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission',
       title: 'Mission 1: The Core Protocol and Campus Cloud Integration',
       text: 'Welcome to Apex Campus. Today is launch day for our new university app, and we have an emergency: thousands of students downloaded the app to check bus schedules and class registrations, but the app keeps freezing on their screens with endless spinning loading circles. The mobile developers insist their app is fine and blame the server team. The backend server developers insist their database is healthy and blame the phone app. Security rules strictly forbid giving the phone app direct access to the server database password. The phone and server must communicate through APIs: digital messengers that carry questions and answers across the network. As Lead API Test Automation Architect, your job is to step into the war room, find out why the two systems are failing to communicate, and build automated tests in Postman so launch day never crashes again.\n\nHow We Will Approach This Mission: We cannot fix a car if we do not know what is under the hood. Right now, we do not know the basics of APIs, so we cannot diagnose why the server is crashing. We will approach Mission 1 in three clear, purposeful phases:\n\n• Phase 1 (Chapter 1 · Right Now): The Foundation. We master the basics of APIs, learn how phone apps and servers communicate, see how backend developers write API code in Python, and inspect real live messages directly in the browser. Outcome: You gain the fundamental knowledge needed to look past the screen and inspect network messages with confidence.\n\n• Phase 2 (Chapter 2 · Next Step): The Investigation. We decode the language of the wire: learning the five actions (GET, POST, PUT, PATCH, DELETE) and status codes (200 OK to 500 server crash). Outcome: You find the exact hidden 500 error that crashed the campus bus coordinate lookup.\n\n• Phase 3 (Chapter 3 · Mission Victory): The Automation. We set up Postman, build a shared team workspace, and create our first automated test suite. Outcome: Mission 1 Cleared! The campus transit API is fully protected by automated tests so this crisis never happens again.',
@@ -121,6 +128,13 @@ export const lesson01 = {
         'Apple can redesign the phone with a faster screen, and the cable still charges it. The laptop maker can upgrade the processor, and the cable still connects.',
         'In software, the API is that standard cable. The phone developers can redesign the entire mobile app, and the server developers can rewrite their database. As long as the API in the middle stays the same, neither side ever breaks!',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'October 2013 Launch Crisis',
+      title: 'Healthcare.gov Launch Crash: The Real Cost of Untested Wire Contracts',
+      context: 'When the United States federal health insurance exchange launched in October 2013, millions of citizens flooded the portal. Within two hours, the entire platform stalled with blank screens. What was the core cause? The frontend user interface team and backend insurance database teams had never performed end to end automated API testing against real network data. The frontend expected user records formatted with specific camelCase field names, while the backend produced differing keys. Because neither team verified the API messages traveling across the network wire before opening the public doors, the user interface froze while millions were locked out.',
+      takeaway: 'Never trust user interfaces alone to validate system health. Wire contracts must be rigorously verified at the API boundary using automated assertions before opening services to users.'
     },
     {
       type: 'heading',
@@ -276,11 +290,48 @@ export const lesson01 = {
           { code: 'EE210', title: 'Digital Logic and Microprocessors', department: 'Electrical Engineering', credits: 4, status: 'Active' }
         ]
       },
+      testScript: [
+        '// Test 1: Verify the HTTP status code is 200 OK',
+        'pm.test("Status code is 200 OK", function () {',
+        '    pm.response.to.have.status(200);',
+        '});',
+        '',
+        '// Test 2: Verify the response headers specify JSON',
+        'pm.test("Response header specifies JSON", function () {',
+        '    pm.expect(pm.response.headers.get("Content-Type")).to.include("json");',
+        '});',
+        '',
+        '// Test 3: Verify the campus catalog payload structure',
+        'pm.test("Institution matches Apex Campus platform", function () {',
+        '    const data = pm.response.json();',
+        '    pm.expect(data.institution).to.eql("Apex Campus Global Platform");',
+        '    pm.expect(data.courses.length).to.eql(4);',
+        '});'
+      ],
       assertions: [
         'Response HTTP status code is 200 OK',
         'Response Content Type is application/json',
         'Institution matches Apex Campus Global Platform',
         'Total courses count is equal to four'
+      ]
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Mystery of the Endless Spinning Wheel',
+      scenario: 'It is 8:15 AM on launch morning. A student opens the campus transit app at the central bus stop. The screen displays a university logo and an endless spinning circle. The mobile developer claims: "My Swift UI code is flawless; the button was clicked properly!" The backend developer claims: "Our PostgreSQL database CPU is at 2 percent!" As Lead Automation Architect, what is your first diagnostic move?',
+      options: [
+        'Rewrite the mobile button click handler in Swift to retry three times when clicked.',
+        'Restart the database server cluster and allocate double the RAM to clear query memory.',
+        'Open the network wire inspector to observe the raw HTTP request and server response payload.',
+        'File an urgent bug ticket with the design team to replace the spinning wheel with a loading bar.'
+      ],
+      answerIndex: 2,
+      debrief: 'You bypassed UI assumptions and inspected the wire directly! In minutes, you see the GET request to /v1/bus/coordinates returned an HTTP 500 error because a coordinate resolver crashed. The mobile app hung because it never received JSON.',
+      traps: [
+        'Modifying client side code blindly wastes valuable minutes when the failure occurs over the network wire.',
+        'Restarting healthy database clusters risks customer downtime without diagnosing the actual API communication failure.',
+        '',
+        'Cosmetic visual adjustments hide the underlying systemic breakdown while leaving students stranded at the stop.'
       ]
     },
     {
