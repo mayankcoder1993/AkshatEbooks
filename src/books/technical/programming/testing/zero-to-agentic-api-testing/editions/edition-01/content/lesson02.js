@@ -10,6 +10,13 @@ export const lesson02 = {
   tags: ['REST', 'HTTP', 'CRUD', 'Status Codes', 'Architecture'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 1: The Core Protocol and Campus Cloud Integration',
+      phase: 'Phase 2 of 3: The Investigation',
+      rank: 'Rank: Wire Protocol Investigator',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 1 PROGRESS · STEP 2 OF 3',
       title: 'Continuing Mission 1: Decoding the Wire Protocol',
@@ -132,6 +139,32 @@ export const lesson02 = {
         'Because GET parameters appear directly in the browser address bar, web server access logs, and browser history, they are immediately exposed to third parties.',
         'Always use POST with a request body over HTTPS for sensitive user input, and reserve GET strictly for safe, read only data retrieval.',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'World Cup Traffic Crisis',
+      title: 'Twitter Fail Whale: The Danger of Cascading 500 and 503 Crashes',
+      context: 'During the 2010 World Cup, millions of global fans sent simultaneous soccer reactions. Twitter servers buckled under the traffic, showing users the famous Fail Whale illustration. The architectural breakdown occurred because the service lacked idempotent retry policies and client timeouts. When one microservice slowed down, upstream APIs kept blasting retries, causing an avalanche of cascading HTTP 500 and 503 errors that paralyzed the entire platform.',
+      takeaway: 'Designing resilient APIs requires strict status code discipline, client side timeout limits, and idempotency guarantees to prevent traffic storms from bringing down production systems.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Dangerous Duplicate Charge Incident',
+      scenario: 'An angry student calls campus billing: their credit card was charged three times for one semester parking permit! The network log reveals the student clicked the Pay button during a WiFi flicker. The client dispatched three consecutive POST requests to /v1/payments/charge. What is the fundamental REST protocol defect causing this disaster?',
+      options: [
+        'The mobile application used POST without an idempotency key to protect duplicate payment execution.',
+        'The backend database should have rejected any HTTP request sent during a wireless signal drop.',
+        'The client should have sent a DELETE request immediately following every completed POST call.',
+        'The university payment gateway requires all requests to be formatted in raw XML text.'
+      ],
+      answerIndex: 0,
+      debrief: 'POST is non idempotent by definition! Sending three identical POST requests creates three distinct charges. Production systems require idempotency keys so that duplicate network packets safely return the existing transaction receipt rather than executing a duplicate charge.',
+      traps: [
+        '',
+        'Network drops are inevitable on mobile devices; backend servers cannot predict signal strength.',
+        'Executing a DELETE request after every payment would erase the student registration record.',
+        'Payload format has no effect on idempotency or payment safety.'
+      ]
     },
     {
       type: 'heading',

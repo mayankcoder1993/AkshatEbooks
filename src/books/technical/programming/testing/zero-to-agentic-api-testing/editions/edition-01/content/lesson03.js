@@ -10,6 +10,13 @@ export const lesson03 = {
   tags: ['Postman', 'Workspaces', 'Installation', 'Collections', 'Tooling'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 1: The Core Protocol and Campus Cloud Integration',
+      phase: 'Phase 3 of 3: The Automation (Mission Victory)',
+      rank: 'Rank: Automation Pipeline Engineer',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 1 PROGRESS · STEP 3 OF 3',
       title: 'Completing Mission 1: Entering the Laboratory to Verify the Wire',
@@ -168,6 +175,32 @@ export const lesson03 = {
         'If your unfinished test fails during a scheduled smoke run, it triggers false alarm emails to engineering leads.',
         'Always fork the collection into your own branch, test your changes thoroughly, and raise a pull request for review.',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Security Exposure Audit',
+      title: 'Public Workspace Key Exposure: The Danger of Accidental Visibility',
+      context: 'Security researchers analyzing public API repositories uncovered thousands of live production database passwords, cloud secrets, and private authentication tokens inadvertently shared in public Postman workspaces. Engineers intended to test a quick endpoint in their personal sandbox, but accidentally published their workspace to the open web. Anyone typing search terms into web search engines could discover administrative master keys.',
+      takeaway: 'Always isolate sensitive credentials using private masked environment variables. Never publish workspace collections containing real production authorization keys to public web directories.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Leaked Master Key Incident',
+      scenario: 'At 11:30 PM, the campus security operations center alerts the team: an administrative database token was detected in an open web search index. A junior tester admits they created a collection in Postman earlier that afternoon. What immediate containment action must the team take first?',
+      options: [
+        'Send an email to vendor support requesting them to remove the indexed collection URL.',
+        'Immediately revoke and regenerate the compromised database secret in the identity provider.',
+        'Rename the Postman collection to a generic title like Test Project.',
+        'Delete the local Postman application from the tester laptop workstation.'
+      ],
+      answerIndex: 1,
+      debrief: 'Immediate credential revocation is step one of incident containment! Once a secret is exposed to the public internet, assume it is already harvested by automated scanners. You must invalidate the key instantly, inspect access audit logs, and move all tokens into masked environment variables.',
+      traps: [
+        'Waiting for external vendor support allows attackers unrestricted hours of database access.',
+        '',
+        'Renaming collections does not change URLs or revoke exposed credentials from search caches.',
+        'Deleting local software does not erase published cloud data or revoke live keys.'
+      ]
     },
     {
       type: 'mission-accomplished',
