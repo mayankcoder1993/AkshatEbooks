@@ -141,6 +141,102 @@ function BattlePlan({ badge = 'TACTICAL MISSION ROADMAP', title = 'The 3 Phase B
   )
 }
 
+function ScenarioGrid({ badge = 'REAL WORLD MENTAL MODELS', title = 'Everyday APIs You Already Use', intro, scenarios = [] }) {
+  return (
+    <section className="scenario-grid-container">
+      <div className="scenario-grid-header">
+        <span className="scenario-grid-badge">{badge}</span>
+        <h3 className="scenario-grid-title">{title}</h3>
+      </div>
+      {intro && <p className="scenario-grid-intro"><RichText text={intro} /></p>}
+      <div className="scenario-cards-row">
+        {scenarios.map((sc, idx) => (
+          <div key={idx} className="scenario-card">
+            <div className="scenario-card-header">
+              <span className="scenario-card-icon">{sc.icon}</span>
+              <div>
+                <span className="scenario-card-kicker">{sc.kicker}</span>
+                <h4 className="scenario-card-title">{sc.title}</h4>
+              </div>
+            </div>
+            <div className="scenario-card-body">
+              <div className="scenario-block question-block">
+                <span className="scenario-label">The Natural Question:</span>
+                <p className="scenario-text italic"><RichText text={sc.question} /></p>
+              </div>
+              <div className="scenario-block reality-block">
+                <span className="scenario-label">The Tech Reality Check:</span>
+                <p className="scenario-text"><RichText text={sc.reality} /></p>
+              </div>
+              <div className="scenario-block conversation-block">
+                <span className="scenario-label">The API Conversation Over the Wire:</span>
+                <div className="conversation-dialogue">
+                  <div className="dialogue-line client">
+                    <span className="dialogue-speaker">{sc.clientName}:</span>
+                    <span className="dialogue-quote">"{sc.clientSays}"</span>
+                  </div>
+                  <div className="dialogue-line server">
+                    <span className="dialogue-speaker">{sc.serverName}:</span>
+                    <span className="dialogue-quote">"{sc.serverReplies}"</span>
+                  </div>
+                </div>
+              </div>
+              <div className="scenario-block takeaway-block">
+                <span className="scenario-label">Why This Matters:</span>
+                <p className="scenario-text highlight"><RichText text={sc.takeaway} /></p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function StructuredBreakdown({ badge = 'ARCHITECTURAL DECONSTRUCTION', title, intro, categories = [] }) {
+  return (
+    <section className="structured-breakdown-card">
+      <div className="structured-header">
+        <span className="structured-badge">{badge}</span>
+        <h3 className="structured-title">{title}</h3>
+      </div>
+      {intro && <p className="structured-intro"><RichText text={intro} /></p>}
+      <div className="structured-categories-list">
+        {categories.map((cat, idx) => (
+          <div key={idx} className="category-shape-box">
+            <div className="category-top-bar">
+              <span className="category-num-badge">PILLAR {idx + 1}</span>
+              <span className="category-name">{cat.category}</span>
+              {cat.subCategory && <span className="category-sub">{cat.subCategory}</span>}
+            </div>
+            <div className="category-content-grid">
+              <div className="category-explanation-pane">
+                <h4 className="category-card-heading">{cat.title}</h4>
+                <p className="category-desc"><RichText text={cat.explanation} /></p>
+                {cat.points?.length > 0 && (
+                  <ul className="category-bullets">
+                    {cat.points.map((pt, pidx) => (
+                      <li key={pidx}><RichText text={pt} /></li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {cat.code && (
+                <div className="category-code-pane">
+                  <div className="pane-code-header">
+                    <span>{cat.filename || 'snippet.py'}</span>
+                  </div>
+                  <pre className="category-code-box"><code>{Array.isArray(cat.code) ? cat.code.join('\n') : cat.code}</code></pre>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 export function Block({ block: b, staticMode = false }) {
   switch (b.type) {
     case 'heading': return <Heading>{b.text}</Heading>
@@ -192,6 +288,8 @@ export function Block({ block: b, staticMode = false }) {
     case 'triage': return <WarRoomTriage {...b} staticMode={staticMode} />
     case 'battle-scar': return <BattleScar {...b} />
     case 'battle-plan': return <BattlePlan {...b} />
+    case 'scenario-grid': return <ScenarioGrid {...b} />
+    case 'structured-breakdown': return <StructuredBreakdown {...b} />
     case 'mission':
       return (
         <section className="mission modern-mission-box">

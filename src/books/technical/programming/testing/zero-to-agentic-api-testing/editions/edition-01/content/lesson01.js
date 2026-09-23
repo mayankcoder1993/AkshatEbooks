@@ -116,16 +116,36 @@ export const lesson01 = {
       text: 'Step 2: Everyday Examples: How Apps Talk to Outside Services',
     },
     {
-      type: 'paragraph',
-      text: 'Think about the Weather app on your phone. When you open it, the screen tells you: *It is 24 degrees and sunny outside.* Did your phone launch a weather satellite into space? Did Apple build physical thermometers on every street corner? Of course not.',
-    },
-    {
-      type: 'paragraph',
-      text: 'Your phone simply asked a weather computer: *What is the temperature in my town right now?* The weather computer checked its database and replied: *24 degrees and sunny.* Your phone took that simple answer and drew a nice yellow sun on your screen. That quick conversation is an API.',
-    },
-    {
-      type: 'paragraph',
-      text: 'Think about booking a flight on Google Flights or MakeMyTrip. When you search for flights, you see ticket prices from multiple airlines on one screen. Did those airlines give Google their secret computer passwords? Did they let outside companies touch their private booking systems? Absolutely not. Instead, Google asks each airline API: *What flights do you have today?* Each airline API checks their private system and sends back the prices. That is the beauty of an API: two different companies can share information safely without sharing passwords.',
+      type: 'scenario-grid',
+      badge: 'EVERYDAY MENTAL MODELS',
+      title: 'Real World Scenarios: Weather and Flight Bookings',
+      intro: 'You already use APIs dozens of times each day without realizing it. Here is how modern applications coordinate information across the network:',
+      scenarios: [
+        {
+          icon: '☀️',
+          kicker: 'Everyday Example 1',
+          title: 'The Smartphone Weather App',
+          question: 'When you open your phone and see: "It is 24 degrees and sunny outside."',
+          reality: 'Did your phone launch a weather satellite into space? Did Apple or Google build physical thermometers on every street corner? Of course not.',
+          clientName: 'Phone (Client)',
+          clientSays: 'What is the temperature in my town right now?',
+          serverName: 'Weather Server (Backend)',
+          serverReplies: '24 degrees and sunny.',
+          takeaway: 'Your phone took that simple text answer and drew a cheerful yellow sun on your screen. That quick conversation is an API!'
+        },
+        {
+          icon: '✈️',
+          kicker: 'Everyday Example 2',
+          title: 'Google Flights and MakeMyTrip',
+          question: 'When you search for flights and see ticket prices from multiple airlines on one screen.',
+          reality: 'Did those airlines give Google their secret computer passwords? Did they let outside companies touch private booking systems? Absolutely not.',
+          clientName: 'Flight Aggregator',
+          clientSays: 'What flights and ticket prices do you have available today?',
+          serverName: 'Airline APIs',
+          serverReplies: 'Flight 101 departs at 9 AM for 220 dollars.',
+          takeaway: 'Two separate companies share live business data safely without ever sharing private system passwords.'
+        }
+      ]
     },
     {
       type: 'heading',
@@ -151,17 +171,6 @@ export const lesson01 = {
       ],
     },
     {
-      type: 'callout',
-      variant: 'note',
-      title: 'The Universal USB Cable Analogy: Complete Freedom to Change',
-      paragraphs: [
-        'Think of a standard USB charging cable. You can plug it into an Apple iPad, a Samsung phone, a Dell laptop, or a Kindle reader.',
-        'The company making the laptop does not need to know what brand of phone you buy, and the charger company does not care what laptop you own.',
-        'Apple can redesign the phone with a faster screen, and the cable still charges it. The laptop maker can upgrade the processor, and the cable still connects.',
-        'In software, the API is that standard cable. The phone developers can redesign the entire mobile app, and the server developers can rewrite their database. As long as the API in the middle stays the same, neither side ever breaks!',
-      ],
-    },
-    {
       type: 'battle-scar',
       metric: 'October 2013 Launch Crisis',
       title: 'Healthcare.gov Launch Crash: The Real Cost of Untested Wire Contracts',
@@ -177,73 +186,87 @@ export const lesson01 = {
       text: 'Why are we looking at server code right now? Remember our launch day crisis in the War Room: the phone app is frozen, and the mobile developers and server developers are arguing. To step in as the Lead Quality Architect and solve this breakdown, you need to understand what an API looks like from the inside out. When you understand how a server receives questions and packages answers, you can pinpoint the exact failure and write automated tests that prevent it.',
     },
     {
+      type: 'structured-breakdown',
+      badge: 'BACKEND ARCHITECTURAL DECONSTRUCTION',
+      title: 'How a Server Listens, Computes, and Answers on the Wire',
+      intro: 'A backend API server is built from modular architectural pillars. Here is how modern cloud frameworks like FastAPI organize server mechanics:',
+      categories: [
+        {
+          category: 'Data Format',
+          subCategory: 'JSON Key Value Envelope',
+          title: 'How Computers Exchange Notes in Plain Text',
+          explanation: 'Before looking at code, let us understand how computers exchange notes. They use a simple format called JSON (JavaScript Object Notation). It is plain text with labels on the left and values on the right inside curly brackets.',
+          points: [
+            'Label on the left: Names the field attribute such as "bus" or "arrivesInMinutes".',
+            'Value on the right: Contains the actual data payload such as "Campus Express" or 5.',
+            'Universal readability: Every computer language on Earth (Python, JavaScript, Swift, Java, C#) reads and writes JSON natively.',
+          ],
+          filename: 'sample-note.json',
+          code: [
+            '{',
+            '  "bus": "Campus Express",',
+            '  "arrivesInMinutes": 5,',
+            '  "onTime": true',
+            '}'
+          ]
+        },
+        {
+          category: 'Pillar 1: Identity',
+          subCategory: 'Web Engine Initialization',
+          title: 'Giving the Service a Formal Title and Memory Space',
+          explanation: 'We import our lightweight web engine and initialize the application instance. This creates the master router that handles web traffic.',
+          points: [
+            'Import FastAPI: Brings in the modern high performance web framework.',
+            'Title assignment: Identifies the university transit microservice in system logs and automated documentation.',
+          ],
+          filename: 'piece-1-create-service.py',
+          code: [
+            'from fastapi import FastAPI',
+            '',
+            'app = FastAPI(title="Campus Transit API")'
+          ]
+        },
+        {
+          category: 'Pillar 2: The Door Route',
+          subCategory: 'Network Listener Decorator',
+          title: 'Setting the Wire Address Door for Client Requests',
+          explanation: 'We tell the server operating system which URL address door to monitor for incoming student mobile requests.',
+          points: [
+            'Route decorator (@app.get): Acts as the physical door buzzer for incoming requests.',
+            'Address path (/v1/location/resolve): The exact URL string phones knock on to ask for coordinate verification.',
+          ],
+          filename: 'piece-2-set-route.py',
+          code: [
+            '# Whenever a phone asks for this address, wake up and answer',
+            '@app.get("/v1/location/resolve")'
+          ]
+        },
+        {
+          category: 'Pillar 3: The Handler',
+          subCategory: 'Business Logic and Packing',
+          title: 'Computing the Coordinates and Packing the JSON Answer',
+          explanation: 'The server takes student latitude and longitude numbers, checks whether they fall within campus boundaries, and packages the result into a clean JSON note.',
+          points: [
+            'Parameter acceptance: Accepts numeric coordinates sent from the mobile client.',
+            'Boundary calculation: Verifies if coordinates fall within university geographical bounds.',
+            'JSON response packaging: Returns a structured dictionary ready for network transmission.',
+          ],
+          filename: 'piece-3-answer-question.py',
+          code: [
+            'def resolve_campus_location(latitude: float, longitude: float):',
+            '    is_on_campus = (37.40 <= latitude <= 37.45) and (-122.10 <= longitude <= -122.05)',
+            '    return {',
+            '        "status": "success",',
+            '        "campus": "North Campus",',
+            '        "verified_on_campus": is_on_campus',
+            '    }'
+          ]
+        }
+      ]
+    },
+    {
       type: 'paragraph',
-      text: 'Before looking at code, let us understand how computers exchange notes. They use a simple format called JSON. A JSON note is just plain text with labels and values inside curly brackets:',
-    },
-    {
-      type: 'code',
-      filename: 'sample-note.json',
-      lines: [
-        '{',
-        '  "bus": "Campus Express",',
-        '  "arrivesInMinutes": 5,',
-        '  "onTime": true',
-        '}',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'Notice how clean that note is. A label on the left, a value on the right. There are no secret symbols or machine code. Because it is simple plain text, every computer language on Earth can read and write it easily.',
-    },
-    {
-      type: 'paragraph',
-      text: 'Now, let us build a real server API in three tiny, digestible pieces using Python:',
-    },
-    {
-      type: 'paragraph',
-      text: 'Piece 1: Giving Our Service a Name. We bring in our web tool and give our service a title:',
-    },
-    {
-      type: 'code',
-      filename: 'piece-1-create-service.py',
-      lines: [
-        'from fastapi import FastAPI',
-        '',
-        'app = FastAPI(title="Campus Transit API")',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'Piece 2: Setting the Address Door. We tell the server which web address to listen for:',
-    },
-    {
-      type: 'code',
-      filename: 'piece-2-set-route.py',
-      lines: [
-        '# Whenever a phone asks for this address, wake up and answer',
-        '@app.get("/v1/location/resolve")',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'Piece 3: Doing the Work and Packing the Answer. The server takes the student latitude and longitude numbers, checks if they are on campus, and packs the answer into our simple JSON note:',
-    },
-    {
-      type: 'code',
-      filename: 'piece-3-answer-question.py',
-      lines: [
-        'def resolve_campus_location(latitude: float, longitude: float):',
-        '    is_on_campus = (37.40 <= latitude <= 37.45) and (-122.10 <= longitude <= -122.05)',
-        '    return {',
-        '        "status": "success",',
-        '        "campus": "North Campus",',
-        '        "verified_on_campus": is_on_campus',
-        '    }',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'Putting It All Together: Combining the Three Pieces into One Complete Service. Look at what happens when we combine those three pieces together:',
+      text: 'Putting It All Together: Combining the Three Pillars into One Complete Service. Notice how simple the complete application is when assembled:',
     },
     {
       type: 'code',
@@ -271,8 +294,8 @@ export const lesson01 = {
       variant: 'tip',
       title: 'The Big Takeaway for Software Testers',
       paragraphs: [
-        'In just 14 lines of simple code, a real API is running, listening for requests, and returning answers to thousands of student phones.',
-        'As software testers, we do not need to write their server code. Our mission is to test from the outside: making sure good questions get good answers, and bad questions get handled safely without crashing the system.',
+        'In just 14 lines of clean code, a real API is running, listening for requests, and returning answers to thousands of student phones.',
+        'As software automation architects, our mission is not to write backend application code. Our mission is to test from the outside over the wire: verifying that valid requests receive accurate JSON payloads, and malformed requests return structured error codes without crashing the server.',
       ],
     },
     {
@@ -298,6 +321,17 @@ export const lesson01 = {
     {
       type: 'paragraph',
       text: 'Below is our live inspection blueprint. If you are reading on the interactive web, you can click Send Request to test the call. If you are reading in an eBook or printed page, you can see the complete request, the full server response payload, and all verified test results laid out directly in front of you:',
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Why Private Corporate URLs Cannot Open in a Public Browser',
+      paragraphs: [
+        'Notice the address in our inspection workbench below: `https://api.campuslibrary.org/v1/catalog`. If you copy this URL and paste it into your ordinary web browser, your browser will display a "Site Can Not Be Reached" error.',
+        'Why does this happen? In real world enterprise software, internal microservices live on private intranet domains behind corporate firewalls. They are not registered on public internet DNS root servers, so your home internet provider has no record of them.',
+        'This is the primary reason API testing workbenches like Postman exist: to send authenticated requests directly to private microservices, local developer environments, and mock server clusters.',
+        'To see the exact live JSON response payload in your browser right now, click the "Live Browser Link" button in the workbench toolbar or open our verified public links above!',
+      ],
     },
     {
       type: 'api-inspector',

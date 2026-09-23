@@ -123,6 +123,32 @@ async function blockToDocx(b) {
       ];
       return [tableBox(b.title || 'THE 3 PHASE BATTLE PLAN', items, 'EEF8F6')];
     }
+    case 'scenario-grid': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.scenarios.flatMap(sc => [
+          p([new TextRun({ text: `${sc.icon || '•'} ${sc.kicker}: ${sc.title}`, bold: true, color: colors.navy })]),
+          p([new TextRun({ text: 'The Natural Question: ', bold: true }), new TextRun({ text: sc.question, italics: true })]),
+          p([new TextRun({ text: 'The Tech Reality Check: ', bold: true }), ...rich(sc.reality)]),
+          p([new TextRun({ text: `${sc.clientName}: `, bold: true, color: colors.indigo }), new TextRun({ text: `"${sc.clientSays}"`, italics: true })]),
+          p([new TextRun({ text: `${sc.serverName}: `, bold: true, color: colors.teal }), new TextRun({ text: `"${sc.serverReplies}"`, italics: true })]),
+          p([new TextRun({ text: 'Why This Matters: ', bold: true, color: colors.teal }), ...rich(sc.takeaway)])
+        ])
+      ];
+      return [tableBox(b.title || 'EVERYDAY REAL WORLD SCENARIOS', items, 'EEF1FA')];
+    }
+    case 'structured-breakdown': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.categories.flatMap((cat, idx) => [
+          p([new TextRun({ text: `PILLAR ${idx + 1}: ${cat.category} · ${cat.title}`, bold: true, color: colors.navy })]),
+          p(cat.explanation),
+          ...(cat.points?.length ? cat.points.map(pt => p(`• ${pt}`)) : []),
+          ...(cat.code ? code(Array.isArray(cat.code) ? cat.code : [cat.code], cat.filename || 'snippet.py') : [])
+        ])
+      ];
+      return [tableBox(b.title || 'ARCHITECTURAL DECONSTRUCTION', items, 'F3F6FA')];
+    }
     case 'mission-tracker': {
       const items = [p(b.text)];
       if (b.image) {

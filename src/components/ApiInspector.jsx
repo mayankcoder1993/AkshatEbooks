@@ -3,6 +3,7 @@ import { useState } from 'react'
 export default function ApiInspector({
   method = 'GET',
   url = 'https://api.github.com/users/octocat',
+  publicMirrorUrl = null,
   headers = {},
   requestBody = null,
   status = '200 OK',
@@ -28,6 +29,11 @@ export default function ApiInspector({
   const [activeTab, setActiveTab] = useState(staticMode ? 'all' : 'all')
   const [chaosMode, setChaosMode] = useState('normal')
   const [sending, setSending] = useState(false)
+
+  const isSimulatedDomain = url.includes('campuslibrary.org') || url.includes('.local') || url.includes('.corp')
+  const mirrorLink = publicMirrorUrl || (url.includes('campuslibrary.org')
+    ? 'https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/lesson-01/campus-catalog.json'
+    : null)
 
   const methodClass = method.toUpperCase() === 'POST' ? 'post' :
     method.toUpperCase() === 'DELETE' ? 'delete' :
@@ -83,6 +89,22 @@ export default function ApiInspector({
       <div className="api-url-bar">
         <span className={`method-badge ${methodClass}`}>{method}</span>
         <span className="url-text">{url}</span>
+        {isSimulatedDomain && (
+          <span className="dns-notice-pill" title="Private simulated university microservice. Not registered on public internet DNS.">
+            🔒 Private Intranet Domain
+          </span>
+        )}
+        {mirrorLink && (
+          <a
+            href={mirrorLink}
+            target="_blank"
+            rel="noreferrer"
+            className="mirror-btn"
+            title="Open live JSON payload directly in your browser"
+          >
+            🌐 Live Browser Link ↗
+          </a>
+        )}
         {!staticMode && (
           <div className="workbench-actions">
             <button
@@ -96,6 +118,12 @@ export default function ApiInspector({
           </div>
         )}
       </div>
+
+      {isSimulatedDomain && (
+        <div className="dns-explainer-bar">
+          💡 <strong>Why pasting this URL into your browser shows no response:</strong> <code>{url}</code> is a private university intranet address. In real world corporate architectures, internal microservices live behind company firewalls and are not registered on public internet DNS. That is why API workbenches like Postman exist: to test private endpoints directly! To inspect this exact response live in your public browser right now, click <a href={mirrorLink} target="_blank" rel="noreferrer">Live Browser Link ↗</a>.
+        </div>
+      )}
 
       {!staticMode && (
         <div className="chaos-controls-bar">
