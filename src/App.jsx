@@ -5,6 +5,7 @@ import LessonShell from './components/LessonShell.jsx'
 import PrintBook from './components/PrintBook.jsx'
 import Blocks from './components/Blocks.jsx'
 import CurriculumBlueprint from './components/CurriculumBlueprint.jsx'
+import HowToUseGuide from './components/HowToUseGuide.jsx'
 import { DEFAULT_BOOK_ID, loadBookPackage } from './catalog/generated/registry.js'
 
 const BUILD_BOOK_ID = import.meta.env.VITE_BOOK_ID || DEFAULT_BOOK_ID
@@ -59,17 +60,29 @@ const initialLocation = () => {
   const isFsParam = search.get('fullscreen') === 'true'
   const preview = search.get('view') === 'book' || isFsParam
   const targetBook = search.get('book') || 'zero-to-agentic-api-testing'
+  const sectionParam = search.get('section')
+  const chapterParam = search.get('chapter')
+
+  let initialActive = 'preface'
+  if (sectionParam === 'how-to-use') {
+    initialActive = 'how-to-use'
+  } else if (chapterParam) {
+    const chNum = parseInt(chapterParam, 10)
+    if (!isNaN(chNum) && chNum >= 1) {
+      initialActive = chNum - 1
+    }
+  }
 
   if (window.location.search.includes('view=blueprint') || window.location.pathname.includes('blueprint')) {
-    return { view: 'blueprint', bookId: targetBook, editionId: 'edition-01', preview: false, fullscreen: false }
+    return { view: 'blueprint', bookId: targetBook, editionId: 'edition-01', preview: false, fullscreen: false, initialActive }
   }
   if (window.location.protocol === 'file:') {
-    return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false, fullscreen: false }
+    return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false, fullscreen: false, initialActive }
   }
   const location = routeBookLocation()
   return location
-    ? { view: 'book', ...location, preview, fullscreen: isFsParam }
-    : { view: 'book', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview, fullscreen: isFsParam }
+    ? { view: 'book', ...location, preview, fullscreen: isFsParam, initialActive }
+    : { view: 'book', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview, fullscreen: isFsParam, initialActive }
 }
 
 export default function App() {
@@ -86,7 +99,7 @@ export default function App() {
   const [editionId, setEditionId] = useState(initial.editionId)
   const [publication, setPublication] = useState(null)
   const [loadError, setLoadError] = useState(null)
-  const [active, setActive] = useState(0)
+  const [active, setActive] = useState(initial.initialActive || 'preface')
   const [preview, setPreview] = useState(initial.preview)
   const [exporting, setExporting] = useState(false)
   const [isWide, setIsWide] = useState(false)
@@ -207,7 +220,7 @@ export default function App() {
     let current = true
     setPublication(null)
     setLoadError(null)
-    setActive(0)
+    setActive('preface')
     loadBookPackage(bookId, editionId || undefined)
       .then(book => {
         if (current) setPublication(book)
@@ -298,8 +311,11 @@ export default function App() {
     )
   }
 
-  const { lessons, BOOK, BRAND } = publication
-  const lesson = lessons[active]
+  const { lessons, BOOK, BRAND, PREFACE } = publication
+  const isPreface = active === 'preface'
+  const isHowToUse = active === 'how-to-use'
+  const isChapter = typeof active === 'number'
+  const lesson = isChapter ? lessons[active] : null
 
   const savePdf = () => {
     setPreview(true)
@@ -341,11 +357,14 @@ export default function App() {
               <option value="print-toc">Table of Contents</option>
               <option value="print-preface">Preface</option>
               <option value="print-how-to">How to use this book</option>
-              {lessons.map((l, i) => (
+              {lessons.map((l, i) => [
+                <option key={`briefing-${l.id}`} value={`print-briefing-${l.id}`}>
+                  Mission Briefing: Chapter {i + 1}
+                </option>,
                 <option key={l.id} value={`print-${l.id}`}>
                   Chapter {i + 1}: {l.title}
                 </option>
-              ))}
+              ])}
               <option value="print-about">About the Author</option>
             </select>
           </div>
@@ -431,20 +450,71 @@ export default function App() {
           onToggleFullscreen={toggleFullscreen}
         />
         <main className={`page ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
-          <div key={lesson.id}>
-            <LessonShell lesson={lesson} index={active} total={lessons.length} unitLabel={BOOK.unitLabel}>
-              <Blocks blocks={lesson.blocks} />
-            </LessonShell>
-          </div>
+          {isPreface && PREFACE && (
+            <article className="lesson lesson-enter">
+              <header className="lesson-hero">
+                <div className="lesson-hero-meta">
+                  <span className="pill accent">Frontmatter · Preface</span>
+                  <span className="pill">Foundations</span>
+                  <span className="pill">First Principles</span>
+                </div>
+                <p className="lesson-eyebrow">Frontmatter</p>
+                <h1 className="lesson-title">{PREFACE.title}</h1>
+                <p className="lesson-subtitle">The invisible nervous system of modern computing, first principles, and the transition from human clicks to automated pipelines.</p>
+              </header>
+              <Blocks blocks={PREFACE.blocks} />
+            </article>
+          )}
+
+          {isHowToUse && (
+            <article className="lesson lesson-enter">
+              <header className="lesson-hero">
+                <div className="lesson-hero-meta">
+                  <span className="pill accent">Frontmatter · Guide</span>
+                  <span className="pill">Active Recall</span>
+                  <span className="pill">Mastery Framework</span>
+                </div>
+                <p className="lesson-eyebrow">Frontmatter</p>
+                <h1 className="lesson-title">How to Use This Book for Maximum Mastery</h1>
+                <p className="lesson-subtitle">Active prediction, wire level observation, runnable code sandboxes, and defensive recovery habits.</p>
+              </header>
+              <HowToUseGuide items={BOOK?.howToUse || []} />
+            </article>
+          )}
+
+          {isChapter && lesson && (
+            <div key={lesson.id}>
+              <LessonShell lesson={lesson} index={active} total={lessons.length} unitLabel={BOOK.unitLabel}>
+                <Blocks blocks={lesson.blocks} />
+              </LessonShell>
+            </div>
+          )}
+
           <nav className="lesson-nav">
-            <button className="btn" disabled={!active} onClick={() => setActive(value => value - 1)}>
+            <button
+              className="btn"
+              disabled={isPreface}
+              onClick={() => {
+                if (isHowToUse) setActive('preface')
+                else if (isChapter && active === 0) setActive('how-to-use')
+                else if (isChapter && active > 0) setActive(value => value - 1)
+              }}
+            >
               ← Previous
             </button>
-            <span>Chapter {active + 1} of {lessons.length}</span>
+            <span>
+              {isPreface && 'Frontmatter: Preface'}
+              {isHowToUse && 'Frontmatter: How to Use This Book'}
+              {isChapter && `Chapter ${active + 1} of ${lessons.length}`}
+            </span>
             <button
               className="btn primary"
-              disabled={active === lessons.length - 1}
-              onClick={() => setActive(value => value + 1)}
+              disabled={isChapter && active === lessons.length - 1}
+              onClick={() => {
+                if (isPreface) setActive('how-to-use')
+                else if (isHowToUse) setActive(0)
+                else if (isChapter && active < lessons.length - 1) setActive(value => value + 1)
+              }}
             >
               Next →
             </button>

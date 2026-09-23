@@ -282,22 +282,68 @@ function ChunkedCode({ badge = 'CODE IN CHUNKS', title, intro, chunks = [] }) {
   )
 }
 
-function ChapterOpener({ achieve, how, carry, staticMode }) {
+function ChapterOpener({
+  missionBadge = 'MISSION BRIEFING',
+  missionTitle,
+  missionCrisis,
+  missionContext,
+  missionObjective,
+  targetSystems,
+  achieve,
+  how,
+  carry,
+  staticMode
+}) {
   return (
-    <section className="chapter-opener-card">
-      <div className="opener-grid">
-        <div className="opener-cell achieve">
-          <span className="opener-kicker">WE WILL ACHIEVE</span>
-          <p className="opener-text"><RichText text={achieve} /></p>
+    <section className="mission-chapter-launchpad-card">
+      <div className="launchpad-banner">
+        <div className="launchpad-badge-row">
+          <span className="launchpad-mission-badge">{missionBadge}</span>
+          {missionTitle && <span className="launchpad-mission-title">{missionTitle}</span>}
         </div>
-        <div className="opener-cell how">
-          <span className="opener-kicker">HOW WE WILL DO IT</span>
-          <p className="opener-text"><RichText text={how} /></p>
+        {missionCrisis && <h2 className="launchpad-crisis-heading">{missionCrisis}</h2>}
+      </div>
+
+      {(missionContext || missionObjective || targetSystems) && (
+        <div className="launchpad-mission-detail-box">
+          <div className="launchpad-detail-header">
+            <span className="launchpad-detail-kicker">THE ENTERPRISE MISSION BRIEFING</span>
+            {targetSystems && <span className="launchpad-systems-tag">{targetSystems}</span>}
+          </div>
+          {missionContext && <p className="launchpad-context-text"><RichText text={missionContext} /></p>}
+          {missionObjective && (
+            <div className="launchpad-objective-bar">
+              <span className="launchpad-objective-tag">OPERATIONAL TARGET</span>
+              <p className="launchpad-objective-text"><RichText text={missionObjective} /></p>
+            </div>
+          )}
         </div>
-        <div className="opener-cell carry">
-          <span className="opener-kicker">WHAT YOU WILL CARRY FORWARD</span>
-          <p className="opener-text"><RichText text={carry} /></p>
+      )}
+
+      <div className="launchpad-chapter-plan-box">
+        <div className="launchpad-plan-header">
+          <span className="launchpad-plan-kicker">WHAT WE WILL DO IN THIS CHAPTER</span>
         </div>
+        <div className="opener-grid">
+          <div className="opener-cell achieve">
+            <span className="opener-kicker">WE WILL ACHIEVE</span>
+            <p className="opener-text"><RichText text={achieve} /></p>
+          </div>
+          <div className="opener-cell how">
+            <span className="opener-kicker">HOW WE WILL DO IT</span>
+            <p className="opener-text"><RichText text={how} /></p>
+          </div>
+          <div className="opener-cell carry">
+            <span className="opener-kicker">WHAT YOU WILL CARRY FORWARD</span>
+            <p className="opener-text"><RichText text={carry} /></p>
+          </div>
+        </div>
+      </div>
+
+      <div className="launchpad-transition-banner">
+        <span className="transition-dot">•</span>
+        <span className="transition-label">MISSION BRIEFING COMPLETE · CHAPTER INVESTIGATION BEGINS BELOW</span>
+        <span className="transition-dot">•</span>
       </div>
     </section>
   )

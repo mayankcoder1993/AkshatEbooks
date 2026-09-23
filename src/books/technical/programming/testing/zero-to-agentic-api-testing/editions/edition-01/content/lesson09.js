@@ -18,6 +18,12 @@ export const lesson09 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 2 · PHASE 6 OF 6',
+      missionTitle: 'Automating Student and Campus Services at Scale',
+      missionCrisis: 'Production Hardening: Error Handling and Self Healing Resilience',
+      missionContext: 'In production, network glitches, temporary service outages, and duplicate records will occur. Brittle test suites fail completely on the first unexpected error. Enterprise test suites must be resilient: handling negative response codes defensively, safe parsing JSON payloads, and executing self healing cleanup loops to recover gracefully.',
+      missionObjective: 'Implement defensive try catch parsing, validate negative error codes, and engineer self healing cleanup loops.',
+      targetSystems: 'Resilience Engineering Layer · Defensive Scripting Sandbox · Teardown Loop',
       achieve: 'Harden test suites against real world production instability by constructing negative test matrices, implementing defensive parsing, and writing bounded self healing workflows.',
       how: 'Test boundary and error status codes, safeguard JSON deserialization against HTML gateway crashes with try catch, verify data leak shields, and control execution flow safely.',
       carry: 'Defensive parsing and bounded retry mechanics that prepare your test suites for mock simulation in Chapter 10 and OAuth 2.0 flows in Chapter 11.'

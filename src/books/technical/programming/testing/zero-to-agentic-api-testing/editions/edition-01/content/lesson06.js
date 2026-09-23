@@ -17,6 +17,12 @@ export const lesson06 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 2 · PHASE 3 OF 6',
+      missionTitle: 'Automating Student and Campus Services at Scale',
+      missionCrisis: 'Dynamic Environment Isolation and Unique State Generation',
+      missionContext: 'Hardcoded test data causes severe test flakiness. If your test suite uses a hardcoded ISBN, running the suite a second time triggers a duplicate book collision error and fails the test. Furthermore, running tests against production instead of staging by mistake can corrupt live data. We must master the five variable scopes, switch environments dynamically, and generate collision free unique IDs.',
+      missionObjective: 'Implement the 5 variable scopes, configure QA vs UAT environments, and generate dynamic unique ISBNs in Pre request scripts.',
+      targetSystems: 'Postman Variable Scopes Hierarchy · Dynamic Environment Switching · Pre request Script Engine',
       achieve: 'Eliminate hardcoded URLs and duplicate key collisions by mastering the five variable tiers, dynamic environment switching, and collision safe dynamic generation.',
       how: 'Map variable precedence from Local to Global, safeguard secrets using Initial versus Current values, generate unique runtime ISBNs in Pre request scripts, and analyze collision mathematics.',
       carry: 'A parameterized environment and dynamically generated variable keys that seamlessly feed the downstream request chaining pipeline in Chapter 7.'

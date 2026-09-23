@@ -17,6 +17,12 @@ export const lesson11 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 3 · PHASE 2 OF 4',
+      missionTitle: 'Enterprise Resilience and CI CD Quality Gates',
+      missionCrisis: 'Securing the Gateway: OAuth 2.0 and Modern Token Authorization',
+      missionContext: 'Enterprise campus systems handle sensitive student records and financial transactions. Simple API keys or basic auth credentials are unacceptable in modern architecture. Microservices enforce OAuth 2.0 token based authorization. We must master the four roles, execute the two step Authorization Code grant, automate token exchange scripts, and chain Bearer tokens into secured requests.',
+      missionObjective: 'Deconstruct the OAuth 2.0 handshake, automate token retrieval in pre request scripts, and test token expiration.',
+      targetSystems: 'OAuth 2.0 Authorization Server · Bearer Token Gateway · Secured Student Endpoints',
       achieve: 'Master modern enterprise API security by deconstructing OAuth 2.0 grant types, automating token handshakes in test suites, and chaining Bearer tokens into protected requests.',
       how: 'Contrast interactive Authorization Code flows with machine to machine Client Credentials for CI CD, execute live token exchange requests, extract tokens into global variables, and validate 401 unauthorized boundaries.',
       carry: 'Automated token acquisition patterns and authenticated collection runs that safeguard enterprise endpoints, carrying forward into XML web services in Chapter 12.'

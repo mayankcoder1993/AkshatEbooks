@@ -18,6 +18,12 @@ export const lesson10 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 3 · PHASE 1 OF 4',
+      missionTitle: 'Enterprise Resilience and CI CD Quality Gates',
+      missionCrisis: 'Agile Sprint Simulation: Contract First Testing with Mock Servers',
+      missionContext: 'In modern fast paced engineering sprints, QA automation engineers face a classic roadblock: backend developers spend two weeks building database schemas and business logic. If testers wait for live endpoints before writing tests, QA becomes the release bottleneck. We must unblock parallel testing by adopting contract first development, writing JSON Schema contracts, and spinning up hosted Postman Mock Servers.',
+      missionObjective: 'Build JSON Schema contract validators, configure Postman Mock Servers with Examples, and compare REST with GraphQL.',
+      targetSystems: 'Postman Hosted Mock Server · JSON Schema Validator · GraphQL Query Resolver',
       achieve: 'Unblock Agile testing sprints and prevent contract drift by mastering JSON Schema validation, hosted Postman Mock Servers, and modern GraphQL query architectures.',
       how: 'Define strict array schemas matching production REST contracts, configure cloud mock examples, execute seamless mock to live environment flips, and parameterize GraphQL queries.',
       carry: 'Production grade schema validation and mock virtualization techniques that prepare you for enterprise OAuth 2.0 security in Chapter 11.'

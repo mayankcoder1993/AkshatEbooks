@@ -18,6 +18,12 @@ export const lesson13 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 3 · PHASE 4 OF 4',
+      missionTitle: 'Enterprise Resilience and CI CD Quality Gates',
+      missionCrisis: 'Continuous Quality Gate: Headless Newman Execution in CI CD',
+      missionContext: 'On the eve of campus enrollment, ten thousand students and faculty will access the university portal. Developers are deploying hotfixes continuously. We cannot rely on manual testing in a desktop app. We must construct an autonomous robot watchdog: running our test suites headlessly via Newman CLI on every code commit, generating visual HTML Extra dashboards, and gating production releases in Jenkins and GitHub Actions.',
+      missionObjective: 'Export portable collections and environments, run headless test suites with Newman, configure fail fast bail flags, and integrate CI CD pipelines.',
+      targetSystems: 'Newman CLI Runtime · Jenkins CI CD Pipeline · GitHub Actions · HTML Extra Dashboard',
       achieve: 'Transform your desktop collection into an automated, headless deployment gate by mastering Newman CLI, HTML Extra reports, and CI CD pipeline integration.',
       how: 'Export portable JSON collections and environments, execute command line runs with data files and fail fast bail flags, generate visual dashboards, and configure Jenkins automation.',
       carry: 'The complete enterprise grade automated API testing pipeline running autonomously in continuous delivery pipelines, achieving full Mission 3 victory.'

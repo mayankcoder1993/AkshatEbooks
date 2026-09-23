@@ -18,6 +18,12 @@ export const lesson07 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 2 · PHASE 4 OF 6',
+      missionTitle: 'Automating Student and Campus Services at Scale',
+      missionCrisis: 'Autonomous Request Chaining and Multilevel JSON Traversal',
+      missionContext: 'Real world workflows do not exist in isolation: data produced by one request must be consumed by the next. In the library catalog, AddBook generates a composite ID that must be dynamically captured and passed into GetBook and DeleteBook. Furthermore, enterprise responses contain deeply nested objects and arrays that require mathematical verification.',
+      missionObjective: 'Chain AddBook, GetBook, and DeleteBook dynamically, parse nested JSON responses, and aggregate array data with JavaScript methods.',
+      targetSystems: 'Autonomous Request Chaining Pipeline · Campus Bookstore E Commerce Engine',
       achieve: 'Build an autonomous multi request testing pipeline by capturing dynamic IDs, piping them into downstream requests, and verifying nested JSON structures and array mathematics.',
       how: 'Chain AddBook to GetBook and DeleteBook using collection variables, assert exact catalog fields without assuming unreturned properties, and master find, filter, map, and reduce in an advanced audit lab.',
       carry: 'An end to end chained pipeline that creates, validates, and cleans up records autonomously, ready for multi row data driven execution in Chapter 8.'

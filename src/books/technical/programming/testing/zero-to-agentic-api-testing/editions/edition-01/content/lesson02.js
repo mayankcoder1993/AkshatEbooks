@@ -12,6 +12,12 @@ export const lesson02 = {
   blocks: [
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 1 · PHASE 2 OF 3',
+      missionTitle: 'Global Open Data and Web Wire Audit',
+      missionCrisis: 'The Campus Transit Shuttle Crash: Diagnosing the 500 Server Error',
+      missionContext: 'The student shuttle tracking service crashed on day one of orientation whenever students opened the route tracker without selecting a destination. The frontend team blamed the backend, while backend logs showed an unhandled NullPointerException. In this phase, we enter the war room to inspect raw HTTP packets by hand, understand status code families, and install defensive guards.',
+      missionObjective: 'Reproduce the unhandled 500 crash, install a defensive input validation guard, and verify both 400 Bad Request and 200 OK contracts.',
+      targetSystems: 'Campus Shuttle Route Locator Service · Port 5050 · HTTP Wire Traffic',
       achieve: 'Find why one shuttle location request fails, make bad input safe, and check that a valid lookup still provides coordinates.',
       how: 'Compare two URLs, send requests to a local teaching service, examine the client response and server log, write a diagnosis and repair plan, add a defensive validation guard, and replay both requests by hand.',
       carry: 'The two finished manual request setups and verified response contracts, ready to automate in Chapter 3.'
@@ -215,7 +221,7 @@ export const lesson02 = {
         'Transit Service running on http://localhost:3001',
         'GET /v1/campus/shuttle/coordinates',
         'TypeError: Cannot read properties of undefined (reading \'trim\')',
-        '    at /home/user/campus-api/shuttle_service.js:23:25',
+        '    at /home/user/campus_api/shuttle_service.js:23:25',
         '    at Layer.handle [as handle_request] (/node_modules/express/lib/router/layer.js:95:5)',
         '    at next (/node_modules/express/lib/router/route.js:149:13)',
       ],

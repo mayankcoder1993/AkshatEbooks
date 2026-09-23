@@ -3,6 +3,7 @@ import bridgeImg from '../assets/frontend-backend-api-bridge.jpg'
 import pyramidImg from '../assets/testing-pyramid-focus.jpg'
 import matrixImg from '../assets/api-architectures-matrix.jpg'
 import anatomyImg from '../assets/http-wire-anatomy.jpg'
+import serverAnatomyImg from '../assets/express-server-code-anatomy.jpg'
 
 export const lesson01 = {
   id: 'understanding-apis',
@@ -14,6 +15,12 @@ export const lesson01 = {
   blocks: [
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 1 · PHASE 1 OF 3',
+      missionTitle: 'Global Open Data and Web Wire Audit',
+      missionCrisis: 'The Apex Campus Launch Crisis: When the Frontend Lost Its Voice',
+      missionContext: 'On the eve of university orientation, the student mobile application failed to display campus data. The triage war room discovered a silent disconnect between client UI code and backend services. To resolve the crisis and establish lasting quality gates, we must inspect the wire from first principles, construct a minimal server, and audit every core HTTP operation.',
+      missionObjective: 'Build a runnable server from scratch, execute all five CRUD operations, and verify payload contracts across REST, SOAP, and GraphQL.',
+      targetSystems: 'Node.js Express Catalog Service · Port 3000 · Public Open Data Endpoints',
       achieve: 'Build and run a minimal API server from scratch and verify every core HTTP operation over the wire.',
       how: 'Assembling a runnable Express server step by step, executing POST, GET, PUT, PATCH, and DELETE, and comparing REST, SOAP, and GraphQL using the same book inquiry.',
       carry: 'The assembled runnable server.js file and the foundational mental model of an HTTP request and response pair.'
@@ -103,16 +110,83 @@ export const lesson01 = {
       ],
     },
     {
-      type: 'callout',
-      variant: 'note',
-      title: 'Understanding Every Line of the Starter Program',
-      paragraphs: [
-        '• const express = require("express"): Imports the Express library to create web routes.',
-        '• app.use(express.json()): Enables the server to understand incoming JSON request bodies.',
-        '• let books = [...]: Holds our textbook inventory in system RAM. Because it is in memory, stopping the server resets the catalog back to this initial record.',
-        '• let nextId = 2: A monotonically advancing counter ensuring every new book receives an incremented, unique ID that never collides with or reuses old IDs.',
-        '• app.listen(3000): Opens local communication port 3000 and waits for incoming network connections.',
-      ],
+      type: 'image',
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/express-server-code-anatomy.jpg',
+      alt: 'Architectural code anatomy diagram of minimal Express API server',
+      caption: 'The Architectural Anatomy of server.js: Four Distinct Layers Powering Our Minimal API Server',
+      w: 1408,
+      h: 768,
+    },
+    {
+      type: 'structured-breakdown',
+      badge: 'SERVER CODE ANATOMY',
+      title: 'Deconstructing server.js: Inside the Four Pillars of a Web API',
+      intro: 'Every web API server, whether a microservice or an enterprise cloud gateway, is assembled from four architectural layers. Examine the code and purpose inside each box:',
+      categories: [
+        {
+          category: 'ROUTING ENGINE',
+          subCategory: 'Pillar 1',
+          title: 'Framework Import and Application Factory',
+          filename: 'server.js (Lines 1 to 3)',
+          code: [
+            'const express = require("express");',
+            'const app = express();'
+          ],
+          explanation: 'Imports the Express web framework from node_modules and initializes the central app server instance. This object coordinates all incoming HTTP traffic, registers route handlers, and dispatches responses.',
+          points: [
+            'require("express"): Loads the web routing framework into system memory.',
+            'app = express(): Creates the central application instance that registers route endpoints.'
+          ]
+        },
+        {
+          category: 'PAYLOAD INTERCEPTOR',
+          subCategory: 'Pillar 2',
+          title: 'Inbound JSON Parsing Middleware',
+          filename: 'server.js (Lines 5 to 7)',
+          code: [
+            '// Middleware to parse incoming JSON payloads',
+            'app.use(express.json());'
+          ],
+          explanation: 'Registers global middleware that intercepts every incoming network packet. When a client sends a request carrying Content-Type: application/json, this middleware parses the raw incoming binary stream into an accessible JavaScript object attached to req.body.',
+          points: [
+            'Stream Deserialization: Without this middleware, req.body remains completely undefined.',
+            'Automatic Translation: Translates raw JSON wire text into structured JavaScript objects.'
+          ]
+        },
+        {
+          category: 'IN MEMORY DATASTORE',
+          subCategory: 'Pillar 3',
+          title: 'Volatile Array and Monotonic ID Counter',
+          filename: 'server.js (Lines 9 to 13)',
+          code: [
+            'let books = [',
+            '  { id: 1, title: "Clean Architecture", author: "Robert Martin" }',
+            '];',
+            'let nextId = 2;'
+          ],
+          explanation: 'Allocates an array directly inside Node.js heap memory (system RAM). Because it is stored in volatile RAM, restarting the server resets the catalog back to its starter state. The monotonically advancing nextId counter ensures every newly created book receives a unique ID.',
+          points: [
+            'Zero Database Overhead: Enables instant local experimentation without external database drivers.',
+            'Monotonic Sequence: nextId advances from 2 to 3, 4, and beyond, preventing ID collisions or reuse.'
+          ]
+        },
+        {
+          category: 'NETWORK LISTENER',
+          subCategory: 'Pillar 4',
+          title: 'TCP Port 3000 Loopback Listener',
+          filename: 'server.js (Lines 15 to 18)',
+          code: [
+            'app.listen(3000, () => {',
+            '  console.log("Book catalog server listening on http://localhost:3000");',
+            '});'
+          ],
+          explanation: 'Binds the Node.js process to TCP communication port 3000 on your machine loopback network interface. Think of your computer as a high rise residential building: localhost is the building address, and port 3000 is the specific apartment door where our catalog service accepts visitors.',
+          points: [
+            'localhost: The universal loopback address (127.0.0.1) routing traffic within the same machine.',
+            'Port 3000: The dedicated doorway where our book server listens for incoming HTTP requests.'
+          ]
+        }
+      ]
     },
     {
       type: 'paragraph',

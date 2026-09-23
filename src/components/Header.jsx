@@ -28,6 +28,20 @@ export default function Header({
         </button>
 
         <nav className="lesson-chips" aria-label="Lessons">
+          <button
+            className={active === 'preface' ? 'chip active' : 'chip'}
+            onClick={() => onSelect('preface')}
+          >
+            <span className="chip-num">P</span>
+            Preface
+          </button>
+          <button
+            className={active === 'how-to-use' ? 'chip active' : 'chip'}
+            onClick={() => onSelect('how-to-use')}
+          >
+            <span className="chip-num">?</span>
+            How to Use
+          </button>
           {lessons.map((lesson, index) => (
             <button
               key={lesson.id}

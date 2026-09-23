@@ -3953,6 +3953,168 @@ body:has(.page.fullscreen-mode) .site-header,
 }
 
 /* ==========================================================================
+   MISSION & CHAPTER LAUNCHPAD CARD
+   ========================================================================== */
+.mission-chapter-launchpad-card {
+  margin: 1.5rem 0 2.5rem;
+  border-radius: 14px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.launchpad-banner {
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.07) 0%, rgba(99, 102, 241, 0.05) 100%);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.launchpad-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.launchpad-mission-badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: #0284c7;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.launchpad-mission-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--heading);
+  letter-spacing: 0.02em;
+}
+
+.launchpad-crisis-heading {
+  margin: 0.25rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--heading);
+  line-height: 1.35;
+}
+
+.launchpad-mission-detail-box {
+  padding: 1.35rem 1.5rem;
+  background: var(--panel-soft);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.launchpad-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.launchpad-detail-kicker {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #475569;
+}
+
+.launchpad-systems-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0369a1;
+  background: rgba(2, 132, 199, 0.08);
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(2, 132, 199, 0.18);
+}
+
+.launchpad-context-text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.launchpad-objective-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-soft);
+}
+
+.launchpad-objective-tag {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0d9488;
+  white-space: nowrap;
+  padding-top: 0.15rem;
+}
+
+.launchpad-objective-text {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.launchpad-chapter-plan-box {
+  background: var(--panel);
+}
+
+.launchpad-plan-header {
+  padding: 1rem 1.5rem 0.5rem;
+}
+
+.launchpad-plan-kicker {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6366f1;
+}
+
+.launchpad-transition-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  border-top: 1px dashed var(--border);
+  color: #64748b;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.transition-dot {
+  color: #0284c7;
+  font-size: 0.65rem;
+}
+
+/* ==========================================================================
    CHAPTER OPENER CARD
    ========================================================================== */
 .chapter-opener-card {
@@ -4127,6 +4289,106 @@ body:has(.page.fullscreen-mode) .site-header,
 .static-api-table td {
   padding: 0.65rem 0.85rem;
   border-bottom: 1px solid var(--border-soft);
+  color: var(--body);
+}
+
+/* ==========================================================================
+   HOW TO USE GUIDE COMPONENT
+   ========================================================================== */
+.how-to-use-guide-container {
+  margin: 1.5rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.how-to-intro-box {
+  padding: 1.75rem 2rem;
+  border-radius: 14px;
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+}
+
+.how-to-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0284c7;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.how-to-intro-box h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--heading);
+}
+
+.how-to-intro-box p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.how-to-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.how-to-card {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.how-to-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+}
+
+.how-to-num {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #0284c7;
+  font-variant-numeric: tabular-nums;
+}
+
+.how-to-pillar {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+  background: var(--panel-soft);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-soft);
+}
+
+.how-to-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--heading);
+  line-height: 1.35;
+}
+
+.how-to-desc {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
   color: var(--body);
 }
 

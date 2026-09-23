@@ -17,6 +17,12 @@ export const lesson05 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 2 · PHASE 2 OF 6',
+      missionTitle: 'Automating Student and Campus Services at Scale',
+      missionCrisis: 'Eliminating Eyeball Traps: Machine Speed JavaScript Assertions',
+      missionContext: 'Manual verification of hundreds of textbook responses is impossible for human eyes to sustain. A missing JSON key or a latency spike to two seconds will easily slip past manual review. In this phase, we harness the embedded Node.js sandbox inside Postman to write Chai assertions that validate status codes, response times, header values, and schema contracts in milliseconds.',
+      missionObjective: 'Automate status code, response time, header, and JSON schema assertions with strict casing validation.',
+      targetSystems: 'Postman Embedded Node.js Sandbox · Chai Assertion Library · Library REST Engine',
       achieve: 'Transform manual eyeball checks into machine speed quality gates by mastering the Postman JavaScript execution sandbox, Chai matchers, and JSON schema validation.',
       how: 'Deconstruct the Postman request lifecycle, explore core JavaScript variable rules, build robust Chai status and response assertions, and validate strict schema contracts accounting for production casing disparities.',
       carry: 'A battle tested suite of JavaScript assertions verifying status codes, response timing budgets, and schema properties that you will parameterize with dynamic environments in Chapter 6.'

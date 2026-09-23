@@ -17,6 +17,12 @@ export const lesson08 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 2 · PHASE 5 OF 6',
+      missionTitle: 'Automating Student and Campus Services at Scale',
+      missionCrisis: 'Mass Ingestion: Data Driven Testing with External Datasets',
+      missionContext: 'Testing one book at a time proves the contract works, but enterprise systems must ingest thousands of books across different genres and authors. Hardcoding individual test cases for every book is unmaintainable. We must decouple test logic from test data by driving automated iterations from external CSV and JSON data files.',
+      missionObjective: 'Drive automated collection runner iterations using external CSV and JSON datasets with iterationData variables.',
+      targetSystems: 'Postman Collection Runner · CSV and JSON Data File Ingestion Engine',
       achieve: 'Scale single request tests into bulk regression engines by driving automated iterations with external CSV datasets and mastering Data Scope precedence.',
       how: 'Structure tabular test data, ingest row values using pm.iterationData, parameterize request bodies, and monitor iteration level execution scorecards.',
       carry: 'The capability to execute high volume regression suites against external datasets, closing Mission 2 and preparing for complex e commerce workflows in Chapter 9.'

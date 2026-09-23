@@ -11,6 +11,12 @@ export const lesson03 = {
   blocks: [
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 1 · PHASE 3 OF 3',
+      missionTitle: 'Global Open Data and Web Wire Audit',
+      missionCrisis: 'Automating the Wire Gate: Never Repeat Manual Eyeball Audits',
+      missionContext: 'We diagnosed and repaired the shuttle service defect by hand, but manual testing does not scale across repeated deployments. If an engineer accidentally removes the defensive guard tomorrow, the system will crash again. We must convert our manual wire observations into automated JavaScript assertions that run at machine speed in Postman.',
+      missionObjective: 'Construct automated regression checks for both the 400 guard and 200 contract, execute collection runs, and achieve Mission 1 victory.',
+      targetSystems: 'Postman Test Workbench · JavaScript Sandbox · Campus Transit Service',
       achieve: 'Turn the shuttle investigation we performed by hand into repeatable checks that reveal a broken response.',
       how: 'Reuse the same local endpoint and inputs, add a small post response check to each request, run the checks against broken and guarded versions, and read actual Test Results.',
       carry: 'The core automated assertion pattern ready to test library services in Chapter 4.'

@@ -17,6 +17,12 @@ export const lesson12 = {
     },
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 3 · PHASE 3 OF 4',
+      missionTitle: 'Enterprise Resilience and CI CD Quality Gates',
+      missionCrisis: 'Legacy Systems Integration: SOAP WebServices and XML Parsing',
+      missionContext: 'Modern microservices communicate via REST and JSON, but enterprise institutions still rely on legacy mainframes and banking gateways built on SOAP and XML. When the campus finance office requires verifying textbook grants through a state accounting mainframe, our testing suite must speak SOAP 1.1 and 1.2 XML envelopes and parse responses accurately.',
+      missionObjective: 'Craft valid SOAP XML envelopes, set required SOAP headers, parse XML with xml2Json, and assert response values.',
+      targetSystems: 'Enterprise SOAP 1.2 WebService · XML Envelope Parser · State Accounting Gateway',
       achieve: 'Master legacy enterprise web services by crafting SOAP 1.1 and 1.2 XML envelopes, parsing XML responses with xml2Json, and asserting payload data defensively.',
       how: 'Contrast REST with SOAP, configure strict Content Type headers, convert XML envelopes into traversable JavaScript objects, and defend against legacy whitespace quirks with trim.',
       carry: 'The complete multi protocol toolkit (REST, GraphQL, and SOAP) ready for unattended command line test execution in Jenkins and Newman in Chapter 13.'

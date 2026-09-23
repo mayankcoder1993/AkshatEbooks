@@ -155,11 +155,18 @@ async function blockToDocx(b) {
     }
     case 'chapter-opener': {
       const items = [
+        ...(b.missionBadge || b.missionTitle ? [
+          p([new TextRun({ text: `${b.missionBadge || 'MISSION BRIEFING'}: ${b.missionTitle || ''}`, bold: true, color: colors.teal })])
+        ] : []),
+        ...(b.missionCrisis ? [p([new TextRun({ text: `CRISIS SCENARIO: ${b.missionCrisis}`, bold: true, color: colors.navy })])] : []),
+        ...(b.missionContext ? [p([new TextRun({ text: 'Context: ', bold: true }), ...rich(b.missionContext)])] : []),
+        ...(b.missionObjective ? [p([new TextRun({ text: 'Operational Target: ', bold: true, color: colors.teal }), ...rich(b.missionObjective)])] : []),
+        ...(b.targetSystems ? [p([new TextRun({ text: 'Target Systems: ', bold: true }), b.targetSystems])] : []),
         p([new TextRun({ text: 'WE WILL ACHIEVE: ', bold: true, color: colors.teal }), ...rich(b.achieve)]),
         p([new TextRun({ text: 'HOW WE WILL DO IT: ', bold: true, color: colors.indigo }), ...rich(b.how)]),
         p([new TextRun({ text: 'WHAT YOU WILL CARRY FORWARD: ', bold: true, color: colors.navy }), ...rich(b.carry)])
       ];
-      return [tableBox('CHAPTER ROADMAP & LEARNING CONTRACT', items, 'F8FAFC')];
+      return [tableBox('MISSION BRIEFING & CHAPTER ROADMAP', items, 'F8FAFC')];
     }
     case 'chunked-code': {
       const items = [

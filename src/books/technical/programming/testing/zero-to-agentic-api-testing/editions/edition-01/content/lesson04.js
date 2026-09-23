@@ -11,6 +11,12 @@ export const lesson04 = {
   blocks: [
     {
       type: 'chapter-opener',
+      missionBadge: 'MISSION 2 · PHASE 1 OF 6',
+      missionTitle: 'Automating Student and Campus Services at Scale',
+      missionCrisis: 'The College Library REST Service: Manual CRUD Exploration',
+      missionContext: 'With the transit crisis resolved, the engineering leadership assigns you to automate the core College Library REST services. The library system manages cataloging, aisle positioning, and book acquisitions under strict unique constraints. Before automating scripts, we must map out the manual AddBook, GetBook, and DeleteBook contract lifecycle and experience the pain of manual copy paste.',
+      missionObjective: 'Map out the complete CRUD contract across AddBook, GetBook, and DeleteBook, and verify unique ISBN and aisle constraints.',
+      targetSystems: 'College Library REST Engine · Port 5050 · QA Staging Target',
       achieve: 'Execute the complete Create, Read, and Teardown lifecycle against an enterprise Library API service by hand.',
       how: 'Sending AddBook POST, witnessing duplicate ISBN and aisle collisions, querying GetBook with query parameters, and executing DeleteBook teardown.',
       carry: 'The canonical 3 step Library API request contract: AddBook, GetBook, and DeleteBook.'
@@ -362,7 +368,7 @@ export const lesson04 = {
         Msg: 'successfully added',
         ID: '9781227'
       },
-      sampleLabel: 'CLEAN RE-ADDITION AFTER TEARDOWN'
+      sampleLabel: 'CLEAN RE ADDITION AFTER TEARDOWN'
     },
     {
       type: 'heading',

@@ -83,7 +83,44 @@ export default function PrintBook({ publication }) {
     </section>
     <section className="front-page book-sheet" data-page-label="Preface" id="print-preface"><h1>{PREFACE.title}</h1><Blocks blocks={PREFACE.blocks} staticMode/></section>
     <section className="front-page book-sheet" data-page-label="How to Use" id="print-how-to"><h1>How to use this book</h1>{BOOK.howToUse.map(text=><p key={text}>{text}</p>)}</section>
-    {lessons.map((l,i)=><section className="chapter-wrapper book-sheet" data-page-label={String(i+1).padStart(2,'0')} id={`print-${l.id}`} key={l.id}><article className="lesson-page"><header className="lesson-page-header"><p className="lesson-page-kicker">Chapter {i+1}</p><h1>{l.title}</h1><p className="lesson-page-sub">{l.subtitle}</p></header><Blocks blocks={l.blocks} staticMode/></article></section>)}
+    {lessons.map((l, i) => {
+      const opener = l.blocks.find(b => b.type === 'chapter-opener')
+      const bodyBlocks = l.blocks.filter(b => b.type !== 'chapter-opener')
+      return [
+        opener ? (
+          <section
+            className="mission-briefing-sheet book-sheet"
+            data-page-label="Briefing"
+            id={`print-briefing-${l.id}`}
+            key={`briefing-${l.id}`}
+          >
+            <article className="briefing-page">
+              <header className="lesson-page-header">
+                <p className="lesson-page-kicker">Mission Briefing · Chapter {i + 1}</p>
+                <h1>{l.title}</h1>
+                <p className="lesson-page-sub">{l.subtitle}</p>
+              </header>
+              <Blocks blocks={[opener]} staticMode />
+            </article>
+          </section>
+        ) : null,
+        <section
+          className="chapter-wrapper book-sheet"
+          data-page-label={String(i + 1).padStart(2, '0')}
+          id={`print-${l.id}`}
+          key={l.id}
+        >
+          <article className="lesson-page">
+            <header className="lesson-page-header">
+              <p className="lesson-page-kicker">Chapter {i + 1}</p>
+              <h1>{l.title}</h1>
+              <p className="lesson-page-sub">{l.subtitle}</p>
+            </header>
+            <Blocks blocks={bodyBlocks} staticMode />
+          </article>
+        </section>
+      ]
+    })}
     <section className="front-page about book-sheet" data-page-label="About the Author" id="print-about"><h1>About the author</h1>{BOOK.aboutAuthor.map(text=><RichLine text={text} key={text}/>)}<h2>Keep learning</h2><p>Your next useful program begins with one small question. Keep guessing, running and checking.</p><p><strong>{BRAND.imprint}</strong> · {BRAND.tagline}</p></section>
   </main>
 }
