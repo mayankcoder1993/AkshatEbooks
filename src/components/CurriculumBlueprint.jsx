@@ -498,7 +498,7 @@ export default function CurriculumBlueprint({ onBack, onHome, theme, onToggleThe
     const initial = {}
     SYLLABUS_ITEMS.forEach(item => {
       const stored = localStorage.getItem('checklist_' + item.id)
-      initial[item.id] = stored !== null ? stored === 'true' : true
+      initial[item.id] = stored !== null ? stored === 'true' : false
     })
     return initial
   })

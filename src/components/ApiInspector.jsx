@@ -11,24 +11,16 @@ export default function ApiInspector({
   size = '562 B',
   responseBody = {},
   assertions = [],
-  testScript = [
-    '// Verify status code is 200 OK',
-    'pm.test("Status code is 200 OK", function () {',
-    '    pm.response.to.have.status(200);',
-    '});',
-    '',
-    '// Verify campus catalog contains all 4 required courses',
-    'pm.test("Catalog contains 4 active courses", function () {',
-    '    const data = pm.response.json();',
-    '    pm.expect(data.courses.length).to.eql(4);',
-    '});'
-  ],
-  title = 'API Test Workbench: Campus Transit Suite',
+  testScript = null,
+  title = 'API Test Workbench: Wire Inspector',
   staticMode = false
 }) {
   const [activeTab, setActiveTab] = useState(staticMode ? 'all' : 'all')
   const [chaosMode, setChaosMode] = useState('normal')
   const [sending, setSending] = useState(false)
+  const [liveResponse, setLiveResponse] = useState(null)
+  const [liveStatus, setLiveStatus] = useState(null)
+  const [liveTime, setLiveTime] = useState(null)
 
   const isSimulatedDomain = url.includes('campuslibrary.org') || url.includes('.local') || url.includes('.corp')
   const mirrorLink = publicMirrorUrl || (url.includes('campuslibrary.org')
@@ -42,23 +34,50 @@ export default function ApiInspector({
   const handleSend = () => {
     if (staticMode) return
     setSending(true)
-    setTimeout(() => {
-      setSending(false)
-      setActiveTab('all')
-    }, 350)
+    const startTime = performance.now()
+
+    // If it's a real public or localhost URL, attempt browser fetch
+    const canFetch = (url.startsWith('https://api.github.com') || url.startsWith('https://api.bigdatacloud.net') || url.startsWith('http://localhost:5050')) && method === 'GET'
+    
+    if (canFetch) {
+      fetch(url)
+        .then(res => {
+          const duration = Math.round(performance.now() - startTime)
+          setLiveStatus(`${res.status} ${res.statusText}`)
+          setLiveTime(`${duration} ms`)
+          return res.json()
+        })
+        .then(data => {
+          setLiveResponse(data)
+          setSending(false)
+          setActiveTab('all')
+        })
+        .catch(() => {
+          // Fallback to static mock payload if CORS or network blocks
+          setTimeout(() => {
+            setSending(false)
+            setActiveTab('all')
+          }, 250)
+        })
+    } else {
+      setTimeout(() => {
+        setSending(false)
+        setActiveTab('all')
+      }, 300)
+    }
   }
 
   // Chaos simulation states
   const isCrash = chaosMode === 'crash500'
   const isSlow = chaosMode === 'slow3000'
 
-  const currentStatus = isCrash ? '500 Server Error' : status
-  const currentTime = isSlow ? '3,420 ms' : (isCrash ? '14 ms' : time)
+  const currentStatus = isCrash ? '500 Server Error' : (liveStatus || status)
+  const currentTime = isSlow ? '3,420 ms' : (isCrash ? '14 ms' : (liveTime || time))
   const currentSize = isCrash ? '280 B' : size
 
   const currentResponseString = isCrash
     ? '<html>\n  <head><title>500 Internal Server Error</title></head>\n  <body>\n    <h1>Unhandled Server Error</h1>\n    <p>Crash in coordinate resolver service</p>\n  </body>\n</html>'
-    : (typeof responseBody === 'string' ? responseBody : JSON.stringify(responseBody, null, 2))
+    : (liveResponse ? JSON.stringify(liveResponse, null, 2) : (typeof responseBody === 'string' ? responseBody : JSON.stringify(responseBody, null, 2)))
 
   const testResults = isCrash
     ? assertions.map(a => ({ name: a, pass: false, error: 'Expected 200 OK with JSON, but received HTML 500 error' }))
@@ -74,7 +93,8 @@ export default function ApiInspector({
   const showRequest = staticMode || activeTab === 'request' || activeTab === 'all'
   const showResponse = staticMode || activeTab === 'response' || activeTab === 'all'
   const showTests = (staticMode || activeTab === 'tests' || activeTab === 'all') && assertions.length > 0
-  const showScript = !staticMode && (activeTab === 'script' || activeTab === 'all')
+  const hasScript = Array.isArray(testScript) && testScript.length > 0
+  const showScript = !staticMode && (activeTab === 'script' || activeTab === 'all') && hasScript
 
   return (
     <div className="api-inspector">
@@ -175,13 +195,15 @@ export default function ApiInspector({
           >
             Request Details
           </button>
-          <button
-            type="button"
-            className={`tab-btn ${activeTab === 'script' ? 'active' : ''}`}
-            onClick={() => setActiveTab('script')}
-          >
-            JavaScript Tests (pm.*)
-          </button>
+          {hasScript && (
+            <button
+              type="button"
+              className={`tab-btn ${activeTab === 'script' ? 'active' : ''}`}
+              onClick={() => setActiveTab('script')}
+            >
+              JavaScript Tests (pm.*)
+            </button>
+          )}
           {assertions.length > 0 && (
             <button
               type="button"

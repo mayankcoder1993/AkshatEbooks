@@ -6,7 +6,7 @@ export const lesson04 = {
   icon: '',
   title: 'Manual Testing the College Library API',
   shortTitle: 'The Library API',
-  subtitle: 'Executing AddBook, GetBook, and DeleteBook with unique constraints and query parameters.',
+  subtitle: 'Executing AddBook, GetBook, and DeleteBook manually, feeling the copy paste pain, and mapping unique constraints.',
   tags: ['Postman', 'Collections', 'CRUD', 'Library API', 'Hands On'],
   blocks: [
     {
@@ -56,7 +56,7 @@ export const lesson04 = {
           timing: 'Chapter 4 · Right Now',
           title: 'Manual CRUD Execution',
           status: 'active',
-          desc: 'We execute manual AddBook, GetBook, and DeleteBook operations to map unique ISBN and aisle constraints directly against the live server.',
+          desc: 'We execute manual AddBook, GetBook, and DeleteBook operations to map unique ISBN and aisle constraints and experience the friction of manual testing.',
           outcome: 'You discover database constraint collisions and understand the lifecycle of book inventory.'
         },
         {
@@ -110,9 +110,9 @@ export const lesson04 = {
       alt: 'Three stage sequence flow diagram: Step 1 POST AddBook, Step 2 GET GetBook, Step 3 POST DeleteBook.',
       caption: 'The complete lifecycle of a textbook through the Library API.',
       points: [
-        'Phase 1 (Step 1 AddBook POST): Client submits book title, author, ISBN, and shelf aisle. The server stores the record and returns 201 Created with generated composite ID.',
-        'Phase 2 (Step 2 GetBook GET): Client queries GET /books with the composite ID to confirm the record exists in the catalog and returns 200 OK with location details.',
-        'Phase 3 (Step 3 DeleteBook POST): Client submits a delete request with the composite ID to /books/delete. The server removes the record and confirms deletion.',
+        'Phase 1 (Step 1 AddBook POST): Client submits book title, author, ISBN, and shelf aisle. The server stores the record and returns a composite ID.',
+        'Phase 2 (Step 2 GetBook GET): Client queries GET /books with the composite ID to confirm the record exists in the catalog.',
+        'Phase 3 (Step 3 DeleteBook POST): Client submits a delete request with the composite ID to remove the record.',
       ],
     },
     {
@@ -121,32 +121,53 @@ export const lesson04 = {
     },
     {
       type: 'paragraph',
-      text: 'When a new book arrives at the library circulation desk, the librarian enters its title, author, ISBN, and assigned shelf aisle number. In Postman, we send an HTTP POST request with a JSON body:',
+      text: 'When a new book arrives at the circulation desk, the librarian enters its title, author, ISBN, and shelf aisle number. In our API test workbench, we break down the outgoing HTTP POST request in chunks:',
     },
     {
-      type: 'code',
-      filename: 'AddBook-Request.json',
-      lines: [
-        'POST https://api.campuslibrary.org/v1/books HTTP/1.1',
-        'Content-Type: application/json',
-        '',
-        '{',
-        '  "name": "Zero to Agentic API Testing",',
-        '  "isbn": "9781",',
-        '  "aisle": "227",',
-        '  "author": "Alex Mercer"',
-        '}',
+      type: 'chunked-code',
+      badge: 'REQUEST CHUNKS',
+      title: 'Deconstructing the AddBook POST Request',
+      intro: 'Inspect the method, endpoint, and payload:',
+      chunks: [
+        {
+          label: 'Endpoint and Method',
+          filename: 'AddBook-line.http',
+          code: 'POST /v1/books HTTP/1.1\nHost: api.campuslibrary.org',
+          title: 'The Target Resource',
+          explanation: 'Dispatches a POST request to the collection resource endpoint.',
+          keyTakeaway: 'POST indicates resource creation on the server.'
+        },
+        {
+          label: 'JSON Payload Body',
+          filename: 'AddBook-payload.json',
+          code: '{\n  "name": "Zero to Agentic API Testing",\n  "isbn": "9781",\n  "aisle": "227",\n  "author": "Alex Mercer"\n}',
+          title: 'The Book Attributes',
+          explanation: 'The server combines the ISBN (9781) and aisle (227) into a unique composite primary key: 9781227.',
+          keyTakeaway: 'The combination of ISBN and aisle forms the unique identifier in this API.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When we send this AddBook request for the first time, what response status and payload do you expect from the server?',
+      options: [
+        '200 OK with JSON confirmation: { "Msg": "successfully added", "ID": "9781227" }',
+        '404 Not Found because the library catalog is locked for the night',
+        '500 Server Error because the book author is not an enrolled student'
       ],
+      answerIndex: 0,
+      revealTitle: 'AddBook Live Wire Outcome',
+      explanation: 'The book is registered! The server returns 200 OK along with a confirmation message and the composite primary key ID: 9781227.'
     },
     {
-      type: 'terminal',
-      command: 'HTTP Response from Server',
-      lines: [
-        'Status: 200 OK | Time: 182 ms | Size: 248 B',
-        '{',
-        '  "Msg": "successfully added",',
-        '  "ID": "9781227"',
-        '}',
+      type: 'callout',
+      variant: 'note',
+      title: 'Architectural Contract Quirk: Why AddBook Returns 200 Instead of 201',
+      paragraphs: [
+        'In Chapter 2, we learned that theoretical REST standards recommend returning 201 Created when a new record is added.',
+        'However, in real world corporate software, many production APIs return 200 OK with a custom confirmation payload. Notice also that the success message uses capitalized "Msg" while other endpoints use lowercase "msg".',
+        'As quality automation engineers, our job is not to enforce academic dogma: we test against the actual published contract of the service.',
       ],
     },
     {
@@ -170,12 +191,7 @@ export const lesson04 = {
       responseBody: {
         Msg: 'successfully added',
         ID: '9781227'
-      },
-      assertions: [
-        'Response HTTP status code is 200 OK',
-        'Response message equals successfully added',
-        'Backend generated ID equals concatenation of ISBN and aisle'
-      ]
+      }
     },
     {
       type: 'heading',
@@ -183,91 +199,106 @@ export const lesson04 = {
     },
     {
       type: 'paragraph',
-      text: 'To confirm that the book was stored on the correct shelf, we query the catalog by passing the generated composite ID as a query parameter:',
+      text: 'To confirm that the book was stored on the correct shelf, we query the catalog by passing the generated composite ID (9781227) as a query parameter:',
     },
     {
-      type: 'code',
-      filename: 'GetBook-Request.http',
-      lines: [
-        'GET https://api.campuslibrary.org/v1/books?id=9781227 HTTP/1.1',
-        'Accept: application/json',
-      ],
+      type: 'chunked-code',
+      badge: 'GET REQUEST CHUNK',
+      title: 'The GetBook Query Request',
+      intro: 'We pass the composite ID created in Step 2:',
+      chunks: [
+        {
+          label: 'Query Parameter Request',
+          filename: 'GetBook-Request.http',
+          code: 'GET /v1/books?id=9781227 HTTP/1.1\nHost: api.campuslibrary.org\nAccept: application/json',
+          title: 'Filtering by Composite Key',
+          explanation: 'The query parameter `?id=9781227` asks the database to locate the single record matching that ID.',
+          keyTakeaway: 'Notice that we had to manually copy and paste 9781227 from the previous step!'
+        }
+      ]
     },
     {
-      type: 'terminal',
-      command: 'HTTP Response from Server',
-      lines: [
-        'Status: 200 OK | Time: 145 ms',
-        '[',
-        '  {',
-        '    "book_name": "Zero to Agentic API Testing",',
-        '    "isbn": "9781",',
-        '    "aisle": "227"',
-        '  }',
-        ']',
-      ],
+      type: 'api-inspector',
+      title: 'Live Interactive Wire Inspector: GetBook GET',
+      method: 'GET',
+      url: 'https://qa-api.campuslibrary.org/v1/books?id=9781227',
+      status: '200 OK',
+      time: '145 ms',
+      size: '312 B',
+      responseBody: [
+        {
+          book_name: 'Zero to Agentic API Testing',
+          isbn: '9781',
+          aisle: '227'
+        }
+      ]
     },
     {
       type: 'heading',
-      text: 'Step 4: Action 3: Deleting the Book (POST)',
+      text: 'Step 4: Action 3: Deleting the Book (POST Teardown)',
     },
     {
       type: 'paragraph',
-      text: 'When a book is retired or lost, the librarian removes it from the catalog by posting its ID to the delete endpoint:',
+      text: 'When a textbook is retired, the librarian removes it by posting its ID to the delete endpoint:',
     },
     {
-      type: 'code',
-      filename: 'DeleteBook-Request.json',
-      lines: [
-        'POST https://api.campuslibrary.org/v1/books/delete HTTP/1.1',
-        'Content-Type: application/json',
-        '',
-        '{',
-        '  "ID": "9781227"',
-        '}',
-      ],
+      type: 'chunked-code',
+      badge: 'TEARDOWN REQUEST CHUNK',
+      title: 'The DeleteBook Teardown Request',
+      intro: 'We submit the book ID to clean up database state:',
+      chunks: [
+        {
+          label: 'Delete Payload Body',
+          filename: 'DeleteBook-Request.json',
+          code: 'POST /v1/books/delete HTTP/1.1\nHost: api.campuslibrary.org\nContent-Type: application/json\n\n{\n  "ID": "9781227"\n}',
+          title: 'Submitting Deletion ID',
+          explanation: 'The server verifies the ID exists, purges the record from the database table, and returns a confirmation message.',
+          keyTakeaway: 'Teardown deletions prevent test databases from bloating with obsolete records.'
+        }
+      ]
     },
     {
-      type: 'terminal',
-      command: 'HTTP Response from Server',
-      lines: [
-        'Status: 200 OK',
-        '{ "msg": "book is successfully deleted" }',
-      ],
+      type: 'api-inspector',
+      title: 'Live Interactive Wire Inspector: DeleteBook POST',
+      method: 'POST',
+      url: 'https://qa-api.campuslibrary.org/v1/books/delete',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      requestBody: {
+        ID: '9781227'
+      },
+      status: '200 OK',
+      time: '120 ms',
+      size: '185 B',
+      responseBody: {
+        msg: 'book is successfully deleted'
+      }
     },
     {
       type: 'heading',
-      text: 'Step 5: The Duplicate Constraint Bug and Manual Testing Bottleneck',
+      text: 'Step 5: The Duplicate Key Collision and Manual Testing Pain',
     },
     {
       type: 'bug',
+      filename: 'AddBook-Duplicate.http',
       prompt: 'You execute AddBook a second time with the exact same payload. The server returns: { "msg": "Book already exists" }. Why?',
       lines: [
-        'POST /api/v1/books',
+        'POST /v1/books HTTP/1.1',
         'Payload: { "name": "Zero to Agentic API Testing", "isbn": "9781", "aisle": "227", "author": "Alex Mercer" }',
-        'Response: { "msg": "Book already exists" }',
+        'Response: 200 OK { "msg": "Book already exists" }',
       ],
       bugLine: 3,
       explain: 'The Library API enforces a unique constraint on the composite key (ISBN + aisle). Because a book with ISBN 9781 and aisle 227 already exists in the database, duplicate insertion is rejected. In Chapter 6, we solve this by generating unique ISBNs dynamically.',
     },
     {
       type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Duplicate Key Collisions',
+      variant: 'warning',
+      title: 'The Friction of Manual Testing: Why We Must Automate',
       paragraphs: [
-        'When testing APIs for the first time, students often hit Send multiple times and panic when they get an error.',
-        'If a database table has a unique rule on a field (like a student enrollment number, user email, or ISBN), subsequent requests with identical data will fail with a collision error.',
-        'In Chapter 6, we learn how to generate unique random numbers in Pre request scripts so every test execution succeeds cleanly.',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Why Manual Copy Paste Fails at Scale',
-      paragraphs: [
-        'In this exercise, we manually copied the ID string (9781227) from AddBook into GetBook and DeleteBook.',
-        'This takes minutes of human effort, risks manual typo errors, and cannot run in continuous integration.',
-        'In Chapter 5, we begin automating: writing JavaScript assertions to replace visual checks.',
+        '1. Copy Paste Fatigue: In this manual exercise, we had to look at the AddBook response, copy "9781227", open a new tab for GetBook, paste the ID into the URL, run it, then copy it into DeleteBook. Doing this for 500 books would take hours of tedious, error prone labor.',
+        '2. False Confidence: When you inspect JSON visually with your eyes, you can easily miss subtle typos or missing fields.',
+        '3. In Chapter 5, we begin the automation revolution: writing automated JavaScript assertions to validate every status code, message, and property in milliseconds!',
       ],
     },
     {
@@ -302,61 +333,46 @@ export const lesson04 = {
     },
     {
       type: 'guess',
-      prompt: 'If you call DeleteBook again immediately after a successful deletion, what will the server return?',
+      prompt: 'If you execute DeleteBook with ID 9781227 a second time immediately after a successful deletion, what should happen?',
       options: [
-        '200 OK: book is successfully deleted again',
-        '404 Not Found: book does not exist',
-        '500 Internal Server Error: database crash',
-        '201 Created: book recreated',
+        'The server should crash with a fatal 500 error',
+        'The server should return 404 Not Found or a message indicating the book no longer exists, because the record was already purged on the first call',
+        'The server should recreate the book automatically',
+        'The server should delete all books in the library'
       ],
       answerIndex: 1,
-      explain: 'Because the record was already removed from the database in the previous step, querying or deleting the same ID will inform the client that the book does not exist.',
+      explain: 'Because the record was purged during the initial deletion, attempting to delete it a second time cannot find the record ID. The server appropriately responds with 404 Not Found or a message stating the resource does not exist.'
     },
     {
       type: 'quiz',
       items: [
         [
-          'How does the Library API generate the unique book ID in its response?',
-          'By concatenating the isbn string and aisle string provided in the AddBook request payload (for example, 9781 plus 227 equals 9781227).',
+          'What is a composite primary key in database design?',
+          'A composite primary key is a unique identifier formed by combining two or more individual columns: such as ISBN and aisle: to ensure no duplicate combination exists.',
         ],
         [
-          'Why did we manually copy the ID from AddBook into GetBook and DeleteBook?',
-          'Because we were performing manual exploratory testing. In upcoming chapters, we eliminate manual copying using Postman environment variables and request chaining.',
+          'Why did we execute DeleteBook at the end of our manual testing workflow?',
+          'Executing DeleteBook performs automated teardown: returning the test database to its clean, pristine starting state so subsequent test runs do not fail on duplicate key collisions.',
+        ],
+        [
+          'How does the GetBook endpoint locate a book record?',
+          'The client transmits the composite ID as an HTTP query parameter in the URL (such as ?id=9781227), which the database queries to return matching shelf locations.',
         ],
       ],
     },
     {
       type: 'takeaways',
       items: [
-        'The Library API provides a realistic CRUD testbed simulating production database interactions.',
-        'AddBook requires a unique ISBN and aisle pair to prevent duplicate collision errors.',
-        'GetBook retrieves data using URL query parameters (?ID= and ?AuthorName=).',
-        'DeleteBook removes the record and validates idempotent cleanup.',
+        'The Library API lifecycle consists of Create (AddBook POST), Read (GetBook GET), and Teardown (DeleteBook POST).',
+        'Composite primary keys combine multiple fields (ISBN plus aisle) to enforce uniqueness in the catalog database.',
+        'Always clean up test records using teardown delete requests to keep test environments reproducible.',
+        'Manual copy pasting of dynamic IDs between requests is slow and prone to errors; this motivates automated request chaining.',
       ],
-    },
-    {
-      type: 'victory-milestone',
-      badge: 'MISSION 2 PHASE 1 CLEARED',
-      rank: 'INVENTORY AUTOMATION SPECIALIST',
-      title: 'Architectural Triumph: Full CRUD Lifecycle & Constraint Auditing Mastered',
-      summary: 'You executed the complete multi step lifecycle of the College Library catalog. You uncovered how composite keys generate primary IDs, diagnosed duplicate insertion constraint rejections, and experienced the exact manual bottleneck that makes automated testing non negotiable.',
-      powers: [
-        'Executing full cycle CRUD transactions: AddBook POST, GetBook GET with query parameters, and DeleteBook cleanup',
-        'Deconstructing composite ID generation mechanics from concatenated payload attributes (ISBN + aisle)',
-        'Diagnosing relational database unique constraint collisions directly from API error payloads',
-        'Recognizing the severe failure modes of manual copy paste to design autonomous test architectures',
-      ],
-      disastersPrevented: [
-        'Averted catastrophic database lockups and corrupt records from unhandled duplicate key collisions',
-        'Eliminated orphaned test records cluttering production campus library databases by verifying teardown cleanup',
-        'Prevented blind deployment of unverified schema changes that silently break mobile student catalog lookups',
-      ],
-      warRoomTakeaway: 'Manual testing is an exploratory flashlight, not a quality shield. Once you map the manual lifecycle, your mission is to turn it into an autonomous, self running JavaScript machine.',
     },
     {
       type: 'cliffhanger',
-      title: 'Continuing Mission 2: Automating our validations',
-      text: 'Manual copy pasting and eyeballing ends here. In Chapter 5, we open the Postman Tests tab: writing JavaScript assertions using the pm object and Chai matchers to validate responses in milliseconds!',
+      title: 'Banishing Human Eyeballs: Automated JavaScript Assertions',
+      text: 'You have mapped the Library CRUD lifecycle by hand and felt the pain of copy pasting IDs between tabs. In Chapter 5, we banish manual visual inspections forever: writing powerful JavaScript assertions with pm.expect to validate status codes, latency budgets, and JSON properties in milliseconds!',
     },
   ],
 }

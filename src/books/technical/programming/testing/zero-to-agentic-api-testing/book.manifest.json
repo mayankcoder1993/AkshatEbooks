@@ -11,11 +11,11 @@
   "author": "Akshat Sinha",
   "status": "in-progress",
   "statusLabel": "In progress",
-  "progress": 100,
+  "progress": 65,
   "readable": true,
   "currentEdition": "edition-01",
   "route": "/books/zero-to-agentic-api-testing",
-  "nextMilestone": "All 10 core transcript units completed and verified.",
+  "nextMilestone": "Foundations, manual wire investigation, and automated test synchronization.",
   "instructionFiles": [
     "AGENTS.md",
     "docs/agents/CORE_EDITORIAL.md",

@@ -135,24 +135,53 @@ export const lesson06 = {
     },
     {
       type: 'paragraph',
-      text: 'To avoid the duplicate book already exists bug we uncovered in Chapter 4, we write a 4 line Pre request script to generate a unique random ISBN on every single run:',
+      text: 'To avoid the duplicate book already exists bug we uncovered in Chapter 4, we write a Pre request script to generate a unique random ISBN on every single run:',
     },
     {
-      type: 'code',
-      filename: 'pre-request-unique-isbn.js',
-      lines: [
-        '// Step 1: Retrieve universal company prefix from Global Scope',
-        'const companyCode = pm.globals.get("company_code") || "LIB";',
-        '',
-        '// Step 2: Generate dynamic random integer using Postman dynamic utility',
-        'const randomDigits = pm.variables.replaceIn("{{$randomInt}}");',
-        '',
-        '// Step 3: Concatenate prefix and random digits to form unique ISBN',
-        'const uniqueISBN = companyCode + randomDigits;',
-        '',
-        '// Step 4: Store in Collection Scope so request payload can read {{ISBN}}',
-        'pm.collectionVariables.set("ISBN", uniqueISBN);',
+      type: 'chunked-code',
+      badge: 'PRE REQUEST SCRIPT CHUNKS',
+      title: 'Dynamic ISBN Generation Script',
+      intro: 'Executed before the HTTP request leaves the computer:',
+      chunks: [
+        {
+          label: 'Chunk 1: Fetching Base Prefix',
+          filename: 'prefix-lookup.js',
+          code: 'const companyCode = pm.globals.get("company_code") || "LIB";',
+          title: 'Reading Global Scope',
+          explanation: 'Reads the shared company code prefix from Global Scope, defaulting to LIB if unset.',
+          keyTakeaway: 'Global variables provide universal defaults across collections.'
+        },
+        {
+          label: 'Chunk 2: Random Number Generation',
+          filename: 'random-generator.js',
+          code: 'const randomDigits = Math.floor(1000 + Math.random() * 9000);\nconst uniqueISBN = companyCode + randomDigits;',
+          title: 'Generating Non Colliding Key',
+          explanation: 'Produces a random four digit number (e.g. 4821) and appends it to form LIB4821.',
+          keyTakeaway: 'Dynamic timestamps or random numbers eliminate duplicate key collisions.'
+        },
+        {
+          label: 'Chunk 3: Saving to Collection Variable',
+          filename: 'save-variable.js',
+          code: 'pm.collectionVariables.set("ISBN", uniqueISBN);',
+          title: 'Binding to Collection Tier',
+          explanation: 'Saves the fresh key so the request body placeholder {{ISBN}} can interpolate it at runtime.',
+          keyTakeaway: 'Collection tier keeps generated data accessible to all downstream requests.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'If uniqueISBN generates "LIB7824" and the request payload is { "isbn": "{{ISBN}}" }, what raw text does Postman transmit over the wire?',
+      options: [
+        'The literal string { "isbn": "{{ISBN}}" } with curly braces',
+        'The interpolated value { "isbn": "LIB7824" } with curly braces replaced by the variable value',
+        'An empty string { "isbn": "" } because variables require quotes',
+        'A syntax error because Postman does not support curly braces in JSON'
       ],
+      answerIndex: 1,
+      revealTitle: 'Wire Interpolation Confirmation',
+      explanation: 'Postman resolves the variable! Before sending the network packet, Postman replaces {{ISBN}} with the current runtime value "LIB7824", transmitting clean JSON to the server.'
     },
     {
       type: 'callout',

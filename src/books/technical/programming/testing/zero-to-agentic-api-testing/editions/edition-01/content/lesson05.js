@@ -135,27 +135,53 @@ export const lesson05 = {
     },
     {
       type: 'paragraph',
-      text: 'Use `pm.response.json()` to parse structured objects, and `pm.response.text()` for raw string searches.',
+      text: 'To automate our validation of the AddBook response from Chapter 4, we break down our assertions into three focused chunks:',
     },
     {
-      type: 'code',
-      filename: 'response-assertions.js',
-      lines: [
-        '// Parse the incoming JSON body into a JavaScript object',
-        'const responseData = pm.response.json();',
-        '',
-        '// Test 1: Verify exact property values inside the object',
-        'pm.test("Response contains successfully added message", function () {',
-        '    pm.expect(responseData.msg).to.eql("successfully added");',
-        '});',
-        '',
-        '// Test 2: Check wire headers and latency budgets',
-        'pm.test("Content Type is application/json and latency under 1200ms", function () {',
-        '    pm.response.to.have.header("Content-Type");',
-        '    pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json");',
-        '    pm.expect(pm.response.responseTime).to.be.below(1200);',
-        '});',
+      type: 'chunked-code',
+      badge: 'ASSERTION CHUNKS',
+      title: 'Automating the AddBook Response Validation',
+      intro: 'Each chunk asserts a distinct architectural layer of the response packet:',
+      chunks: [
+        {
+          label: 'Chunk 1: Status Code Assertion',
+          filename: 'status-assertion.js',
+          code: 'pm.test("Status code is 200 OK", function () {\n    pm.response.to.have.status(200);\n});',
+          title: 'Verifying Wire Status',
+          explanation: 'Asserts that the server answered with HTTP 200 OK, confirming the AddBook operation was accepted.',
+          keyTakeaway: 'Always verify status code first before parsing response body properties.'
+        },
+        {
+          label: 'Chunk 2: Headers and Latency Budget',
+          filename: 'header-latency.js',
+          code: 'pm.test("Header is JSON and latency under 1200ms", function () {\n    pm.response.to.have.header("Content-Type");\n    pm.expect(pm.response.headers.get("Content-Type")).to.include("application/json");\n    pm.expect(pm.response.responseTime).to.be.below(1200);\n});',
+          title: 'Enforcing Envelope Contract',
+          explanation: 'Confirms the payload is encoded in JSON and arrived within the 1200 millisecond performance budget.',
+          keyTakeaway: 'Testing latency budgets protects against silent database index degradation.'
+        },
+        {
+          label: 'Chunk 3: Deep JSON Body Validation',
+          filename: 'body-assertion.js',
+          code: 'pm.test("Response contains successfully added message", function () {\n    const responseData = pm.response.json();\n    pm.expect(responseData.msg || responseData.Msg).to.include("successfully added");\n    pm.expect(responseData.ID).to.be.a("string");\n});',
+          title: 'Validating Payload Properties',
+          explanation: 'Defensively inspects both lowercase msg and uppercase Msg keys, and confirms the generated ID is a valid string.',
+          keyTakeaway: 'Defensive assertions protect suites against casing inconsistencies across microservices.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'If the server takes 145 ms and returns { "Msg": "successfully added", "ID": "9781227" } with status 200 OK, what will the Test Results tab display?',
+      options: [
+        'PASS 3 of 3: Three green checkmarks confirming status, header, and body message',
+        'FAIL: Because the server response did not include a timestamp',
+        'ERROR: Because Postman cannot check string inclusion',
+        'TIMEOUT: Because latency was measured in milliseconds'
       ],
+      answerIndex: 0,
+      revealTitle: 'AddBook Assertion Test Results Confirmation',
+      explanation: 'All three assertions pass green! Postman confirmed the 200 status, validated latency was 145 ms (well below 1200 ms), and confirmed that Msg included "successfully added" with a valid ID string!'
     },
     {
       type: 'callout',

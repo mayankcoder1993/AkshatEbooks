@@ -237,10 +237,217 @@ function StructuredBreakdown({ badge = 'ARCHITECTURAL DECONSTRUCTION', title, in
   )
 }
 
+function ChunkedCode({ badge = 'CODE IN CHUNKS', title, intro, chunks = [] }) {
+  return (
+    <section className="chunked-code-card">
+      <div className="chunked-header">
+        <span className="chunked-badge">{badge}</span>
+        <h3 className="chunked-title">{title}</h3>
+      </div>
+      {intro && <p className="chunked-intro"><RichText text={intro} /></p>}
+      <div className="chunked-list">
+        {chunks.map((chunk, idx) => (
+          <div key={idx} className="chunk-shape-card">
+            <div className="chunk-top-bar">
+              <span className="chunk-num-badge">CHUNK {idx + 1}</span>
+              <span className="chunk-label">{chunk.label}</span>
+              {chunk.badge && <span className="chunk-sub-badge">{chunk.badge}</span>}
+            </div>
+            <div className="chunk-grid">
+              <div className="chunk-code-pane">
+                <div className="chunk-code-head">
+                  <span className="dot r" />
+                  <span className="dot y" />
+                  <span className="dot g" />
+                  <span className="chunk-filename">{chunk.filename || 'wire_segment'}</span>
+                </div>
+                <pre className="chunk-code-body">
+                  <code>{Array.isArray(chunk.code) ? chunk.code.join('\n') : chunk.code}</code>
+                </pre>
+              </div>
+              <div className="chunk-explanation-pane">
+                <h4 className="chunk-heading">{chunk.title || 'What this chunk does'}</h4>
+                <p className="chunk-desc"><RichText text={chunk.explanation} /></p>
+                {chunk.keyTakeaway && (
+                  <div className="chunk-key-takeaway">
+                    <strong>Rule:</strong> <RichText text={chunk.keyTakeaway} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+function PredictOutput({ badge = 'IMAGINE & PREDICT', prompt, code, options = [], answerIndex = 0, revealTitle = 'Actual Output & Debrief', explanation, staticMode = false }) {
+  const [selected, setSelected] = useState(null)
+  const [revealed, setRevealed] = useState(staticMode)
+
+  const handleSelect = (idx) => {
+    setSelected(idx)
+    setRevealed(true)
+  }
+
+  return (
+    <section className="predict-output-card">
+      <div className="predict-header">
+        <span className="predict-badge">{badge}</span>
+        <h3 className="predict-prompt">{prompt}</h3>
+      </div>
+      {code && (
+        <div className="predict-code-wrap">
+          <pre className="predict-code-block"><code>{Array.isArray(code) ? code.join('\n') : code}</code></pre>
+        </div>
+      )}
+      <div className="predict-options-grid">
+        {options.map((opt, idx) => {
+          let btnClass = 'predict-option-btn'
+          if (revealed) {
+            if (idx === answerIndex) btnClass += ' correct'
+            else if (selected === idx) btnClass += ' wrong'
+          }
+          return (
+            <button
+              key={idx}
+              type="button"
+              className={btnClass}
+              onClick={() => handleSelect(idx)}
+              disabled={revealed && !staticMode}
+            >
+              <span className="opt-letter">{String.fromCharCode(65 + idx)}</span>
+              <span className="opt-text"><RichText text={opt} /></span>
+            </button>
+          )
+        })}
+      </div>
+      {!revealed && !staticMode && (
+        <button type="button" className="predict-reveal-btn" onClick={() => setRevealed(true)}>
+          Skip prediction and reveal wire result ▽
+        </button>
+      )}
+      {(revealed || staticMode) && (
+        <div className="predict-reveal-pane">
+          <div className="predict-reveal-header">
+            <span className="predict-reveal-tag">CONFIRMED WIRE RESULT</span>
+            <h4>{revealTitle}</h4>
+          </div>
+          <p className="predict-explanation"><RichText text={explanation} /></p>
+        </div>
+      )}
+    </section>
+  )
+}
+
+function MiniApiSandbox({ title = 'Build & Test Your Own 5-Line In-Memory API', staticMode = false }) {
+  const [books, setBooks] = useState([
+    { id: 1, title: 'Clean Architecture', author: 'Robert Martin' },
+    { id: 2, title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann' }
+  ])
+  const [activeMethod, setActiveMethod] = useState('GET')
+  const [lastAction, setLastAction] = useState('Server started. Initialized with 2 books in memory.')
+  const [status, setStatus] = useState('200 OK')
+
+  const handleGet = () => {
+    setActiveMethod('GET')
+    setStatus('200 OK')
+    setLastAction(`GET /books returned ${books.length} records from memory.`)
+  }
+
+  const handlePost = () => {
+    setActiveMethod('POST')
+    const nextId = books.length > 0 ? Math.max(...books.map(b => b.id)) + 1 : 1
+    const newBook = { id: nextId, title: 'The Pragmatic Programmer', author: 'David Thomas' }
+    setBooks(prev => [...prev, newBook])
+    setStatus('201 Created')
+    setLastAction(`POST /books added "${newBook.title}" (ID: ${nextId}) to the server memory array!`)
+  }
+
+  const handlePut = () => {
+    setActiveMethod('PUT')
+    if (books.length === 0) {
+      setStatus('404 Not Found')
+      setLastAction('PUT /books/1 failed: no records exist in server memory to replace.')
+      return
+    }
+    setBooks(prev => prev.map((b, i) => i === 0 ? { ...b, title: 'Clean Code: Refactored Edition' } : b))
+    setStatus('200 OK')
+    setLastAction('PUT /books/1 completely replaced record ID 1 with new payload attributes.')
+  }
+
+  const handleDelete = () => {
+    setActiveMethod('DELETE')
+    if (books.length === 0) {
+      setStatus('404 Not Found')
+      setLastAction('DELETE /books/1 failed: array is already empty in server memory.')
+      return
+    }
+    const removed = books[books.length - 1]
+    setBooks(prev => prev.slice(0, prev.length - 1))
+    setStatus('200 OK')
+    setLastAction(`DELETE /books/${removed.id} removed "${removed.title}" from memory.`)
+  }
+
+  return (
+    <section className="mini-api-card">
+      <div className="mini-api-head">
+        <span className="mini-api-badge">INTERACTIVE 5-LINE API SERVER</span>
+        <h3 className="mini-api-title">{title}</h3>
+        <p className="mini-api-intro">
+          This is what an API actually is under the hood: a simple server holding data in memory, answering HTTP verbs. Click each method button below to send requests and watch the server memory array update live!
+        </p>
+      </div>
+
+      <div className="mini-api-controls">
+        <button type="button" className={`api-btn get ${activeMethod === 'GET' ? 'active' : ''}`} onClick={handleGet}>
+          GET /books (Read)
+        </button>
+        <button type="button" className={`api-btn post ${activeMethod === 'POST' ? 'active' : ''}`} onClick={handlePost}>
+          POST /books (Create)
+        </button>
+        <button type="button" className={`api-btn put ${activeMethod === 'PUT' ? 'active' : ''}`} onClick={handlePut}>
+          PUT /books/1 (Replace)
+        </button>
+        <button type="button" className={`api-btn delete ${activeMethod === 'DELETE' ? 'active' : ''}`} onClick={handleDelete}>
+          DELETE /books/last (Remove)
+        </button>
+      </div>
+
+      <div className="mini-api-display-grid">
+        <div className="mini-api-memory-pane">
+          <div className="pane-title-bar">
+            <span>Server Memory Array (RAM)</span>
+            <span className="count-pill">{books.length} items</span>
+          </div>
+          <pre className="memory-json"><code>{JSON.stringify(books, null, 2)}</code></pre>
+        </div>
+
+        <div className="mini-api-wire-pane">
+          <div className="pane-title-bar">
+            <span>Wire Response</span>
+            <span className={`status-pill ${status.startsWith('2') ? 'ok' : 'err'}`}>{status}</span>
+          </div>
+          <div className="wire-log-box">
+            <p className="wire-log-msg">{lastAction}</p>
+            <p className="wire-log-hint">
+              Notice how the server returned an HTTP status code alongside the updated memory state. That is the entire foundation of RESTful APIs!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function Block({ block: b, staticMode = false }) {
   switch (b.type) {
     case 'heading': return <Heading>{b.text}</Heading>
     case 'paragraph': return <p className="section-intro"><RichText text={b.text}/></p>
+    case 'chunked-code': return <ChunkedCode {...b} />
+    case 'predict-output': return <PredictOutput {...b} staticMode={staticMode} />
+    case 'mini-api': return <MiniApiSandbox {...b} staticMode={staticMode} />
     case 'image':
       return (
         <figure className="modern-ui-box lesson-figure">
@@ -316,16 +523,22 @@ export function Block({ block: b, staticMode = false }) {
               </div>
             )}
             <p className="mission-description"><RichText text={b.text} /></p>
-            <div className="mission-grid">
-              <div>
-                <strong>What we know</strong>
-                <ul>{b.weKnow.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
+            {(b.weKnow?.length > 0 || b.weNeed?.length > 0) && (
+              <div className="mission-grid">
+                {b.weKnow?.length > 0 && (
+                  <div>
+                    <strong>What we know</strong>
+                    <ul>{b.weKnow.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
+                  </div>
+                )}
+                {b.weNeed?.length > 0 && (
+                  <div>
+                    <strong>What we need</strong>
+                    <ul>{b.weNeed.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
+                  </div>
+                )}
               </div>
-              <div>
-                <strong>What we need</strong>
-                <ul>{b.weNeed.map(x => <li key={x}><RichText text={x} /></li>)}</ul>
-              </div>
-            </div>
+            )}
           </div>
         </section>
       )
@@ -395,7 +608,7 @@ export function Block({ block: b, staticMode = false }) {
       )
     case 'think': return <section className="journey-card think"><span>PAUSE & THINK</span><h3>{b.prompt}</h3><Reveal label="Reveal our thinking" staticMode={staticMode}><p>{b.answer}</p></Reveal></section>
     case 'guess': return <section className="journey-card guess"><span>MAKE A GUESS</span><h3>{b.prompt}</h3>{b.code && <pre>{b.code}</pre>}<ol>{b.options.map(x=><li key={x}>{x}</li>)}</ol><Reveal label="Show the answer" staticMode={staticMode}><p><strong>Answer: {b.options[b.answerIndex]}.</strong> {b.explain}</p></Reveal></section>
-    case 'bug': return <section className="journey-card bug"><span>BUG HUNT</span><h3>{b.prompt}</h3><CodeBlock filename="bug_hunt.py" lines={b.lines}/><Reveal label="Find the bug" staticMode={staticMode}><p><strong>Line {b.bugLine}.</strong> {b.explain}</p></Reveal></section>
+    case 'bug': return <section className="journey-card bug"><span>BUG HUNT</span><h3>{b.prompt}</h3><CodeBlock filename={b.filename || 'snippet'} lines={b.lines}/><Reveal label="Find the bug" staticMode={staticMode}><p><strong>Line {b.bugLine}.</strong> {b.explain}</p></Reveal></section>
     case 'callout': return <section className={`callout ${b.variant || 'note'}`}>{b.title && <h3>{b.title}</h3>}{b.paragraphs.map(p=><p key={p}><RichText text={p}/></p>)}</section>
     case 'flow': return <><Heading>Input → Process → Output</Heading><FlowDiagram inputLabel={b.input[0]} inputDetail={b.input[1]} processLabel={b.process[0]} processDetail={b.process[1]} outputLabel={b.output[0]} outputDetail={b.output[1]}/></>
     case 'blueprint': return <ProgramCard {...b}/>

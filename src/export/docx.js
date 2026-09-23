@@ -70,8 +70,12 @@ async function blockToDocx(b) {
           });
         }
       }
-      items.push(p([new TextRun({ text: 'What we know: ', bold: true }), ...rich(b.weKnow.join(' • '))]));
-      items.push(p([new TextRun({ text: 'What we need: ', bold: true }), ...rich(b.weNeed.join(' • '))]));
+      if (b.weKnow?.length) {
+        items.push(p([new TextRun({ text: 'What we know: ', bold: true }), ...rich(b.weKnow.join(' • '))]));
+      }
+      if (b.weNeed?.length) {
+        items.push(p([new TextRun({ text: 'What we need: ', bold: true }), ...rich(b.weNeed.join(' • '))]));
+      }
       return [tableBox(`OUR MISSION · ${b.title}`, items, 'EEF5FA')];
     }
     case 'api-inspector': {
@@ -148,6 +152,34 @@ async function blockToDocx(b) {
         ])
       ];
       return [tableBox(b.title || 'ARCHITECTURAL DECONSTRUCTION', items, 'F3F6FA')];
+    }
+    case 'chunked-code': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.chunks.flatMap((chunk, idx) => [
+          p([new TextRun({ text: `CHUNK ${idx + 1}: ${chunk.label} · ${chunk.title || ''}`, bold: true, color: colors.navy })]),
+          p(chunk.explanation),
+          ...(chunk.code ? code(Array.isArray(chunk.code) ? chunk.code : [chunk.code], chunk.filename || 'wire_segment') : []),
+          ...(chunk.keyTakeaway ? [p([new TextRun({ text: 'Rule: ', bold: true, color: colors.teal }), ...rich(chunk.keyTakeaway)])] : [])
+        ])
+      ];
+      return [tableBox(b.title || 'CODE IN CHUNKS', items, 'F3F6FA')];
+    }
+    case 'predict-output': {
+      const items = [
+        p([new TextRun({ text: b.prompt, bold: true, color: colors.navy })]),
+        ...(b.code ? code(Array.isArray(b.code) ? b.code : [b.code], 'prediction_target') : []),
+        ...b.options.map((opt, idx) => p(`${String.fromCharCode(65 + idx)}. ${opt}`)),
+        p([new TextRun({ text: `Actual Output (${b.revealTitle || 'Confirmed'}): `, bold: true, color: colors.teal }), ...rich(b.explanation)])
+      ];
+      return [tableBox('IMAGINE & PREDICT BEFORE SENDING', items, 'EEF8F6')];
+    }
+    case 'mini-api': {
+      const items = [
+        p(b.intro || 'An in-memory API demonstrates core HTTP operations: GET returns records, POST appends records, PUT replaces a record, and DELETE removes records.'),
+        p([new TextRun({ text: 'Core Mechanics: ', bold: true }), new TextRun({ text: 'Memory array serves as the transient database; each HTTP verb triggers a deterministic state transition.' })])
+      ];
+      return [tableBox(b.title || 'INTERACTIVE 5-LINE API SERVER', items, 'EEF1FA')];
     }
     case 'mission-tracker': {
       const items = [p(b.text)];

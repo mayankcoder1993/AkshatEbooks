@@ -4,271 +4,293 @@ import collaborationImg from '../assets/postman-team-collaboration-fork-pr.jpg'
 export const lesson03 = {
   id: 'postman-setup',
   icon: '',
-  title: 'Setting Up Postman and Workspace Collaboration',
-  shortTitle: 'Postman Setup',
-  subtitle: 'Installing the app, navigating the interface, and managing Personal, Team, and Public workspaces.',
-  tags: ['Postman', 'Workspaces', 'Installation', 'Collections', 'Tooling'],
+  title: 'Automating the Wire Check: Postman Workbench and Assertions',
+  shortTitle: 'Automating the Wire Check',
+  subtitle: 'Translating manual verification into automated JavaScript assertions, running test suites, and team collaboration.',
+  tags: ['Postman', 'Assertions', 'JavaScript', 'Automation', 'Collections', 'Collaboration'],
   blocks: [
     {
       type: 'mission-hud',
       mission: 'Mission 1: The Core Protocol and Campus Cloud Integration',
-      phase: 'Phase 3 of 3: The Automation (Mission Victory)',
-      rank: 'Rank: Automation Pipeline Engineer',
+      phase: 'Phase 3 of 3: Automating the Wire Verification',
+      rank: 'Rank: Automation Quality Engineer',
       status: 'ACTIVE'
     },
     {
       type: 'mission-tracker',
       badge: 'MISSION 1 PROGRESS · STEP 3 OF 3',
-      title: 'Completing Mission 1: Entering the Laboratory to Verify the Wire',
-      text: 'To audit our publishing endpoints, craft custom POST payloads, and inspect wire headers, we enter our specialized API workbench. Because web browsers cannot craft arbitrary POST payloads or custom request headers from the address bar, we configure Postman, explore its interface alongside modern tools like Bruno, create our first executable test collection, and learn how engineering teams collaborate safely using forked collections and pull requests.',
+      title: 'Completing Mission 1: Turning Manual Inspections into Automated Watchdogs',
+      text: 'In Chapter 2, we investigated the campus transit crash and proved the solution by hand. But manual checking has a severe flaw: a human tester cannot sit at a screen clicking Send every fifteen seconds, especially during midnight deployments. If a backend engineer pushes an update that accidentally breaks the route parameter again, real students will be stranded at bus stops before anyone notices. In this chapter, we automate our manual checks into a repeatable Postman collection with JavaScript assertions that validate the wire in milliseconds.',
     },
     {
       type: 'heading',
-      text: 'Step 1: Why We Need an API Testing Workbench',
+      text: 'Step 1: The API Testing Workbench Cockpit',
     },
     {
       type: 'paragraph',
-      text: 'In our previous chapter, we discovered that standard web browsers can only perform GET requests through the address bar. A browser cannot send custom POST payloads, set authorization headers, or inspect raw status codes cleanly.',
-    },
-    {
-      type: 'paragraph',
-      text: 'This is why testers use a dedicated **API Testing Workbench**. An integrated workbench like Postman combines all the essential tools into a single visual cockpit:',
-    },
-    {
-      type: 'comparison',
-      title: 'Core Capabilities of an API Testing Workbench',
-      columns: ['Workbench Zone', 'What It Does', 'Why It Matters'],
-      rows: [
-        ['Request Builder', 'Select any HTTP verb, configure headers, and write JSON payloads', 'Lets you craft and send arbitrary network requests that browsers cannot trigger'],
-        ['Response Inspector', 'Displays formatted JSON, status codes, response time, and payload size', 'Provides instant visual feedback on whether the backend succeeded or failed'],
-        ['Environment Manager', 'Stores dynamic variables (such as base_url) across QA and UAT targets', 'Allows switching between testing environments with a single click'],
-        ['Automation Sandbox', 'Embedded Node.js JavaScript engine for writing pm.test assertions', 'Replaces manual inspection with instant automated test execution'],
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 2: Understanding Postman and Modern Alternatives like Bruno',
-    },
-    {
-      type: 'paragraph',
-      text: 'Postman is the enterprise industry standard API platform used worldwide. Modern offline alternatives like Bruno also store collections as plain text files in local Git folders. The underlying HTTP wire mechanics are identical across both tools.',
-    },
-    {
-      type: 'steps',
-      items: [
-        'Download the official desktop application: [https://www.postman.com/downloads/](https://www.postman.com/downloads/).',
-        'Launch the installer and sign in with your account to enable workspace cloud synchronization.',
-        'Create a new Workspace named "Global Open Data and Campus Audit" to organize your projects.',
-        'Create a Collection named "Web Wire REST Suite" to serve as your executable test suite. You can also import the pre built course collection directly: [Download Zero to Agentic Postman Collection](/materials/zero-to-agentic-api-testing/Zero-to-Agentic-API-Testing.postman_collection.json) or [Raw GitHub File](https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/Zero-to-Agentic-API-Testing.postman_collection.json).',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 3: Tour of the Postman Workbench',
+      text: 'Standard web browsers are designed for human browsing, not API automation. A browser address bar cannot run assertions, cannot chain variables between requests, and cannot execute automated regression suites. This is why professional quality engineers rely on an **API Testing Workbench** like Postman.',
     },
     {
       type: 'image',
       layout: 'stacked',
-      badge: 'WORKBENCH ARCHITECTURE',
-      title: 'Postman Workbench Architecture: The Four Operational Zones',
-      text: 'The Postman application organizes testing into four specialized zones: the left sidebar for navigation and collection hierarchies, the top bar for environments and workspaces, the center request builder for constructing HTTP transactions, and the bottom panel for inspecting live response headers and payloads.',
+      badge: 'POSTMAN WORKBENCH',
+      title: 'The Postman Testing Cockpit: Navigation, Request Builder, and Response Pane',
+      text: 'Postman organizes your testing universe into three major zones: the left sidebar for Collections and Environments, the center top builder for URLs and Headers, and the bottom pane for live responses and assertion results.',
       src: workbenchImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-workbench-overview.jpg',
       w: 1408,
       h: 768,
-      alt: 'Postman UI architectural overview: Workspaces, Collections sidebar as test suites, Request Builder tabs, and Response/Console viewer.',
-      caption: 'The four operational zones of an API testing workbench.',
+      alt: 'Postman user interface layout showing collections, request tabs, and test execution results.',
+      caption: 'The Automation Cockpit: Collections on the left, request parameters on top, response data and test results on the bottom.',
       points: [
-        'Workspaces Header: Manage active workspace scope (Personal, Team, Public).',
-        'Collections Sidebar: Folders grouping related API requests into executable test suites.',
-        'Request Editor: Tabs for URL params, Auth, Headers, Body, Pre request Script, and Tests.',
-        'Response Viewer: Bottom panel displaying Status Code, Latency, Payload Body, and Test Results.',
+        'Left Sidebar: Houses Collections, Environments, and Mock Servers organized in logical folders.',
+        'Top Center Pane: Where you configure HTTP methods, endpoints, authorization headers, and body payloads.',
+        'Bottom Pane: Where the live server status code, response time, headers, body, and test results appear.',
       ],
     },
     {
       type: 'heading',
-      text: 'Step 4: Executing Live Requests in Your Postman Collection',
+      text: 'Step 2: The JavaScript Test Sandbox: pm.test and pm.expect',
     },
     {
       type: 'paragraph',
-      text: 'With Postman open, let us create our first live test request. Click the plus button to add a request, set the method to POST, enter the URL https://jsonplaceholder.typicode.com/posts, select Body > raw > JSON, and paste our payload:',
+      text: 'Inside Postman, every request includes a dedicated tab labeled **Tests**. Code typed into this tab executes automatically in a secure JavaScript sandbox immediately after the server response arrives.',
     },
     {
-      type: 'code',
-      filename: 'create-article-request.json',
-      lines: [
-        'POST https://jsonplaceholder.typicode.com/posts HTTP/1.1',
-        'Content-Type: application/json',
-        '',
-        '{',
-        '  "title": "Automating APIs with Postman",',
-        '  "body": "Step by step guide to sending HTTP requests and validating response codes",',
-        '  "userId": 1',
-        '}',
-      ],
+      type: 'paragraph',
+      text: 'Postman provides a global JavaScript object named **pm** that gives your test scripts complete access to the request and response packets. The testing syntax uses plain English matchers powered by the popular Chai assertion library:',
     },
     {
-      type: 'terminal',
-      command: 'HTTP Response from Server',
-      lines: [
-        'Status: 201 Created',
-        'Time: 142 ms',
-        '',
-        '{',
-        '  "title": "Automating APIs with Postman",',
-        '  "body": "Step by step guide to sending HTTP requests and validating response codes",',
-        '  "userId": 1,',
-        '  "id": 101',
-        '}',
+      type: 'definition',
+      term: 'Test Assertion',
+      text: 'A formal logical condition in code that compares an actual runtime value against an expected outcome. If the condition is true, the test passes with a green checkmark; if false, the test halts with an explicit error description.',
+      example: 'pm.response.to.have.status(200) asserts that the server returned HTTP status code 200 OK.',
+    },
+    {
+      type: 'heading',
+      text: 'Step 3: Chunking the Automation Test Script',
+    },
+    {
+      type: 'paragraph',
+      text: 'Let us take the exact manual observations we made in Chapter 2 and convert them into three automated assertion chunks:',
+    },
+    {
+      type: 'chunked-code',
+      badge: 'AUTOMATION SCRIPT CHUNKS',
+      title: 'The Campus Shuttle Automated Assertion Suite',
+      intro: 'Study each assertion chunk and see how it mirrors what our eyes inspected by hand:',
+      chunks: [
+        {
+          label: 'Chunk 1: Status Code Assertion',
+          filename: 'status_check.js',
+          code: 'pm.test("Status code is 200 OK", function () {\n    pm.response.to.have.status(200);\n});',
+          title: 'Verifying HTTP Status',
+          explanation: 'Replaces our manual check of the status pill. If the server crashes with 500 or returns 404, this assertion instantly fails with a red badge.',
+          keyTakeaway: 'Always verify status code first before parsing response body properties.'
+        },
+        {
+          label: 'Chunk 2: Response Time Latency Check',
+          filename: 'latency_check.js',
+          code: 'pm.test("Response time is under 500 ms", function () {\n    pm.expect(pm.response.responseTime).to.be.below(500);\n});',
+          title: 'Enforcing Performance Budgets',
+          explanation: 'Human eyes cannot reliably notice whether a server answered in 120 ms or 800 ms. This script ensures the server responds within half a second.',
+          keyTakeaway: 'Performance budgets prevent slow database queries from creeping into production.'
+        },
+        {
+          label: 'Chunk 3: Data Integrity and Coordinate Validation',
+          filename: 'payload_check.js',
+          code: 'pm.test("Shuttle coordinates are valid numbers", function () {\n    const data = pm.response.json();\n    pm.expect(data.status).to.eql("in_transit");\n    pm.expect(data.coordinates.latitude).to.be.a("number");\n    pm.expect(data.coordinates.longitude).to.be.a("number");\n});',
+          title: 'Validating JSON Payload Structure',
+          explanation: 'Parses the response JSON text into a JavaScript object and validates that latitude and longitude are real numbers, not null strings.',
+          keyTakeaway: 'Deep property validation guarantees mobile mapping components receive valid coordinates.'
+        }
+      ]
+    },
+    {
+      type: 'heading',
+      text: 'Step 4: Imagine and Predict the Test Result',
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When we send the corrected request (GET /v1/campus/shuttle/coordinates?route=campus_loop_north) and execute these three assertion chunks, what will appear in the Postman Test Results tab?',
+      options: [
+        'PASS 3 of 3: Three green checkmarks confirming status 200, latency under 500 ms, and valid numeric coordinates',
+        'FAIL: Because JavaScript requires variables to be declared in uppercase letters',
+        'ERROR: Because Postman cannot inspect JSON numbers inside response objects',
+        'TIMEOUT: Because assertions delay network transmission by sixty seconds'
       ],
+      answerIndex: 0,
+      revealTitle: 'Automated Test Results Tab Confirmation',
+      explanation: 'All three assertions pass with bright green checkmarks! Postman evaluated the status code, confirmed the response time was 38 ms (well below 500 ms), and verified that latitude and longitude were valid floating point numbers!'
+    },
+    {
+      type: 'heading',
+      text: 'Step 5: Executing the Suite Live in the Workbench',
+    },
+    {
+      type: 'paragraph',
+      text: 'Here is the complete automated execution in our API workbench. Notice the Test Results tab: our three assertions validate the server contract automatically:',
+    },
+    {
+      type: 'api-inspector',
+      title: 'Automated Postman Suite: Campus Shuttle Locator',
+      method: 'GET',
+      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates?route=campus_loop_north',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer campus_student_tok_9918'
+      },
+      status: '200 OK',
+      time: '38 ms',
+      size: '286 B',
+      responseBody: {
+        route: 'campus_loop_north',
+        shuttleId: 'BUS_104',
+        status: 'in_transit',
+        coordinates: {
+          latitude: 42.3601,
+          longitude: -71.0942
+        },
+        speedMph: 24,
+        nextStop: 'Apex Student Union',
+        estimatedArrivalMinutes: 3
+      },
+      assertions: [
+        'Status code is 200 OK',
+        'Response time is under 500 ms latency budget',
+        'Shuttle coordinates are valid numbers'
+      ],
+      testScript: [
+        'pm.test("Status code is 200 OK", function () {',
+        '    pm.response.to.have.status(200);',
+        '});',
+        '',
+        'pm.test("Response time is under 500 ms", function () {',
+        '    pm.expect(pm.response.responseTime).to.be.below(500);',
+        '});',
+        '',
+        'pm.test("Shuttle coordinates are valid numbers", function () {',
+        '    const data = pm.response.json();',
+        '    pm.expect(data.status).to.eql("in_transit");',
+        '    pm.expect(data.coordinates.latitude).to.be.a("number");',
+        '    pm.expect(data.coordinates.longitude).to.be.a("number");',
+        '});'
+      ]
+    },
+    {
+      type: 'heading',
+      text: 'Step 6: Sourced Case Study: When Code Deploys Without Verification',
+    },
+    {
+      type: 'source-note',
+      label: 'Verified Historical Case Study · August 2012',
+      claim: 'Knight Capital Group Suffers 440 Million Dollar Loss in 45 Minutes Due to Unverified Deployment',
+      url: 'https://www.sec.gov/litigation/admin/2013/34-70694.pdf',
+      verifiedThrough: 'United States Securities and Exchange Commission (SEC) Administrative Proceeding'
     },
     {
       type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Forgetting to Click Save before Running',
+      variant: 'warning',
+      title: 'The Catastrophic Cost of Missing Automated Verification: Knight Capital',
       paragraphs: [
-        'One of the most frequent mistakes made by beginners in Postman is editing a request URL, payload, or test script, and clicking Send without clicking the Save button (or pressing Ctrl+S / Cmd+S).',
-        'If you do not save, your single interactive request might work in the active tab, but when you run the collection in the Collection Runner, Postman executes the older saved version from disk!',
-        'Notice the small orange dot beside your tab name in Postman: that orange dot means you have unsaved changes. Always press Save to persist your updates.',
+        'On August 1, 2012, financial trading firm Knight Capital Group deployed an update to eight servers. A technician mistakenly failed to copy the new software to the eighth server, leaving an obsolete flag active.',
+        'When the market opened at 9:30 AM, the unverified server entered an infinite loop: executing millions of unintended high speed stock trades. Because the team had no automated post deployment verification tests running against the live cluster, the rogue server traded for 45 minutes straight.',
+        'By the time engineers halted the system, the firm had accumulated a staggering loss of 440 million dollars, forcing the company into emergency acquisition.',
+        'The Lesson: Automated API test suites are not optional luxuries. They are automated safety shields that run on every code release to ensure broken code never runs unchecked.',
       ],
     },
     {
       type: 'heading',
-      text: 'Step 5: Team Collaboration: Forking Collections and Reviewing Pull Requests',
+      text: 'Step 7: Team Collaboration: Workspaces, Forks, and Pull Requests',
+    },
+    {
+      type: 'paragraph',
+      text: 'Now that you have built a working test collection, how do you share it across the engineering team without team members accidentally overwriting each other work?',
     },
     {
       type: 'image',
       layout: 'stacked',
       badge: 'TEAM COLLABORATION',
-      title: 'Postman Collaboration Lifecycle: Forking, Branching, and Merging',
-      text: 'In real world software projects, multiple engineers work on the same API test collection simultaneously. If everyone edits the main collection directly, tests overwrite each other and breaking changes enter production test runs. Postman provides an enterprise branching workflow mirroring Git: engineers fork a parent collection into their personal workspace, make atomic updates, submit pull requests with visual change diffs, and merge back into the verified team source of truth.',
+      title: 'Collaborative Testing Workflow: Forking Collections and Reviewing Pull Requests',
+      text: 'Just like software developers use Git branches to write code safely, API testers use Postman Forks. You fork the parent collection into your personal workspace, add new assertions, and create a Pull Request for your peers to review before merging.',
       src: collaborationImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-team-collaboration-fork-pr.jpg',
       w: 1408,
       h: 768,
-      alt: 'Postman team collaboration workflow showing collection forking, branch isolation, pull request creation, peer review, and merging back to the parent master collection.',
-      caption: 'The Postman Team Collaboration Lifecycle: Forking, branching, reviewing, and merging.',
+      alt: 'Postman collaboration workflow showing parent collections, personal forks, and pull request reviews.',
+      caption: 'Safe Collaboration: Forking the main collection, writing assertions, and merging through peer review.',
       points: [
-        'Step 1 (Master Team Workspace): The single source of truth containing tested parent collections used by teams and automated CI pipelines.',
-        'Step 2 (Fork to Private Branch): Each engineer creates their own isolated personal working fork without affecting teammates.',
-        'Step 3 (Local Test Scripting): The engineer develops new test scripts, dynamic assertions, and mock payloads in complete safety.',
-        'Step 4 (Pull Request and Peer Review): The engineer opens a pull request with side by side diff views showing green additions for peer approval.',
-        'Step 5 (Merge and Fork Cleanup): Approved changes merge cleanly into the master parent collection, and the temporary fork is deleted to keep the workspace tidy.',
+        'Parent Collection: The single source of truth shared in the Team Workspace.',
+        'Personal Fork: Your safe, private playground where you experiment and write new assertions without affecting teammates.',
+        'Pull Request: A formal review request where teammates inspect your added tests before merging into the main collection.',
       ],
-    },
-    {
-      type: 'steps',
-      items: [
-        'Forking a Collection: Click the three dots icon beside your parent collection and select Create a Fork. Assign a distinct label such as "Library_Working_Branch". This creates an isolated copy linked to the original parent.',
-        'Developing in Isolation: Add new test scripts, assertions, and mock payloads inside your fork without affecting teammates.',
-        'Creating a Pull Request: When your changes are ready, click Create Pull Request. Provide a clear title, description of changes, and select your teammates as Reviewers.',
-        'Reviewing and Diff Inspection: The reviewer opens the Pull Requests tab, inspects the Changes view (where green highlights show added code), and leaves inline comments on specific test files.',
-        'Approving and Merging: Once approved, click Merge Changes, and select "Update destination and delete source fork" to keep your workspace tidy.',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Editing the Master Collection Directly in Teams',
-      paragraphs: [
-        'When joining a company, never push experimental assertions directly into the shared master collection.',
-        'If your unfinished test fails during a scheduled smoke run, it triggers false alarm emails to engineering leads.',
-        'Always fork the collection into your own branch, test your changes thoroughly, and raise a pull request for review.',
-      ],
-    },
-    {
-      type: 'battle-scar',
-      metric: 'Security Exposure Audit',
-      title: 'Public Workspace Key Exposure: The Danger of Accidental Visibility',
-      context: 'Security researchers analyzing public API repositories uncovered thousands of live production database passwords, cloud secrets, and private authentication tokens inadvertently shared in public Postman workspaces. Engineers intended to test a quick endpoint in their personal sandbox, but accidentally published their workspace to the open web. Anyone typing search terms into web search engines could discover administrative master keys.',
-      takeaway: 'Always isolate sensitive credentials using private masked environment variables. Never publish workspace collections containing real production authorization keys to public web directories.'
-    },
-    {
-      type: 'triage',
-      title: 'War Room Triage: The Leaked Master Key Incident',
-      scenario: 'At 11:30 PM, the campus security operations center alerts the team: an administrative database token was detected in an open web search index. A junior tester admits they created a collection in Postman earlier that afternoon. What immediate containment action must the team take first?',
-      options: [
-        'Send an email to vendor support requesting them to remove the indexed collection URL.',
-        'Immediately revoke and regenerate the compromised database secret in the identity provider.',
-        'Rename the Postman collection to a generic title like Test Project.',
-        'Delete the local Postman application from the tester laptop workstation.'
-      ],
-      answerIndex: 1,
-      debrief: 'Immediate credential revocation is step one of incident containment! Once a secret is exposed to the public internet, assume it is already harvested by automated scanners. You must invalidate the key instantly, inspect access audit logs, and move all tokens into masked environment variables.',
-      traps: [
-        'Waiting for external vendor support allows attackers unrestricted hours of database access.',
-        '',
-        'Renaming collections does not change URLs or revoke exposed credentials from search caches.',
-        'Deleting local software does not erase published cloud data or revoke live keys.'
-      ]
-    },
-    {
-      type: 'mission-accomplished',
-      title: 'Mission 1 Accomplished: Live REST Collection Verified!',
-      text: 'By assembling our requests in Postman, we submitted custom POST payloads, received 201 Created with generated resource IDs, inspected raw wire headers, and learned how enterprise teams collaborate via forked collections. We have built our first functioning test collection without proprietary licensing barriers!',
     },
     {
       type: 'heading',
-      text: 'Step 6: Review and Practice',
+      text: 'Step 8: Review and Practice',
     },
     {
       type: 'guess',
-      prompt: 'When collaborating in a team workspace in Postman, why should an automation engineer fork a collection before adding new tests?',
+      prompt: 'What happens when an assertion inside a pm.test block evaluates to false?',
       options: [
-        'Because Postman does not allow more than one person to open a collection',
-        'To work safely on an isolated working branch without disrupting the stable parent collection used by teammates and CI pipelines',
-        'Because forking deletes the original collection',
-        'To make the collection run faster in the desktop app',
+        'Postman automatically restarts your computer',
+        'Postman marks that specific test as failed with a red indicator and prints the exact assertion difference in the console',
+        'The entire Postman application deletes the collection',
+        'The network server cancels all user accounts'
       ],
       answerIndex: 1,
-      explain: 'Forking creates a linked copy of the collection, allowing engineers to develop and verify new tests independently before merging them back into the main collection via a reviewed pull request.',
+      explain: 'When an assertion condition fails, Postman catches the AssertionError, flags the test with a red cross badge in the Test Results tab, and prints the expected vs actual value in the test report.'
     },
     {
       type: 'quiz',
       items: [
         [
-          'What are the three workspace scopes in Postman?',
-          'Personal (private to the individual user), Team (shared among invited organization members with real time sync), and Public (visible to anyone with the URL).',
+          'What is the difference between a manual test and an automated API test?',
+          'A manual test requires a human tester to click buttons, inspect screens, and verify status codes with their eyes. An automated API test executes in milliseconds using code assertions that run without human intervention.',
         ],
         [
-          'What is the recommended merge option when completing a pull request in Postman?',
-          'Selecting "Update destination and delete source fork", which merges your verified changes into the parent collection while automatically cleaning up the temporary working fork.',
+          'In Postman, what is the role of the pm.response.json() method?',
+          'It parses the incoming raw HTTP response body text and deserializes it into a traversable JavaScript object that can be queried and asserted.',
+        ],
+        [
+          'Why should engineering teams use Postman Forks instead of editing the parent collection directly?',
+          'Editing a shared team collection directly can disrupt ongoing automated builds and overwrite teammate changes. Forking provides an isolated workspace where tests can be developed safely and reviewed before merging.',
         ],
       ],
     },
     {
       type: 'takeaways',
       items: [
-        'An API workbench lets you send arbitrary HTTP requests, inspect headers, and examine response bodies visually.',
-        'Tools like Bruno offer offline alternatives, while sharing identical HTTP wire mechanics.',
-        'Workspaces separate work contexts: Personal for private study, Team for corporate collaboration.',
-        'Forking and pull requests allow teams to build and review automated tests safely without breaking main suites.',
-        'Testing live endpoints with real JSON payloads confirms that the client server contract functions end to end.',
+        'Postman provides a dedicated API testing cockpit combining collections, environment management, and JavaScript assertion sandboxes.',
+        'Use pm.test() to define individual test cases, and pm.expect() to assert status codes, response times, and payload properties.',
+        'The Chai assertion library powers expressive, readable assertions: such as to.have.status(200) and to.be.below(500).',
+        'Team collaboration relies on forking collections and opening pull requests to review new test cases safely.',
       ],
     },
     {
       type: 'victory-milestone',
-      badge: 'MISSION 1 CONQUERED · SUITE ASSEMBLED',
-      rank: 'ENTERPRISE QA AUTOMATION ARCHITECT',
-      title: 'Major Milestone Cleared: Autonomous API Workbench & Team Collaboration Deployed',
-      summary: 'You have conquered Mission 1! You transitioned from passive browser viewing to commanding an enterprise API testing cockpit. You verified live JSON endpoints, executed parameterized POST and GET calls, and implemented git style collaborative forking and pull request governance. Your foundation is unshakeable.',
+      badge: 'MISSION 1 ACCOMPLISHED · PROTOCOL & WORKBENCH CLEARED',
+      rank: 'FOUNDATIONAL API AUTOMATION ENGINEER',
+      title: 'Mission 1 Accomplished: Transit Crisis Resolved and Automated Watchdogs Deployed',
+      summary: 'You have conquered Mission 1! You took on the launch day transit crisis, rejected finger pointing, investigated the failing shuttle locator call directly on the wire, proved the exact 500 error cause by hand, verified the manual fix, and automated the entire validation into a repeatable Postman collection with JavaScript assertions.',
       powers: [
-        'Mastering the complete Postman and Bruno testing workbench cockpits with zero licensing friction',
-        'Executing multi user workspace governance across Personal, Team, and Public visibility boundaries',
-        'Deploying safe collection forking and peer reviewed pull requests to prevent team regression collisions',
-        'Validating live HTTP transactions with custom payloads, status assertions, and wire header diagnostics',
+        'Decoding HTTP wire messages into methods, endpoints, headers, and payloads with complete confidence',
+        'Distinguishing client errors (4xx) from server crashes (5xx) using the five status code families',
+        'Writing automated JavaScript assertions in Postman using pm.test and pm.expect',
+        'Validating latency budgets and deep JSON coordinate properties directly over the wire',
       ],
       disastersPrevented: [
-        'Eliminated silent team collection overwrites and accidental corruption of master CI CD test suites',
-        'Stopped false alarm build failures caused by untested scripts pushed directly to team repositories',
-        'Prevented single engineer knowledge silos by establishing standard transparent pull request workflows',
+        'Eliminated the deadlock between mobile and backend teams by providing undeniable wire evidence',
+        'Prevented recurring transit crashes on future releases by deploying automated test watchdogs',
+        'Protected the team from unverified deployment catastrophes like the 2012 Knight Capital disaster',
       ],
-      warRoomTakeaway: 'You now command the tools and protocols that power global digital commerce. You are no longer just testing software: you are defending system contracts across the entire engineering organization.',
+      warRoomTakeaway: 'You started with zero API knowledge. Now you have investigated a live production crash, proved the fix by hand, and automated the verification in code. Mission 1 is officially conquered!',
     },
     {
       type: 'cliffhanger',
-      title: 'Moving to Mission 2: Testing College Library Inventory at Scale',
-      text: 'With our workbench operational, our REST fundamentals verified, and our team collaboration workflows established, we are ready for enterprise automation. In our next chapter, we begin Mission 2: taking on the College Library Inventory API, testing composite IDs, and transitioning from manual checks to automated assertions!',
+      title: 'Entering Mission 2: Automating Campus Library Services at Scale',
+      text: 'Our shuttle bus is rolling and protected by automated tests. But across campus, the University Library catalog is about to launch! In Mission 2 (Chapters 4 through 8), we step up to multi request CRUD workflows: adding books, querying records, handling duplicate constraints, chaining dynamic IDs, and processing hundreds of records using Data Driven Testing with CSV spreadsheets!',
     },
   ],
 }

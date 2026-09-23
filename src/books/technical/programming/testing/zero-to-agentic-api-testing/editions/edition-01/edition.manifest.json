@@ -19,22 +19,22 @@
     {
       "id": "understanding-apis",
       "title": "Understanding APIs from First Principles",
-      "subtitle": "The campus launch crisis, how phone apps and servers talk, the friendly restaurant analogy, and inspecting live web messages."
+      "subtitle": "The restaurant analogy, the five core operations, building your own minimal server, and tasting REST, SOAP, and GraphQL."
     },
     {
       "id": "rest-crud-status",
-      "title": "REST Architecture and HTTP Methods",
-      "subtitle": "CRUD operations, the restaurant bill analogy for methods, and the 5 status code families."
+      "title": "Investigating the Incident: Manual Wire Auditing and Status Codes",
+      "subtitle": "The campus transit shuttle crisis, dissecting the five status code families, chunking the failing request, and discovering the 500 crash by hand."
     },
     {
       "id": "postman-setup",
-      "title": "Setting Up Postman and Workspace Collaboration",
-      "subtitle": "Installing the app, navigating the interface, and managing Personal, Team, and Public workspaces."
+      "title": "Automating the Wire Check: Postman Workbench and Assertions",
+      "subtitle": "Translating manual verification into automated JavaScript assertions, running test suites, and team collaboration."
     },
     {
       "id": "library-crud",
       "title": "Manual Testing the College Library API",
-      "subtitle": "Executing AddBook, GetBook, and DeleteBook with unique constraints and query parameters."
+      "subtitle": "Executing AddBook, GetBook, and DeleteBook manually, feeling the copy paste pain, and mapping unique constraints."
     },
     {
       "id": "javascript-assertions",
