@@ -10,6 +10,13 @@ export const lesson10 = {
   tags: ['Mock Servers', 'JSON Schema', 'Contract Testing', 'Agile Sprints', 'GraphQL'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
+      phase: 'Phase 2 of 5: Mock Servers & Schema Contracts',
+      rank: 'Rank: Contract Architecture Specialist',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 3 PROGRESS · STEP 2 OF 5',
       title: 'Continuing Mission 3: Contract Testing and Agile Simulation',
@@ -296,6 +303,32 @@ export const lesson10 = {
         'In GraphQL, because the query syntax is packaged inside the request payload body, every query and mutation is dispatched using HTTP POST.',
         'In Postman, select POST, choose Body > GraphQL, paste your query on the left and your JSON variables on the right.',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Enterprise Contract Outage',
+      title: 'The Silent Schema Drift Outage: When a Type Flip Crashed Native Mobile Apps',
+      context: 'A retail engineering team updated an inventory API endpoint. The property in_stock_count was changed from integer 42 to string "42" to accommodate out of stock text badges. Desktop web browsers handled the loose type coercion without complaint, but the native iOS and Android mobile apps crashed instantly on startup with fatal JSON decoding errors: Expected Int but received String. Because test suites had only verified HTTP 200 status codes without schema contract checks, the defect reached the public app store, crashing the app for over two million customers.',
+      takeaway: 'Never rely on HTTP 200 status checks alone. Rigid JSON Schema assertions with tv4 or ajv ensure property names and data types strictly adhere to contracts before production deployment.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Cryptic Contract Failure',
+      scenario: 'You write a contract test in Postman: pm.expect(tv4.validate(data, schema)).to.be.true. The assertion fails during sprint testing, but the test runner prints only "AssertionError: expected false to be true", offering zero clues on which field broke. What debugging technique instantly pinpoints the schema defect?',
+      options: [
+        'Inspect tv4.error.message and tv4.error.dataPath to log the exact property and type violation.',
+        'Restart Postman and run the collection again.',
+        'Change the schema data type from object to string.',
+        'Delete all required fields from the JSON Schema blueprint.'
+      ],
+      answerIndex: 0,
+      debrief: 'Extract the validation error details! The tv4 library stores full diagnostic information in tv4.error. Logging tv4.error.message alongside tv4.error.dataPath pinpoints the exact offending JSON key (such as /books/0/isbn) and the specific reason (such as "type string expected, integer received").',
+      traps: [
+        '',
+        'Restarting the app will not fix an invalid schema match.',
+        'Modifying the schema type breaks the intended data validation.',
+        'Removing required fields defeats the entire purpose of contract validation.'
+      ]
     },
     {
       type: 'heading',

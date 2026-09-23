@@ -9,6 +9,13 @@ export const lesson08 = {
   tags: ['DDT', 'CSV', 'JSON', 'Iteration', 'Collection Runner'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 2: Automating Student and Campus Services at Scale',
+      phase: 'Phase 5 of 5: Data Driven Scale (Mission Victory)',
+      rank: 'Rank: Enterprise Quality Architect',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 5 OF 5',
       title: 'Completing Mission 2: Ingesting Bulk Inventory with External Data Files',
@@ -106,6 +113,32 @@ export const lesson08 = {
         'Iteration 3: Ingested "Modern Angular Architecture" : 6 of 6 passed (165 ms)',
         'Bulk Execution Completed: 3 iterations, 9 requests, 18 assertions, 0 failures (517 ms)',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Data Parsing Catastrophe',
+      title: 'The Million Dollar Comma Outage: The Peril of Unescaped CSV Delimiters',
+      context: 'An international airline imported route pricing spreadsheets using automated CSV test drivers. A route description contained an unquoted comma ("London, Heathrow to New York"). Because the CSV parser treated the comma as a column delimiter, every subsequent column shifted by one position, moving seat discount percentages into the base fare column. Before the automated suite flagged the issue, thousand dollar transatlantic tickets were briefly sold for ten dollars!',
+      takeaway: 'Always validate and quote external test data files. When ingesting CSV datasets, wrap text strings containing commas in quotes or utilize JSON format for strict schema safety.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Data File Variable Shadowing Trap',
+      scenario: 'You load a CSV file into the Collection Runner with column header isbn. In your Pre request script, you also write: pm.environment.set("isbn", "9999"). When the runner executes, AddBook sends ISBN 1001 from the CSV row instead of 9999. Why did Postman ignore the environment variable?',
+      options: [
+        'Postman environments are automatically disabled when a data file is selected.',
+        'Data scope has higher precedence than Environment scope, so iteration data variables always override environment variables of the same name.',
+        'CSV file values can only be read inside the Tests tab, not in the request body.',
+        'The Collection Runner only supports numeric values in CSV columns.'
+      ],
+      answerIndex: 1,
+      debrief: 'Data scope overrides Environment scope! The Postman variable hierarchy prioritizes Local > Data > Environment > Collection > Global. Because iteration data sits above environment tier, the value from the CSV row automatically overrides your environment setting.',
+      traps: [
+        'Environments remain fully active during data driven runs for non data variables.',
+        '',
+        'CSV values are available across URLs, headers, bodies, and scripts.',
+        'CSV files support text strings, numbers, booleans, and nulls.'
+      ]
     },
     {
       type: 'mission-accomplished',

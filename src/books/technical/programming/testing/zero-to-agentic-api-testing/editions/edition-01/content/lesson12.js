@@ -9,6 +9,13 @@ export const lesson12 = {
   tags: ['SOAP', 'XML', 'WSDL', 'xml2Json', 'Protocols'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
+      phase: 'Phase 4 of 5: Enterprise SOAP & XML Systems',
+      rank: 'Rank: Enterprise Protocols Specialist',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 3 PROGRESS · STEP 4 OF 5',
       title: 'Continuing Mission 3: Testing Legacy Enterprise Protocols',
@@ -244,6 +251,32 @@ export const lesson12 = {
         'In the Body tab, select raw and XML, then wrap `<NumberToDollars><dNum>123</dNum></NumberToDollars>` inside the SOAP 1.2 envelope.',
         'In the Tests tab, convert the response with xml2Json and write an assertion verifying that the returned string equals "one hundred and twenty three dollars". You can download the completed solution file: [Download SOAP Number to Dollars XML](/materials/zero-to-agentic-api-testing/lesson-12/soap-number-dollars.xml).',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Enterprise Interbank Freeze',
+      title: 'The 415 Header Collision: The Cost of a SOAP Version Mismatch',
+      context: 'A national banking federation upgraded its interbank clearing gateway from SOAP 1.1 to SOAP 1.2. Automated test pipelines running on older Postman collections continued sending legacy headers: Content Type text/xml; charset=utf 8 with a SOAPAction header. The upgraded gateway strictly required Content Type application/soap+xml; charset=utf 8 per the SOAP 1.2 specification. The legacy header triggered millions of HTTP 415 Unsupported Media Type errors, halting electronic clearing across fifty regional credit unions for four hours.',
+      takeaway: 'Always align HTTP Content Type headers with the exact SOAP specification. SOAP 1.1 mandates text/xml with SOAPAction, while SOAP 1.2 strictly requires application/soap+xml without SOAPAction.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The xml2Json Undefined Traversal Crash',
+      scenario: 'You convert an XML response using const responseJson = xml2Json(pm.response.text()). In your test script, you assert: pm.expect(responseJson["soap:Envelope"]["soap:Body"].NumberToWordsResult).to.eql("four hundred"). Postman halts immediately with: "TypeError: Cannot read property NumberToWordsResult of undefined". What caused this traversal failure?',
+      options: [
+        'Postman does not support parsing XML responses in JavaScript.',
+        'The response XML element contained an XML namespace prefix (such as m:NumberToWordsResponse) that was omitted from the bracket lookup chain.',
+        'The xml2Json utility only operates inside Node.js scripts outside Postman.',
+        'The SOAP server returned an encrypted binary hash instead of XML.'
+      ],
+      answerIndex: 1,
+      debrief: 'Respect XML namespace prefixes! XML responses often qualify elements with namespace prefixes like m:NumberToWordsResponse. When converted by xml2Json, these prefixes become part of the JavaScript object property key. Omitting the prefix means responseJson["soap:Envelope"]["soap:Body"]["NumberToWordsResponse"] evaluates to undefined, throwing a fatal TypeError on subsequent property accesses!',
+      traps: [
+        'Postman natively provides the xml2Json utility for seamless parsing.',
+        '',
+        'xml2Json is built directly into Postman sandbox environment.',
+        'The server returned valid XML, but navigation failed due to missing namespace prefixes.'
+      ]
     },
     {
       type: 'heading',

@@ -10,6 +10,13 @@ export const lesson13 = {
   tags: ['Newman', 'CLI', 'CI/CD', 'Jenkins', 'Reporting', 'Monitors'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
+      phase: 'Phase 5 of 5: Headless Newman & CI CD (Mission Victory)',
+      rank: 'Rank: Continuous Delivery Architect',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 3 PROGRESS · STEP 5 OF 5',
       title: 'Completing Mission 3: Continuous Integration and Automated Gating',
@@ -318,6 +325,32 @@ export const lesson13 = {
         '5. Configure email alerts: enter team email addresses to receive instant notifications if any assertion fails, with automatic retry on transient network errors.',
         '6. Inspecting History and Restoring Items: If an engineer accidentally deletes a collection, navigate to the workspace Trash to restore it immediately.',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Four Million Dollar Pipeline Bypass',
+      title: 'The Bypassed CI Gate Disaster: The Cost of Disabling Newman in the Merge Pipeline',
+      context: 'Under intense pressure to meet a strict quarterly launch deadline, an engineering squad commented out the Newman collection execution step in their GitHub Actions workflow file to expedite merging. A developer subsequently merged a pull request that unintentionally inverted financial debit and credit transaction signs. Because the Newman automated regression check had been disabled, the pull request merged green without firing assertions. Within ninety minutes of deployment, the production ledger accumulated over four million dollars in erroneous balances.',
+      takeaway: 'Never bypass or disable automated CI quality gates. Treat Newman command line regression tests as mandatory blocking status checks on every pull request and automated build.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Non Zero Exit Code CI Blocker',
+      scenario: 'You configure Newman in a Jenkins pipeline: newman run LibraryTests.json -e StagingEnv.json. Two assertions fail during the test execution, yet Jenkins marks the build step as SUCCESS and deploys the defective build straight to staging. Why did Jenkins fail to block the deployment?',
+      options: [
+        'Newman does not generate exit codes on assertion failures.',
+        'The build script appended "|| true" or suppressed the non zero exit code, preventing Jenkins from detecting that Newman returned exit code 1 on assertion failures.',
+        'Jenkins only inspects console colors, not numeric exit codes.',
+        'The Newman collection must be written in Python to fail a Jenkins build.'
+      ],
+      answerIndex: 1,
+      debrief: 'Exit code integrity controls CI pipelines! In Unix and Windows terminals, a command indicates failure by returning a non zero exit code (such as 1). Newman automatically returns exit code 1 whenever any test assertion fails. If a shell script appends "|| true", the shell overrides the exit code to 0, deceiving Jenkins into treating a failed run as successful. Remove any exit code suppression or use the --bail flag to guarantee immediate failure!',
+      traps: [
+        'Newman strictly adheres to standard terminal exit code conventions.',
+        '',
+        'Jenkins status decisions rely entirely on the process exit code, never console color formatting.',
+        'Newman runs natively on Node.js and integrates seamlessly with all CI engines.'
+      ]
     },
     {
       type: 'mission-accomplished',

@@ -121,6 +121,69 @@ export const lesson02 = {
       ],
     },
     {
+      type: 'structured-breakdown',
+      badge: 'DIAGNOSTIC STATUS MATRIX',
+      title: 'Deconstructing the Five HTTP Status Code Families',
+      intro: 'When a server answers an API call, it returns a three digit status code grouped into five fundamental families. Here is how each family functions on the wire:',
+      categories: [
+        {
+          category: '1xx Family',
+          subCategory: 'Informational Transmissions',
+          title: 'Request Received and Processing Continues',
+          explanation: 'The server acknowledges receipt of initial request headers and instructs the client to proceed with sending the remainder of the payload.',
+          points: [
+            '100 Continue: Server confirms request headers are acceptable and client should transmit the body.',
+            'Diagnostic role: Rare in everyday manual testing; frequently handled automatically by HTTP client libraries.'
+          ]
+        },
+        {
+          category: '2xx Family',
+          subCategory: 'Success Confirmations',
+          title: 'Action Understood, Accepted, and Completed',
+          explanation: 'The golden path of software testing. The server successfully processed the request and delivered the expected result.',
+          points: [
+            '200 OK: Standard successful response for GET, PUT, or DELETE operations.',
+            '201 Created: Returned by POST requests when a brand new database record has been generated with an ID.',
+            '204 No Content: Operation succeeded and there is no response body to return (common for DELETE).'
+          ]
+        },
+        {
+          category: '3xx Family',
+          subCategory: 'Redirection Notices',
+          title: 'Resource Moved to Another Network Location',
+          explanation: 'The requested resource has been relocated. The response provides a Location header telling the client where to redirect.',
+          points: [
+            '301 Moved Permanently: URL has permanently changed to a new destination.',
+            '302 Found: Temporary redirect to an alternate location.',
+            'Automation note: Modern tools like Postman follow redirects automatically unless configured otherwise.'
+          ]
+        },
+        {
+          category: '4xx Family',
+          subCategory: 'Client Side Faults',
+          title: 'The Client Dispatched an Invalid or Unauthorized Request',
+          explanation: 'The defect originates on the sender side. The client asked for a nonexistent URL, submitted malformed data, or omitted required auth tokens.',
+          points: [
+            '400 Bad Request: Malformed JSON syntax or missing mandatory fields.',
+            '401 Unauthorized: Request lacks valid authentication credentials.',
+            '403 Forbidden: Client identity is verified, but lacks permission to view the resource.',
+            '404 Not Found: The requested URL path does not exist on the server.'
+          ]
+        },
+        {
+          category: '5xx Family',
+          subCategory: 'Server Side Failures',
+          title: 'The Server Crashed or Threw an Unhandled Exception',
+          explanation: 'The client sent a valid request, but the server code encountered a bug, database timeout, or memory exhaustion while computing the answer.',
+          points: [
+            '500 Internal Server Error: Unhandled code exception or null pointer crash on the backend.',
+            '502 Bad Gateway: Upstream server returned an invalid response to the gateway proxy.',
+            '503 Service Unavailable: Server is overloaded or undergoing maintenance downtime.'
+          ]
+        }
+      ]
+    },
+    {
       type: 'callout',
       variant: 'note',
       title: 'Diagnosing Wire Failures and Server Crashes Live',

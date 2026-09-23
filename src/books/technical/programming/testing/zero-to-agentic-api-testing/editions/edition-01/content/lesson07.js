@@ -10,6 +10,13 @@ export const lesson07 = {
   tags: ['Chaining', 'Property Transfer', 'Nested JSON', 'Array Methods', 'Calculations'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 2: Automating Student and Campus Services at Scale',
+      phase: 'Phase 4 of 5: Dynamic Request Chaining & Array Pipelines',
+      rank: 'Rank: Automation Pipeline Architect',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 4 OF 5',
       title: 'Continuing Mission 2: Assembling the Autonomous Pipeline',
@@ -261,6 +268,32 @@ export const lesson07 = {
         '9. DELETE TeardownProduct: 200 OK (105 ms) : 1 of 1 passed',
         'Collection Run Complete: 9 requests, 12 assertions, 0 failures (1300 ms)',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Order Processing Pipeline Failure',
+      title: 'The Silent Null ID Disaster: The Perils of Unchecked Property Transfer',
+      context: 'An online ticketing company deployed a microservice update that changed the confirmation key from id to order_id in their reservation endpoint. The downstream payment capture step in the automated test suite continued to look for data.id without defensive validation. The variable was set to undefined, and the payment API was called with: POST /v1/payments/capture?orderId=undefined. Because the payment API did not validate the parameter, thousands of transactions were recorded against a null order ID, requiring emergency database reconciliations.',
+      takeaway: 'Always validate that dynamic properties exist before saving them to collection or environment variables. Defensive checks like pm.expect(data.id).to.not.be.undefined prevent corrupted downstream request pipelines.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Mystery of the Uncaught TypeError in Array Parsing',
+      scenario: 'You are writing an assertion to verify the price of the third book in an audit response: pm.expect(data.department.courses[2].books[0].price).to.eql(45). The test runner throws a fatal error: "TypeError: Cannot read property books of undefined". What is the most likely structural defect in the response?',
+      options: [
+        'Postman does not support zero based array indexing.',
+        'The courses array contained only two elements, so courses[2] resolved to undefined, making .books an invalid property lookup.',
+        'The price field in JSON must always be wrapped in quotation marks.',
+        'Array methods in JavaScript cannot be executed inside the Tests tab.'
+      ],
+      answerIndex: 1,
+      debrief: 'Zero based index boundary overflow! In JavaScript, array indices start at 0. Therefore, the third item is at index 2. If the courses array contains only two courses (indices 0 and 1), courses[2] evaluates to undefined, and attempting to access .books throws a fatal TypeError. Always assert array length before indexing into nested elements!',
+      traps: [
+        'JavaScript arrays are universally zero indexed across all engines.',
+        '',
+        'JSON numbers are valid without quotation marks.',
+        'The Postman Tests tab executes full modern JavaScript with complete array method support.'
+      ]
     },
     {
       type: 'heading',

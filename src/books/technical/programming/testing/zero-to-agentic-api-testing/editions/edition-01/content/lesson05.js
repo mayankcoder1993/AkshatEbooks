@@ -9,6 +9,13 @@ export const lesson05 = {
   tags: ['JavaScript', 'Assertions', 'pm Object', 'Chai', 'Schema'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 2: Automating Student and Campus Services at Scale',
+      phase: 'Phase 2 of 5: Automated JavaScript Assertions',
+      rank: 'Rank: Automated Quality Engineer',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 2 OF 5',
       title: 'Continuing Mission 2: Replacing the Manual Eyeball Test',
@@ -185,6 +192,32 @@ export const lesson05 = {
         '    pm.response.to.have.jsonSchema(bookSchema);',
         '});',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Silent Production Bug Outage',
+      title: 'The Silent False Positive Trap: The Danger of Assertions Without Matchers',
+      context: 'During an enterprise retail migration, thousands of automated tests ran green across CI CD pipelines. Yet, immediately after deployment, customers could not add items to their shopping cart. An engineering audit discovered the test script was written as: pm.test("Item added", function() { pm.response.json().status === "success"; }). Because the triple equal expression returned true or false without passing it to a Chai matcher or throwing an error, the Postman test sandbox recorded every test as passed green, even when the server returned an error!',
+      takeaway: 'Never write bare boolean expressions inside pm.test. Assertions must use pm.expect or pm.response.to.have matchers that explicitly throw errors on mismatch so failing contracts turn the quality gate red.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The False Positive Green Gate Incident',
+      scenario: 'The CI pipeline runs 120 automated Postman tests and all 120 report green checkmarks. Ten minutes later, customers report that user registration is broken. When inspecting the test script for registration, you see: pm.test("Status is 200", function () { pm.response.status; }). Why did this test report green while production crashed?',
+      options: [
+        'Postman ignores HTTP status codes when running inside automated pipelines.',
+        'The statement pm.response.status accesses the status number but performs no comparison matcher or error throw, so the function exited cleanly without failing.',
+        'The backend database intercepted the test runner and returned simulated success headers.',
+        'The test script requires a semicolon after every bracket to trigger failures.'
+      ],
+      answerIndex: 1,
+      debrief: 'A test only fails when an exception is thrown! Accessing pm.response.status without an assertion matcher like pm.response.to.have.status(200) simply evaluates a number in memory and exits cleanly. The test runner saw zero errors and falsely marked the test green.',
+      traps: [
+        'Postman evaluates status codes identically across desktop and headless CLI environments.',
+        '',
+        'Databases have no awareness of test runners versus human requests.',
+        'JavaScript syntax rules do not alter test assertion execution mechanics.'
+      ]
     },
     {
       type: 'heading',

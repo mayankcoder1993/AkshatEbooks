@@ -10,9 +10,16 @@ export const lesson09 = {
   tags: ['Error Handling', 'Negative Testing', 'Try Catch', 'Resilience', 'Workflow Control'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
+      phase: 'Phase 1 of 5: Negative Testing & Safe Parsing',
+      rank: 'Rank: Resilience Systems Engineer',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission',
       title: 'Mission 3: Hardening for Enterprise Production and CI CD',
-      text: 'Our library automation runs smoothly on happy paths. But real world production systems operate in an unpredictable environment: users submit blank forms, network connections drop, authentication tokens expire, and duplicate records collide in the database. If an API returns a generic 500 error instead of a helpful 400 Bad Request, or leaks database passwords in a crash stack trace, the application is fragile and insecure. Across the next five chapters, our mission is to enterprise harden our test suite: validating error status codes, parsing non JSON failure pages safely with try catch blocks, building self healing teardown scripts, creating Postman Mock Servers and validating JSON Schema contracts, securing workflows with OAuth 2.0 token authentication, querying legacy enterprise SOAP WebServices, and integrating our test suite into automated continuous integration pipelines with Newman.',
+      text: 'Our library automation runs smoothly on happy paths. But real world production systems operate in an unpredictable environment: users submit blank forms, network connections drop, authentication tokens expire, and duplicate records collide in the database. If an API returns a generic 500 error instead of a helpful 400 Bad Request, or leaks database passwords in a crash stack trace, the application is fragile and insecure. As Lead Quality Architect, your mission is to harden our test suite to ensure systems fail safely and withstand hostile production edge cases.',
       image: {
         src: cicdGateImg,
         file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/enterprise-cicd-quality-gate.jpg',
@@ -37,6 +44,54 @@ export const lesson09 = {
         'A security assertion ensuring that crash responses never expose passwords, tokens, or SQL stack traces.',
         'A self healing retry workflow using collection flags and postman.setNextRequest to resolve duplicate collisions.',
       ],
+    },
+    {
+      type: 'battle-plan',
+      badge: 'TACTICAL MISSION ROADMAP',
+      title: 'How We Will Approach Mission 3: The 5 Phase Battle Plan',
+      intro: 'Hardening an API ecosystem for production continuous integration requires systematic resilience verification across five structured phases:',
+      phases: [
+        {
+          phase: 'Phase 1',
+          timing: 'Chapter 9 · Right Now',
+          title: 'Resilience and Safe Parsing',
+          status: 'active',
+          desc: 'We construct a negative testing matrix, implement try catch wrappers against non JSON 500 error pages, and build self healing recovery workflows.',
+          outcome: 'Zero unhandled test crashes; your automated suites withstand HTML failure pages gracefully.'
+        },
+        {
+          phase: 'Phase 2',
+          timing: 'Chapter 10 · Next Step',
+          title: 'Mock Servers and Schema Contracts',
+          status: 'upcoming',
+          desc: 'We decouple frontend and backend teams by simulating endpoints with Postman Mock Servers and validating contracts with JSON Schema.',
+          outcome: 'Parallel agile team development without waiting for backend microservices to be coded.'
+        },
+        {
+          phase: 'Phase 3',
+          timing: 'Chapter 11 · Identity Protocols',
+          title: 'OAuth 2.0 Token Handshake',
+          status: 'upcoming',
+          desc: 'We automate two legged and three legged OAuth 2.0 token handshakes, capturing Bearer access tokens dynamically for enterprise calls.',
+          outcome: 'Secure zero trust API authorization automated seamlessly across test pipelines.'
+        },
+        {
+          phase: 'Phase 4',
+          timing: 'Chapter 12 · Legacy Integration',
+          title: 'SOAP WebServices and XML',
+          status: 'upcoming',
+          desc: 'We master legacy enterprise protocols by crafting SOAP 1.2 XML envelopes and converting raw XML payloads into clean JavaScript objects.',
+          outcome: 'Full capability to test banking, government, and enterprise legacy systems.'
+        },
+        {
+          phase: 'Phase 5',
+          timing: 'Chapter 13 · Mission Victory',
+          title: 'Headless Newman and CI CD',
+          status: 'upcoming',
+          desc: 'We execute collections in terminal pipelines using Newman, publish HTML dashboards, and configure automated GitHub Actions quality gates.',
+          outcome: 'Mission 3 Cleared! Autonomous enterprise quality gate guarding production deployments.'
+        }
+      ]
     },
     {
       type: 'heading',
@@ -134,6 +189,32 @@ export const lesson09 = {
         '    });',
         '}',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Critical Credential Leak Outage',
+      title: 'The Database Stack Trace Leak: When an Uncaught 500 Exposed Root Credentials',
+      context: 'A financial payment processing platform deployed a microservice that failed to implement global exception handling. When automated tests flooded the endpoint with malformed payloads, the backend threw an unhandled SQL syntax error. Instead of returning a sterile JSON error message, the web framework printed a 120 line raw stack trace containing the internal database hostname, database username, and unmasked connection string password. Security researchers discovered the flaw within three hours of release.',
+      takeaway: 'Never permit backend stack traces or database connection strings to leak to clients. Always write automated security assertions in Postman verifying that error responses do not contain keywords like "SQLException", "password", or "traceback".'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Fatal SyntaxError on Server Crash Pages',
+      scenario: 'During midnight CI regression, the upstream gateway crashes and returns an HTML 502 Bad Gateway page. Your test script executes: const data = pm.response.json(). The test runner halts immediately with: "JSONError: Unexpected token < in JSON at position 0". How do you safeguard your assertion suite from crashing?',
+      options: [
+        'Change the request method from POST to GET.',
+        'Wrap the JSON parsing call in a try catch block and assert status code before attempting to inspect properties.',
+        'Increase the request timeout in Postman settings to 60 seconds.',
+        'Convert the HTML page to XML inside the Pre request script.'
+      ],
+      answerIndex: 1,
+      debrief: 'Defensive parsing saves automation suites! When an upstream proxy fails, it returns an HTML document starting with <!DOCTYPE html>. Calling pm.response.json() throws a fatal SyntaxError because HTML cannot be parsed as JSON. Wrapping parsing in a try catch block or checking the response Content Type keeps the runner alive!',
+      traps: [
+        'Changing the HTTP method does not fix gateway crash parsing.',
+        '',
+        'Increasing timeout does not prevent non JSON responses.',
+        'Pre request scripts run before response arrival and cannot alter server response types.'
+      ]
     },
     {
       type: 'heading',

@@ -9,6 +9,13 @@ export const lesson06 = {
   tags: ['Variables', 'Environments', 'Pre Request', 'Scopes', 'Dynamic Data'],
   blocks: [
     {
+      type: 'mission-hud',
+      mission: 'Mission 2: Automating Student and Campus Services at Scale',
+      phase: 'Phase 3 of 5: Variable Scopes & Environments',
+      rank: 'Rank: Senior Automation Engineer',
+      status: 'ACTIVE'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 3 OF 5',
       title: 'Continuing Mission 2: Eliminating Hardcoded URLs and Collision Errors',
@@ -37,6 +44,64 @@ export const lesson06 = {
         'Collection Scope: Variables shared across all requests inside one specific collection folder.',
         'Global Scope (Lowest Priority): Universal constants accessible across all collections and environments.',
       ],
+    },
+    {
+      type: 'structured-breakdown',
+      badge: 'VARIABLE PRECEDENCE ARCHITECTURE',
+      title: 'The Five Postman Variable Tiers Explained',
+      intro: 'When multiple variables share the exact same key name, Postman resolves conflicts by choosing the narrowest scope. Here is the operational role of each tier:',
+      categories: [
+        {
+          category: 'Scope 1: Local',
+          subCategory: 'Sandbox Execution Scope',
+          title: 'Temporary In Script Variables',
+          explanation: 'Exists exclusively while the active script is executing. Overrides every other scope in Postman.',
+          points: [
+            'pm.variables.set("tempId", 101): Scoped strictly to the immediate request run.',
+            'Disappears from memory as soon as the request completes.',
+          ]
+        },
+        {
+          category: 'Scope 2: Data',
+          subCategory: 'Data Driven Testing',
+          title: 'External Dataset Row Variables',
+          explanation: 'Supplied by external CSV or JSON test data files during automated Collection Runner runs.',
+          points: [
+            'pm.iterationData.get("isbn"): Reads the specific value from the current dataset row.',
+            'Each iteration pulls fresh data automatically.',
+          ]
+        },
+        {
+          category: 'Scope 3: Environment',
+          subCategory: 'Deployment Target Scope',
+          title: 'Infrastructure Stage Configuration',
+          explanation: 'Configures target hostnames and ports for specific deployment stages like Local, QA, and UAT.',
+          points: [
+            'pm.environment.set("base_url", "..."): Switched instantly with the environment dropdown.',
+            'Initial values sync to team cloud; current values stay local to your machine.',
+          ]
+        },
+        {
+          category: 'Scope 4: Collection',
+          subCategory: 'Shared Suite Scope',
+          title: 'Test Suite Level Variables',
+          explanation: 'Variables shared across every folder and request inside one specific Postman collection.',
+          points: [
+            'pm.collectionVariables.set("suiteToken", "..."): Accessible by all requests in the collection.',
+            'Ideal for generated IDs passed between consecutive steps.',
+          ]
+        },
+        {
+          category: 'Scope 5: Global',
+          subCategory: 'Universal Workspace Scope',
+          title: 'Workspace Wide Constants',
+          explanation: 'Universal settings accessible across all collections and environments within the workspace.',
+          points: [
+            'pm.globals.set("companyDomain", "..."): Lowest precedence in the hierarchy.',
+            'Easily overridden by environment or collection variables with the same name.',
+          ]
+        }
+      ]
     },
     {
       type: 'heading',
@@ -98,6 +163,32 @@ export const lesson06 = {
         'If your Pre request script writes `pm.collectionVariables.set("ISBN", ...)` in capital letters, but your JSON payload body looks for `{{isbn}}` in lowercase, Postman will NOT find the variable and will send an empty string or the literal text "{{isbn}}" to the server!',
         'Always ensure exact matching casing between the variable key saved in your script and the placeholder wrapped in double curly braces.',
       ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Environment Misconfiguration Outage',
+      title: 'The Production Database Overwrite Outage: The Danger of Ambiguous Variable Scopes',
+      context: 'An engineering team ran an automated load test suite intended for the staging cluster. However, the collection contained a global variable baseUrl set to the production cluster, while the staging environment variable had a subtle spelling mismatch (base_url vs baseUrl). Because of the variable precedence hierarchy and naming discrepancy, Postman defaulted to the global production URL. Within minutes, the automated test inserted fifty thousand fictitious student test accounts directly into the live production database!',
+      takeaway: 'Never define production server hostnames in global variables. Always isolate target server environments strictly and verify variable resolution in the Postman Console before triggering automated test runs.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Mystery of the Overridden Variable',
+      scenario: 'You select the "QA Environment" in Postman where timeout is set to 5000 milliseconds. But when you click Send, your test script fails after only 100 milliseconds with a timeout exception. When inspecting your collection, you discover a script with: pm.variables.set("timeout", 100). Why did Postman ignore your 5000 millisecond environment setting?',
+      options: [
+        'Postman environments do not work when running single requests manually.',
+        'Local script scope variables created via pm.variables.set have higher precedence than environment variables and override them during execution.',
+        'The QA server database rejected the timeout header because it was too large.',
+        'Environment variables only apply to request URLs, not to script logic.'
+      ],
+      answerIndex: 1,
+      debrief: 'Local scope overrides environment scope! The Postman variable hierarchy prioritizes Local variables above Data, Environment, Collection, and Global tiers. The in script variable took precedence, causing the early timeout.',
+      traps: [
+        'Environments apply to both manual single requests and automated collection runs.',
+        '',
+        'Backend servers have no control over Postman internal client side timeout variables.',
+        'Environment variables are accessible across URLs, headers, bodies, and test scripts.'
+      ]
     },
     {
       type: 'heading',
