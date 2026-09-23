@@ -76,7 +76,7 @@ const SYLLABUS_ITEMS = [
   {
     id: 'restaurant-bill-story',
     title: 'The Restaurant Bill Story for HTTP Methods',
-    desc: 'Intuitive mental model distinguishing POST (order created), GET (view bill), PUT (replace order), PATCH (change dressing), and DELETE (cancel order).',
+    desc: 'Intuitive mental model distinguishing GET (read menu or view bill), POST (place new order), PUT (completely replace order), PATCH (partially modify item), and DELETE (cancel order).',
     mission: 'm1',
     missionLabel: 'Mission 1',
     chapters: ['Ch 02'],
@@ -491,7 +491,7 @@ const CHAPTERS_DATA = [
   }
 ]
 
-export default function CurriculumBlueprint({ onBack, onHome, theme, onToggleTheme }) {
+export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-testing', onBack, onHome, theme, onToggleTheme }) {
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
   const [checkedMap, setCheckedMap] = useState(() => {
@@ -543,9 +543,11 @@ export default function CurriculumBlueprint({ onBack, onHome, theme, onToggleThe
       <div className="blueprint-container">
         <div className="blueprint-hero">
           <div className="blueprint-eyebrow">Enterprise Curriculum Architecture & Master Plan</div>
-          <h1>Zero to Agentic API Testing</h1>
+          <h1>{bookId === 'python-absolute-beginners' ? 'Python for Absolute Beginners' : 'Zero to Agentic API Testing'}</h1>
           <p>
-            A comprehensive, multi-chapter pedagogical blueprint mapping out all 70 course transcripts and syllabus concepts into an authentic enterprise narrative: the <strong>Apex Campus Enterprise Cloud Platform</strong>.
+            {bookId === 'python-absolute-beginners'
+              ? 'A foundational programming curriculum mapping interactive coding concepts, visual data structures, and algorithmic logic from first principles.'
+              : 'A comprehensive pedagogical blueprint mapping core transcripts and syllabus concepts into an authentic enterprise narrative across 13 structured chapters.'}
           </p>
 
           <div className="bp-mission-grid">

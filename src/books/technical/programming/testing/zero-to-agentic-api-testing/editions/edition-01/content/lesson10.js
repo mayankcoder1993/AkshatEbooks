@@ -67,33 +67,53 @@ export const lesson10 = {
     },
     {
       type: 'paragraph',
-      text: 'Postman includes the industry standard schema validator library **tv4** directly in its test sandbox. Here is how we validate that incoming server responses strictly comply with our agreed architectural contract. You can download the contract schema: [Download Contract Schema JSON](/materials/zero-to-agentic-api-testing/lesson-10/contract-schema.json):',
+      text: 'Postman includes the industry standard schema validator library **tv4** directly in its test sandbox. We break down the schema validation assertion into three focused chunks:',
     },
     {
-      type: 'code',
-      filename: 'validate-json-schema.js',
-      lines: [
-        '// Step 1: Parse the incoming JSON response',
-        'const responseData = pm.response.json();',
-        '',
-        '// Step 2: Define the agreed contract schema',
-        'const schemaContract = {',
-        '    type: "object",',
-        '    required: ["book_name", "isbn", "aisle", "author"],',
-        '    properties: {',
-        '        book_name: { type: "string" },',
-        '        isbn: { type: "string" },',
-        '        aisle: { type: "integer", minimum: 1 },',
-        '        author: { type: "string" }',
-        '    }',
-        '};',
-        '',
-        '// Step 3: Run the tv4 validation check',
-        'pm.test("Response body strictly satisfies the JSON Schema contract", function () {',
-        '    const validationResult = tv4.validate(responseData, schemaContract);',
-        '    pm.expect(validationResult, "Schema validation failed: " + JSON.stringify(tv4.error)).to.be.true;',
-        '});',
+      type: 'chunked-code',
+      badge: 'CONTRACT VALIDATION CHUNKS',
+      title: 'JSON Schema Validation Architecture',
+      intro: 'Guarantees structural and type integrity:',
+      chunks: [
+        {
+          label: 'Chunk 1: Defining Contract Schema',
+          filename: 'schema-contract.js',
+          code: 'const schemaContract = {\n    type: "object",\n    required: ["book_name", "isbn", "aisle", "author"],\n    properties: {\n        book_name: { type: "string" },\n        isbn: { type: "string" },\n        aisle: { type: "integer", minimum: 1 },\n        author: { type: "string" }\n    }\n};',
+          title: 'The Architectural Contract Blueprint',
+          explanation: 'Specifies mandatory fields and exact expected data types (strings, positive integers).',
+          keyTakeaway: 'The contract acts as the immutable standard between frontend and backend teams.'
+        },
+        {
+          label: 'Chunk 2: Executing Schema Matcher',
+          filename: 'schema-matcher.js',
+          code: 'const responseData = pm.response.json();\npm.test("Response body strictly satisfies the JSON Schema contract", function () {\n    const validationResult = tv4.validate(responseData, schemaContract);\n    pm.expect(validationResult, "Schema validation failed: " + JSON.stringify(tv4.error)).to.be.true;\n});',
+          title: 'Evaluating Structural Compliance',
+          explanation: 'Validates that the received JSON payload adheres strictly to every constraint in the blueprint.',
+          keyTakeaway: 'tv4 evaluates missing fields and type mismatches across deep hierarchies.'
+        },
+        {
+          label: 'Chunk 3: Diagnostic Pinpoint Logging',
+          filename: 'schema-error-diagnostics.js',
+          code: 'if (!tv4.validate(responseData, schemaContract)) {\n    console.error("Contract violation at " + tv4.error.dataPath + ": " + tv4.error.message);\n}',
+          title: 'Pinpointing Offending Fields',
+          explanation: 'If validation fails, logs the exact JSON path and the specific violation reason in the Postman Console.',
+          keyTakeaway: 'Diagnostic logging eliminates guesswork when diagnosing schema rejections.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'If a backend update changes the aisle field from integer 42 to string "42", how will this schema test react?',
+      options: [
+        'The test fails immediately: tv4 flags a type mismatch because string was received where integer was required',
+        'The test passes green because JSON automatically converts strings to numbers',
+        'Postman ignores the schema and passes the status code',
+        'The server rolls back the database'
       ],
+      answerIndex: 0,
+      revealTitle: 'Schema Type Mismatch Confirmation',
+      explanation: 'Schema drift caught instantly! JSON Schema is strictly typed: tv4 flags an AssertionError with message "Invalid type: string (expected integer) at /aisle". This protects mobile apps from crashing before bad code reaches production!'
     },
     {
       type: 'heading',

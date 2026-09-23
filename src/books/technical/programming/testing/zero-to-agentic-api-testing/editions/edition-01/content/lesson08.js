@@ -53,24 +53,53 @@ export const lesson08 = {
     },
     {
       type: 'paragraph',
-      text: 'During a collection run with a data file, Postman exposes **Data Scope**. In Pre request scripts, access row values with `pm.iterationData.get()`.',
+      text: 'During a collection run with a data file, Postman exposes **Data Scope**. In Pre request scripts, access row values with `pm.iterationData.get()`. We break down the data ingestion script into three chunks:',
     },
     {
-      type: 'code',
-      filename: 'ddt-pre-request.js',
-      lines: [
-        '// Step 1: Read values from the active CSV row header',
-        'const currentBook = pm.iterationData.get("book_name");',
-        'const currentAuthor = pm.iterationData.get("author");',
-        '',
-        '// Step 2: Push to Collection Scope for request payload interpolation',
-        'pm.collectionVariables.set("book_name", currentBook);',
-        'pm.collectionVariables.set("author_name", currentAuthor);',
-        '',
-        '// Step 3: Generate dynamic ISBN to guarantee uniqueness per row',
-        'const randomDigits = pm.variables.replaceIn("{{$randomInt}}");',
-        'pm.collectionVariables.set("ISBN", "LIB" + randomDigits);',
+      type: 'chunked-code',
+      badge: 'DDT SCRIPT CHUNKS',
+      title: 'Ingesting CSV Rows into Request Payloads',
+      intro: 'Executed before each row request fires:',
+      chunks: [
+        {
+          label: 'Chunk 1: Reading from Data Scope',
+          filename: 'read-row.js',
+          code: 'const currentBook = pm.iterationData.get("book_name");\nconst currentAuthor = pm.iterationData.get("author");',
+          title: 'Extracting Active Row Values',
+          explanation: 'Reads the specific values from the columns of the active CSV row for this iteration.',
+          keyTakeaway: 'Column headers in the CSV must match the string passed to get().'
+        },
+        {
+          label: 'Chunk 2: Promoting to Collection Variables',
+          filename: 'promote-vars.js',
+          code: 'pm.collectionVariables.set("book_name", currentBook);\npm.collectionVariables.set("author_name", currentAuthor);',
+          title: 'Making Data Available to Request Body',
+          explanation: 'Stores row values in Collection Scope so request body placeholders {{book_name}} can interpolate them.',
+          keyTakeaway: 'Double curly brace placeholders read values from Collection Scope.'
+        },
+        {
+          label: 'Chunk 3: Dynamic Random Key per Row',
+          filename: 'row-isbn.js',
+          code: 'const randomDigits = Math.floor(1000 + Math.random() * 9000);\npm.collectionVariables.set("ISBN", "LIB" + randomDigits);',
+          title: 'Guaranteed Uniqueness Across Iterations',
+          explanation: 'Generates a fresh random ISBN for each iteration row to prevent unique constraint rejections.',
+          keyTakeaway: 'Dynamic generation per row ensures 100 consecutive rows insert without collision.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When you upload a CSV file with 3 data rows into the Postman Collection Runner and click Run, how many total request iterations will Postman execute?',
+      options: [
+        'Exactly 3 iterations: Postman automatically sets the iteration count to match the number of data rows in the file',
+        'Only 1 iteration: Postman stops after reading the first line',
+        '30 iterations: Postman multiplies the row count by 10 by default',
+        '0 iterations: Postman requires manual entry of loop counts'
       ],
+      answerIndex: 0,
+      revealTitle: 'Collection Runner Iteration Count Confirmation',
+      explanation: 'Postman inspects the file! When a CSV or JSON file is uploaded, Postman counts the data rows (excluding the header) and automatically locks the iteration counter to that exact number (3 iterations).'
     },
     {
       type: 'callout',
@@ -88,6 +117,7 @@ export const lesson08 = {
     },
     {
       type: 'bug',
+      filename: 'ddt-bug.js',
       prompt: 'You run the collection with your CSV file. The tests execute, but in the server database, author is saved as empty string! What caused this bug?',
       lines: [
         '// Pre request Script',

@@ -248,6 +248,7 @@ export default function App() {
   if (view === 'blueprint') {
     return (
       <CurriculumBlueprint
+        bookId={publication?.manifest?.id || 'zero-to-agentic-api-testing'}
         onBack={() => {
           if (publication) {
             setView('book')

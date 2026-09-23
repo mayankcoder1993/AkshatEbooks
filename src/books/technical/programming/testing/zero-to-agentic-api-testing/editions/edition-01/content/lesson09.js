@@ -122,33 +122,53 @@ export const lesson09 = {
     },
     {
       type: 'paragraph',
-      text: 'When servers crash or time out, gateways like Nginx or cloud load balancers return raw HTML error pages rather than JSON. Attempting to parse HTML as JSON throws a fatal SyntaxError unless guarded by a defensive try catch block.',
+      text: 'When servers crash or time out, gateways like Nginx or cloud load balancers return raw HTML error pages rather than JSON. Attempting to parse HTML as JSON throws a fatal SyntaxError unless guarded by a defensive try catch block. We chunk this defensive pattern into three architectural layers:',
     },
     {
-      type: 'code',
-      filename: 'defensive-safe-parsing.js',
-      lines: [
-        'let parsedBody = null;',
-        '',
-        '// Safely attempt to parse JSON without throwing fatal exceptions',
-        'try {',
-        '    parsedBody = pm.response.json();',
-        '} catch (exception) {',
-        '    console.warn("Server returned non JSON response: " + exception.message);',
-        '    parsedBody = null;',
-        '}',
-        '',
-        '// Step 1: Assert that the response is valid JSON',
-        'pm.test("Response arrives in valid JSON format", function () {',
-        '    pm.expect(parsedBody, "Parsed JSON body").to.not.equal(null);',
-        '});',
-        '',
-        '// Step 2: Security check that stack traces are not leaked',
-        'pm.test("Response does not leak sensitive internal secrets", function () {',
-        '    const rawText = pm.response.text();',
-        '    pm.expect(rawText).to.not.match(/password|database|stack trace|syntax error/i);',
-        '});',
+      type: 'chunked-code',
+      badge: 'DEFENSIVE SCRIPT CHUNKS',
+      title: 'Resilient Error Parsing Architecture',
+      intro: 'Guards against fatal crashes on HTML server pages:',
+      chunks: [
+        {
+          label: 'Chunk 1: Guarded Parsing',
+          filename: 'try-catch-guard.js',
+          code: 'let parsedBody = null;\ntry {\n    parsedBody = pm.response.json();\n} catch (exception) {\n    console.warn("Non JSON response: " + exception.message);\n    parsedBody = null;\n}',
+          title: 'Guarding Against Crash Pages',
+          explanation: 'Wraps the parser in a try catch block. If the server returns HTML, the exception is caught safely without aborting the runner.',
+          keyTakeaway: 'Always catch parsing errors when testing failure endpoints.'
+        },
+        {
+          label: 'Chunk 2: Format Contract Assertion',
+          filename: 'format-assertion.js',
+          code: 'pm.test("Response arrives in valid JSON format", function () {\n    pm.expect(parsedBody, "Parsed JSON body").to.not.equal(null);\n});',
+          title: 'Asserting Content Type Compliance',
+          explanation: 'Formally reports a failed test if the response was not valid JSON, giving clear error logs in the test report.',
+          keyTakeaway: 'Report formatting failures as structured test failures rather than unhandled script crashes.'
+        },
+        {
+          label: 'Chunk 3: Security Leak Scanner',
+          filename: 'security-scan.js',
+          code: 'pm.test("Response does not leak database secrets", function () {\n    const rawText = pm.response.text();\n    pm.expect(rawText).to.not.match(/password|SQLException|stack trace/i);\n});',
+          title: 'Preventing Credential Leaks',
+          explanation: 'Scans raw response text to ensure backend database table names, SQL queries, or passwords never reach clients.',
+          keyTakeaway: 'Automated security assertions prevent dangerous internal leaks to third parties.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'If an upstream server crashes and returns an HTML page starting with <!DOCTYPE html>, what will happen if your script calls pm.response.json() without a try catch wrapper?',
+      options: [
+        'Postman throws a fatal JSONError SyntaxError and crashes the test execution',
+        'Postman automatically translates the HTML into a JSON object',
+        'Postman returns undefined and continues running smoothly',
+        'Postman reboots the remote server'
       ],
+      answerIndex: 0,
+      revealTitle: 'Unguarded JSON Parsing Crash Confirmation',
+      explanation: 'Fatal JSONError halts execution! The JavaScript JSON parser expects braces { } or brackets [ ]. When it encounters the HTML tag <, it throws an unhandled SyntaxError that halts the remaining tests in that request. A try catch block prevents this crash!'
     },
     {
       type: 'heading',

@@ -38,6 +38,6 @@ export const lesson04 = {
     { type: 'quiz', items: [['Which type stores a whole number?', 'int stores whole numbers such as 0, 12 and -5.'], ['What is a bool?', 'A truth value: True or False.'], ['Why is "5" not an int?', 'Quotes make it a string.'], ['What does dynamic typing mean here?', 'Python tracks types while the program runs, and one name can later refer to a value of another type.']] },
     { type: 'takeaways', items: ['str stores text; int stores whole numbers.', 'float stores decimal numbers; bool stores True or False.', 'The type belongs to the value and controls valid operations.', 'type(value) reports a value’s type.', 'int() and str() perform explicit conversions.'] },
     { type: 'resources', items: [['Python built-in types', 'https://docs.python.org/3/library/stdtypes.html']] },
-    { type: 'cliffhanger', title: 'How does a reader give us a value?', text: 'Next, we use input() and learn why typed input begins as a string.' },
+    { type: 'cliffhanger', title: 'The Next Coding Frontier', text: 'Our First Code Series continues in future editions: mastering user input with input(), conditional branching, loop iterations, and object hierarchies!' },
   ],
 }

@@ -152,22 +152,53 @@ export const lesson13 = {
     },
     {
       type: 'paragraph',
-      text: 'Terminal output is great for developers, but engineering directors and quality assurance managers need visual dashboards. We install the `newman-reporter-htmlextra` plugin to generate publication grade reports. You can download the complete runner script: [Download HTML Extra Runner Script](/materials/zero-to-agentic-api-testing/lesson-13/install-and-run-htmlextra.sh).',
+      text: 'Terminal output is great for developers, but engineering directors and quality assurance managers need visual dashboards. We install the `newman-reporter-htmlextra` plugin to generate publication grade reports. We break down the Newman execution command into three key flag chunks:',
     },
     {
-      type: 'code',
-      filename: 'install-and-run-htmlextra.sh',
-      lines: [
-        '# Install the HTML Extra reporter globally',
-        'npm install -g newman-reporter-htmlextra',
-        '',
-        '# Execute collection and generate interactive dashboard',
-        'newman run Campus_Library_Collection.json \\',
-        '  -e Campus_Library_UAT.json \\',
-        '  -d books_data.csv \\',
-        '  -r cli,htmlextra \\',
-        '  --reporter-htmlextra-export reports/dashboard.html',
+      type: 'chunked-code',
+      badge: 'NEWMAN CLI CHUNKS',
+      title: 'Deconstructing the Headless Command',
+      intro: 'Essential CLI parameters for automated pipelines:',
+      chunks: [
+        {
+          label: 'Chunk 1: Target Files',
+          filename: 'newman-targets.sh',
+          code: 'newman run Campus_Library_Collection.json \\\n  -e Campus_Library_UAT.json \\\n  -d books_data.csv',
+          title: 'Providing Test Assets',
+          explanation: 'Specifies the exported collection JSON, the UAT environment variables file, and the CSV dataset.',
+          keyTakeaway: 'Newman loads environments and data files headlessly without GUI dialogs.'
+        },
+        {
+          label: 'Chunk 2: Multi Reporter Configuration',
+          filename: 'newman-reporters.sh',
+          code: '  -r cli,htmlextra \\\n  --reporter-htmlextra-export reports/dashboard.html',
+          title: 'Configuring Dashboard Output',
+          explanation: 'Generates real time colored CLI text in the terminal while compiling an interactive HTML dashboard.',
+          keyTakeaway: 'The single file dashboard can be archived directly as a CI build artifact.'
+        },
+        {
+          label: 'Chunk 3: Failure Enforcement Policy',
+          filename: 'newman-bail.sh',
+          code: '  --bail',
+          title: 'Fast Fail Safety Gate',
+          explanation: 'Tells Newman to stop execution immediately on the first assertion failure, saving build agent compute time.',
+          keyTakeaway: '--bail guarantees defective builds are blocked immediately.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When Newman executes in a Jenkins or GitHub Actions pipeline and an assertion fails, what exit code does Newman return to the terminal?',
+      options: [
+        'Exit code 1: Signaling non zero failure to the operating system, which instructs the CI pipeline to fail the build',
+        'Exit code 0: Because commands that finish executing always return zero',
+        'Exit code 200: Matching the HTTP status code',
+        'Exit code 500'
       ],
+      answerIndex: 0,
+      revealTitle: 'Terminal Exit Code Confirmation',
+      explanation: 'Exit code 1 halts the pipeline! In Unix and Windows terminals, exit code 0 indicates success, while any non zero code (such as 1) signals failure. Jenkins and GitHub Actions automatically inspect this numeric code: when Newman exits with 1, the pipeline halts and blocks the deployment!'
     },
     {
       type: 'callout',

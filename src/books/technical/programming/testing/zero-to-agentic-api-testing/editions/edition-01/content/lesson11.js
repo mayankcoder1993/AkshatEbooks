@@ -140,21 +140,53 @@ export const lesson11 = {
     },
     {
       type: 'paragraph',
-      text: 'Now our client backend (or Postman collection) takes that temporary code and exchanges it for the actual Bearer token via HTTP POST. You can download the completed exchange request: [Download Token Exchange HTTP Request](/materials/zero-to-agentic-api-testing/lesson-11/token-exchange.http):',
+      text: 'Now our client backend (or Postman collection) takes that temporary code and exchanges it for the actual Bearer token via HTTP POST. We break down the mandatory parameters into three chunks:',
     },
     {
-      type: 'code',
-      filename: 'token-exchange-request.http',
-      lines: [
-        'POST https://auth.campuslibrary.org/oauth/token HTTP/1.1',
-        'Content-Type: application/x-www-form-urlencoded',
-        '',
-        'grant_type=authorization_code',
-        '&code=authcode_89712a4f',
-        '&client_id=campus-library-web-client',
-        '&client_secret=secureUniversitySecretKey_98765',
-        '&redirect_uri=https://campus.university.edu/oauth/callback',
+      type: 'chunked-code',
+      badge: 'TOKEN EXCHANGE CHUNKS',
+      title: 'OAuth 2.0 Token Exchange Parameters',
+      intro: 'Mandatory form parameters sent to the authorization endpoint:',
+      chunks: [
+        {
+          label: 'Chunk 1: Grant Type and Code',
+          filename: 'exchange-core.http',
+          code: 'POST /oauth/token HTTP/1.1\nHost: auth.campuslibrary.org\nContent-Type: application/x-www-form-urlencoded\n\ngrant_type=authorization_code\n&code=authcode_89712a4f',
+          title: 'Declaring the Handshake Protocol',
+          explanation: 'Tells the auth server we are exchanging a temporary code for an access token.',
+          keyTakeaway: 'The authorization code is single use and expires within minutes.'
+        },
+        {
+          label: 'Chunk 2: Client Authentication',
+          filename: 'client-credentials.http',
+          code: '&client_id=campus-library-web-client\n&client_secret=secureUniversitySecretKey_98765',
+          title: 'Proving Application Identity',
+          explanation: 'The client secret proves that the application exchanging the code is the legitimate registered client.',
+          keyTakeaway: 'client_id is public; client_secret must never be shared in browser client code.'
+        },
+        {
+          label: 'Chunk 3: Redirect URI Matching',
+          filename: 'redirect-check.http',
+          code: '&redirect_uri=https://campus.university.edu/oauth/callback',
+          title: 'Strict Callback Verification',
+          explanation: 'The server verifies that this redirect URI matches the one sent in the initial code request byte for byte.',
+          keyTakeaway: 'Mismatching redirect URIs abort the handshake immediately for security.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When the client submits these verified parameters to the authorization server, what response structure will come back?',
+      options: [
+        '200 OK with JSON object containing access_token, token_type: "Bearer", and expires_in: 3600',
+        '302 Redirect asking the user to re enter their password again',
+        '404 Not Found because access tokens are only generated in Python',
+        '500 Server Error because tokens cannot be serialized in JSON'
       ],
+      answerIndex: 0,
+      revealTitle: 'Token Exchange Confirmation',
+      explanation: 'Access token granted! The authorization server verifies the code and secret, then delivers a 200 OK response with a Bearer access token valid for one hour (3600 seconds)!'
     },
     {
       type: 'terminal',

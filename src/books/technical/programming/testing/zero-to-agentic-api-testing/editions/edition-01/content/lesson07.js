@@ -50,18 +50,53 @@ export const lesson07 = {
     },
     {
       type: 'paragraph',
-      text: 'In the Tests tab of AddBook, parse the response JSON and save the generated ID into an environment variable so downstream requests can immediately read it.',
+      text: 'In the Tests tab of AddBook, parse the response JSON and save the generated ID into a variable so downstream requests can immediately read it. We break this property transfer down into three chunks:',
     },
     {
-      type: 'code',
-      filename: 'addbook-property-transfer.js',
-      lines: [
-        'const responseData = pm.response.json();',
-        'const generatedId = responseData.ID;',
-        '',
-        '// Save ID to Environment Scope for downstream requests',
-        'pm.environment.set("book_id", generatedId);',
+      type: 'chunked-code',
+      badge: 'PROPERTY TRANSFER CHUNKS',
+      title: 'Automated Property Transfer Mechanics',
+      intro: 'Extracting data from responses and passing downstream:',
+      chunks: [
+        {
+          label: 'Chunk 1: Parsing Incoming Payload',
+          filename: 'parse-response.js',
+          code: 'const responseData = pm.response.json();',
+          title: 'Deserializing JSON Text',
+          explanation: 'Converts the raw text into a navigable JavaScript object.',
+          keyTakeaway: 'Always deserialize before property lookups.'
+        },
+        {
+          label: 'Chunk 2: Extracting Generated Key',
+          filename: 'extract-property.js',
+          code: 'const generatedId = responseData.ID;\npm.expect(generatedId, "Generated ID").to.not.be.undefined;',
+          title: 'Defensive Property Extraction',
+          explanation: 'Validates that the ID key exists and holds a valid string before attempting to save.',
+          keyTakeaway: 'Defensive validation prevents saving undefined into variables.'
+        },
+        {
+          label: 'Chunk 3: Persisting to Collection Tier',
+          filename: 'persist-variable.js',
+          code: 'pm.collectionVariables.set("book_id", generatedId);',
+          title: 'Binding to Shared Scope',
+          explanation: 'Stores the ID in Collection Scope so subsequent requests can interpolate {{book_id}}.',
+          keyTakeaway: 'Collection tier makes variables universally accessible to all folder requests.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When AddBook completes and GetBook executes with URL: GET /v1/books?id={{book_id}}, what value does Postman send across the network wire?',
+      options: [
+        'The exact generated ID string (such as "LIB4821") dynamically extracted from the AddBook response',
+        'The literal placeholder text "{{book_id}}"',
+        'An empty query parameter ?id=',
+        'A null pointer exception'
       ],
+      answerIndex: 0,
+      revealTitle: 'Dynamic Chaining Wire Confirmation',
+      explanation: 'Property transfer confirmed! Postman resolves {{book_id}} from Collection Scope, replacing the placeholder with the dynamic ID value (LIB4821) before dispatching the HTTP GET request!'
     },
     {
       type: 'heading',

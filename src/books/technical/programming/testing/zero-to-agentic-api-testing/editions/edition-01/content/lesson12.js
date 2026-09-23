@@ -99,24 +99,53 @@ export const lesson12 = {
     },
     {
       type: 'paragraph',
-      text: 'The documentation offers both SOAP 1.1 and SOAP 1.2 specifications. In modern enterprise testing, SOAP 1.2 is the recommended standard. You can download the ready to use request envelope file: [Download SOAP Number Conversion XML](/materials/zero-to-agentic-api-testing/lesson-12/soap-number-conversion.xml). Here is the exact SOAP 1.2 request envelope we paste into Postman:',
+      text: 'The documentation offers both SOAP 1.1 and SOAP 1.2 specifications. In modern enterprise testing, SOAP 1.2 is the recommended standard. We deconstruct the SOAP 1.2 request envelope into three distinct structural chunks:',
     },
     {
-      type: 'code',
-      filename: 'soap-number-conversion-request.xml',
-      lines: [
-        'POST https://www.dataaccess.com/webservicesserver/NumberConversion.wso HTTP/1.1',
-        'Content-Type: application/soap+xml; charset=utf-8',
-        '',
-        '<?xml version="1.0" encoding="utf-8"?>',
-        '<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">',
-        '  <soap12:Body>',
-        '    <NumberToWords xmlns="http://www.dataaccess.com/webservicesserver/">',
-        '      <ubiNum>400</ubiNum>',
-        '    </NumberToWords>',
-        '  </soap12:Body>',
-        '</soap12:Envelope>',
+      type: 'chunked-code',
+      badge: 'SOAP XML CHUNKS',
+      title: 'Deconstructing the SOAP 1.2 Request Envelope',
+      intro: 'The formal XML contract components:',
+      chunks: [
+        {
+          label: 'Chunk 1: Root Envelope & Namespace',
+          filename: 'soap-envelope-root.xml',
+          code: '<?xml version="1.0" encoding="utf-8"?>\n<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">',
+          title: 'The Outer Sealed Container',
+          explanation: 'Declares this message as an official SOAP 1.2 envelope using the W3C namespace.',
+          keyTakeaway: 'The XML namespace prevents naming collisions with custom business tags.'
+        },
+        {
+          label: 'Chunk 2: The SOAP Body & Operation',
+          filename: 'soap-operation.xml',
+          code: '  <soap12:Body>\n    <NumberToWords xmlns="http://www.dataaccess.com/webservicesserver/">',
+          title: 'Invoking the Target Method',
+          explanation: 'Specifies the RPC operation (NumberToWords) and targets the service contract domain.',
+          keyTakeaway: 'SOAP operations are declared in XML body tags rather than HTTP URL paths.'
+        },
+        {
+          label: 'Chunk 3: Method Parameter Tag',
+          filename: 'soap-parameter.xml',
+          code: '      <ubiNum>400</ubiNum>\n    </NumberToWords>\n  </soap12:Body>\n</soap12:Envelope>',
+          title: 'Supplying Argument Value',
+          explanation: 'Passes 400 inside the ubiNum tag, then cleanly closes the operation, body, and envelope tags.',
+          keyTakeaway: 'Every opening XML tag must possess an exact matching closing tag.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When we POST this valid SOAP 1.2 XML envelope to the live NumberConversion service, what response structure will return?',
+      options: [
+        '200 OK with an XML envelope containing <m:NumberToWordsResult>four hundred</m:NumberToWordsResult>',
+        'A JSON object { "result": "four hundred" } because all modern APIs return JSON',
+        '404 Not Found because XML cannot be sent over HTTP POST',
+        '500 Server Error because 400 is not a valid number'
       ],
+      answerIndex: 0,
+      revealTitle: 'Live SOAP WebService Outcome',
+      explanation: 'SOAP XML response confirmed! The remote accounting mainframe evaluates the envelope and replies with an HTTP 200 OK XML document wrapping "four hundred" inside the NumberToWordsResult tag!'
     },
     {
       type: 'callout',
