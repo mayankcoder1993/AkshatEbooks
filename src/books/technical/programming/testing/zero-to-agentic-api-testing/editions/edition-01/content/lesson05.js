@@ -205,13 +205,13 @@ export const lesson05 = {
     },
     {
       type: 'paragraph',
-      text: 'JSON Schema validation checks the entire structural contract: verifying that required fields exist and data types remain stable across server releases.',
+      text: 'JSON Schema validation checks the entire structural contract: verifying that required fields exist and data types remain stable across server releases. Because each endpoint has its own specific contract, we write each schema validation script in that endpoint own Tests tab in Postman.',
     },
     {
       type: 'code',
-      filename: 'schema-validation.js',
+      filename: 'addbook-schema-tests.js',
       lines: [
-        '// Strict JSON Schema for AddBook response',
+        '// Placed in the Tests tab of AddBook (POST /v1/books)',
         'const addBookSchema = {',
         '    type: "object",',
         '    required: ["Msg", "ID"],',
@@ -224,8 +224,13 @@ export const lesson05 = {
         'pm.test("AddBook response matches strict JSON Schema", function () {',
         '    pm.response.to.have.jsonSchema(addBookSchema);',
         '});',
-        '',
-        '// Compare with DeleteBook response schema',
+      ],
+    },
+    {
+      type: 'code',
+      filename: 'deletebook-schema-tests.js',
+      lines: [
+        '// Placed in the Tests tab of DeleteBook (POST /v1/books/delete)',
         'const deleteBookSchema = {',
         '    type: "object",',
         '    required: ["msg"],',
@@ -234,7 +239,7 @@ export const lesson05 = {
         '    }',
         '};',
         '',
-        'pm.test("DeleteBook response matches schema", function () {',
+        'pm.test("DeleteBook response matches strict JSON Schema", function () {',
         '    pm.response.to.have.jsonSchema(deleteBookSchema);',
         '});',
       ],

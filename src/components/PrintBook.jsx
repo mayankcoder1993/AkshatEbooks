@@ -14,21 +14,18 @@ export default function PrintBook({ publication }) {
     <section className="front-page toc book-sheet" data-page-label="Contents" id="print-toc">
       <div className="toc-header">
         <h1>Contents & Curriculum Roadmap</h1>
-        <p className="toc-intro">A structured, mastery-based path from core fundamentals to full software architecture.</p>
+        <p className="toc-intro">A structured, mastery based path from core fundamentals to full software architecture.</p>
       </div>
 
-      <div className="toc-current-chapters">
-        <h2>Table of Contents & Curriculum Map</h2>
-        <ol className="toc-list">
+      <div className="toc-frontmatter-nav">
+        <ul className="toc-meta-list">
           <li><a href="#print-preface">{PREFACE.title || 'Preface'}</a></li>
           <li><a href="#print-how-to">How to use this book</a></li>
-          {lessons.map((l,i)=><li key={l.id}><a href={`#print-${l.id}`}>Chapter {i+1}: {l.title}</a><span>{l.subtitle}</span></li>)}
-        </ol>
+        </ul>
       </div>
 
-      {CURRICULUM_ROADMAP && (
+      {CURRICULUM_ROADMAP ? (
         <div className="toc-curriculum-roadmap">
-          <h2>Master Curriculum Journey by Missions</h2>
           <div className="curriculum-phases-grid">
             {CURRICULUM_ROADMAP.map(phase => (
               <div key={phase.phase} className="curriculum-phase-card">
@@ -38,17 +35,27 @@ export default function PrintBook({ publication }) {
                 </div>
                 <p className="phase-desc">{phase.description}</p>
                 <div className="phase-modules">
-                  {phase.modules.map(mod => (
-                    <div key={mod.id} className="phase-module-item">
-                      <div className="module-title-row">
-                        <strong>{mod.title}</strong>
-                        {mod.assessment && <span className="module-assessment-pill">✓ {mod.assessment}</span>}
+                  {phase.modules.map(mod => {
+                    const chIndex = lessons.findIndex(l => l.id === mod.id)
+                    const lessonObj = chIndex >= 0 ? lessons[chIndex] : null
+                    const chNum = chIndex >= 0 ? chIndex + 1 : null
+                    return (
+                      <div key={mod.id} className="phase-module-item">
+                        <div className="module-title-row">
+                          <a href={`#print-${mod.id}`} className="module-chapter-link">
+                            {chNum ? `Chapter ${chNum}: ` : ''}{mod.title}
+                          </a>
+                          {mod.assessment && <span className="module-assessment-pill">✓ {mod.assessment}</span>}
+                        </div>
+                        {lessonObj?.subtitle && (
+                          <p className="module-subtitle-note">{lessonObj.subtitle}</p>
+                        )}
+                        <div className="module-topics-chips">
+                          {mod.topics.map(topic => <span key={topic} className="topic-chip">{topic}</span>)}
+                        </div>
                       </div>
-                      <div className="module-topics-chips">
-                        {mod.topics.map(topic => <span key={topic} className="topic-chip">{topic}</span>)}
-                      </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
                 {phase.milestone && (
                   <div className="phase-milestone-banner">
@@ -62,6 +69,15 @@ export default function PrintBook({ publication }) {
               </div>
             ))}
           </div>
+        </div>
+      ) : (
+        <div className="toc-current-chapters">
+          <h2>Table of Contents</h2>
+          <ol className="toc-list">
+            <li><a href="#print-preface">{PREFACE.title || 'Preface'}</a></li>
+            <li><a href="#print-how-to">How to use this book</a></li>
+            {lessons.map((l,i)=><li key={l.id}><a href={`#print-${l.id}`}>Chapter {i+1}: {l.title}</a><span>{l.subtitle}</span></li>)}
+          </ol>
         </div>
       )}
     </section>

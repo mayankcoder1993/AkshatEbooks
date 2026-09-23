@@ -335,7 +335,7 @@ export const lesson04 = {
     },
     {
       type: 'heading',
-      text: 'Step 6: Action 5: Verifying Re-add After Teardown Cleanup',
+      text: 'Step 6: Action 5: Verifying Re addition After Teardown Cleanup',
     },
     {
       type: 'paragraph',
@@ -384,16 +384,16 @@ export const lesson04 = {
     {
       type: 'source-note',
       label: 'Verified Historical Case Study · 1999',
-      claim: 'UK Passport Agency Automation Crisis Caused by Unvalidated Workflows and Inadequate Integration Testing',
-      url: 'https://www.nao.org.uk/reports/the-cancellation-of-the-uk-passport-agencys-computer-system/',
+      claim: 'UK Passport Agency Computer System Delays Documenting Inadequate Testing and Contingency Planning',
+      url: 'https://www.nao.org.uk/reports/united-kingdom-passport-agency-the-passport-delays-of-summer-1999/',
       verifiedThrough: 'United Kingdom National Audit Office (NAO) Report HC 812'
     },
     {
       type: 'battle-scar',
       metric: 'Enterprise Workflow Failure',
-      title: 'UK Passport Agency Outage: The Cost of Unvalidated Batch Workflows',
-      context: 'In 1999, the UK Passport Agency deployed a new computerized processing system without completing end to end integration testing or automating negative edge cases. When batch record updates encountered unexpected data schemas and missing field validations, application processing ground to an immediate halt. Over five hundred thousand citizens experienced severe passport issuance delays, costing the agency millions in emergency compensation and staff overtime. The National Audit Office investigation concluded that the project suffered from insufficient integration verification and unvalidated workflow assumptions.',
-      takeaway: 'Never assume database and workflow operations behave correctly under edge conditions. API quality engineers must validate error handling, unique constraints, and multi step request lifecycles before production launch.'
+      title: 'UK Passport Agency Delays: The Real World Cost of Untested Rollouts',
+      context: 'In the summer of 1999, the United Kingdom Passport Agency introduced a new computerized processing system without completing end to end integration verification or contingency planning. Rollout difficulties produced a backlog of around 565,000 passport applications, forcing hundreds of citizens to wait in long queues and costing millions of pounds in emergency staffing. The National Audit Office inquiry determined that inadequate testing, training, and contingency readiness were central factors in the disruption.',
+      takeaway: 'Never assume backend services and multi step lifecycles will function smoothly without comprehensive integration testing. Quality automation engineers must validate happy paths, edge cases, and cleanup routines before deployment.'
     },
     {
       type: 'triage',
@@ -416,7 +416,7 @@ export const lesson04 = {
     },
     {
       type: 'heading',
-      text: 'Step 6: Review and Practice',
+      text: 'Step 8: Review and Practice',
     },
     {
       type: 'guess',

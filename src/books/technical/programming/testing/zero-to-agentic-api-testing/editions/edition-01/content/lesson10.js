@@ -247,38 +247,66 @@ export const lesson10 = {
       ],
     },
     {
+      type: 'heading',
+      text: 'Revisiting the Chapter 1 Book Inquiry in GraphQL',
+    },
+    {
       type: 'paragraph',
-      text: 'GraphQL solves this by exposing a single endpoint (such as `POST /graphql`) where the client sends a query asking for the exact fields needed. The GraphQL server runtime resolves the request by querying backend microservices and databases, returning one consolidated JSON response.',
+      text: 'Recall our comparison in Chapter 1: when asking for a book record, a standard REST endpoint returns the entire rigid database schema (including aisle, ISBN, price, copies, and timestamps), whether the client needs them or not. In GraphQL, the client asks specifically for the desired fields, such as title and author:',
     },
     {
       type: 'code',
-      filename: 'campus-graphql-query.graphql',
+      filename: 'book-graphql-query.graphql',
       lines: [
-        '# Querying multiple domains in one single request',
-        'query GetResearcherProfile($researcherId: Int!) {',
-        '  character(id: $researcherId) {',
-        '    name',
-        '    gender',
-        '    status',
+        '# Parameterized book query with dynamic variable',
+        'query GetBookDetails($bookId: ID!) {',
+        '  book(id: $bookId) {',
+        '    title',
+        '    author',
         '  }',
-        '  location(id: 8) {',
+        '}',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'When dispatched with variable `{ "bookId": "1" }`, the GraphQL engine contacts the catalog repository and returns only the requested attributes: `{ "data": { "book": { "title": "Clean Architecture", "author": "Robert Martin" } } }`. If the client subsequently needs the price, the frontend engineer simply adds `price` to the query string without waiting for backend engineers to deploy a new REST endpoint version.',
+    },
+    {
+      type: 'heading',
+      text: 'Live Exploration: Testing the Public Rick and Morty GraphQL API',
+    },
+    {
+      type: 'paragraph',
+      text: 'To practice testing GraphQL against a live production endpoint without configuring local mock servers or authentication credentials, engineers often explore the public Rick and Morty GraphQL service at `https://rickandmortyapi.com/graphql`. Here is a live parameterized query fetching character details and nested location coordinates:',
+    },
+    {
+      type: 'code',
+      filename: 'rick-and-morty-query.graphql',
+      lines: [
+        '# Live query against public https://rickandmortyapi.com/graphql',
+        'query GetCharacterProfile($characterId: ID!) {',
+        '  character(id: $characterId) {',
         '    name',
-        '    dimension',
+        '    status',
+        '    species',
+        '    origin {',
+        '      name',
+        '    }',
         '  }',
         '}',
       ],
     },
     {
       type: 'api-inspector',
-      title: 'Live Interactive Wire Inspector: GraphQL Multi Domain Query',
+      title: 'Live Interactive Wire Inspector: Public Rick and Morty GraphQL Query',
       method: 'POST',
-      url: 'https://api.campusresearch.org/graphql',
+      url: 'https://rickandmortyapi.com/graphql',
       headers: {
         'Content-Type': 'application/json'
       },
       requestBody: {
-        query: 'query GetResearcherProfile($researcherId: Int!) { character(id: $researcherId) { name gender status } location(id: 8) { name dimension } }',
-        variables: { researcherId: 8 }
+        query: 'query GetCharacterProfile($characterId: ID!) { character(id: $characterId) { name status species origin { name } } }',
+        variables: { characterId: '1' }
       },
       status: '200 OK',
       time: '142 ms',
@@ -286,21 +314,20 @@ export const lesson10 = {
       responseBody: {
         data: {
           character: {
-            name: 'Dr. Elena Rostova',
-            gender: 'Female',
-            status: 'Active'
-          },
-          location: {
-            name: 'Innovation Robotics Lab',
-            dimension: 'North Wing Lab 4'
+            name: 'Rick Sanchez',
+            status: 'Alive',
+            species: 'Human',
+            origin: {
+              name: 'Earth (C-137)'
+            }
           }
         }
       },
       assertions: [
         'GraphQL status code is 200 OK',
         'Response contains data object without errors',
-        'Character name attribute matches Dr. Elena Rostova',
-        'Location dimension attribute matches North Wing Lab 4'
+        'Character name matches Rick Sanchez',
+        'Origin name matches Earth (C-137)'
       ]
     },
     {
@@ -328,7 +355,7 @@ export const lesson10 = {
       title: 'Fresher Trap to Avoid: All GraphQL Calls Use HTTP POST',
       paragraphs: [
         'In REST, you use GET to read records and POST to write records.',
-        'In GraphQL, because the query syntax is packaged inside the request payload body, every query and mutation is dispatched using HTTP POST.',
+        'In GraphQL, while queries can technically be sent via GET query parameters, industry standard practice packages the query syntax and variables into a JSON payload body and dispatches using HTTP POST.',
         'In Postman, select POST, choose Body > GraphQL, paste your query on the left and your JSON variables on the right.',
       ],
     },

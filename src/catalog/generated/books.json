@@ -50,7 +50,7 @@
       {
         "id": "rest-crud-status",
         "title": "Investigating the Incident: Manual Wire Auditing and Status Codes",
-        "subtitle": "The campus transit shuttle crisis, dissecting the five status code families, chunking the failing request, and discovering the 500 crash by hand."
+        "subtitle": "The campus transit shuttle crisis, dissecting status code families, comparing URLs, diagnosing the 500 crash by hand, and verifying the 400 guard and 200 contract."
       },
       {
         "id": "postman-setup",

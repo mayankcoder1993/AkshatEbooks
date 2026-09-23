@@ -7,14 +7,14 @@ export const lesson02 = {
   icon: '',
   title: 'Investigating the Incident: Manual Wire Auditing and Status Codes',
   shortTitle: 'Manual Wire Auditing',
-  subtitle: 'The campus transit shuttle crisis, dissecting the five status code families, chunking the failing request, and discovering the 500 crash by hand.',
+  subtitle: 'The campus transit shuttle crisis, dissecting status code families, comparing URLs, diagnosing the 500 crash by hand, and verifying the 400 guard and 200 contract.',
   tags: ['REST', 'HTTP', 'Status Codes', 'Triage', 'Manual Testing', 'Investigation'],
   blocks: [
     {
       type: 'chapter-opener',
-      achieve: 'Locate an unhandled server crash directly on the network wire and verify both defensive error handling and successful query execution.',
-      how: 'Inspecting the raw campus shuttle location request, diagnosing uncaught NullPointerException from an omitted query parameter, installing a defensive validation guard, and testing both negative and positive calls by hand.',
-      carry: 'The verified two request collection contract: the 400 Bad Request defensive guard and the 200 OK coordinate payload.'
+      achieve: 'Find why one shuttle location request fails, make bad input safe, and check that a valid lookup still provides coordinates.',
+      how: 'Compare two URLs, send requests to a local teaching service, examine the client response and server log, write a diagnosis and repair plan, add a defensive validation guard, and replay both requests by hand.',
+      carry: 'The two finished manual request setups and verified response contracts, ready to automate in Chapter 3.'
     },
     {
       type: 'mission-hud',
@@ -37,315 +37,383 @@ export const lesson02 = {
         points: [
           'The Incident: The campus shuttle locator screen is frozen with endless loading indicators.',
           'The Deadlock: Mobile developers and backend server teams blame each other for the crash.',
-          'The Plan: Inspect the exact HTTP request by hand, see the raw server response, and isolate the break.',
+          'The Action Plan: Compare URLs, reproduce the crash locally, write a repair plan, guard the server, and verify both branches.',
         ],
       },
     },
     {
       type: 'heading',
-      text: 'Step 1: The Language of the Server: The Five Status Code Families',
+      text: 'Step 1: Setting Up the Local Runnable Transit Fixture',
     },
     {
       type: 'paragraph',
-      text: 'When a client sends an HTTP request, the server cannot talk back with spoken words. Instead, it begins its response with a standardized three digit numeric code called an **HTTP Status Code**. The first digit defines the overall family of the outcome:',
+      text: 'To investigate this failure safely without touching production systems, we run a local teaching fixture on port 3001. In Chapter 1, you learned how to start a minimal Node.js server. Here is the complete standalone Express transit service file, which you can run locally: [Download shuttle_service.js](/materials/zero-to-agentic-api-testing/lesson-02/shuttle_service.js):',
     },
     {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'STATUS CODE MATRIX',
-      title: 'The Five HTTP Status Code Families at a Glance',
-      text: 'Every HTTP status code belongs to one of five distinct families: 1xx Informational, 2xx Success, 3xx Redirection, 4xx Client Error, and 5xx Server Failure.',
-      src: crudImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/restful-crud-status-guide.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Visual guide to HTTP status code families from 100 to 599.',
-      caption: 'The Status Code Compass: Directing developers to the exact layer of success or failure.',
-      points: [
-        '2xx (Success): Everything went smoothly and the requested action was fulfilled.',
-        '4xx (Client Error): The caller made a mistake, such as omitting a required parameter or sending bad credentials.',
-        '5xx (Server Error): The server encountered an unhandled crash or database failure while processing a valid request.',
+      type: 'code',
+      filename: 'shuttle_service.js',
+      lines: [
+        '// shuttle_service.js: Runnable Local Transit Fixture (Node.js & Express)',
+        'const express = require("express");',
+        'const app = express();',
+        'app.use(express.json());',
+        '',
+        '// In memory route coordinate database',
+        'const activeRoutes = {',
+        '  campus_loop_north: {',
+        '    route: "campus_loop_north",',
+        '    shuttleId: "BUS_104",',
+        '    status: "in_transit",',
+        '    coordinates: { latitude: 42.3601, longitude: -71.0942 },',
+        '    speedMph: 24,',
+        '    nextStop: "Apex Student Union",',
+        '    estimatedArrivalMinutes: 3',
+        '  }',
+        '};',
+        '',
+        '// GET /v1/campus/shuttle/coordinates',
+        'app.get("/v1/campus/shuttle/coordinates", (req, res) => {',
+        '  const route = req.query.route;',
+        '',
+        '  // DEFECT: Attempting to trim without checking if route exists!',
+        '  const normalizedRoute = route.trim().toLowerCase();',
+        '',
+        '  const shuttleData = activeRoutes[normalizedRoute];',
+        '  if (shuttleData) {',
+        '    return res.status(200).json(shuttleData);',
+        '  }',
+        '  res.status(404).json({ statusCode: 404, error: "Unknown shuttle route" });',
+        '});',
+        '',
+        'app.listen(3001, () => console.log("Transit Service running on http://localhost:3001"));',
       ],
     },
     {
-      type: 'structured-breakdown',
-      badge: 'STATUS CODE FAMILIES',
-      title: 'Deconstructing the Five Status Code Families',
-      intro: 'Understanding these five ranges lets you instantly identify where a web failure originated:',
-      categories: [
-        {
-          category: '1xx Series',
-          subCategory: '100 to 199',
-          title: 'Informational Codes: Request Received',
-          explanation: 'Tells the client that the initial request headers have been received and that processing is continuing over the network connection.',
-          points: [
-            '100 Continue: Server acknowledges the initial headers and tells the client to send the body.',
-            '101 Switching Protocols: Used when upgrading a standard HTTP connection to a live real time WebSocket.'
-          ]
-        },
-        {
-          category: '2xx Series',
-          subCategory: '200 to 299',
-          title: 'Success Codes: Action Completed Gracefully',
-          explanation: 'Confirms that the client request was successfully received, understood, and accepted by the backend application.',
-          points: [
-            '200 OK: Standard successful response for GET, PUT, or general queries.',
-            '201 Created: The request succeeded and a brand new database record was created (standard for POST).',
-            '204 No Content: Action succeeded but there is no response body to return (common for DELETE).'
-          ]
-        },
-        {
-          category: '3xx Series',
-          subCategory: '300 to 399',
-          title: 'Redirection Codes: Further Action Required',
-          explanation: 'Informs the client that the requested resource has relocated and that the client must visit a different URL to retrieve it.',
-          points: [
-            '301 Moved Permanently: The resource has permanently relocated to a new address.',
-            '302 Found: The resource is temporarily reachable at an alternate location.',
-            '304 Not Modified: Cached response is still fresh; saves network bandwidth by sending zero body data.'
-          ]
-        },
-        {
-          category: '4xx Series',
-          subCategory: '400 to 499',
-          title: 'Client Error Codes: The Caller Made a Mistake',
-          explanation: 'Indicates that the request contains invalid syntax, missing authentication, or points to an address that does not exist.',
-          points: [
-            '400 Bad Request: Malformed syntax, invalid JSON formatting, or missing required parameters.',
-            '401 Unauthorized: Caller lacks valid authentication credentials (such as an API token).',
-            '403 Forbidden: Caller identity is known, but they do not possess permissions to view this resource.',
-            '404 Not Found: The requested URL endpoint does not exist on this server.'
-          ]
-        },
-        {
-          category: '5xx Series',
-          subCategory: '500 to 599',
-          title: 'Server Error Codes: The Backend Crashed',
-          explanation: 'Proves that the client sent a request, but the server encountered an internal software crash, null pointer exception, or database timeout.',
-          points: [
-            '500 Internal Server Error: Unhandled programming exception or fatal software defect on the server.',
-            '502 Bad Gateway: Upstream server or proxy returned an invalid response.',
-            '503 Service Unavailable: Server is overloaded or undergoing maintenance.',
-            '504 Gateway Timeout: Server failed to respond before the network connection expired.'
-          ]
-        }
-      ]
+      type: 'paragraph',
+      text: 'To run this service, open a terminal window in your workspace and type `node shuttle_service.js`. To stop it at any time, press `Ctrl + C`. Before touching any broken requests, let us perform a baseline check to prove the server is reachable and can serve valid data:',
     },
     {
-      type: 'heading',
-      text: 'Step 2: Inspecting the Failing Bus Request in Chunks',
+      type: 'terminal',
+      command: 'curl -s "http://localhost:3001/v1/campus/shuttle/coordinates?route=campus_loop_north"',
+      lines: [
+        '{',
+        '  "route": "campus_loop_north",',
+        '  "shuttleId": "BUS_104",',
+        '  "status": "in_transit",',
+        '  "coordinates": {',
+        '    "latitude": 42.3601,',
+        '    "longitude": -71.0942',
+        '  },',
+        '  "speedMph": 24,',
+        '  "nextStop": "Apex Student Union",',
+        '  "estimatedArrivalMinutes": 3',
+        '}',
+      ],
     },
     {
       type: 'paragraph',
-      text: 'Let us isolate the exact network request triggered when the mobile app opens the bus tracking screen. Rather than looking at a massive wall of text, we break the outgoing message into clean structural chunks:',
+      text: 'The server returns `200 OK` with valid GPS coordinates. This confirms that the service is alive and the database contains active shuttle records. Now, what is different about the request that the mobile app actually sent?',
+    },
+    {
+      type: 'heading',
+      text: 'Step 2: Comparing the Two URLs: Locating the Missing Piece',
+    },
+    {
+      type: 'paragraph',
+      text: 'Let us place the working baseline URL and the mobile app request side by side:',
     },
     {
       type: 'chunked-code',
-      badge: 'REQUEST CHUNKS',
-      title: 'The Outgoing Campus Bus Location Request',
-      intro: 'Here is what the mobile phone dispatched over the network wire:',
+      badge: 'URL COMPARISON',
+      title: 'Comparing the Working URL with the Mobile Request',
+      intro: 'Notice the exact difference in the request line:',
       chunks: [
         {
-          label: 'Request Verb and Resource Path',
-          filename: 'request_line.http',
-          code: 'GET /v1/campus/shuttle/coordinates HTTP/1.1\nHost: api.campustransit.org',
-          title: 'The Verb and Missing Query Parameter',
-          explanation: 'The mobile app calls the shuttle coordinates endpoint using an HTTP GET verb. Notice that the required query parameter route is completely missing from the request line!',
-          keyTakeaway: 'The mobile app code omitted the required route parameter on initial screen load.'
+          label: 'Working Baseline URL',
+          filename: 'working_url.http',
+          code: 'GET http://localhost:3001/v1/campus/shuttle/coordinates?route=campus_loop_north',
+          title: 'Contains the Route Parameter',
+          explanation: 'The question mark begins extra query information. The key route specifies which bus line the map wishes to locate.',
+          keyTakeaway: 'The server requires route to look up matching coordinates.'
         },
         {
-          label: 'Request Metadata Headers',
-          filename: 'headers.http',
-          code: 'Accept: application/json\nUser-Agent: ApexCampusMobile/2.4.0 (iOS 17.4)\nAuthorization: Bearer campus_student_tok_9918',
-          title: 'Client Identification and Auth',
-          explanation: 'The mobile phone identifies itself as the official student app and passes a valid Bearer authentication token.',
-          keyTakeaway: 'The client is properly authenticated; the credentials are not the problem.'
+          label: 'Mobile App Failing Request',
+          filename: 'failing_url.http',
+          code: 'GET http://localhost:3001/v1/campus/shuttle/coordinates',
+          title: 'Omitted Query Parameter',
+          explanation: 'On initial screen boot, the mobile frontend code dispatched the GET request immediately, omitting the question mark and the route parameter entirely.',
+          keyTakeaway: 'The query string is completely absent from the client call.'
         }
       ]
     },
     {
       type: 'heading',
-      text: 'Step 3: Imagine and Predict the Output',
+      text: 'Step 3: Imagine and Predict Before Sending',
     },
     {
       type: 'predict-output',
       badge: 'IMAGINE & PREDICT',
       prompt: 'When this request arrives at the backend server with the route query parameter missing, how will an unhardened backend service respond?',
       options: [
-        '200 OK: Returns GPS coordinates for all routes across the campus',
-        '500 Server Error: Crashes with uncaught NullPointerException because the missing parameter was null',
-        '201 Created: Creates a brand new transit route on the server database',
-        '301 Moved Permanently: Redirects to a third party commercial map service'
+        'A successful response returning GPS coordinates for all campus routes',
+        'An unhandled 500 server crash caused by attempting to use an absent value',
+        'A 201 Created code generating a brand new route on the server',
+        'A 301 redirect forwarding to an external commercial map provider'
       ],
       answerIndex: 1,
-      revealTitle: 'Raw Wire Response from Server',
-      explanation: 'The backend crashed! In Java, an omitted query parameter causes request.getParameter("route") to return null (unlike ?route= which returns an empty string ""). Calling .trim() on null threw an uncaught java.lang.NullPointerException at RouteLocatorService.java:42, crashing the gateway with 500 Internal Server Error!'
+      revealTitle: 'Raw Server Wire Output',
+      explanation: 'The backend crashed with HTTP 500! When the query parameter was omitted, req.query.route evaluated to undefined in Node.js (and null in Java). Calling .trim() on undefined threw an unhandled TypeError, terminating the request with an internal server error!'
     },
     {
       type: 'heading',
-      text: 'Step 4: The Live Wire Reveal: Finding the 500 Error by Hand',
+      text: 'Step 4: Manually Reproducing the Crash: Client Response vs Server Log',
     },
     {
       type: 'paragraph',
-      text: 'Here is the raw response captured directly from the server when we execute the failing call in our HTTP workbench:',
+      text: 'In your API software (such as Postman or Thunder Client), configure a GET request targeting `http://localhost:3001/v1/campus/shuttle/coordinates` without any query parameters or request body. Click Send. Now observe the two distinct locations where output appears:',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'WIRE ARCHITECTURE',
+      title: 'Distinguishing Client Response from Server Terminal Log',
+      text: 'An API tester must look in two separate places: the client response pane shows what the public caller received, while the server terminal log reveals internal exceptions and call stack traces.',
+      src: wireImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/http-wire-anatomy.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Anatomy of an HTTP wire exchange separating client status from server terminal log.',
+      caption: 'Two distinct perspectives: the client response pane versus the local server console.',
+      points: [
+        'The Client Response Pane: Shows the HTTP status code and response payload returned to the caller.',
+        'The Server Terminal Console: Displays internal logs, uncaught exceptions, and line numbers where code broke.',
+      ],
     },
     {
       type: 'api-inspector',
-      title: 'Live Wire Capture: Failing Campus Shuttle Request',
+      title: 'Local Wire Capture: Failing Campus Shuttle Request',
       method: 'GET',
-      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates',
+      url: 'http://localhost:3001/v1/campus/shuttle/coordinates',
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer campus_student_tok_9918'
+        'User-Agent': 'ApexCampusMobile/2.4.0 (iOS 17.4)'
       },
       status: '500 Internal Server Error',
       time: '14 ms',
-      size: '342 B',
+      size: '228 B',
       responseBody: {
         statusCode: 500,
         error: 'Internal Server Error',
-        exception: 'java.lang.NullPointerException',
-        message: 'Cannot invoke "String.trim()" because "route" is null at RouteLocatorService.java:42',
-        timestamp: '2026-09-23T09:15:00Z'
-      }
+        message: 'Cannot read properties of undefined (reading \'trim\')'
+      },
+      sampleLabel: 'UNHANDLED 500 SERVER CRASH'
+    },
+    {
+      type: 'terminal',
+      command: 'Local Server Console Output (shuttle_service.js)',
+      lines: [
+        'Transit Service running on http://localhost:3001',
+        'GET /v1/campus/shuttle/coordinates',
+        'TypeError: Cannot read properties of undefined (reading \'trim\')',
+        '    at /home/user/campus-api/shuttle_service.js:23:25',
+        '    at Layer.handle [as handle_request] (/node_modules/express/lib/router/layer.js:95:5)',
+        '    at next (/node_modules/express/lib/router/route.js:149:13)',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Look at the evidence. The client received `500 Internal Server Error`. The server terminal reveals that line 23 crashed with an unhandled TypeError because it called `.trim()` on an undefined variable. In Java Spring servers, this same defect manifests as `java.lang.NullPointerException` at RouteLocatorService.java:42. In both ecosystems, the root cause is identical: dereferencing an unchecked input.',
     },
     {
       type: 'structured-breakdown',
       badge: 'PARAMETER MECHANICS',
       title: 'Distinguishing Missing Parameters from Empty Strings',
-      intro: 'Web application frameworks (like Java Servlets and Spring Boot) treat query parameters with strict semantic distinctions:',
+      intro: 'Web application servers make strict semantic distinctions between different parameter states:',
       categories: [
         {
           category: 'Case A: Parameter Omitted Completely',
           subCategory: 'GET /v1/campus/shuttle/coordinates',
-          title: 'Evaluates to null in Server Memory',
-          explanation: 'When the query parameter route is completely absent from the URL, request.getParameter("route") returns null. Calling route.trim() without a null check throws java.lang.NullPointerException, bubbling up to an unhandled 500 error.',
+          title: 'Evaluates to undefined or null in Server Memory',
+          explanation: 'When the query string route is absent from the URL, the parameter evaluates to undefined in Node.js or null in Java. Calling methods like trim() without a presence check throws an immediate fatal exception.',
           points: [
-            'Trigger: The mobile app omitted the query string entirely on boot.',
-            'Server State: Variable route is null; dereferencing throws a fatal exception.',
-            'Required Defense: Check if (route == null) before invoking any string methods.'
+            'Trigger: The client sent the URL path with zero query parameters.',
+            'Server State: Variable route does not exist in memory.',
+            'Required Defense: Check if (!route) or if (route == null) before dereferencing.'
           ]
         },
         {
           category: 'Case B: Parameter Present but Empty',
           subCategory: 'GET /v1/campus/shuttle/coordinates?route=',
           title: 'Evaluates to an Empty String ("")',
-          explanation: 'When the parameter name is supplied with an empty value (?route=), request.getParameter("route") returns "". Calling route.trim() succeeds, but querying the GPS database for an empty route string returns zero coordinates or invalid query errors.',
+          explanation: 'When the parameter name is supplied with an empty value, the variable is defined as an empty string. Calling trim() succeeds without throwing, but querying the database for a blank route finds zero records.',
           points: [
-            'Trigger: The client passed ?route= with nothing after the equal sign.',
-            'Server State: Variable route is non null but holds zero characters.',
-            'Required Defense: Check if (route.trim().isEmpty()) to reject blank strings.'
+            'Trigger: The caller included the key but provided no value after the equal sign.',
+            'Server State: Variable is non null but holds zero characters.',
+            'Required Defense: Check if (route.trim() === "") to reject blank queries.'
+          ]
+        },
+        {
+          category: 'Case C: Parameter Whitespace Only',
+          subCategory: 'GET /v1/campus/shuttle/coordinates?route=%20%20',
+          title: 'Evaluates to Blank Whitespace ("  ")',
+          explanation: 'The parameter contains spaces that pass a simple presence check. If trimmed, its length collapses to zero characters.',
+          points: [
+            'Trigger: The caller provided spaces or blanks.',
+            'Server State: Variable holds spaces; trim() produces an empty string.',
+            'Required Defense: Always trim before checking length.'
           ]
         }
       ]
     },
     {
       type: 'heading',
-      text: 'Step 5: Installing the Backend Defensive Validation Guard',
+      text: 'Step 5: Stop and Plan: Writing the Diagnosis and Repair Card',
     },
     {
       type: 'paragraph',
-      text: 'To protect the service from crashing, the backend engineering team installs defensive input validation before touching any database queries:',
+      text: 'Before modifying a single line of backend code, professional quality engineers pause to write a concrete repair plan. Guessing and randomly editing code creates secondary bugs. Here is the four part repair card for this incident:',
+    },
+    {
+      type: 'structured-breakdown',
+      badge: 'REPAIR CARD',
+      title: 'The Four Part Incident Diagnosis and Proof Plan',
+      intro: 'Write down the diagnosis, the minimal change, and the exact two tests to prove the fix:',
+      categories: [
+        {
+          category: 'Part 1: Observed Evidence',
+          subCategory: 'The Facts',
+          title: 'Client 500 and Server TypeError',
+          explanation: 'The client omitted the route parameter, causing an uncaught exception on the server when trying to trim undefined.',
+          points: [
+            'The client is at fault for omitting required input.',
+            'The server is also at fault for failing to validate inputs before using them.',
+          ]
+        },
+        {
+          category: 'Part 2: Root Cause',
+          subCategory: 'The Defect',
+          title: 'Unchecked Input Dereferencing',
+          explanation: 'The server code assumes route is always a valid string and attempts to call string methods before checking presence.',
+          points: [
+            'Missing input validation guard at controller layer.',
+            'Cascades into unhandled 500 error.',
+          ]
+        },
+        {
+          category: 'Part 3: Proposed Minimal Repair',
+          subCategory: 'The Code Change',
+          title: 'Defensive Validation Guard',
+          explanation: 'Inspect route first. If route is omitted, empty, or whitespace, immediately return HTTP 400 Bad Request with a clear message.',
+          points: [
+            'Guard must check both absence and blank strings.',
+            'Must return status 400 with { statusCode: 400, error: "route parameter is required" }.',
+          ]
+        },
+        {
+          category: 'Part 4: Proof Checks',
+          subCategory: 'The Two Verifications',
+          title: 'Negative Guard Test and Positive Path Test',
+          explanation: 'Verify both execution branches manually to prove stability.',
+          points: [
+            'Check 1 (Negative): Replay the unchanged failing URL and confirm 400 Bad Request without server crash.',
+            'Check 2 (Positive): Send valid route campus_loop_north and confirm 200 OK with coordinates.',
+          ]
+        }
+      ]
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Investigator Insight: Why Fixing Only the Client is Insufficient',
+      paragraphs: [
+        'A junior engineer might suggest: "Why touch the backend? Just update the mobile app to send the route parameter!"',
+        'In enterprise systems, hundreds of third party clients, mobile platforms, web portals, and external partners call the same API. If the server does not defend itself, any single bug in any client will crash server threads, exhaust connection pools, and trigger widespread outages.',
+        'Robust engineering requires two separate fixes: the server must defend itself with a 400 validation guard, and the client must supply valid parameters to receive 200 data.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 6: Applying the Defensive Guard and Replaying the Bad Request',
+    },
+    {
+      type: 'paragraph',
+      text: 'Now open `shuttle_service.js` in your editor. We install the defensive validation guard at the top of the route handler, before any string manipulation occurs:',
     },
     {
       type: 'code',
-      filename: 'RouteLocatorServiceGuard.java',
+      filename: 'shuttle_service_guarded.js',
       lines: [
-        '// Defensive Guard in RouteLocatorService.java',
-        'String route = request.getParameter("route");',
+        '// Defensive Guard installed in shuttle_service.js',
+        'app.get("/v1/campus/shuttle/coordinates", (req, res) => {',
+        '  const route = req.query.route;',
         '',
-        '// Guard both Case A (null) and Case B (empty string)',
-        'if (route == null || route.trim().isEmpty()) {',
-        '    response.setStatus(400);',
-        '    response.setContentType("application/json");',
-        '    response.getWriter().write("{\\"error\\": \\"route parameter is required\\"}");',
-        '    return;',
-        '}',
+        '  // DEFENSIVE GUARD: Catch omitted, empty, and whitespace strings',
+        '  if (!route || route.trim() === "") {',
+        '    return res.status(400).json({',
+        '      statusCode: 400,',
+        '      error: "route parameter is required"',
+        '    });',
+        '  }',
         '',
-        '// Safe to process valid route string',
-        'String normalizedRoute = route.trim().toLowerCase();',
+        '  // Safe to process valid string',
+        '  const normalizedRoute = route.trim().toLowerCase();',
+        '  const shuttleData = activeRoutes[normalizedRoute];',
+        '  if (shuttleData) {',
+        '    return res.status(200).json(shuttleData);',
+        '  }',
+        '  res.status(404).json({ statusCode: 404, error: "Unknown shuttle route" });',
+        '});',
       ],
     },
     {
       type: 'paragraph',
-      text: 'Now let us verify the guarded server. We dispatch the exact same failing request (with route omitted) to confirm that the server returns HTTP 400 Bad Request instead of crashing with 500:',
+      text: 'Save the file. In your terminal, stop the running server with `Ctrl + C` and restart it with `node shuttle_service.js`. Now, in your API software, replay the exact same failing request without changing the URL: `GET http://localhost:3001/v1/campus/shuttle/coordinates`:',
     },
     {
       type: 'api-inspector',
-      title: 'Wire Capture: Guarded Response for Omitted Parameter',
+      title: 'Local Wire Capture: Guarded Response for Omitted Parameter',
       method: 'GET',
-      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates',
+      url: 'http://localhost:3001/v1/campus/shuttle/coordinates',
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer campus_student_tok_9918'
+        'User-Agent': 'ApexCampusMobile/2.4.0 (iOS 17.4)'
       },
       status: '400 Bad Request',
       time: '12 ms',
       size: '184 B',
       responseBody: {
         statusCode: 400,
-        error: 'Bad Request',
-        message: 'route parameter is required'
+        error: 'route parameter is required'
       },
       sampleLabel: 'DEFENSIVE 400 WIRE RESPONSE'
     },
     {
-      type: 'heading',
-      text: 'Step 6: Sourced Case Study: The Healthcare.gov Launch Outage',
-    },
-    {
-      type: 'source-note',
-      label: 'Verified Historical Case Study · October 2013',
-      claim: 'Healthcare.gov Launch Meltdown Caused by Capacity Bottlenecks and Untested Integration Dependencies',
-      url: 'https://oig.hhs.gov/oei/reports/oei-03-14-00230.pdf',
-      verifiedThrough: 'United States Department of Health and Human Services (HHS) Office of Inspector General'
-    },
-    {
-      type: 'callout',
-      variant: 'warning',
-      title: 'The Real World Cost of Untested Dependencies: Healthcare.gov Launch',
-      paragraphs: [
-        'On October 1, 2013, the United States federal health insurance exchange opened to the public. Within minutes, the system slowed to a crawl and crashed for millions of citizens.',
-        'The Department of Health and Human Services Inspector General report documented capacity bottlenecks, cross agency timeout dependencies, and lack of end to end integration testing before release. When identity verification services became overloaded, downstream systems faced cascading unhandled timeouts and generic 500 crashes instead of graceful degradation or early validation.',
-        'Because user registration was blocked at the API layer, only six people successfully registered for health plans on the entire first day of nationwide launch.',
-        'The Takeaway: Always test error status codes. An API must handle missing or invalid inputs gracefully with 4xx codes rather than crashing the system with unhandled 5xx server exceptions.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 7: Performing the Manual Fix: Verifying 200 OK by Hand',
+      type: 'paragraph',
+      text: 'The server did not crash! Instead of an internal 500 error, the service immediately returned `400 Bad Request` with an informative JSON payload explaining that the route parameter is required. Notice that the server console log remains completely quiet: zero unhandled exceptions!',
     },
     {
       type: 'paragraph',
-      text: 'Now let us verify the positive happy path. In our HTTP testing workbench, we provide the valid campus route name: `campus_loop_north`. We send the request by hand and inspect the response:',
+      text: 'Now let us test Case B by sending `GET http://localhost:3001/v1/campus/shuttle/coordinates?route=`. Because `route.trim() === ""` evaluates to true, the server returns the exact same defensive `400 Bad Request`. Both bad input variations are now safely handled.',
     },
     {
-      type: 'chunked-code',
-      badge: 'CORRECTED WIRE CALL',
-      title: 'The Corrected Campus Transit Request',
-      intro: 'We supply the valid query parameter to verify successful coordinate delivery:',
-      chunks: [
-        {
-          label: 'Corrected Request Line',
-          filename: 'fixed_request.http',
-          code: 'GET /v1/campus/shuttle/coordinates?route=campus_loop_north HTTP/1.1\nHost: api.campustransit.org',
-          title: 'Valid Parameter Passed',
-          explanation: 'By providing the exact route identifier campus_loop_north, the server locates the active shuttle and queries the GPS database properly.',
-          keyTakeaway: 'Query parameters must always match the required backend contract schema.'
-        }
-      ]
+      type: 'heading',
+      text: 'Step 7: Repairing the Client Call and Verifying 200 OK',
+    },
+    {
+      type: 'paragraph',
+      text: 'Now let us perform our second proof check: verifying the positive happy path. The backend guard safely rejected bad inputs, but the mobile transit map still needs real coordinates to function. In your API software request builder, add the query parameter `?route=campus_loop_north`. Click Send:',
     },
     {
       type: 'api-inspector',
-      title: 'Live Wire Capture: Fixed Campus Shuttle Request',
+      title: 'Local Wire Capture: Fixed Campus Shuttle Request',
       method: 'GET',
-      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates?route=campus_loop_north',
+      url: 'http://localhost:3001/v1/campus/shuttle/coordinates?route=campus_loop_north',
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer campus_student_tok_9918'
+        'User-Agent': 'ApexCampusMobile/2.4.0 (iOS 17.4)'
       },
       status: '200 OK',
-      time: '38 ms',
+      time: '28 ms',
       size: '286 B',
       responseBody: {
         route: 'campus_loop_north',
@@ -362,23 +430,180 @@ export const lesson02 = {
       sampleLabel: 'SUCCESSFUL 200 WIRE RESPONSE'
     },
     {
+      type: 'paragraph',
+      text: 'The map unfreezes! The server returns `200 OK` with valid GPS coordinates, shuttle speed, and the estimated arrival time. You proved the exact cause of the crash, added the server defense, and verified the solution with your own eyes on the network wire.',
+    },
+    {
       type: 'callout',
       variant: 'note',
       title: 'What We Carry into Chapter 3: The Two Verified Request Contracts',
       paragraphs: [
         'We have verified two distinct requests by hand:',
-        '1. Negative Regression Request: GET /v1/campus/shuttle/coordinates (omitted route) returning 400 Bad Request with error guidance.',
-        '2. Positive Contract Request: GET /v1/campus/shuttle/coordinates?route=campus_loop_north returning 200 OK with valid numeric coordinates.',
+        '1. Negative Regression Request: GET /v1/campus/shuttle/coordinates (omitted route) returning 400 Bad Request with JSON body { statusCode: 400, error: "route parameter is required" }.',
+        '2. Positive Contract Request: GET /v1/campus/shuttle/coordinates?route=campus_loop_north returning 200 OK with valid numeric coordinates { latitude: 42.3601, longitude: -71.0942 }.',
         'In Chapter 3, we take these exact two requests and automate them inside Postman with JavaScript assertions!',
       ],
     },
     {
+      type: 'heading',
+      text: 'Step 8: Generalizing the Five HTTP Status Code Families',
+    },
+    {
       type: 'paragraph',
-      text: 'The map unfreezes! The server returns `200 OK` with valid GPS coordinates, shuttle speed, and the estimated arrival time. You proved the exact cause of the crash and verified the solution with your own eyes on the network wire!',
+      text: 'Now that you have observed status codes 200, 400, and 500 live on the network wire, we can generalize how web servers communicate. When a client sends an HTTP request, the server begins its response with a standardized three digit numeric code called an **HTTP Status Code**. The first digit defines the overall family:',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'STATUS CODE MATRIX',
+      title: 'The Five HTTP Status Code Families at a Glance',
+      text: 'Every HTTP status code belongs to one of five distinct families: 1xx Informational, 2xx Success, 3xx Redirection, 4xx Client Error, and 5xx Server Failure.',
+      src: crudImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/restful-crud-status-guide.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Visual guide to HTTP status code families from 100 to 599.',
+      caption: 'The Status Code Compass: Directing developers to the exact layer of success or failure.',
+      points: [
+        '2xx (Success): Everything went smoothly and the requested action was fulfilled (observed in our 200 OK coordinate response).',
+        '4xx (Client Error): The caller made a mistake, such as omitting a required parameter (observed in our 400 Bad Request guard).',
+        '5xx (Server Error): The server encountered an unhandled crash or exception (observed in our initial 500 TypeError crash).',
+      ],
+    },
+    {
+      type: 'structured-breakdown',
+      badge: 'STATUS CODE FAMILIES',
+      title: 'Deconstructing the Five Status Code Families',
+      intro: 'Understanding these five ranges lets you instantly identify where a web failure originated:',
+      categories: [
+        {
+          category: '2xx Series',
+          subCategory: '200 to 299',
+          title: 'Success Codes: Action Completed Gracefully',
+          explanation: 'Confirms that the client request was successfully received, understood, and accepted by the backend application.',
+          points: [
+            '200 OK: Standard successful response for GET, PUT, or general queries.',
+            '201 Created: The request succeeded and a brand new database record was created (standard for POST).',
+            '204 No Content: Action succeeded but there is no response body to return (common for DELETE).'
+          ]
+        },
+        {
+          category: '4xx Series',
+          subCategory: '400 to 499',
+          title: 'Client Error Codes: The Caller Made a Mistake',
+          explanation: 'Indicates that the request contains invalid syntax, missing parameters, or unauthorized tokens.',
+          points: [
+            '400 Bad Request: Malformed syntax, invalid JSON formatting, or missing required parameters.',
+            '401 Unauthorized: Caller lacks valid authentication credentials (such as an API token).',
+            '403 Forbidden: Caller identity is known, but they do not possess permissions to view this resource.',
+            '404 Not Found: The requested URL endpoint does not exist on this server.'
+          ]
+        },
+        {
+          category: '5xx Series',
+          subCategory: '500 to 599',
+          title: 'Server Error Codes: The Backend Crashed',
+          explanation: 'Proves that the client sent a request, but the server encountered an internal software crash, null dereference, or database failure.',
+          points: [
+            '500 Internal Server Error: Unhandled programming exception or fatal software defect on the server.',
+            '502 Bad Gateway: Upstream server or proxy returned an invalid response.',
+            '503 Service Unavailable: Server is overloaded or undergoing maintenance.',
+            '504 Gateway Timeout: Server failed to respond before the network connection expired.'
+          ]
+        },
+        {
+          category: '1xx and 3xx Series',
+          subCategory: '100 to 199 and 300 to 399',
+          title: 'Informational and Redirection Codes',
+          explanation: 'Specialized protocol signaling codes for connection handshakes and URL relocations.',
+          points: [
+            '100 Continue: Server acknowledges the initial headers and tells the client to send the body.',
+            '301 Moved Permanently: The resource has permanently relocated to a new address.',
+            '304 Not Modified: Cached client response is still fresh; saves network bandwidth.'
+          ]
+        }
+      ]
     },
     {
       type: 'heading',
-      text: 'Step 7: Review and Practice',
+      text: 'Step 9: Sourced Case Study: The Healthcare.gov Launch Outage',
+    },
+    {
+      type: 'source-note',
+      label: 'Verified Historical Case Study · August 2014',
+      claim: 'Healthcare.gov Early Outages Case Study Documenting Integration Bottlenecks and Access Failures',
+      url: 'https://oig.hhs.gov/documents/evaluation/2981/OEI-06-14-00350-Complete%20Report.pdf',
+      verifiedThrough: 'United States Department of Health and Human Services (HHS) Office of Inspector General Report OEI-06-14-00350'
+    },
+    {
+      type: 'callout',
+      variant: 'warning',
+      title: 'The Real World Cost of Untested Dependencies: Healthcare.gov Launch',
+      paragraphs: [
+        'On October 1, 2013, the United States federal health insurance exchange opened to the public. Within minutes, the system slowed to a crawl and crashed for millions of citizens.',
+        'The Department of Health and Human Services Inspector General report documented capacity bottlenecks, cross agency timeout dependencies, and lack of end to end integration testing before release. When identity verification services became overloaded, downstream systems faced cascading unhandled timeouts and generic 500 crashes instead of graceful degradation or early validation.',
+        'The Takeaway: Always test error status codes. An API must handle missing or invalid inputs gracefully with 4xx codes rather than crashing the system with unhandled 5xx server exceptions.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 10: Final Understanding Gate: Independent Diagnosis Challenge',
+    },
+    {
+      type: 'paragraph',
+      text: 'Before moving to Chapter 3, test your diagnostic reasoning on a brand new case. Suppose a client sends `GET /v1/campus/shuttle/coordinates?route=%20%20` (a present query parameter containing only spaces). Consider the four questions below:',
+    },
+    {
+      type: 'structured-breakdown',
+      badge: 'DIAGNOSTIC GATE',
+      title: 'Independent Understanding Challenge',
+      intro: 'Evaluate this new request against our guarded server code:',
+      categories: [
+        {
+          category: 'Question 1: Parameter Condition',
+          subCategory: 'Classification',
+          title: 'Is this parameter omitted, empty, or whitespace only?',
+          explanation: 'The parameter is present in the query string, but its content consists entirely of URL encoded spaces (%20%20). This represents Case C: Whitespace Only.',
+          points: [
+            'Presence check if (!route) evaluates to false because the string exists.',
+            'Trimming the string collapses its length to zero characters.',
+          ]
+        },
+        {
+          category: 'Question 2: Guard Behavior',
+          subCategory: 'Predicted Response',
+          title: 'Which condition catches this request, and what status is returned?',
+          explanation: 'The check route.trim() === "" evaluates to true. The server immediately returns HTTP 400 Bad Request with { statusCode: 400, error: "route parameter is required" }.',
+          points: [
+            'Guards against invisible blank queries that would fail in the database.',
+            'Protects backend resources from executing empty string lookups.',
+          ]
+        },
+        {
+          category: 'Question 3: Client Remediation',
+          subCategory: 'The Fix',
+          title: 'What must the caller send to receive active coordinates?',
+          explanation: 'The client must pass a real, non blank route identifier: ?route=campus_loop_north.',
+          points: [
+            'Client must supply valid business identifiers.',
+            'The backend cannot guess which route the student needs.',
+          ]
+        },
+        {
+          category: 'Question 4: Test Philosophy',
+          subCategory: 'Why Test Both?',
+          title: 'Why do quality engineers test both bad and valid calls after every fix?',
+          explanation: 'Testing only the valid call proves the feature works under ideal conditions, but misses regression crashes. Testing only the bad call proves error safety, but cannot confirm if real users receive data. You must test both to guarantee total system reliability.',
+          points: [
+            'Negative test proves system resilience against crashes.',
+            'Positive test proves business fulfillment for users.',
+          ]
+        }
+      ]
+    },
+    {
+      type: 'heading',
+      text: 'Step 11: Review and Practice',
     },
     {
       type: 'triage',
@@ -394,7 +619,6 @@ export const lesson02 = {
       debrief: 'Client error identified! The 4xx family explicitly signifies client side issues: the caller transmitted data that violated business validation rules. The backend functioned perfectly by rejecting the impossible dates and returning a helpful error message.',
       traps: [
         'Database crashes result in 500 Internal Server Error, not 400.',
-        '',
         'Network disconnections trigger local network timeouts, not HTTP response codes.',
         'Postman executes requests without requiring commercial licenses for manual testing.'
       ]
@@ -403,12 +627,12 @@ export const lesson02 = {
       type: 'quiz',
       items: [
         [
-          'What does the first digit of an HTTP status code represent?',
-          'The first digit represents the status family: 1xx Informational, 2xx Success, 3xx Redirection, 4xx Client Error, and 5xx Server Failure.',
+          'What is the fundamental difference between an omitted parameter and an empty parameter?',
+          'An omitted parameter is completely absent from the URL (evaluating to undefined or null in server memory), which can trigger uncaught dereference crashes if not checked. An empty parameter is present as a defined variable with zero characters (such as ?route=), which can still produce invalid database queries if not trimmed and validated.',
         ],
         [
-          'Why did the campus shuttle locator service crash with HTTP 500 when route was empty?',
-          'The backend code failed to implement defensive parameter validation. When the query parameter was empty, the service attempted to invoke methods on a null object, throwing an unhandled exception.',
+          'Why did the campus shuttle locator service crash with HTTP 500 when the route parameter was omitted?',
+          'The backend code failed to implement defensive parameter validation. When the query parameter was completely omitted, req.query.route evaluated to undefined. The service attempted to invoke trim() on this undefined reference, triggering an unhandled TypeError that crashed the request.',
         ],
         [
           'If a client requests a web address that does not exist on the server, what status code should be returned?',
@@ -422,7 +646,8 @@ export const lesson02 = {
         'HTTP status codes provide an instant, unambiguous diagnosis of where a transaction succeeded or broke.',
         'The 2xx series confirms success, 4xx series identifies client caller errors, and 5xx series proves backend server crashes.',
         'When diagnosing production defects, never rely on frontend screen behavior; inspect the raw request and response wire packets.',
-        'Query parameters in URLs allow clients to filter or specify target resources; omitting required parameters must be handled gracefully.',
+        'Query parameters in URLs allow clients to filter or specify target resources; omitting required parameters must be handled defensively with 400 Bad Request.',
+        'Always test both branches: verify that bad input is safely rejected with 400, and verify that valid input returns 200 with required data.',
       ],
     },
     {

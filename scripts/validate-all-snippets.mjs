@@ -1,8 +1,32 @@
 // scripts/validate-all-snippets.mjs
 // Rigorous automated validation of every API endpoint, code snippet, assertion, and Rule 19 compliance
 import http from 'http';
+import { spawn } from 'child_process';
 
 const MOCK_URL = 'http://127.0.0.1:5050';
+
+async function ensureServerRunning() {
+  const isUp = await new Promise((resolve) => {
+    const req = http.get('http://127.0.0.1:5050/health', (res) => resolve(res.statusCode === 200));
+    req.on('error', () => resolve(false));
+    req.setTimeout(400, () => { req.destroy(); resolve(false); });
+  });
+  if (isUp) return;
+  const child = spawn(process.execPath, ['scripts/mock-api-server.mjs'], {
+    detached: true,
+    stdio: 'ignore'
+  });
+  child.unref();
+  for (let i = 0; i < 30; i++) {
+    await new Promise((r) => setTimeout(r, 100));
+    const ready = await new Promise((resolve) => {
+      const req = http.get('http://127.0.0.1:5050/health', (res) => resolve(res.statusCode === 200));
+      req.on('error', () => resolve(false));
+      req.setTimeout(300, () => { req.destroy(); resolve(false); });
+    });
+    if (ready) return;
+  }
+}
 
 function request(method, path, body = null, headers = {}) {
   return new Promise((resolve, reject) => {
@@ -44,6 +68,7 @@ function request(method, path, body = null, headers = {}) {
 }
 
 async function runValidation() {
+  await ensureServerRunning();
   console.log('=== STARTING RIGOROUS COMPREHENSIVE VALIDATION ===\n');
   let passed = 0;
   let total = 0;
@@ -77,6 +102,15 @@ async function runValidation() {
 
   const status500 = await request('GET', '/status/500');
   assert(status500.status === 500 && status500.body.error === 'Internal Server Error', 'Status 500 returns 500 error');
+
+  // Shuttle checks (Chapter 2 & 3)
+  const shuttleMissing = await request('GET', '/v1/campus/shuttle/coordinates');
+  assert(shuttleMissing.status === 400, 'Shuttle omitted route returns 400 Bad Request');
+  assert(shuttleMissing.body.error === 'route parameter is required', 'Shuttle 400 error message guides client');
+
+  const shuttleValid = await request('GET', '/v1/campus/shuttle/coordinates?route=campus_loop_north');
+  assert(shuttleValid.status === 200, 'Shuttle valid route returns 200 OK');
+  assert(shuttleValid.body.status === 'in_transit' && typeof shuttleValid.body.coordinates.latitude === 'number', 'Shuttle 200 returns valid numeric coordinates');
 
   // --- 2. REST LIBRARY CRUD WORKFLOW (Chapters 4, 5, 6, 7) ---
   console.log('\n--- Checking Chapters 4, 5, 6, 7 REST Library Workflow ---');

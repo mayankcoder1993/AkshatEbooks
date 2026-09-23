@@ -2,7 +2,7 @@ export const CURRICULUM_ROADMAP = [
   {
     phase: 'Mission 1',
     title: 'The Core Protocol and Campus Cloud Integration',
-    description: 'Resolving the campus interoperability crisis, inspecting the invisible network wire, building a minimal five line Express server, finding and fixing backend crashes, and automating dual assertions in Postman.',
+    description: 'Resolving the campus interoperability crisis, inspecting the invisible network wire, building a minimal Express server, finding and fixing backend crashes, and automating dual assertions in Postman.',
     modules: [
       {
         id: 'understanding-apis',
@@ -11,11 +11,11 @@ export const CURRICULUM_ROADMAP = [
           'What is an API? The Campus Interoperability Crisis',
           'The Restaurant Analogy: Customer, Waiter, and Kitchen Backend',
           'Building a Minimal In Memory API Server in Express (server.js)',
-          'Testing the Five Operations: GET, POST, PUT, PATCH, and DELETE',
+          'Testing the Five Operations: POST, GET, PUT, PATCH, and DELETE',
           'Protocol Tasting: Comparing REST, SOAP, and GraphQL on the Same Question',
           'Live Exploration: Public GitHub and Reverse Geocoding Endpoints',
         ],
-        assessment: 'API Fundamentals and Five Line Server Verification',
+        assessment: 'API Fundamentals and Minimal Server Verification',
       },
       {
         id: 'rest-crud-status',

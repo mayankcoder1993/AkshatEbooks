@@ -2,6 +2,7 @@ import restaurantImg from '../assets/api-concept-restaurant.jpg'
 import bridgeImg from '../assets/frontend-backend-api-bridge.jpg'
 import pyramidImg from '../assets/testing-pyramid-focus.jpg'
 import matrixImg from '../assets/api-architectures-matrix.jpg'
+import anatomyImg from '../assets/http-wire-anatomy.jpg'
 
 export const lesson01 = {
   id: 'understanding-apis',
@@ -13,9 +14,9 @@ export const lesson01 = {
   blocks: [
     {
       type: 'chapter-opener',
-      achieve: 'Build and run a minimal API server from scratch and inspect both sides of every core HTTP exchange.',
-      how: 'Writing a 5 line Express server, executing GET, POST, PUT, PATCH, and DELETE, and comparing REST, SOAP, and GraphQL using the same book inquiry.',
-      carry: 'The assembled runnable server.js file and the mental model of an HTTP request and response pair.'
+      achieve: 'Build and run a minimal API server from scratch and verify every core HTTP operation over the wire.',
+      how: 'Assembling a runnable Express server step by step, executing POST, GET, PUT, PATCH, and DELETE, and comparing REST, SOAP, and GraphQL using the same book inquiry.',
+      carry: 'The assembled runnable server.js file and the foundational mental model of an HTTP request and response pair.'
     },
     {
       type: 'heading',
@@ -23,7 +24,7 @@ export const lesson01 = {
     },
     {
       type: 'paragraph',
-      text: 'Every day you tap buttons on your smartphone: you order food on a delivery app, check the weather forecast, or book a cab. But your phone does not store the global weather database, and it certainly does not store the restaurant kitchen inventory. Your phone is a **client**, and the powerful computer holding the data miles away in a data center is the **server**.',
+      text: 'Every day you tap buttons on your smartphone: you order food on a delivery app, check the weather forecast, or book a cab. But your phone does not store the global weather database, and it certainly does not store the restaurant kitchen inventory. Your phone is a **client**, and the computer holding the data miles away in a data center is the **server**.',
     },
     {
       type: 'paragraph',
@@ -32,229 +33,153 @@ export const lesson01 = {
     {
       type: 'image',
       layout: 'stacked',
-      badge: 'FIRST PRINCIPLES MENTAL MODEL',
+      badge: 'CLIENT SERVER ARCHITECTURE',
       title: 'The Restaurant Analogy: Customer, Waiter, and Kitchen Backend',
       text: 'Imagine dining in a restaurant. You are the customer sitting at the table. The kitchen is the backend system with all the ingredients and cooking equipment. You cannot walk into the kitchen and cook food yourself. Instead, the waiter takes your order, brings it to the chef, and returns with your meal.',
       src: restaurantImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-concept-restaurant.jpg',
       w: 1408,
       h: 768,
-      alt: 'The friendly restaurant dining room illustrating client, API waiter, and kitchen backend database.',
-      caption: 'The Digital Dining Room: The customer is the client, the waiter is the API, and the kitchen is the server.',
+      alt: 'Illustrated modern restaurant analogy showing Customer at table as Client, Waiter carrying order notepad as API Messenger, and Kitchen Chef as Backend Server.',
+      caption: 'The restaurant mental model: The client asks under agreed rules, and the server answers.',
       points: [
-        'The Customer: Represents the client, such as a web browser or mobile phone app.',
-        'The Waiter: Represents the API messenger carrying requests and delivering responses.',
-        'The Kitchen: Represents backend microservices and databases storing business records securely.',
+        'The Customer (Client App): Sits in the dining room, browses the menu, and decides what data to request.',
+        'The Waiter (API Messenger): Delivers your order to the kitchen and brings back your prepared food.',
+        'The Kitchen (Backend Server): Stores all raw ingredients and processes business logic securely behind the counter.',
       ],
     },
     {
       type: 'definition',
-      term: 'Application Programming Interface (API)',
+      term: 'API (Application Programming Interface)',
       text: 'A structured set of rules and protocols that lets two software applications communicate and exchange data securely without exposing internal database credentials or implementation details.',
-      example: 'A weather app on your phone calls a weather service API to retrieve the current temperature in your city.',
-    },
-    {
-      type: 'heading',
-      text: 'Step 2: The Five Universal HTTP Operations',
+      example: 'A mobile library app requesting a list of available textbooks from the campus catalog server.'
     },
     {
       type: 'paragraph',
-      text: 'Just like dining at a restaurant involves different actions: reading the menu, placing an order, changing a dish, or cancelling an item: communicating with a web server relies on standard verbs called **HTTP Methods**.',
+      text: 'Before we touch network protocols, look at how data travels. In modern web APIs, data is represented in **JSON** (JavaScript Object Notation). A single record is wrapped in curly braces like {"id": 1, "title": "Clean Architecture", "author": "Robert Martin"}. When a server holds multiple records, it groups them inside square brackets as a list: [{ ... }]. Now let us build a real program that serves this data.',
     },
     {
-      type: 'comparison',
-      title: 'The Five Core HTTP Operations and Their Everyday Meanings',
-      columns: ['HTTP Verb', 'Everyday Action', 'Restaurant Analogy', 'Database Action', 'Wire Effect'],
-      rows: [
-        ['GET', 'Read or Retrieve', 'Reading the printed menu or checking table status', 'SELECT', 'Fetches records without modifying server state'],
-        ['POST', 'Create New Record', 'Placing a brand new order with the chef', 'INSERT', 'Creates a fresh resource and assigns an ID'],
-        ['PUT', 'Completely Replace', 'Replacing your entire meal order with a different set', 'UPDATE (Full)', 'Replaces the entire record with the new payload'],
-        ['PATCH', 'Partially Modify', 'Asking the waiter for extra spicy sauce on your second dish', 'UPDATE (Partial)', 'Updates only the specific fields provided in the body'],
-        ['DELETE', 'Remove Record', 'Cancelling a dish before preparation starts', 'DELETE', 'Permanently removes the target record from the database'],
+      type: 'heading',
+      text: 'Step 2: Create and Start Your API Server',
+    },
+    {
+      type: 'paragraph',
+      text: 'Many beginners assume an API requires massive cloud infrastructure. In reality, a web API is simply a small computer program running on your machine, listening on a network port, and replying when contacted. We will build our server using **Node.js** and the lightweight **Express** web library.',
+    },
+    {
+      type: 'steps',
+      items: [
+        'Verify Node.js: Open your terminal and run node -v. Any modern LTS version (such as Node 18 or Node 20) is ready to go.',
+        'Create a Project Folder: Run mkdir campus_api, then cd campus_api.',
+        'Initialize and Install Express: Run npm init -y, then npm install express. This installs the web framework locally.',
+        'Create server.js: Create a new file named server.js in your campus_api directory and paste the complete starter code shown below.',
+      ],
+    },
+    {
+      type: 'code',
+      filename: 'server.js',
+      lines: [
+        '// server.js: Minimal API Server Starter',
+        'const express = require("express");',
+        'const app = express();',
+        '',
+        '// Middleware to parse incoming JSON payloads',
+        'app.use(express.json());',
+        '',
+        '// In memory textbook records and monotonically advancing counter',
+        'let books = [',
+        '  { id: 1, title: "Clean Architecture", author: "Robert Martin" }',
+        '];',
+        'let nextId = 2;',
+        '',
+        '// =========================================',
+        '// ROUTE HANDLERS WILL BE ADDED HERE',
+        '// =========================================',
+        '',
+        '// Start the server listening on local port 3000',
+        'app.listen(3000, () => {',
+        '  console.log("Book catalog server listening on http://localhost:3000");',
+        '});',
       ],
     },
     {
       type: 'callout',
       variant: 'note',
-      title: 'The Crucial Architectural Distinction: Safe vs Idempotent',
+      title: 'Understanding Every Line of the Starter Program',
       paragraphs: [
-        '• Safe Operations: A request is safe if it does not alter server state. GET is safe because reading a webpage a hundred times changes nothing in the database.',
-        '• Idempotent Operations: A request is idempotent if repeating it multiple times produces the identical server state as executing it once. PUT and DELETE are idempotent. Replacing a record with name "Alice" ten times leaves the name as "Alice". Deleting record ID 42 once removes it; repeating the command leaves it removed.',
-        '• Neither Safe Nor Idempotent: POST is neither safe nor idempotent. Submitting a payment POST request three times will charge the customer credit card three times!',
+        '• const express = require("express"): Imports the Express library to create web routes.',
+        '• app.use(express.json()): Enables the server to understand incoming JSON request bodies.',
+        '• let books = [...]: Holds our textbook inventory in system RAM. Because it is in memory, stopping the server resets the catalog back to this initial record.',
+        '• let nextId = 2: A monotonically advancing counter ensuring every new book receives an incremented, unique ID that never collides with or reuses old IDs.',
+        '• app.listen(3000): Opens local communication port 3000 and waits for incoming network connections.',
       ],
     },
     {
-      type: 'heading',
-      text: 'Step 3: Anatomy of an HTTP Message: Both Sides of the Wire',
-    },
-    {
       type: 'paragraph',
-      text: 'When your computer talks to a server over the network, it sends an **HTTP Request** packet and receives an **HTTP Response** packet. To understand how APIs work, you must see both sides of this exchange. Here is a complete GET request and reply targeting our future server address at http://localhost:3000/books:',
+      text: 'Now start the server from your terminal. Run the following command:',
     },
     {
-      type: 'chunked-code',
-      badge: 'HTTP EXCHANGE ANATOMY',
-      title: 'Deconstructing Both Sides of the Wire Exchange',
-      intro: 'Study each part of the outgoing request and the incoming response:',
-      chunks: [
-        {
-          label: 'Part 1: The Outgoing Request Line',
-          filename: 'request_line.http',
-          code: 'GET /books HTTP/1.1\nHost: localhost:3000',
-          title: 'The Action and Address',
-          explanation: 'Specifies the HTTP method (GET) telling the server to read records, followed by the resource path (/books) and target host (localhost:3000).',
-          keyTakeaway: 'The URL identifies the target resource; the HTTP verb identifies the intended operation.'
-        },
-        {
-          label: 'Part 2: The Outgoing Request Headers',
-          filename: 'request_headers.http',
-          code: 'Accept: application/json\nUser-Agent: CampusClient/1.0',
-          title: 'Client Envelope Metadata',
-          explanation: 'Headers act like the outside of a postal envelope: Accept informs the server that our client wants data formatted as JSON text.',
-          keyTakeaway: 'Headers provide context and metadata without polluting the payload data.'
-        },
-        {
-          label: 'Part 3: The Incoming Response Status Line and Headers',
-          filename: 'response_headers.http',
-          code: 'HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\nContent-Length: 68',
-          title: 'Server Acknowledgment and Type',
-          explanation: 'The server replies with HTTP status code 200 OK, followed by headers stating that the returned body is UTF-8 encoded JSON text.',
-          keyTakeaway: 'The status code immediately informs the client whether the operation succeeded or failed.'
-        },
-        {
-          label: 'Part 4: The Incoming Response Body',
-          filename: 'response_body.json',
-          code: '[\n  {\n    "id": 1,\n    "title": "Clean Architecture",\n    "author": "Robert Martin"\n  }\n]',
-          title: 'The Actual Data Content',
-          explanation: 'The payload delivered back to the client, formatted as clean, structured JSON containing the requested book records.',
-          keyTakeaway: 'The client deserializes this JSON text into native programming objects for display or processing.'
-        }
-      ]
-    },
-    {
-      type: 'heading',
-      text: 'Step 4: Developing a Minimal API Server and Testing Every Operation',
-    },
-    {
-      type: 'paragraph',
-      text: 'Many beginners assume an API is a mysterious black box requiring complex enterprise infrastructure. In reality, a modern web API is simply a small script listening on a network port, maintaining records in memory, and responding to HTTP verbs. Let us build our own minimal API server from scratch in Node.js and Express, and then systematically execute every core HTTP operation against it.',
-    },
-    {
-      type: 'chunked-code',
-      badge: 'SERVER BLUEPRINT',
-      title: 'Building Our Minimal In Memory API Server (server.js)',
-      intro: 'Here is the entire backend web service. Notice how few lines it takes to build a fully functional REST API:',
-      chunks: [
-        {
-          label: 'Chunk 1: Express App and JSON Parser Middleware',
-          filename: 'setup.js',
-          code: 'const express = require("express");\nconst app = express();\napp.use(express.json());',
-          title: 'Application Bootstrap',
-          explanation: 'Imports Express, initializes the application instance, and mounts the JSON middleware to automatically parse incoming request bodies.',
-          keyTakeaway: 'Without express.json(), the server cannot read incoming JSON payload bodies.'
-        },
-        {
-          label: 'Chunk 2: The In Memory Data Store',
-          filename: 'database.js',
-          code: 'let books = [\n  { id: 1, title: "Clean Architecture", author: "Robert Martin" }\n];',
-          title: 'The Database Array in RAM',
-          explanation: 'Before connecting enterprise SQL or NoSQL databases, APIs store data in simple memory collections. This array acts as our live database table.',
-          keyTakeaway: 'Every HTTP mutation alters this array in the computer memory.'
-        },
-        {
-          label: 'Chunk 3: The Route Handlers and HTTP Verbs',
-          filename: 'routes.js',
-          code: 'app.get("/books", (req, res) => res.json(books));\napp.post("/books", (req, res) => {\n  const newBook = { id: books.length + 1, ...req.body };\n  books.push(newBook);\n  res.status(201).json(newBook);\n});\napp.put("/books/:id", (req, res) => {\n  const idx = books.findIndex(b => b.id == req.params.id);\n  if (idx === -1) return res.status(404).json({ error: "Book not found" });\n  books[idx] = { id: Number(req.params.id), ...req.body };\n  res.json(books[idx]);\n});\napp.patch("/books/:id", (req, res) => {\n  const book = books.find(b => b.id == req.params.id);\n  if (!book) return res.status(404).json({ error: "Book not found" });\n  Object.assign(book, req.body);\n  res.json(book);\n});\napp.delete("/books/:id", (req, res) => {\n  books = books.filter(b => b.id != req.params.id);\n  res.json({ msg: "removed", id: Number(req.params.id) });\n});',
-          title: 'Mapping Verbs to Actions',
-          explanation: 'Each method (get, post, put, patch, delete) is bound to an endpoint path. When a request arrives, Express routes it to the matching function.',
-          keyTakeaway: 'The HTTP method tells the server which function to execute on the resource.'
-        },
-        {
-          label: 'Chunk 4: Starting the Network Port Listener',
-          filename: 'listen.js',
-          code: 'app.listen(3000, () => console.log("Campus API listening on port 3000"));',
-          title: 'Opening the Network Socket',
-          explanation: 'Tells the operating system to bind to TCP port 3000 and listen for incoming HTTP packets over the network.',
-          keyTakeaway: 'Once listening, any HTTP client can dispatch requests to http://localhost:3000.'
-        }
-      ]
-    },
-    {
-      type: 'paragraph',
-      text: 'Now that our server code is running, let us step through each core operation one by one. For each operation, study the server code handler, predict the outcome, and observe the wire transmission.',
-    },
-    {
-      type: 'heading',
-      text: 'Operation 1: Reading Records with GET /books',
-    },
-    {
-      type: 'paragraph',
-      text: 'The client wants to view all books currently stored in the library. The backend route handler is `app.get("/books", (req, res) => res.json(books));`. Because GET is a safe, read only operation, it does not alter server memory in any way.',
-    },
-    {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'When we dispatch an HTTP GET request to http://localhost:3000/books on a newly started server, what status code and payload structure do you expect?',
-      options: [
-        '200 OK: Returns a JSON array containing the single initial book stored in memory',
-        '201 Created: Generates a brand new book record on the server database',
-        '404 Not Found: The books collection is completely empty on startup',
-        '500 Server Error: In memory arrays require SQL drivers before they can be queried'
+      type: 'terminal',
+      command: 'node server.js',
+      lines: [
+        'Book catalog server listening on http://localhost:3000',
       ],
-      answerIndex: 0,
-      revealTitle: 'Wire Response for GET /books',
-      explanation: 'The server reads the current books array from RAM, serializes it to JSON text, and responds with HTTP status 200 OK containing our initial record!'
-    },
-    {
-      type: 'api-inspector',
-      title: 'Wire Capture: GET /books (Read All Records)',
-      method: 'GET',
-      url: 'http://localhost:3000/books',
-      status: '200 OK',
-      time: '18 ms',
-      size: '142 B',
-      responseBody: [
-        {
-          id: 1,
-          title: 'Clean Architecture',
-          author: 'Robert Martin'
-        }
-      ]
     },
     {
       type: 'callout',
-      variant: 'note',
-      title: 'Server State Transition: RAM After GET',
+      variant: 'tip',
+      title: 'What Localhost and Port 3000 Mean',
       paragraphs: [
-        'Server RAM state: The books array still contains exactly 1 record. Total records in memory: 1.',
-        'Architectural takeaway: GET is safe and idempotent. You can execute this GET request ten thousand times, and the server state will remain completely unchanged.',
+        '• localhost: Refers to "this computer". It is the universal network loopback address allowing your machine to talk to programs running on itself.',
+        '• Port 3000: Think of your computer as a large apartment building. The IP address or localhost is the building address, and port 3000 is the specific apartment door where our book server lives.',
+        '• Stopping and Restarting: Whenever you add new code handlers to server.js, press Ctrl+C in your terminal to stop the running program, and run node server.js again to load your updates.',
       ],
     },
     {
       type: 'heading',
-      text: 'Operation 2: Creating a Record with POST /books',
+      text: 'Step 3: Operation 1: Creating a Record with POST /books',
     },
     {
       type: 'paragraph',
-      text: 'Now we want to add a new book to our collection. The client dispatches an HTTP POST verb with a JSON payload in the request body. The server handler `app.post("/books", ...)` generates the next ID, pushes the new object into the memory array, and returns HTTP 201 Created.',
+      text: 'Now let us add a new textbook to our catalog. In REST architecture, creating a new resource is performed using the HTTP **POST** method.',
+    },
+    {
+      type: 'chunked-code',
+      badge: 'ADD ROUTE HANDLER',
+      title: 'Adding the POST Handler to server.js',
+      intro: 'Insert this route handler into server.js directly above app.listen:',
+      chunks: [
+        {
+          label: 'The Creation Handler',
+          filename: 'post-books-handler.js',
+          code: 'app.post("/books", (req, res) => {\n  const newBook = { id: nextId++, title: req.body.title, author: req.body.author };\n  books.push(newBook);\n  res.status(201).json(newBook);\n});',
+          title: 'Assigning ID and Appending to Memory',
+          explanation: 'Reads title and author from req.body, assigns nextId (which advances from 2 to 3), adds the object to the books array, and returns status 201 Created.',
+          keyTakeaway: 'HTTP status 201 Created explicitly confirms a new resource was created.'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'Save server.js, press Ctrl+C in your terminal, and restart the server with node server.js. Now open your API testing workbench (such as Postman) and configure your request inputs: Method is **POST**, URL is **http://localhost:3000/books**, Header is **Content-Type: application/json**, and Body is set to raw JSON: {"title": "The Pragmatic Programmer", "author": "David Thomas"}.',
     },
     {
       type: 'predict-output',
       badge: 'IMAGINE & PREDICT',
-      prompt: 'When we dispatch a POST request carrying a JSON body with title "The Pragmatic Programmer" and author "David Thomas", what status code and response payload will the server return?',
+      prompt: 'When you dispatch this POST request carrying the new textbook data, what status code and ID will the server return?',
       options: [
-        '201 Created: Returns the newly persisted book object with a newly assigned primary key ID of 2',
-        '200 OK: Returns all books previously stored in the database',
-        '400 Bad Request: Missing author enrollment credentials',
-        '304 Not Modified: The record already existed in client browser cache'
+        'HTTP status 201 Created with ID 2 and the newly created book object: { "id": 2, "title": "The Pragmatic Programmer", "author": "David Thomas" }',
+        'HTTP status 200 OK with the entire library array',
+        'HTTP status 400 Bad Request because ID was omitted from the request body',
+        'HTTP status 204 No Content'
       ],
       answerIndex: 0,
-      revealTitle: 'Wire Response for POST /books',
-      explanation: 'Success! The server accepted the payload, generated ID 2, appended it to the in memory array, and returned HTTP status 201 Created!'
+      revealTitle: 'Recorded Wire Response for POST /books',
+      explanation: 'Resource created! The server took nextId (2), attached it to the incoming title and author, pushed it into the array, incremented nextId to 3, and returned HTTP 201 Created.'
     },
     {
       type: 'api-inspector',
-      title: 'Wire Capture: POST /books (Create New Record)',
+      title: 'Live Recorded Exchange: POST /books (Create New Record)',
       method: 'POST',
       url: 'http://localhost:3000/books',
       headers: {
@@ -266,183 +191,297 @@ export const lesson01 = {
       },
       status: '201 Created',
       time: '24 ms',
-      size: '178 B',
+      size: '76 B',
       responseBody: {
         id: 2,
         title: 'The Pragmatic Programmer',
         author: 'David Thomas'
-      }
+      },
+      sampleLabel: 'RECORDED WIRE CAPTURE'
     },
     {
       type: 'callout',
       variant: 'note',
-      title: 'Server State Transition: RAM After POST',
+      title: 'First Recovery Check: Connection Refused',
       paragraphs: [
-        'Server RAM state: The books array now contains 2 records (ID 1 and ID 2).',
-        'Architectural takeaway: POST is non idempotent. If you send this exact same POST request three times, you will create three distinct books with three unique IDs in memory!',
+        'If your API tool displays "Error: connect ECONNREFUSED 127.0.0.1:3000", do not panic! This message simply means no program is listening on port 3000.',
+        'Check your terminal window: did you forget to run node server.js? Make sure the terminal shows "Book catalog server listening" before sending requests.',
       ],
     },
     {
       type: 'heading',
-      text: 'Operation 3: Replacing a Complete Record with PUT /books/:id',
+      text: 'Step 4: Operation 2: Reading Records with GET /books',
     },
     {
       type: 'paragraph',
-      text: 'Suppose we need to update record 1 with an entirely new title and updated author name. In REST architecture, the HTTP PUT verb represents complete resource replacement. The URL path parameter `:id` indicates which record to target.',
+      text: 'Now let us verify what is stored in server memory based on the record we created in Step 3! In REST architecture, retrieving data without altering server state is performed using the HTTP **GET** method.',
+    },
+    {
+      type: 'chunked-code',
+      badge: 'ADD ROUTE HANDLER',
+      title: 'Adding the GET Handler to server.js',
+      intro: 'Insert this small route handler into server.js below your POST handler:',
+      chunks: [
+        {
+          label: 'The Route Definition',
+          filename: 'get-books-handler.js',
+          code: 'app.get("/books", (req, res) => {\n  res.status(200).json(books);\n});',
+          title: 'Replying with the Book List',
+          explanation: 'When a client asks for GET /books, the server responds with HTTP status 200 OK and transmits the books array as JSON.',
+          keyTakeaway: 'res.status(200).json(...) sets the success status code and formats data as JSON.'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'Save server.js, press Ctrl+C in your terminal, and restart the server with node server.js. Now open your API testing workbench and configure your request inputs: Method is **GET**, URL is **http://localhost:3000/books**, and Body is left completely empty.',
     },
     {
       type: 'predict-output',
       badge: 'IMAGINE & PREDICT',
-      prompt: 'When we send an HTTP PUT request to http://localhost:3000/books/1 with a full replacement payload, how does the server process the update?',
+      prompt: 'When you dispatch this GET request to http://localhost:3000/books based on the book created in Step 3, what status code, payload structure, and book count do you expect to see?',
       options: [
-        '200 OK: Completely replaces the existing record at ID 1 with the new attributes and returns the updated object',
-        '201 Created: Appends a third book to the memory array',
-        '405 Method Not Allowed: Existing records in memory cannot be updated',
-        '500 Server Error: Overwriting memory is strictly prohibited by Express'
+        'HTTP status 200 OK with a JSON array containing both the initial book and the new book created in Step 3: [{ id: 1, title: "Clean Architecture", author: "Robert Martin" }, { id: 2, title: "The Pragmatic Programmer", author: "David Thomas" }]',
+        'HTTP status 201 Created with a single book object',
+        'HTTP status 404 Not Found because the server is empty',
+        'HTTP status 500 Server Error because database connection was not established'
       ],
       answerIndex: 0,
-      revealTitle: 'Wire Response for PUT /books/1',
-      explanation: 'The server located the existing record at index 0 matching ID 1, replaced its contents entirely with the incoming payload, and returned HTTP status 200 OK!'
+      revealTitle: 'Recorded Wire Response for GET /books',
+      explanation: 'Success confirmed! The server finds the books array in RAM, wraps it in status 200 OK, and returns both records inside an array bracket, directly verifying the record created in Step 3!'
     },
     {
       type: 'api-inspector',
-      title: 'Wire Capture: PUT /books/1 (Full Record Replacement)',
+      title: 'Live Recorded Exchange: GET /books (Read All Records)',
+      method: 'GET',
+      url: 'http://localhost:3000/books',
+      status: '200 OK',
+      time: '18 ms',
+      size: '128 B',
+      responseBody: [
+        {
+          id: 1,
+          title: 'Clean Architecture',
+          author: 'Robert Martin'
+        },
+        {
+          id: 2,
+          title: 'The Pragmatic Programmer',
+          author: 'David Thomas'
+        }
+      ],
+      sampleLabel: 'RECORDED WIRE CAPTURE'
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Objects versus Lists: Spotting the Data Structure Shift',
+      paragraphs: [
+        'Notice the structural difference: when you sent POST /books in Step 3, you transmitted a single JSON object wrapped in curly braces { ... } because you were creating one individual record.',
+        'When you dispatched GET /books in Step 4, the server returned an array [ ... ] holding both Book 1 and Book 2! An array groups multiple items; an object defines a single item.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 5: PUT, PATCH, and DELETE: Complete Replacement, Delta, and Removal',
+    },
+    {
+      type: 'paragraph',
+      text: 'Now let us master the remaining three operations: PUT, PATCH, and DELETE. Each operation solves a distinct data modification challenge.',
+    },
+    {
+      type: 'heading',
+      text: 'Operation 3: Full Record Replacement with PUT /books/:id',
+    },
+    {
+      type: 'paragraph',
+      text: 'Suppose we need to update record 1 with a new title and author. In REST architecture, **PUT** represents complete resource replacement. The :id in the URL path is a parameter specifying which record to replace:',
+    },
+    {
+      type: 'code',
+      filename: 'put-handler.js',
+      lines: [
+        '// Full replacement (PUT /books/:id)',
+        'app.put("/books/:id", (req, res) => {',
+        '  const id = Number(req.params.id);',
+        '  const index = books.findIndex(b => b.id === id);',
+        '  if (index === -1) return res.status(404).json({ error: "Book not found" });',
+        '  books[index] = { id: id, title: req.body.title, author: req.body.author };',
+        '  res.status(200).json(books[index]);',
+        '});',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Notice that PUT replaces the entire object. If a client sends a PUT payload omitting the author, the author property becomes undefined! Let us replace Book 1 by sending PUT to http://localhost:3000/books/1 with payload: {"title": "Clean Code", "author": "Robert Martin"}:',
+    },
+    {
+      type: 'api-inspector',
+      title: 'Live Recorded Exchange: PUT /books/1 (Full Record Replacement)',
       method: 'PUT',
       url: 'http://localhost:3000/books/1',
       headers: {
         'Content-Type': 'application/json'
       },
       requestBody: {
-        title: 'Clean Code: Refactored Edition',
-        author: 'Robert C. Martin'
+        title: 'Clean Code',
+        author: 'Robert Martin'
       },
       status: '200 OK',
-      time: '20 ms',
-      size: '182 B',
+      time: '21 ms',
+      size: '56 B',
       responseBody: {
         id: 1,
-        title: 'Clean Code: Refactored Edition',
-        author: 'Robert C. Martin'
-      }
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Server State Transition: RAM After PUT',
-      paragraphs: [
-        'Server RAM state: Record 1 was completely overwritten in RAM. Total records in memory: still exactly 2 (ID 1 and ID 2).',
-        'Architectural takeaway: PUT is idempotent. Sending this exact PUT request once or one hundred times produces the exact same server memory state.',
-      ],
+        title: 'Clean Code',
+        author: 'Robert Martin'
+      },
+      sampleLabel: 'RECORDED WIRE CAPTURE'
     },
     {
       type: 'heading',
-      text: 'Operation 4: Partially Modifying a Record with PATCH /books/:id',
+      text: 'Operation 4: Partial Modification with PATCH /books/:id',
     },
     {
       type: 'paragraph',
-      text: 'What if you only want to update one single attribute: such as changing the book title: without touching the author? If you used PUT and omitted the author, the author field would be wiped out. This is where the HTTP PATCH verb is required: PATCH represents a partial delta update.',
+      text: 'What if you only want to change the title of Book 1 without touching the author? With PUT, omitting the author wiped it out. This is why **PATCH** exists: PATCH applies a partial delta modification, updating only the specific fields supplied:',
     },
     {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'If we send a PATCH request to /books/1 containing only { "title": "Clean Architecture: Collector Edition" } without passing the author field, what happens to the author in server memory?',
-      options: [
-        'The author is preserved: Only the title field is modified while the existing author remains untouched in RAM',
-        'The author is erased: Any field omitted in a PATCH request is permanently set to null',
-        'The server crashes: PATCH requires every single schema field to be provided',
-        'A new record is created: PATCH behaves identically to POST'
+      type: 'code',
+      filename: 'patch-handler.js',
+      lines: [
+        '// Partial modification (PATCH /books/:id)',
+        'app.patch("/books/:id", (req, res) => {',
+        '  const id = Number(req.params.id);',
+        '  const book = books.find(b => b.id === id);',
+        '  if (!book) return res.status(404).json({ error: "Book not found" });',
+        '  if (req.body.title !== undefined) book.title = req.body.title;',
+        '  if (req.body.author !== undefined) book.author = req.body.author;',
+        '  res.status(200).json(book);',
+        '});',
       ],
-      answerIndex: 0,
-      revealTitle: 'Wire Response for PATCH /books/1',
-      explanation: 'The author was preserved! The server handler used Object.assign(book, req.body) to apply only the new title property, leaving the existing author intact.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Let us send a PATCH request to http://localhost:3000/books/1 with only the title: {"title": "Clean Craftsmanship"}. Notice the author is retained intact in server memory:',
     },
     {
       type: 'api-inspector',
-      title: 'Wire Capture: PATCH /books/1 (Partial Delta Update)',
+      title: 'Live Recorded Exchange: PATCH /books/1 (Partial Delta Update)',
       method: 'PATCH',
       url: 'http://localhost:3000/books/1',
       headers: {
         'Content-Type': 'application/json'
       },
       requestBody: {
-        title: 'Clean Architecture: Collector Edition'
+        title: 'Clean Craftsmanship'
       },
       status: '200 OK',
       time: '19 ms',
-      size: '186 B',
+      size: '64 B',
       responseBody: {
         id: 1,
-        title: 'Clean Architecture: Collector Edition',
-        author: 'Robert C. Martin'
-      }
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Server State Transition: RAM After PATCH',
-      paragraphs: [
-        'Server RAM state: Record 1 has updated title while retaining its existing author. Total records in memory: still 2.',
-        'Architectural takeaway: Use PUT when replacing an entire entity; use PATCH when updating a subset of fields without touching the rest.',
-      ],
+        title: 'Clean Craftsmanship',
+        author: 'Robert Martin'
+      },
+      sampleLabel: 'RECORDED WIRE CAPTURE'
     },
     {
       type: 'heading',
-      text: 'Operation 5: Deleting a Record with DELETE /books/:id',
+      text: 'Operation 5: Removing a Record with DELETE /books/:id',
     },
     {
       type: 'paragraph',
-      text: 'Finally, we want to purge a textbook from our library. The client sends an HTTP DELETE verb with the target ID in the path parameter. The server handler `app.delete("/books/:id", ...)` filters the memory array to remove the matching record.',
+      text: 'Finally, we want to remove a textbook from our catalog. In REST architecture, the HTTP **DELETE** verb purges the targeted resource:',
     },
     {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'When we dispatch DELETE /books/1 to remove record 1, and then immediately dispatch GET /books to inspect the catalog, what will the books array contain?',
-      options: [
-        'Only ID 2 remains: Record 1 was purged from server memory, leaving a single book in the array',
-        'Both records remain: DELETE only marks records as hidden in client cookies',
-        'The array is completely empty: DELETE purges the entire database collection',
-        'The server crashes: Deleting memory requires an operating system reboot'
+      type: 'code',
+      filename: 'delete-handler.js',
+      lines: [
+        '// Delete a book (DELETE /books/:id)',
+        'app.delete("/books/:id", (req, res) => {',
+        '  const id = Number(req.params.id);',
+        '  const index = books.findIndex(b => b.id === id);',
+        '  if (index === -1) return res.status(404).json({ error: "Book not found" });',
+        '  books.splice(index, 1);',
+        '  res.status(200).json({ deleted: id });',
+        '});',
       ],
-      answerIndex: 0,
-      revealTitle: 'Wire Response for DELETE /books/1 and Verification GET',
-      explanation: 'Record 1 is gone! The server responded to DELETE with 200 OK, and our follow up GET verification confirms only ID 2 remains in memory.'
+    },
+    {
+      type: 'paragraph',
+      text: 'Let us dispatch DELETE to http://localhost:3000/books/1. The server purges the record and confirms with {"deleted": 1}:',
     },
     {
       type: 'api-inspector',
-      title: 'Wire Capture: DELETE /books/1 (Remove Record from Memory)',
+      title: 'Live Recorded Exchange: DELETE /books/1 (Remove Record)',
       method: 'DELETE',
       url: 'http://localhost:3000/books/1',
       status: '200 OK',
-      time: '16 ms',
-      size: '124 B',
+      time: '15 ms',
+      size: '15 B',
       responseBody: {
-        msg: 'removed',
-        id: 1
-      }
+        deleted: 1
+      },
+      sampleLabel: 'RECORDED WIRE CAPTURE'
+    },
+    {
+      type: 'paragraph',
+      text: 'Now let us run a follow up GET /books request to verify the server data state after deletion:',
     },
     {
       type: 'api-inspector',
-      title: 'Wire Capture: Verification GET /books (Proving Deletion)',
+      title: 'Live Recorded Exchange: Verification GET /books (Proving Deletion)',
       method: 'GET',
       url: 'http://localhost:3000/books',
       status: '200 OK',
-      time: '15 ms',
-      size: '148 B',
+      time: '14 ms',
+      size: '78 B',
       responseBody: [
         {
           id: 2,
           title: 'The Pragmatic Programmer',
           author: 'David Thomas'
         }
-      ]
+      ],
+      sampleLabel: 'RECORDED WIRE CAPTURE'
     },
     {
       type: 'callout',
       variant: 'note',
-      title: 'Server State Transition: RAM After DELETE',
+      title: 'Monotonic ID Protection: Why Next Book Gets ID 3',
       paragraphs: [
-        'Server RAM state: Record 1 has been permanently purged. The books array now holds exactly 1 record (ID 2).',
-        'Architectural takeaway: We have completed the entire CRUD lifecycle (Create, Read, Update, Delete) against our own API server using standardized HTTP methods!',
+        'Notice that Book 1 was deleted, leaving only Book 2 in the catalog.',
+        'If you now execute POST /books to add a third book, what ID will it receive? Because our server relies on nextId (which is now 3), the new record is assigned ID 3.',
+        'It does NOT reuse ID 1! Reusing old IDs is a dangerous anti pattern that corrupts historical audit logs and foreign keys in relational databases.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'The Five Operations Compared: Safe and Idempotent Behaviors',
+    },
+    {
+      type: 'paragraph',
+      text: 'Now that you have executed all five operations with your own hands, study how their behaviors compare. In API engineering, operations are classified along two core dimensions: **Safe** and **Idempotent**:',
+    },
+    {
+      type: 'comparison',
+      title: 'The Five Universal HTTP Operations',
+      columns: ['HTTP Method', 'Everyday Purpose', 'Payload Body?', 'Typical Status', 'Safe?', 'Idempotent?'],
+      rows: [
+        ['GET', 'Read records without modifying state', 'No body sent', '200 OK', 'Yes (Read Only)', 'Yes'],
+        ['POST', 'Create a new resource', 'Requires JSON body', '201 Created', 'No (Creates state)', 'No (Repeated POST creates duplicates)'],
+        ['PUT', 'Completely replace target resource', 'Requires full body', '200 OK or 201', 'No (Modifies state)', 'Yes (Repeated PUT yields identical state)'],
+        ['PATCH', 'Partially update selected fields', 'Requires partial body', '200 OK', 'No (Modifies state)', 'Usually Yes (when setting values)'],
+        ['DELETE', 'Purge target resource', 'No body needed', '200 OK or 204', 'No (Deletes state)', 'Yes (Subsequent calls leave resource absent)'],
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Understanding Safe vs Idempotent from Your Real Executions',
+      paragraphs: [
+        '• Safe: Calling GET /books five times in a row never changes the books stored on the server. Safe methods are strictly read only.',
+        '• Idempotent: If you send DELETE /books/1 once, the book is deleted. If you send DELETE /books/1 again, the book is still absent from the catalog. The server state remains identical. In contrast, sending POST /books ten times creates ten distinct book records in memory, which is why POST is not idempotent.',
       ],
     },
     {
@@ -451,12 +490,13 @@ export const lesson01 = {
     },
     {
       type: 'paragraph',
-      text: 'Here is our complete minimal API server assembled into one self contained JavaScript file. Save this file as server.js and run it using Node.js:',
+      text: 'Here is our complete minimal API server with all five route handlers assembled into one file. Save this complete code as server.js in your project directory:',
     },
     {
       type: 'code',
       filename: 'server.js',
       lines: [
+        '// Complete Minimal API Server (server.js)',
         'const express = require("express");',
         'const app = express();',
         'app.use(express.json());',
@@ -464,124 +504,224 @@ export const lesson01 = {
         'let books = [',
         '  { id: 1, title: "Clean Architecture", author: "Robert Martin" }',
         '];',
+        'let nextId = 2;',
         '',
-        'app.get("/books", (req, res) => res.json(books));',
+        '// 1. GET /books: Read all books',
+        'app.get("/books", (req, res) => {',
+        '  res.status(200).json(books);',
+        '});',
         '',
+        '// 2. POST /books: Create a new book',
         'app.post("/books", (req, res) => {',
-        '  const newBook = { id: books.length + 1, ...req.body };',
+        '  const newBook = { id: nextId++, title: req.body.title, author: req.body.author };',
         '  books.push(newBook);',
         '  res.status(201).json(newBook);',
         '});',
         '',
+        '// 3. PUT /books/:id: Full resource replacement',
         'app.put("/books/:id", (req, res) => {',
-        '  const idx = books.findIndex(b => b.id == req.params.id);',
-        '  if (idx === -1) return res.status(404).json({ error: "Book not found" });',
-        '  books[idx] = { id: Number(req.params.id), ...req.body };',
-        '  res.json(books[idx]);',
+        '  const id = Number(req.params.id);',
+        '  const index = books.findIndex(b => b.id === id);',
+        '  if (index === -1) return res.status(404).json({ error: "Book not found" });',
+        '  books[index] = { id: id, title: req.body.title, author: req.body.author };',
+        '  res.status(200).json(books[index]);',
         '});',
         '',
+        '// 4. PATCH /books/:id: Partial delta update',
         'app.patch("/books/:id", (req, res) => {',
-        '  const book = books.find(b => b.id == req.params.id);',
+        '  const id = Number(req.params.id);',
+        '  const book = books.find(b => b.id === id);',
         '  if (!book) return res.status(404).json({ error: "Book not found" });',
-        '  Object.assign(book, req.body);',
-        '  res.json(book);',
+        '  if (req.body.title !== undefined) book.title = req.body.title;',
+        '  if (req.body.author !== undefined) book.author = req.body.author;',
+        '  res.status(200).json(book);',
         '});',
         '',
+        '// 5. DELETE /books/:id: Purge a record',
         'app.delete("/books/:id", (req, res) => {',
-        '  books = books.filter(b => b.id != req.params.id);',
-        '  res.json({ msg: "removed", id: Number(req.params.id) });',
+        '  const id = Number(req.params.id);',
+        '  const index = books.findIndex(b => b.id === id);',
+        '  if (index === -1) return res.status(404).json({ error: "Book not found" });',
+        '  books.splice(index, 1);',
+        '  res.status(200).json({ deleted: id });',
         '});',
         '',
-        'app.listen(3000, () => console.log("Campus API listening on port 3000"));',
+        'app.listen(3000, () => {',
+        '  console.log("Book catalog server listening on http://localhost:3000");',
+        '});',
       ],
     },
     {
       type: 'terminal',
-      command: 'node server.js',
+      command: 'Complete Five Operation Execution Transcript',
       lines: [
         '$ node server.js',
-        'Campus API listening on port 3000',
+        'Book catalog server listening on http://localhost:3000',
+        '',
+        '# 1. Read catalog (GET /books)',
+        'HTTP/1.1 200 OK -> [{"id":1,"title":"Clean Architecture","author":"Robert Martin"}]',
+        '',
+        '# 2. Add second book (POST /books)',
+        'HTTP/1.1 201 Created -> {"id":2,"title":"The Pragmatic Programmer","author":"David Thomas"}',
+        '',
+        '# 3. Replace book 1 (PUT /books/1)',
+        'HTTP/1.1 200 OK -> {"id":1,"title":"Clean Code","author":"Robert Martin"}',
+        '',
+        '# 4. Update title only (PATCH /books/1)',
+        'HTTP/1.1 200 OK -> {"id":1,"title":"Clean Craftsmanship","author":"Robert Martin"}',
+        '',
+        '# 5. Delete book 1 (DELETE /books/1)',
+        'HTTP/1.1 200 OK -> {"deleted":1}',
+        '',
+        '# Verification GET: Only book 2 remains',
+        'HTTP/1.1 200 OK -> [{"id":2,"title":"The Pragmatic Programmer","author":"David Thomas"}]',
       ],
     },
     {
       type: 'heading',
-      text: 'Interactive Companion Sandbox: Experimenting with Custom Inputs',
+      text: 'Interactive Workbench: In Browser Simulation',
     },
     {
       type: 'paragraph',
-      text: 'For readers viewing this book inside our interactive application, you can also experiment dynamically with custom book titles, authors, and target IDs using the live workbench below:',
+      text: 'For readers reviewing this chapter inside our interactive digital reading environment, you can also experiment dynamically with custom book titles, authors, and target IDs using the in browser simulation below:',
     },
     {
       type: 'mini-api',
-      title: 'Live Interactive 5 Line In Memory API Server',
-      intro: 'Type custom title and author values below, then click each method to witness real time server memory transitions and wire logs:',
+      title: 'In Browser Simulation: Five Handler Book Catalog API',
     },
     {
       type: 'heading',
-      text: 'Step 5: Tasting the Three Architectural Worlds: REST, SOAP, and GraphQL',
+      text: 'Step 6: Deconstructing Both Sides of the Wire Exchange',
     },
     {
       type: 'paragraph',
-      text: 'Not all APIs look identical. In enterprise software, you will encounter three major architectural styles: REST, SOAP, and GraphQL. To see how their shapes differ, let us first ask all three styles the exact same question: "Retrieve the title of book ID 1":',
+      text: 'When your computer talks to a server over the network, it dispatches an **HTTP Request** packet and receives an **HTTP Response** packet. Now let us deconstruct the exact bytes exchanged during our earlier POST request when adding Book 2:',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'PROTOCOL ANATOMY',
+      title: 'Anatomy of an HTTP Message: Request and Response Packet Structure',
+      text: 'Every network transaction consists of two halves: the client request specifying method, path, headers, and body, and the server response specifying status code, response headers, and returned data.',
+      src: anatomyImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/http-wire-anatomy.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Detailed two panel diagram showing HTTP Request on left with Method, Host, Headers, Body, and HTTP Response on right with Status, Headers, Body.',
+      caption: 'The four fundamental parts of every HTTP request and response.',
+      points: [
+        'Request Line: Specifies the HTTP verb, resource path (/books), and protocol version.',
+        'Request Headers: Metadata such as Content-Type telling the server that JSON payload is attached.',
+        'Request Body: The actual data payload transmitted to the server.',
+        'Status Line: The numerical status code (such as 201 Created) indicating transaction outcome.',
+      ],
+    },
+    {
+      type: 'chunked-code',
+      badge: 'WIRE ANATOMY CHUNKS',
+      title: 'Deconstructing the POST /books Wire Exchange',
+      intro: 'Inspect each component of the request and response from our earlier execution:',
+      chunks: [
+        {
+          label: 'Part 1: The Request Line',
+          filename: 'request-line.http',
+          code: 'POST /books HTTP/1.1\nHost: localhost:3000',
+          title: 'Specifying Method, Path, and Host',
+          explanation: 'The request line declares the HTTP method, resource path, protocol version, and target host.',
+          keyTakeaway: 'The method indicates desired action; the path indicates target resource.'
+        },
+        {
+          label: 'Part 2: Request Headers & Body',
+          filename: 'request-body.json',
+          code: 'Content-Type: application/json\nAccept: application/json\n\n{\n  "title": "The Pragmatic Programmer",\n  "author": "David Thomas"\n}',
+          title: 'Content Type and Outgoing Data',
+          explanation: 'The Content-Type header informs the server that raw JSON text follows in the request body.',
+          keyTakeaway: 'Always send Content-Type: application/json when transmitting JSON data.'
+        },
+        {
+          label: 'Part 3: The Response Status Line',
+          filename: 'response-status.http',
+          code: 'HTTP/1.1 201 Created',
+          title: 'Server Transaction Result',
+          explanation: 'The server acknowledges receipt and confirms a new resource was created in memory.',
+          keyTakeaway: '2xx family indicates successful transaction completion.'
+        },
+        {
+          label: 'Part 4: Response Headers & Body',
+          filename: 'response-body.json',
+          code: 'Content-Type: application/json; charset=utf-8\n\n{\n  "id": 2,\n  "title": "The Pragmatic Programmer",\n  "author": "David Thomas"\n}',
+          title: 'Returned Data Payload',
+          explanation: 'The server returns the freshly created book record complete with its assigned ID.',
+          keyTakeaway: 'The response body contains the structured data requested by the client.'
+        }
+      ]
+    },
+    {
+      type: 'heading',
+      text: 'Step 7: Tasting the Three Architectural Worlds: REST, SOAP, and GraphQL',
+    },
+    {
+      type: 'paragraph',
+      text: 'Not all APIs look identical. In enterprise software, you will encounter three major architectural styles: REST, SOAP, and GraphQL. To understand how their shapes differ, let us first ask all three styles the exact same question: "Retrieve the title of book ID 1":',
     },
     {
       type: 'image',
       layout: 'stacked',
       badge: 'ARCHITECTURAL STYLES',
-      title: 'Architectural Comparison: REST, SOAP, and GraphQL Side by Side',
+      title: 'Comparing API Architectures: REST, SOAP, and GraphQL',
       text: 'REST treats data as unique URL resources formatted in lightweight JSON. SOAP packages requests in formal XML envelopes with rigid schemas. GraphQL exposes a single endpoint where clients request the exact fields they need.',
       src: matrixImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-architectures-matrix.jpg',
       w: 1408,
       h: 768,
-      alt: 'Architectural comparison matrix illustrating REST, SOAP, and GraphQL.',
-      caption: 'Three Architectural Flavors: REST for clean resources, SOAP for formal legal envelopes, GraphQL for custom client queries.',
+      alt: 'Comparison diagram showing REST with URL resource paths, SOAP with XML envelope, and GraphQL with flexible query selection.',
+      caption: 'Three architectural styles answering the same inquiry.',
       points: [
-        'REST (The Postcard): Simple, human readable JSON resources over clean HTTP verbs.',
-        'SOAP (The Sealed Legal Document): Formal W3C XML standard used extensively in banking and government.',
-        'GraphQL (The Custom Shopping List): Single endpoint where clients specify exactly which fields to return.',
+        'REST (Representational State Transfer): Targets URL resources like /books/1 using standard HTTP verbs.',
+        'SOAP (Simple Object Access Protocol): Encloses method calls inside formal XML envelope structures.',
+        'GraphQL: Sends query documents to a single /graphql endpoint, selecting exact requested fields.',
       ],
     },
     {
       type: 'chunked-code',
-      badge: 'SAME QUESTION THREE PROTOCOLS',
-      title: 'Comparing the Same Book Query Across Three Protocols',
-      intro: 'Notice how each protocol asks for the title of book ID 1 and what payload returns:',
+      badge: 'PROTOCOL COMPARISON',
+      title: 'Asking the Same Question: Book ID 1 Across Three Protocols',
+      intro: 'Observe how the exact same data query is formatted in each architectural style:',
       chunks: [
         {
-          label: 'RESTful API Request and Response',
-          filename: 'rest_exchange.http',
-          code: 'REQUEST:\nGET /books/1 HTTP/1.1\nHost: localhost:3000\nAccept: application/json\n\nRESPONSE:\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  "id": 1,\n  "title": "Clean Architecture",\n  "author": "Robert Martin"\n}',
-          title: 'Direct Resource Retrieval',
-          explanation: 'In REST, the URL directly identifies the resource. The server replies with clean JSON text containing the entire book object.',
-          keyTakeaway: 'REST is the dominant standard across 85 percent of modern web and mobile services.'
+          label: 'Style 1: RESTful Query',
+          filename: 'rest-query.http',
+          code: 'GET /books/1 HTTP/1.1\nHost: localhost:3000\nAccept: application/json\n\n// Response 200 OK\n{\n  "id": 1,\n  "title": "Clean Architecture",\n  "author": "Robert Martin"\n}',
+          title: 'Resource Centric REST Query',
+          explanation: 'REST targets a specific URL resource path (/books/1) with the GET verb and returns lightweight JSON.',
+          keyTakeaway: 'REST is resource oriented and leverages standard HTTP verbs and status codes.'
         },
         {
-          label: 'GraphQL Query Request and Response',
-          filename: 'graphql_exchange.http',
-          code: 'REQUEST:\nPOST /graphql HTTP/1.1\nHost: localhost:3000\nContent-Type: application/json\n\n{\n  "query": "query { book(id: 1) { title } }"\n}\n\nRESPONSE:\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  "data": {\n    "book": {\n      "title": "Clean Architecture"\n    }\n  }\n}',
-          title: 'Precise Field Selection',
-          explanation: 'In GraphQL, the client asks only for the title field, avoiding unwanted author metadata and eliminating extra byte transfer.',
-          keyTakeaway: 'GraphQL prevents over fetching by letting clients dictate the exact JSON response shape.'
+          label: 'Style 2: SOAP WebService (Hypothetical Contract)',
+          filename: 'soap-envelope.xml',
+          code: 'POST /BookService HTTP/1.1\nHost: localhost:3000\nContent-Type: application/soap+xml\n\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <GetBookTitleRequest xmlns="http://campus.edu/books">\n      <bookId>1</bookId>\n    </GetBookTitleRequest>\n  </soap:Body>\n</soap:Envelope>',
+          title: 'XML Envelope Wrapper',
+          explanation: 'SOAP wraps every request inside a formal XML Envelope and Body, dispatching via HTTP POST.',
+          keyTakeaway: 'SOAP is strict, protocol heavy, and relies exclusively on XML payloads.'
         },
         {
-          label: 'SOAP WebServices Request and Response',
-          filename: 'soap_exchange.xml',
-          code: 'REQUEST:\nPOST /BookService HTTP/1.1\nHost: localhost:3000\nContent-Type: application/soap+xml; charset=utf-8\n\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <GetBookRequest>\n      <BookId>1</BookId>\n    </GetBookRequest>\n  </soap:Body>\n</soap:Envelope>\n\nRESPONSE:\nHTTP/1.1 200 OK\nContent-Type: application/soap+xml; charset=utf-8\n\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <GetBookResponse>\n      <title>Clean Architecture</title>\n    </GetBookResponse>\n  </soap:Body>\n</soap:Envelope>',
-          title: 'Formal XML Envelope',
-          explanation: 'In SOAP, every request is wrapped in a strict XML envelope with formal namespaces and dispatched via HTTP POST.',
-          keyTakeaway: 'SOAP relies on rigid WSDL contracts, widely used in financial banking and legacy mainframes.'
+          label: 'Style 3: GraphQL Query (Hypothetical Contract)',
+          filename: 'book-query.graphql',
+          code: 'POST /graphql HTTP/1.1\nHost: localhost:3000\nContent-Type: application/json\n\n{\n  "query": "query { book(id: 1) { title } }"\n}\n\n// Response 200 OK\n{\n  "data": {\n    "book": { "title": "Clean Architecture" }\n  }\n}',
+          title: 'Field Precise GraphQL Query',
+          explanation: 'GraphQL sends a structured query document to /graphql asking for only the title property.',
+          keyTakeaway: 'GraphQL prevents over fetching by returning only the exact properties requested.'
         }
       ]
     },
     {
       type: 'callout',
       variant: 'note',
-      title: 'Architectural Clarification: Our Express Server Implements REST',
+      title: 'Architectural Clarification: Conceptual Contracts vs Implemented Route',
       paragraphs: [
-        'Our minimal 5 line Express server implements standard REST. It exposes clean URL paths (/books) and responds to standard HTTP verbs.',
-        'The GraphQL and SOAP exchanges shown above are conceptual contract variants: they demonstrate how an engineering team would structure that same book query if they selected GraphQL or SOAP instead.',
-        'Now let us inspect real, independently reachable public endpoints on the internet for both SOAP and GraphQL.',
+        'Notice an essential distinction: our minimal Node server implements the RESTful GET /books route.',
+        'The SOAP /BookService and GraphQL /graphql examples shown above are conceptual contract designs illustrating how different protocols structure the same request. Do not attempt to send SOAP or GraphQL packets to our five handler Express server on port 3000!',
+        'In Chapters 10 and 12, we will explore dedicated GraphQL and SOAP services in depth.',
       ],
     },
     {
@@ -590,7 +730,7 @@ export const lesson01 = {
     },
     {
       type: 'paragraph',
-      text: 'To prove that these protocols are not theoretical, here are real public services responding on the internet today:',
+      text: 'To prove that SOAP and GraphQL are real protocols used in production today, here are live public services responding on the internet. Note that each public service manages its own distinct dataset:',
     },
     {
       type: 'api-inspector',
@@ -600,20 +740,24 @@ export const lesson01 = {
       headers: {
         'Content-Type': 'application/soap+xml; charset=utf-8'
       },
-      requestBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\n  <soap12:Body>\n    <NumberToWords xmlns="http://www.dataaccess.com/webservicesserver/">\n      <ubiNum>400</ubiNum>\n    </NumberToWords>\n  </soap12:Body>\n</soap12:Envelope>',
+      requestBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\n  <soap12:Body>\n    <NumberToWords xmlns="http://www.dataaccess.com/webservicesserver/">\n      <ubiNum>500</ubiNum>\n    </NumberToWords>\n  </soap12:Body>\n</soap12:Envelope>',
       status: '200 OK',
       time: '215 ms',
       size: '412 B',
-      responseBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">\n      <m:NumberToWordsResult>four hundred </m:NumberToWordsResult>\n    </m:NumberToWordsResponse>\n  </soap:Body>\n</soap:Envelope>',
-      sampleLabel: 'LIVE PUBLIC SOAP ENDPOINT'
+      responseBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">\n      <m:NumberToWordsResult>five hundred </m:NumberToWordsResult>\n    </m:NumberToWordsResponse>\n  </soap:Body>\n</soap:Envelope>',
+      assertions: [
+        'Status code is 200 OK',
+        'SOAP body contains written English words'
+      ],
+      sampleLabel: 'LIVE PUBLIC SOAP WIRE CAPTURE'
     },
     {
       type: 'callout',
-      variant: 'tip',
-      title: 'Real World Wire Quirk: Notice the Trailing Space',
+      variant: 'note',
+      title: 'Real World Wire Quirk: The Trailing Space',
       paragraphs: [
-        'Notice that the live DataAccess SOAP service returns `<m:NumberToWordsResult>four hundred </m:NumberToWordsResult>` with an extra space after hundred.',
-        'If a test assertion expects exact equality to "four hundred", the assertion fails! This is why professional quality engineers always inspect the raw wire and use string trim() when verifying external services.',
+        'Inspect the raw XML response from the public DataAccess SOAP service above. Notice that it returned "five hundred " with a trailing space inside the tag!',
+        'This real world quirk demonstrates why automated quality engineers exist: real production services often have subtle formatting oddities that unit tests miss. In Chapter 12, we write assertions using trim() to handle this exact quirk defensively.',
       ],
     },
     {
@@ -625,119 +769,48 @@ export const lesson01 = {
         'Content-Type': 'application/json'
       },
       requestBody: {
-        query: '{ character(id: 1) { id name } }'
+        query: 'query { character(id: 1) { name status species } }'
       },
       status: '200 OK',
-      time: '190 ms',
-      size: '168 B',
+      time: '180 ms',
+      size: '210 B',
       responseBody: {
         data: {
           character: {
-            id: '1',
-            name: 'Rick Sanchez'
+            name: 'Rick Sanchez',
+            status: 'Alive',
+            species: 'Human'
           }
         }
       },
-      sampleLabel: 'LIVE PUBLIC GRAPHQL ENDPOINT'
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Transport Clarification: GraphQL over POST and GET',
-      paragraphs: [
-        'In our workbench, we dispatch GraphQL queries using HTTP POST with a JSON body: {"query": "..."}.',
-        'However, GraphQL specifications also permit queries over HTTP GET by passing the query as a URL encoded query parameter. In Chapters 10 and 12, we explore deep GraphQL and SOAP testing in detail.',
+      assertions: [
+        'Status code is 200 OK',
+        'Response contains data object without errors',
+        'Character name attribute matches Rick Sanchez'
       ],
+      sampleLabel: 'LIVE PUBLIC GRAPHQL WIRE CAPTURE'
     },
     {
       type: 'heading',
-      text: 'Step 6: Live Exploration: Sending Real Global GET Requests',
+      text: 'Step 8: Prove Readiness and Hand Off',
     },
     {
       type: 'paragraph',
-      text: 'Now let us send real HTTP requests over the public internet. First, we will inspect the public GitHub user profile for the famous GitHub mascot, Octocat:',
+      text: 'Before moving onward, test your mastery with this hands on exercise:',
     },
     {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'When we send a GET request to https://api.github.com/users/octocat, what status code and data fields do you expect the server to return?',
-      options: [
-        '200 OK: Returns the public Octocat profile object containing username and public repository statistics',
-        '201 Created: Generates a brand new user profile on the server database',
-        '404 Not Found: Fails because octocat is a cartoon mascot',
-        '500 Server Error: Crashes because GitHub requires paid authentication to read user data'
-      ],
-      answerIndex: 0,
-      revealTitle: 'GitHub Public API Wire Confirmation',
-      explanation: 'Because the octocat profile is public and exists, GitHub responds with HTTP 200 OK and returns Octocat profile metadata serialized in JSON!'
-    },
-    {
-      type: 'api-inspector',
-      title: 'Live Public Wire: GitHub Octocat User Profile',
-      method: 'GET',
-      url: 'https://api.github.com/users/octocat',
-      status: '200 OK',
-      time: '185 ms',
-      size: '2.6 kB',
-      responseBody: {
-        login: 'octocat',
-        id: 583231,
-        name: 'The Octocat',
-        company: '@github',
-        blog: 'https://github.blog',
-        location: 'San Francisco',
-        public_repos: 8,
-        followers: 12450
-      }
-    },
-    {
-      type: 'paragraph',
-      text: 'Next, let us query the BigDataCloud reverse geocoding API. When your mobile device shares its latitude and longitude, the API translates those coordinates into a physical city and postal code:',
-    },
-    {
-      type: 'api-inspector',
-      title: 'Live Public Wire: BigDataCloud Reverse Geocoding',
-      method: 'GET',
-      url: 'https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=42.3601&longitude=-71.0942&localityLanguage=en',
-      status: '200 OK',
-      time: '142 ms',
-      size: '1.2 kB',
-      responseBody: {
-        latitude: 42.3601,
-        longitude: -71.0942,
-        continent: 'North America',
-        countryName: 'United States of America',
-        principalSubdivision: 'Massachusetts',
-        city: 'Cambridge',
-        locality: 'MIT Campus',
-        postcode: '02139'
-      }
-    },
-    {
-      type: 'heading',
-      text: 'Step 7: Sourced Historical Outage: When Operations Are Misunderstood',
-    },
-    {
-      type: 'source-note',
-      label: 'Verified Historical Case Study · May 2005',
-      claim: 'Google Web Accelerator Crawler Inadvertently Triggers Mass Deletions on Web Forums',
-      url: 'https://www.w3.org/2001/tag/doc/whenToUseGet.html',
-      verifiedThrough: 'W3C Technical Architecture Group (TAG) Finding on Safe HTTP Methods'
-    },
-    {
-      type: 'callout',
-      variant: 'warning',
-      title: 'The Real World Cost of Misunderstanding HTTP GET: The Web Accelerator Incident',
-      paragraphs: [
-        'In May 2005, Google launched a utility called Google Web Accelerator. Its purpose was to speed up browsing by pre fetching web links using background HTTP GET requests before the user clicked them.',
-        'However, web forums and enterprise applications had implemented destructive actions: such as deleting a post, modifying account settings, or clearing a cart: using simple hyperlinks like `<a href="/admin/delete_post?id=42">Delete</a>`.',
-        'Because the developers bound state modifying operations to HTTP GET instead of HTTP POST or DELETE, Google web pre fetcher visited every link it encountered. It triggered deletions, cleared carts, and modified application state on forums across the web where destructive actions were bound to GET links.',
-        'The Architectural Rule: Never use GET for state modifying actions. In HTTP specifications (RFC 7231), GET must strictly remain a safe, read only operation that leaves server databases unaltered.',
+      type: 'steps',
+      items: [
+        '1. Restart your server: Press Ctrl+C in your terminal and run node server.js.',
+        '2. Verify catalog: Send GET http://localhost:3000/books. Confirm it returns status 200 OK with Book 1.',
+        '3. Add a book: Send POST http://localhost:3000/books with title "Modern Operating Systems" and author "Andrew Tanenbaum". Confirm status 201 Created and ID 2.',
+        '4. Partially update: Send PATCH http://localhost:3000/books/2 with title "Modern Distributed Systems". Confirm author is retained.',
+        '5. Delete book: Send DELETE http://localhost:3000/books/1. Verify subsequent GET returns only Book 2.',
       ],
     },
     {
       type: 'heading',
-      text: 'Step 8: Why We Test at the API Layer: The Testing Pyramid',
+      text: 'Why We Test at the API Layer: The Testing Pyramid',
     },
     {
       type: 'paragraph',
@@ -746,19 +819,41 @@ export const lesson01 = {
     {
       type: 'image',
       layout: 'stacked',
-      badge: 'TESTING PYRAMID',
-      title: 'The Automation Testing Pyramid: High Speed and Deep Reliability',
+      badge: 'TESTING ARCHITECTURE',
+      title: 'The Testing Pyramid: Speed, Cost, and Isolation across Tiers',
       text: 'Testing exclusively through the user interface is slow, fragile, and prone to false alarms caused by animation lags. Testing at the API layer allows engineers to validate business logic directly over the wire in milliseconds.',
       src: pyramidImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/testing-pyramid-focus.jpg',
       w: 1408,
       h: 768,
-      alt: 'The Testing Pyramid contrasting Unit, API Integration, and UI End to End tests.',
-      caption: 'The Automation Pyramid: API integration tests provide the sweet spot of speed, reliability, and business coverage.',
+      alt: 'Testing Pyramid diagram showing Unit Tests at bottom, API Integration Tests in middle, and UI Tests at top.',
+      caption: 'The Testing Pyramid: Balancing fast unit checks, robust API contract tests, and focused UI checks.',
       points: [
-        'Top Layer (UI Tests): Slow, fragile, and easily broken by minor button redesigns or screen resizing.',
-        'Middle Layer (API Tests): Fast, dependable, executing hundreds of validations per second directly on business contracts.',
-        'Base Layer (Unit Tests): High volume internal code checks validating individual functions.',
+        'UI Tests (Top Layer): Slowest and most expensive. High maintenance because UI layout changes break scripts.',
+        'API Service Layer (Middle Layer): Fast, deterministic, and verifies business rules directly across the wire without browser rendering delays.',
+        'Unit Tests (Base Layer): Fastest execution testing isolated functions in code.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Sourced Architecture Finding: Why Safe Methods Must Not Alter State',
+    },
+    {
+      type: 'source-note',
+      label: 'Architectural Standard Finding · March 2004',
+      claim: 'W3C Technical Architecture Group (TAG) Finding on URIs and Safe HTTP Operations',
+      url: 'https://www.w3.org/2001/tag/doc/whenToUseGet.html',
+      verifiedThrough: 'World Wide Web Consortium (W3C) TAG Finding on Safe Methods and GET Semantics'
+    },
+    {
+      type: 'callout',
+      variant: 'warning',
+      title: 'Why HTTP Operations Must Follow Semantic Rules',
+      paragraphs: [
+        'In March 2004, the World Wide Web Consortium (W3C) Technical Architecture Group issued a formal finding on URIs and safe methods.',
+        'The finding emphasizes that HTTP GET is designed strictly for safe information retrieval. Clients, search engine crawlers, and network web proxies assume that repeating a GET request causes no destructive side effects.',
+        'If a developer improperly binds destructive database actions to a GET request: such as /deleteBook?id=1: web crawlers indexing links can accidentally trigger catastrophic data deletions across an entire company database.',
+        'The Architectural Lesson: Always use POST, PUT, or DELETE for operations that modify server state, and keep GET strictly safe and read only.',
       ],
     },
     {
@@ -769,49 +864,44 @@ export const lesson01 = {
       type: 'guess',
       prompt: 'If you send an HTTP GET request to a public API endpoint ten times in a row, what should happen to the server database records?',
       options: [
-        'Ten new records should be created in the database table',
-        'Nothing should change in the database records because GET is a safe, read only operation',
-        'The server should permanently delete the requested resource',
-        'The server should automatically reboot its operating system'
+        'The records should remain completely unchanged because GET is a safe, read only operation',
+        'Ten duplicate copies of the database records will be created',
+        'The server will delete the records on the tenth call',
+        'The network proxy will block the computer permanently',
       ],
-      answerIndex: 1,
-      explain: 'GET operations are defined by the HTTP specification as safe. Safe methods retrieve data without altering server state, regardless of how many times they are executed.'
+      answerIndex: 0,
+      explain: 'GET is defined by the HTTP standard as a safe, read only method. Dispatching GET one time or a thousand times must never modify server database state.',
     },
     {
       type: 'quiz',
       items: [
         [
-          'What is the core difference between an idempotent operation and a safe operation?',
-          'A safe operation (such as GET) does not alter server state at all. An idempotent operation (such as PUT or DELETE) alters state, but repeating the request produces the exact same final state as executing it once.',
+          'What is the fundamental role of an API in client server architecture?',
+          'An API acts as a structured digital messenger that allows a client application to request data and services from a backend server without exposing database internals.',
         ],
         [
-          'Why did the Google Web Accelerator cause mass data loss on web forums in 2005?',
-          'Developers improperly bound destructive actions to HTTP GET links. Because Web Accelerator pre fetched every GET link to speed up browsing, it automatically executed delete operations across thousands of websites.',
+          'What is the difference between a PUT operation and a PATCH operation?',
+          'PUT replaces the entire resource with the incoming payload, overwriting omitted fields. PATCH applies a partial delta modification, updating only the specific fields provided while retaining others.',
         ],
         [
-          'What are the four primary structural components of an HTTP request?',
-          'The HTTP method (verb), the resource URL endpoint, the metadata headers (such as Content Type), and the payload body.',
-        ],
-        [
-          'How does GraphQL differ from REST when a client only requires one specific property?',
-          'REST returns the entire resource payload defined by the endpoint. GraphQL allows the client to request only the specific field needed, eliminating unnecessary network bandwidth and payload processing.',
+          'Why are API layer tests considered more reliable and faster than UI browser tests?',
+          'API tests bypass browser rendering, visual layout engines, and network animation delays, verifying business logic and contracts directly over the wire in milliseconds.',
         ],
       ],
     },
     {
       type: 'takeaways',
       items: [
-        'An API is a software messenger that allows decoupled clients and servers to communicate across networks securely.',
-        'The five universal HTTP operations are GET (Read), POST (Create), PUT (Replace), PATCH (Modify), and DELETE (Remove).',
-        'GET operations must always remain safe; PUT and DELETE operations are idempotent; POST operations are neither safe nor idempotent.',
-        'Every HTTP request carries a verb, an endpoint URL, envelope headers, and an optional data payload body.',
-        'An API server is simply a program listening on a port that updates in memory records and returns status codes.',
+        'An API is a contract allowing clients to communicate securely with backend servers.',
+        'HTTP defines standard methods: GET reads, POST creates, PUT replaces, PATCH updates, and DELETE removes.',
+        'Safe methods (like GET) never alter server data; idempotent methods (like GET, PUT, and DELETE) produce the identical state when repeated.',
+        'REST targets unique URL resources using JSON, SOAP packages calls in formal XML envelopes, and GraphQL queries exact fields.',
       ],
     },
     {
       type: 'cliffhanger',
-      title: 'Now Enter the Mission: The Apex Campus Transit Crisis',
-      text: 'Now that your foundations are crystal clear: you understand clients, servers, HTTP verbs, and wire packets: you are ready for your first real world mission. In Chapter 2, launch day arrives at Apex Campus: the transit shuttle tracker is frozen, students are stranded, and you must investigate and fix the failing request by hand!',
+      title: 'Entering Mission 1: The Apex Campus Transit Outage',
+      text: 'Now that your foundations are solid: you have built an API server, executed all five operations, and verified responses on the wire: you are ready for your first investigation. Launch day has arrived at Apex Campus: the transit shuttle tracker is frozen, students are stranded, and you must investigate the failing request by hand in Chapter 2!',
     },
   ],
 }

@@ -133,7 +133,7 @@ export const lesson13 = {
         '  ✓ Response contains successfully added message',
         '  ✓ Backend generated ID correctly concatenates ISBN and aisle',
         '',
-        'GET https://uat-api.campuslibrary.org/v1/books?id=9781227 [200 OK, 192B, 142ms]',
+        'GET https://uat-api.campuslibrary.org/v1/books?id=LIB1048101 [200 OK, 192B, 142ms]',
         '  ✓ GetBook response returns an array with at least one record',
         '  ✓ Retrieved book name matches "Learn Postman Testing"',
         '  ✓ Catalog ISBN and aisle match created coordinates',
@@ -188,8 +188,8 @@ export const lesson13 = {
           filename: 'newman-bail.sh',
           code: '  --bail',
           title: 'Fast Fail Safety Gate',
-          explanation: 'Tells Newman to stop execution immediately on the first assertion failure, saving build agent compute time.',
-          keyTakeaway: '--bail guarantees defective builds are blocked immediately.'
+          explanation: 'Tells Newman to stop execution immediately upon the very first assertion failure, saving valuable CI compute minutes. Note that any assertion failure causes Newman to exit with code 1; the bail flag enables fast fail semantics.',
+          keyTakeaway: '--bail guarantees defective builds are blocked immediately without wasting compute.'
         }
       ]
     },

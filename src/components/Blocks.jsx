@@ -333,9 +333,14 @@ function PredictOutput({ badge = 'IMAGINE & PREDICT', prompt, code, options = []
           ))}
         </div>
         <div className="print-write-box">
-          <span className="print-write-label">✏️ YOUR PREDICTED OUTCOME (Write down your status and body prediction before checking below):</span>
-          <div className="print-write-line" />
+          <span className="print-write-label">✏️ YOUR PREDICTED OUTCOME (Record your prediction before turning to the verified result):</span>
+          <div className="print-prediction-fields">
+            <div className="print-field-row"><span className="field-lbl">Predicted Status Code:</span><span className="field-line" /></div>
+            <div className="print-field-row"><span className="field-lbl">Predicted Response Body:</span><span className="field-line" /></div>
+            <div className="print-field-row"><span className="field-lbl">Predicted Server State:</span><span className="field-line" /></div>
+          </div>
         </div>
+        <div className="print-divider" />
         <div className="predict-reveal-pane static-reveal">
           <div className="predict-reveal-header">
             <span className="predict-reveal-tag">CONFIRMED WIRE RESULT</span>

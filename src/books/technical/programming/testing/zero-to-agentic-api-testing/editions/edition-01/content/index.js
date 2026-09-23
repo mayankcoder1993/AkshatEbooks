@@ -32,10 +32,10 @@ export const BOOK = {
   unitLabel: '',
   howToUse: [
     'Read the opening mission to understand the real world software problem we are diagnosing.',
-    'Test every endpoint live by clicking the provided URLs in your web browser or copying them into your API testing workbench.',
-    'Inspect the complete network wire: study the HTTP method, resource path, headers, request payload, and server response codes.',
-    'Engage with the interactive checkpoints: answer the Think and Guess questions before revealing the explanations to solidify your understanding.',
-    'Build your executable test collection step by step as you progress through each chapter.',
+    'Study the complete network wire: examine the HTTP method, resource path, headers, request payload, and server response codes.',
+    'Attempt every prediction before checking the verified outcome: write down your predicted status code, response body, and server state in the provided exercise spaces.',
+    'Follow the step by step setup commands to build your own runnable server and executable Postman test collection as you progress through each chapter.',
+    'Compare your observations with the recorded terminal transcripts, wire captures, and troubleshooting recovery checks.',
   ],
   aboutAuthor: [
     '**Akshat Sinha** is the founder of The Sinha Family Group and the creator of Sarva Gyana Koshah: the treasury of all knowledge, which teaches through books, interactive learning platforms, and authoritative engineering references.',

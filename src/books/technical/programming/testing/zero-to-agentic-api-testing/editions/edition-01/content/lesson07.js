@@ -95,14 +95,14 @@ export const lesson07 = {
       badge: 'IMAGINE & PREDICT',
       prompt: 'When AddBook completes and GetBook executes with URL: GET /v1/books?id={{book_id}}, what value does Postman send across the network wire?',
       options: [
-        'The exact generated ID string (such as "LIB4821") dynamically extracted from the AddBook response',
+        'The exact composite ID string (such as "LIB4821227") dynamically extracted from the AddBook response',
         'The literal placeholder text "{{book_id}}"',
         'An empty query parameter ?id=',
         'A null pointer exception'
       ],
       answerIndex: 0,
       revealTitle: 'Dynamic Chaining Wire Confirmation',
-      explanation: 'Property transfer confirmed! Postman resolves {{book_id}} from Collection Scope, replacing the placeholder with the dynamic ID value (LIB4821) before dispatching the HTTP GET request!'
+      explanation: 'Property transfer confirmed! Postman resolves {{book_id}} from Collection Scope, replacing the placeholder with the dynamic composite ID value (LIB4821227) before dispatching the HTTP GET request!'
     },
     {
       type: 'heading',
@@ -110,24 +110,32 @@ export const lesson07 = {
     },
     {
       type: 'paragraph',
-      text: 'GetBook returns a JSON array. In JavaScript, access the first record using zero index bracket notation: booksList[0].book_name. Let us validate both the composite ID calculation and the retrieved catalog entry:',
+      text: 'GetBook returns a JSON array. In JavaScript, access the first record using zero index bracket notation: booksList[0].book_name. Because these assertions validate different points in the lifecycle, we separate them into their respective request Tests tabs in Postman:',
     },
     {
       type: 'code',
-      filename: 'validate-id-and-catalog.js',
+      filename: 'addbook-tests.js',
       lines: [
-        '// Step 1: Parse outgoing request payload to verify business calculation',
+        '// Placed in the Tests tab of AddBook (POST /v1/books)',
         'const requestPayload = JSON.parse(pm.request.body.raw);',
         'const expectedCompositeId = requestPayload.isbn + requestPayload.aisle;',
-        '',
-        '// Step 2: Assert backend ID equals ISBN + aisle in AddBook Tests tab',
         'const responsePayload = pm.response.json();',
+        '',
         'pm.test("Backend generated ID correctly concatenates ISBN and aisle", function () {',
         '    pm.expect(responsePayload.ID).to.eql(expectedCompositeId);',
         '});',
         '',
-        '// Step 3: Assert retrieved catalog entry in GetBook Tests tab',
+        '// Store composite ID in collection variable for downstream requests',
+        'pm.collectionVariables.set("book_id", responsePayload.ID);',
+      ],
+    },
+    {
+      type: 'code',
+      filename: 'getbook-tests.js',
+      lines: [
+        '// Placed in the Tests tab of GetBook (GET /v1/books?id={{book_id}})',
         'const booksList = pm.response.json();',
+        '',
         'pm.test("GetBook returns valid array with matching catalog metadata", function () {',
         '    pm.expect(booksList).to.be.an("array").with.lengthOf.atLeast(1);',
         '    pm.expect(booksList[0].book_name).to.eql("Zero to Agentic API Testing");',

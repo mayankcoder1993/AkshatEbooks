@@ -81,7 +81,7 @@ export async function loadBookPackage(id = DEFAULT_BOOK_ID, editionId = CURRENT_
   const loader = BOOK_LOADERS[key]
   if (!loader) throw new Error(\`Unknown or unreadable book edition: ${'${key}'}\`)
   const module = await loader()
-  return { id, editionId, lessons: module.default, BOOK: module.BOOK, BRAND: module.BRAND, PREFACE: module.PREFACE }
+  return { id, editionId, lessons: module.default, BOOK: module.BOOK, BRAND: module.BRAND, PREFACE: module.PREFACE, CURRICULUM_ROADMAP: module.CURRICULUM_ROADMAP }
 }
 `
 

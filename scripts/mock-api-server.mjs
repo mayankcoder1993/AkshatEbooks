@@ -101,6 +101,35 @@ const server = http.createServer(async (req, res) => {
     return res.end(JSON.stringify({ id: 101, title: 'API Testing on Campus', body: 'Decoupled REST microservices' }));
   }
 
+  // 1e. Campus Transit Shuttle Service (GET /v1/campus/shuttle/coordinates)
+  if (pathname === '/v1/campus/shuttle/coordinates' && method === 'GET') {
+    const route = parsed.query.route;
+    if (!route || route.trim() === '') {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({
+        statusCode: 400,
+        error: 'route parameter is required'
+      }));
+    }
+    if (route === 'campus_loop_north') {
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({
+        route: 'campus_loop_north',
+        shuttleId: 'BUS_104',
+        status: 'in_transit',
+        coordinates: {
+          latitude: 42.3601,
+          longitude: -71.0942
+        },
+        speedMph: 24,
+        nextStop: 'Apex Student Union',
+        estimatedArrivalMinutes: 3
+      }));
+    }
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ statusCode: 404, error: 'Unknown shuttle route' }));
+  }
+
   // 2. REST Campus Library: AddBook (POST /v1/books)
   if (pathname === '/v1/books' && method === 'POST') {
     const raw = await readBody(req);
@@ -429,8 +458,16 @@ const server = http.createServer(async (req, res) => {
       return res.end(JSON.stringify({ data }));
     }
 
-    // 15b. Query: character / student / location / episodes
+    // 15b. Query: character / student / location / episodes / book
     const data = {};
+    if (query.includes('book')) {
+      data.book = {
+        id: vars.id || 1,
+        title: 'Clean Architecture',
+        author: 'Robert Martin',
+        price: 55
+      };
+    }
     if (query.includes('character') || query.includes('student')) {
       data.character = {
         name: 'Akshat Research Scholar',

@@ -100,7 +100,7 @@ export default function ApiInspector({
   const showResponse = staticMode || activeTab === 'response' || activeTab === 'all'
   const showTests = (staticMode || activeTab === 'tests' || activeTab === 'all') && assertions.length > 0 && hasSent
   const hasScript = Array.isArray(testScript) && testScript.length > 0
-  const showScript = !staticMode && (activeTab === 'script' || activeTab === 'all') && hasScript
+  const showScript = (staticMode || activeTab === 'script' || activeTab === 'all') && hasScript
 
   return (
     <div className="api-inspector">
@@ -109,7 +109,7 @@ export default function ApiInspector({
         <span className="dot y" />
         <span className="dot g" />
         <span className="api-inspector-title">{title}</span>
-        <span className="workbench-tag">{sampleLabel || 'SILICON VALLEY WORKBENCH UI'}</span>
+        <span className="workbench-tag">{sampleLabel || 'IN BROWSER SIMULATION · WIRE REFERENCE'}</span>
       </div>
 
       <div className="api-url-bar">

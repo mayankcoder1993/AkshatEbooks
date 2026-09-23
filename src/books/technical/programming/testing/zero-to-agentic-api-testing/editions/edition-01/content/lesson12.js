@@ -178,7 +178,7 @@ export const lesson12 = {
         '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">',
         '  <soap:Body>',
         '    <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">',
-        '      <m:NumberToWordsResult>four hundred</m:NumberToWordsResult>',
+        '      <m:NumberToWordsResult>four hundred </m:NumberToWordsResult>',
         '    </m:NumberToWordsResponse>',
         '  </soap:Body>',
         '</soap:Envelope>',
@@ -196,7 +196,7 @@ export const lesson12 = {
       status: '200 OK',
       time: '215 ms',
       size: '412 B',
-      responseBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">\n      <m:NumberToWordsResult>four hundred</m:NumberToWordsResult>\n    </m:NumberToWordsResponse>\n  </soap:Body>\n</soap:Envelope>',
+      responseBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">\n      <m:NumberToWordsResult>four hundred </m:NumberToWordsResult>\n    </m:NumberToWordsResponse>\n  </soap:Body>\n</soap:Envelope>',
       assertions: [
         'Accounting service status code is 200 OK',
         'Header Content Type is application/soap+xml',

@@ -163,7 +163,7 @@ export const lesson06 = {
           code: 'const randomDigits = Math.floor(1000 + Math.random() * 9000);\nconst uniqueISBN = companyCode + randomDigits;',
           title: 'Generating Non Colliding Key',
           explanation: 'Produces a random four digit number (e.g. 4821) and appends it to form LIB4821.',
-          keyTakeaway: 'Dynamic timestamps or random numbers eliminate duplicate key collisions.'
+          keyTakeaway: 'Combining random values with timestamps reduces collisions, but teardown remains essential.'
         },
         {
           label: 'Chunk 3: Saving to Collection Variable',

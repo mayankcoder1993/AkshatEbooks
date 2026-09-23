@@ -251,7 +251,21 @@ export const lesson11 = {
     },
     {
       type: 'paragraph',
-      text: 'When executing test collections automatedly in CI CD pipelines, we configure an automated token exchange request as the very first step in our collection. In its Tests script, we extract the access token and save it into a global variable so every subsequent request inherits it automatically. You can download the script: [Download Capture Bearer Token Script](/materials/zero-to-agentic-api-testing/lesson-11/capture-bearer-token.js):',
+      text: 'When executing test collections automatedly in CI CD pipelines, we configure an unattended Client Credentials token exchange request as the very first step in our collection. We submit the pre configured client credentials with strictly scoped read permissions: `scope=read:catalog`. In its Tests script, we extract the access token and save it into Collection Scope so subsequent requests in this collection inherit it without leaking secrets across global workspaces. You can download the script: [Download Capture Bearer Token Script](/materials/zero-to-agentic-api-testing/lesson-11/capture-bearer-token.js):',
+    },
+    {
+      type: 'code',
+      filename: 'unattended-token-request.http',
+      lines: [
+        'POST /oauth/token HTTP/1.1',
+        'Host: auth.campuslibrary.org',
+        'Content-Type: application/x-www-form-urlencoded',
+        '',
+        'grant_type=client_credentials',
+        '&client_id={{client_id}}',
+        '&client_secret={{client_secret}}',
+        '&scope=read:catalog write:loans',
+      ],
     },
     {
       type: 'code',
@@ -268,8 +282,18 @@ export const lesson11 = {
         '    pm.expect(responseData.expires_in).to.be.above(0);',
         '});',
         '',
-        '// Step 3: Save Bearer token to Global Scope for automated collection chaining',
-        'pm.globals.set("access_token", responseData.access_token);',
+        '// Step 3: Save Bearer token to Collection Scope (Least Privilege principle)',
+        'pm.collectionVariables.set("access_token", responseData.access_token);',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      title: 'Security Best Practice: Scoped Storage and Secret Hygiene',
+      paragraphs: [
+        'Never store sensitive access tokens in Global Scope where any collection in your workspace could read them.',
+        'Always store tokens in Collection Scope (pm.collectionVariables) or ephemeral Environment memory (Current Value only).',
+        'Keep Initial Value empty for all client secrets so credentials are never exported or synced to shared version control repositories.',
       ],
     },
     {
