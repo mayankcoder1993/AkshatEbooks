@@ -15,7 +15,7 @@
     "prepare:books": "npm run styles && npm run catalog && npm run validate:books",
     "create:book": "node scripts/create-book.mjs",
     "create:edition": "node scripts/create-edition.mjs",
-    "predev": "npm run prepare:books && npm run generate:docx && npm run build:single",
+    "predev": "npm run prepare:books",
     "dev": "vite --host 0.0.0.0",
     "prebuild": "npm run prepare:books",
     "build": "vite build",
