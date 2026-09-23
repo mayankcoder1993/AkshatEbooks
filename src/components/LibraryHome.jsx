@@ -22,7 +22,7 @@ function BookDetails({ book, onOpenBook, onOpenBlueprint }) {
           <button className="btn" disabled={!book.readable} onClick={() => onOpenBook(book, book.currentEdition, { preview: true })}>
             Book / PDF Preview
           </button>
-          <button type="button" className="btn" onClick={onOpenBlueprint}>
+          <button type="button" className="btn" onClick={() => onOpenBlueprint(book.id, book.currentEdition)}>
             📋 Curriculum Blueprint
           </button>
           {book.readable ? (

@@ -68,40 +68,32 @@ export const lesson03 = {
     },
     {
       type: 'heading',
-      text: 'Step 3: Chunking the Automation Test Script',
+      text: 'Step 3: Automating Both Manual Checks: Negative and Positive Assertions',
     },
     {
       type: 'paragraph',
-      text: 'Let us take the exact manual observations we made in Chapter 2 and convert them into three automated assertion chunks:',
+      text: 'In Chapter 2, we performed two manual checks: first observing how an omitted parameter crashed the backend, and second verifying that a valid route returned coordinates. A thorough automation suite must automate both paths: a negative test to guarantee regressions never crash the server, and a positive test to verify functional correctness:',
     },
     {
       type: 'chunked-code',
       badge: 'AUTOMATION SCRIPT CHUNKS',
       title: 'The Campus Shuttle Automated Assertion Suite',
-      intro: 'Study each assertion chunk and see how it mirrors what our eyes inspected by hand:',
+      intro: 'Study each assertion chunk and see how it translates our manual observations into automated guards:',
       chunks: [
         {
-          label: 'Chunk 1: Status Code Assertion',
-          filename: 'status_check.js',
-          code: 'pm.test("Status code is 200 OK", function () {\n    pm.response.to.have.status(200);\n});',
-          title: 'Verifying HTTP Status',
-          explanation: 'Replaces our manual check of the status pill. If the server crashes with 500 or returns 404, this assertion instantly fails with a red badge.',
-          keyTakeaway: 'Always verify status code first before parsing response body properties.'
+          label: 'Request 1: Negative Regression Assertion (Missing Route)',
+          filename: 'negative_guard.js',
+          code: 'pm.test("Omitted route returns 400 Bad Request", function () {\n    pm.response.to.have.status(400);\n});\n\npm.test("Error message guides the client", function () {\n    const data = pm.response.json();\n    pm.expect(data.error).to.include("route parameter is required");\n});',
+          title: 'Guarding Against 500 Regressions',
+          explanation: 'Validates that when route is omitted, the server returns 400 Bad Request rather than an uncaught 500 NullPointerException.',
+          keyTakeaway: 'Automating negative error cases ensures backend code never regresses into unhandled crashes.'
         },
         {
-          label: 'Chunk 2: Response Time Latency Check',
-          filename: 'latency_check.js',
-          code: 'pm.test("Response time is under 500 ms", function () {\n    pm.expect(pm.response.responseTime).to.be.below(500);\n});',
-          title: 'Enforcing Performance Budgets',
-          explanation: 'Human eyes cannot reliably notice whether a server answered in 120 ms or 800 ms. This script ensures the server responds within half a second.',
-          keyTakeaway: 'Performance budgets prevent slow database queries from creeping into production.'
-        },
-        {
-          label: 'Chunk 3: Data Integrity and Coordinate Validation',
-          filename: 'payload_check.js',
-          code: 'pm.test("Shuttle coordinates are valid numbers", function () {\n    const data = pm.response.json();\n    pm.expect(data.status).to.eql("in_transit");\n    pm.expect(data.coordinates.latitude).to.be.a("number");\n    pm.expect(data.coordinates.longitude).to.be.a("number");\n});',
-          title: 'Validating JSON Payload Structure',
-          explanation: 'Parses the response JSON text into a JavaScript object and validates that latitude and longitude are real numbers, not null strings.',
+          label: 'Request 2: Positive Contract Assertion (Valid Route)',
+          filename: 'positive_contract.js',
+          code: 'pm.test("Status code is 200 OK", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test("Response time is under 500 ms", function () {\n    pm.expect(pm.response.responseTime).to.be.below(500);\n});\n\npm.test("Coordinates are valid numbers", function () {\n    const data = pm.response.json();\n    pm.expect(data.status).to.eql("in_transit");\n    pm.expect(data.coordinates.latitude).to.be.a("number");\n    pm.expect(data.coordinates.longitude).to.be.a("number");\n});',
+          title: 'Verifying Functional Correctness',
+          explanation: 'Asserts status 200 OK, latency under 500 ms, and confirms latitude and longitude are numbers rather than null or missing keys.',
           keyTakeaway: 'Deep property validation guarantees mobile mapping components receive valid coordinates.'
         }
       ]
@@ -113,16 +105,16 @@ export const lesson03 = {
     {
       type: 'predict-output',
       badge: 'IMAGINE & PREDICT',
-      prompt: 'When we send the corrected request (GET /v1/campus/shuttle/coordinates?route=campus_loop_north) and execute these three assertion chunks, what will appear in the Postman Test Results tab?',
+      prompt: 'When we automate both requests into our Postman collection (the missing parameter test and the valid route test), what will the Test Results tab display?',
       options: [
-        'PASS 3 of 3: Three green checkmarks confirming status 200, latency under 500 ms, and valid numeric coordinates',
-        'FAIL: Because JavaScript requires variables to be declared in uppercase letters',
-        'ERROR: Because Postman cannot inspect JSON numbers inside response objects',
-        'TIMEOUT: Because assertions delay network transmission by sixty seconds'
+        'All assertions pass: The negative check verifies 400 Bad Request with guidance, and the positive check verifies 200 OK with coordinates',
+        'The negative check fails: Testing workbenches only support validating successful 200 OK responses',
+        'The entire suite halts: JavaScript assertions cannot evaluate error messages or numbers',
+        'Both calls timeout: API test suites require mobile phone emulators to run'
       ],
       answerIndex: 0,
       revealTitle: 'Automated Test Results Tab Confirmation',
-      explanation: 'All three assertions pass with bright green checkmarks! Postman evaluated the status code, confirmed the response time was 38 ms (well below 500 ms), and verified that latitude and longitude were valid floating point numbers!'
+      explanation: 'All assertions pass! Postman validates negative error handling (400 Bad Request) just as reliably as positive successful data flows (200 OK), giving complete coverage across both code paths.'
     },
     {
       type: 'heading',
@@ -130,7 +122,7 @@ export const lesson03 = {
     },
     {
       type: 'paragraph',
-      text: 'Here is the complete automated execution in our API workbench. Notice the Test Results tab: our three assertions validate the server contract automatically:',
+      text: 'Here is the automated execution of the positive shuttle call in our API workbench. Notice the Test Results tab: our assertions validate the server contract automatically:',
     },
     {
       type: 'api-inspector',
@@ -185,19 +177,19 @@ export const lesson03 = {
     {
       type: 'source-note',
       label: 'Verified Historical Case Study · August 2012',
-      claim: 'Knight Capital Group Suffers 440 Million Dollar Loss in 45 Minutes Due to Unverified Deployment',
+      claim: 'Knight Capital Group Incurs 440 Million Dollar Loss Following Unverified Deployment',
       url: 'https://www.sec.gov/litigation/admin/2013/34-70694.pdf',
-      verifiedThrough: 'United States Securities and Exchange Commission (SEC) Administrative Proceeding'
+      verifiedThrough: 'United States Securities and Exchange Commission (SEC) Administrative Proceeding File No. 3-15570'
     },
     {
       type: 'callout',
       variant: 'warning',
-      title: 'The Catastrophic Cost of Missing Automated Verification: Knight Capital',
+      title: 'The Real World Cost of Missing Automated Release Checks: Knight Capital',
       paragraphs: [
-        'On August 1, 2012, financial trading firm Knight Capital Group deployed an update to eight servers. A technician mistakenly failed to copy the new software to the eighth server, leaving an obsolete flag active.',
-        'When the market opened at 9:30 AM, the unverified server entered an infinite loop: executing millions of unintended high speed stock trades. Because the team had no automated post deployment verification tests running against the live cluster, the rogue server traded for 45 minutes straight.',
-        'By the time engineers halted the system, the firm had accumulated a staggering loss of 440 million dollars, forcing the company into emergency acquisition.',
-        'The Lesson: Automated API test suites are not optional luxuries. They are automated safety shields that run on every code release to ensure broken code never runs unchecked.',
+        'On August 1, 2012, financial trading firm Knight Capital Group deployed updated order router code across eight servers. During the manual deployment, a technician failed to copy the new code to the eighth server, leaving an obsolete feature flag active on that single machine.',
+        'When the market opened at 9:30 AM, the unverified server repurposed an obsolete order execution mechanism, processing millions of erroneous share transactions in 45 minutes.',
+        'Because the engineering team lacked automated pre release verification suites to validate consistent server configurations and response behavior across all nodes before trading opened, the rogue server operated unnoticed until 440 million dollars in losses had accumulated.',
+        'The Architectural Lesson: Automated verification suites run continuously to catch configuration drift, unverified deployments, and unexpected contract changes before users or downstream services are impacted.',
       ],
     },
     {
@@ -269,23 +261,9 @@ export const lesson03 = {
       ],
     },
     {
-      type: 'victory-milestone',
-      badge: 'MISSION 1 ACCOMPLISHED · PROTOCOL & WORKBENCH CLEARED',
-      rank: 'FOUNDATIONAL API AUTOMATION ENGINEER',
-      title: 'Mission 1 Accomplished: Transit Crisis Resolved and Automated Watchdogs Deployed',
-      summary: 'You have conquered Mission 1! You took on the launch day transit crisis, rejected finger pointing, investigated the failing shuttle locator call directly on the wire, proved the exact 500 error cause by hand, verified the manual fix, and automated the entire validation into a repeatable Postman collection with JavaScript assertions.',
-      powers: [
-        'Decoding HTTP wire messages into methods, endpoints, headers, and payloads with complete confidence',
-        'Distinguishing client errors (4xx) from server crashes (5xx) using the five status code families',
-        'Writing automated JavaScript assertions in Postman using pm.test and pm.expect',
-        'Validating latency budgets and deep JSON coordinate properties directly over the wire',
-      ],
-      disastersPrevented: [
-        'Eliminated the deadlock between mobile and backend teams by providing undeniable wire evidence',
-        'Prevented recurring transit crashes on future releases by deploying automated test watchdogs',
-        'Protected the team from unverified deployment catastrophes like the 2012 Knight Capital disaster',
-      ],
-      warRoomTakeaway: 'You started with zero API knowledge. Now you have investigated a live production crash, proved the fix by hand, and automated the verification in code. Mission 1 is officially conquered!',
+      type: 'mission-accomplished',
+      title: 'Mission 1 Completed: Transit Verification Watchdogs Active',
+      text: 'You have automated both critical transit checks into repeatable JavaScript assertions: the negative check verifies 400 Bad Request to prevent 500 crashes, and the positive check validates 200 OK with numeric coordinates. These assertions now execute on every deployment.'
     },
     {
       type: 'cliffhanger',

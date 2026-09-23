@@ -152,9 +152,9 @@ export const lesson04 = {
       badge: 'IMAGINE & PREDICT',
       prompt: 'When we send this AddBook request for the first time, what response status and payload do you expect from the server?',
       options: [
-        '200 OK with JSON confirmation: { "Msg": "successfully added", "ID": "9781227" }',
-        '404 Not Found because the library catalog is locked for the night',
-        '500 Server Error because the book author is not an enrolled student'
+        '200 OK: Returns a success confirmation message alongside the composite primary key ID',
+        '404 Not Found: Endpoint is unreachable because the library catalog is offline for maintenance',
+        '500 Server Error: Crashes because the book author is not registered in the student directory'
       ],
       answerIndex: 0,
       revealTitle: 'AddBook Live Wire Outcome',
@@ -302,11 +302,21 @@ export const lesson04 = {
       ],
     },
     {
+      type: 'library-workbench',
+    },
+    {
+      type: 'source-note',
+      label: 'Verified Historical Case Study · 1999',
+      claim: 'UK Passport Agency Automation Crisis Caused by Unvalidated Workflows and Inadequate Integration Testing',
+      url: 'https://www.nao.org.uk/reports/the-cancellation-of-the-uk-passport-agencys-computer-system/',
+      verifiedThrough: 'United Kingdom National Audit Office (NAO) Report HC 812'
+    },
+    {
       type: 'battle-scar',
-      metric: 'Enterprise Database Collision',
-      title: 'UK Passport System Crash: The Real Cost of Unhandled Unique Key Collisions',
-      context: 'When government immigration services upgraded their online application database, batch imports of applicant records began failing intermittently. Testing teams had only validated individual records manually and assumed the database would automatically increment sequence IDs. In reality, the database enforced a composite unique key across document number and postal zone. Because automated test suites never verified duplicate submission behaviors or automated record teardown, duplicate applicant records caused cascading transaction rollbacks that delayed hundreds of thousands of citizen passports.',
-      takeaway: 'Never assume a database handles duplicate primary keys gracefully. API automation engineers must explicitly verify unique constraint rejections and automate record deletion teardown steps.'
+      metric: 'Enterprise Workflow Failure',
+      title: 'UK Passport Agency Outage: The Cost of Unvalidated Batch Workflows',
+      context: 'In 1999, the UK Passport Agency deployed a new computerized processing system without completing end to end integration testing or automating negative edge cases. When batch record updates encountered unexpected data schemas and missing field validations, application processing ground to an immediate halt. Over five hundred thousand citizens experienced severe passport issuance delays, costing the agency millions in emergency compensation and staff overtime. The National Audit Office investigation concluded that the project suffered from insufficient integration verification and unvalidated workflow assumptions.',
+      takeaway: 'Never assume database and workflow operations behave correctly under edge conditions. API quality engineers must validate error handling, unique constraints, and multi step request lifecycles before production launch.'
     },
     {
       type: 'triage',

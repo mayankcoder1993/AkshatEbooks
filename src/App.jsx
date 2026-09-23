@@ -55,12 +55,14 @@ const exitNativeFullscreen = () => {
 }
 
 const initialLocation = () => {
-  if (window.location.search.includes('view=blueprint') || window.location.pathname.includes('blueprint')) {
-    return { view: 'blueprint', bookId: 'zero-to-agentic-api-testing', editionId: 'edition-01', preview: false, fullscreen: false }
-  }
   const search = new URLSearchParams(window.location.search)
   const isFsParam = search.get('fullscreen') === 'true'
   const preview = search.get('view') === 'book' || isFsParam
+  const targetBook = search.get('book') || 'zero-to-agentic-api-testing'
+
+  if (window.location.search.includes('view=blueprint') || window.location.pathname.includes('blueprint')) {
+    return { view: 'blueprint', bookId: targetBook, editionId: 'edition-01', preview: false, fullscreen: false }
+  }
   if (window.location.protocol === 'file:') {
     return { view: 'book', bookId: BUILD_BOOK_ID, editionId: BUILD_EDITION_ID, preview: false, fullscreen: false }
   }
@@ -238,7 +240,9 @@ export default function App() {
   }
 
   const openLibrary = () => navigate('library', '/')
-  const openBlueprint = () => navigate('blueprint', '/?view=blueprint')
+  const openBlueprint = (targetBookId = bookId, targetEditionId = editionId) => {
+    navigate('blueprint', `/?view=blueprint&book=${targetBookId || 'zero-to-agentic-api-testing'}`, targetBookId, targetEditionId)
+  }
   const toggleTheme = () => setTheme(value => (value === 'light' ? 'dark' : 'light'))
   const toggleWideMode = () => setIsWide(value => !value)
   const openInNewTab = () => {
@@ -248,12 +252,12 @@ export default function App() {
   if (view === 'blueprint') {
     return (
       <CurriculumBlueprint
-        bookId={publication?.manifest?.id || 'zero-to-agentic-api-testing'}
+        bookId={bookId || publication?.manifest?.id || 'zero-to-agentic-api-testing'}
         onBack={() => {
           if (publication) {
             setView('book')
           } else {
-            navigate('book', '/', 'zero-to-agentic-api-testing', 'edition-01', false)
+            navigate('book', '/', bookId || 'zero-to-agentic-api-testing', editionId || 'edition-01', false)
           }
         }}
         onHome={openLibrary}

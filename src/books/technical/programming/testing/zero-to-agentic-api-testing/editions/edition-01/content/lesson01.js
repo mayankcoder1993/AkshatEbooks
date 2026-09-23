@@ -201,10 +201,10 @@ export const lesson01 = {
       badge: 'IMAGINE & PREDICT',
       prompt: 'When we send a GET request to https://api.github.com/users/octocat, what status code and data fields do you expect the server to return?',
       options: [
-        '200 OK with a JSON object containing login: "octocat", name, and public repo counts',
-        '201 Created because the server generates a new user profile on every call',
-        '404 Not Found because octocat is a fictional cartoon mascot',
-        '500 Server Error because GitHub requires a paid password to read user accounts'
+        '200 OK: Returns the public Octocat profile object containing username and public repository statistics',
+        '201 Created: Generates a brand new user profile on the server database',
+        '404 Not Found: Fails because octocat is a cartoon mascot',
+        '500 Server Error: Crashes because GitHub requires paid authentication to read user data'
       ],
       answerIndex: 0,
       revealTitle: 'GitHub Public API Wire Confirmation',
@@ -266,12 +266,12 @@ export const lesson01 = {
     {
       type: 'callout',
       variant: 'warning',
-      title: 'The Catastrophic Cost of Misunderstanding HTTP GET: The Web Accelerator Incident',
+      title: 'The Real World Cost of Misunderstanding HTTP GET: The Web Accelerator Incident',
       paragraphs: [
-        'In May 2005, Google launched a desktop software utility called Google Web Accelerator. Its purpose was to make browsing faster by pre fetching all links on web pages using background HTTP GET requests before the user clicked them.',
-        'However, thousands of web forums and enterprise administrative panels had implemented destructive actions: such as deleting a user post, banning a member, or clearing a cart: using hyperlinks like `<a href="/admin/delete_post?id=42">Delete</a>`!',
-        'Because the developers bound destructive database operations to HTTP GET instead of HTTP DELETE or POST, Google web pre fetcher automatically visited every delete link it encountered. Within hours, thousands of message boards were erased, administrative databases were purged, and private user carts were cleared worldwide!',
-        'The Architectural Rule: Never use GET for destructive actions. GET must strictly remain a safe, read only operation that leaves server databases unaltered.',
+        'In May 2005, Google launched a utility called Google Web Accelerator. Its purpose was to speed up browsing by pre fetching web links using background HTTP GET requests before the user clicked them.',
+        'However, web forums and enterprise applications had implemented destructive actions: such as deleting a post, modifying account settings, or clearing a cart: using simple hyperlinks like `<a href="/admin/delete_post?id=42">Delete</a>`.',
+        'Because the developers bound state modifying operations to HTTP GET instead of HTTP POST or DELETE, Google web pre fetcher visited every link it encountered. It triggered deletions, cleared carts, and modified application state on forums across the web where destructive actions were bound to GET links.',
+        'The Architectural Rule: Never use GET for state modifying actions. In HTTP specifications (RFC 7231), GET must strictly remain a safe, read only operation that leaves server databases unaltered.',
       ],
     },
     {

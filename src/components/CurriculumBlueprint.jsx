@@ -29,13 +29,13 @@ const SYLLABUS_ITEMS = [
     artifact: 'BigDataCloud Geocoding API'
   },
   {
-    id: 'backend-fastapi-blueprint',
-    title: 'How Backends Build APIs (FastAPI Blueprint)',
-    desc: 'Demystifying the server: Python FastAPI route decorator (@app.get), query parameters mapping, and automatic dictionary-to-JSON serialization.',
+    id: 'backend-express-blueprint',
+    title: 'How Backends Build APIs (Minimal Express Server Blueprint)',
+    desc: 'Demystifying the server: Express route handlers (app.get, app.post), URL path parameters, and in-memory state manipulation.',
     mission: 'm1',
     missionLabel: 'Mission 1',
     chapters: ['Ch 01'],
-    artifact: 'campus-location-service.py'
+    artifact: 'server.js'
   },
   {
     id: 'browser-wire-inspection',
@@ -370,14 +370,14 @@ const CHAPTERS_DATA = [
   {
     num: 'Chapter 04',
     title: 'Manual Testing the College Library API',
-    desc: 'Deploying the local companion test workbench, manual testing of AddBook POST, composite primary keys (isbn + aisle), GetBook GET with query parameters, DeleteBook POST, and manual copy-paste pain.',
+    desc: 'Interactive manual testing of AddBook POST, composite primary keys (isbn + aisle), GetBook GET with query parameters, DeleteBook POST, and manual copy-paste friction.',
     topics: [
-      'Setting Up the Local Companion API Test Workbench',
+      'Interactive Manual Testing with the Library Simulator',
       'AddBook POST: JSON Payloads & Composite Primary Keys',
       'Handling Duplicate Records: Book Already Exists',
       'GetBook GET: Query Parameters & Resource Retrieval',
       'DeleteBook POST: Idempotent Database Cleanup',
-      'Identifying the Pain of Manual Copy-Paste'
+      'Identifying the Friction of Manual Copy-Paste'
     ]
   },
   {
@@ -491,12 +491,113 @@ const CHAPTERS_DATA = [
   }
 ]
 
+const PYTHON_SYLLABUS_ITEMS = [
+  {
+    id: 'py-first-program',
+    title: 'Your First Program: print() and String Literals',
+    desc: 'Understanding the anatomy of a line of code: function names, parentheses, string literals, and quotes. Running your first Python script.',
+    mission: 'm1',
+    missionLabel: 'Module 1',
+    chapters: ['Ch 01'],
+    artifact: 'hello-world'
+  },
+  {
+    id: 'py-execution-pipeline',
+    title: 'From Code to Screen: The Python Execution Pipeline',
+    desc: 'How Python reads source files, compiles them to bytecode, and executes them line by line in the Python Virtual Machine (PVM).',
+    mission: 'm1',
+    missionLabel: 'Module 1',
+    chapters: ['Ch 02'],
+    artifact: 'code-to-machine'
+  },
+  {
+    id: 'py-variables-memory',
+    title: 'Variables: Names as Sticky Labels for Values',
+    desc: 'How Python stores values in memory and attaches variable labels. The assignment operator (=), memory diagrams, and reassignment mechanics.',
+    mission: 'm2',
+    missionLabel: 'Module 2',
+    chapters: ['Ch 03'],
+    artifact: 'variables'
+  },
+  {
+    id: 'py-data-types',
+    title: 'Data Types: Strings, Integers, Floats, and Booleans',
+    desc: 'Exploring Python four primary foundational types: text (str), whole numbers (int), decimal numbers (float), and truth values (bool).',
+    mission: 'm2',
+    missionLabel: 'Module 2',
+    chapters: ['Ch 04'],
+    artifact: 'data-types'
+  },
+  {
+    id: 'py-type-coercion',
+    title: 'Type Checking and Explicit Conversions',
+    desc: 'Using type() to inspect object classes, understanding type mismatch exceptions, and converting types with str(), int(), and float().',
+    mission: 'm2',
+    missionLabel: 'Module 2',
+    chapters: ['Ch 04'],
+    artifact: 'type-conversions'
+  }
+]
+
+const PYTHON_CHAPTERS = [
+  {
+    num: 'Chapter 01',
+    title: 'Your First Program: Hello, World!',
+    desc: 'We begin with an empty file and end with a real result: understanding every single character we typed.',
+    topics: [
+      'The print() function and syntax structure',
+      'String literals and quotation marks',
+      'Executing Python in the interactive terminal',
+      'Diagnosing SyntaxError exceptions early'
+    ]
+  },
+  {
+    num: 'Chapter 02',
+    title: 'How Does Our Code Reach the Computer?',
+    desc: 'Follow one tiny message from our file to the screen. No hidden knowledge required.',
+    topics: [
+      'Source code files (.py)',
+      'The Python Interpreter and Compilation to Bytecode',
+      'The Python Virtual Machine (PVM)',
+      'Memory, CPU, and standard output terminal'
+    ]
+  },
+  {
+    num: 'Chapter 03',
+    title: 'Variables: Names for Values',
+    desc: 'Store a value, change it, and inspect computer memory one line at a time.',
+    topics: [
+      'Variables as sticky note labels in memory',
+      'The assignment operator (=) vs mathematical equality',
+      'Reassigning variable values over time',
+      'Variable naming rules and PEP 8 conventions'
+    ]
+  },
+  {
+    num: 'Chapter 04',
+    title: 'Data Types: What Kind of Value?',
+    desc: 'Meet strings, integers, floats, and booleans: and see why type changes what Python can do.',
+    topics: [
+      'The four primitive types: str, int, float, and bool',
+      'Inspecting types with type()',
+      'String concatenation vs mathematical addition',
+      'Explicit type conversion with int(), float(), and str()'
+    ]
+  }
+]
+
 export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-testing', onBack, onHome, theme, onToggleTheme }) {
+  const [activeBook, setActiveBook] = useState(bookId === 'python-absolute-beginners' ? 'python-absolute-beginners' : 'zero-to-agentic-api-testing')
   const [search, setSearch] = useState('')
   const [filter, setFilter] = useState('all')
+
+  const isPython = activeBook === 'python-absolute-beginners'
+  const currentSyllabus = isPython ? PYTHON_SYLLABUS_ITEMS : SYLLABUS_ITEMS
+  const currentChapters = isPython ? PYTHON_CHAPTERS : CHAPTERS_DATA
+
   const [checkedMap, setCheckedMap] = useState(() => {
     const initial = {}
-    SYLLABUS_ITEMS.forEach(item => {
+    SYLLABUS_ITEMS.concat(PYTHON_SYLLABUS_ITEMS).forEach(item => {
       const stored = localStorage.getItem('checklist_' + item.id)
       initial[item.id] = stored !== null ? stored === 'true' : false
     })
@@ -511,7 +612,7 @@ export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-test
     })
   }
 
-  const filteredItems = SYLLABUS_ITEMS.filter(item => {
+  const filteredItems = currentSyllabus.filter(item => {
     const matchesFilter = filter === 'all' || item.mission === filter
     const matchesSearch = !search ||
       item.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -521,9 +622,9 @@ export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-test
     return matchesFilter && matchesSearch
   })
 
-  const total = SYLLABUS_ITEMS.length
-  const completed = Object.values(checkedMap).filter(Boolean).length
-  const percent = Math.round((completed / total) * 100)
+  const total = currentSyllabus.length
+  const completed = currentSyllabus.filter(i => checkedMap[i.id]).length
+  const percent = total > 0 ? Math.round((completed / total) * 100) : 0
 
   return (
     <div className="blueprint-screen">
@@ -543,79 +644,135 @@ export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-test
       <div className="blueprint-container">
         <div className="blueprint-hero">
           <div className="blueprint-eyebrow">Enterprise Curriculum Architecture & Master Plan</div>
-          <h1>{bookId === 'python-absolute-beginners' ? 'Python for Absolute Beginners' : 'Zero to Agentic API Testing'}</h1>
+          
+          <div className="blueprint-book-selector" style={{ display: 'flex', gap: '0.75rem', margin: '1rem 0' }}>
+            <button
+              type="button"
+              className={`btn ${!isPython ? 'primary' : ''}`}
+              onClick={() => { setActiveBook('zero-to-agentic-api-testing'); setFilter('all'); }}
+            >
+              Zero to Agentic API Testing (13 Chapters)
+            </button>
+            <button
+              type="button"
+              className={`btn ${isPython ? 'primary' : ''}`}
+              onClick={() => { setActiveBook('python-absolute-beginners'); setFilter('all'); }}
+            >
+              Python for Absolute Beginners (4 Chapters)
+            </button>
+          </div>
+
+          <h1>{isPython ? 'Python for Absolute Beginners' : 'Zero to Agentic API Testing'}</h1>
           <p>
-            {bookId === 'python-absolute-beginners'
+            {isPython
               ? 'A foundational programming curriculum mapping interactive coding concepts, visual data structures, and algorithmic logic from first principles.'
               : 'A comprehensive pedagogical blueprint mapping core transcripts and syllabus concepts into an authentic enterprise narrative across 13 structured chapters.'}
           </p>
 
-          <div className="bp-mission-grid">
-            <div className="bp-mission-card m1">
-              <div>
-                <div className="bp-mission-header">
-                  <span className="bp-badge m1">Mission 1</span>
-                  <span className="bp-mission-chapters-count">Chapters 1 to 3</span>
+          {!isPython ? (
+            <div className="bp-mission-grid">
+              <div className="bp-mission-card m1">
+                <div>
+                  <div className="bp-mission-header">
+                    <span className="bp-badge m1">Mission 1</span>
+                    <span className="bp-mission-chapters-count">Chapters 1 to 3</span>
+                  </div>
+                  <h3 className="bp-mission-title">The Core Protocol and Campus Cloud Integration</h3>
+                  <p className="bp-mission-desc">
+                    Resolving the campus launch day crisis, auditing the invisible network wire, understanding client server decoupling, examining backend Express server code blueprints, mastering the 4 REST CRUD operations, and setting up collaborative Postman workspaces with Git style forks and Pull Requests.
+                  </p>
                 </div>
-                <h3 className="bp-mission-title">The Core Protocol and Campus Cloud Integration</h3>
-                <p className="bp-mission-desc">
-                  Resolving the campus launch day crisis, auditing the invisible network wire, understanding client server decoupling, examining backend FastAPI code blueprints, mastering the 4 REST CRUD operations, and setting up collaborative Postman workspaces with Git style forks and Pull Requests.
-                </p>
+                <div className="bp-mission-pills">
+                  <span className="bp-pill">Ch 01: Understanding APIs</span>
+                  <span className="bp-pill">Ch 02: REST & HTTP</span>
+                  <span className="bp-pill">Ch 03: Postman Setup</span>
+                </div>
               </div>
-              <div className="bp-mission-pills">
-                <span className="bp-pill">Ch 01: Understanding APIs</span>
-                <span className="bp-pill">Ch 02: REST & HTTP</span>
-                <span className="bp-pill">Ch 03: Postman Setup</span>
-              </div>
-            </div>
 
-            <div className="bp-mission-card m2">
-              <div>
-                <div className="bp-mission-header">
-                  <span className="bp-badge m2">Mission 2</span>
-                  <span className="bp-mission-chapters-count">Chapters 4 to 8</span>
+              <div className="bp-mission-card m2">
+                <div>
+                  <div className="bp-mission-header">
+                    <span className="bp-badge m2">Mission 2</span>
+                    <span className="bp-mission-chapters-count">Chapters 4 to 8</span>
+                  </div>
+                  <h3 className="bp-mission-title">Automating Student & Campus Services at Scale</h3>
+                  <p className="bp-mission-desc">
+                    Automating the College Library API suite, mastering JavaScript assertions with Chai and the pm object, navigating the 5 variable scopes, dynamic ISBN generation, automated property transfer chaining, complex nested JSON array operations (find, filter, map, reduce), and high-volume Data Driven Testing (DDT) with external CSV/JSON files.
+                  </p>
                 </div>
-                <h3 className="bp-mission-title">Automating Student & Campus Services at Scale</h3>
-                <p className="bp-mission-desc">
-                  Automating the College Library API suite, mastering JavaScript assertions with Chai and the pm object, navigating the 5 variable scopes, dynamic ISBN generation, automated property transfer chaining, complex nested JSON array operations (find, filter, map, reduce), and high-volume Data Driven Testing (DDT) with external CSV/JSON files.
-                </p>
+                <div className="bp-mission-pills">
+                  <span className="bp-pill">Ch 04: Library CRUD</span>
+                  <span className="bp-pill">Ch 05: JS Assertions</span>
+                  <span className="bp-pill">Ch 06: Scopes & Variables</span>
+                  <span className="bp-pill">Ch 07: Chaining & Arrays</span>
+                  <span className="bp-pill">Ch 08: Data Driven Testing</span>
+                </div>
               </div>
-              <div className="bp-mission-pills">
-                <span className="bp-pill">Ch 04: Library CRUD</span>
-                <span className="bp-pill">Ch 05: JS Assertions</span>
-                <span className="bp-pill">Ch 06: Scopes & Variables</span>
-                <span className="bp-pill">Ch 07: Chaining & Arrays</span>
-                <span className="bp-pill">Ch 08: Data Driven Testing</span>
-              </div>
-            </div>
 
-            <div className="bp-mission-card m3">
-              <div>
-                <div className="bp-mission-header">
-                  <span className="bp-badge m3">Mission 3</span>
-                  <span className="bp-mission-chapters-count">Chapters 9 to 13</span>
+              <div className="bp-mission-card m3">
+                <div>
+                  <div className="bp-mission-header">
+                    <span className="bp-badge m3">Mission 3</span>
+                    <span className="bp-mission-chapters-count">Chapters 9 to 13</span>
+                  </div>
+                  <h3 className="bp-mission-title">Enterprise Resilience, Mock Servers & CI CD</h3>
+                  <p className="bp-mission-desc">
+                    Multi-step E-Commerce transactional testing, production negative testing matrices, defensive try-catch scripting, hosted Postman Mock Servers, JSON Schema contract verification with Ajv, GraphQL single-query resolution, OAuth 2.0 authorization code handshakes, SOAP 1.2 XML services with xml2Json, and headless Newman CI/CD regression gates with HTML Extra reports.
+                  </p>
                 </div>
-                <h3 className="bp-mission-title">Enterprise Resilience, Mock Servers & CI CD</h3>
-                <p className="bp-mission-desc">
-                  Multi-step E-Commerce transactional testing, production negative testing matrices, defensive try-catch scripting, hosted Postman Mock Servers, JSON Schema contract verification with Ajv, GraphQL single-query resolution, OAuth 2.0 authorization code handshakes, SOAP 1.2 XML services with xml2Json, and headless Newman CI/CD regression gates with HTML Extra reports.
-                </p>
-              </div>
-              <div className="bp-mission-pills">
-                <span className="bp-pill">Ch 09: Resilience & E-Commerce</span>
-                <span className="bp-pill">Ch 10: Mock Servers & GraphQL</span>
-                <span className="bp-pill">Ch 11: OAuth 2.0 Tokens</span>
-                <span className="bp-pill">Ch 12: SOAP XML WebServices</span>
-                <span className="bp-pill">Ch 13: Newman CLI & CI CD</span>
+                <div className="bp-mission-pills">
+                  <span className="bp-pill">Ch 09: Resilience & E-Commerce</span>
+                  <span className="bp-pill">Ch 10: Mock Servers & GraphQL</span>
+                  <span className="bp-pill">Ch 11: OAuth 2.0 Tokens</span>
+                  <span className="bp-pill">Ch 12: SOAP XML WebServices</span>
+                  <span className="bp-pill">Ch 13: Newman CLI & CI CD</span>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="bp-mission-grid">
+              <div className="bp-mission-card m1">
+                <div>
+                  <div className="bp-mission-header">
+                    <span className="bp-badge m1">Module 1</span>
+                    <span className="bp-mission-chapters-count">Chapters 1 & 2</span>
+                  </div>
+                  <h3 className="bp-mission-title">The First Program and Execution Mechanics</h3>
+                  <p className="bp-mission-desc">
+                    Writing your very first line of code with print(), understanding string literals, and tracing the path of instructions from human-readable text into bytecode and machine execution inside the Python Virtual Machine.
+                  </p>
+                </div>
+                <div className="bp-mission-pills">
+                  <span className="bp-pill">Ch 01: Hello, World!</span>
+                  <span className="bp-pill">Ch 02: Code to Machine</span>
+                </div>
+              </div>
+
+              <div className="bp-mission-card m2">
+                <div>
+                  <div className="bp-mission-header">
+                    <span className="bp-badge m2">Module 2</span>
+                    <span className="bp-mission-chapters-count">Chapters 3 & 4</span>
+                  </div>
+                  <h3 className="bp-mission-title">Memory Allocation and Data Types</h3>
+                  <p className="bp-mission-desc">
+                    Mastering variables as named labels in computer memory, observing assignment vs equality, and exploring Python four core data types (str, int, float, bool) alongside explicit type casting.
+                  </p>
+                </div>
+                <div className="bp-mission-pills">
+                  <span className="bp-pill">Ch 03: Variables</span>
+                  <span className="bp-pill">Ch 04: Data Types</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="bp-controls">
           <input
             type="text"
             className="bp-search"
-            placeholder="🔍 Search syllabus concepts (e.g. OAuth, FastAPI, BigDataCloud, find, reduce, Newman, scopes)..."
+            placeholder={isPython ? "🔍 Search Python concepts (e.g. print, variables, types, int, float, bytecode)..." : "🔍 Search syllabus concepts (e.g. OAuth, Express, BigDataCloud, find, reduce, Newman, scopes)..."}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -624,26 +781,28 @@ export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-test
               className={`bp-filter-btn ${filter === 'all' ? 'active' : ''}`}
               onClick={() => setFilter('all')}
             >
-              All Topics ({SYLLABUS_ITEMS.length})
+              All Topics ({currentSyllabus.length})
             </button>
             <button
               className={`bp-filter-btn ${filter === 'm1' ? 'active' : ''}`}
               onClick={() => setFilter('m1')}
             >
-              Mission 1
+              {isPython ? 'Module 1' : 'Mission 1'}
             </button>
             <button
               className={`bp-filter-btn ${filter === 'm2' ? 'active' : ''}`}
               onClick={() => setFilter('m2')}
             >
-              Mission 2
+              {isPython ? 'Module 2' : 'Mission 2'}
             </button>
-            <button
-              className={`bp-filter-btn ${filter === 'm3' ? 'active' : ''}`}
-              onClick={() => setFilter('m3')}
-            >
-              Mission 3
-            </button>
+            {!isPython && (
+              <button
+                className={`bp-filter-btn ${filter === 'm3' ? 'active' : ''}`}
+                onClick={() => setFilter('m3')}
+              >
+                Mission 3
+              </button>
+            )}
           </div>
         </div>
 
@@ -659,7 +818,7 @@ export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-test
           <div className="bp-table-head">
             <div>✓</div>
             <div>Syllabus Concept & Curriculum Topic</div>
-            <div>Mission</div>
+            <div>{isPython ? 'Module' : 'Mission'}</div>
             <div>Chapter Coverage</div>
             <div>Primary Artifact / Endpoint</div>
           </div>
@@ -697,7 +856,7 @@ export default function CurriculumBlueprint({ bookId = 'zero-to-agentic-api-test
 
         <h2 className="bp-section-heading">Chapter by Chapter Architectural Breakdown</h2>
         <div className="bp-chapters-grid">
-          {CHAPTERS_DATA.map(ch => (
+          {currentChapters.map(ch => (
             <div key={ch.num} className="bp-ch-card">
               <div className="bp-ch-num">{ch.num}</div>
               <h4 className="bp-ch-title">{ch.title}</h4>

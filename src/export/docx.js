@@ -181,6 +181,13 @@ async function blockToDocx(b) {
       ];
       return [tableBox(b.title || 'INTERACTIVE 5-LINE API SERVER', items, 'EEF1FA')];
     }
+    case 'library-workbench': {
+      const items = [
+        p('Interactive manual workbench demonstrating the 3-step College Library CRUD lifecycle: AddBook (POST), GetBook (GET with query parameter ?id=), and DeleteBook (POST teardown).'),
+        p([new TextRun({ text: 'The Friction of Manual Testing: ', bold: true }), new TextRun({ text: 'Requires manually copying the generated ID from Step 1 and pasting it into Step 2 and Step 3, demonstrating why automated request chaining is essential.' })])
+      ];
+      return [tableBox('MANUAL COLLEGE LIBRARY CRUD SIMULATOR', items, 'EEF5FA')];
+    }
     case 'mission-tracker': {
       const items = [p(b.text)];
       if (b.image) {

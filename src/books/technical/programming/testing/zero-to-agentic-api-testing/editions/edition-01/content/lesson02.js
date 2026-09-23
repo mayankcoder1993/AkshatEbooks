@@ -142,10 +142,10 @@ export const lesson02 = {
         {
           label: 'Request Verb and Resource Path',
           filename: 'request_line.http',
-          code: 'GET /v1/campus/shuttle/coordinates?route= HTTP/1.1\nHost: api.campustransit.org',
-          title: 'The Verb and Query String',
-          explanation: 'The mobile app calls the shuttle coordinates endpoint using an HTTP GET verb. Notice the query parameter: `route=` has an empty string!',
-          keyTakeaway: 'The mobile app code forgot to attach the selected route name to the query string.'
+          code: 'GET /v1/campus/shuttle/coordinates HTTP/1.1\nHost: api.campustransit.org',
+          title: 'The Verb and Missing Query Parameter',
+          explanation: 'The mobile app calls the shuttle coordinates endpoint using an HTTP GET verb. Notice that the required query parameter route is completely missing from the request line!',
+          keyTakeaway: 'The mobile app code omitted the required route parameter on initial screen load.'
         },
         {
           label: 'Request Metadata Headers',
@@ -164,16 +164,16 @@ export const lesson02 = {
     {
       type: 'predict-output',
       badge: 'IMAGINE & PREDICT',
-      prompt: 'When this request arrives at the backend server with an empty query parameter (?route=), how will an unhardened backend service respond?',
+      prompt: 'When this request arrives at the backend server with the route query parameter missing, how will an unhardened backend service respond?',
       options: [
-        '200 OK with GPS coordinates for every bus in the state',
-        '500 Internal Server Error because the backend software code threw an unhandled NullPointerException when parsing the empty route string',
-        '201 Created with a brand new bus route entry added to the database',
-        '301 Moved Permanently redirecting the phone to an external commercial mapping site'
+        '200 OK: Returns GPS coordinates for all routes across the campus',
+        '500 Server Error: Crashes with uncaught NullPointerException because the missing parameter was null',
+        '201 Created: Creates a brand new transit route on the server database',
+        '301 Moved Permanently: Redirects to a third party commercial map service'
       ],
       answerIndex: 1,
       revealTitle: 'Raw Wire Response from Server',
-      explanation: 'The backend crashed! Because the backend developer wrote `String routeName = request.getParameter("route"); routeName.toUpperCase();` without checking for empty values, the server threw a fatal NullPointerException and crashed with a 500 Internal Server Error!'
+      explanation: 'The backend crashed! In Java, an omitted query parameter causes request.getParameter("route") to return null (unlike ?route= which returns an empty string ""). Calling .trim() on null threw an uncaught java.lang.NullPointerException at RouteLocatorService.java:42, crashing the gateway with 500 Internal Server Error!'
     },
     {
       type: 'heading',
@@ -187,7 +187,7 @@ export const lesson02 = {
       type: 'api-inspector',
       title: 'Live Wire Capture: Failing Campus Shuttle Request',
       method: 'GET',
-      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates?route=',
+      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates',
       headers: {
         'Accept': 'application/json',
         'Authorization': 'Bearer campus_student_tok_9918'
@@ -199,18 +199,18 @@ export const lesson02 = {
         statusCode: 500,
         error: 'Internal Server Error',
         exception: 'java.lang.NullPointerException',
-        message: 'Parameter route cannot be null or empty string at RouteLocatorService.java:42',
+        message: 'Cannot invoke "String.trim()" because "route" is null at RouteLocatorService.java:42',
         timestamp: '2026-09-23T09:15:00Z'
       }
     },
     {
       type: 'callout',
       variant: 'danger',
-      title: 'The Truth Uncovered: Both Teams Shared the Blame',
+      title: 'The Truth Uncovered: Technical Mechanism of the Crash',
       paragraphs: [
-        '1. The Mobile Team Flaw: The mobile app had a coding bug: on startup, it failed to initialize the default route selection, sending `?route=` as an empty string.',
-        '2. The Backend Team Flaw: The server had an unhandled exception: instead of validating input and returning a polite `400 Bad Request` with message "Please provide a valid route name", the backend crashed with an unhandled `500 Internal Server Error` and leaked internal code line numbers.',
-        '3. This is why API testing is indispensable: neither team could see the real defect by staring at their own code. The network wire revealed the truth in seconds!',
+        '1. The Parameter Distinction: In web application servers (such as Java Servlets or Spring Boot), omitting a query parameter entirely causes request.getParameter("route") to evaluate to null. Passing ?route= evaluates to an empty string (""). Both require defensive handling.',
+        '2. The Backend Defect: The server code attempted route.trim().toUpperCase() directly without checking if route was null. This triggered an unhandled java.lang.NullPointerException that crashed through to a 500 error, exposing stack traces.',
+        '3. The Architectural Fix: Defensive input validation on the server must check: if (route == null || route.trim().isEmpty()) and immediately return HTTP 400 Bad Request with a clear message: {"error": "route parameter is required"}. Simultaneously, the mobile app must supply the default route on boot.',
       ],
     },
     {
@@ -220,19 +220,19 @@ export const lesson02 = {
     {
       type: 'source-note',
       label: 'Verified Historical Case Study · October 2013',
-      claim: 'Healthcare.gov Launch Paralysis Caused by Unhandled Gateway Timeouts and Cascading 500 Failures',
+      claim: 'Healthcare.gov Launch Meltdown Caused by Capacity Bottlenecks and Untested Integration Dependencies',
       url: 'https://oig.hhs.gov/oei/reports/oei-03-14-00230.pdf',
       verifiedThrough: 'United States Department of Health and Human Services (HHS) Office of Inspector General'
     },
     {
       type: 'callout',
       variant: 'warning',
-      title: 'The Cost of Unhandled 500 Cascades: Healthcare.gov Launch Meltdown',
+      title: 'The Real World Cost of Untested Dependencies: Healthcare.gov Launch',
       paragraphs: [
         'On October 1, 2013, the United States federal health insurance exchange opened to the public. Within minutes, the system slowed to a crawl and crashed for millions of citizens.',
-        'The Department of Health and Human Services Inspector General report documented that cross agency microservices relied on synchronous backend API requests with missing input validation. When identity verification services became overloaded, downstream gateways returned generic 500 errors and unhandled timeouts instead of graceful queues.',
-        'Because user registration was blocked at the API layer, only six people successfully registered for health plans on the entire first day of nationwide launch!',
-        'The Takeaway: Always test error status codes. An API must handle invalid inputs gracefully with 4xx codes rather than crashing the system with 5xx server exceptions.',
+        'The Department of Health and Human Services Inspector General report documented capacity bottlenecks, cross agency timeout dependencies, and lack of end to end integration testing before release. When identity verification services became overloaded, downstream systems faced cascading unhandled timeouts and generic 500 crashes instead of graceful degradation or early validation.',
+        'Because user registration was blocked at the API layer, only six people successfully registered for health plans on the entire first day of nationwide launch.',
+        'The Takeaway: Always test error status codes. An API must handle missing or invalid inputs gracefully with 4xx codes rather than crashing the system with unhandled 5xx server exceptions.',
       ],
     },
     {

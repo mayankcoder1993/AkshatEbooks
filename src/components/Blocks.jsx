@@ -346,9 +346,26 @@ function MiniApiSandbox({ title = 'Build & Test Your Own 5-Line In-Memory API', 
     { id: 1, title: 'Clean Architecture', author: 'Robert Martin' },
     { id: 2, title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann' }
   ])
+  const [inputTitle, setInputTitle] = useState('The Pragmatic Programmer')
+  const [inputAuthor, setInputAuthor] = useState('David Thomas')
+  const [targetId, setTargetId] = useState(1)
   const [activeMethod, setActiveMethod] = useState('GET')
   const [lastAction, setLastAction] = useState('Server started. Initialized with 2 books in memory.')
   const [status, setStatus] = useState('200 OK')
+  const [showCode, setShowCode] = useState(false)
+
+  const serverCode = `// Minimal 5-line Express API Server (server.js)
+const express = require('express');
+const app = express();
+app.use(express.json());
+let books = [{ id: 1, title: "Clean Architecture", author: "Robert Martin" }];
+
+app.get('/books', (req, res) => res.json(books));
+app.post('/books', (req, res) => { const b = { id: books.length + 1, ...req.body }; books.push(b); res.status(201).json(b); });
+app.put('/books/:id', (req, res) => { const idx = books.findIndex(b => b.id == req.params.id); books[idx] = { id: Number(req.params.id), ...req.body }; res.json(books[idx]); });
+app.patch('/books/:id', (req, res) => { const b = books.find(b => b.id == req.params.id); Object.assign(b, req.body); res.json(b); });
+app.delete('/books/:id', (req, res) => { books = books.filter(b => b.id != req.params.id); res.json({ msg: "removed" }); });
+app.listen(3000);`
 
   const handleGet = () => {
     setActiveMethod('GET')
@@ -359,35 +376,49 @@ function MiniApiSandbox({ title = 'Build & Test Your Own 5-Line In-Memory API', 
   const handlePost = () => {
     setActiveMethod('POST')
     const nextId = books.length > 0 ? Math.max(...books.map(b => b.id)) + 1 : 1
-    const newBook = { id: nextId, title: 'The Pragmatic Programmer', author: 'David Thomas' }
+    const newBook = { id: nextId, title: inputTitle.trim() || 'Untitled Book', author: inputAuthor.trim() || 'Anonymous' }
     setBooks(prev => [...prev, newBook])
     setStatus('201 Created')
-    setLastAction(`POST /books added "${newBook.title}" (ID: ${nextId}) to the server memory array!`)
+    setLastAction(`POST /books added "${newBook.title}" (ID: ${nextId}) to server memory!`)
   }
 
   const handlePut = () => {
     setActiveMethod('PUT')
-    if (books.length === 0) {
+    const target = books.find(b => b.id === Number(targetId))
+    if (!target) {
       setStatus('404 Not Found')
-      setLastAction('PUT /books/1 failed: no records exist in server memory to replace.')
+      setLastAction(`PUT /books/${targetId} failed: ID ${targetId} does not exist in memory.`)
       return
     }
-    setBooks(prev => prev.map((b, i) => i === 0 ? { ...b, title: 'Clean Code: Refactored Edition' } : b))
+    setBooks(prev => prev.map(b => b.id === Number(targetId) ? { id: Number(targetId), title: inputTitle.trim() || 'Replaced Title', author: inputAuthor.trim() || 'Replaced Author' } : b))
     setStatus('200 OK')
-    setLastAction('PUT /books/1 completely replaced record ID 1 with new payload attributes.')
+    setLastAction(`PUT /books/${targetId} completely replaced record ID ${targetId} with new payload.`)
+  }
+
+  const handlePatch = () => {
+    setActiveMethod('PATCH')
+    const target = books.find(b => b.id === Number(targetId))
+    if (!target) {
+      setStatus('404 Not Found')
+      setLastAction(`PATCH /books/${targetId} failed: ID ${targetId} does not exist in memory.`)
+      return
+    }
+    setBooks(prev => prev.map(b => b.id === Number(targetId) ? { ...b, title: inputTitle.trim() || b.title } : b))
+    setStatus('200 OK')
+    setLastAction(`PATCH /books/${targetId} partially modified only the title of ID ${targetId}, leaving author unchanged.`)
   }
 
   const handleDelete = () => {
     setActiveMethod('DELETE')
-    if (books.length === 0) {
+    const target = books.find(b => b.id === Number(targetId))
+    if (!target) {
       setStatus('404 Not Found')
-      setLastAction('DELETE /books/1 failed: array is already empty in server memory.')
+      setLastAction(`DELETE /books/${targetId} failed: ID ${targetId} does not exist in memory.`)
       return
     }
-    const removed = books[books.length - 1]
-    setBooks(prev => prev.slice(0, prev.length - 1))
+    setBooks(prev => prev.filter(b => b.id !== Number(targetId)))
     setStatus('200 OK')
-    setLastAction(`DELETE /books/${removed.id} removed "${removed.title}" from memory.`)
+    setLastAction(`DELETE /books/${targetId} permanently removed record from memory.`)
   }
 
   return (
@@ -396,22 +427,72 @@ function MiniApiSandbox({ title = 'Build & Test Your Own 5-Line In-Memory API', 
         <span className="mini-api-badge">INTERACTIVE 5-LINE API SERVER</span>
         <h3 className="mini-api-title">{title}</h3>
         <p className="mini-api-intro">
-          This is what an API actually is under the hood: a simple server holding data in memory, answering HTTP verbs. Click each method button below to send requests and watch the server memory array update live!
+          This is what an API actually is under the hood: a simple server holding data in memory, answering HTTP verbs. Type custom fields below and click each method to see the server memory array and wire response update live!
         </p>
       </div>
 
+      <div className="mini-api-input-bar">
+        <div className="input-group">
+          <label>Book Title:</label>
+          <input
+            type="text"
+            value={inputTitle}
+            onChange={e => setInputTitle(e.target.value)}
+            placeholder="Type book title"
+          />
+        </div>
+        <div className="input-group">
+          <label>Author:</label>
+          <input
+            type="text"
+            value={inputAuthor}
+            onChange={e => setInputAuthor(e.target.value)}
+            placeholder="Type author name"
+          />
+        </div>
+        <div className="input-group small">
+          <label>Target ID:</label>
+          <input
+            type="number"
+            min="1"
+            value={targetId}
+            onChange={e => setTargetId(e.target.value)}
+          />
+        </div>
+        <button
+          type="button"
+          className="code-toggle-btn"
+          onClick={() => setShowCode(v => !v)}
+        >
+          {showCode ? 'Hide Server Code ✕' : 'View Server Code (server.js) ⚙'}
+        </button>
+      </div>
+
+      {showCode && (
+        <div className="mini-api-code-view">
+          <div className="code-view-head">
+            <span>server.js (Node.js & Express)</span>
+            <small>Actual backend code listening on port 3000</small>
+          </div>
+          <pre className="code-view-body"><code>{serverCode}</code></pre>
+        </div>
+      )}
+
       <div className="mini-api-controls">
         <button type="button" className={`api-btn get ${activeMethod === 'GET' ? 'active' : ''}`} onClick={handleGet}>
-          GET /books (Read)
+          GET /books (Read All)
         </button>
         <button type="button" className={`api-btn post ${activeMethod === 'POST' ? 'active' : ''}`} onClick={handlePost}>
-          POST /books (Create)
+          POST /books (Create New)
         </button>
         <button type="button" className={`api-btn put ${activeMethod === 'PUT' ? 'active' : ''}`} onClick={handlePut}>
-          PUT /books/1 (Replace)
+          PUT /books/{targetId} (Full Replace)
+        </button>
+        <button type="button" className={`api-btn patch ${activeMethod === 'PATCH' ? 'active' : ''}`} onClick={handlePatch}>
+          PATCH /books/{targetId} (Partial Modify)
         </button>
         <button type="button" className={`api-btn delete ${activeMethod === 'DELETE' ? 'active' : ''}`} onClick={handleDelete}>
-          DELETE /books/last (Remove)
+          DELETE /books/{targetId} (Remove)
         </button>
       </div>
 
@@ -441,6 +522,173 @@ function MiniApiSandbox({ title = 'Build & Test Your Own 5-Line In-Memory API', 
   )
 }
 
+function LibraryApiWorkbench({ staticMode = false }) {
+  const [catalog, setCatalog] = useState([
+    { ID: 'LIB101', name: 'Learning HTTP Wire Basics', isbn: 'LIB', aisle: '101', author: 'Dr. Sarah Chen' }
+  ])
+  const [addName, setAddName] = useState('Zero to Agentic API Testing')
+  const [addAuthor, setAddAuthor] = useState('Alex Mercer')
+  const [addIsbn, setAddIsbn] = useState('9781')
+  const [addAisle, setAddAisle] = useState('227')
+
+  const [addResponse, setAddResponse] = useState(null)
+  const [getQueryId, setGetQueryId] = useState('')
+  const [getResponse, setGetResponse] = useState(null)
+  const [deleteId, setDeleteId] = useState('')
+  const [deleteResponse, setDeleteResponse] = useState(null)
+
+  const handleAddBook = () => {
+    const compositeId = addIsbn + addAisle
+    const existing = catalog.find(b => b.ID === compositeId)
+    if (existing) {
+      setAddResponse({ status: '200 OK', body: { msg: 'Book already exists' }, isError: true })
+      return
+    }
+    const newBook = { ID: compositeId, name: addName, isbn: addIsbn, aisle: addAisle, author: addAuthor }
+    setCatalog(prev => [...prev, newBook])
+    setAddResponse({ status: '200 OK', body: { Msg: 'successfully added', ID: compositeId }, isError: false })
+  }
+
+  const handleGetBook = () => {
+    if (!getQueryId.trim()) {
+      setGetResponse({ status: '404 Not Found', body: { msg: 'Please provide an id parameter' }, isError: true })
+      return
+    }
+    const match = catalog.find(b => b.ID === getQueryId.trim())
+    if (!match) {
+      setGetResponse({ status: '404 Not Found', body: { msg: 'The book by requested id is not found!' }, isError: true })
+    } else {
+      setGetResponse({ status: '200 OK', body: [{ book_name: match.name, isbn: match.isbn, aisle: match.aisle }], isError: false })
+    }
+  }
+
+  const handleDeleteBook = () => {
+    if (!deleteId.trim()) {
+      setDeleteResponse({ status: '404 Not Found', body: { msg: 'Please provide an ID to delete' }, isError: true })
+      return
+    }
+    const target = catalog.find(b => b.ID === deleteId.trim())
+    if (!target) {
+      setDeleteResponse({ status: '404 Not Found', body: { msg: 'book is not found' }, isError: true })
+    } else {
+      setCatalog(prev => prev.filter(b => b.ID !== deleteId.trim()))
+      setDeleteResponse({ status: '200 OK', body: { msg: 'book is successfully deleted' }, isError: false })
+    }
+  }
+
+  return (
+    <section className="library-workbench-card">
+      <div className="workbench-head">
+        <span className="workbench-badge">INTERACTIVE LAB · FEEL THE COPY PASTE FRICTION</span>
+        <h3 className="workbench-title">Manual College Library CRUD Simulator</h3>
+        <p className="workbench-desc">
+          Execute the three operations by hand. Notice how you must copy the generated ID from Step 1 and paste it into Step 2 and Step 3: this is the exact manual pain that motivates automated request chaining!
+        </p>
+      </div>
+
+      <div className="workbench-steps-grid">
+        <div className="wb-step-card">
+          <div className="wb-step-head">
+            <span className="step-num">ACTION 1</span>
+            <strong>POST /v1/books (AddBook)</strong>
+          </div>
+          <div className="wb-form-fields">
+            <div className="wb-input-item">
+              <label>Title:</label>
+              <input type="text" value={addName} onChange={e => setAddName(e.target.value)} />
+            </div>
+            <div className="wb-input-item">
+              <label>Author:</label>
+              <input type="text" value={addAuthor} onChange={e => setAddAuthor(e.target.value)} />
+            </div>
+            <div className="wb-input-row">
+              <div className="wb-input-item">
+                <label>ISBN:</label>
+                <input type="text" value={addIsbn} onChange={e => setAddIsbn(e.target.value)} />
+              </div>
+              <div className="wb-input-item">
+                <label>Aisle:</label>
+                <input type="text" value={addAisle} onChange={e => setAddAisle(e.target.value)} />
+              </div>
+            </div>
+            <button type="button" className="api-btn post full-width" onClick={handleAddBook}>
+              Send POST /v1/books 🚀
+            </button>
+          </div>
+          {addResponse && (
+            <div className={`wb-response-box ${addResponse.isError ? 'err' : 'ok'}`}>
+              <div className="wb-resp-status">Status: {addResponse.status}</div>
+              <pre><code>{JSON.stringify(addResponse.body, null, 2)}</code></pre>
+              {addResponse.body.ID && (
+                <button type="button" className="copy-id-btn" onClick={() => {
+                  setGetQueryId(addResponse.body.ID);
+                  setDeleteId(addResponse.body.ID);
+                }}>
+                  📋 Copy ID "{addResponse.body.ID}" for GetBook and DeleteBook
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+
+        <div className="wb-step-card">
+          <div className="wb-step-head">
+            <span className="step-num">ACTION 2</span>
+            <strong>GET /v1/books?id= (GetBook)</strong>
+          </div>
+          <div className="wb-form-fields">
+            <div className="wb-input-item">
+              <label>Paste Book ID Here:</label>
+              <input
+                type="text"
+                placeholder="Paste generated ID (e.g. 9781227)"
+                value={getQueryId}
+                onChange={e => setGetQueryId(e.target.value)}
+              />
+            </div>
+            <button type="button" className="api-btn get full-width" onClick={handleGetBook}>
+              Send GET /v1/books?id={getQueryId || '...'} 🚀
+            </button>
+          </div>
+          {getResponse && (
+            <div className={`wb-response-box ${getResponse.isError ? 'err' : 'ok'}`}>
+              <div className="wb-resp-status">Status: {getResponse.status}</div>
+              <pre><code>{JSON.stringify(getResponse.body, null, 2)}</code></pre>
+            </div>
+          )}
+        </div>
+
+        <div className="wb-step-card">
+          <div className="wb-step-head">
+            <span className="step-num">ACTION 3</span>
+            <strong>POST /v1/books/delete (DeleteBook)</strong>
+          </div>
+          <div className="wb-form-fields">
+            <div className="wb-input-item">
+              <label>Paste Book ID to Delete:</label>
+              <input
+                type="text"
+                placeholder="Paste ID to delete (e.g. 9781227)"
+                value={deleteId}
+                onChange={e => setDeleteId(e.target.value)}
+              />
+            </div>
+            <button type="button" className="api-btn delete full-width" onClick={handleDeleteBook}>
+              Send POST /v1/books/delete 🚀
+            </button>
+          </div>
+          {deleteResponse && (
+            <div className={`wb-response-box ${deleteResponse.isError ? 'err' : 'ok'}`}>
+              <div className="wb-resp-status">Status: {deleteResponse.status}</div>
+              <pre><code>{JSON.stringify(deleteResponse.body, null, 2)}</code></pre>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function Block({ block: b, staticMode = false }) {
   switch (b.type) {
     case 'heading': return <Heading>{b.text}</Heading>
@@ -448,6 +696,7 @@ export function Block({ block: b, staticMode = false }) {
     case 'chunked-code': return <ChunkedCode {...b} />
     case 'predict-output': return <PredictOutput {...b} staticMode={staticMode} />
     case 'mini-api': return <MiniApiSandbox {...b} staticMode={staticMode} />
+    case 'library-workbench': return <LibraryApiWorkbench staticMode={staticMode} />
     case 'image':
       return (
         <figure className="modern-ui-box lesson-figure">
