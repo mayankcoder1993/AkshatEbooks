@@ -109,6 +109,20 @@ async function blockToDocx(b) {
       ];
       return [tableBox(`WAR ROOM BATTLE SCAR · ${b.metric || 'PRODUCTION LESSON'}`, items, 'FFF8E8')];
     }
+    case 'battle-plan': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.phases.flatMap(ph => [
+          p([
+            new TextRun({ text: `${ph.phase} (${ph.timing}): ${ph.title} `, bold: true, color: ph.status === 'active' ? colors.teal : colors.navy }),
+            ...(ph.status === 'active' ? [new TextRun({ text: '[CURRENT FOCUS]', bold: true, color: colors.teal })] : [])
+          ]),
+          p(ph.desc),
+          p([new TextRun({ text: 'Outcome: ', bold: true, color: colors.teal }), ...rich(ph.outcome)])
+        ])
+      ];
+      return [tableBox(b.title || 'THE 3 PHASE BATTLE PLAN', items, 'EEF8F6')];
+    }
     case 'mission-tracker': {
       const items = [p(b.text)];
       if (b.image) {

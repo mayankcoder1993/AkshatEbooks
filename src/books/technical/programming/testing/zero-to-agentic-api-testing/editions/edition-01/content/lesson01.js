@@ -22,7 +22,7 @@ export const lesson01 = {
     {
       type: 'mission',
       title: 'Mission 1: The Core Protocol and Campus Cloud Integration',
-      text: 'Welcome to Apex Campus. Today is launch day for our new university app, and we have an emergency: thousands of students downloaded the app to check bus schedules and class registrations, but the app keeps freezing on their screens with endless spinning loading circles. The mobile developers insist their app is fine and blame the server team. The backend server developers insist their database is healthy and blame the phone app. Security rules strictly forbid giving the phone app direct access to the server database password. The phone and server must communicate through APIs: digital messengers that carry questions and answers across the network. As Lead API Test Automation Architect, your job is to step into the war room, find out why the two systems are failing to communicate, and build automated tests in Postman so launch day never crashes again.\n\nHow We Will Approach This Mission: We cannot fix a car if we do not know what is under the hood. Right now, we do not know the basics of APIs, so we cannot diagnose why the server is crashing. We will approach Mission 1 in three clear, purposeful phases:\n\n• Phase 1 (Chapter 1 · Right Now): The Foundation. We master the basics of APIs, learn how phone apps and servers communicate, see how backend developers write API code in Python, and inspect real live messages directly in the browser. Outcome: You gain the fundamental knowledge needed to look past the screen and inspect network messages with confidence.\n\n• Phase 2 (Chapter 2 · Next Step): The Investigation. We decode the language of the wire: learning the five actions (GET, POST, PUT, PATCH, DELETE) and status codes (200 OK to 500 server crash). Outcome: You find the exact hidden 500 error that crashed the campus bus coordinate lookup.\n\n• Phase 3 (Chapter 3 · Mission Victory): The Automation. We set up Postman, build a shared team workspace, and create our first automated test suite. Outcome: Mission 1 Cleared! The campus transit API is fully protected by automated tests so this crisis never happens again.',
+      text: 'Welcome to Apex Campus. Today is launch day for our new university app, and we have an emergency: thousands of students downloaded the app to check bus schedules and class registrations, but the app keeps freezing on their screens with endless spinning loading circles. The mobile developers insist their app is fine and blame the server team. The backend server developers insist their database is healthy and blame the phone app. Security rules strictly forbid giving the phone app direct access to the server database password. The phone and server must communicate through APIs: digital messengers that carry questions and answers across the network. As Lead API Test Automation Architect, your job is to step into the war room, find out why the two systems are failing to communicate, and build automated tests in Postman so launch day never crashes again.',
       image: {
         src: warRoomImg,
         file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
@@ -47,6 +47,38 @@ export const lesson01 = {
         'Phase 1 Hands On: Inspect real, live API messages directly in your browser with zero complicated setup.',
         'Phase 1 Strategy: Learn why testing APIs is faster and more dependable than clicking buttons on a phone screen.',
       ],
+    },
+    {
+      type: 'battle-plan',
+      badge: 'TACTICAL MISSION ROADMAP',
+      title: 'How We Will Approach Mission 1: The 3 Phase Battle Plan',
+      intro: 'We cannot fix a car if we do not know what is under the hood. Right now, we do not know the basics of APIs, so we cannot diagnose why the server is crashing. We will approach Mission 1 in three clear, purposeful phases:',
+      phases: [
+        {
+          phase: 'Phase 1',
+          timing: 'Chapter 1 · Right Now',
+          title: 'The Foundation',
+          status: 'active',
+          desc: 'We master the basics of APIs, learn how phone apps and servers communicate, see how backend developers write API code in Python, and inspect real live messages directly in the browser.',
+          outcome: 'You gain the fundamental knowledge needed to look past the screen and inspect network messages with confidence.'
+        },
+        {
+          phase: 'Phase 2',
+          timing: 'Chapter 2 · Next Step',
+          title: 'The Investigation',
+          status: 'upcoming',
+          desc: 'We decode the language of the wire: learning the five actions (GET, POST, PUT, PATCH, DELETE) and status codes (200 OK to 500 server crash).',
+          outcome: 'You find the exact hidden 500 error that crashed the campus bus coordinate lookup.'
+        },
+        {
+          phase: 'Phase 3',
+          timing: 'Chapter 3 · Mission Victory',
+          title: 'The Automation',
+          status: 'upcoming',
+          desc: 'We set up Postman, build a shared team workspace, and create our first automated test suite.',
+          outcome: 'Mission 1 Cleared! The campus transit API is fully protected by automated tests so this crisis never happens again.'
+        }
+      ]
     },
     {
       type: 'heading',

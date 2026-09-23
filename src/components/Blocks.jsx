@@ -108,6 +108,39 @@ function BattleScar({ title, context, takeaway, metric = 'PRODUCTION LESSON' }) 
   )
 }
 
+function BattlePlan({ badge = 'TACTICAL MISSION ROADMAP', title = 'The 3 Phase Battle Plan', intro, phases = [] }) {
+  return (
+    <section className="battle-plan-card">
+      <div className="battle-plan-header">
+        <span className="battle-plan-badge">{badge}</span>
+        <h3 className="battle-plan-title">{title}</h3>
+      </div>
+      <div className="battle-plan-body">
+        {intro && <p className="battle-plan-intro"><RichText text={intro} /></p>}
+        <div className="battle-plan-grid">
+          {phases.map((ph, idx) => (
+            <div key={idx} className={`battle-plan-phase-card ${ph.status === 'active' ? 'active' : ''}`}>
+              <div className="phase-card-top">
+                <span className="phase-pill">{ph.phase}</span>
+                {ph.status === 'active' && <span className="phase-active-tag">CURRENT FOCUS</span>}
+              </div>
+              {ph.timing && <span className="phase-timing">{ph.timing}</span>}
+              <h4 className="phase-card-title">{ph.title}</h4>
+              <p className="phase-card-desc"><RichText text={ph.desc} /></p>
+              {ph.outcome && (
+                <div className="phase-outcome-box">
+                  <strong>★ Phase Outcome:</strong>
+                  <RichText text={ph.outcome} />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export function Block({ block: b, staticMode = false }) {
   switch (b.type) {
     case 'heading': return <Heading>{b.text}</Heading>
@@ -158,6 +191,7 @@ export function Block({ block: b, staticMode = false }) {
     case 'mission-hud': return <MissionHud {...b} />
     case 'triage': return <WarRoomTriage {...b} staticMode={staticMode} />
     case 'battle-scar': return <BattleScar {...b} />
+    case 'battle-plan': return <BattlePlan {...b} />
     case 'mission':
       return (
         <section className="mission modern-mission-box">
