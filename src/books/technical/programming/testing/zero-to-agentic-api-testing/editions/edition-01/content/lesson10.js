@@ -17,6 +17,12 @@ export const lesson10 = {
       status: 'ACTIVE'
     },
     {
+      type: 'chapter-opener',
+      achieve: 'Unblock Agile testing sprints and prevent contract drift by mastering JSON Schema validation, hosted Postman Mock Servers, and modern GraphQL query architectures.',
+      how: 'Define strict array schemas matching production REST contracts, configure cloud mock examples, execute seamless mock to live environment flips, and parameterize GraphQL queries.',
+      carry: 'Production grade schema validation and mock virtualization techniques that prepare you for enterprise OAuth 2.0 security in Chapter 11.'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 3 PROGRESS · STEP 2 OF 5',
       title: 'Continuing Mission 3: Contract Testing and Agile Simulation',
@@ -40,13 +46,15 @@ export const lesson10 = {
       lines: [
         '{',
         '  "$schema": "http://json-schema.org/draft-07/schema#",',
-        '  "type": "object",',
-        '  "required": ["book_name", "isbn", "aisle", "author"],',
-        '  "properties": {',
-        '    "book_name": { "type": "string" },',
-        '    "isbn": { "type": "string", "minLength": 3 },',
-        '    "aisle": { "type": "integer", "minimum": 1 },',
-        '    "author": { "type": "string" }',
+        '  "type": "array",',
+        '  "items": {',
+        '    "type": "object",',
+        '    "required": ["book_name", "isbn", "aisle"],',
+        '    "properties": {',
+        '      "book_name": { "type": "string" },',
+        '      "isbn": { "type": "string", "minLength": 3 },',
+        '      "aisle": { "type": "string" }',
+        '    }',
         '  }',
         '}',
       ],
@@ -54,11 +62,11 @@ export const lesson10 = {
     {
       type: 'callout',
       variant: 'note',
-      title: 'Detecting Costly Type Mismatches Early',
+      title: 'The Array Trap in REST Search Endpoints',
       paragraphs: [
-        'A frequent bug in web applications is data type discrepancy: the mobile app expects a numerical price (45), but the backend accidentally serializes it as a string ("45").',
-        'Manual inspection often overlooks this subtle bug because the human eye sees the digits 45 in both cases.',
-        'JSON Schema validation catches type mismatches automatically during test execution, preventing severe client side calculation errors.',
+        'A frequent pitfall among freshers is declaring the root type as object when inspecting query endpoints.',
+        'In RESTful services, search endpoints like GET /v1/books?id=... return a list of matching entries even when only one record matches. The root container is an array ([]) rather than a single object ({}).',
+        'Declaring type: "object" against an array response immediately triggers a schema mismatch failure. Always verify whether the root token is a curly bracket or an open square bracket!',
       ],
     },
     {
@@ -78,9 +86,9 @@ export const lesson10 = {
         {
           label: 'Chunk 1: Defining Contract Schema',
           filename: 'schema-contract.js',
-          code: 'const schemaContract = {\n    type: "object",\n    required: ["book_name", "isbn", "aisle", "author"],\n    properties: {\n        book_name: { type: "string" },\n        isbn: { type: "string" },\n        aisle: { type: "integer", minimum: 1 },\n        author: { type: "string" }\n    }\n};',
+          code: 'const schemaContract = {\n    type: "array",\n    items: {\n        type: "object",\n        required: ["book_name", "isbn", "aisle"],\n        properties: {\n            book_name: { type: "string" },\n            isbn: { type: "string" },\n            aisle: { type: "string" }\n        }\n    }\n};',
           title: 'The Architectural Contract Blueprint',
-          explanation: 'Specifies mandatory fields and exact expected data types (strings, positive integers).',
+          explanation: 'Specifies that the response is an array of book objects with required string properties.',
           keyTakeaway: 'The contract acts as the immutable standard between frontend and backend teams.'
         },
         {
@@ -104,16 +112,16 @@ export const lesson10 = {
     {
       type: 'predict-output',
       badge: 'IMAGINE & PREDICT',
-      prompt: 'If a backend update changes the aisle field from integer 42 to string "42", how will this schema test react?',
+      prompt: 'If a backend update changes the aisle field from string "42" to a number 42, how will this schema test react?',
       options: [
-        'The test fails immediately: tv4 flags a type mismatch because string was received where integer was required',
-        'The test passes green because JSON automatically converts strings to numbers',
+        'The test fails immediately: tv4 flags a type mismatch because number was received where string was required',
+        'The test passes green because JSON automatically converts numbers to strings',
         'Postman ignores the schema and passes the status code',
         'The server rolls back the database'
       ],
       answerIndex: 0,
       revealTitle: 'Schema Type Mismatch Confirmation',
-      explanation: 'Schema drift caught instantly! JSON Schema is strictly typed: tv4 flags an AssertionError with message "Invalid type: string (expected integer) at /aisle". This protects mobile apps from crashing before bad code reaches production!'
+      explanation: 'Schema drift caught instantly! JSON Schema is strictly typed: tv4 flags an AssertionError with message "Invalid type: number (expected string) at /0/aisle". This protects mobile apps from crashing before bad code reaches production!'
     },
     {
       type: 'heading',

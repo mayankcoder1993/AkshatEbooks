@@ -16,6 +16,12 @@ export const lesson08 = {
       status: 'ACTIVE'
     },
     {
+      type: 'chapter-opener',
+      achieve: 'Scale single request tests into bulk regression engines by driving automated iterations with external CSV datasets and mastering Data Scope precedence.',
+      how: 'Structure tabular test data, ingest row values using pm.iterationData, parameterize request bodies, and monitor iteration level execution scorecards.',
+      carry: 'The capability to execute high volume regression suites against external datasets, closing Mission 2 and preparing for complex e commerce workflows in Chapter 9.'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 5 OF 5',
       title: 'Completing Mission 2: Ingesting Bulk Inventory with External Data Files',
@@ -50,6 +56,16 @@ export const lesson08 = {
     {
       type: 'paragraph',
       text: 'You can download the ready to use dataset directly: [Download books_data.csv](/materials/zero-to-agentic-api-testing/lesson-08/books_data.csv) or view the single file on GitHub: [Raw books_data.csv](https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/lesson-08/books_data.csv). Clicking the link opens only that individual file.',
+    },
+    {
+      type: 'code',
+      filename: 'books_data.csv',
+      lines: [
+        'book_name,author,aisle',
+        'Learn Postman Testing,John Doe,101',
+        'Mastering Git and GitHub,Jane Smith,102',
+        'Modern Angular Architecture,Alex Mercer,103',
+      ],
     },
     {
       type: 'paragraph',
@@ -138,10 +154,19 @@ export const lesson08 = {
       type: 'terminal',
       command: 'Postman Collection Runner Bulk Results',
       lines: [
-        'Iteration 1: Ingested "Learn Postman Testing" : 6 of 6 passed (180 ms)',
-        'Iteration 2: Ingested "Mastering Git and GitHub" : 6 of 6 passed (172 ms)',
-        'Iteration 3: Ingested "Modern Angular Architecture" : 6 of 6 passed (165 ms)',
-        'Bulk Execution Completed: 3 iterations, 9 requests, 18 assertions, 0 failures (517 ms)',
+        'Iteration 1 of 3 (Row 1):',
+        '  POST AddBook: 200 OK (38 ms) -> Msg: "successfully added", ID: "LIB104821"',
+        '  GET GetBook?id=LIB104821: 200 OK (29 ms) -> Verified name "Learn Postman Testing", aisle "101"',
+        '  POST DeleteBook: 200 OK (26 ms) -> msg: "book is successfully deleted"',
+        'Iteration 2 of 3 (Row 2):',
+        '  POST AddBook: 200 OK (36 ms) -> Msg: "successfully added", ID: "LIB207192"',
+        '  GET GetBook?id=LIB207192: 200 OK (28 ms) -> Verified name "Mastering Git and GitHub", aisle "102"',
+        '  POST DeleteBook: 200 OK (25 ms) -> msg: "book is successfully deleted"',
+        'Iteration 3 of 3 (Row 3):',
+        '  POST AddBook: 200 OK (37 ms) -> Msg: "successfully added", ID: "LIB303841"',
+        '  GET GetBook?id=LIB303841: 200 OK (28 ms) -> Verified name "Modern Angular Architecture", aisle "103"',
+        '  POST DeleteBook: 200 OK (25 ms) -> msg: "book is successfully deleted"',
+        'Bulk Execution Completed: 3 iterations, 9 requests, 18 assertions, 0 failures (312 ms)',
       ],
     },
     {

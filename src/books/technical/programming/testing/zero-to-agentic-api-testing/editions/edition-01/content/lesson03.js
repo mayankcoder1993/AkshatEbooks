@@ -10,6 +10,12 @@ export const lesson03 = {
   tags: ['Postman', 'Assertions', 'JavaScript', 'Automation', 'Collections', 'Collaboration'],
   blocks: [
     {
+      type: 'chapter-opener',
+      achieve: 'Translate manual wire inspections into automated, repeatable JavaScript assertions inside Postman.',
+      how: 'Configuring Postman request tabs, writing Chai assertion scripts for status codes, latency budgets, and coordinate data types across both the negative 400 guard and positive 200 contract requests.',
+      carry: 'An automated Postman test collection containing both guarded transit requests.'
+    },
+    {
       type: 'mission-hud',
       mission: 'Mission 1: The Core Protocol and Campus Cloud Integration',
       phase: 'Phase 3 of 3: Automating the Wire Verification',
@@ -118,15 +124,52 @@ export const lesson03 = {
     },
     {
       type: 'heading',
-      text: 'Step 5: Executing the Suite Live in the Workbench',
+      text: 'Step 5: Executing Both Automated Requests in the Postman Suite',
     },
     {
       type: 'paragraph',
-      text: 'Here is the automated execution of the positive shuttle call in our API workbench. Notice the Test Results tab: our assertions validate the server contract automatically:',
+      text: 'Now let us run both automated checks inside our Postman workbench. First, we execute Request 1 to verify our negative regression guard:',
     },
     {
       type: 'api-inspector',
-      title: 'Automated Postman Suite: Campus Shuttle Locator',
+      title: 'Automated Postman Suite: Request 1 (Negative 400 Guard)',
+      method: 'GET',
+      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer campus_student_tok_9918'
+      },
+      status: '400 Bad Request',
+      time: '14 ms',
+      size: '184 B',
+      responseBody: {
+        statusCode: 400,
+        error: 'Bad Request',
+        message: 'route parameter is required'
+      },
+      assertions: [
+        'Omitted route returns 400 Bad Request',
+        'Error message guides the client'
+      ],
+      testScript: [
+        'pm.test("Omitted route returns 400 Bad Request", function () {',
+        '    pm.response.to.have.status(400);',
+        '});',
+        '',
+        'pm.test("Error message guides the client", function () {',
+        '    const data = pm.response.json();',
+        '    pm.expect(data.error).to.include("route parameter is required");',
+        '});'
+      ],
+      sampleLabel: 'POSTMAN TEST EXECUTION: NEGATIVE GUARD'
+    },
+    {
+      type: 'paragraph',
+      text: 'Next, we execute Request 2 to verify our positive contract with the valid route identifier:',
+    },
+    {
+      type: 'api-inspector',
+      title: 'Automated Postman Suite: Request 2 (Positive 200 Contract)',
       method: 'GET',
       url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates?route=campus_loop_north',
       headers: {
@@ -168,7 +211,8 @@ export const lesson03 = {
         '    pm.expect(data.coordinates.latitude).to.be.a("number");',
         '    pm.expect(data.coordinates.longitude).to.be.a("number");',
         '});'
-      ]
+      ],
+      sampleLabel: 'POSTMAN TEST EXECUTION: POSITIVE CONTRACT'
     },
     {
       type: 'heading',

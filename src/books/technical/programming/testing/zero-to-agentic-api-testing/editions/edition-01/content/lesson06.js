@@ -16,6 +16,12 @@ export const lesson06 = {
       status: 'ACTIVE'
     },
     {
+      type: 'chapter-opener',
+      achieve: 'Eliminate hardcoded URLs and duplicate key collisions by mastering the five variable tiers, dynamic environment switching, and collision safe dynamic generation.',
+      how: 'Map variable precedence from Local to Global, safeguard secrets using Initial versus Current values, generate unique runtime ISBNs in Pre request scripts, and analyze collision mathematics.',
+      carry: 'A parameterized environment and dynamically generated variable keys that seamlessly feed the downstream request chaining pipeline in Chapter 7.'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 3 OF 5',
       title: 'Continuing Mission 2: Eliminating Hardcoded URLs and Collision Errors',
@@ -168,6 +174,17 @@ export const lesson06 = {
           keyTakeaway: 'Collection tier keeps generated data accessible to all downstream requests.'
         }
       ]
+    },
+    {
+      type: 'callout',
+      variant: 'warning',
+      title: 'The Birthday Paradox: Why Naive Random Numbers Collide in CI CD',
+      paragraphs: [
+        'Why not simply generate a random 4 digit integer between 1000 and 9999? Consider the mathematics of the Birthday Paradox.',
+        'With only 9,000 possible 4 digit values, probability theory dictates that after just 112 test executions, there is a 50 percent chance that two runs generate the exact same number! In an automated continuous integration pipeline running 20 builds daily, collisions will inevitably cause false negative test failures within days.',
+        'To achieve collision resistance, combine multiple entropy sources: a timestamp like Date.now(), or Postman built in dynamic variables like {{$randomISBN}} and {{$randomInt}}.',
+        'Crucial Automation Law: Even with collision resistant generation, automated teardown via DeleteBook is mandatory. Relying on randomness alone leaves orphaned records that bloat database indexes and corrupt catalog counts over time.',
+      ],
     },
     {
       type: 'predict-output',

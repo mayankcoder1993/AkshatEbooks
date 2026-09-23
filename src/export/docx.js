@@ -153,6 +153,14 @@ async function blockToDocx(b) {
       ];
       return [tableBox(b.title || 'ARCHITECTURAL DECONSTRUCTION', items, 'F3F6FA')];
     }
+    case 'chapter-opener': {
+      const items = [
+        p([new TextRun({ text: 'WE WILL ACHIEVE: ', bold: true, color: colors.teal }), ...rich(b.achieve)]),
+        p([new TextRun({ text: 'HOW WE WILL DO IT: ', bold: true, color: colors.indigo }), ...rich(b.how)]),
+        p([new TextRun({ text: 'WHAT YOU WILL CARRY FORWARD: ', bold: true, color: colors.navy }), ...rich(b.carry)])
+      ];
+      return [tableBox('CHAPTER ROADMAP & LEARNING CONTRACT', items, 'F8FAFC')];
+    }
     case 'chunked-code': {
       const items = [
         ...(b.intro ? [p(b.intro)] : []),

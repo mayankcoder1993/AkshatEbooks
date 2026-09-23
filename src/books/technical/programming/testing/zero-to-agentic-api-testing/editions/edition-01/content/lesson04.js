@@ -10,6 +10,12 @@ export const lesson04 = {
   tags: ['Postman', 'Collections', 'CRUD', 'Library API', 'Hands On'],
   blocks: [
     {
+      type: 'chapter-opener',
+      achieve: 'Execute the complete Create, Read, and Teardown lifecycle against an enterprise Library API service by hand.',
+      how: 'Sending AddBook POST, witnessing duplicate ISBN and aisle collisions, querying GetBook with query parameters, and executing DeleteBook teardown.',
+      carry: 'The canonical 3 step Library API request contract: AddBook, GetBook, and DeleteBook.'
+    },
+    {
       type: 'mission-hud',
       mission: 'Mission 2: Automating Student and Campus Services at Scale',
       phase: 'Phase 1 of 5: Manual CRUD Verification',
@@ -116,6 +122,18 @@ export const lesson04 = {
       ],
     },
     {
+      type: 'callout',
+      variant: 'note',
+      title: 'This Service Contract: Inspecting Real World Conventions',
+      paragraphs: [
+        'Before dispatching requests, inspect the published contract of this college library service:',
+        '• AddBook (POST /v1/books): Returns HTTP status 200 OK (rather than 201) with a capitalized Msg property: { "Msg": "successfully added", "ID": "9781227" }.',
+        '• GetBook (GET /v1/books?id=...): Returns an array containing matching book items: [{ "book_name": "...", "isbn": "...", "aisle": "..." }]. Notice that aisle is a string and the author field is omitted from this read endpoint.',
+        '• DeleteBook (POST /v1/books/delete): Requires a JSON body with the ID: { "ID": "..." }, returning HTTP status 200 OK with lowercase msg: { "msg": "book is successfully deleted" }.',
+        'As quality automation engineers, our job is to test against the exact service contract rather than assuming theoretical conventions.',
+      ],
+    },
+    {
       type: 'heading',
       text: 'Step 2: Action 1: Adding a Book (POST)',
     },
@@ -195,7 +213,47 @@ export const lesson04 = {
     },
     {
       type: 'heading',
-      text: 'Step 3: Action 2: Retrieving by ID (GET with Query Params)',
+      text: 'Step 3: Action 2: Duplicate Key Collision Before Cleanup',
+    },
+    {
+      type: 'paragraph',
+      text: 'What happens if you execute AddBook a second time with the exact same payload before deleting the first record? Let us test the database unique constraint:',
+    },
+    {
+      type: 'api-inspector',
+      title: 'Live Interactive Wire Inspector: Duplicate AddBook POST',
+      method: 'POST',
+      url: 'https://qa-api.campuslibrary.org/v1/books',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      requestBody: {
+        name: 'Zero to Agentic API Testing',
+        isbn: '9781',
+        aisle: '227',
+        author: 'Alex Mercer'
+      },
+      status: '200 OK',
+      time: '110 ms',
+      size: '142 B',
+      responseBody: {
+        msg: 'Book already exists'
+      },
+      sampleLabel: 'DUPLICATE CONSTRAINT REJECTION'
+    },
+    {
+      type: 'callout',
+      variant: 'warning',
+      title: 'Why Duplicate Insertion Failed',
+      paragraphs: [
+        'The Library API enforces a composite unique key across ISBN and aisle (9781 + 227 = 9781227).',
+        'Because record 9781227 already exists in the database table, the server rejects insertion and returns: {"msg": "Book already exists"}.',
+        'This demonstrates why test teardown is mandatory: without automated deletion, subsequent test runs will fail immediately on duplicate constraints!',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 4: Action 3: Retrieving by ID (GET with Query Params)',
     },
     {
       type: 'paragraph',
@@ -235,7 +293,7 @@ export const lesson04 = {
     },
     {
       type: 'heading',
-      text: 'Step 4: Action 3: Deleting the Book (POST Teardown)',
+      text: 'Step 5: Action 4: Deleting the Book (POST Teardown)',
     },
     {
       type: 'paragraph',
@@ -277,24 +335,43 @@ export const lesson04 = {
     },
     {
       type: 'heading',
-      text: 'Step 5: The Duplicate Key Collision and Manual Testing Pain',
+      text: 'Step 6: Action 5: Verifying Re-add After Teardown Cleanup',
     },
     {
-      type: 'bug',
-      filename: 'AddBook-Duplicate.http',
-      prompt: 'You execute AddBook a second time with the exact same payload. The server returns: { "msg": "Book already exists" }. Why?',
-      lines: [
-        'POST /v1/books HTTP/1.1',
-        'Payload: { "name": "Zero to Agentic API Testing", "isbn": "9781", "aisle": "227", "author": "Alex Mercer" }',
-        'Response: 200 OK { "msg": "Book already exists" }',
-      ],
-      bugLine: 3,
-      explain: 'The Library API enforces a unique constraint on the composite key (ISBN + aisle). Because a book with ISBN 9781 and aisle 227 already exists in the database, duplicate insertion is rejected. In Chapter 6, we solve this by generating unique ISBNs dynamically.',
+      type: 'paragraph',
+      text: 'Now that DeleteBook has successfully purged record 9781227 from the database, what happens if we execute AddBook again with the exact same payload? Let us verify:',
+    },
+    {
+      type: 'api-inspector',
+      title: 'Live Wire Capture: AddBook After Teardown Succeeded',
+      method: 'POST',
+      url: 'https://qa-api.campuslibrary.org/v1/books',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      requestBody: {
+        name: 'Zero to Agentic API Testing',
+        isbn: '9781',
+        aisle: '227',
+        author: 'Alex Mercer'
+      },
+      status: '200 OK',
+      time: '175 ms',
+      size: '248 B',
+      responseBody: {
+        Msg: 'successfully added',
+        ID: '9781227'
+      },
+      sampleLabel: 'CLEAN RE-ADDITION AFTER TEARDOWN'
+    },
+    {
+      type: 'heading',
+      text: 'Step 7: The Friction of Manual Testing: Why We Must Automate',
     },
     {
       type: 'callout',
       variant: 'warning',
-      title: 'The Friction of Manual Testing: Why We Must Automate',
+      title: 'Why Manual Testing Fails at Scale',
       paragraphs: [
         '1. Copy Paste Fatigue: In this manual exercise, we had to look at the AddBook response, copy "9781227", open a new tab for GetBook, paste the ID into the URL, run it, then copy it into DeleteBook. Doing this for 500 books would take hours of tedious, error prone labor.',
         '2. False Confidence: When you inspect JSON visually with your eyes, you can easily miss subtle typos or missing fields.',

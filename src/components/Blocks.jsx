@@ -282,6 +282,27 @@ function ChunkedCode({ badge = 'CODE IN CHUNKS', title, intro, chunks = [] }) {
   )
 }
 
+function ChapterOpener({ achieve, how, carry, staticMode }) {
+  return (
+    <section className="chapter-opener-card">
+      <div className="opener-grid">
+        <div className="opener-cell achieve">
+          <span className="opener-kicker">WE WILL ACHIEVE</span>
+          <p className="opener-text"><RichText text={achieve} /></p>
+        </div>
+        <div className="opener-cell how">
+          <span className="opener-kicker">HOW WE WILL DO IT</span>
+          <p className="opener-text"><RichText text={how} /></p>
+        </div>
+        <div className="opener-cell carry">
+          <span className="opener-kicker">WHAT YOU WILL CARRY FORWARD</span>
+          <p className="opener-text"><RichText text={carry} /></p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function PredictOutput({ badge = 'IMAGINE & PREDICT', prompt, code, options = [], answerIndex = 0, revealTitle = 'Actual Output & Debrief', explanation, staticMode = false }) {
   const [selected, setSelected] = useState(null)
   const [revealed, setRevealed] = useState(staticMode)
@@ -289,6 +310,44 @@ function PredictOutput({ badge = 'IMAGINE & PREDICT', prompt, code, options = []
   const handleSelect = (idx) => {
     setSelected(idx)
     setRevealed(true)
+  }
+
+  if (staticMode) {
+    return (
+      <section className="predict-output-card static-mode">
+        <div className="predict-head">
+          <span className="predict-badge">{badge}</span>
+          <h3 className="predict-prompt">{prompt}</h3>
+        </div>
+        {code && (
+          <div className="predict-target-code">
+            <pre className="code-box"><code>{Array.isArray(code) ? code.join('\n') : code}</code></pre>
+          </div>
+        )}
+        <div className="predict-print-options">
+          {options.map((opt, idx) => (
+            <div key={idx} className="print-opt-row">
+              <span className="print-opt-letter">{String.fromCharCode(65 + idx)}.</span>
+              <span className="print-opt-text"><RichText text={opt} /></span>
+            </div>
+          ))}
+        </div>
+        <div className="print-write-box">
+          <span className="print-write-label">✏️ YOUR PREDICTED OUTCOME (Write down your status and body prediction before checking below):</span>
+          <div className="print-write-line" />
+        </div>
+        <div className="predict-reveal-pane static-reveal">
+          <div className="predict-reveal-header">
+            <span className="predict-reveal-tag">CONFIRMED WIRE RESULT</span>
+            <h4>{revealTitle}</h4>
+          </div>
+          <p className="predict-correct-callout">
+            <strong>Confirmed Answer: Option {String.fromCharCode(65 + answerIndex)}</strong>
+          </p>
+          <p className="predict-explanation"><RichText text={explanation} /></p>
+        </div>
+      </section>
+    )
   }
 
   return (
@@ -366,6 +425,70 @@ app.put('/books/:id', (req, res) => { const idx = books.findIndex(b => b.id == r
 app.patch('/books/:id', (req, res) => { const b = books.find(b => b.id == req.params.id); Object.assign(b, req.body); res.json(b); });
 app.delete('/books/:id', (req, res) => { books = books.filter(b => b.id != req.params.id); res.json({ msg: "removed" }); });
 app.listen(3000);`
+
+  if (staticMode) {
+    return (
+      <section className="mini-api-card static-mode">
+        <div className="mini-api-head">
+          <span className="mini-api-badge">REFERENCE ARCHITECTURE · 5-LINE IN-MEMORY API</span>
+          <h3 className="mini-api-title">{title}</h3>
+          <p className="mini-api-intro">
+            A minimal Node.js and Express web service running in memory. The table below summarizes each method, path, and state transition:
+          </p>
+        </div>
+        <div className="static-api-table-wrapper">
+          <table className="static-api-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Endpoint</th>
+                <th>Operation</th>
+                <th>Status</th>
+                <th>State Transition in RAM</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span className="method-badge get">GET</span></td>
+                <td><code>/books</code></td>
+                <td>Read all records</td>
+                <td>200 OK</td>
+                <td>Unchanged (Safe and Idempotent)</td>
+              </tr>
+              <tr>
+                <td><span className="method-badge post">POST</span></td>
+                <td><code>/books</code></td>
+                <td>Create new record</td>
+                <td>201 Created</td>
+                <td>Appends book object to array (Non idempotent)</td>
+              </tr>
+              <tr>
+                <td><span className="method-badge put">PUT</span></td>
+                <td><code>/books/:id</code></td>
+                <td>Full record replacement</td>
+                <td>200 OK</td>
+                <td>Overwrites target record (Idempotent)</td>
+              </tr>
+              <tr>
+                <td><span className="method-badge patch">PATCH</span></td>
+                <td><code>/books/:id</code></td>
+                <td>Partial delta update</td>
+                <td>200 OK</td>
+                <td>Modifies specified fields, preserves others</td>
+              </tr>
+              <tr>
+                <td><span className="method-badge delete">DELETE</span></td>
+                <td><code>/books/:id</code></td>
+                <td>Remove record</td>
+                <td>200 OK</td>
+                <td>Purges target record from array (Idempotent)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    )
+  }
 
   const handleGet = () => {
     setActiveMethod('GET')
@@ -537,6 +660,38 @@ function LibraryApiWorkbench({ staticMode = false }) {
   const [deleteId, setDeleteId] = useState('')
   const [deleteResponse, setDeleteResponse] = useState(null)
 
+  if (staticMode) {
+    return (
+      <section className="library-workbench-card static-mode">
+        <div className="workbench-head">
+          <span className="workbench-badge">MANUAL WORKFLOW REFERENCE · FEEL THE COPY PASTE FRICTION</span>
+          <h3 className="workbench-title">Manual College Library CRUD Lifecycle</h3>
+          <p className="workbench-desc">
+            In manual testing, a tester must manually copy the generated ID from Action 1 and paste it into Action 2 and Action 3:
+          </p>
+        </div>
+        <div className="static-lifecycle-steps" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', padding: '1.25rem' }}>
+          <div className="static-step-box" style={{ background: 'var(--panel-soft)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
+            <strong>Action 1: AddBook (POST /v1/books)</strong>
+            <p style={{ margin: '0.4rem 0', fontSize: '0.82rem' }}>Payload: <code>{JSON.stringify({ name: "Zero to Agentic API Testing", isbn: "9781", aisle: "227", author: "Alex Mercer" })}</code></p>
+            <p style={{ margin: '0.4rem 0', fontSize: '0.82rem' }}>Response: <code>200 OK {JSON.stringify({ Msg: "successfully added", ID: "9781227" })}</code></p>
+            <small style={{ color: 'var(--accent)', fontWeight: 700 }}>⚠️ Tester must copy "9781227" to clipboard.</small>
+          </div>
+          <div className="static-step-box" style={{ background: 'var(--panel-soft)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
+            <strong>Action 2: GetBook (GET /v1/books?id=9781227)</strong>
+            <p style={{ margin: '0.4rem 0', fontSize: '0.82rem' }}>Query: <code>?id=9781227</code> (pasted from Action 1)</p>
+            <p style={{ margin: '0.4rem 0', fontSize: '0.82rem' }}>Response: <code>200 OK [{JSON.stringify({ book_name: "Zero to Agentic API Testing", isbn: "9781", aisle: "227" })}]</code></p>
+          </div>
+          <div className="static-step-box" style={{ background: 'var(--panel-soft)', padding: '1rem', borderRadius: '8px', border: '1px solid var(--border)' }}>
+            <strong>Action 3: DeleteBook (POST /v1/books/delete)</strong>
+            <p style={{ margin: '0.4rem 0', fontSize: '0.82rem' }}>Payload: <code>{JSON.stringify({ ID: "9781227" })}</code> (pasted from Action 1)</p>
+            <p style={{ margin: '0.4rem 0', fontSize: '0.82rem' }}>Response: <code>200 OK {JSON.stringify({ msg: "book is successfully deleted" })}</code></p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
   const handleAddBook = () => {
     const compositeId = addIsbn + addAisle
     const existing = catalog.find(b => b.ID === compositeId)
@@ -691,6 +846,7 @@ function LibraryApiWorkbench({ staticMode = false }) {
 
 export function Block({ block: b, staticMode = false }) {
   switch (b.type) {
+    case 'chapter-opener': return <ChapterOpener {...b} staticMode={staticMode} />
     case 'heading': return <Heading>{b.text}</Heading>
     case 'paragraph': return <p className="section-intro"><RichText text={b.text}/></p>
     case 'chunked-code': return <ChunkedCode {...b} />

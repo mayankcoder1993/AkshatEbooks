@@ -18,7 +18,7 @@ export default function PrintBook({ publication }) {
       </div>
 
       <div className="toc-current-chapters">
-        <h2>Active Lessons in this Edition</h2>
+        <h2>Table of Contents & Curriculum Map</h2>
         <ol className="toc-list">
           <li><a href="#print-preface">{PREFACE.title || 'Preface'}</a></li>
           <li><a href="#print-how-to">How to use this book</a></li>
@@ -28,7 +28,7 @@ export default function PrintBook({ publication }) {
 
       {CURRICULUM_ROADMAP && (
         <div className="toc-curriculum-roadmap">
-          <h2>Master Curriculum Journey</h2>
+          <h2>Master Curriculum Journey by Missions</h2>
           <div className="curriculum-phases-grid">
             {CURRICULUM_ROADMAP.map(phase => (
               <div key={phase.phase} className="curriculum-phase-card">

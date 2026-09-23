@@ -17,6 +17,12 @@ export const lesson07 = {
       status: 'ACTIVE'
     },
     {
+      type: 'chapter-opener',
+      achieve: 'Build an autonomous multi request testing pipeline by capturing dynamic IDs, piping them into downstream requests, and verifying nested JSON structures and array mathematics.',
+      how: 'Chain AddBook to GetBook and DeleteBook using collection variables, assert exact catalog fields without assuming unreturned properties, and master find, filter, map, and reduce in an advanced audit lab.',
+      carry: 'An end to end chained pipeline that creates, validates, and cleans up records autonomously, ready for multi row data driven execution in Chapter 8.'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 4 OF 5',
       title: 'Continuing Mission 2: Assembling the Autonomous Pipeline',
@@ -39,9 +45,9 @@ export const lesson07 = {
       alt: 'Flowchart showing request chaining pipeline: Step 1 AddBook POST creates ID, Step 2 GetBook GET queries ID, Step 3 DeleteBook POST removes ID.',
       caption: 'The autonomous property transfer pipeline across three chained requests.',
       points: [
-        'Step 1 (AddBook POST): Dispatches dynamic payload. Tests script extracts generated ID into environment variable book_id.',
-        'Step 2 (GetBook GET): Injects {{book_id}} into query params and asserts that the stored author matches the creation author.',
-        'Step 3 (DeleteBook POST): Reads {{book_id}} in the payload body and asserts that the record is completely removed.',
+        'Step 1 (AddBook POST): Dispatches dynamic payload. Tests script extracts generated ID into collection variable book_id.',
+        'Step 2 (GetBook GET): Injects {{book_id}} into query params and asserts that the cataloged book name, ISBN, and aisle match the created record.',
+        'Step 3 (DeleteBook POST): Reads {{book_id}} in the payload body and asserts that the record is completely removed from the database.',
       ],
     },
     {
@@ -104,21 +110,40 @@ export const lesson07 = {
     },
     {
       type: 'paragraph',
-      text: 'GetBook returns a JSON array. In JavaScript, access the first record using zero index bracket notation: booksList[0].author.',
+      text: 'GetBook returns a JSON array. In JavaScript, access the first record using zero index bracket notation: booksList[0].book_name. Let us validate both the composite ID calculation and the retrieved catalog entry:',
     },
     {
       type: 'code',
-      filename: 'validate-id-and-author.js',
+      filename: 'validate-id-and-catalog.js',
       lines: [
         '// Step 1: Parse outgoing request payload to verify business calculation',
         'const requestPayload = JSON.parse(pm.request.body.raw);',
         'const expectedCompositeId = requestPayload.isbn + requestPayload.aisle;',
         '',
-        '// Step 2: Assert backend ID equals ISBN + aisle',
+        '// Step 2: Assert backend ID equals ISBN + aisle in AddBook Tests tab',
         'const responsePayload = pm.response.json();',
         'pm.test("Backend generated ID correctly concatenates ISBN and aisle", function () {',
         '    pm.expect(responsePayload.ID).to.eql(expectedCompositeId);',
         '});',
+        '',
+        '// Step 3: Assert retrieved catalog entry in GetBook Tests tab',
+        'const booksList = pm.response.json();',
+        'pm.test("GetBook returns valid array with matching catalog metadata", function () {',
+        '    pm.expect(booksList).to.be.an("array").with.lengthOf.atLeast(1);',
+        '    pm.expect(booksList[0].book_name).to.eql("Zero to Agentic API Testing");',
+        '    pm.expect(booksList[0].isbn).to.eql(pm.collectionVariables.get("ISBN"));',
+        '    pm.expect(booksList[0].aisle).to.eql("227");',
+        '});',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Contract Precision: Why Author is Omitted from GetBook',
+      paragraphs: [
+        'Notice that GetBook returns an array containing book_name, isbn, and aisle. The author field supplied during AddBook is not included in this endpoint response.',
+        'If you wrote pm.expect(booksList[0].author).to.eql("Alex Mercer"), your test would crash with an undefined failure.',
+        'Never assert fields based on wishful thinking: assert strictly against what the API contract promises.',
       ],
     },
     {
@@ -268,10 +293,9 @@ export const lesson07 = {
       type: 'steps',
       items: [
         '1. POST AddBook: Dispatches dynamic payload with generated ISBN. Tests script captures the created composite ID: pm.collectionVariables.set("book_id", jsonData.ID).',
-        '2. GET GetBook: Calls /v1/books?id={{book_id}}. Tests script confirms that the stored title and author match the creation parameters.',
-        '3. GET DepartmentAudit: Fetches the multi course departmental inventory array and runs our reduce() summation to verify budget totals.',
-        '4. POST DeleteBook: Dispatches /v1/books/delete with body {"ID": "{{book_id}}"}. Confirms deletion message from server.',
-        '5. GET GetBook Verification: Queries /v1/books?id={{book_id}} one final time to verify that the record is completely removed from active circulation.',
+        '2. GET GetBook: Calls /v1/books?id={{book_id}}. Tests script confirms that book_name, isbn, and aisle match the created record.',
+        '3. POST DeleteBook: Dispatches /v1/books/delete with body {"ID": "{{book_id}}"}. Confirms deletion confirmation from server.',
+        '4. Advanced Side Lab (GET DepartmentAudit): Fetches the departmental inventory array and executes reduce() summation to verify fiscal budget totals.',
       ],
     },
     {
@@ -284,10 +308,9 @@ export const lesson07 = {
       lines: [
         '1. POST AddBook: 200 OK (180 ms) : 2 of 2 passed (Captured book_id)',
         '2. GET GetBook: 200 OK (145 ms) : 2 of 2 passed (Verified book_id {{book_id}})',
-        '3. GET DepartmentAudit: 200 OK (185 ms) : 3 of 3 passed (Nested array sum verified)',
-        '4. POST DeleteBook: 200 OK (130 ms) : 1 of 1 passed (Teardown completed)',
-        '5. GET GetBook (Verify Cleanup): 200 OK (110 ms) : 1 of 1 passed (Confirmed removed)',
-        'Collection Run Complete: 5 requests, 9 assertions, 0 failures (750 ms)',
+        '3. POST DeleteBook: 200 OK (130 ms) : 1 of 1 passed (Teardown completed)',
+        '4. GET DepartmentAudit (Side Lab): 200 OK (185 ms) : 3 of 3 passed (Nested array sum verified)',
+        'Collection Run Complete: 4 requests, 8 assertions, 0 failures (640 ms)',
       ],
     },
     {

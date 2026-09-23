@@ -11,6 +11,12 @@ export const lesson02 = {
   tags: ['REST', 'HTTP', 'Status Codes', 'Triage', 'Manual Testing', 'Investigation'],
   blocks: [
     {
+      type: 'chapter-opener',
+      achieve: 'Locate an unhandled server crash directly on the network wire and verify both defensive error handling and successful query execution.',
+      how: 'Inspecting the raw campus shuttle location request, diagnosing uncaught NullPointerException from an omitted query parameter, installing a defensive validation guard, and testing both negative and positive calls by hand.',
+      carry: 'The verified two request collection contract: the 400 Bad Request defensive guard and the 200 OK coordinate payload.'
+    },
+    {
       type: 'mission-hud',
       mission: 'Mission 1: The Core Protocol and Campus Cloud Integration',
       phase: 'Phase 2 of 3: The Manual Wire Investigation',
@@ -204,18 +210,88 @@ export const lesson02 = {
       }
     },
     {
-      type: 'callout',
-      variant: 'danger',
-      title: 'The Truth Uncovered: Technical Mechanism of the Crash',
-      paragraphs: [
-        '1. The Parameter Distinction: In web application servers (such as Java Servlets or Spring Boot), omitting a query parameter entirely causes request.getParameter("route") to evaluate to null. Passing ?route= evaluates to an empty string (""). Both require defensive handling.',
-        '2. The Backend Defect: The server code attempted route.trim().toUpperCase() directly without checking if route was null. This triggered an unhandled java.lang.NullPointerException that crashed through to a 500 error, exposing stack traces.',
-        '3. The Architectural Fix: Defensive input validation on the server must check: if (route == null || route.trim().isEmpty()) and immediately return HTTP 400 Bad Request with a clear message: {"error": "route parameter is required"}. Simultaneously, the mobile app must supply the default route on boot.',
-      ],
+      type: 'structured-breakdown',
+      badge: 'PARAMETER MECHANICS',
+      title: 'Distinguishing Missing Parameters from Empty Strings',
+      intro: 'Web application frameworks (like Java Servlets and Spring Boot) treat query parameters with strict semantic distinctions:',
+      categories: [
+        {
+          category: 'Case A: Parameter Omitted Completely',
+          subCategory: 'GET /v1/campus/shuttle/coordinates',
+          title: 'Evaluates to null in Server Memory',
+          explanation: 'When the query parameter route is completely absent from the URL, request.getParameter("route") returns null. Calling route.trim() without a null check throws java.lang.NullPointerException, bubbling up to an unhandled 500 error.',
+          points: [
+            'Trigger: The mobile app omitted the query string entirely on boot.',
+            'Server State: Variable route is null; dereferencing throws a fatal exception.',
+            'Required Defense: Check if (route == null) before invoking any string methods.'
+          ]
+        },
+        {
+          category: 'Case B: Parameter Present but Empty',
+          subCategory: 'GET /v1/campus/shuttle/coordinates?route=',
+          title: 'Evaluates to an Empty String ("")',
+          explanation: 'When the parameter name is supplied with an empty value (?route=), request.getParameter("route") returns "". Calling route.trim() succeeds, but querying the GPS database for an empty route string returns zero coordinates or invalid query errors.',
+          points: [
+            'Trigger: The client passed ?route= with nothing after the equal sign.',
+            'Server State: Variable route is non null but holds zero characters.',
+            'Required Defense: Check if (route.trim().isEmpty()) to reject blank strings.'
+          ]
+        }
+      ]
     },
     {
       type: 'heading',
-      text: 'Step 5: Sourced Case Study: The Healthcare.gov Launch Outage',
+      text: 'Step 5: Installing the Backend Defensive Validation Guard',
+    },
+    {
+      type: 'paragraph',
+      text: 'To protect the service from crashing, the backend engineering team installs defensive input validation before touching any database queries:',
+    },
+    {
+      type: 'code',
+      filename: 'RouteLocatorServiceGuard.java',
+      lines: [
+        '// Defensive Guard in RouteLocatorService.java',
+        'String route = request.getParameter("route");',
+        '',
+        '// Guard both Case A (null) and Case B (empty string)',
+        'if (route == null || route.trim().isEmpty()) {',
+        '    response.setStatus(400);',
+        '    response.setContentType("application/json");',
+        '    response.getWriter().write("{\\"error\\": \\"route parameter is required\\"}");',
+        '    return;',
+        '}',
+        '',
+        '// Safe to process valid route string',
+        'String normalizedRoute = route.trim().toLowerCase();',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Now let us verify the guarded server. We dispatch the exact same failing request (with route omitted) to confirm that the server returns HTTP 400 Bad Request instead of crashing with 500:',
+    },
+    {
+      type: 'api-inspector',
+      title: 'Wire Capture: Guarded Response for Omitted Parameter',
+      method: 'GET',
+      url: 'https://api.campustransit.org/v1/campus/shuttle/coordinates',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer campus_student_tok_9918'
+      },
+      status: '400 Bad Request',
+      time: '12 ms',
+      size: '184 B',
+      responseBody: {
+        statusCode: 400,
+        error: 'Bad Request',
+        message: 'route parameter is required'
+      },
+      sampleLabel: 'DEFENSIVE 400 WIRE RESPONSE'
+    },
+    {
+      type: 'heading',
+      text: 'Step 6: Sourced Case Study: The Healthcare.gov Launch Outage',
     },
     {
       type: 'source-note',
@@ -237,24 +313,24 @@ export const lesson02 = {
     },
     {
       type: 'heading',
-      text: 'Step 6: Performing the Manual Fix: Verifying 200 OK by Hand',
+      text: 'Step 7: Performing the Manual Fix: Verifying 200 OK by Hand',
     },
     {
       type: 'paragraph',
-      text: 'Now let us perform the manual fix. In our HTTP testing workbench, we provide the valid campus route name: `campus_loop_north`. We send the request by hand and inspect the response:',
+      text: 'Now let us verify the positive happy path. In our HTTP testing workbench, we provide the valid campus route name: `campus_loop_north`. We send the request by hand and inspect the response:',
     },
     {
       type: 'chunked-code',
       badge: 'CORRECTED WIRE CALL',
       title: 'The Corrected Campus Transit Request',
-      intro: 'We supply the missing query parameter to verify the service works:',
+      intro: 'We supply the valid query parameter to verify successful coordinate delivery:',
       chunks: [
         {
           label: 'Corrected Request Line',
           filename: 'fixed_request.http',
           code: 'GET /v1/campus/shuttle/coordinates?route=campus_loop_north HTTP/1.1\nHost: api.campustransit.org',
           title: 'Valid Parameter Passed',
-          explanation: 'By providing the exact route identifier `campus_loop_north`, the server can query the GPS database properly.',
+          explanation: 'By providing the exact route identifier campus_loop_north, the server locates the active shuttle and queries the GPS database properly.',
           keyTakeaway: 'Query parameters must always match the required backend contract schema.'
         }
       ]
@@ -282,7 +358,19 @@ export const lesson02 = {
         speedMph: 24,
         nextStop: 'Apex Student Union',
         estimatedArrivalMinutes: 3
-      }
+      },
+      sampleLabel: 'SUCCESSFUL 200 WIRE RESPONSE'
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'What We Carry into Chapter 3: The Two Verified Request Contracts',
+      paragraphs: [
+        'We have verified two distinct requests by hand:',
+        '1. Negative Regression Request: GET /v1/campus/shuttle/coordinates (omitted route) returning 400 Bad Request with error guidance.',
+        '2. Positive Contract Request: GET /v1/campus/shuttle/coordinates?route=campus_loop_north returning 200 OK with valid numeric coordinates.',
+        'In Chapter 3, we take these exact two requests and automate them inside Postman with JavaScript assertions!',
+      ],
     },
     {
       type: 'paragraph',

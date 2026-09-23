@@ -17,6 +17,12 @@ export const lesson13 = {
       status: 'ACTIVE'
     },
     {
+      type: 'chapter-opener',
+      achieve: 'Transform your desktop collection into an automated, headless deployment gate by mastering Newman CLI, HTML Extra reports, and CI CD pipeline integration.',
+      how: 'Export portable JSON collections and environments, execute command line runs with data files and fail fast bail flags, generate visual dashboards, and configure Jenkins automation.',
+      carry: 'The complete enterprise grade automated API testing pipeline running autonomously in continuous delivery pipelines, achieving full Mission 3 victory.'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 3 PROGRESS · STEP 5 OF 5',
       title: 'Completing Mission 3: Continuous Integration and Automated Gating',
@@ -129,7 +135,8 @@ export const lesson13 = {
         '',
         'GET https://uat-api.campuslibrary.org/v1/books?id=9781227 [200 OK, 192B, 142ms]',
         '  ✓ GetBook response returns an array with at least one record',
-        '  ✓ Retrieved book author matches the original creation author',
+        '  ✓ Retrieved book name matches "Learn Postman Testing"',
+        '  ✓ Catalog ISBN and aisle match created coordinates',
         '',
         'POST https://uat-api.campuslibrary.org/v1/books/delete [200 OK, 212B, 158ms]',
         '  ✓ Book is successfully deleted message verified',

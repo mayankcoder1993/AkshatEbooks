@@ -3,7 +3,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { discoverBooks, projectRelative } from './lib/book-system.mjs'
 
-const allowedBlocks = new Set(['heading','paragraph','image','mission','mission-tracker','mission-accomplished','victory-milestone','think','guess','bug','callout','flow','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','reflection','safety-notice','api-inspector','mission-hud','triage','battle-scar','battle-plan','scenario-grid','structured-breakdown','chunked-code','predict-output','mini-api','library-workbench'])
+const allowedBlocks = new Set(['heading','paragraph','image','mission','mission-tracker','mission-accomplished','victory-milestone','think','guess','bug','callout','flow','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','reflection','safety-notice','api-inspector','mission-hud','triage','battle-scar','battle-plan','scenario-grid','structured-breakdown','chunked-code','predict-output','mini-api','library-workbench','chapter-opener'])
 const books = await discoverBooks()
 let editionCount = 0
 let chapterCount = 0

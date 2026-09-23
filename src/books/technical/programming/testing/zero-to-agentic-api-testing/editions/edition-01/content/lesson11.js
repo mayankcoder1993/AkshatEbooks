@@ -16,6 +16,12 @@ export const lesson11 = {
       status: 'ACTIVE'
     },
     {
+      type: 'chapter-opener',
+      achieve: 'Master modern enterprise API security by deconstructing OAuth 2.0 grant types, automating token handshakes in test suites, and chaining Bearer tokens into protected requests.',
+      how: 'Contrast interactive Authorization Code flows with machine to machine Client Credentials for CI CD, execute live token exchange requests, extract tokens into global variables, and validate 401 unauthorized boundaries.',
+      carry: 'Automated token acquisition patterns and authenticated collection runs that safeguard enterprise endpoints, carrying forward into XML web services in Chapter 12.'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 3 PROGRESS · STEP 3 OF 5',
       title: 'Continuing Mission 3: Mastering Enterprise Token Security',
@@ -230,11 +236,22 @@ export const lesson11 = {
     },
     {
       type: 'heading',
-      text: 'Step 6: Automating Token Workflows and Global Variables in Postman',
+      text: 'Step 6: Automating Token Workflows and CI CD Grant Types',
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Architectural Choice: Authorization Code vs Client Credentials in CI CD',
+      paragraphs: [
+        'Why can you not easily run an Authorization Code flow inside a headless continuous integration build server?',
+        '• Authorization Code Grant requires an interactive web browser where a human student logs in and clicks Allow. In unattended Jenkins, GitHub Actions, or GitLab CI pipelines, there is no browser and no human user to solve two factor authentication prompts!',
+        '• Client Credentials Grant is designed specifically for machine to machine automation. The automated test runner dispatches a direct backend call with grant_type=client_credentials, client_id, and client_secret to POST /oauth/token, receiving an automated service token in milliseconds without user interaction.',
+        'When testing public user journeys, Postman handles Authorization Code. When testing automated background microservice integrations in CI CD, configure the Client Credentials grant.',
+      ],
     },
     {
       type: 'paragraph',
-      text: 'When executing test collections automatedly in CI CD pipelines, you cannot open a browser window to click login buttons. Instead, we configure an automated token exchange request as the very first step in our collection. In its Tests script, we extract the access token and save it into a global variable so every subsequent request inherits it automatically. You can download the script: [Download Capture Bearer Token Script](/materials/zero-to-agentic-api-testing/lesson-11/capture-bearer-token.js):',
+      text: 'When executing test collections automatedly in CI CD pipelines, we configure an automated token exchange request as the very first step in our collection. In its Tests script, we extract the access token and save it into a global variable so every subsequent request inherits it automatically. You can download the script: [Download Capture Bearer Token Script](/materials/zero-to-agentic-api-testing/lesson-11/capture-bearer-token.js):',
     },
     {
       type: 'code',

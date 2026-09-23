@@ -12,6 +12,12 @@ export const lesson01 = {
   tags: ['APIs', 'Client Server', 'JSON', 'REST', 'Fundamentals', 'Architecture'],
   blocks: [
     {
+      type: 'chapter-opener',
+      achieve: 'Build and run a minimal API server from scratch and inspect both sides of every core HTTP exchange.',
+      how: 'Writing a 5 line Express server, executing GET, POST, PUT, PATCH, and DELETE, and comparing REST, SOAP, and GraphQL using the same book inquiry.',
+      carry: 'The assembled runnable server.js file and the mental model of an HTTP request and response pair.'
+    },
+    {
       type: 'heading',
       text: 'Step 1: The Core Mental Model: What is an API?',
     },
@@ -79,41 +85,49 @@ export const lesson01 = {
     },
     {
       type: 'heading',
-      text: 'Step 3: Anatomy of an HTTP Message: The Wire Structure',
+      text: 'Step 3: Anatomy of an HTTP Message: Both Sides of the Wire',
     },
     {
       type: 'paragraph',
-      text: 'When your computer talks to a server over the internet, it sends an **HTTP Request** packet and receives an **HTTP Response** packet. Every message consists of four structural elements:',
+      text: 'When your computer talks to a server over the network, it sends an **HTTP Request** packet and receives an **HTTP Response** packet. To understand how APIs work, you must see both sides of this exchange. Here is a complete GET request and reply targeting our future server address at http://localhost:3000/books:',
     },
     {
       type: 'chunked-code',
-      badge: 'REQUEST ANATOMY',
-      title: 'Deconstructing the HTTP Request Envelope',
-      intro: 'Study each part of an HTTP request before we execute live calls:',
+      badge: 'HTTP EXCHANGE ANATOMY',
+      title: 'Deconstructing Both Sides of the Wire Exchange',
+      intro: 'Study each part of the outgoing request and the incoming response:',
       chunks: [
         {
-          label: 'The Verb and Endpoint URL',
+          label: 'Part 1: The Outgoing Request Line',
           filename: 'request_line.http',
-          code: 'POST /v1/books HTTP/1.1\nHost: api.library.org',
+          code: 'GET /books HTTP/1.1\nHost: localhost:3000',
           title: 'The Action and Address',
-          explanation: 'Specifies the HTTP method (POST) telling the server what operation to perform, followed by the resource path and target server host name.',
-          keyTakeaway: 'The URL identifies the target resource; the HTTP verb identifies the intended action.'
+          explanation: 'Specifies the HTTP method (GET) telling the server to read records, followed by the resource path (/books) and target host (localhost:3000).',
+          keyTakeaway: 'The URL identifies the target resource; the HTTP verb identifies the intended operation.'
         },
         {
-          label: 'The Headers (The Envelope Metadata)',
-          filename: 'headers.http',
-          code: 'Content-Type: application/json\nAccept: application/json\nUser-Agent: CampusClient/1.0',
-          title: 'Format and Client Details',
-          explanation: 'Headers act like the outside of a postal envelope: they declare the data format (JSON), security tokens, and device details.',
-          keyTakeaway: 'Content Type informs the server how to parse the incoming body payload.'
+          label: 'Part 2: The Outgoing Request Headers',
+          filename: 'request_headers.http',
+          code: 'Accept: application/json\nUser-Agent: CampusClient/1.0',
+          title: 'Client Envelope Metadata',
+          explanation: 'Headers act like the outside of a postal envelope: Accept informs the server that our client wants data formatted as JSON text.',
+          keyTakeaway: 'Headers provide context and metadata without polluting the payload data.'
         },
         {
-          label: 'The Payload Body (The Letter Inside)',
-          filename: 'payload.json',
-          code: '{\n  "title": "Clean Code",\n  "author": "Robert Martin",\n  "aisle": 42\n}',
+          label: 'Part 3: The Incoming Response Status Line and Headers',
+          filename: 'response_headers.http',
+          code: 'HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\nContent-Length: 68',
+          title: 'Server Acknowledgment and Type',
+          explanation: 'The server replies with HTTP status code 200 OK, followed by headers stating that the returned body is UTF-8 encoded JSON text.',
+          keyTakeaway: 'The status code immediately informs the client whether the operation succeeded or failed.'
+        },
+        {
+          label: 'Part 4: The Incoming Response Body',
+          filename: 'response_body.json',
+          code: '[\n  {\n    "id": 1,\n    "title": "Clean Architecture",\n    "author": "Robert Martin"\n  }\n]',
           title: 'The Actual Data Content',
-          explanation: 'The payload contains the raw data being created or updated, formatted as human readable JSON text.',
-          keyTakeaway: 'GET requests generally do not have a body; POST and PUT requests carry payloads.'
+          explanation: 'The payload delivered back to the client, formatted as clean, structured JSON containing the requested book records.',
+          keyTakeaway: 'The client deserializes this JSON text into native programming objects for display or processing.'
         }
       ]
     },
@@ -433,6 +447,64 @@ export const lesson01 = {
     },
     {
       type: 'heading',
+      text: 'The Complete Assembled Server and Command Transcript',
+    },
+    {
+      type: 'paragraph',
+      text: 'Here is our complete minimal API server assembled into one self contained JavaScript file. Save this file as server.js and run it using Node.js:',
+    },
+    {
+      type: 'code',
+      filename: 'server.js',
+      lines: [
+        'const express = require("express");',
+        'const app = express();',
+        'app.use(express.json());',
+        '',
+        'let books = [',
+        '  { id: 1, title: "Clean Architecture", author: "Robert Martin" }',
+        '];',
+        '',
+        'app.get("/books", (req, res) => res.json(books));',
+        '',
+        'app.post("/books", (req, res) => {',
+        '  const newBook = { id: books.length + 1, ...req.body };',
+        '  books.push(newBook);',
+        '  res.status(201).json(newBook);',
+        '});',
+        '',
+        'app.put("/books/:id", (req, res) => {',
+        '  const idx = books.findIndex(b => b.id == req.params.id);',
+        '  if (idx === -1) return res.status(404).json({ error: "Book not found" });',
+        '  books[idx] = { id: Number(req.params.id), ...req.body };',
+        '  res.json(books[idx]);',
+        '});',
+        '',
+        'app.patch("/books/:id", (req, res) => {',
+        '  const book = books.find(b => b.id == req.params.id);',
+        '  if (!book) return res.status(404).json({ error: "Book not found" });',
+        '  Object.assign(book, req.body);',
+        '  res.json(book);',
+        '});',
+        '',
+        'app.delete("/books/:id", (req, res) => {',
+        '  books = books.filter(b => b.id != req.params.id);',
+        '  res.json({ msg: "removed", id: Number(req.params.id) });',
+        '});',
+        '',
+        'app.listen(3000, () => console.log("Campus API listening on port 3000"));',
+      ],
+    },
+    {
+      type: 'terminal',
+      command: 'node server.js',
+      lines: [
+        '$ node server.js',
+        'Campus API listening on port 3000',
+      ],
+    },
+    {
+      type: 'heading',
       text: 'Interactive Companion Sandbox: Experimenting with Custom Inputs',
     },
     {
@@ -450,7 +522,7 @@ export const lesson01 = {
     },
     {
       type: 'paragraph',
-      text: 'Not all APIs look identical. In enterprise software, you will encounter three major architectural styles. Here is how the same operation: retrieving a book: looks in each world:',
+      text: 'Not all APIs look identical. In enterprise software, you will encounter three major architectural styles: REST, SOAP, and GraphQL. To see how their shapes differ, let us first ask all three styles the exact same question: "Retrieve the title of book ID 1":',
     },
     {
       type: 'image',
@@ -472,35 +544,110 @@ export const lesson01 = {
     },
     {
       type: 'chunked-code',
-      badge: 'THREE PROTOCOLS',
-      title: 'Comparing the Three Styles in Practice',
-      intro: 'Notice how each style requests the title of book ID 101:',
+      badge: 'SAME QUESTION THREE PROTOCOLS',
+      title: 'Comparing the Same Book Query Across Three Protocols',
+      intro: 'Notice how each protocol asks for the title of book ID 1 and what payload returns:',
       chunks: [
         {
-          label: 'RESTful API Request',
-          filename: 'rest_request.http',
-          code: 'GET /v1/books/101 HTTP/1.1\nHost: api.library.org\nAccept: application/json',
+          label: 'RESTful API Request and Response',
+          filename: 'rest_exchange.http',
+          code: 'REQUEST:\nGET /books/1 HTTP/1.1\nHost: localhost:3000\nAccept: application/json\n\nRESPONSE:\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  "id": 1,\n  "title": "Clean Architecture",\n  "author": "Robert Martin"\n}',
           title: 'Direct Resource Retrieval',
-          explanation: 'In REST, the URL directly identifies the resource. The server replies with clean JSON: { "id": 101, "title": "Clean Code" }.',
-          keyTakeaway: 'REST is the dominant standard across 85 percent of modern web and mobile applications.'
+          explanation: 'In REST, the URL directly identifies the resource. The server replies with clean JSON text containing the entire book object.',
+          keyTakeaway: 'REST is the dominant standard across 85 percent of modern web and mobile services.'
         },
         {
-          label: 'SOAP WebServices Request',
-          filename: 'soap_envelope.xml',
-          code: '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">\n  <soap:Body>\n    <GetBookRequest>\n      <BookId>101</BookId>\n    </GetBookRequest>\n  </soap:Body>\n</soap:Envelope>',
-          title: 'Formal XML Envelope',
-          explanation: 'In SOAP, every request is wrapped in a strict XML envelope and dispatched via HTTP POST to an enterprise gateway.',
-          keyTakeaway: 'SOAP relies on rigid WSDL contracts, widely used in financial banking and legacy systems.'
-        },
-        {
-          label: 'GraphQL Query Request',
-          filename: 'query.graphql',
-          code: 'query {\n  book(id: 101) {\n    title\n  }\n}',
+          label: 'GraphQL Query Request and Response',
+          filename: 'graphql_exchange.http',
+          code: 'REQUEST:\nPOST /graphql HTTP/1.1\nHost: localhost:3000\nContent-Type: application/json\n\n{\n  "query": "query { book(id: 1) { title } }"\n}\n\nRESPONSE:\nHTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  "data": {\n    "book": {\n      "title": "Clean Architecture"\n    }\n  }\n}',
           title: 'Precise Field Selection',
-          explanation: 'In GraphQL, the client asks only for the title field, avoiding unwanted metadata and eliminating extra round trips.',
+          explanation: 'In GraphQL, the client asks only for the title field, avoiding unwanted author metadata and eliminating extra byte transfer.',
           keyTakeaway: 'GraphQL prevents over fetching by letting clients dictate the exact JSON response shape.'
+        },
+        {
+          label: 'SOAP WebServices Request and Response',
+          filename: 'soap_exchange.xml',
+          code: 'REQUEST:\nPOST /BookService HTTP/1.1\nHost: localhost:3000\nContent-Type: application/soap+xml; charset=utf-8\n\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <GetBookRequest>\n      <BookId>1</BookId>\n    </GetBookRequest>\n  </soap:Body>\n</soap:Envelope>\n\nRESPONSE:\nHTTP/1.1 200 OK\nContent-Type: application/soap+xml; charset=utf-8\n\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <GetBookResponse>\n      <title>Clean Architecture</title>\n    </GetBookResponse>\n  </soap:Body>\n</soap:Envelope>',
+          title: 'Formal XML Envelope',
+          explanation: 'In SOAP, every request is wrapped in a strict XML envelope with formal namespaces and dispatched via HTTP POST.',
+          keyTakeaway: 'SOAP relies on rigid WSDL contracts, widely used in financial banking and legacy mainframes.'
         }
       ]
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Architectural Clarification: Our Express Server Implements REST',
+      paragraphs: [
+        'Our minimal 5 line Express server implements standard REST. It exposes clean URL paths (/books) and responds to standard HTTP verbs.',
+        'The GraphQL and SOAP exchanges shown above are conceptual contract variants: they demonstrate how an engineering team would structure that same book query if they selected GraphQL or SOAP instead.',
+        'Now let us inspect real, independently reachable public endpoints on the internet for both SOAP and GraphQL.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Public Protocol Spot Checks: Real Public SOAP and GraphQL Endpoints',
+    },
+    {
+      type: 'paragraph',
+      text: 'To prove that these protocols are not theoretical, here are real public services responding on the internet today:',
+    },
+    {
+      type: 'api-inspector',
+      title: 'Public SOAP WebService: DataAccess Number Conversion',
+      method: 'POST',
+      url: 'https://www.dataaccess.com/webservicesserver/NumberConversion.wso',
+      headers: {
+        'Content-Type': 'application/soap+xml; charset=utf-8'
+      },
+      requestBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap12:Envelope xmlns:soap12="http://www.w3.org/2003/05/soap-envelope">\n  <soap12:Body>\n    <NumberToWords xmlns="http://www.dataaccess.com/webservicesserver/">\n      <ubiNum>400</ubiNum>\n    </NumberToWords>\n  </soap12:Body>\n</soap12:Envelope>',
+      status: '200 OK',
+      time: '215 ms',
+      size: '412 B',
+      responseBody: '<?xml version="1.0" encoding="utf-8"?>\n<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope">\n  <soap:Body>\n    <m:NumberToWordsResponse xmlns:m="http://www.dataaccess.com/webservicesserver/">\n      <m:NumberToWordsResult>four hundred </m:NumberToWordsResult>\n    </m:NumberToWordsResponse>\n  </soap:Body>\n</soap:Envelope>',
+      sampleLabel: 'LIVE PUBLIC SOAP ENDPOINT'
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      title: 'Real World Wire Quirk: Notice the Trailing Space',
+      paragraphs: [
+        'Notice that the live DataAccess SOAP service returns `<m:NumberToWordsResult>four hundred </m:NumberToWordsResult>` with an extra space after hundred.',
+        'If a test assertion expects exact equality to "four hundred", the assertion fails! This is why professional quality engineers always inspect the raw wire and use string trim() when verifying external services.',
+      ],
+    },
+    {
+      type: 'api-inspector',
+      title: 'Public GraphQL Service: Rick and Morty Character Query',
+      method: 'POST',
+      url: 'https://rickandmortyapi.com/graphql',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      requestBody: {
+        query: '{ character(id: 1) { id name } }'
+      },
+      status: '200 OK',
+      time: '190 ms',
+      size: '168 B',
+      responseBody: {
+        data: {
+          character: {
+            id: '1',
+            name: 'Rick Sanchez'
+          }
+        }
+      },
+      sampleLabel: 'LIVE PUBLIC GRAPHQL ENDPOINT'
+    },
+    {
+      type: 'callout',
+      variant: 'note',
+      title: 'Transport Clarification: GraphQL over POST and GET',
+      paragraphs: [
+        'In our workbench, we dispatch GraphQL queries using HTTP POST with a JSON body: {"query": "..."}.',
+        'However, GraphQL specifications also permit queries over HTTP GET by passing the query as a URL encoded query parameter. In Chapters 10 and 12, we explore deep GraphQL and SOAP testing in detail.',
+      ],
     },
     {
       type: 'heading',

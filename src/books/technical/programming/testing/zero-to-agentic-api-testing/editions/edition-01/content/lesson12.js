@@ -16,6 +16,12 @@ export const lesson12 = {
       status: 'ACTIVE'
     },
     {
+      type: 'chapter-opener',
+      achieve: 'Master legacy enterprise web services by crafting SOAP 1.1 and 1.2 XML envelopes, parsing XML responses with xml2Json, and asserting payload data defensively.',
+      how: 'Contrast REST with SOAP, configure strict Content Type headers, convert XML envelopes into traversable JavaScript objects, and defend against legacy whitespace quirks with trim.',
+      carry: 'The complete multi protocol toolkit (REST, GraphQL, and SOAP) ready for unattended command line test execution in Jenkins and Newman in Chapter 13.'
+    },
+    {
       type: 'mission-tracker',
       badge: 'MISSION 3 PROGRESS · STEP 4 OF 5',
       title: 'Continuing Mission 3: Testing Legacy Enterprise Protocols',
@@ -223,8 +229,19 @@ export const lesson12 = {
         '// Step 4: Extract the result using bracket notation for XML namespaces',
         'pm.test("Number conversion result returns four hundred", function () {',
         '    const actualValue = responseJson["soap:Envelope"]["soap:Body"]["m:NumberToWordsResponse"]["m:NumberToWordsResult"];',
-        '    pm.expect(actualValue).to.eql("four hundred");',
+        '    // Defensive trim handles legacy SOAP trailing whitespace',
+        '    pm.expect(actualValue.trim()).to.eql("four hundred");',
         '});',
+      ],
+    },
+    {
+      type: 'callout',
+      variant: 'warning',
+      title: 'Legacy SOAP Reality: The Trailing Whitespace Trap',
+      paragraphs: [
+        'A real world quirk of the public DataAccess NumberConversion SOAP service is that it appends a trailing space to words: returning "four hundred " rather than "four hundred".',
+        'If you write pm.expect(actualValue).to.eql("four hundred") without trimming, your test will fail with an unexpected character difference at index 12!',
+        'In automated testing of legacy XML services, always use defensive methods like actualValue.trim() or pm.expect(actualValue).to.include("four hundred") to safeguard tests from invisible whitespace discrepancies.',
       ],
     },
     {
@@ -255,7 +272,7 @@ export const lesson12 = {
         '',
         'pm.test("Deep tag validation matches collection expected result", function () {',
         '    const expectedWord = pm.collectionVariables.get("grant_word") || "four hundred";',
-        '    pm.expect(actualWord).to.eql(expectedWord);',
+        '    pm.expect(actualWord.trim()).to.eql(expectedWord);',
         '});',
         '',
         '// Technique 2: Fast text scanning across the entire response string',
