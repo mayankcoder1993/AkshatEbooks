@@ -62,10 +62,16 @@ const initialLocation = () => {
   const targetBook = search.get('book') || 'zero-to-agentic-api-testing'
   const sectionParam = search.get('section')
   const chapterParam = search.get('chapter')
+  const briefingParam = search.get('briefing')
 
   let initialActive = 'preface'
   if (sectionParam === 'how-to-use') {
     initialActive = 'how-to-use'
+  } else if (briefingParam) {
+    const bNum = parseInt(briefingParam, 10)
+    if (!isNaN(bNum) && bNum >= 1) {
+      initialActive = `briefing-${bNum - 1}`
+    }
   } else if (chapterParam) {
     const chNum = parseInt(chapterParam, 10)
     if (!isNaN(chNum) && chNum >= 1) {
@@ -314,8 +320,14 @@ export default function App() {
   const { lessons, BOOK, BRAND, PREFACE } = publication
   const isPreface = active === 'preface'
   const isHowToUse = active === 'how-to-use'
+  const isBriefing = typeof active === 'string' && active.startsWith('briefing-')
+  const briefingLessonIndex = isBriefing ? parseInt(active.replace('briefing-', ''), 10) : null
+  const briefingLesson = isBriefing && briefingLessonIndex !== null ? lessons[briefingLessonIndex] : null
+  const briefingOpener = briefingLesson ? briefingLesson.blocks.find(b => b.type === 'chapter-opener') : null
   const isChapter = typeof active === 'number'
   const lesson = isChapter ? lessons[active] : null
+  const lessonOpener = lesson ? lesson.blocks.find(b => b.type === 'chapter-opener') : null
+  const chapterBlocks = lesson ? lesson.blocks.filter(b => b.type !== 'chapter-opener') : []
 
   const savePdf = () => {
     setPreview(true)
@@ -482,10 +494,49 @@ export default function App() {
             </article>
           )}
 
+          {isBriefing && briefingLesson && briefingOpener && (
+            <article className="lesson lesson-enter mission-briefing-view">
+              <header className="lesson-hero">
+                <div className="lesson-hero-meta">
+                  <span className="pill accent">Enterprise Mission Briefing</span>
+                  <span className="pill">{briefingOpener.missionBadge || `Mission Phase ${briefingLessonIndex + 1}`}</span>
+                </div>
+                <p className="lesson-eyebrow">{briefingOpener.missionBadge || 'MISSION BRIEFING'}</p>
+                <h1 className="lesson-title">{briefingOpener.missionCrisis || briefingOpener.missionTitle || briefingLesson.title}</h1>
+                <p className="lesson-subtitle">{briefingLesson.subtitle}</p>
+              </header>
+              <Blocks blocks={[briefingOpener]} />
+              <div className="briefing-action-bar">
+                <button
+                  type="button"
+                  className="btn primary large-btn"
+                  onClick={() => setActive(briefingLessonIndex)}
+                >
+                  Begin Chapter {briefingLessonIndex + 1} Investigation →
+                </button>
+              </div>
+            </article>
+          )}
+
           {isChapter && lesson && (
             <div key={lesson.id}>
               <LessonShell lesson={lesson} index={active} total={lessons.length} unitLabel={BOOK.unitLabel}>
-                <Blocks blocks={lesson.blocks} />
+                {lessonOpener && (
+                  <div className="chapter-mission-context-banner">
+                    <div className="context-left">
+                      <span className="context-badge">{lessonOpener.missionBadge || 'MISSION BRIEFING'}</span>
+                      <span className="context-title">{lessonOpener.missionCrisis || lessonOpener.missionTitle}</span>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn small"
+                      onClick={() => setActive(`briefing-${active}`)}
+                    >
+                      📋 View Mission Briefing
+                    </button>
+                  </div>
+                )}
+                <Blocks blocks={chapterBlocks} />
               </LessonShell>
             </div>
           )}
@@ -496,8 +547,15 @@ export default function App() {
               disabled={isPreface}
               onClick={() => {
                 if (isHowToUse) setActive('preface')
-                else if (isChapter && active === 0) setActive('how-to-use')
-                else if (isChapter && active > 0) setActive(value => value - 1)
+                else if (isBriefing) {
+                  if (briefingLessonIndex === 0) setActive('how-to-use')
+                  else setActive(briefingLessonIndex - 1)
+                }
+                else if (isChapter) {
+                  if (lessonOpener) setActive(`briefing-${active}`)
+                  else if (active === 0) setActive('how-to-use')
+                  else setActive(value => value - 1)
+                }
               }}
             >
               ← Previous
@@ -505,6 +563,7 @@ export default function App() {
             <span>
               {isPreface && 'Frontmatter: Preface'}
               {isHowToUse && 'Frontmatter: How to Use This Book'}
+              {isBriefing && `Mission Briefing: Chapter ${briefingLessonIndex + 1}`}
               {isChapter && `Chapter ${active + 1} of ${lessons.length}`}
             </span>
             <button
@@ -512,8 +571,16 @@ export default function App() {
               disabled={isChapter && active === lessons.length - 1}
               onClick={() => {
                 if (isPreface) setActive('how-to-use')
-                else if (isHowToUse) setActive(0)
-                else if (isChapter && active < lessons.length - 1) setActive(value => value + 1)
+                else if (isHowToUse) setActive('briefing-0')
+                else if (isBriefing) setActive(briefingLessonIndex)
+                else if (isChapter) {
+                  const nextIndex = active + 1
+                  if (nextIndex < lessons.length) {
+                    const nextHasOpener = lessons[nextIndex]?.blocks.some(b => b.type === 'chapter-opener')
+                    if (nextHasOpener) setActive(`briefing-${nextIndex}`)
+                    else setActive(nextIndex)
+                  }
+                }
               }}
             >
               Next →

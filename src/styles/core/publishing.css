@@ -4526,6 +4526,71 @@ body:has(.page.fullscreen-mode) .site-header,
   color: var(--body);
 }
 
+/* ==========================================================================
+   MISSION BRIEFING DEDICATED VIEW & CHAPTER MISSION CONTEXT BANNER
+   ========================================================================== */
+.chapter-mission-context-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  margin: 1.25rem 0 2rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.08) 0%, rgba(99, 102, 241, 0.06) 100%);
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.chapter-mission-context-banner .context-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.chapter-mission-context-banner .context-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #0284c7;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.chapter-mission-context-banner .context-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+.briefing-action-bar {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 1rem;
+}
+
+.briefing-action-bar .large-btn {
+  font-size: 1rem;
+  padding: 0.85rem 1.75rem;
+  font-weight: 700;
+}
+
+.chip.mission-chip {
+  background: rgba(2, 132, 199, 0.1);
+  border-color: rgba(2, 132, 199, 0.3);
+  color: #0284c7;
+  font-weight: 700;
+}
+
+.chip.mission-chip.active {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+
 
 
 
