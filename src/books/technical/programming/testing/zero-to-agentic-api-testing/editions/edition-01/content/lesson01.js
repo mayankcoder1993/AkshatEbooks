@@ -22,6 +22,14 @@ export const lesson01 = {
       missionContext: 'On the eve of university orientation, the student mobile application failed to display campus data. The triage war room discovered a silent disconnect between client UI code and backend services. To resolve the crisis and establish lasting quality gates, we must inspect the wire from first principles, construct a minimal server, and audit every core HTTP operation.',
       missionObjective: 'Build a runnable server from scratch, execute all five CRUD operations, and verify payload contracts across REST, SOAP, and GraphQL.',
       targetSystems: 'Node.js Express Catalog Service · Port 3000 · Public Open Data Endpoints',
+      missionImage: {
+        src: warRoomImg,
+        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+        w: 1408,
+        h: 768,
+        alt: 'The Apex Campus war room showing engineering command screens and live wire diagnostics.',
+        caption: 'The Apex Campus War Room: When the frontend loses its voice, truth is found on the wire.',
+      },
       phaseRoadmap: [
         {
           phase: 'Phase 1 of 3',
@@ -45,34 +53,6 @@ export const lesson01 = {
       achieve: 'Build and run a minimal API server from scratch and verify every core HTTP operation over the wire.',
       how: 'Assembling a runnable Express server step by step, executing POST, GET, PUT, PATCH, and DELETE, and comparing REST, SOAP, and GraphQL using the same book inquiry.',
       carry: 'The assembled runnable server.js file and the foundational mental model of an HTTP request and response pair.'
-    },
-    {
-      type: 'mission',
-      badge: 'MISSION 1 ACTIVE SCENARIO',
-      title: 'The Apex Campus Launch Crisis: When the Frontend Lost Its Voice',
-      text: 'On the eve of campus launch at Apex University, an urgent alert flashes across engineering monitors. The flagship student portal application has gone dark. The mobile user interface is completely blank, displaying silent error states. Inside the triage war room, the mobile frontend team insists their interface code was compiled without errors and blames backend failures. The backend server engineers report that their databases are active and blame mobile network drops. Neither team can see what is happening across the invisible communication boundary. As the API Quality Engineer, your deployment begins here: you must inspect the raw network wire, construct a minimal API server from scratch to prove communication contracts, execute the core HTTP operations, and bridge the disconnect between client and backend.',
-      image: {
-        src: warRoomImg,
-        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
-        w: 1408,
-        h: 768,
-        alt: 'The Apex Campus war room showing engineering command screens and live wire diagnostics.',
-        caption: 'The Apex Campus War Room: When the frontend loses its voice, truth is found on the wire.',
-        points: [
-          'The Crisis: Student mobile screens display blank cards and silent network failures.',
-          'The Disconnect: Frontend and backend teams are deadlocked because neither can observe the wire.',
-          'The Mission: Build a minimal server from first principles, master the five core operations, and audit the wire.',
-        ],
-      },
-      weKnow: [
-        'The frontend UI and backend server cannot communicate without agreed API contracts.',
-        'HTTP requests and responses travel across the network wire as structured text packets.',
-      ],
-      weNeed: [
-        'Build a minimal runnable Express server to control and inspect both sides of the connection.',
-        'Execute and verify POST, GET, PUT, PATCH, and DELETE operations over the wire.',
-        'Contrast REST with SOAP and GraphQL using the identical data query.',
-      ],
     },
     {
       type: 'heading',
@@ -116,20 +96,65 @@ export const lesson01 = {
     },
     {
       type: 'heading',
-      text: 'Step 2: Create and Start Your API Server',
+      text: 'Step 2: Assembling Your First API Server Step by Step in Code Chunks',
     },
     {
       type: 'paragraph',
-      text: 'Many beginners assume an API requires massive cloud infrastructure. In reality, a web API is simply a small computer program running on your machine, listening on a network port, and replying when contacted. We will build our server using **Node.js** and the lightweight **Express** web library.',
+      text: 'When you are called into an engineering war room to debug a broken system, you cannot treat the API as a mysterious black box. You must understand how a web server is actually constructed from the inside out. Rather than pasting a whole file all at once, let us build server.js progressively in four clean code chunks, explaining the exact technical responsibility of each component as an engineer would expect.',
     },
     {
       type: 'steps',
       items: [
         'Verify Node.js: Open your terminal and run node -v. Any modern LTS version (such as Node 18 or Node 20) is ready to go.',
         'Create a Project Folder: Run mkdir campus_api, then cd campus_api.',
-        'Initialize and Install Express: Run npm init -y, then npm install express. This installs the web framework locally.',
-        'Create server.js: Create a new file named server.js in your campus_api directory and paste the complete starter code shown below.',
+        'Initialize Node.js: Run npm init -y to generate a default package.json configuration file.',
+        'Install Express: Run npm install express to pull the lightweight web routing framework into your project node_modules.',
+        'Create server.js: Create a new file named server.js in your campus_api directory. We will now assemble it chunk by chunk.',
       ],
+    },
+    {
+      type: 'chunked-code',
+      badge: 'ASSEMBLING SERVER.JS',
+      title: 'Step by Step Construction of server.js',
+      intro: 'Open an empty file named server.js in your campus_api directory and add these four code sections line by line:',
+      chunks: [
+        {
+          label: 'CHUNK 1: APPLICATION SETUP',
+          filename: 'server.js (Lines 1 to 3)',
+          title: 'Importing Express and Instantiating the Application',
+          code: 'const express = require("express");\nconst app = express();',
+          explanation: 'Loads the Express web routing library from node_modules and invokes it to instantiate the central application object named app. In Node.js architecture, this app instance manages the HTTP request lifecycle, registers endpoint routes, and controls middleware pipelines.',
+          keyTakeaway: 'app is the central server instance coordinating all HTTP traffic.'
+        },
+        {
+          label: 'CHUNK 2: STREAM PARSING',
+          filename: 'server.js (Lines 5 to 7)',
+          title: 'Configuring JSON Body Deserialization Middleware',
+          code: '// Middleware to parse incoming JSON payloads\napp.use(express.json());',
+          explanation: 'In Node.js, incoming HTTP request bodies arrive as raw binary streams split across network TCP packets. Without a deserializer, req.body remains undefined. express.json() acts as stream parsing middleware: it intercepts incoming packets with Content-Type application/json, buffers the data chunks, parses the raw JSON text into structured JavaScript objects, and attaches the parsed object directly to req.body.',
+          keyTakeaway: 'Without express.json(), req.body remains completely undefined when receiving JSON payloads.'
+        },
+        {
+          label: 'CHUNK 3: IN MEMORY STATE',
+          filename: 'server.js (Lines 9 to 13)',
+          title: 'Allocating the In Memory Datastore and State Counter',
+          code: '// In memory textbook records and monotonically advancing counter\nlet books = [\n  { id: 1, title: "Clean Architecture", author: "Robert Martin" }\n];\nlet nextId = 2;',
+          explanation: 'Allocates an array directly inside system RAM (Node.js heap memory) seeded with an initial textbook object. Using in-memory storage allows rapid local experimentation without external database drivers, and resets cleanly on server restart. The nextId counter advances monotonically from 2 to 3, 4, and beyond, ensuring every newly created resource receives an immutable, collision free ID.',
+          keyTakeaway: 'In memory state enables zero database friction; monotonic counters prevent ID collisions.'
+        },
+        {
+          label: 'CHUNK 4: PORT BINDING',
+          filename: 'server.js (Lines 15 to 18)',
+          title: 'Binding the Process to TCP Port 3000',
+          code: '// Start the server listening on local port 3000\napp.listen(3000, () => {\n  console.log("Book catalog server listening on http://localhost:3000");\n});',
+          explanation: 'Binds the Node.js process to TCP communication port 3000 on the local loopback interface (127.0.0.1). Think of your computer as a high rise residential building: localhost is the building address, and port 3000 is the specific apartment door where our catalog service accepts visitors.',
+          keyTakeaway: 'Port 3000 is the dedicated communication doorway where our server receives requests.'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'Here is how your assembled server.js file looks with all four components united. Route handlers will be inserted right above app.listen:',
     },
     {
       type: 'code',
@@ -160,86 +185,22 @@ export const lesson01 = {
     },
     {
       type: 'image',
+      src: serverAnatomyImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/express-server-code-anatomy.jpg',
-      alt: 'Architectural code anatomy diagram of minimal Express API server',
-      caption: 'The Architectural Anatomy of server.js: Four Distinct Layers Powering Our Minimal API Server',
+      alt: 'Architectural flow diagram of server.js showing Client Request, Port 3000, JSON Stream Middleware, In Memory Heap Array, and JSON Response.',
+      caption: 'The Architectural Flow of server.js: Client Request entering Port 3000, passing through JSON Middleware, mutating Heap RAM State, and returning formatted JSON.',
       w: 1408,
       h: 768,
-    },
-    {
-      type: 'structured-breakdown',
-      badge: 'SERVER CODE ANATOMY',
-      title: 'Deconstructing server.js: Inside the Four Pillars of a Web API',
-      intro: 'Every web API server, whether a microservice or an enterprise cloud gateway, is assembled from four architectural layers. Examine the code and purpose inside each box:',
-      categories: [
-        {
-          category: 'ROUTING ENGINE',
-          subCategory: 'Pillar 1',
-          title: 'Framework Import and Application Factory',
-          filename: 'server.js (Lines 1 to 3)',
-          code: [
-            'const express = require("express");',
-            'const app = express();'
-          ],
-          explanation: 'Imports the Express web framework from node_modules and initializes the central app server instance. This object coordinates all incoming HTTP traffic, registers route handlers, and dispatches responses.',
-          points: [
-            'require("express"): Loads the web routing framework into system memory.',
-            'app = express(): Creates the central application instance that registers route endpoints.'
-          ]
-        },
-        {
-          category: 'PAYLOAD INTERCEPTOR',
-          subCategory: 'Pillar 2',
-          title: 'Inbound JSON Parsing Middleware',
-          filename: 'server.js (Lines 5 to 7)',
-          code: [
-            '// Middleware to parse incoming JSON payloads',
-            'app.use(express.json());'
-          ],
-          explanation: 'Registers global middleware that intercepts every incoming network packet. When a client sends a request carrying Content-Type: application/json, this middleware parses the raw incoming binary stream into an accessible JavaScript object attached to req.body.',
-          points: [
-            'Stream Deserialization: Without this middleware, req.body remains completely undefined.',
-            'Automatic Translation: Translates raw JSON wire text into structured JavaScript objects.'
-          ]
-        },
-        {
-          category: 'IN MEMORY DATASTORE',
-          subCategory: 'Pillar 3',
-          title: 'Volatile Array and Monotonic ID Counter',
-          filename: 'server.js (Lines 9 to 13)',
-          code: [
-            'let books = [',
-            '  { id: 1, title: "Clean Architecture", author: "Robert Martin" }',
-            '];',
-            'let nextId = 2;'
-          ],
-          explanation: 'Allocates an array directly inside Node.js heap memory (system RAM). Because it is stored in volatile RAM, restarting the server resets the catalog back to its starter state. The monotonically advancing nextId counter ensures every newly created book receives a unique ID.',
-          points: [
-            'Zero Database Overhead: Enables instant local experimentation without external database drivers.',
-            'Monotonic Sequence: nextId advances from 2 to 3, 4, and beyond, preventing ID collisions or reuse.'
-          ]
-        },
-        {
-          category: 'NETWORK LISTENER',
-          subCategory: 'Pillar 4',
-          title: 'TCP Port 3000 Loopback Listener',
-          filename: 'server.js (Lines 15 to 18)',
-          code: [
-            'app.listen(3000, () => {',
-            '  console.log("Book catalog server listening on http://localhost:3000");',
-            '});'
-          ],
-          explanation: 'Binds the Node.js process to TCP communication port 3000 on your machine loopback network interface. Think of your computer as a high rise residential building: localhost is the building address, and port 3000 is the specific apartment door where our catalog service accepts visitors.',
-          points: [
-            'localhost: The universal loopback address (127.0.0.1) routing traffic within the same machine.',
-            'Port 3000: The dedicated doorway where our book server listens for incoming HTTP requests.'
-          ]
-        }
-      ]
+      points: [
+        'The Client Request: Dispatches an HTTP call over the network wire targeting localhost port 3000.',
+        'The Port 3000 Listener: Accepts the incoming TCP socket connection on your machine.',
+        'The JSON Middleware: Intercepts raw stream bytes and populates req.body with a structured JavaScript object.',
+        'The In Memory Store: Reads and writes textbook records directly inside Node.js heap memory.',
+      ],
     },
     {
       type: 'paragraph',
-      text: 'Now start the server from your terminal. Run the following command:',
+      text: 'Now start the server from your terminal by running the following command:',
     },
     {
       type: 'terminal',
@@ -250,12 +211,11 @@ export const lesson01 = {
     },
     {
       type: 'callout',
-      variant: 'tip',
-      title: 'What Localhost and Port 3000 Mean',
+      variant: 'note',
+      title: 'Terminal Controls and Stopping the Server',
       paragraphs: [
-        '• localhost: Refers to "this computer". It is the universal network loopback address allowing your machine to talk to programs running on itself.',
-        '• Port 3000: Think of your computer as a large apartment building. The IP address or localhost is the building address, and port 3000 is the specific apartment door where our book server lives.',
-        '• Stopping and Restarting: Whenever you add new code handlers to server.js, press Ctrl+C in your terminal to stop the running program, and run node server.js again to load your updates.',
+        '• Stopping and Restarting: Whenever you add new route handlers to server.js in subsequent steps, switch to your terminal, press Ctrl+C to stop the process, and run node server.js again to load your changes.',
+        '• Connection Refused Check: If your API client ever displays "Error: connect ECONNREFUSED 127.0.0.1:3000", verify that node server.js is actively running in your terminal.',
       ],
     },
     {

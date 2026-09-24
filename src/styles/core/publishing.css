@@ -4008,6 +4008,38 @@ body:has(.page.fullscreen-mode) .site-header,
   line-height: 1.35;
 }
 
+.launchpad-image-wrap {
+  padding: 1.25rem 1.5rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.launchpad-image-frame {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  background: #ffffff;
+}
+
+.launchpad-image-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.launchpad-image-caption {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748b;
+  text-align: center;
+}
+
 .launchpad-mission-detail-box {
   padding: 1.35rem 1.5rem;
   background: var(--panel-soft);

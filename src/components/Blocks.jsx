@@ -289,6 +289,7 @@ function ChapterOpener({
   missionContext,
   missionObjective,
   targetSystems,
+  missionImage,
   phaseRoadmap,
   achieve,
   how,
@@ -304,6 +305,20 @@ function ChapterOpener({
         </div>
         {missionCrisis && <h2 className="launchpad-crisis-heading">{missionCrisis}</h2>}
       </div>
+
+      {missionImage && (
+        <div className="launchpad-image-wrap">
+          <div className="launchpad-image-frame">
+            <img
+              src={missionImage.src || missionImage.file || missionImage}
+              alt={missionImage.alt || missionCrisis || 'Mission Scenario'}
+            />
+          </div>
+          {missionImage.caption && (
+            <p className="launchpad-image-caption">{missionImage.caption}</p>
+          )}
+        </div>
+      )}
 
       {(missionContext || missionObjective || targetSystems) && (
         <div className="launchpad-mission-detail-box">
@@ -951,7 +966,7 @@ export function Block({ block: b, staticMode = false }) {
             )}
             <div className="ui-box-media-wrap">
               <div className="figure-media">
-                <img src={b.src} alt={b.alt}/>
+                <img src={b.src || b.file} alt={b.alt}/>
               </div>
               {b.caption && (
                 <p className="figure-summary">{b.caption}</p>
