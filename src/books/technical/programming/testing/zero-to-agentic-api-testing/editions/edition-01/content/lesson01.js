@@ -5,7 +5,10 @@ import matrixImg from '../assets/api-architectures-matrix.jpg'
 import anatomyImg from '../assets/http-wire-anatomy.jpg'
 import serverAnatomyImg from '../assets/express-server-code-anatomy.jpg'
 import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
-import warRoomComicStripImg from '../assets/war-room-comic-strip.jpg'
+import panel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import panel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import panel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
+import panel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 import postOpImg from '../assets/post-operation-wire-flow.jpg'
 import getOpImg from '../assets/get-operation-wire-flow.jpg'
 import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
@@ -64,92 +67,91 @@ export const lesson01 = {
     },
     {
       type: 'paragraph',
-      text: 'It is 8:14 PM on the eve of campus wide orientation at Apex University. Fluorescent lights hum in the engineering command center. A massive curved display shows real time transit telemetry, student registration queues, and a flood of failing network requests.',
-    },
-    {
-      type: 'paragraph',
-      text: 'The mobile development lead is visibly frustrated: The mobile app is completely blank. The backend transit service must have crashed. The backend lead pushes back immediately: Our database clusters are healthy and CPU load is under twelve percent. The mobile team must have broken their UI rendering.',
-    },
-    {
-      type: 'paragraph',
-      text: 'Both engineering teams are deadlocked because they are staring at their own screens, arguing across an invisible chasm: the network wire.',
-    },
-    {
-      type: 'paragraph',
-      text: 'You have just joined the engineering team as an aspiring tester and developer. You want to help resolve the crisis, but you face an immediate reality: you have never audited network packets or debugged distributed services before. How can you diagnose why two computers cannot speak to each other if you have never built an API from scratch?',
-    },
-    {
-      type: 'paragraph',
-      text: 'You cannot debug what you do not understand. To see through the confusion of the war room, you need to understand what an API truly is, how data travels across the physical wire, and how servers process requests.',
-    },
-    {
-      type: 'paragraph',
-      text: 'You pull up a chair in the corner of the room, open your laptop terminal, and begin where every great engineer begins: by understanding the foundational mechanics of client server communication from first principles.',
+      text: 'It is 8:14 PM on the eve of campus wide orientation at Apex University. Inside the grand stone pillared mandapa hall, carved Dravidian granite pillars and delicate Nagara stone jali lattice screens frame the bustling engineering command center. Brass lamps cast a warm glow across ancient stone archways while student registration queues begin stalling. Suddenly, the campus transit tracking system goes completely dark. A glowing stone alert tablet on a carved heritage plinth flashes the emergency warning: CAMPUS TRANSIT OFFLINE.',
     },
     {
       type: 'image',
       layout: 'stacked',
-      badge: 'HERITAGE WAR ROOM COMIC',
-      title: 'The Invisible Wire: A Four Panel Indian Heritage Story',
-      text: 'Illustrated in traditional Indian Madhubani folk art style with sharp eyes, set inside an ancient carved Dravidian and Nagara stone mandapa hall. Follow the unfolding incident from the initial 8:14 PM transit outage alert to the cross team standoff and the decision to rebuild understanding from first principles.',
-      src: warRoomComicStripImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-comic-strip.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Traditional Indian Madhubani style four panel comic strip set inside an ancient carved Dravidian stone mandapa hall with Nagara jali screens, showing the 8:14 PM transit crisis, the finger pointing debate between leads, the broken wire under the stone conduit, and the engineer opening a terminal to build an API from first principles.',
-      caption: 'Figure 1.0: The Invisible Wire. Illustrated in traditional Indian Madhubani folk art style with sharp eyes, set inside an ancient stone mandapa hall.',
+      badge: 'INCIDENT TIMELINE: 8:14 PM',
+      title: 'The Crisis: Campus Transit Drops Offline',
+      text: 'Orientation eve transit tracking vanishes from the student portal moments before arriving shuttles reach campus gates. In the quiet heritage hall, the glowing tablet confirms the outage.',
+      src: panel1Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Madhubani style engineer entering an ancient Dravidian and Nagara stone mandapa hall where an illuminated tablet flashes CAMPUS TRANSIT OFFLINE at 8:14 PM.',
+      caption: 'Figure 1.0A: The Outage at 8:14 PM. Orientation transit tracking vanishes across campus moments before student arrival.',
       points: [
-        'Panel 1 (The Crisis, 8:14 PM): Campus transit goes dark on orientation eve, leaving incoming students stranded.',
-        'Panel 2 (The Finger Pointing): Mobile lead blames backend service while backend lead defends database cluster metrics.',
-        'Panel 3 (The Invisible Wire): Packets fail in transit across the physical network wire while both teams ignore the transport layer.',
-        'Panel 4 (First Principles): The aspiring engineer pulls up a laptop terminal to construct a minimal API server from scratch.'
+        'Orientation Eve Emergency: Real time bus telemetry stops responding as thousands of students arrive.',
+        'The Heritage Command Hall: Dravidian granite pillars and Nagara pierced stone screens frame the central triage center.',
+        'The First Observer: A junior engineer walks into the room as the stone tablet flashes the alert.'
       ],
     },
     {
-      type: 'storyboard',
-      badge: 'STORYBOARD BREAKDOWN · FOUR PANELS',
-      title: 'Deconstructing the Four Panel War Room Drama',
-      intro: 'Step through the four panels to see how a high stakes outage exposes the invisible network wire between mobile clients and backend servers:',
-      panels: [
-        {
-          title: 'The Crisis: Orientation Eve Transit Outage',
-          time: '8:14 PM',
-          scene: 'A young engineer arrives at the grand stone mandapa command hall as the stone alert tablet flashes transit offline. Thousands of arriving students are left stranded without shuttle tracking.',
-          dialogue: {
-            speaker: 'Junior Engineer',
-            speech: 'The entire campus transit system has vanished from the student portal.'
-          },
-          realization: 'When critical services fail without clear error messages, users see only frozen screens.'
-        },
-        {
-          title: 'The Finger Pointing: Mobile Lead vs Backend Lead',
-          time: '8:18 PM',
-          scene: 'Across a carved teakwood table flanked by massive Dravidian granite pillars and Nagara stone jali screens, the mobile lead and backend lead engage in a heated deadlock.',
-          dialogue: {
-            speaker: 'Mobile Lead',
-            speech: 'The backend service is dead! Check your data!',
-            replySpeaker: 'Backend Lead',
-            replySpeech: 'Our server is fine and database is healthy! The bug is in your client rendering!'
-          },
-          realization: 'Teams naturally blame each other because each group only observes their own application tier.'
-        },
-        {
-          title: 'The Invisible Wire: The Severed Packet Channel',
-          time: '8:22 PM',
-          scene: 'Deep beneath the ancient stone flooring, data packets travel through copper network conduits between mobile devices and server monoliths. An unhandled exception drops packets mid flight.',
-          realization: 'Neither team is inspecting the wire. The failure does not live on the screen or in the database; it is trapped on the transport wire.'
-        },
-        {
-          title: 'First Principles: Rebuilding Understanding from Scratch',
-          time: '8:26 PM',
-          scene: 'Sitting peacefully in a quiet stone alcove beside an intricate Nagara jali window, the young engineer opens a laptop terminal, choosing not to guess, but to build an API from first principles.',
-          dialogue: {
-            speaker: 'Junior Engineer',
-            speech: 'I will rebuild the connection myself from the ground up.'
-          },
-          realization: 'You cannot debug what you do not understand. Building a minimal server gives you complete command over the wire.'
-        }
-      ]
+      type: 'paragraph',
+      text: 'Tension across the room erupts immediately. Mobile Lead and Backend Lead stand opposite each other across a carved teakwood table, pointing fingers in furious deadlock. The mobile lead waves a smartphone showing a blank loading spinner and shouts that the backend service is dead and returning nothing. The backend lead pushes back instantly, insisting that database clusters are healthy, server CPU is under twelve percent, and the fault lies entirely within mobile client rendering. Both leads are convinced they are right because each team inspects only their own screen.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'THE ARCHITECTURAL IMPASSE: 8:17 PM',
+      title: 'The Standoff: Client versus Backend',
+      text: 'Under carved Dravidian beams beside a Nagara jali window, mobile and backend engineering leads argue across the table. Each lead points to local metrics while the system remains broken.',
+      src: panel2Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Two Madhubani style engineering leads in traditional kurtas debating across a carved stone table under Dravidian pillars and Nagara jali screens.',
+      caption: 'Figure 1.0B: The Standoff at 8:17 PM. Mobile and backend leads debate across the carved stone table, trapped by local perspectives.',
+      points: [
+        'The Client Perspective: The mobile screen shows an error, so mobile engineers conclude the server crashed.',
+        'The Server Perspective: Database CPU is low and server health checks succeed, so backend engineers blame client rendering.',
+        'The Blind Spot: Arguing over symptoms without inspecting what actually passes between the two machines.'
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Why are both engineering leads deadlocked? Because the real failure is invisible to both of them. Between the mobile device in a student hand and the server clusters in the data center lies the physical transport wire. Deep within conduits running beneath the ancient carved stone flooring, data packets travel between client and server. In the middle of this conduit, an unhandled parameter format drops packets mid flight. The database never crashed, and the mobile UI layout code was intact. But because neither engineer inspected the wire itself, the failure escaped notice.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'THE ROOT REALITY: 8:21 PM',
+      title: 'The Invisible Wire: Where Network Packets Live and Die',
+      text: 'A cross section beneath the carved stone floor reveals the transport conduit. While engineers debate above, network packets drop silently along the wire.',
+      src: panel3Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Cutaway view under ancient stone flooring showing a severed network cable with dropped packet, while engineering leads argue in the background.',
+      caption: 'Figure 1.0C: The Invisible Wire at 8:21 PM. Packets fail in transit across the physical transport wire while both teams inspect only their own screens.',
+      points: [
+        'The Transport Conduit: Data packets travel through physical network wires connecting client and server.',
+        'The Silent Failure: A malformed request or dropped packet causes the mobile client to wait forever.',
+        'The Wire Truth: System truth does not live in client UI or database CPU; it lives on the wire.'
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'You realize you cannot solve the crisis by joining the debate. You face a foundational truth: you have never audited network packets or built a distributed service before. You cannot debug what you do not understand. You pull up a chair in a quiet stone alcove beside an intricate Nagara jali window, set your laptop on a low carved wooden table, and open a clean terminal window. You type your first command: mkdir campus_api. To master the wire and rescue the campus transit system, you will construct a minimal API server from first principles.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'FIRST PRINCIPLES: 8:25 PM',
+      title: 'The Foundation: Building the API from Scratch',
+      text: 'Sitting peacefully in a quiet stone alcove beside a carved Nagara jali window, the aspiring engineer opens a laptop terminal to construct an API server from first principles.',
+      src: panel4Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Madhubani style female engineer sitting in a stone alcove with Nagara jali window working on a laptop with terminal speech bubble mkdir campus_api.',
+      caption: 'Figure 1.0D: First Principles at 8:25 PM. Constructing an API server from scratch gives you complete command over every network packet on the wire.',
+      points: [
+        'The Strategic Choice: Step away from surface speculation and learn client server mechanics directly.',
+        'The First Command: Initializing a fresh workspace with mkdir campus_api in the terminal.',
+        'The Path Ahead: Building a minimal server gives you the diagnostic power to resolve any distributed outage.'
+      ],
     },
     {
       type: 'heading',
