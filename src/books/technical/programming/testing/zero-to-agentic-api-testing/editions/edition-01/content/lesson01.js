@@ -5,7 +5,7 @@ import matrixImg from '../assets/api-architectures-matrix.jpg'
 import anatomyImg from '../assets/http-wire-anatomy.jpg'
 import serverAnatomyImg from '../assets/express-server-code-anatomy.jpg'
 import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
-import warRoomEngineerImg from '../assets/war-room-engineer-first-principles.jpg'
+import warRoomComicStripImg from '../assets/war-room-comic-strip.jpg'
 import postOpImg from '../assets/post-operation-wire-flow.jpg'
 import getOpImg from '../assets/get-operation-wire-flow.jpg'
 import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
@@ -89,20 +89,67 @@ export const lesson01 = {
     {
       type: 'image',
       layout: 'stacked',
-      badge: 'THE APEX CAMPUS WAR ROOM',
-      title: 'Triage at 8:14 PM: The Invisible Network Wire Between Mobile and Backend',
-      text: 'Inside the Apex University command center, engineering leads debate whether the outage stems from mobile app rendering bugs or backend microservice crashes. In the foreground, an aspiring engineer opens a terminal to investigate the wire from first principles.',
-      src: warRoomEngineerImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-engineer-first-principles.jpg',
+      badge: 'HERITAGE WAR ROOM COMIC',
+      title: 'The Invisible Wire: A Four Panel Indian Heritage Story',
+      text: 'Illustrated in traditional Indian Madhubani folk art style with sharp eyes, set inside an ancient carved Dravidian and Nagara stone mandapa hall. Follow the unfolding incident from the initial 8:14 PM transit outage alert to the cross team standoff and the decision to rebuild understanding from first principles.',
+      src: warRoomComicStripImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-comic-strip.jpg',
       w: 1408,
       h: 768,
-      alt: 'Photograph of the Apex Campus engineering war room at 8:14 PM with an engineer working at a laptop in the foreground while tech leads debate a transit incident display in the background.',
-      caption: 'Figure 1.0: The Apex Campus War Room. When mobile and backend teams point fingers across an invisible network wire, the engineer must build and verify from first principles.',
+      alt: 'Traditional Indian Madhubani style four panel comic strip set inside an ancient carved Dravidian stone mandapa hall with Nagara jali screens, showing the 8:14 PM transit crisis, the finger pointing debate between leads, the broken wire under the stone conduit, and the engineer opening a terminal to build an API from first principles.',
+      caption: 'Figure 1.0: The Invisible Wire. Illustrated in traditional Indian Madhubani folk art style with sharp eyes, set inside an ancient stone mandapa hall.',
       points: [
-        'The Command Display: Real time transit telemetry showing critical network failures and offline shuttle routes.',
-        'The Architectural Impasse: Mobile engineers blame backend crashes; backend leads defend database health.',
-        'The First Principles Approach: Opening a fresh terminal to build a minimal API server from the ground up.'
+        'Panel 1 (The Crisis, 8:14 PM): Campus transit goes dark on orientation eve, leaving incoming students stranded.',
+        'Panel 2 (The Finger Pointing): Mobile lead blames backend service while backend lead defends database cluster metrics.',
+        'Panel 3 (The Invisible Wire): Packets fail in transit across the physical network wire while both teams ignore the transport layer.',
+        'Panel 4 (First Principles): The aspiring engineer pulls up a laptop terminal to construct a minimal API server from scratch.'
       ],
+    },
+    {
+      type: 'storyboard',
+      badge: 'STORYBOARD BREAKDOWN · FOUR PANELS',
+      title: 'Deconstructing the Four Panel War Room Drama',
+      intro: 'Step through the four panels to see how a high stakes outage exposes the invisible network wire between mobile clients and backend servers:',
+      panels: [
+        {
+          title: 'The Crisis: Orientation Eve Transit Outage',
+          time: '8:14 PM',
+          scene: 'A young engineer arrives at the grand stone mandapa command hall as the stone alert tablet flashes transit offline. Thousands of arriving students are left stranded without shuttle tracking.',
+          dialogue: {
+            speaker: 'Junior Engineer',
+            speech: 'The entire campus transit system has vanished from the student portal.'
+          },
+          realization: 'When critical services fail without clear error messages, users see only frozen screens.'
+        },
+        {
+          title: 'The Finger Pointing: Mobile Lead vs Backend Lead',
+          time: '8:18 PM',
+          scene: 'Across a carved teakwood table flanked by massive Dravidian granite pillars and Nagara stone jali screens, the mobile lead and backend lead engage in a heated deadlock.',
+          dialogue: {
+            speaker: 'Mobile Lead',
+            speech: 'The backend service is dead! Check your data!',
+            replySpeaker: 'Backend Lead',
+            replySpeech: 'Our server is fine and database is healthy! The bug is in your client rendering!'
+          },
+          realization: 'Teams naturally blame each other because each group only observes their own application tier.'
+        },
+        {
+          title: 'The Invisible Wire: The Severed Packet Channel',
+          time: '8:22 PM',
+          scene: 'Deep beneath the ancient stone flooring, data packets travel through copper network conduits between mobile devices and server monoliths. An unhandled exception drops packets mid flight.',
+          realization: 'Neither team is inspecting the wire. The failure does not live on the screen or in the database; it is trapped on the transport wire.'
+        },
+        {
+          title: 'First Principles: Rebuilding Understanding from Scratch',
+          time: '8:26 PM',
+          scene: 'Sitting peacefully in a quiet stone alcove beside an intricate Nagara jali window, the young engineer opens a laptop terminal, choosing not to guess, but to build an API from first principles.',
+          dialogue: {
+            speaker: 'Junior Engineer',
+            speech: 'I will rebuild the connection myself from the ground up.'
+          },
+          realization: 'You cannot debug what you do not understand. Building a minimal server gives you complete command over the wire.'
+        }
+      ]
     },
     {
       type: 'heading',

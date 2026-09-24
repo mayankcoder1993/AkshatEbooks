@@ -168,6 +168,23 @@ async function blockToDocx(b) {
       ];
       return [tableBox('MISSION BRIEFING & CHAPTER ROADMAP', items, 'F8FAFC')];
     }
+    case 'storyboard': {
+      const items = [
+        ...(b.badge ? [p([new TextRun({ text: b.badge, bold: true, color: colors.teal })])] : []),
+        ...(b.title ? [p([new TextRun({ text: b.title, bold: true, size: 28, color: colors.navy })])] : []),
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.panels.flatMap((panel, idx) => [
+          p([new TextRun({ text: `PANEL ${idx + 1}: ${panel.title}${panel.time ? ` (${panel.time})` : ''}`, bold: true, color: colors.navy })]),
+          p([new TextRun({ text: 'Scene: ', bold: true }), panel.scene]),
+          ...(panel.dialogue ? [
+            p([new TextRun({ text: `${panel.dialogue.speaker}: `, bold: true, color: colors.teal }), `"${panel.dialogue.speech}"`]),
+            ...(panel.dialogue.replySpeaker ? [p([new TextRun({ text: `${panel.dialogue.replySpeaker}: `, bold: true, color: colors.indigo }), `"${panel.dialogue.replySpeech}"`])] : [])
+          ] : []),
+          p([new TextRun({ text: 'The Core Wire Lesson: ', bold: true, color: colors.teal }), panel.realization])
+        ])
+      ];
+      return [tableBox(b.title || 'COMIC STORYBOARD', items, 'F8FAFC')];
+    }
     case 'chunked-code': {
       const items = [
         ...(b.intro ? [p(b.intro)] : []),
