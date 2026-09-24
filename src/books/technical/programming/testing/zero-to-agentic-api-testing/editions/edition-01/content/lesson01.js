@@ -5,6 +5,7 @@ import matrixImg from '../assets/api-architectures-matrix.jpg'
 import anatomyImg from '../assets/http-wire-anatomy.jpg'
 import serverAnatomyImg from '../assets/express-server-code-anatomy.jpg'
 import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
+import warRoomEngineerImg from '../assets/war-room-engineer-first-principles.jpg'
 import postOpImg from '../assets/post-operation-wire-flow.jpg'
 import getOpImg from '../assets/get-operation-wire-flow.jpg'
 import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
@@ -84,6 +85,24 @@ export const lesson01 = {
     {
       type: 'paragraph',
       text: 'You pull up a chair in the corner of the room, open your laptop terminal, and begin where every great engineer begins: by understanding the foundational mechanics of client server communication from first principles.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'THE APEX CAMPUS WAR ROOM',
+      title: 'Triage at 8:14 PM: The Invisible Network Wire Between Mobile and Backend',
+      text: 'Inside the Apex University command center, engineering leads debate whether the outage stems from mobile app rendering bugs or backend microservice crashes. In the foreground, an aspiring engineer opens a terminal to investigate the wire from first principles.',
+      src: warRoomEngineerImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-engineer-first-principles.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Photograph of the Apex Campus engineering war room at 8:14 PM with an engineer working at a laptop in the foreground while tech leads debate a transit incident display in the background.',
+      caption: 'Figure 1.0: The Apex Campus War Room. When mobile and backend teams point fingers across an invisible network wire, the engineer must build and verify from first principles.',
+      points: [
+        'The Command Display: Real time transit telemetry showing critical network failures and offline shuttle routes.',
+        'The Architectural Impasse: Mobile engineers blame backend crashes; backend leads defend database health.',
+        'The First Principles Approach: Opening a fresh terminal to build a minimal API server from the ground up.'
+      ],
     },
     {
       type: 'heading',
