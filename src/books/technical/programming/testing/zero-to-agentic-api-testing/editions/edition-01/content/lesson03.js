@@ -11,12 +11,32 @@ export const lesson03 = {
   blocks: [
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 1 · PHASE 3 OF 3',
+      missionBadge: 'MISSION 1 · PHASE 3 OF 3: AUTOMATING THE WIRE VERIFICATION',
       missionTitle: 'Global Open Data and Web Wire Audit',
       missionCrisis: 'Automating the Wire Gate: Never Repeat Manual Eyeball Audits',
       missionContext: 'We diagnosed and repaired the shuttle service defect by hand, but manual testing does not scale across repeated deployments. If an engineer accidentally removes the defensive guard tomorrow, the system will crash again. We must convert our manual wire observations into automated JavaScript assertions that run at machine speed in Postman.',
       missionObjective: 'Construct automated regression checks for both the 400 guard and 200 contract, execute collection runs, and achieve Mission 1 victory.',
       targetSystems: 'Postman Test Workbench · JavaScript Sandbox · Campus Transit Service',
+      phaseRoadmap: [
+        {
+          phase: 'Phase 1 of 3',
+          title: 'Wire Foundations and Minimal Server',
+          status: 'completed',
+          desc: 'Chapter 1: Assembled server.js from scratch, tested the 5 operations, and mapped HTTP basics.'
+        },
+        {
+          phase: 'Phase 2 of 3',
+          title: 'The Manual Wire Investigation',
+          status: 'completed',
+          desc: 'Chapter 2: Diagnosed the transit shuttle 500 crash by hand and installed defensive guards.'
+        },
+        {
+          phase: 'Phase 3 of 3',
+          title: 'Automating the Wire Verification',
+          status: 'active',
+          desc: 'Chapter 3: Converting manual checks into automated Postman JavaScript assertions.'
+        }
+      ],
       achieve: 'Turn the shuttle investigation we performed by hand into repeatable checks that reveal a broken response.',
       how: 'Reuse the same local endpoint and inputs, add a small post response check to each request, run the checks against broken and guarded versions, and read actual Test Results.',
       carry: 'The core automated assertion pattern ready to test library services in Chapter 4.'

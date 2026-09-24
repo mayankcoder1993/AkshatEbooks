@@ -289,6 +289,7 @@ function ChapterOpener({
   missionContext,
   missionObjective,
   targetSystems,
+  phaseRoadmap,
   achieve,
   how,
   carry,
@@ -317,6 +318,32 @@ function ChapterOpener({
               <p className="launchpad-objective-text"><RichText text={missionObjective} /></p>
             </div>
           )}
+        </div>
+      )}
+
+      {phaseRoadmap && phaseRoadmap.length > 0 && (
+        <div className="launchpad-phases-box">
+          <div className="launchpad-phases-header">
+            <span className="launchpad-phases-kicker">MISSION TACTICAL ROADMAP</span>
+            <span className="launchpad-phases-note">Understanding Where This Chapter Fits</span>
+          </div>
+          <div className="launchpad-phases-grid">
+            {phaseRoadmap.map((p, idx) => (
+              <div
+                key={idx}
+                className={`launchpad-phase-card ${p.status === 'active' ? 'active-phase' : p.status === 'completed' ? 'completed-phase' : 'upcoming-phase'}`}
+              >
+                <div className="phase-card-top">
+                  <span className="phase-badge">{p.phase}</span>
+                  <span className="phase-status-pill">
+                    {p.status === 'active' ? 'Current Chapter' : p.status === 'completed' ? 'Completed' : 'Upcoming'}
+                  </span>
+                </div>
+                <h4 className="phase-title">{p.title}</h4>
+                <p className="phase-desc">{p.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

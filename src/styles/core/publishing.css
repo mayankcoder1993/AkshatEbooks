@@ -4078,6 +4078,108 @@ body:has(.page.fullscreen-mode) .site-header,
   font-weight: 600;
 }
 
+.launchpad-phases-box {
+  padding: 1.25rem 1.5rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.launchpad-phases-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.launchpad-phases-kicker {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #0284c7;
+}
+
+.launchpad-phases-note {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.launchpad-phases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+}
+
+.launchpad-phase-card {
+  padding: 0.85rem 1rem;
+  border-radius: 8px;
+  background: var(--panel-soft);
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.launchpad-phase-card.active-phase {
+  background: rgba(2, 132, 199, 0.06);
+  border-color: #0284c7;
+  box-shadow: 0 0 0 1px #0284c7;
+}
+
+.launchpad-phase-card.completed-phase {
+  opacity: 0.85;
+  border-color: #10b981;
+}
+
+.phase-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phase-badge {
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #0369a1;
+}
+
+.phase-status-pill {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(100, 116, 139, 0.12);
+  color: #475569;
+  text-transform: uppercase;
+}
+
+.active-phase .phase-status-pill {
+  background: #0284c7;
+  color: #ffffff;
+}
+
+.phase-title {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--heading);
+  line-height: 1.35;
+}
+
+.phase-desc {
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--body);
+}
+
 .launchpad-chapter-plan-box {
   background: var(--panel);
 }

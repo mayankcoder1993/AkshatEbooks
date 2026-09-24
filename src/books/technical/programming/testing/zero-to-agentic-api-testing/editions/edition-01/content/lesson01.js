@@ -4,6 +4,7 @@ import pyramidImg from '../assets/testing-pyramid-focus.jpg'
 import matrixImg from '../assets/api-architectures-matrix.jpg'
 import anatomyImg from '../assets/http-wire-anatomy.jpg'
 import serverAnatomyImg from '../assets/express-server-code-anatomy.jpg'
+import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 
 export const lesson01 = {
   id: 'understanding-apis',
@@ -15,15 +16,63 @@ export const lesson01 = {
   blocks: [
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 1 · PHASE 1 OF 3',
+      missionBadge: 'MISSION 1 · PHASE 1 OF 3: WIRE FOUNDATIONS AND FIRST PRINCIPLES',
       missionTitle: 'Global Open Data and Web Wire Audit',
       missionCrisis: 'The Apex Campus Launch Crisis: When the Frontend Lost Its Voice',
       missionContext: 'On the eve of university orientation, the student mobile application failed to display campus data. The triage war room discovered a silent disconnect between client UI code and backend services. To resolve the crisis and establish lasting quality gates, we must inspect the wire from first principles, construct a minimal server, and audit every core HTTP operation.',
       missionObjective: 'Build a runnable server from scratch, execute all five CRUD operations, and verify payload contracts across REST, SOAP, and GraphQL.',
       targetSystems: 'Node.js Express Catalog Service · Port 3000 · Public Open Data Endpoints',
+      phaseRoadmap: [
+        {
+          phase: 'Phase 1 of 3',
+          title: 'Wire Foundations and Minimal Server',
+          status: 'active',
+          desc: 'Chapter 1: Assembling server.js from scratch, testing the 5 operations, and understanding HTTP wire basics.'
+        },
+        {
+          phase: 'Phase 2 of 3',
+          title: 'The Manual Wire Investigation',
+          status: 'upcoming',
+          desc: 'Chapter 2: Investigating the transit shuttle 500 crash by hand and installing defensive guards.'
+        },
+        {
+          phase: 'Phase 3 of 3',
+          title: 'Automating the Wire Verification',
+          status: 'upcoming',
+          desc: 'Chapter 3: Converting manual checks into automated Postman JavaScript assertions.'
+        }
+      ],
       achieve: 'Build and run a minimal API server from scratch and verify every core HTTP operation over the wire.',
       how: 'Assembling a runnable Express server step by step, executing POST, GET, PUT, PATCH, and DELETE, and comparing REST, SOAP, and GraphQL using the same book inquiry.',
       carry: 'The assembled runnable server.js file and the foundational mental model of an HTTP request and response pair.'
+    },
+    {
+      type: 'mission',
+      badge: 'MISSION 1 ACTIVE SCENARIO',
+      title: 'The Apex Campus Launch Crisis: When the Frontend Lost Its Voice',
+      text: 'On the eve of campus launch at Apex University, an urgent alert flashes across engineering monitors. The flagship student portal application has gone dark. The mobile user interface is completely blank, displaying silent error states. Inside the triage war room, the mobile frontend team insists their interface code was compiled without errors and blames backend failures. The backend server engineers report that their databases are active and blame mobile network drops. Neither team can see what is happening across the invisible communication boundary. As the API Quality Engineer, your deployment begins here: you must inspect the raw network wire, construct a minimal API server from scratch to prove communication contracts, execute the core HTTP operations, and bridge the disconnect between client and backend.',
+      image: {
+        src: warRoomImg,
+        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+        w: 1408,
+        h: 768,
+        alt: 'The Apex Campus war room showing engineering command screens and live wire diagnostics.',
+        caption: 'The Apex Campus War Room: When the frontend loses its voice, truth is found on the wire.',
+        points: [
+          'The Crisis: Student mobile screens display blank cards and silent network failures.',
+          'The Disconnect: Frontend and backend teams are deadlocked because neither can observe the wire.',
+          'The Mission: Build a minimal server from first principles, master the five core operations, and audit the wire.',
+        ],
+      },
+      weKnow: [
+        'The frontend UI and backend server cannot communicate without agreed API contracts.',
+        'HTTP requests and responses travel across the network wire as structured text packets.',
+      ],
+      weNeed: [
+        'Build a minimal runnable Express server to control and inspect both sides of the connection.',
+        'Execute and verify POST, GET, PUT, PATCH, and DELETE operations over the wire.',
+        'Contrast REST with SOAP and GraphQL using the identical data query.',
+      ],
     },
     {
       type: 'heading',

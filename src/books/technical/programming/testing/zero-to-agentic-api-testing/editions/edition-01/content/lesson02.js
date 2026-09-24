@@ -12,12 +12,32 @@ export const lesson02 = {
   blocks: [
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 1 · PHASE 2 OF 3',
+      missionBadge: 'MISSION 1 · PHASE 2 OF 3: THE MANUAL WIRE INVESTIGATION',
       missionTitle: 'Global Open Data and Web Wire Audit',
       missionCrisis: 'The Campus Transit Shuttle Crash: Diagnosing the 500 Server Error',
       missionContext: 'The student shuttle tracking service crashed on day one of orientation whenever students opened the route tracker without selecting a destination. The frontend team blamed the backend, while backend logs showed an unhandled NullPointerException. In this phase, we enter the war room to inspect raw HTTP packets by hand, understand status code families, and install defensive guards.',
       missionObjective: 'Reproduce the unhandled 500 crash, install a defensive input validation guard, and verify both 400 Bad Request and 200 OK contracts.',
       targetSystems: 'Campus Shuttle Route Locator Service · Port 5050 · HTTP Wire Traffic',
+      phaseRoadmap: [
+        {
+          phase: 'Phase 1 of 3',
+          title: 'Wire Foundations and Minimal Server',
+          status: 'completed',
+          desc: 'Chapter 1: Assembled server.js from scratch, tested the 5 operations, and mapped HTTP basics.'
+        },
+        {
+          phase: 'Phase 2 of 3',
+          title: 'The Manual Wire Investigation',
+          status: 'active',
+          desc: 'Chapter 2: Diagnosing the transit shuttle 500 crash by hand and installing defensive guards.'
+        },
+        {
+          phase: 'Phase 3 of 3',
+          title: 'Automating the Wire Verification',
+          status: 'upcoming',
+          desc: 'Chapter 3: Converting manual checks into automated Postman JavaScript assertions.'
+        }
+      ],
       achieve: 'Find why one shuttle location request fails, make bad input safe, and check that a valid lookup still provides coordinates.',
       how: 'Compare two URLs, send requests to a local teaching service, examine the client response and server log, write a diagnosis and repair plan, add a defensive validation guard, and replay both requests by hand.',
       carry: 'The two finished manual request setups and verified response contracts, ready to automate in Chapter 3.'
