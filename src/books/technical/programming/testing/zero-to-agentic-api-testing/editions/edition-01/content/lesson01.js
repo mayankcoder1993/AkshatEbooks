@@ -5,6 +5,9 @@ import matrixImg from '../assets/api-architectures-matrix.jpg'
 import anatomyImg from '../assets/http-wire-anatomy.jpg'
 import serverAnatomyImg from '../assets/express-server-code-anatomy.jpg'
 import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
+import postOpImg from '../assets/post-operation-wire-flow.jpg'
+import getOpImg from '../assets/get-operation-wire-flow.jpg'
+import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
 
 export const lesson01 = {
   id: 'understanding-apis',
@@ -333,6 +336,24 @@ export const lesson01 = {
       sampleLabel: 'RECORDED WIRE CAPTURE'
     },
     {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'OPERATION 1 WIRE FLOW',
+      title: 'HTTP POST Creation Flow: From Request to In Memory Persistence',
+      text: 'When a client dispatches a POST request with a JSON payload, Express streams the bytes through middleware, allocates an incremented ID, stores the record in RAM heap memory, and returns HTTP 201 Created.',
+      src: postOpImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/post-operation-wire-flow.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'HTTP POST creation flow diagram showing Client dispatching POST with JSON payload, Express server assigning ID 2, and responding with 201 Created.',
+      caption: 'The POST creation flow: Moving data from client request into server memory and returning 201 Created.',
+      points: [
+        'Client Dispatches POST: Sends method POST /books with Content-Type application/json and raw payload.',
+        'Express Server Processing: Middleware deserializes JSON, assigns nextId 2, and pushes object into memory.',
+        'Server Responds 201 Created: Transmits the freshly created record back to the client as confirmation.'
+      ],
+    },
+    {
       type: 'callout',
       variant: 'note',
       title: 'First Recovery Check: Connection Refused',
@@ -412,6 +433,24 @@ export const lesson01 = {
       paragraphs: [
         'Notice the structural difference: when you sent POST /books in Step 3, you transmitted a single JSON object wrapped in curly braces { ... } because you were creating one individual record.',
         'When you dispatched GET /books in Step 4, the server returned an array [ ... ] holding both Book 1 and Book 2! An array groups multiple items; an object defines a single item.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'OPERATION 2 WIRE FLOW',
+      title: 'HTTP GET Retrieval Flow: Reading Records from RAM Memory',
+      text: 'Retrieving records using HTTP GET is a safe, read only operation. No body is transmitted with the request. The server reads the existing books array from RAM heap memory and returns status 200 OK with both book records.',
+      src: getOpImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/get-operation-wire-flow.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'HTTP GET retrieval flow diagram showing Client dispatching GET without body, Express server reading books array from RAM heap, and responding with 200 OK.',
+      caption: 'The GET retrieval flow: Safe read operation returning the accumulated catalog in a JSON array.',
+      points: [
+        'Client Dispatches GET: Requests resource collection /books with no body payload.',
+        'Express Server Processing: Route handler accesses the in memory books array without modifying state.',
+        'Server Responds 200 OK: Serializes the two item array and returns it to the client.'
       ],
     },
     {
@@ -615,6 +654,24 @@ export const lesson01 = {
       paragraphs: [
         '• Safe: Calling GET /books five times in a row never changes the books stored on the server. Safe methods are strictly read only.',
         '• Idempotent: If you send DELETE /books/1 once, the book is deleted. If you send DELETE /books/1 again, the book is still absent from the catalog. The server state remains identical. In contrast, sending POST /books ten times creates ten distinct book records in memory, which is why POST is not idempotent.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'MUTATION COMPARISON',
+      title: 'Comparing PUT, PATCH, and DELETE: Complete Replacement, Delta, and Removal',
+      text: 'Study how the three data modification operations interact with server state: PUT replaces the whole record, PATCH mutates only specific fields, and DELETE purges the record entirely.',
+      src: putPatchDeleteImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/put-patch-delete-comparison.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Diagram comparing PUT full replacement, PATCH partial delta update, and DELETE resource removal side by side.',
+      caption: 'The three mutation verbs compared: Complete replacement with PUT, partial delta with PATCH, and resource purging with DELETE.',
+      points: [
+        'PUT (Full Replacement): Completely overwrites the existing record in memory with the supplied payload.',
+        'PATCH (Partial Delta): Modifies only the specified fields while preserving unmentioned fields like author.',
+        'DELETE (Resource Removal): Purges the target resource from system memory, returning confirmation status 200 or 204.'
       ],
     },
     {
