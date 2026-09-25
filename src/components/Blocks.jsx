@@ -237,6 +237,56 @@ function StructuredBreakdown({ badge = 'ARCHITECTURAL DECONSTRUCTION', title, in
   )
 }
 
+function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels = [] }) {
+  return (
+    <section className="storyboard-container">
+      <div className="storyboard-header">
+        <span className="storyboard-badge">{badge}</span>
+        {title && <h3 className="storyboard-title">{title}</h3>}
+      </div>
+      {intro && <p className="storyboard-intro"><RichText text={intro} /></p>}
+      <div className="storyboard-grid">
+        {panels.map((p, idx) => (
+          <div key={idx} className="storyboard-panel-card">
+            <div className="panel-card-top">
+              <span className="panel-num-badge">PANEL {idx + 1}</span>
+              <span className="panel-phase-title">{p.title}</span>
+              {p.time && <span className="panel-time-tag">{p.time}</span>}
+            </div>
+            <div className="panel-card-body">
+              <div className="panel-scene-box">
+                <span className="panel-label">Scene & Action:</span>
+                <p className="panel-scene-text"><RichText text={p.scene} /></p>
+              </div>
+              {p.dialogue && (
+                <div className="panel-dialogue-box">
+                  <span className="panel-label">Dialogue:</span>
+                  <div className="panel-dialogue-line">
+                    <strong className="dialogue-speaker">{p.dialogue.speaker}:</strong>
+                    <span className="dialogue-quote">"{p.dialogue.speech}"</span>
+                  </div>
+                  {p.dialogue.replySpeaker && (
+                    <div className="panel-dialogue-line reply">
+                      <strong className="dialogue-speaker">{p.dialogue.replySpeaker}:</strong>
+                      <span className="dialogue-quote">"{p.dialogue.replySpeech}"</span>
+                    </div>
+                  )}
+                </div>
+              )}
+              {p.realization && (
+                <div className="panel-realization-box">
+                  <span className="panel-label">The Core Wire Lesson:</span>
+                  <p className="panel-realization-text"><RichText text={p.realization} /></p>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 function ChunkedCode({ badge = 'CODE IN CHUNKS', title, intro, chunks = [] }) {
   return (
     <section className="chunked-code-card">
@@ -289,6 +339,8 @@ function ChapterOpener({
   missionContext,
   missionObjective,
   targetSystems,
+  missionImage,
+  phaseRoadmap,
   achieve,
   how,
   carry,
@@ -304,6 +356,20 @@ function ChapterOpener({
         {missionCrisis && <h2 className="launchpad-crisis-heading">{missionCrisis}</h2>}
       </div>
 
+      {missionImage && (
+        <div className="launchpad-image-wrap">
+          <div className="launchpad-image-frame">
+            <img
+              src={missionImage.src || missionImage.file || missionImage}
+              alt={missionImage.alt || missionCrisis || 'Mission Scenario'}
+            />
+          </div>
+          {missionImage.caption && (
+            <p className="launchpad-image-caption">{missionImage.caption}</p>
+          )}
+        </div>
+      )}
+
       {(missionContext || missionObjective || targetSystems) && (
         <div className="launchpad-mission-detail-box">
           <div className="launchpad-detail-header">
@@ -317,6 +383,32 @@ function ChapterOpener({
               <p className="launchpad-objective-text"><RichText text={missionObjective} /></p>
             </div>
           )}
+        </div>
+      )}
+
+      {phaseRoadmap && phaseRoadmap.length > 0 && (
+        <div className="launchpad-phases-box">
+          <div className="launchpad-phases-header">
+            <span className="launchpad-phases-kicker">MISSION TACTICAL ROADMAP</span>
+            <span className="launchpad-phases-note">Understanding Where This Chapter Fits</span>
+          </div>
+          <div className="launchpad-phases-grid">
+            {phaseRoadmap.map((p, idx) => (
+              <div
+                key={idx}
+                className={`launchpad-phase-card ${p.status === 'active' ? 'active-phase' : p.status === 'completed' ? 'completed-phase' : 'upcoming-phase'}`}
+              >
+                <div className="phase-card-top">
+                  <span className="phase-badge">{p.phase}</span>
+                  <span className="phase-status-pill">
+                    {p.status === 'active' ? 'Current Chapter' : p.status === 'completed' ? 'Completed' : 'Upcoming'}
+                  </span>
+                </div>
+                <h4 className="phase-title">{p.title}</h4>
+                <p className="phase-desc">{p.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
@@ -924,7 +1016,7 @@ export function Block({ block: b, staticMode = false }) {
             )}
             <div className="ui-box-media-wrap">
               <div className="figure-media">
-                <img src={b.src} alt={b.alt}/>
+                <img src={b.src || b.file} alt={b.alt}/>
               </div>
               {b.caption && (
                 <p className="figure-summary">{b.caption}</p>
@@ -953,6 +1045,7 @@ export function Block({ block: b, staticMode = false }) {
     case 'battle-plan': return <BattlePlan {...b} />
     case 'scenario-grid': return <ScenarioGrid {...b} />
     case 'structured-breakdown': return <StructuredBreakdown {...b} />
+    case 'storyboard': return <Storyboard {...b} />
     case 'mission':
       return (
         <section className="mission modern-mission-box">

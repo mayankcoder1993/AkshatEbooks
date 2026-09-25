@@ -4,6 +4,15 @@ import pyramidImg from '../assets/testing-pyramid-focus.jpg'
 import matrixImg from '../assets/api-architectures-matrix.jpg'
 import anatomyImg from '../assets/http-wire-anatomy.jpg'
 import serverAnatomyImg from '../assets/express-server-code-anatomy.jpg'
+import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
+import panel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import panel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import panel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
+import panel4Img from '../assets/war-room-panel-4-first-principles.jpg'
+import postSceneImg from '../assets/ch01-scene-post-201-created.jpg'
+import postOpImg from '../assets/post-operation-wire-flow.jpg'
+import getOpImg from '../assets/get-operation-wire-flow.jpg'
+import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
 
 export const lesson01 = {
   id: 'understanding-apis',
@@ -15,15 +24,135 @@ export const lesson01 = {
   blocks: [
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 1 · PHASE 1 OF 3',
+      missionBadge: 'MISSION 1 · PHASE 1 OF 3: WIRE FOUNDATIONS AND FIRST PRINCIPLES',
       missionTitle: 'Global Open Data and Web Wire Audit',
       missionCrisis: 'The Apex Campus Launch Crisis: When the Frontend Lost Its Voice',
       missionContext: 'On the eve of university orientation, the student mobile application failed to display campus data. The triage war room discovered a silent disconnect between client UI code and backend services. To resolve the crisis and establish lasting quality gates, we must inspect the wire from first principles, construct a minimal server, and audit every core HTTP operation.',
       missionObjective: 'Build a runnable server from scratch, execute all five CRUD operations, and verify payload contracts across REST, SOAP, and GraphQL.',
       targetSystems: 'Node.js Express Catalog Service · Port 3000 · Public Open Data Endpoints',
+      missionImage: {
+        src: warRoomImg,
+        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+        w: 1408,
+        h: 768,
+        alt: 'The Apex Campus war room showing engineering command screens and live wire diagnostics.',
+        caption: 'The Apex Campus War Room: When the frontend loses its voice, truth is found on the wire.',
+      },
+      phaseRoadmap: [
+        {
+          phase: 'Phase 1 of 3',
+          title: 'Wire Foundations and Minimal Server',
+          status: 'active',
+          desc: 'Chapter 1: Assembling server.js from scratch, testing the 5 operations, and understanding HTTP wire basics.'
+        },
+        {
+          phase: 'Phase 2 of 3',
+          title: 'The Manual Wire Investigation',
+          status: 'upcoming',
+          desc: 'Chapter 2: Investigating the transit shuttle 500 crash by hand and installing defensive guards.'
+        },
+        {
+          phase: 'Phase 3 of 3',
+          title: 'Automating the Wire Verification',
+          status: 'upcoming',
+          desc: 'Chapter 3: Converting manual checks into automated Postman JavaScript assertions.'
+        }
+      ],
       achieve: 'Build and run a minimal API server from scratch and verify every core HTTP operation over the wire.',
       how: 'Assembling a runnable Express server step by step, executing POST, GET, PUT, PATCH, and DELETE, and comparing REST, SOAP, and GraphQL using the same book inquiry.',
       carry: 'The assembled runnable server.js file and the foundational mental model of an HTTP request and response pair.'
+    },
+    {
+      type: 'heading',
+      text: 'The Day You Walked into the War Room',
+    },
+    {
+      type: 'paragraph',
+      text: 'It is 8:14 PM on the eve of campus wide orientation at Apex University. Inside the grand stone pillared mandapa hall, carved Dravidian granite pillars and delicate Nagara stone jali lattice screens frame the bustling engineering command center. Brass lamps cast a warm glow across ancient stone archways while student registration queues begin stalling. Suddenly, the campus transit tracking system goes completely dark. A glowing stone alert tablet on a carved heritage plinth flashes the emergency warning: CAMPUS TRANSIT OFFLINE.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'INCIDENT TIMELINE: 8:14 PM',
+      title: 'The Crisis: Campus Transit Drops Offline',
+      text: 'Orientation eve transit tracking vanishes from the student portal moments before arriving shuttles reach campus gates. In the quiet heritage hall, the glowing tablet confirms the outage.',
+      src: panel1Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Madhubani style engineer entering an ancient Dravidian and Nagara stone mandapa hall where an illuminated tablet flashes CAMPUS TRANSIT OFFLINE at 8:14 PM.',
+      caption: 'Figure 1.0A: The Outage at 8:14 PM. Orientation transit tracking vanishes across campus moments before student arrival.',
+      points: [
+        'Orientation Eve Emergency: Real time bus telemetry stops responding as thousands of students arrive.',
+        'The Heritage Command Hall: Dravidian granite pillars and Nagara pierced stone screens frame the central triage center.',
+        'The First Observer: A junior engineer walks into the room as the stone tablet flashes the alert.'
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Tension across the room erupts immediately. Mobile Lead and Backend Lead stand opposite each other across a carved teakwood table, pointing fingers in furious deadlock. The mobile lead waves a smartphone showing a blank loading spinner and shouts that the backend service is dead and returning nothing. The backend lead pushes back instantly, insisting that database clusters are healthy, server CPU is under twelve percent, and the fault lies entirely within mobile client rendering. Both leads are convinced they are right because each team inspects only their own screen.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'THE ARCHITECTURAL IMPASSE: 8:17 PM',
+      title: 'The Standoff: Client versus Backend',
+      text: 'Under carved Dravidian beams beside a Nagara jali window, mobile and backend engineering leads argue across the table. Each lead points to local metrics while the system remains broken.',
+      src: panel2Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Two Madhubani style engineering leads in traditional kurtas debating across a carved stone table under Dravidian pillars and Nagara jali screens.',
+      caption: 'Figure 1.0B: The Standoff at 8:17 PM. Mobile and backend leads debate across the carved stone table, trapped by local perspectives.',
+      points: [
+        'The Client Perspective: The mobile screen shows an error, so mobile engineers conclude the server crashed.',
+        'The Server Perspective: Database CPU is low and server health checks succeed, so backend engineers blame client rendering.',
+        'The Blind Spot: Arguing over symptoms without inspecting what actually passes between the two machines.'
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'Why are both engineering leads deadlocked? Because the real failure is invisible to both of them. Between the mobile device in a student hand and the server clusters in the data center lies the physical transport wire. Deep within conduits running beneath the ancient carved stone flooring, data packets travel between client and server. In the middle of this conduit, an unhandled parameter format drops packets mid flight. The database never crashed, and the mobile UI layout code was intact. But because neither engineer inspected the wire itself, the failure escaped notice.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'THE ROOT REALITY: 8:21 PM',
+      title: 'The Invisible Wire: Where Network Packets Live and Die',
+      text: 'A cross section beneath the carved stone floor reveals the transport conduit. While engineers debate above, network packets drop silently along the wire.',
+      src: panel3Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Cutaway view under ancient stone flooring showing a severed network cable with dropped packet, while engineering leads argue in the background.',
+      caption: 'Figure 1.0C: The Invisible Wire at 8:21 PM. Packets fail in transit across the physical transport wire while both teams inspect only their own screens.',
+      points: [
+        'The Transport Conduit: Data packets travel through physical network wires connecting client and server.',
+        'The Silent Failure: A malformed request or dropped packet causes the mobile client to wait forever.',
+        'The Wire Truth: System truth does not live in client UI or database CPU; it lives on the wire.'
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'You realize you cannot solve the crisis by joining the debate. You face a foundational truth: you have never audited network packets or built a distributed service before. You cannot debug what you do not understand. You pull up a chair in a quiet stone alcove beside an intricate Nagara jali window, set your laptop on a low carved wooden table, and open a clean terminal window. You type your first command: mkdir campus_api. To master the wire and rescue the campus transit system, you will construct a minimal API server from first principles.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'FIRST PRINCIPLES: 8:25 PM',
+      title: 'The Foundation: Building the API from Scratch',
+      text: 'Sitting peacefully in a quiet stone alcove beside a carved Nagara jali window, the aspiring engineer opens a laptop terminal to construct an API server from first principles.',
+      src: panel4Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+      w: 445,
+      h: 445,
+      alt: 'Madhubani style female engineer sitting in a stone alcove with Nagara jali window working on a laptop with terminal speech bubble mkdir campus_api.',
+      caption: 'Figure 1.0D: First Principles at 8:25 PM. Constructing an API server from scratch gives you complete command over every network packet on the wire.',
+      points: [
+        'The Strategic Choice: Step away from surface speculation and learn client server mechanics directly.',
+        'The First Command: Initializing a fresh workspace with mkdir campus_api in the terminal.',
+        'The Path Ahead: Building a minimal server gives you the diagnostic power to resolve any distributed outage.'
+      ],
     },
     {
       type: 'heading',
@@ -56,6 +185,24 @@ export const lesson01 = {
       ],
     },
     {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'ENTERPRISE ARCHITECTURE',
+      title: 'The Frontend and Backend Bridge: How Modern Applications Communicate',
+      text: 'In enterprise software, the frontend client application (iOS, Android, React Web) never connects directly to database servers. Instead, it dispatches structured HTTP requests with JSON contracts across the network wire to an API gateway and backend service.',
+      src: bridgeImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/frontend-backend-api-bridge.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Architectural bridge diagram showing Frontend Clients connecting through HTTP REST and JSON Contracts to Backend Spring Boot and PostgreSQL Database.',
+      caption: 'The API bridge: Decoupling user interfaces from backend database clusters across the network wire.',
+      points: [
+        'Frontend Clients: Mobile applications and web browsers rendering UI components.',
+        'API Gateway and Network Wire: The HTTP communication layer transmitting standardized JSON payloads.',
+        'Backend and Database: Enterprise services executing business logic and persisting state to database clusters.',
+      ],
+    },
+    {
       type: 'definition',
       term: 'API (Application Programming Interface)',
       text: 'A structured set of rules and protocols that lets two software applications communicate and exchange data securely without exposing internal database credentials or implementation details.',
@@ -67,20 +214,65 @@ export const lesson01 = {
     },
     {
       type: 'heading',
-      text: 'Step 2: Create and Start Your API Server',
+      text: 'Step 2: Assembling Your First API Server Step by Step in Code Chunks',
     },
     {
       type: 'paragraph',
-      text: 'Many beginners assume an API requires massive cloud infrastructure. In reality, a web API is simply a small computer program running on your machine, listening on a network port, and replying when contacted. We will build our server using **Node.js** and the lightweight **Express** web library.',
+      text: 'When you are called into an engineering war room to debug a broken system, you cannot treat the API as a mysterious black box. You must understand how a web server is actually constructed from the inside out. Rather than pasting a whole file all at once, let us build server.js progressively in four clean code chunks, explaining the exact technical responsibility of each component as an engineer would expect.',
     },
     {
       type: 'steps',
       items: [
         'Verify Node.js: Open your terminal and run node -v. Any modern LTS version (such as Node 18 or Node 20) is ready to go.',
         'Create a Project Folder: Run mkdir campus_api, then cd campus_api.',
-        'Initialize and Install Express: Run npm init -y, then npm install express. This installs the web framework locally.',
-        'Create server.js: Create a new file named server.js in your campus_api directory and paste the complete starter code shown below.',
+        'Initialize Node.js: Run npm init -y to generate a default package.json configuration file.',
+        'Install Express: Run npm install express to pull the lightweight web routing framework into your project node_modules.',
+        'Create server.js: Create a new file named server.js in your campus_api directory. We will now assemble it chunk by chunk.',
       ],
+    },
+    {
+      type: 'chunked-code',
+      badge: 'ASSEMBLING SERVER.JS',
+      title: 'Step by Step Construction of server.js',
+      intro: 'Open an empty file named server.js in your campus_api directory and add these four code sections line by line:',
+      chunks: [
+        {
+          label: 'CHUNK 1: APPLICATION SETUP',
+          filename: 'server.js (Lines 1 to 3)',
+          title: 'Importing Express and Instantiating the Application',
+          code: 'const express = require("express");\nconst app = express();',
+          explanation: 'Loads the Express web routing library from node_modules and invokes it to instantiate the central application object named app. In Node.js architecture, this app instance manages the HTTP request lifecycle, registers endpoint routes, and controls middleware pipelines.',
+          keyTakeaway: 'app is the central server instance coordinating all HTTP traffic.'
+        },
+        {
+          label: 'CHUNK 2: STREAM PARSING',
+          filename: 'server.js (Lines 5 to 7)',
+          title: 'Configuring JSON Body Deserialization Middleware',
+          code: '// Middleware to parse incoming JSON payloads\napp.use(express.json());',
+          explanation: 'In Node.js, incoming HTTP request bodies arrive as raw binary streams split across network TCP packets. Without a deserializer, req.body remains undefined. express.json() acts as stream parsing middleware: it intercepts incoming packets with Content-Type application/json, buffers the data chunks, parses the raw JSON text into structured JavaScript objects, and attaches the parsed object directly to req.body.',
+          keyTakeaway: 'Without express.json(), req.body remains completely undefined when receiving JSON payloads.'
+        },
+        {
+          label: 'CHUNK 3: IN MEMORY STATE',
+          filename: 'server.js (Lines 9 to 13)',
+          title: 'Allocating the In Memory Datastore and State Counter',
+          code: '// In memory textbook records and monotonically advancing counter\nlet books = [\n  { id: 1, title: "Clean Architecture", author: "Robert Martin" }\n];\nlet nextId = 2;',
+          explanation: 'Allocates an array directly inside system RAM (Node.js heap memory) seeded with an initial textbook object. Using in memory storage allows rapid local experimentation without external database drivers, and resets cleanly on server restart. The nextId counter advances monotonically from 2 to 3, 4, and beyond, ensuring every newly created resource receives an immutable, collision free ID.',
+          keyTakeaway: 'In memory state enables zero database friction; monotonic counters prevent ID collisions.'
+        },
+        {
+          label: 'CHUNK 4: PORT BINDING',
+          filename: 'server.js (Lines 15 to 18)',
+          title: 'Binding the Process to TCP Port 3000',
+          code: '// Start the server listening on local port 3000\napp.listen(3000, () => {\n  console.log("Book catalog server listening on http://localhost:3000");\n});',
+          explanation: 'Binds the Node.js process to TCP communication port 3000 on the local loopback interface (127.0.0.1). Think of your computer as a high rise residential building: localhost is the building address, and port 3000 is the specific apartment door where our catalog service accepts visitors.',
+          keyTakeaway: 'Port 3000 is the dedicated communication doorway where our server receives requests.'
+        }
+      ]
+    },
+    {
+      type: 'paragraph',
+      text: 'Here is how your assembled server.js file looks with all four components united. Route handlers will be inserted right above app.listen:',
     },
     {
       type: 'code',
@@ -111,86 +303,26 @@ export const lesson01 = {
     },
     {
       type: 'image',
+      layout: 'stacked',
+      badge: 'ARCHITECTURAL ANATOMY',
+      title: 'Architectural Flow of server.js: Data Journey through TCP and Memory',
+      text: 'Here is how your minimal server processes traffic under the hood: incoming TCP requests enter port 3000, pass through stream parsing middleware, mutate heap memory state, and return formatted JSON.',
+      src: serverAnatomyImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/express-server-code-anatomy.jpg',
-      alt: 'Architectural code anatomy diagram of minimal Express API server',
-      caption: 'The Architectural Anatomy of server.js: Four Distinct Layers Powering Our Minimal API Server',
+      alt: 'Architectural flow diagram of server.js showing Client Request, Port 3000, JSON Stream Middleware, In Memory Heap Array, and JSON Response.',
+      caption: 'The Architectural Flow of server.js: Client Request entering Port 3000, passing through JSON Middleware, mutating Heap RAM State, and returning formatted JSON.',
       w: 1408,
       h: 768,
-    },
-    {
-      type: 'structured-breakdown',
-      badge: 'SERVER CODE ANATOMY',
-      title: 'Deconstructing server.js: Inside the Four Pillars of a Web API',
-      intro: 'Every web API server, whether a microservice or an enterprise cloud gateway, is assembled from four architectural layers. Examine the code and purpose inside each box:',
-      categories: [
-        {
-          category: 'ROUTING ENGINE',
-          subCategory: 'Pillar 1',
-          title: 'Framework Import and Application Factory',
-          filename: 'server.js (Lines 1 to 3)',
-          code: [
-            'const express = require("express");',
-            'const app = express();'
-          ],
-          explanation: 'Imports the Express web framework from node_modules and initializes the central app server instance. This object coordinates all incoming HTTP traffic, registers route handlers, and dispatches responses.',
-          points: [
-            'require("express"): Loads the web routing framework into system memory.',
-            'app = express(): Creates the central application instance that registers route endpoints.'
-          ]
-        },
-        {
-          category: 'PAYLOAD INTERCEPTOR',
-          subCategory: 'Pillar 2',
-          title: 'Inbound JSON Parsing Middleware',
-          filename: 'server.js (Lines 5 to 7)',
-          code: [
-            '// Middleware to parse incoming JSON payloads',
-            'app.use(express.json());'
-          ],
-          explanation: 'Registers global middleware that intercepts every incoming network packet. When a client sends a request carrying Content-Type: application/json, this middleware parses the raw incoming binary stream into an accessible JavaScript object attached to req.body.',
-          points: [
-            'Stream Deserialization: Without this middleware, req.body remains completely undefined.',
-            'Automatic Translation: Translates raw JSON wire text into structured JavaScript objects.'
-          ]
-        },
-        {
-          category: 'IN MEMORY DATASTORE',
-          subCategory: 'Pillar 3',
-          title: 'Volatile Array and Monotonic ID Counter',
-          filename: 'server.js (Lines 9 to 13)',
-          code: [
-            'let books = [',
-            '  { id: 1, title: "Clean Architecture", author: "Robert Martin" }',
-            '];',
-            'let nextId = 2;'
-          ],
-          explanation: 'Allocates an array directly inside Node.js heap memory (system RAM). Because it is stored in volatile RAM, restarting the server resets the catalog back to its starter state. The monotonically advancing nextId counter ensures every newly created book receives a unique ID.',
-          points: [
-            'Zero Database Overhead: Enables instant local experimentation without external database drivers.',
-            'Monotonic Sequence: nextId advances from 2 to 3, 4, and beyond, preventing ID collisions or reuse.'
-          ]
-        },
-        {
-          category: 'NETWORK LISTENER',
-          subCategory: 'Pillar 4',
-          title: 'TCP Port 3000 Loopback Listener',
-          filename: 'server.js (Lines 15 to 18)',
-          code: [
-            'app.listen(3000, () => {',
-            '  console.log("Book catalog server listening on http://localhost:3000");',
-            '});'
-          ],
-          explanation: 'Binds the Node.js process to TCP communication port 3000 on your machine loopback network interface. Think of your computer as a high rise residential building: localhost is the building address, and port 3000 is the specific apartment door where our catalog service accepts visitors.',
-          points: [
-            'localhost: The universal loopback address (127.0.0.1) routing traffic within the same machine.',
-            'Port 3000: The dedicated doorway where our book server listens for incoming HTTP requests.'
-          ]
-        }
-      ]
+      points: [
+        'The Client Request: Dispatches an HTTP call over the network wire targeting localhost port 3000.',
+        'The Port 3000 Listener: Accepts the incoming TCP socket connection on your machine.',
+        'The JSON Middleware: Intercepts raw stream bytes and populates req.body with a structured JavaScript object.',
+        'The In Memory Store: Reads and writes textbook records directly inside Node.js heap memory.',
+      ],
     },
     {
       type: 'paragraph',
-      text: 'Now start the server from your terminal. Run the following command:',
+      text: 'Now start the server from your terminal by running the following command:',
     },
     {
       type: 'terminal',
@@ -201,12 +333,11 @@ export const lesson01 = {
     },
     {
       type: 'callout',
-      variant: 'tip',
-      title: 'What Localhost and Port 3000 Mean',
+      variant: 'note',
+      title: 'Terminal Controls and Stopping the Server',
       paragraphs: [
-        '• localhost: Refers to "this computer". It is the universal network loopback address allowing your machine to talk to programs running on itself.',
-        '• Port 3000: Think of your computer as a large apartment building. The IP address or localhost is the building address, and port 3000 is the specific apartment door where our book server lives.',
-        '• Stopping and Restarting: Whenever you add new code handlers to server.js, press Ctrl+C in your terminal to stop the running program, and run node server.js again to load your updates.',
+        '• Stopping and Restarting: Whenever you add new route handlers to server.js in subsequent steps, switch to your terminal, press Ctrl+C to stop the process, and run node server.js again to load your changes.',
+        '• Connection Refused Check: If your API client ever displays "Error: connect ECONNREFUSED 127.0.0.1:3000", verify that node server.js is actively running in your terminal.',
       ],
     },
     {
@@ -272,6 +403,42 @@ export const lesson01 = {
         author: 'David Thomas'
       },
       sampleLabel: 'RECORDED WIRE CAPTURE'
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'MUTATION SUCCESS · 201 CREATED',
+      title: 'The First Record on the Wire: Ananya Dispatches POST /books',
+      text: 'Inside the quiet stone alcove beside the Nagara jali window, Ananya watches her laptop screen flash green as the server returns 201 Created with newly allocated ID 1. Peeking through the carved Dravidian archway, mobile lead Vikram and backend lead Rohan lean forward in surprise and respect, witnessing the first record persist across the wire.',
+      src: postSceneImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch01-scene-post-201-created.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Madhubani style illustration showing Ananya typing on her laptop in a carved stone alcove with 201 Created on screen while Vikram and Rohan observe in admiration.',
+      caption: 'Figure 1.3: Creation on the Wire. Ananya executes POST /books on her local server, capturing the 201 Created wire packet while tech leads look on.',
+      points: [
+        'The First Mutation: Sending a structured JSON payload across the wire to create a new resource.',
+        'The Server Confirmation: HTTP 201 Created proves the server deserialized the body and assigned a unique ID.',
+        'The Turning Point: Vikram and Rohan realize this newcomer is methodically mastering the wire from first principles.'
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'OPERATION 1 WIRE FLOW',
+      title: 'HTTP POST Creation Flow: From Request to In Memory Persistence',
+      text: 'When a client dispatches a POST request with a JSON payload, Express streams the bytes through middleware, allocates an incremented ID, stores the record in RAM heap memory, and returns HTTP 201 Created.',
+      src: postOpImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/post-operation-wire-flow.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'HTTP POST creation flow diagram showing Client dispatching POST with JSON payload, Express server assigning ID 2, and responding with 201 Created.',
+      caption: 'The POST creation flow: Moving data from client request into server memory and returning 201 Created.',
+      points: [
+        'Client Dispatches POST: Sends method POST /books with Content-Type application/json and raw payload.',
+        'Express Server Processing: Middleware deserializes JSON, assigns nextId 2, and pushes object into memory.',
+        'Server Responds 201 Created: Transmits the freshly created record back to the client as confirmation.'
+      ],
     },
     {
       type: 'callout',
@@ -353,6 +520,24 @@ export const lesson01 = {
       paragraphs: [
         'Notice the structural difference: when you sent POST /books in Step 3, you transmitted a single JSON object wrapped in curly braces { ... } because you were creating one individual record.',
         'When you dispatched GET /books in Step 4, the server returned an array [ ... ] holding both Book 1 and Book 2! An array groups multiple items; an object defines a single item.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'OPERATION 2 WIRE FLOW',
+      title: 'HTTP GET Retrieval Flow: Reading Records from RAM Memory',
+      text: 'Retrieving records using HTTP GET is a safe, read only operation. No body is transmitted with the request. The server reads the existing books array from RAM heap memory and returns status 200 OK with both book records.',
+      src: getOpImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/get-operation-wire-flow.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'HTTP GET retrieval flow diagram showing Client dispatching GET without body, Express server reading books array from RAM heap, and responding with 200 OK.',
+      caption: 'The GET retrieval flow: Safe read operation returning the accumulated catalog in a JSON array.',
+      points: [
+        'Client Dispatches GET: Requests resource collection /books with no body payload.',
+        'Express Server Processing: Route handler accesses the in memory books array without modifying state.',
+        'Server Responds 200 OK: Serializes the two item array and returns it to the client.'
       ],
     },
     {
@@ -556,6 +741,24 @@ export const lesson01 = {
       paragraphs: [
         '• Safe: Calling GET /books five times in a row never changes the books stored on the server. Safe methods are strictly read only.',
         '• Idempotent: If you send DELETE /books/1 once, the book is deleted. If you send DELETE /books/1 again, the book is still absent from the catalog. The server state remains identical. In contrast, sending POST /books ten times creates ten distinct book records in memory, which is why POST is not idempotent.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'MUTATION COMPARISON',
+      title: 'Comparing PUT, PATCH, and DELETE: Complete Replacement, Delta, and Removal',
+      text: 'Study how the three data modification operations interact with server state: PUT replaces the whole record, PATCH mutates only specific fields, and DELETE purges the record entirely.',
+      src: putPatchDeleteImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/put-patch-delete-comparison.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Diagram comparing PUT full replacement, PATCH partial delta update, and DELETE resource removal side by side.',
+      caption: 'The three mutation verbs compared: Complete replacement with PUT, partial delta with PATCH, and resource purging with DELETE.',
+      points: [
+        'PUT (Full Replacement): Completely overwrites the existing record in memory with the supplied payload.',
+        'PATCH (Partial Delta): Modifies only the specified fields while preserving unmentioned fields like author.',
+        'DELETE (Resource Removal): Purges the target resource from system memory, returning confirmation status 200 or 204.'
       ],
     },
     {

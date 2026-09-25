@@ -1,3 +1,6 @@
+import launchPostmanImg from '../assets/ch03-scene-1-launching-postman.jpg'
+import assertionSandboxImg from '../assets/ch03-scene-2-assertion-sandbox.jpg'
+import missionTriumphImg from '../assets/ch03-scene-3-mission-triumph.jpg'
 import workbenchImg from '../assets/postman-workbench-overview.jpg'
 import collaborationImg from '../assets/postman-team-collaboration-fork-pr.jpg'
 
@@ -11,12 +14,32 @@ export const lesson03 = {
   blocks: [
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 1 · PHASE 3 OF 3',
+      missionBadge: 'MISSION 1 · PHASE 3 OF 3: AUTOMATING THE WIRE VERIFICATION',
       missionTitle: 'Global Open Data and Web Wire Audit',
       missionCrisis: 'Automating the Wire Gate: Never Repeat Manual Eyeball Audits',
       missionContext: 'We diagnosed and repaired the shuttle service defect by hand, but manual testing does not scale across repeated deployments. If an engineer accidentally removes the defensive guard tomorrow, the system will crash again. We must convert our manual wire observations into automated JavaScript assertions that run at machine speed in Postman.',
       missionObjective: 'Construct automated regression checks for both the 400 guard and 200 contract, execute collection runs, and achieve Mission 1 victory.',
       targetSystems: 'Postman Test Workbench · JavaScript Sandbox · Campus Transit Service',
+      phaseRoadmap: [
+        {
+          phase: 'Phase 1 of 3',
+          title: 'Wire Foundations and Minimal Server',
+          status: 'completed',
+          desc: 'Chapter 1: Assembled server.js from scratch, tested the 5 operations, and mapped HTTP basics.'
+        },
+        {
+          phase: 'Phase 2 of 3',
+          title: 'The Manual Wire Investigation',
+          status: 'completed',
+          desc: 'Chapter 2: Diagnosed the transit shuttle 500 crash by hand and installed defensive guards.'
+        },
+        {
+          phase: 'Phase 3 of 3',
+          title: 'Automating the Wire Verification',
+          status: 'active',
+          desc: 'Chapter 3: Converting manual checks into automated Postman JavaScript assertions.'
+        }
+      ],
       achieve: 'Turn the shuttle investigation we performed by hand into repeatable checks that reveal a broken response.',
       how: 'Reuse the same local endpoint and inputs, add a small post response check to each request, run the checks against broken and guarded versions, and read actual Test Results.',
       carry: 'The core automated assertion pattern ready to test library services in Chapter 4.'
@@ -110,6 +133,24 @@ export const lesson03 = {
         'Left Sidebar: Houses Collections, Environments, and saved requests organized in folders.',
         'Top Center Pane: Where you configure HTTP methods, endpoints, parameters, and post response test scripts.',
         'Bottom Pane: Where live server status codes, response bodies, and named test results appear.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'POSTMAN WORKBENCH COCKPIT · MISSION 1 PHASE 3',
+      title: 'The Automation Cockpit: Ananya Configures the Testing Workbench',
+      text: 'Under carved Dravidian pillars beside a Nagara jali window, Ananya launches the Postman testing workbench on her laptop. Standing beside her, mobile lead Vikram and backend lead Rohan look on with eager anticipation as the four surfaces of the automation workbench take form.',
+      src: launchPostmanImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch03-scene-1-launching-postman.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Madhubani style illustration of Ananya launching Postman on her laptop while Vikram and Rohan observe under carved Dravidian stone pillars.',
+      caption: 'Figure 3.1: Launching the Workbench. Ananya sets up the four surfaces of Postman to convert manual transit checks into automated JavaScript assertions.',
+      points: [
+        'Method and URL Bar: Specifying the endpoint address and HTTP verb.',
+        'Headers and Body: Configuring metadata and payload inputs.',
+        'The JavaScript Sandbox: The post response script editor where assertions execute at machine speed.'
       ],
     },
     {
@@ -355,6 +396,24 @@ export const lesson03 = {
         '});'
       ],
       sampleLabel: 'POSTMAN TEST EXECUTION: POSITIVE CONTRACT'
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'AUTOMATED ASSERTION SANDBOX · TESTS EXECUTING',
+      title: 'The Green Assertion Triumph: Running Automated Checks in Postman',
+      text: 'Suspense fills the heritage mandapa hall as Ananya clicks the orange Send button. Behind her, Vikram bites his knuckles with nervous tension while Rohan leans in breathless. The screen flashes green: both automated assertions pass cleanly, proving that the defensive 400 guard and 200 coordinates contract are locked in permanently.',
+      src: assertionSandboxImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch03-scene-2-assertion-sandbox.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Madhubani style hybrid illustration showing Ananya, Vikram, and Rohan in suspense at the top, and the Postman software interface at the bottom showing JavaScript test script and green PASS test results.',
+      caption: 'Figure 3.3: Automated Execution in Postman. The hybrid workbench view showing JavaScript test scripts executing against the live transit service and reporting green passes.',
+      points: [
+        'Real Time Assertion Execution: JavaScript code evaluates the response body the millisecond bytes arrive.',
+        'The Suspense Resolved: Nervous tension gives way to relief as the Test Results pane confirms Status 200 OK.',
+        'Permanent Watchdog: If any developer ever breaks this contract, Postman will immediately flash red.'
+      ],
     },
     {
       type: 'paragraph',
@@ -606,6 +665,24 @@ export const lesson03 = {
         'The Chai assertion library powers expressive, readable assertions: such as to.have.status(200) and to.be.below(1200).',
         'Always verify red before green: a test must be proven capable of detecting real failures before trusting its green status.',
         'Team collaboration relies on forking collections and opening pull requests to review new test cases safely.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'MISSION 1 ACCOMPLISHED · PRODUCTION TRIUMPH',
+      title: 'Mission 1 Victory: Campus Transit Restored Across the Wire',
+      text: 'Joy erupts inside the ancient stone mandapa hall! Ananya, Vikram, and Rohan celebrate with arms raised in victory as the ancient stone plinth display glows green: MISSION 1 TRIUMPH: CAMPUS TRANSIT FULLY OPERATIONAL. Outside through the carved chaitya archways, arriving students board shuttle buses smoothly under morning sunlight, protected by an automated quality gate.',
+      src: missionTriumphImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch03-scene-3-mission-triumph.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Madhubani style illustration showing Ananya, Vikram, and Rohan celebrating with arms raised in victory in the stone mandapa hall as campus shuttles move outside.',
+      caption: 'Figure 3.4: Mission 1 Victory. The engineering war room celebrates full recovery as automated wire safeguards protect orientation transit for thousands of students.',
+      points: [
+        'Crisis Resolved: The 500 crash is eliminated by the defensive 400 validation guard.',
+        'Contract Verified: Shuttle coordinates are delivered reliably with 200 OK.',
+        'Continuous Safety: The automated Postman test suite guards the wire against future regressions.'
       ],
     },
     {
