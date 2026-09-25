@@ -340,6 +340,67 @@ export const lesson01 = {
       ],
     },
     {
+      type: 'comic-workbench',
+      badge: 'IDE WORKSPACE · NODE.JS SERVER SETUP',
+      title: 'Akshay Assembles the In Memory API Server in the IDE',
+      intro: 'Akshay launches the code IDE to assemble the campus catalog API server from scratch, while Sameer monitors the architecture to ensure incoming streams parse without crashes.',
+      appType: 'ide',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'I created server.js with Express and initialized an in memory books array on the heap. When I execute node server.js in the terminal, our server binds to port 3000!',
+          pointer: 'Terminal Port 3000'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'Dhyan se dekho line 6: app.use(express.json()). Without that middleware, incoming TCP byte streams cannot be deserialized, and req.body remains completely undefined on the heap!',
+          pointer: 'Line 6 (express.json)'
+        }
+      ],
+      ide: {
+        fileName: 'server.js',
+        breadcrumbs: 'apex campus > src > server.js',
+        code: `const express = require("express");
+const app = express();
+
+// Middleware: deserializes incoming raw network bytes into req.body
+app.use(express.json());
+
+// In memory textbook array stored directly on the process heap
+let books = [
+  { id: 1, title: "Clean Architecture", author: "Robert Martin" }
+];
+let nextId = 2;
+
+app.get("/books", (req, res) => res.json(books));
+app.post("/books", (req, res) => {
+  const newBook = { id: nextId++, ...req.body };
+  books.push(newBook);
+  res.status(201).json(newBook);
+});
+
+app.listen(3000, () => {
+  console.log("Book catalog server listening on http://localhost:3000");
+});`,
+        terminalCommand: 'node server.js',
+        terminalLogs: [
+          'Book catalog server listening on http://localhost:3000',
+          'Ready to accept HTTP wire connections on TCP port 3000'
+        ]
+      },
+      breakdown: {
+        input: 'Node.js runtime executing server.js with Express web routing library.',
+        explanation: 'Lines 1 to 3 import Express and instantiate the application. Line 6 configures JSON stream deserialization middleware. Lines 9 to 13 allocate transient in memory storage on the heap with a monotonic ID counter. Lines 15 to 21 register route handlers, and line 23 binds the process to TCP port 3000.',
+        output: 'A live listening TCP socket bound to port 3000 capable of streaming JSON over HTTP.',
+        trapAndFix: {
+          trap: 'Akshay initially omitted app.use(express.json()), which caused req.body to return undefined when POSTing new records.',
+          savior: 'Sameer explained network stream mechanics: HTTP payloads arrive as chunked binary buffers over TCP. Stream middleware must assemble and deserialize those bytes into JSON before route handlers can read them.'
+        }
+      }
+    },
+    {
       type: 'heading',
       text: 'Step 3: Operation 1: Creating a Record with POST /books',
     },
@@ -402,6 +463,54 @@ export const lesson01 = {
         author: 'David Thomas'
       },
       sampleLabel: 'RECORDED WIRE CAPTURE'
+    },
+    {
+      type: 'comic-workbench',
+      badge: 'API TESTING WORKBENCH · OPERATION 1 POST',
+      title: 'Akshay Creates a Textbook Record in the API Testing App',
+      intro: 'With the server running in the IDE terminal, Akshay switches to the API Testing app to configure his first creation request.',
+      appType: 'api-workbench',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'I selected POST, entered http://localhost:3000/books, and pasted our textbook JSON in the Body tab. When I clicked Send, the server answered with 201 Created and assigned id 2!',
+          pointer: 'Status 201 Created'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'Notice status 201 Created rather than generic 200. REST semantics explicitly use 201 to confirm that a new resource has been allocated and persisted on the server.',
+          pointer: 'Response ID 2'
+        }
+      ],
+      workbench: {
+        method: 'POST',
+        url: 'http://localhost:3000/books',
+        environment: 'Campus-Library-Local',
+        activeTab: 'Body',
+        tabContent: `{\n  "title": "The Pragmatic Programmer",\n  "author": "David Thomas"\n}`,
+        response: {
+          status: '201 Created',
+          time: '24 ms',
+          size: '76 B',
+          format: 'JSON',
+          body: `{\n  "id": 2,\n  "title": "The Pragmatic Programmer",\n  "author": "David Thomas"\n}`,
+          testResults: [
+            { status: 'PASS', name: 'Status code is 201 Created' },
+            { status: 'PASS', name: 'Response returns assigned numeric ID' }
+          ]
+        }
+      },
+      breakdown: {
+        input: 'HTTP POST request with header Content-Type: application/json and payload carrying title and author.',
+        explanation: 'The API Testing app serializes the JSON text and transmits TCP packets to port 3000. Express deserializes the payload into req.body, assigns nextId, pushes the object to memory, and returns 201 Created.',
+        output: 'HTTP status 201 Created carrying the saved textbook record with its generated identifier.',
+        trapAndFix: {
+          trap: 'Akshay wondered whether to send the id field in the request body when creating a book.',
+          savior: 'Sameer explained resource ownership: clients provide attributes, but the server must always generate and control unique primary keys to prevent client side ID collisions.'
+        }
+      }
     },
     {
       type: 'image',
@@ -471,6 +580,53 @@ export const lesson01 = {
       answerIndex: 0,
       revealTitle: 'Recorded Wire Response for GET /books',
       explanation: 'Success confirmed! The server finds the books array in RAM, wraps it in status 200 OK, and returns both records inside an array bracket, directly verifying the record created in Step 3!'
+    },
+    {
+      type: 'comic-workbench',
+      badge: 'API TESTING WORKBENCH · OPERATION 2 GET',
+      title: 'Akshay Verifies In Memory State with GET /books',
+      intro: 'Akshay executes a GET request to inspect the server memory array and verify that the book created in Step 3 is preserved.',
+      appType: 'api-workbench',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'Now I switched the method to GET and left the body completely empty. When I clicked Send, the response returned 200 OK with both books inside a JSON array!',
+          pointer: 'JSON Array Response'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'A textbook verification: you used POST to mutate server state, and GET to inspect state idempotently without side effects.',
+          pointer: 'Status 200 OK'
+        }
+      ],
+      workbench: {
+        method: 'GET',
+        url: 'http://localhost:3000/books',
+        environment: 'Campus-Library-Local',
+        activeTab: 'Params',
+        response: {
+          status: '200 OK',
+          time: '18 ms',
+          size: '128 B',
+          format: 'JSON',
+          body: `[\n  {\n    "id": 1,\n    "title": "Clean Architecture",\n    "author": "Robert Martin"\n  },\n  {\n    "id": 2,\n    "title": "The Pragmatic Programmer",\n    "author": "David Thomas"\n  }\n]`,
+          testResults: [
+            { status: 'PASS', name: 'Status code is 200 OK' },
+            { status: 'PASS', name: 'Catalog array contains 2 textbooks' }
+          ]
+        }
+      },
+      breakdown: {
+        input: 'HTTP GET /books transmitted across the network wire with an empty request body.',
+        explanation: 'The server route handler app.get matches the path, accesses the in memory books array from heap RAM, formats the array as JSON text, and writes HTTP status 200 OK to the wire.',
+        output: 'A JSON array containing 2 textbook objects, confirming the state transition from Step 3.',
+        trapAndFix: {
+          trap: 'Akshay initially tried adding a JSON payload to his GET request.',
+          savior: 'Sameer clarified RFC standards: GET requests are designed for safe, cacheable information retrieval and should never carry payloads that affect server behavior.'
+        }
+      }
     },
     {
       type: 'api-inspector',

@@ -206,6 +206,19 @@ async function blockToDocx(b) {
       ];
       return [tableBox('IMAGINE & PREDICT BEFORE SENDING', items, 'EEF8F6')];
     }
+    case 'comic-workbench': {
+      const items = [
+        p(b.intro || b.narrative?.context || 'Software engineering workbench featuring interactive IDE and API Testing interfaces with architectural dialogue.'),
+        ...(b.dialogue?.map(d => p([new TextRun({ text: `${d.speaker} (${d.role}): `, bold: true }), new TextRun({ text: d.text })])) || []),
+        ...(b.breakdown?.input ? [p([new TextRun({ text: 'Input: ', bold: true }), new TextRun({ text: b.breakdown.input })])] : []),
+        ...(b.breakdown?.output ? [p([new TextRun({ text: 'Output: ', bold: true }), new TextRun({ text: b.breakdown.output })])] : []),
+        ...(b.breakdown?.trapAndFix ? [
+          p([new TextRun({ text: 'Common Trap: ', bold: true, color: 'B45309' }), new TextRun({ text: b.breakdown.trapAndFix.trap })]),
+          p([new TextRun({ text: 'Architectural Fix: ', bold: true, color: colors.teal }), new TextRun({ text: b.breakdown.trapAndFix.savior })])
+        ] : [])
+      ];
+      return [tableBox(b.title || b.badge || 'APPLICATION WORKBENCH', items, 'F8FAFC')];
+    }
     case 'mini-api': {
       const items = [
         p(b.intro || 'An in-memory API demonstrates core HTTP operations: GET returns records, POST appends records, PUT replaces a record, and DELETE removes records.'),

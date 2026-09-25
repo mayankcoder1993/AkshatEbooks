@@ -6,8 +6,9 @@ import RunVisualizer from './RunVisualizer.jsx'
 import TerminalWindow from './TerminalWindow.jsx'
 import PipelineVisualizer from './PipelineVisualizer.jsx'
 import ApiInspector from './ApiInspector.jsx'
+import { ComicWorkbench } from './ComicWorkbench.jsx'
 
-function RichText({ text = '' }) {
+export function RichText({ text = '' }) {
   const regex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
   const parts = text.split(regex)
   return parts.map((part, i) => {
@@ -994,6 +995,7 @@ export function Block({ block: b, staticMode = false }) {
     case 'paragraph': return <p className="section-intro"><RichText text={b.text}/></p>
     case 'chunked-code': return <ChunkedCode {...b} />
     case 'predict-output': return <PredictOutput {...b} staticMode={staticMode} />
+    case 'comic-workbench': return <ComicWorkbench {...b} staticMode={staticMode} />
     case 'mini-api': return <MiniApiSandbox {...b} staticMode={staticMode} />
     case 'library-workbench': return <LibraryApiWorkbench staticMode={staticMode} />
     case 'image':
