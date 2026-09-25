@@ -1,3 +1,6 @@
+import scene1BriefingImg from '../assets/ch05-scene-1-assertions-briefing.jpg'
+import scene2PmTestImg from '../assets/ch05-scene-2-pm-test-chai.jpg'
+import scene3SchemaImg from '../assets/ch05-scene-3-schema-contract-validation.jpg'
 import lifecycleImg from '../assets/postman-assertion-lifecycle.jpg'
 
 export const lesson05 = {
@@ -32,6 +35,24 @@ export const lesson05 = {
       badge: 'MISSION 2 PROGRESS · STEP 2 OF 5',
       title: 'Continuing Mission 2: Replacing the Manual Eyeball Test',
       text: 'In Chapter 4, we added a book to our campus catalog, but we verified the response by visually inspecting the screen. Humans cannot inspect thousands of JSON responses by eye without missing missing properties or slow response times. Our next step in Mission 2 is replacing eyeball checks with automated JavaScript assertions: mastering the JavaScript fundamentals that power the Postman sandbox, writing code in the Tests tab to validate status codes, response headers, latency budgets, and data schemas in milliseconds.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'MISSION BRIEFING',
+      title: 'Mission 2 Phase 2: Eliminating Eyeball Traps with JavaScript Assertions',
+      text: 'Dev, Pooja, and Karan convene inside the university scriptorium to plan the transition from manual eyeball reviews to automated Chai assertions inside the Postman embedded Node.js sandbox.',
+      src: scene1BriefingImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch05-scene-1-assertions-briefing.jpg',
+      w: 1792,
+      h: 1024,
+      alt: 'Madhubani graphic novel panel showing Dev, Pooja, and Karan in an ancient Indian stone library hall with comic speech clouds explaining the necessity of automated JavaScript assertions.',
+      caption: 'Figure 5.0: Dev, Pooja, and Karan planning the transition from manual eyeball checks to automated JavaScript assertions.',
+      points: [
+        'Dev warns that manual inspection of hundreds of textbook payloads is impossible to sustain.',
+        'Pooja outlines the assertion sequence: HTTP status 200 first, followed by JSON envelope headers and a 1200 millisecond latency budget.',
+        'Karan notes the defensive assertion strategy: validating both lowercase msg and uppercase Msg keys to handle production quirks.',
+      ],
     },
     {
       type: 'heading',
@@ -196,6 +217,24 @@ export const lesson05 = {
       explanation: 'All three assertions pass green! Postman confirmed the 200 status, validated latency was 145 ms (well below 1200 ms), and confirmed that Msg included "successfully added" with a valid ID string!'
     },
     {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'AUTOMATED QUALITY GATE',
+      title: 'Executing Automated Chai Assertions in the Postman Tests Tab',
+      text: 'Dev, Pooja, and Karan review the live execution of their Chai assertions. The top panel captures their analysis, while the bottom panel shows the exact Postman Tests code editor and the green Test Results verification scorecard.',
+      src: scene2PmTestImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch05-scene-2-pm-test-chai.jpg',
+      w: 1792,
+      h: 1024,
+      alt: 'Hybrid Madhubani panel and software UI showing Dev, Pooja, and Karan pointing to Postman Tests code editor and Test Results panel with three green PASS checkmarks.',
+      caption: 'Figure 5.1: Dev, Pooja, and Karan validating AddBook status, latency budget, and payload properties with Chai assertions.',
+      points: [
+        'Dev highlights the Chai matcher pm.response.to.have.status(200) validating the wire code instantly.',
+        'Pooja tracks the Test Results scorecard showing 3 out of 3 assertions passed green in 145 milliseconds.',
+        'Karan demonstrates defensive body validation where responseData.msg or responseData.Msg handles either casing gracefully.',
+      ],
+    },
+    {
       type: 'callout',
       variant: 'tip',
       title: 'Fresher Trap to Avoid: Forgetting Parentheses on json()',
@@ -259,6 +298,24 @@ export const lesson05 = {
         '• AddBook returns uppercase Msg: { "Msg": "successfully added", "ID": "9781227" }.',
         '• DeleteBook returns lowercase msg: { "msg": "book is successfully deleted" }.',
         'If your test script checked for lowercase msg on the AddBook endpoint, your assertion would fail immediately! Real enterprise services are built by different teams over time. Always inspect the live wire response before writing strict JSON schemas.',
+      ],
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'STRICT CONTRACT DEFENSE',
+      title: 'Enforcing JSON Schema Structural Contracts with Ajv',
+      text: 'Dev, Pooja, and Karan lock down payload contracts using JSON Schema validation. The top panel shows their contract review, while the bottom panel displays the schema definition and green verification badge in Postman.',
+      src: scene3SchemaImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch05-scene-3-schema-contract-validation.jpg',
+      w: 1792,
+      h: 1024,
+      alt: 'Hybrid Madhubani panel and software UI showing Dev, Pooja, and Karan analyzing strict JSON schema validation code and the green PASS Test Result badge in Postman.',
+      caption: 'Figure 5.2: Dev, Pooja, and Karan enforcing structural schema contracts to prevent production casing drift.',
+      points: [
+        'Dev explains why status 200 alone is insufficient: silent payload drift or dropped keys break client applications.',
+        'Karan details how Ajv schema validation locks required keys and exact data types into place.',
+        'Pooja verifies that required properties Msg and ID are enforced as strings, catching contract drift at the quality gate.',
       ],
     },
     {

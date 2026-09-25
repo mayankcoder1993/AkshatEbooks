@@ -1,4 +1,6 @@
-import libraryEngineImg from '../assets/campus-library-automation-engine.jpg'
+import libraryMissionImg from '../assets/ch04-scene-1-library-mission.jpg'
+import duplicateCollisionImg from '../assets/ch04-scene-2-duplicate-collision.jpg'
+import copyPasteTeardownImg from '../assets/ch04-scene-3-copy-paste-teardown.jpg'
 import lifecycleImg from '../assets/library-api-crud-lifecycle.jpg'
 
 export const lesson04 = {
@@ -31,14 +33,14 @@ export const lesson04 = {
     {
       type: 'mission',
       title: 'Mission 2: Automating Student and Campus Services at Scale',
-      text: 'Every college campus has a library where students check out textbooks, professors reserve course reading material, and librarians track inventory across physical aisles. The college has deployed a new web service to manage its book catalog across campus stacks. Before releasing the system to faculty and students, we must test every operation: adding a new textbook, verifying its physical shelf location, and removing retired editions. As Automation Quality Engineer, your mission is to map out the entire inventory lifecycle and prepare it for automated testing.',
+      text: 'Every college campus has a library where students check out textbooks, professors reserve course reading material, and librarians track inventory across physical aisles. The college has deployed a new web service to manage its book catalog across campus stacks. Before releasing the system to faculty and students, we must test every operation: adding a new textbook, verifying its physical shelf location, and removing retired editions. Dev leads the quality mission alongside Pooja, the catalog systems lead, and Karan, the student portal developer.',
       image: {
-        src: libraryEngineImg,
-        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/campus-library-automation-engine.jpg',
-        w: 1376,
+        src: libraryMissionImg,
+        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-1-library-mission.jpg',
+        w: 1344,
         h: 768,
-        alt: 'Automated campus library inventory center showing REST API operations, shelf mapping matrix, and request chaining pipeline.',
-        caption: 'The Campus Library Operations Center: Moving from manual book checking to fast automated testing.',
+        alt: 'Dev standing with laptop, Pooja pointing to the stone stele CAMPUS LIBRARY CATALOG ONLINE, and Karan holding a tablet inside the ancient stone library hall.',
+        caption: 'Figure 4.0: Mission 2 Launch. Inside the ancient Dravidian and Nagara stone library archives, Dev, Pooja, and Karan map out the campus book catalog lifecycle.',
         points: [
           'Live Book Tracking: Keeping track of textbook copies, shelf locations, and checkout status in real time.',
           'The Three Core Actions: Adding new books, checking where they sit on the shelf, and deleting old copies safely.',
@@ -248,6 +250,24 @@ export const lesson04 = {
       sampleLabel: 'DUPLICATE CONSTRAINT REJECTION'
     },
     {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'CONSTRAINT REJECTION · DUPLICATE KEY',
+      title: 'Action 2: The Duplicate ISBN and Aisle Collision',
+      text: 'Sending the exact same book payload a second time triggers a constraint rejection! Dev sits at the laptop with wide eyes as Call 1 succeeds while Call 2 returns "Book already exists". Beside him, Karan points at the screen in shock while Pooja explains why unique database keys reject duplicate inserts.',
+      src: duplicateCollisionImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-2-duplicate-collision.jpg',
+      w: 1344,
+      h: 768,
+      alt: 'Dev, Karan, and Pooja in the stone library observing Call 1 AddBook success and Call 2 duplicate rejection with Book already exists.',
+      caption: 'Figure 4.1: The Duplicate Key Collision. The Library API rejects duplicate ISBN and aisle combinations to preserve catalog uniqueness.',
+      points: [
+        'Call 1 (Fresh Insert): Successfully adds the book and allocates composite ID 9781227.',
+        'Call 2 (Duplicate Attempt): Rejects insertion with { "msg": "Book already exists" }.',
+        'The Architectural Takeaway: Test suites must clean up after themselves or subsequent runs will fail on duplicate collisions.'
+      ],
+    },
+    {
       type: 'callout',
       variant: 'warning',
       title: 'Why Duplicate Insertion Failed',
@@ -338,6 +358,24 @@ export const lesson04 = {
       responseBody: {
         msg: 'book is successfully deleted'
       }
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'MANUAL FRICTION · TEARDOWN TEARS',
+      title: 'Action 4: The Friction of Manual Teardown and Copy Paste',
+      text: 'Dev rubs his forehead in exhaustion as he manually copies the generated ID from the AddBook tab and pastes it into the DeleteBook request body. Pooja and Karan watch with determination, recognizing that manual copy paste does not scale across enterprise test suites.',
+      src: copyPasteTeardownImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-3-copy-paste-teardown.jpg',
+      w: 1344,
+      h: 768,
+      alt: 'Dev rubbing forehead in exhaustion copying and pasting IDs between AddBook and DeleteBook in Postman while Pooja and Karan observe.',
+      caption: 'Figure 4.2: Manual Teardown Friction. Copying and pasting IDs by hand is slow and prone to errors; this pain motivates automated variable chaining.',
+      points: [
+        'The Manual Burden: Copying the ID from AddBook response and pasting into DeleteBook request by hand.',
+        'The Collision Risk: Forgetting to delete a test book causes the next test run to fail immediately.',
+        'The Solution Ahead: Chapter 6 and Chapter 7 introduce dynamic variables and automated request chaining.'
+      ],
     },
     {
       type: 'heading',

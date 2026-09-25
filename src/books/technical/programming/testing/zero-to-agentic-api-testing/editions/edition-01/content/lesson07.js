@@ -1,3 +1,5 @@
+import scene1ChainingImg from '../assets/ch07-scene-1-chaining-pipeline.jpg'
+import scene2ChainingUiImg from '../assets/ch07-scene-2-chaining-execution-ui.jpg'
 import chainingImg from '../assets/api-request-chaining-pipeline.jpg'
 import arrayPipelineImg from '../assets/javascript-array-pipeline-transform.jpg'
 
@@ -33,6 +35,24 @@ export const lesson07 = {
       badge: 'MISSION 2 PROGRESS · STEP 4 OF 5',
       title: 'Continuing Mission 2: Assembling the Autonomous Pipeline',
       text: 'Our AddBook request is now parameterized and unique, but we are still manually copying the generated book ID into GetBook and DeleteBook. Our next step in Mission 2 is assembling an autonomous regression pipeline: capturing the response ID automatically, passing it downstream via environment variables, navigating complex nested JSON structures, filtering and mapping arrays, and validating business calculations across multi step transactions.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'PIPELINE BRIEFING',
+      title: 'Mission 2 Phase 4: Autonomous Request Chaining and Property Transfer',
+      text: 'Dev, Pooja, and Karan convene inside the university courtyard to assemble the autonomous three request testing pipeline: connecting AddBook creation, GetBook catalog verification, and DeleteBook teardown.',
+      src: scene1ChainingImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch07-scene-1-chaining-pipeline.jpg',
+      w: 1792,
+      h: 1024,
+      alt: 'Madhubani graphic novel panel showing Dev, Pooja, and Karan in an ancient Indian stone courtyard with comic speech clouds explaining the three step dynamic chaining pipeline.',
+      caption: 'Figure 7.0: Dev, Pooja, and Karan assembling the autonomous request chaining pipeline.',
+      points: [
+        'Dev explains that microservices depend on interconnected state rather than isolated calls.',
+        'Pooja outlines dynamic extraction: reading responseData.ID from AddBook and binding it to collection variable book_id.',
+        'Karan highlights the cleanup teardown: consuming book_id in DeleteBook to leave zero database remnants.',
+      ],
     },
     {
       type: 'heading',
@@ -109,6 +129,24 @@ export const lesson07 = {
       answerIndex: 0,
       revealTitle: 'Dynamic Chaining Wire Confirmation',
       explanation: 'Property transfer confirmed! Postman resolves {{book_id}} from Collection Scope, replacing the placeholder with the dynamic composite ID value (LIB4821227) before dispatching the HTTP GET request!'
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'AUTONOMOUS CHAIN EXECUTION',
+      title: 'Sequential Property Transfer Across AddBook, GetBook, and DeleteBook',
+      text: 'Dev, Pooja, and Karan verify the autonomous flow of data across the three sequential requests. The top panel captures their analysis, while the bottom panel shows the three consecutive Postman tabs executing in harmony.',
+      src: scene2ChainingUiImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch07-scene-2-chaining-execution-ui.jpg',
+      w: 1792,
+      h: 1024,
+      alt: 'Hybrid Madhubani panel and software UI showing Dev, Pooja, and Karan pointing to Postman tabs for AddBook, GetBook, and DeleteBook executing with dynamic book_id property transfer.',
+      caption: 'Figure 7.2: Dev, Pooja, and Karan tracing the automated property transfer pipeline across three chained requests.',
+      points: [
+        'Call 1 (AddBook) dispatches dynamic payload and saves generated ID to collection scope.',
+        'Call 2 (GetBook) resolves the dynamic query parameter and asserts textbook catalog fields.',
+        'Call 3 (DeleteBook) consumes the dynamic ID in its payload body and confirms successful record deletion.',
+      ],
     },
     {
       type: 'heading',

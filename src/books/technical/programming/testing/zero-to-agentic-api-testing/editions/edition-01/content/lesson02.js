@@ -1,7 +1,4 @@
-import crisisImg from '../assets/ch02-scene-1-transit-crisis.jpg'
-import reproduceCrashImg from '../assets/ch02-scene-2-reproduce-500-crash.jpg'
-import defensiveGuardImg from '../assets/ch02-scene-3-defensive-guard-fix.jpg'
-import dualVerificationImg from '../assets/ch02-scene-4-dual-wire-verification.jpg'
+import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 import wireImg from '../assets/http-wire-anatomy.jpg'
 import crudImg from '../assets/restful-crud-status-guide.jpg'
 
@@ -57,15 +54,15 @@ export const lesson02 = {
       title: 'Mission 1 Active Incident: The Apex Campus Transit Blackout',
       text: 'Today is launch day for the new Apex Campus student portal. Outside on university avenues, hundreds of students stand at bus stops waiting for the campus shuttle. When they open the mobile app to check the live transit map, the screen locks into an endless spinning circle. In the engineering war room, tension is high: mobile frontend developers argue that their user interface is flawless and blame server outages; backend engineers insist the database cluster is healthy and blame mobile network disconnects. As the API Quality Engineer, you do not guess or take sides: you inspect the invisible network wire directly to discover the truth.',
       image: {
-        src: crisisImg,
-        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-1-transit-crisis.jpg',
+        src: warRoomImg,
+        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
         w: 1408,
         h: 768,
-        alt: 'Madhubani style illustration showing Ananya pointing to the carved stone alert CAMPUS SHUTTLE 500 CRASH while Vikram holds his phone with loading spinner and Rohan looks defensive under Dravidian pillars.',
-        caption: 'Figure 2.0: The Triage in the Mandapa Hall. Ananya identifies the 500 server crash on the ancient stone display while Vikram and Rohan face the transit outage.',
+        alt: 'The Apex Campus War Room showing real time server logs and mobile transit maps.',
+        caption: 'The War Room Command Center: Finding the truth directly on the network wire.',
         points: [
           'The Incident: The campus shuttle locator screen is frozen with endless loading indicators.',
-          'The Deadlock: Mobile lead Vikram and backend lead Rohan blame each other across the room.',
+          'The Deadlock: Mobile developers and backend server teams blame each other for the crash.',
           'The Action Plan: Compare URLs, reproduce the crash locally, write a repair plan, guard the server, and verify both branches.',
         ],
       },
@@ -236,24 +233,6 @@ export const lesson02 = {
         message: 'Cannot read properties of undefined (reading \'trim\')'
       },
       sampleLabel: 'UNHANDLED 500 SERVER CRASH'
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'UNHANDLED EXCEPTION · 500 SERVER CRASH',
-      title: 'Server Panic on the Wire: The Unhandled TypeError',
-      text: 'Inside the heritage stone mandapa hall, red warning flashes illuminate the laptop screen as Ananya executes the request without a route parameter. Mobile lead Vikram clutches his head in horror and backend lead Rohan gasps in shock as the server log confirms an unhandled TypeError crash returning HTTP 500.',
-      src: reproduceCrashImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-2-reproduce-500-crash.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Madhubani style illustration showing Ananya typing on her laptop while Vikram holds his head in panic and Rohan gasps in shock as the command log displays HTTP 500 TypeError.',
-      caption: 'Figure 2.2: The Unhandled Exception. Ananya reproduces the crash locally, revealing to Vikram and Rohan that the missing route parameter threw an unhandled TypeError terminating in HTTP 500.',
-      points: [
-        'The Root Cause: Attempting to invoke .trim() on undefined throws an unhandled exception.',
-        'The Wire Impact: The server terminates the HTTP stream abruptly with 500 Internal Server Error.',
-        'The Reaction: Tech leads witness firsthand that the failure was not a database crash or client rendering bug, but an unvalidated wire parameter.'
-      ],
     },
     {
       type: 'terminal',
@@ -435,24 +414,6 @@ export const lesson02 = {
       sampleLabel: 'DEFENSIVE 400 WIRE RESPONSE'
     },
     {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'DEFENSIVE PROGRAMMING · THE 400 GUARD',
-      title: 'Repairing the Server: Ananya Installs Input Validation',
-      text: 'At the carved wooden desk beneath Dravidian granite arches, Ananya calmly enters the defensive validation guard into shuttle_service.js. Leaning over her chair, Vikram and Rohan watch in admiration as the server gains the intelligence to catch missing parameters without crashing.',
-      src: defensiveGuardImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-3-defensive-guard-fix.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Madhubani style illustration of Ananya typing the defensive guard into her laptop while Vikram and Rohan watch with admiring smiles under carved pillars.',
-      caption: 'Figure 2.3: Installing the Guard. Ananya writes the defensive input validation guard in shuttle_service.js, turning a 500 crash into a safe 400 Bad Request.',
-      points: [
-        'Defensive Coding: Inspect incoming query parameters before calling string methods.',
-        'Meaningful Contract: Return HTTP 400 Bad Request with actionable error guidance.',
-        'Engineering Harmony: Tech leads watch the server become resilient against invalid client calls.'
-      ],
-    },
-    {
       type: 'paragraph',
       text: 'The server did not crash! Instead of an internal 500 error, the service immediately returned `400 Bad Request` with an informative JSON payload explaining that the route parameter is required. Notice that the server console log remains completely quiet: zero unhandled exceptions!',
     },
@@ -493,24 +454,6 @@ export const lesson02 = {
         estimatedArrivalMinutes: 3
       },
       sampleLabel: 'SUCCESSFUL 200 WIRE RESPONSE'
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'DUAL WIRE VERIFICATION · MISSION 1 PHASE 2 COMPLETE',
-      title: 'Both Wire Contracts Verified: 400 Guard and 200 Happy Path',
-      text: 'Ananya raises her hands in joy as the terminal confirms both wire contracts are satisfied. Standing beside the laptop, Vikram and Rohan fold their hands in heartfelt relief and gratitude as the campus transit wire is restored.',
-      src: dualVerificationImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-4-dual-wire-verification.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Madhubani style illustration showing Ananya celebrating with raised hands, Vikram and Rohan folding hands in namaste gratitude, and two parchment cards showing Branch 1 400 Bad Request and Branch 2 200 OK.',
-      caption: 'Figure 2.4: Dual Verification Triumph. Ananya confirms both Branch 1 (400 Bad Request guard) and Branch 2 (200 OK contract) over the wire, ending the war room deadlock.',
-      points: [
-        'Branch 1 Verified: Missing or blank route returns HTTP 400 Bad Request without server panic.',
-        'Branch 2 Verified: Valid route parameter returns HTTP 200 OK with live shuttle GPS coordinates.',
-        'War Room Victory: Mobile and backend leads achieve complete alignment across the network wire.'
-      ],
     },
     {
       type: 'paragraph',

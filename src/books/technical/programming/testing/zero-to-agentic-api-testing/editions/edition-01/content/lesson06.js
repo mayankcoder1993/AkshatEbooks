@@ -1,3 +1,5 @@
+import scene1ScopesImg from '../assets/ch06-scene-1-scopes-hierarchy.jpg'
+import scene2DynamicIsbnImg from '../assets/ch06-scene-2-prerequest-dynamic-isbn.jpg'
 import scopesImg from '../assets/postman-variable-scopes-hierarchy.jpg'
 
 export const lesson06 = {
@@ -32,6 +34,24 @@ export const lesson06 = {
       badge: 'MISSION 2 PROGRESS · STEP 3 OF 5',
       title: 'Continuing Mission 2: Eliminating Hardcoded URLs and Collision Errors',
       text: 'Our assertions in Chapter 5 run fast, but our collection still has hardcoded server URLs and hardcoded ISBN values that cause duplicate collision errors on every second run. Our next step in Mission 2 is parameterizing our test suite: learning the five variable scopes, switching environments with one click, and generating dynamic unique ISBNs in Pre request scripts.',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'SCOPE ARCHITECTURE',
+      title: 'Mission 2 Phase 3: The Five Variable Scopes and Precedence Rules',
+      text: 'Dev, Pooja, and Karan analyze the variable hierarchy carved onto the stone pillar of the campus scriptorium: establishing precedence from Local to Global and securing environments.',
+      src: scene1ScopesImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch06-scene-1-scopes-hierarchy.jpg',
+      w: 1792,
+      h: 1024,
+      alt: 'Madhubani graphic novel panel showing Dev, Pooja, and Karan in an ancient Indian stone library hall with comic speech clouds explaining the five variable scopes carved on a pillar.',
+      caption: 'Figure 6.0: Dev, Pooja, and Karan examining the five Postman variable tiers and environment configuration rules.',
+      points: [
+        'Dev explains why hardcoding URLs leads to flakiness and outlines the five variable tiers.',
+        'Pooja demonstrates dynamic environment switching using base_url between QA and UAT without altering request definitions.',
+        'Karan clarifies the security boundary between cloud synced Initial values and machine local Current values.',
+      ],
     },
     {
       type: 'heading',
@@ -205,6 +225,24 @@ export const lesson06 = {
       answerIndex: 1,
       revealTitle: 'Wire Interpolation Confirmation',
       explanation: 'Postman resolves the variable! Before sending the network packet, Postman replaces {{ISBN}} with the current runtime value "LIB7824", transmitting clean JSON to the server.'
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'DYNAMIC PRE REQUEST SCRIPTING',
+      title: 'Generating Non Colliding ISBNs in Pre Request Scripts',
+      text: 'Dev, Pooja, and Karan inspect the runtime resolution of dynamic ISBNs. The top panel shows their review, while the bottom panel shows the Pre request Script tab, the raw JSON Body with curly braces, and the resolved outgoing wire packet.',
+      src: scene2DynamicIsbnImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch06-scene-2-prerequest-dynamic-isbn.jpg',
+      w: 1792,
+      h: 1024,
+      alt: 'Hybrid Madhubani panel and software UI showing Dev, Pooja, and Karan pointing to Postman Pre request Script editor, Body tab with ISBN variable, and resolved wire packet.',
+      caption: 'Figure 6.2: Dev, Pooja, and Karan generating collision free dynamic ISBNs in Pre request scripts.',
+      points: [
+        'Dev points out the dynamic calculation combining company code and random digits into a fresh ISBN key.',
+        'Pooja traces how double curly braces ISBN in the request body is interpolated before the packet hits the wire.',
+        'Karan notes that dynamic unique keys eliminate duplicate collision errors during repeated collection runs.',
+      ],
     },
     {
       type: 'callout',

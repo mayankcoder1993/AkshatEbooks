@@ -9,7 +9,6 @@ import panel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
 import panel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
 import panel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 import panel4Img from '../assets/war-room-panel-4-first-principles.jpg'
-import postSceneImg from '../assets/ch01-scene-post-201-created.jpg'
 import postOpImg from '../assets/post-operation-wire-flow.jpg'
 import getOpImg from '../assets/get-operation-wire-flow.jpg'
 import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
@@ -403,24 +402,6 @@ export const lesson01 = {
         author: 'David Thomas'
       },
       sampleLabel: 'RECORDED WIRE CAPTURE'
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'MUTATION SUCCESS · 201 CREATED',
-      title: 'The First Record on the Wire: Ananya Dispatches POST /books',
-      text: 'Inside the quiet stone alcove beside the Nagara jali window, Ananya watches her laptop screen flash green as the server returns 201 Created with newly allocated ID 1. Peeking through the carved Dravidian archway, mobile lead Vikram and backend lead Rohan lean forward in surprise and respect, witnessing the first record persist across the wire.',
-      src: postSceneImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch01-scene-post-201-created.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Madhubani style illustration showing Ananya typing on her laptop in a carved stone alcove with 201 Created on screen while Vikram and Rohan observe in admiration.',
-      caption: 'Figure 1.3: Creation on the Wire. Ananya executes POST /books on her local server, capturing the 201 Created wire packet while tech leads look on.',
-      points: [
-        'The First Mutation: Sending a structured JSON payload across the wire to create a new resource.',
-        'The Server Confirmation: HTTP 201 Created proves the server deserialized the body and assigned a unique ID.',
-        'The Turning Point: Vikram and Rohan realize this newcomer is methodically mastering the wire from first principles.'
-      ],
     },
     {
       type: 'image',
