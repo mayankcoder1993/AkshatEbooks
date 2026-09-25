@@ -52,7 +52,7 @@ export const lesson03 = {
       type: 'mission-tracker',
       badge: 'MISSION 1 PROGRESS · STEP 3 OF 3',
       title: 'Completing Mission 1: Turning Manual Inspections into Automated Watchdogs',
-      text: 'In Chapter 2, we investigated the campus transit crash and proved the solution by hand. But manual checking has a severe limitation: a human tester cannot sit at a screen clicking Send every fifteen seconds, especially during midnight deployments. If a backend engineer pushes an update that accidentally breaks the route parameter again, real students will be stranded at bus stops before anyone notices. In this chapter, we automate our manual checks into a repeatable Postman collection with JavaScript assertions that validate the wire in milliseconds.',
+      text: 'In Chapter 2, Akshay investigated the campus transit crash and proved the solution by hand beside Sameer. But manual checking has a severe limitation: a human tester cannot sit at a screen clicking Send every fifteen seconds, especially during midnight deployments. If a backend engineer pushes an update that accidentally breaks the route parameter again, real students will be stranded at bus stops before anyone notices. Sameer guides Akshay to convert our manual checks into a repeatable API Testing collection with JavaScript assertions that validate the wire in milliseconds.',
     },
     {
       type: 'heading',
@@ -164,6 +164,51 @@ export const lesson03 = {
         '    pm.response.to.have.status(200);',
         '});',
       ],
+    },
+    {
+      type: 'comic-workbench',
+      badge: 'API TESTING WORKBENCH · EXCEPTION DRIVEN RUNNER',
+      title: 'Akshay Learns Why Postman Tests Rely on Chai Assertions',
+      intro: 'Akshay tests status 200 in the Tests tab, while Sameer explains why simple boolean comparisons cause silent false positives in automated runners.',
+      appType: 'api-workbench',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'I wrote pm.response.code === 200 inside my test, but it passed green even when the server crashed with 500! Why did it not flag red?',
+          pointer: 'Tests script'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'Postman is an exception driven test runner, Akshay! A boolean expression evaluating to false does not fail a test unless an Error is thrown. We must use Chai matchers like pm.response.to.have.status(200) which throw an AssertionError on mismatch!',
+          pointer: 'Chai assertion'
+        }
+      ],
+      workbench: {
+        method: 'GET',
+        url: 'http://localhost:3001/v1/campus/shuttle/coordinates?route=campus_loop_north',
+        environment: 'Apex Campus Local',
+        activeTab: 'Tests',
+        tabContent: '// Correct Chai assertion\npm.test("Status code is 200 OK", function () {\n    pm.response.to.have.status(200);\n});',
+        response: {
+          status: '200 OK',
+          time: '28 ms',
+          size: '286 B',
+          format: 'JSON',
+          body: `{\n  "route": "campus_loop_north",\n  "shuttleId": "BUS_104",\n  "status": "in_transit",\n  "coordinates": {\n    "latitude": 42.3601,\n    "longitude": -71.0942\n  }\n}`,
+          testResults: [
+            { status: 'PASS', name: 'Status code is 200 OK' }
+          ]
+        }
+      },
+      breakdown: {
+        input: 'Tests tab script executing after response arrival.',
+        code: 'pm.test("Status code is 200 OK", function () {\n    pm.response.to.have.status(200);\n});',
+        explanation: 'pm.test wraps the assertion callback in a try catch block. When pm.response.to.have.status(200) evaluates against status 200, zero exceptions are thrown and Postman marks the test PASS. If the status were 500, Chai throws an AssertionError, which Postman catches to mark the test FAIL.',
+        output: 'Green PASS badge in Test Results tab with assertion title.',
+        trapAndFix: 'Common Trap: Writing boolean equality like pm.response.code === 200 without throwing. Senior Savior: Always use Chai matchers such as pm.response.to.have.status() or pm.expect() so mismatches throw actionable errors.'
+      }
     },
     {
       type: 'heading',
@@ -290,6 +335,52 @@ export const lesson03 = {
       sampleLabel: 'POSTMAN TEST EXECUTION: NEGATIVE GUARD'
     },
     {
+      type: 'comic-workbench',
+      badge: 'API TESTING WORKBENCH · NEGATIVE REGRESSION GUARD',
+      title: 'Akshay Executes the Automated 400 Regression Suite',
+      intro: 'Akshay sends the omitted route request with automated assertions attached, verifying that defensive status 400 and error messaging pass without human intervention.',
+      appType: 'api-workbench',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'Both assertions passed green in 14 milliseconds! Status code is 400, and the error property matches "route parameter is required" exactly!',
+          pointer: 'Test Results'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'Notice the sequencing, Akshay: we asserted status 400 before deserializing JSON. Verifying the HTTP envelope before opening the body prevents syntax errors if a broken server ever returns HTML error dumps!',
+          pointer: 'Status assertion'
+        }
+      ],
+      workbench: {
+        method: 'GET',
+        url: 'http://localhost:3001/v1/campus/shuttle/coordinates',
+        environment: 'Apex Campus Local',
+        activeTab: 'Tests',
+        tabContent: 'pm.test("Missing route returns 400", function () {\n    pm.response.to.have.status(400);\n});\n\npm.test("Missing route explains why", function () {\n    const body = pm.response.json();\n    pm.expect(body.error).to.eql("route parameter is required");\n});',
+        response: {
+          status: '400 Bad Request',
+          time: '14 ms',
+          size: '184 B',
+          format: 'JSON',
+          body: `{\n  "statusCode": 400,\n  "error": "route parameter is required"\n}`,
+          testResults: [
+            { status: 'PASS', name: 'Missing route returns 400' },
+            { status: 'PASS', name: 'Missing route explains why' }
+          ]
+        }
+      },
+      breakdown: {
+        input: 'GET /v1/campus/shuttle/coordinates with zero parameters.',
+        code: 'pm.response.to.have.status(400);\npm.expect(body.error).to.eql("route parameter is required");',
+        explanation: 'Automates the manual regression test from Chapter 2. If a backend developer deletes or disables the defensive guard in shuttle_service.js, this test flags red instantly on the very next build.',
+        output: 'Two green PASS badges in Test Results summary in 14 milliseconds.',
+        trapAndFix: 'Common Trap: Calling pm.response.json() before asserting status code. Senior Savior: Always check status 400 first so unhandled HTML crashes do not cause obscure parsing errors.'
+      }
+    },
+    {
       type: 'heading',
       text: 'Step 5: Protecting the Positive Path: Deep Data and Coordinate Validation',
     },
@@ -381,6 +472,54 @@ export const lesson03 = {
       text: 'All four assertions pass! Postman validated that the status code is 200, the route matches `campus_loop_north`, the coordinates are numbers (preventing mobile map render crashes), and the response latency was well under our local testing budget.',
     },
     {
+      type: 'comic-workbench',
+      badge: 'API TESTING WORKBENCH · POSITIVE CONTRACT CHECK',
+      title: 'Akshay Verifies the Live Fleet Telemetry Contract',
+      intro: 'Akshay executes the valid route request with deep property and type assertions, completing the automated watchdog suite for Mission 1.',
+      appType: 'api-workbench',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'Four automated checks passed in 28 milliseconds: status 200, route keys, numeric coordinate types, and latency under budget! The entire verification runs at machine speed!',
+          pointer: 'All 4 PASS'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'Compare this to the manual eye strain you experienced earlier, Akshay. These automated assertions will now guard every continuous integration build. Mission 1 is accomplished!',
+          pointer: 'Mission victory'
+        }
+      ],
+      workbench: {
+        method: 'GET',
+        url: 'http://localhost:3001/v1/campus/shuttle/coordinates?route=campus_loop_north',
+        environment: 'Apex Campus Local',
+        activeTab: 'Tests',
+        tabContent: 'pm.test("Status code is 200 OK", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test("Route and status match contract", function () {\n    const data = pm.response.json();\n    pm.expect(data.route).to.eql("campus_loop_north");\n    pm.expect(data.status).to.eql("in_transit");\n});\n\npm.test("Coordinates are valid numbers", function () {\n    const data = pm.response.json();\n    pm.expect(data.coordinates.latitude).to.be.a("number");\n    pm.expect(data.coordinates.longitude).to.be.a("number");\n});\n\npm.test("Response time is under local budget", function () {\n    pm.expect(pm.response.responseTime).to.be.below(1200);\n});',
+        response: {
+          status: '200 OK',
+          time: '28 ms',
+          size: '286 B',
+          format: 'JSON',
+          body: `{\n  "route": "campus_loop_north",\n  "shuttleId": "BUS_104",\n  "status": "in_transit",\n  "coordinates": {\n    "latitude": 42.3601,\n    "longitude": -71.0942\n  },\n  "speedMph": 24,\n  "nextStop": "Apex Student Union",\n  "estimatedArrivalMinutes": 3\n}`,
+          testResults: [
+            { status: 'PASS', name: 'Status code is 200 OK' },
+            { status: 'PASS', name: 'Route and status match contract' },
+            { status: 'PASS', name: 'Coordinates are valid numbers' },
+            { status: 'PASS', name: 'Response time is under local budget' }
+          ]
+        }
+      },
+      breakdown: {
+        input: 'GET /v1/campus/shuttle/coordinates?route=campus_loop_north',
+        code: 'pm.expect(data.coordinates.latitude).to.be.a("number");\npm.expect(pm.response.responseTime).to.be.below(1200);',
+        explanation: 'Validates both functional correctness and non functional performance. Deep type assertion guarantees that coordinates arrive as numbers rather than serialized strings, protecting client map engines from rendering crashes.',
+        output: 'All four assertions green PASS in Test Results pane in 28 milliseconds.',
+        trapAndFix: 'Common Trap: Verifying only that coordinates property exists. Senior Savior: Assert explicit data types with to.be.a("number") to catch silent serializer mutations before release.'
+      }
+    },
+    {
       type: 'heading',
       text: 'Step 6: Covering the Edge Cases: Empty Strings and Spaces Only',
     },
@@ -458,7 +597,7 @@ export const lesson03 = {
         'Iterations: 1',
         'Requests: 4',
         'Assertions: 10',
-        '-------------------------------------------------------',
+        '=======================================================',
         'PASS 01 Valid Route: Status code is 200 OK',
         'PASS 01 Valid Route: Route and status match contract',
         'PASS 01 Valid Route: Coordinates are valid numbers',
@@ -469,7 +608,7 @@ export const lesson03 = {
         'PASS 03 Empty Route: Missing route explains why',
         'PASS 04 Spaces Only: Missing route returns 400',
         'PASS 04 Spaces Only: Missing route explains why',
-        '-------------------------------------------------------',
+        '=======================================================',
         'Results: 10 passed, 0 failed, 0 skipped (duration: 86 ms)',
       ],
     },
@@ -483,7 +622,7 @@ export const lesson03 = {
       lines: [
         'FAIL 01 Valid Route: Coordinates are valid numbers',
         '  AssertionError: expected \'42.3601\' to be a number',
-        '-------------------------------------------------------',
+        '=======================================================',
         'Results: 9 passed, 1 failed, 0 skipped',
       ],
     },

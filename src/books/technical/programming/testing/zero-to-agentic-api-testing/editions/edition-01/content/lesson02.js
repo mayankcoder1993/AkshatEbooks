@@ -17,7 +17,7 @@ export const lesson02 = {
       missionCrisis: 'The Campus Transit Shuttle Crash: Diagnosing the 500 Server Error',
       missionContext: 'The student shuttle tracking service crashed on day one of orientation whenever students opened the route tracker without selecting a destination. The frontend team blamed the backend, while backend logs showed an unhandled NullPointerException. In this phase, we enter the war room to inspect raw HTTP packets by hand, understand status code families, and install defensive guards.',
       missionObjective: 'Reproduce the unhandled 500 crash, install a defensive input validation guard, and verify both 400 Bad Request and 200 OK contracts.',
-      targetSystems: 'Campus Shuttle Route Locator Service · Port 5050 · HTTP Wire Traffic',
+      targetSystems: 'Campus Shuttle Route Locator Service · Port 3001 · HTTP Wire Traffic',
       phaseRoadmap: [
         {
           phase: 'Phase 1 of 3',
@@ -52,7 +52,7 @@ export const lesson02 = {
     {
       type: 'mission',
       title: 'Mission 1 Active Incident: The Apex Campus Transit Blackout',
-      text: 'Today is launch day for the new Apex Campus student portal. Outside on university avenues, hundreds of students stand at bus stops waiting for the campus shuttle. When they open the mobile app to check the live transit map, the screen locks into an endless spinning circle. In the engineering war room, tension is high: mobile frontend developers argue that their user interface is flawless and blame server outages; backend engineers insist the database cluster is healthy and blame mobile network disconnects. As the API Quality Engineer, you do not guess or take sides: you inspect the invisible network wire directly to discover the truth.',
+      text: 'Today is launch day for the new Apex Campus student portal. Outside on university avenues, hundreds of students stand at bus stops waiting for the campus shuttle. When they open the mobile app to check the live transit map, the screen locks into an endless spinning circle. In the engineering war room, tension is high: mobile frontend developers argue that their user interface is flawless and blame server outages; backend engineers insist the database cluster is healthy and blame mobile network disconnects. Akshay arrives at the war room console beside Sameer. Sameer turns to Akshay: "Now that you assembled our API server in Chapter 1, you know that truth lives directly on the network wire. Let us open our API Testing Workbench and reproduce this live failure together!"',
       image: {
         src: warRoomImg,
         file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
@@ -251,6 +251,51 @@ export const lesson02 = {
       text: 'Look at the evidence. The client received `500 Internal Server Error`. The server terminal reveals that line 23 crashed with an unhandled TypeError because it called `.trim()` on an undefined variable. In Java Spring servers, this same defect manifests as `java.lang.NullPointerException` at RouteLocatorService.java:42. In both ecosystems, the root cause is identical: dereferencing an unchecked input.',
     },
     {
+      type: 'comic-workbench',
+      badge: 'API TESTING WORKBENCH · REPRODUCING THE 500 CRASH',
+      title: 'Akshay Reproduces the Incident in the API Testing Workbench',
+      intro: 'Akshay fires the failing request in the API Testing Workbench, while Sameer inspects the server terminal output to reveal the uncaught exception.',
+      appType: 'api-workbench',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'The workbench returned HTTP status 500 Internal Server Error! Did our database drop offline or is the local port blocked?',
+          pointer: 'Status 500'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'Check the terminal console log below, Akshay. Line 23 crashed calling .trim() on undefined! When a client omits a required parameter, the server must never throw an unhandled 500 exception. A 500 error represents a backend code defect!',
+          pointer: 'TypeError trim'
+        }
+      ],
+      workbench: {
+        method: 'GET',
+        url: 'http://localhost:3001/v1/campus/shuttle/coordinates',
+        environment: 'Apex Campus Local',
+        activeTab: 'Params',
+        tabContent: '// Query parameters table is empty: zero keys supplied',
+        response: {
+          status: '500 Internal Server Error',
+          time: '14 ms',
+          size: '228 B',
+          format: 'JSON',
+          body: `{\n  "statusCode": 500,\n  "error": "Internal Server Error",\n  "message": "Cannot read properties of undefined (reading 'trim')"\n}`,
+          testResults: [
+            { status: 'FAIL', name: 'Expected 200 OK or handled 400 Bad Request, but received unhandled 500' }
+          ]
+        }
+      },
+      breakdown: {
+        input: 'GET /v1/campus/shuttle/coordinates with empty query parameters.',
+        code: 'const route = req.query.route;\nconst normalizedRoute = route.trim().toLowerCase();',
+        explanation: 'When the query parameter route is omitted, req.query.route evaluates to undefined. Invoking .trim() on an undefined reference triggers an uncaught TypeError in Node.js or NullPointerException in Java, immediately aborting the request handler.',
+        output: 'HTTP status 500 Internal Server Error with unhandled TypeError stack trace.',
+        trapAndFix: 'Common Trap: Assuming callers will always provide expected parameters. Senior Savior: Never call methods on unchecked inputs. Always check presence before dereferencing.'
+      }
+    },
+    {
       type: 'structured-breakdown',
       badge: 'PARAMETER MECHANICS',
       title: 'Distinguishing Missing Parameters from Empty Strings',
@@ -392,6 +437,40 @@ export const lesson02 = {
       ],
     },
     {
+      type: 'comic-workbench',
+      badge: 'IDE WORKSPACE · DEFENSIVE INPUT GUARD',
+      title: 'Akshay Hardens the Route Handler in the Code IDE',
+      intro: 'Akshay opens the IDE to install a defensive input validation guard in shuttle_service.js, protecting server memory from uncaught exceptions.',
+      appType: 'ide',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'I installed a defensive guard checking (!route || route.trim() === ""). If route is absent or blank, it returns status 400 Bad Request immediately without throwing an uncaught exception!',
+          pointer: 'Guard line 6'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'Notice the logical short circuit order, Akshay: we check (!route) first so JavaScript never calls .trim() on undefined. Defensive programming at the API boundary protects our server threads from unhandled crashes!',
+          pointer: 'Short circuit OR'
+        }
+      ],
+      ide: {
+        file: 'shuttle_service.js',
+        activeLine: 6,
+        code: `// shuttle_service.js: Hardened Route Handler\napp.get("/v1/campus/shuttle/coordinates", (req, res) => {\n  const route = req.query.route;\n\n  // DEFENSIVE GUARD: Catch omitted, empty, and whitespace strings\n  if (!route || route.trim() === "") {\n    return res.status(400).json({\n      statusCode: 400,\n      error: "route parameter is required"\n    });\n  }\n\n  const normalizedRoute = route.trim().toLowerCase();\n  const shuttleData = activeRoutes[normalizedRoute];\n  if (shuttleData) {\n    return res.status(200).json(shuttleData);\n  }\n  res.status(404).json({ statusCode: 404, error: "Unknown shuttle route" });\n});`,
+        terminalOutput: 'Transit Service restarted on http://localhost:3001\nDefensive parameter guard registered for /v1/campus/shuttle/coordinates'
+      },
+      breakdown: {
+        input: 'Any HTTP request missing query parameter route or supplying an empty string.',
+        code: 'if (!route || route.trim() === "") {\n  return res.status(400).json({ statusCode: 400, error: "route parameter is required" });\n}',
+        explanation: 'The logical OR operator short circuits: if route is undefined or null, (!route) evaluates to true and immediately returns status 400. The second expression route.trim() === "" is only evaluated if route is guaranteed to be a string.',
+        output: 'Predictable HTTP 400 Bad Request with informative error body; server terminal remains quiet with zero crashes.',
+        trapAndFix: 'Common Trap: Calling route.trim() before checking if route exists. Senior Savior: Always check presence first before invoking string operations.'
+      }
+    },
+    {
       type: 'paragraph',
       text: 'Save the file. In your terminal, stop the running server with `Ctrl + C` and restart it with `node shuttle_service.js`. Now, in your API software, replay the exact same failing request without changing the URL: `GET http://localhost:3001/v1/campus/shuttle/coordinates`:',
     },
@@ -458,6 +537,52 @@ export const lesson02 = {
     {
       type: 'paragraph',
       text: 'The map unfreezes! The server returns `200 OK` with valid GPS coordinates, shuttle speed, and the estimated arrival time. You proved the exact cause of the crash, added the server defense, and verified the solution with your own eyes on the network wire.',
+    },
+    {
+      type: 'comic-workbench',
+      badge: 'API TESTING WORKBENCH · DUAL VERIFICATION & MANUAL FATIGUE',
+      title: 'Akshay Manually Verifies the Fleet and Experiences Tester Fatigue',
+      intro: 'Akshay switches to the API Testing Workbench to verify that status 200 returns valid GPS telemetry, but discovers the painful limits of manual eyeball checks.',
+      appType: 'api-workbench',
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Junior Automation Engineer',
+          text: 'With ?route=campus_loop_north, status 200 OK returns valid GPS coordinates! But after manually retyping seven different route names and verifying coordinates with my own eyes, I am exhausted and already making typos!',
+          pointer: 'Status 200 OK'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Architect',
+          text: 'That is the reality of manual testing, Akshay. When our campus transit fleet grows to 50 routes, clicking Send and inspecting JSON numbers by hand is impossible to sustain. In Chapter 3, we automate these checks with Postman JavaScript assertions so the machine verifies everything in milliseconds!',
+          pointer: 'Coordinates payload'
+        }
+      ],
+      workbench: {
+        method: 'GET',
+        url: 'http://localhost:3001/v1/campus/shuttle/coordinates?route=campus_loop_north',
+        environment: 'Apex Campus Local',
+        activeTab: 'Params',
+        tabContent: 'KEY: route   |   VALUE: campus_loop_north   |   DESCRIPTION: Active shuttle route',
+        response: {
+          status: '200 OK',
+          time: '28 ms',
+          size: '286 B',
+          format: 'JSON',
+          body: `{\n  "route": "campus_loop_north",\n  "shuttleId": "BUS_104",\n  "status": "in_transit",\n  "coordinates": {\n    "latitude": 42.3601,\n    "longitude": -71.0942\n  },\n  "speedMph": 24,\n  "nextStop": "Apex Student Union",\n  "estimatedArrivalMinutes": 3\n}`,
+          testResults: [
+            { status: 'PASS', name: 'HTTP Status is 200 OK' },
+            { status: 'PASS', name: 'Coordinates object contains latitude and longitude numbers' }
+          ]
+        }
+      },
+      breakdown: {
+        input: 'GET /v1/campus/shuttle/coordinates?route=campus_loop_north',
+        code: 'res.status(200).json(shuttleData);',
+        explanation: 'With valid query parameters supplied, the guarded route handler passes the defensive boundary, finds the record in system RAM, and returns HTTP 200 OK with full transit telemetry.',
+        output: 'HTTP status 200 OK with valid shuttle telemetry and coordinates.',
+        trapAndFix: 'Common Trap: Testing only happy path 200 OK and assuming error paths are safe. Senior Savior: Verify both the negative regression guard (400) and the positive contract (200), then automate them immediately to avoid manual fatigue.'
+      }
     },
     {
       type: 'callout',
