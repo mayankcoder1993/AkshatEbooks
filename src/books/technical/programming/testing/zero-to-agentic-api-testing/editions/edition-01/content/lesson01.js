@@ -7,6 +7,8 @@ import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 import postOpImg from '../assets/post-operation-wire-flow.jpg'
 import getOpImg from '../assets/get-operation-wire-flow.jpg'
 import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
+import day1ComicStripImg from '../assets/ch01-day1-intern-comic-strip.jpg'
+import cliffhangerAlarmStripImg from '../assets/ch01-cliffhanger-alarm-strip.jpg'
 
 const serverCodeLines = [
   "import express from 'express'",
@@ -94,6 +96,24 @@ export const lesson01 = {
       phase: 'STAGE 6 AUTHORING',
       rank: 'DAY 1 INTERN TO WIRE AUDITOR',
       status: 'ACTIVE'
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'COMIC STRIP · SCENE 1 OF 4',
+      title: 'Akshay First Morning: From Chrome Confusion to the Canteen Analogy',
+      text: 'Akshay sits nervously at his new workstation on his first day as an intern. Sameer arrives with hot ginger chai, discovers Akshay attempting to test an API through Google Chrome, and breaks into a warm smile before explaining how clients and servers really talk.',
+      src: day1ComicStripImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch01-day1-intern-comic-strip.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Three panel comic strip showing Akshay arriving nervously, receiving chai from Sameer, trying to type a URL into Chrome, and Sameer sketching the restaurant analogy.',
+      caption: 'The Day 1 Realization: Before you can test an API, you must know what happens behind the screen.',
+      points: [
+        'Panel 1: Akshay sits at his teak workstation desk with Nagara jali screens in the background, wondering where to begin.',
+        'Panel 2: Sameer arrives carrying two steaming glasses of cutting chai, welcoming Akshay to the backend engineering squad.',
+        'Panel 3: Akshay tries typing an API endpoint into Google Chrome; Sameer chuckles and sketches a dining table, waiter, and kitchen.'
+      ]
     },
     {
       type: 'storyboard',
@@ -261,9 +281,9 @@ export const lesson01 = {
     },
     {
       type: 'flow',
-      input: ['HTTP Request', 'Method + URL Path + Headers + Optional Body'],
-      process: ['Express Route Handler', 'Buffers TCP chunks, parses JSON, runs business logic'],
-      output: ['HTTP Response', 'Status Code + Response Headers + JSON Payload']
+      input: ['HTTP Request Input', 'Method: POST · Path: /courses · Headers: application/json · Body: Course Record'],
+      process: ['Express Route Processing', 'Buffers TCP chunks, parses JSON stream, and pushes to courses array'],
+      output: ['HTTP Response Output', 'Status: 201 Created · Latency: 24ms · Body: Confirmation JSON']
     },
     {
       type: 'image',
@@ -763,6 +783,24 @@ export const lesson01 = {
         output: 'HTTP status 200 OK with data envelope containing precisely the requested keys, preventing over fetching.',
         trapAndFix: 'Senior Savior Trap: Assuming modern GraphQL always replaces REST without evaluating caching complexity and file upload trade offs. Golden Rule: Match architecture to problem requirements; REST excels at resource caching, GraphQL excels at client driven nested aggregations.'
       }
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'COMIC STRIP · EMERGENCY CLIFFHANGER',
+      title: 'The Crimson Strobe: Production Alarm Halts Orientation Eve',
+      text: 'Akshay and Sameer celebrate their successful Day 1 training quest when suddenly an emergency pager alarm pierces the lab. The wall mounted operations monitor flashes in crimson red, displaying a critical 500 crash on the campus transit shuttle service and setting up the Chapter 2 mission.',
+      src: cliffhangerAlarmStripImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch01-cliffhanger-alarm-strip.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Three panel comic strip showing Akshay and Sameer high fiving, a red warning strobe light flashing on the ceiling, and both engineers staring seriously at a flashing emergency monitor.',
+      caption: 'The Orientation Alarm: When production crashes, training ends and the real mission begins.',
+      points: [
+        'Panel 1: Akshay and Sameer exchange high fives after mastering all five CRUD operations in the API Testing Workbench.',
+        'Panel 2: A sudden ceiling strobe flashes crimson red across the engineering lab, startling both engineers.',
+        'Panel 3: Sameer and Akshay stand side by side, staring at the critical 500 error alert on the transit shuttle monitor.'
+      ]
     },
     {
       type: 'victory-milestone',
