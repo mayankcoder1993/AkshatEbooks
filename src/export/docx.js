@@ -15,8 +15,274 @@ async function blockToDocx(b) {
   switch(b.type) {
     case 'heading': return [h(b.text)]
     case 'paragraph': return [p(b.text)]
-    case 'image': { const data=await imageLoader(b.src, b); const width=560; return [new Paragraph({alignment:AlignmentType.CENTER,children:[new ImageRun({data,type:b.file?.toLowerCase().endsWith('.png')?'png':'jpg',transformation:{width,height:Math.round(width*b.h/b.w)},altText:{title:b.alt,description:b.alt,name:b.alt}})]}),...(b.caption?[p([new TextRun({text:b.caption,italics:true,color:'5B6575',size:19})],{alignment:AlignmentType.CENTER})]:[]),...(b.points||[]).map((point,index)=>p([new TextRun({text:`${index+1}  `,bold:true,color:colors.indigo}),...rich(point)]))] }
-    case 'mission': return [tableBox(`OUR MISSION · ${b.title}`,[p(b.text),p([new TextRun({text:'What we know: ',bold:true}),...rich(b.weKnow.join(' • '))]),p([new TextRun({text:'What we need: ',bold:true}),...rich(b.weNeed.join(' • '))])],'EEF5FA')]
+    case 'image': {
+      const data = await imageLoader(b.src, b);
+      const width = 560;
+      const items = [];
+      if (b.badge || b.title) {
+        items.push(p([new TextRun({ text: (b.badge ? `${b.badge} · ` : '') + (b.title || ''), bold: true, color: colors.indigo, size: 22 })]));
+      }
+      if (b.text) {
+        items.push(p(rich(b.text)));
+      }
+      if (b.paragraphs?.length) {
+        b.paragraphs.forEach(pr => items.push(p(rich(pr))));
+      }
+      items.push(new Paragraph({
+        alignment: AlignmentType.CENTER,
+        children: [new ImageRun({
+          data,
+          type: b.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
+          transformation: { width, height: Math.round(width * b.h / b.w) },
+          altText: { title: b.alt, description: b.alt, name: b.alt }
+        })]
+      }));
+      if (b.caption) {
+        items.push(p([new TextRun({ text: b.caption, italics: true, color: '5B6575', size: 19 })], { alignment: AlignmentType.CENTER }));
+      }
+      if (b.points?.length) {
+        b.points.forEach((point, index) => {
+          items.push(p([new TextRun({ text: `${index + 1}  `, bold: true, color: colors.indigo }), ...rich(point)]));
+        });
+      }
+      return [tableBox(b.title ? `ARCHITECTURE · ${b.title}` : 'ARCHITECTURAL BLUEPRINT', items, 'F8FAFC')];
+    }
+    case 'mission': {
+      const items = [p(b.text)];
+      if (b.image) {
+        const data = await imageLoader(b.image.src, b.image);
+        const width = 520;
+        items.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new ImageRun({
+            data,
+            type: b.image.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
+            transformation: { width, height: Math.round(width * (b.image.h || 768) / (b.image.w || 1408)) },
+            altText: { title: b.image.alt, description: b.image.alt, name: b.image.alt }
+          })]
+        }));
+        if (b.image.caption) {
+          items.push(p([new TextRun({ text: b.image.caption, italics: true, color: '5B6575', size: 19 })], { alignment: AlignmentType.CENTER }));
+        }
+        if (b.image.points?.length) {
+          b.image.points.forEach((point, index) => {
+            items.push(p([new TextRun({ text: `${index + 1}  `, bold: true, color: colors.indigo }), ...rich(point)]));
+          });
+        }
+      }
+      if (b.weKnow?.length) {
+        items.push(p([new TextRun({ text: 'What we know: ', bold: true }), ...rich(b.weKnow.join(' • '))]));
+      }
+      if (b.weNeed?.length) {
+        items.push(p([new TextRun({ text: 'What we need: ', bold: true }), ...rich(b.weNeed.join(' • '))]));
+      }
+      return [tableBox(`OUR MISSION · ${b.title}`, items, 'EEF5FA')];
+    }
+    case 'api-inspector': {
+      const respStr = typeof b.responseBody === 'string' ? b.responseBody : JSON.stringify(b.responseBody, null, 2);
+      const items = [
+        p([new TextRun({text: `${b.method || 'GET'} `, bold: true, color: colors.teal}), new TextRun({text: b.url, font: 'Consolas'})]),
+        p([new TextRun({text: `Status: ${b.status || '200 OK'} · Time: ${b.time || '42 ms'} · Size: ${b.size || '1.2 kB'}`, italics: true, color: '596579'})]),
+        p([new TextRun({text: 'Response Body:', bold: true})]),
+        ...code(respStr.split('\n'), 'response.json'),
+        ...(b.assertions?.length ? [p([new TextRun({text: 'Assertions Verified:', bold: true, color: colors.teal})]), ...b.assertions.map(a => p(`✓ ${a}`))] : [])
+      ];
+      return [tableBox(b.title || 'LIVE API WIRE INSPECTION', items, 'EEF5FA')];
+    }
+    case 'mission-hud': {
+      const items = [
+        p([new TextRun({text: `PHASE: ${b.phase} · RANK: ${b.rank}`, bold: true, color: colors.teal})]),
+        p([new TextRun({text: `ACTIVE MISSION: ${b.mission}`, bold: true, color: colors.navy})])
+      ];
+      return [tableBox('MISSION COMMAND HUD', items, 'EEF5FA')];
+    }
+    case 'triage': {
+      const items = [
+        p([new TextRun({text: b.title, bold: true, color: colors.navy})]),
+        p(b.scenario),
+        ...b.options.map((opt, i) => p([new TextRun({text: `${String.fromCharCode(65 + i)}. `, bold: true}), ...rich(opt)])),
+        p([new TextRun({text: 'TACTICAL TRIUMPH: ', bold: true, color: colors.teal}), ...rich(b.debrief)])
+      ];
+      return [tableBox('WAR ROOM INCIDENT TRIAGE', items, 'FFF0F0')];
+    }
+    case 'battle-scar': {
+      const items = [
+        p([new TextRun({text: b.title, bold: true, color: colors.navy})]),
+        p(b.context),
+        p([new TextRun({text: 'Key Architectural Lesson: ', bold: true, color: '9A5B00'}), ...rich(b.takeaway)])
+      ];
+      return [tableBox(`WAR ROOM BATTLE SCAR · ${b.metric || 'PRODUCTION LESSON'}`, items, 'FFF8E8')];
+    }
+    case 'battle-plan': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.phases.flatMap(ph => [
+          p([
+            new TextRun({ text: `${ph.phase} (${ph.timing}): ${ph.title} `, bold: true, color: ph.status === 'active' ? colors.teal : colors.navy }),
+            ...(ph.status === 'active' ? [new TextRun({ text: '[CURRENT FOCUS]', bold: true, color: colors.teal })] : [])
+          ]),
+          p(ph.desc),
+          p([new TextRun({ text: 'Outcome: ', bold: true, color: colors.teal }), ...rich(ph.outcome)])
+        ])
+      ];
+      return [tableBox(b.title || 'THE 3 PHASE BATTLE PLAN', items, 'EEF8F6')];
+    }
+    case 'scenario-grid': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.scenarios.flatMap(sc => [
+          p([new TextRun({ text: `${sc.icon || '•'} ${sc.kicker}: ${sc.title}`, bold: true, color: colors.navy })]),
+          p([new TextRun({ text: 'The Natural Question: ', bold: true }), new TextRun({ text: sc.question, italics: true })]),
+          p([new TextRun({ text: 'The Tech Reality Check: ', bold: true }), ...rich(sc.reality)]),
+          p([new TextRun({ text: `${sc.clientName}: `, bold: true, color: colors.indigo }), new TextRun({ text: `"${sc.clientSays}"`, italics: true })]),
+          p([new TextRun({ text: `${sc.serverName}: `, bold: true, color: colors.teal }), new TextRun({ text: `"${sc.serverReplies}"`, italics: true })]),
+          p([new TextRun({ text: 'Why This Matters: ', bold: true, color: colors.teal }), ...rich(sc.takeaway)])
+        ])
+      ];
+      return [tableBox(b.title || 'EVERYDAY REAL WORLD SCENARIOS', items, 'EEF1FA')];
+    }
+    case 'structured-breakdown': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.categories.flatMap((cat, idx) => [
+          p([new TextRun({ text: `PILLAR ${idx + 1}: ${cat.category} · ${cat.title}`, bold: true, color: colors.navy })]),
+          p(cat.explanation),
+          ...(cat.points?.length ? cat.points.map(pt => p(`• ${pt}`)) : []),
+          ...(cat.code ? code(Array.isArray(cat.code) ? cat.code : [cat.code], cat.filename || 'snippet.py') : [])
+        ])
+      ];
+      return [tableBox(b.title || 'ARCHITECTURAL DECONSTRUCTION', items, 'F3F6FA')];
+    }
+    case 'chapter-opener': {
+      const items = [
+        ...(b.missionBadge || b.missionTitle ? [
+          p([new TextRun({ text: `${b.missionBadge || 'MISSION BRIEFING'}: ${b.missionTitle || ''}`, bold: true, color: colors.teal })])
+        ] : []),
+        ...(b.missionCrisis ? [p([new TextRun({ text: `CRISIS SCENARIO: ${b.missionCrisis}`, bold: true, color: colors.navy })])] : []),
+        ...(b.missionContext ? [p([new TextRun({ text: 'Context: ', bold: true }), ...rich(b.missionContext)])] : []),
+        ...(b.missionObjective ? [p([new TextRun({ text: 'Operational Target: ', bold: true, color: colors.teal }), ...rich(b.missionObjective)])] : []),
+        ...(b.targetSystems ? [p([new TextRun({ text: 'Target Systems: ', bold: true }), b.targetSystems])] : []),
+        p([new TextRun({ text: 'WE WILL ACHIEVE: ', bold: true, color: colors.teal }), ...rich(b.achieve)]),
+        p([new TextRun({ text: 'HOW WE WILL DO IT: ', bold: true, color: colors.indigo }), ...rich(b.how)]),
+        p([new TextRun({ text: 'WHAT YOU WILL CARRY FORWARD: ', bold: true, color: colors.navy }), ...rich(b.carry)])
+      ];
+      return [tableBox('MISSION BRIEFING & CHAPTER ROADMAP', items, 'F8FAFC')];
+    }
+    case 'storyboard': {
+      const items = [
+        ...(b.badge ? [p([new TextRun({ text: b.badge, bold: true, color: colors.teal })])] : []),
+        ...(b.title ? [p([new TextRun({ text: b.title, bold: true, size: 28, color: colors.navy })])] : []),
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.panels.flatMap((panel, idx) => [
+          p([new TextRun({ text: `PANEL ${idx + 1}: ${panel.title}${panel.time ? ` (${panel.time})` : ''}`, bold: true, color: colors.navy })]),
+          p([new TextRun({ text: 'Scene: ', bold: true }), panel.scene]),
+          ...(panel.dialogue ? [
+            p([new TextRun({ text: `${panel.dialogue.speaker}: `, bold: true, color: colors.teal }), `"${panel.dialogue.speech}"`]),
+            ...(panel.dialogue.replySpeaker ? [p([new TextRun({ text: `${panel.dialogue.replySpeaker}: `, bold: true, color: colors.indigo }), `"${panel.dialogue.replySpeech}"`])] : [])
+          ] : []),
+          p([new TextRun({ text: 'The Core Wire Lesson: ', bold: true, color: colors.teal }), panel.realization])
+        ])
+      ];
+      return [tableBox(b.title || 'COMIC STORYBOARD', items, 'F8FAFC')];
+    }
+    case 'comic-workbench': {
+      const items = [
+        ...(b.badge ? [p([new TextRun({ text: b.badge, bold: true, color: colors.teal })])] : []),
+        ...(b.title ? [p([new TextRun({ text: b.title, bold: true, size: 28, color: colors.navy })])] : []),
+        ...(b.dialogue ? b.dialogue.flatMap(d => [
+          p([new TextRun({ text: `${d.speaker} (${d.role}): `, bold: true, color: d.speaker === 'Akshay' ? colors.teal : colors.indigo }), `"${d.text}"`]),
+          ...(d.pointer ? [p([new TextRun({ text: 'Pointing to: ', bold: true, color: colors.slate }), d.pointer])] : [])
+        ]) : []),
+        ...(b.appType === 'ide' && b.ide ? [
+          p([new TextRun({ text: `IDE File: ${b.ide.filename} (${b.ide.status})`, bold: true, color: colors.navy })]),
+          ...code(b.ide.code.split('\n'), b.ide.filename || 'server.js')
+        ] : []),
+        ...(b.appType === 'api-workbench' && b.workbench ? [
+          p([new TextRun({ text: `API Request: ${b.workbench.method} ${b.workbench.url}`, bold: true, color: colors.teal })]),
+          ...(b.workbench.headers ? [p([new TextRun({ text: 'Headers: ', bold: true }), typeof b.workbench.headers === 'string' ? b.workbench.headers : JSON.stringify(b.workbench.headers)])] : []),
+          ...(b.workbench.body ? [p([new TextRun({ text: 'Request Body: ', bold: true })]), ...code(b.workbench.body.split('\n'), 'request_body.json')] : []),
+          p([new TextRun({ text: `Live Response: ${b.workbench.responseStatus}${b.workbench.responseTime ? ` (${b.workbench.responseTime})` : ''}`, bold: true, color: colors.navy })]),
+          ...(b.workbench.responseBody ? code(b.workbench.responseBody.split('\n'), 'response.json') : [])
+        ] : []),
+        ...(b.breakdown ? [
+          ...(b.breakdown.input ? [p([new TextRun({ text: '1. Explicit Input: ', bold: true, color: colors.teal }), ...rich(b.breakdown.input)])] : []),
+          ...(b.breakdown.explanation ? [p([new TextRun({ text: '2. Wire & Logic Explanation: ', bold: true, color: colors.indigo }), ...rich(b.breakdown.explanation)])] : []),
+          ...(b.breakdown.output ? [p([new TextRun({ text: '3. Deterministic Output: ', bold: true, color: colors.teal }), ...rich(b.breakdown.output)])] : []),
+          ...(b.breakdown.trapAndFix ? [p([new TextRun({ text: '4. Senior Savior & Common Trap: ', bold: true, color: colors.navy }), ...rich(b.breakdown.trapAndFix)])] : [])
+        ] : [])
+      ];
+      return [tableBox(b.title || 'COMIC WORKBENCH', items, 'F8FAFC')];
+    }
+    case 'chunked-code': {
+      const items = [
+        ...(b.intro ? [p(b.intro)] : []),
+        ...b.chunks.flatMap((chunk, idx) => [
+          p([new TextRun({ text: `CHUNK ${idx + 1}: ${chunk.label} · ${chunk.title || ''}`, bold: true, color: colors.navy })]),
+          p(chunk.explanation),
+          ...(chunk.code ? code(Array.isArray(chunk.code) ? chunk.code : [chunk.code], chunk.filename || 'wire_segment') : []),
+          ...(chunk.keyTakeaway ? [p([new TextRun({ text: 'Rule: ', bold: true, color: colors.teal }), ...rich(chunk.keyTakeaway)])] : [])
+        ])
+      ];
+      return [tableBox(b.title || 'CODE IN CHUNKS', items, 'F3F6FA')];
+    }
+    case 'predict-output': {
+      const items = [
+        p([new TextRun({ text: b.prompt, bold: true, color: colors.navy })]),
+        ...(b.code ? code(Array.isArray(b.code) ? b.code : [b.code], 'prediction_target') : []),
+        ...b.options.map((opt, idx) => p(`${String.fromCharCode(65 + idx)}. ${opt}`)),
+        p([new TextRun({ text: `Actual Output (${b.revealTitle || 'Confirmed'}): `, bold: true, color: colors.teal }), ...rich(b.explanation)])
+      ];
+      return [tableBox('IMAGINE & PREDICT BEFORE SENDING', items, 'EEF8F6')];
+    }
+    case 'mini-api': {
+      const items = [
+        p(b.intro || 'An in-memory API demonstrates core HTTP operations: GET returns records, POST appends records, PUT replaces a record, and DELETE removes records.'),
+        p([new TextRun({ text: 'Core Mechanics: ', bold: true }), new TextRun({ text: 'Memory array serves as the transient database; each HTTP verb triggers a deterministic state transition.' })])
+      ];
+      return [tableBox(b.title || 'INTERACTIVE 5-LINE API SERVER', items, 'EEF1FA')];
+    }
+    case 'library-workbench': {
+      const items = [
+        p('Interactive manual workbench demonstrating the 3-step College Library CRUD lifecycle: AddBook (POST), GetBook (GET with query parameter ?id=), and DeleteBook (POST teardown).'),
+        p([new TextRun({ text: 'The Friction of Manual Testing: ', bold: true }), new TextRun({ text: 'Requires manually copying the generated ID from Step 1 and pasting it into Step 2 and Step 3, demonstrating why automated request chaining is essential.' })])
+      ];
+      return [tableBox('MANUAL COLLEGE LIBRARY CRUD SIMULATOR', items, 'EEF5FA')];
+    }
+    case 'mission-tracker': {
+      const items = [p(b.text)];
+      if (b.image) {
+        const data = await imageLoader(b.image.src, b.image);
+        const width = 520;
+        items.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new ImageRun({
+            data,
+            type: b.image.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
+            transformation: { width, height: Math.round(width * (b.image.h || 768) / (b.image.w || 1408)) },
+            altText: { title: b.image.alt, description: b.image.alt, name: b.image.alt }
+          })]
+        }));
+        if (b.image.caption) {
+          items.push(p([new TextRun({ text: b.image.caption, italics: true, color: '5B6575', size: 19 })], { alignment: AlignmentType.CENTER }));
+        }
+        if (b.image.points?.length) {
+          b.image.points.forEach((point, index) => {
+            items.push(p([new TextRun({ text: `${index + 1}  `, bold: true, color: colors.indigo }), ...rich(point)]));
+          });
+        }
+      }
+      return [tableBox(`MISSION PROGRESS · ${b.title}`, items, 'EBF5FB')];
+    }
+    case 'mission-accomplished': return [tableBox(`★ MISSION ACCOMPLISHED · ${b.title}`,[p(b.text)],'EAFAF1')]
+    case 'victory-milestone':
+      return [tableBox(`⚡ ${b.badge || 'ARCHITECTURAL TRIUMPH'} · ${b.title}`,[
+        p(b.summary),
+        p([new TextRun({text:'Tactical Superpowers Mastered: ',bold:true,color:colors.indigo})]),
+        ...list(b.powers || [],'steps'),
+        p([new TextRun({text:'Enterprise Disasters Prevented: ',bold:true,color:'9A1B1B'})]),
+        ...list(b.disastersPrevented || [],'steps'),
+        ...(b.warRoomTakeaway ? [p([new TextRun({text:'War Room Takeaway: ',bold:true}),...rich(b.warRoomTakeaway)])] : [])
+      ],'F0F4FA')]
     case 'think': return [tableBox('PAUSE & THINK',[p(b.prompt),p([new TextRun({text:'Answer: ',bold:true}),...rich(b.answer)])],'FFF8E8')]
     case 'guess': return [tableBox('MAKE A GUESS',[p(b.prompt),...(b.code?code(b.code.split('\n'),'prediction.py'):[]),...list(b.options.map((x,i)=>`${String.fromCharCode(65+i)}. ${x}`)),p([new TextRun({text:`Answer: ${b.options[b.answerIndex]}. `,bold:true}),...rich(b.explain)])],'F3F0FA')]
     case 'bug': return [tableBox('BUG HUNT',[p(b.prompt),...code(b.lines,'bug_hunt.py'),p([new TextRun({text:`Answer: line ${b.bugLine}. `,bold:true}),...rich(b.explain)])],'FFF4E8')]
@@ -52,7 +318,7 @@ export async function buildBookDocument(publication){
   const { lessons, BOOK, BRAND, PREFACE } = publication
   const imprintMark = await imageLoader(BRAND.imprintMark)
   const front=[new Paragraph({alignment:AlignmentType.CENTER,spacing:{before:900,after:260},children:[new ImageRun({data:imprintMark,type:'png',transformation:{width:96,height:96},altText:{title:`${BRAND.imprint} publisher mark`,description:'Circular publisher mark showing a young scholar writing in an open book.',name:'Publisher mark'}})]}),p(BRAND.imprint.toUpperCase(),{alignment:AlignmentType.CENTER,spacing:{after:160}}),p(BRAND.tagline,{alignment:AlignmentType.CENTER,spacing:{after:400}}),p([new TextRun({text:BOOK.title,bold:true,size:52,color:colors.navy})],{alignment:AlignmentType.CENTER}),p([new TextRun({text:BOOK.subtitle,size:30,color:colors.indigo})],{alignment:AlignmentType.CENTER}),p(`${BOOK.series}\n${BOOK.author}\n${BOOK.edition} · ${BOOK.year}`,{alignment:AlignmentType.CENTER,spacing:{before:500}}),new Paragraph({children:[new PageBreak()]}),h(BOOK.title,HeadingLevel.HEADING_1),p([new TextRun({text:`© ${BOOK.year} by ${BOOK.author}. All rights reserved.`,bold:true})]),p(`Published by ${BOOK.publisher}.`),p(BOOK.rights),p(BOOK.disclaimer),p([new TextRun({text:BOOK.dedication,italics:true,color:colors.indigo})]),new Paragraph({children:[new PageBreak()]}),h('Acknowledgements',HeadingLevel.HEADING_1),...BOOK.acknowledgements.map(text=>p(text)),new Paragraph({children:[new PageBreak()]}),h('Contents',HeadingLevel.HEADING_1),new TableOfContents('Table of Contents',{hyperlink:true,headingStyleRange:'1-1'}),p('In Microsoft Word, right-click this list and choose Update Field if page numbers are not visible.'),new Paragraph({children:[new PageBreak()]}),h(PREFACE.title,HeadingLevel.HEADING_1),...(await blocksToDocx(PREFACE.blocks)),new Paragraph({children:[new PageBreak()]}),h('How to use this book',HeadingLevel.HEADING_1),...BOOK.howToUse.map(text=>p(text))]
-  const body=[]; for(let i=0;i<lessons.length;i++){const l=lessons[i];body.push(new Paragraph({pageBreakBefore:true,heading:HeadingLevel.HEADING_1,children:[new TextRun({text:`${BOOK.unitLabel} ${i+1}: ${l.title}`,bold:true,color:colors.navy})]}),p([new TextRun({text:l.subtitle,italics:true,color:'596579'})]),...(await blocksToDocx(l.blocks)))}
+  const body=[]; for(let i=0;i<lessons.length;i++){const l=lessons[i];body.push(new Paragraph({pageBreakBefore:true,heading:HeadingLevel.HEADING_1,children:[new TextRun({text:`Chapter ${i+1}: ${l.title}`,bold:true,color:colors.navy})]}),p([new TextRun({text:l.subtitle,italics:true,color:'596579'})]),...(await blocksToDocx(l.blocks)))}
   body.push(new Paragraph({pageBreakBefore:true,heading:HeadingLevel.HEADING_1,children:[new TextRun({text:'About the author',bold:true,color:colors.navy})]}),...BOOK.aboutAuthor.map(text=>p(text)),h('Keep learning'),p('Keep guessing, running and checking.'),p([new TextRun({text:`${BRAND.imprint} · ${BRAND.tagline}`,bold:true,color:colors.indigo})]))
   return new Document({features:{updateFields:true},styles:{default:{document:{run:{font:'Calibri',size:22,color:colors.text},paragraph:{spacing:{line:300,after:120}}}},paragraphStyles:[{id:'Heading1',name:'Heading 1',basedOn:'Normal',next:'Normal',quickFormat:true,run:{font:'Calibri',size:34,bold:true,color:colors.navy},paragraph:{spacing:{before:300,after:160},keepNext:true,outlineLevel:0}},{id:'Heading2',name:'Heading 2',basedOn:'Normal',next:'Normal',quickFormat:true,run:{font:'Calibri',size:27,bold:true,color:colors.indigo},paragraph:{spacing:{before:260,after:120},keepNext:true,outlineLevel:1}},{id:'Heading3',name:'Heading 3',basedOn:'Normal',next:'Normal',quickFormat:true,run:{font:'Calibri',size:23,bold:true,color:colors.teal},paragraph:{keepNext:true,outlineLevel:2}}]},numbering:{config:[{reference:'bullet',levels:[{level:0,format:'bullet',text:'•',alignment:AlignmentType.LEFT,style:{paragraph:{indent:{left:500,hanging:240}}}}]},{reference:'steps',levels:[{level:0,format:'decimal',text:'%1.',alignment:AlignmentType.LEFT,style:{paragraph:{indent:{left:500,hanging:240}}}}]}]},sections:[{properties:{page:{margin:{top:900,right:900,bottom:900,left:900}}},headers:{default:new Header({children:[p(`${BOOK.title}  ·  ${BOOK.author}`,{alignment:AlignmentType.RIGHT})]})},footers:{default:new Footer({children:[new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun('Page '),new TextRun({children:[PageNumber.CURRENT]}),new TextRun(' of '),new TextRun({children:[PageNumber.TOTAL_PAGES]})]})]})},children:[...front,...body]}]})
 }

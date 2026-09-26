@@ -1,0 +1,22 @@
+name: API Regression Pipeline
+on: [push, pull_request]
+
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Newman and Reporters
+        run: npm install -g newman newman-reporter-htmlextra
+      - name: Execute Newman Suite
+        run: |
+          newman run course-materials/zero-to-agentic-api-testing/Zero-to-Agentic-API-Testing.postman_collection.json \
+            -e course-materials/zero-to-agentic-api-testing/Campus-Library-UAT.postman_environment.json \
+            -r cli,htmlextra \
+            --reporter-htmlextra-export build/report.html \
+            --bail

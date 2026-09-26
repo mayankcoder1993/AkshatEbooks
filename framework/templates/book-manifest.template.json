@@ -1,0 +1,53 @@
+{
+  "$schema": "../../schemas/book-manifest.schema.json",
+  "schemaVersion": 1,
+  "id": "book-slug-id",
+  "domain": "technical",
+  "subdomain": "domain/subdomain",
+  "profile": "TECHNICAL",
+  "title": "Title of the Book",
+  "subtitle": "Subtitle Describing the Transformation",
+  "series": "SGK Series Name",
+  "author": "Author Name",
+  "status": "in-progress",
+  "statusLabel": "In progress",
+  "progress": 0,
+  "readable": true,
+  "currentEdition": "edition-01",
+  "route": "/books/book-slug-id",
+  "nextMilestone": "Initial storyboard and mission planning.",
+  "instructionFiles": [
+    "AGENTS.md",
+    "docs/agents/CORE_EDITORIAL.md"
+  ],
+  "formats": [
+    {
+      "id": "web",
+      "label": "Interactive Web View",
+      "state": "ready"
+    },
+    {
+      "id": "book",
+      "label": "Book / PDF View",
+      "state": "ready"
+    },
+    {
+      "id": "docx",
+      "label": "Editable Word",
+      "state": "ready"
+    },
+    {
+      "id": "offline-html",
+      "label": "Offline HTML",
+      "state": "ready"
+    }
+  ],
+  "branding": [
+    {
+      "edition": "edition-01",
+      "theme": "classic",
+      "accent": "var(--accent-primary)",
+      "badge": "First Edition"
+    }
+  ]
+}

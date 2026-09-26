@@ -1,0 +1,12 @@
+{
+  "category": "literature",
+  "total_records": 1,
+  "books": [
+    {
+      "book_name": "Classics of World Heritage",
+      "isbn": "LIT108",
+      "aisle": 14,
+      "author": "Marcus Vance"
+    }
+  ]
+}

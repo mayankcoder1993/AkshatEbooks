@@ -3,7 +3,7 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { discoverBooks, projectRelative } from './lib/book-system.mjs'
 
-const allowedBlocks = new Set(['heading','paragraph','image','mission','think','guess','bug','callout','flow','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','reflection','safety-notice'])
+const allowedBlocks = new Set(['heading','paragraph','image','mission','mission-tracker','mission-accomplished','victory-milestone','think','guess','bug','callout','flow','blueprint','code','runviz','terminal','pipeline','steps','mistakes','quiz','takeaways','aha','cliffhanger','resources','definition','worked-example','case-study','timeline','comparison','source-note','question','activity','reflection','safety-notice','api-inspector','mission-hud','triage','battle-scar','battle-plan','scenario-grid','structured-breakdown','chunked-code','predict-output','mini-api','library-workbench','chapter-opener','storyboard','comic-workbench'])
 const books = await discoverBooks()
 let editionCount = 0
 let chapterCount = 0
@@ -25,6 +25,13 @@ async function validateBlocks(blocks, context, bookDirectory) {
       await fs.access(absolute)
       assert(absolute.startsWith(bookDirectory + path.sep), `${label}: image must stay inside its book package`)
     }
+    if ((block.type === 'mission' || block.type === 'mission-tracker') && block.image) {
+      assert(block.image.alt && block.image.w > 0 && block.image.h > 0 && block.image.file, `${label}: mission image requires file, dimensions and alt text`)
+      const absolute = path.resolve(block.image.file)
+      await fs.access(absolute)
+      assert(absolute.startsWith(bookDirectory + path.sep), `${label}: mission image must stay inside its book package`)
+    }
+    if (block.type === 'victory-milestone') assert(block.title && block.summary && Array.isArray(block.powers) && Array.isArray(block.disastersPrevented), `${label}: victory milestone requires title, summary, powers and disastersPrevented`)
     if (block.type === 'quiz') assert(Array.isArray(block.items) && block.items.every(item => Array.isArray(item) && item.length === 2), `${label}: quiz items require question and answer`)
     if (block.type === 'runviz') assert(Array.isArray(block.steps) && block.steps.length, `${label}: run visualizer requires steps`)
     if (block.type === 'definition') assert(block.term && block.text, `${label}: definition requires term and text`)

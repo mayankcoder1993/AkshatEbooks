@@ -1,0 +1,85 @@
+{
+  "$schema": "../../../../../../../schemas/edition-manifest.schema.json",
+  "schemaVersion": 1,
+  "bookId": "zero-to-agentic-api-testing",
+  "id": "edition-01",
+  "label": "First Edition",
+  "contentVersion": "1.0.0",
+  "publicationYear": 2026,
+  "status": "drafting",
+  "technology": "REST, Postman, JavaScript, Newman & JSON",
+  "verifiedThrough": "2026-09-21",
+  "contentModule": "editions/edition-01/content/index.js",
+  "outputDir": "public/books/zero-to-agentic-api-testing/edition-01",
+  "outputs": {
+    "docx": "Zero-To-Agentic-Api-Testing-Edition-01.docx",
+    "offlineHtml": "Zero-To-Agentic-Api-Testing-Edition-01.html"
+  },
+  "chapters": [
+    {
+      "id": "understanding-apis",
+      "title": "Understanding APIs from First Principles",
+      "subtitle": "The restaurant analogy, the five core operations, building your own minimal server, and tasting REST, SOAP, and GraphQL."
+    },
+    {
+      "id": "rest-crud-status",
+      "title": "Investigating the Incident: Manual Wire Auditing and Status Codes",
+      "subtitle": "The campus transit shuttle crisis, dissecting status code families, comparing URLs, diagnosing the 500 crash by hand, and verifying the 400 guard and 200 contract."
+    },
+    {
+      "id": "postman-setup",
+      "title": "Automating the Wire Check: Postman Workbench and Assertions",
+      "subtitle": "Translating manual verification into automated JavaScript assertions, running test suites, and team collaboration."
+    },
+    {
+      "id": "library-crud",
+      "title": "Manual Testing the College Library API",
+      "subtitle": "Executing AddBook, GetBook, and DeleteBook manually, feeling the copy paste pain, and mapping unique constraints."
+    },
+    {
+      "id": "javascript-assertions",
+      "title": "Writing JavaScript Assertions and the pm Object",
+      "subtitle": "Automating response validation, JavaScript fundamentals for testers, Chai matchers, and JSON schema verification."
+    },
+    {
+      "id": "variables-and-scopes",
+      "title": "Managing Variables Across the Five Scopes",
+      "subtitle": "The five variable tiers, precedence rules, dynamic environment switching, and unique ISBN generation."
+    },
+    {
+      "id": "request-chaining",
+      "title": "Request Chaining and Complex Nested JSON Parsing",
+      "subtitle": "Automated property transfer, navigating nested object hierarchies, array methods, and mathematical calculations."
+    },
+    {
+      "id": "data-driven-testing",
+      "title": "Data Driven Testing with External Data Files",
+      "subtitle": "Powering automated iterations with CSV and JSON files, pm.iterationData, and debugging console traps."
+    },
+    {
+      "id": "error-handling-resilience",
+      "title": "Advanced Error Handling and Resilience Testing",
+      "subtitle": "Negative testing matrix, safe JSON parsing, preventing secret leaks, and self healing workflow loops."
+    },
+    {
+      "id": "mock-servers-and-contracts",
+      "title": "Postman Mock Servers and JSON Schema Contracts",
+      "subtitle": "Contract first development, JSON Schema validation, building hosted Mock Servers, and unblocking parallel QA in Agile sprints."
+    },
+    {
+      "id": "oauth-token-auth",
+      "title": "OAuth 2.0 and Modern Token Authentication",
+      "subtitle": "The four roles, Authorization Code grant handshake, automated token exchange scripts, global variables, and Bearer token chaining."
+    },
+    {
+      "id": "soap-and-xml",
+      "title": "SOAP WebServices and XML Parsing",
+      "subtitle": "Crafting XML envelopes, setting SOAP headers, and converting responses into JavaScript objects with xml2Json."
+    },
+    {
+      "id": "newman-cicd-execution",
+      "title": "Headless Test Execution with Newman and CI CD",
+      "subtitle": "Command line collection runs, rich HTML Extra reports, and automated pipeline integration."
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+POST https://auth.campuslibrary.org/oauth/v2/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=authorization_code
+&code={{auth_code}}
+&client_id={{client_id}}
+&client_secret={{client_secret}}
+&redirect_uri=https://qa-api.campuslibrary.org/callback

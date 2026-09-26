@@ -1,0 +1,36 @@
+{
+  "institution": "Apex Campus Global Platform",
+  "academic_year": "2026-2027",
+  "campus_location": "Main University Hub",
+  "total_courses": 4,
+  "courses": [
+    {
+      "code": "CS101",
+      "title": "Foundations of Computer Systems",
+      "department": "Computer Science",
+      "credits": 4,
+      "status": "Active"
+    },
+    {
+      "code": "CS204",
+      "title": "Data Structures and Algorithms",
+      "department": "Computer Science",
+      "credits": 4,
+      "status": "Active"
+    },
+    {
+      "code": "QA301",
+      "title": "Agentic API Automation and Quality",
+      "department": "Software Engineering",
+      "credits": 3,
+      "status": "Active"
+    },
+    {
+      "code": "EE210",
+      "title": "Digital Logic and Microprocessors",
+      "department": "Electrical Engineering",
+      "credits": 4,
+      "status": "Active"
+    }
+  ]
+}

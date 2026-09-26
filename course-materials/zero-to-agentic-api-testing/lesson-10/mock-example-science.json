@@ -1,0 +1,12 @@
+{
+  "category": "science",
+  "total_records": 1,
+  "books": [
+    {
+      "book_name": "Full Stack API Automation",
+      "isbn": "SCI941",
+      "aisle": 42,
+      "author": "Dr. Sarah Chen"
+    }
+  ]
+}

@@ -4,7 +4,12 @@ import { discoverBooks, projectRelative, toPosix } from './lib/book-system.mjs'
 
 const ROOT = process.cwd()
 const OUTPUT_DIR = path.join(ROOT, 'src/catalog/generated')
-const books = await discoverBooks()
+const rawBooks = await discoverBooks()
+const books = rawBooks.sort((a, b) => {
+  if (a.manifest.id === 'zero-to-agentic-api-testing') return -1
+  if (b.manifest.id === 'zero-to-agentic-api-testing') return 1
+  return 0
+})
 const stateLabel = value => value.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
 
 const catalog = books.map(({ manifest, edition, editions, releases }) => ({
@@ -76,7 +81,7 @@ export async function loadBookPackage(id = DEFAULT_BOOK_ID, editionId = CURRENT_
   const loader = BOOK_LOADERS[key]
   if (!loader) throw new Error(\`Unknown or unreadable book edition: ${'${key}'}\`)
   const module = await loader()
-  return { id, editionId, lessons: module.default, BOOK: module.BOOK, BRAND: module.BRAND, PREFACE: module.PREFACE }
+  return { id, editionId, lessons: module.default, BOOK: module.BOOK, BRAND: module.BRAND, PREFACE: module.PREFACE, CURRICULUM_ROADMAP: module.CURRICULUM_ROADMAP }
 }
 `
 

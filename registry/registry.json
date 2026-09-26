@@ -1,0 +1,59 @@
+{
+  "platform": "Sarva Gyana Koshah",
+  "version": "1.0.0",
+  "lastUpdated": "2026-09-26",
+  "books": [
+    {
+      "id": "SGK-TECH-API-001",
+      "canonicalId": "zero-to-agentic-api-testing",
+      "title": "Zero to Agentic API Testing",
+      "subtitle": "The Modern Guide to Testing APIs with Postman, JavaScript and Newman",
+      "seriesId": "sgk-tech",
+      "seriesName": "SGK Tech Series",
+      "verticalModule": "programming-and-dev-tools",
+      "audienceProfile": "professionals-23-to-45",
+      "status": "in-progress",
+      "currentStage": 4,
+      "currentMilestone": "Chapters 1 to 6 certified; Stage 4 storyboarding for Chapters 7 and 8 active.",
+      "bookPromise": "This book takes a beginner or manual tester with zero automation experience to a job-ready API Quality Architect: mastering Postman, JavaScript test scripting, dynamic request chaining, data-driven execution, and headless CI/CD pipeline gating across 13 hands-on mission chapters.",
+      "totalChapters": 13,
+      "certifiedChapters": 6,
+      "averageAuditScore": 95.8,
+      "language": "English",
+      "rule19Status": "certified",
+      "mrpINR": 599,
+      "mentor": "Sameer Krishnamurthy",
+      "learner": "Akshay Sharma",
+      "workspacePath": "src/books/technical/programming/testing/zero-to-agentic-api-testing",
+      "missions": [
+        {
+          "number": 1,
+          "name": "The Global Open Data & Web Wire Audit",
+          "creativeMotif": "Forensic Wire Investigation / Ground-Zero Audit",
+          "chapters": [1, 2, 3],
+          "status": "certified"
+        },
+        {
+          "number": 2,
+          "name": "Automating Campus Services at Scale",
+          "creativeMotif": "The Automation Engine / Eliminating Manual Fatigue",
+          "chapters": [4, 5, 6, 7, 8],
+          "status": "in-progress"
+        },
+        {
+          "number": 3,
+          "name": "Enterprise Resilience, Mock Servers, and CI/CD Pipelines",
+          "creativeMotif": "The Enterprise Citadel / Autonomous Quality Gatekeeper",
+          "chapters": [9, 10, 11, 12, 13],
+          "status": "planned"
+        }
+      ],
+      "exports": {
+        "html": "public/books/zero-to-agentic-api-testing/edition-01/Zero-To-Agentic-Api-Testing-Interactive.html",
+        "docx": "public/books/zero-to-agentic-api-testing/edition-01/Zero-To-Agentic-Api-Testing-Manuscript.docx",
+        "pdf": null,
+        "epub": null
+      }
+    }
+  ]
+}

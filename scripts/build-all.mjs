@@ -1,3 +1,5 @@
+import fs from 'node:fs'
+import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { discoverBooks } from './lib/book-system.mjs'
 
@@ -20,4 +22,16 @@ for (const { bookId, editionId } of editions) {
   run(process.execPath, ['node_modules/vite/bin/vite.js', 'build', '--config', 'vite.singlefile.config.mjs'], env)
   run(process.execPath, ['--import', './scripts/register-jpg.mjs', 'scripts/copy-single.mjs'], env)
 }
+
+// Sync docs/ folder for GitHub Pages deployment
+const docsDir = path.resolve('docs')
+fs.mkdirSync(docsDir, { recursive: true })
+fs.cpSync(path.resolve('public'), docsDir, { recursive: true })
+const defaultSingleHtml = path.resolve('public/books/zero-to-agentic-api-testing/edition-01/Zero-To-Agentic-Api-Testing-Edition-01.html')
+if (fs.existsSync(defaultSingleHtml)) {
+  fs.copyFileSync(defaultSingleHtml, path.join(docsDir, 'index.html'))
+}
+fs.writeFileSync(path.join(docsDir, '.nojekyll'), '')
+console.log('Synchronized docs/ folder for GitHub Pages deployment.')
+
 console.log(`\nBuilt the library and ${editions.length} readable edition(s).`)

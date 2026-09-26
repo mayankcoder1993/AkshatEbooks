@@ -11,11 +11,11 @@
   "author": "Akshat Sinha",
   "status": "in-progress",
   "statusLabel": "In progress",
-  "progress": 80,
+  "progress": 35,
   "readable": true,
   "currentEdition": "edition-01",
   "route": "/books/python-absolute-beginners",
-  "nextMilestone": "Add the input() lesson and integrate the owner-supplied family crest.",
+  "nextMilestone": "Add the input() lesson, conditional logic, and functions.",
   "instructionFiles": [
     "AGENTS.md",
     "docs/agents/CORE_EDITORIAL.md",

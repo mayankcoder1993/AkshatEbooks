@@ -25,8 +25,11 @@ await Promise.all([
 
 const safeName = args.id.split('-').map(word => word[0].toUpperCase() + word.slice(1)).join('-')
 const bookPath = directory.split(path.sep).join('/')
+const bookSchemaPath = path.relative(directory, 'src/schemas/book-manifest.schema.json').split(path.sep).join('/')
+const editionSchemaPath = path.relative(editionDir, 'src/schemas/edition-manifest.schema.json').split(path.sep).join('/')
+
 const manifest = {
-  $schema: '../../../../schemas/book-manifest.schema.json',
+  $schema: bookSchemaPath,
   schemaVersion: 1,
   id: args.id,
   domain: args.domain,
@@ -58,7 +61,7 @@ const manifest = {
 }
 const date = new Date().toISOString().slice(0, 10)
 const edition = {
-  $schema: '../../../../../../schemas/edition-manifest.schema.json',
+  $schema: editionSchemaPath,
   schemaVersion: 1,
   bookId: args.id,
   id: 'edition-01',

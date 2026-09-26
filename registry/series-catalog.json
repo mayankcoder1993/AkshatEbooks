@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "platform": "Sarva Gyana Koshah",
+  "version": "1.0.0",
+  "series": [
+    {
+      "id": "sgk-tech",
+      "name": "SGK Tech Series",
+      "badge": "SGK TECH SERIES",
+      "color": "Teal",
+      "hex": "#0D9488",
+      "mentor": "Sameer Krishnamurthy",
+      "domains": ["programming", "devops", "cloud", "testing", "data-science", "ai", "cybersecurity"]
+    },
+    {
+      "id": "sgk-exam",
+      "name": "SGK Exam Series",
+      "badge": "SGK EXAM SERIES",
+      "color": "Saffron",
+      "hex": "#D97706",
+      "mentor": "Collector Arjun Nair, IAS",
+      "domains": ["upsc", "state-psc", "ssc", "banking", "defense", "nda", "cds"]
+    },
+    {
+      "id": "sgk-law",
+      "name": "SGK Law Series",
+      "badge": "SGK LAW SERIES",
+      "color": "Maroon",
+      "hex": "#9B1C1C",
+      "mentor": "Justice (Retd.) Balakrishnan Iyer",
+      "domains": ["polity", "constitutional-law", "criminal-procedure", "corporate-law", "judiciary"]
+    },
+    {
+      "id": "sgk-commerce",
+      "name": "SGK Commerce Series",
+      "badge": "SGK COMMERCE SERIES",
+      "color": "Navy Blue",
+      "hex": "#1E3A8A",
+      "mentor": "Vasanthi Subramaniam",
+      "domains": ["economics", "macroeconomics", "finance", "accounting", "gst", "ca-foundation"]
+    },
+    {
+      "id": "sgk-science",
+      "name": "SGK Science Series",
+      "badge": "SGK SCIENCE SERIES",
+      "color": "Forest Green",
+      "hex": "#166534",
+      "mentor": "Dr. Meera Iyer",
+      "domains": ["physics", "chemistry", "biology", "space-science", "environmental-science"]
+    },
+    {
+      "id": "sgk-saral",
+      "name": "SGK Saral Series",
+      "badge": "SGK SARAL SERIES",
+      "color": "Warm Orange",
+      "hex": "#C2410C",
+      "mentor": "Dadi Ma Kamala",
+      "domains": ["digital-literacy", "personal-finance", "daily-legal-rights", "health-and-nutrition"]
+    },
+    {
+      "id": "sgk-school",
+      "name": "SGK School Series",
+      "badge": "SGK SCHOOL SERIES",
+      "color": "Royal Violet",
+      "hex": "#6D28D9",
+      "mentor": "Masterji Gopal Shankar",
+      "domains": ["cbse-school", "icse-school", "foundational-mathematics", "board-exam-prep"]
+    }
+  ]
+}

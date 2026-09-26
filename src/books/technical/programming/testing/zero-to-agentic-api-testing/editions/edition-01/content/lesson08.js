@@ -1,0 +1,271 @@
+import ddtImg from '../assets/data-driven-testing-iteration.jpg'
+
+export const lesson08 = {
+  id: 'data-driven-testing',
+  icon: '',
+  title: 'Data Driven Testing with External Data Files',
+  shortTitle: 'Data Driven Testing',
+  subtitle: 'Powering automated iterations with CSV and JSON files, pm.iterationData, and debugging console traps.',
+  tags: ['DDT', 'CSV', 'JSON', 'Iteration', 'Collection Runner'],
+  blocks: [
+    {
+      type: 'mission-hud',
+      mission: 'Mission 2: Automating Student and Campus Services at Scale',
+      phase: 'Phase 5 of 5: Data Driven Scale (Mission Victory)',
+      rank: 'Rank: Enterprise Quality Architect',
+      status: 'ACTIVE'
+    },
+    {
+      type: 'chapter-opener',
+      missionBadge: 'MISSION 2 · PHASE 5 OF 6',
+      missionTitle: 'Automating Student and Campus Services at Scale',
+      missionCrisis: 'Mass Ingestion: Data Driven Testing with External Datasets',
+      missionContext: 'Testing one book at a time proves the contract works, but enterprise systems must ingest thousands of books across different genres and authors. Hardcoding individual test cases for every book is unmaintainable. We must decouple test logic from test data by driving automated iterations from external CSV and JSON data files.',
+      missionObjective: 'Drive automated collection runner iterations using external CSV and JSON datasets with iterationData variables.',
+      targetSystems: 'Postman Collection Runner · CSV and JSON Data File Ingestion Engine',
+      achieve: 'Scale single request tests into bulk regression engines by driving automated iterations with external CSV datasets and mastering Data Scope precedence.',
+      how: 'Structure tabular test data, ingest row values using pm.iterationData, parameterize request bodies, and monitor iteration level execution scorecards.',
+      carry: 'The capability to execute high volume regression suites against external datasets, closing Mission 2 and preparing for complex e commerce workflows in Chapter 9.'
+    },
+    {
+      type: 'mission-tracker',
+      badge: 'MISSION 2 PROGRESS · STEP 5 OF 5',
+      title: 'Completing Mission 2: Ingesting Bulk Inventory with External Data Files',
+      text: 'Our chained pipeline in Chapter 7 tests a single book with complete autonomy. But this morning, the college bookstore received a shipment of 100 new textbooks in a CSV spreadsheet. Our final step in Mission 2 is implementing Data Driven Testing: loading books_data.csv into the Postman Collection Runner, iterating through every record row by row, and validating bulk ingestion at scale.',
+    },
+    {
+      type: 'heading',
+      text: 'Step 1: The Data Driven Iteration Loop',
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'DATA DRIVEN TESTING',
+      title: 'Data Driven Testing Loop: Executing Parameterized Iterations',
+      text: 'In Data Driven Testing, your request sequence acts as a reusable engine. When you feed an external data file into the Collection Runner, Postman executes the entire collection once for every single row in the file, automatically binding values to data variables.',
+      src: ddtImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/data-driven-testing-iteration.jpg',
+      w: 1408,
+      h: 768,
+      alt: 'Diagram showing CSV file with multiple rows feeding into Postman Collection Runner, executing iterations 1, 2, and 3 in a loop.',
+      caption: 'The Data Driven Testing loop executing multiple test iterations from one external file.',
+      points: [
+        'The External Dataset: A CSV or JSON document where column headers act as variable keys and each row contains distinct test values.',
+        'The Collection Runner Loop: Postman loads row 1, executes Pre request scripts, fires the request, and runs assertions. It then immediately repeats the cycle for row 2, row 3, and beyond.',
+        'The Iteration Scorecard: Results are tallied across all runs, reporting total passed assertions and pinpointing any failing records.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 2: Preparing the CSV Dataset and Ingesting Row Values',
+    },
+    {
+      type: 'paragraph',
+      text: 'You can download the ready to use dataset directly: [Download books_data.csv](/materials/zero-to-agentic-api-testing/lesson-08/books_data.csv) or view the single file on GitHub: [Raw books_data.csv](https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/lesson-08/books_data.csv). Clicking the link opens only that individual file.',
+    },
+    {
+      type: 'code',
+      filename: 'books_data.csv',
+      lines: [
+        'book_name,author,aisle',
+        'Learn Postman Testing,John Doe,101',
+        'Mastering Git and GitHub,Jane Smith,102',
+        'Modern Angular Architecture,Alex Mercer,103',
+      ],
+    },
+    {
+      type: 'paragraph',
+      text: 'During a collection run with a data file, Postman exposes **Data Scope**. In Pre request scripts, access row values with `pm.iterationData.get()`. We break down the data ingestion script into three chunks:',
+    },
+    {
+      type: 'chunked-code',
+      badge: 'DDT SCRIPT CHUNKS',
+      title: 'Ingesting CSV Rows into Request Payloads',
+      intro: 'Executed before each row request fires:',
+      chunks: [
+        {
+          label: 'Chunk 1: Reading from Data Scope',
+          filename: 'read-row.js',
+          code: 'const currentBook = pm.iterationData.get("book_name");\nconst currentAuthor = pm.iterationData.get("author");',
+          title: 'Extracting Active Row Values',
+          explanation: 'Reads the specific values from the columns of the active CSV row for this iteration.',
+          keyTakeaway: 'Column headers in the CSV must match the string passed to get().'
+        },
+        {
+          label: 'Chunk 2: Promoting to Collection Variables',
+          filename: 'promote-vars.js',
+          code: 'pm.collectionVariables.set("book_name", currentBook);\npm.collectionVariables.set("author_name", currentAuthor);',
+          title: 'Making Data Available to Request Body',
+          explanation: 'Stores row values in Collection Scope so request body placeholders {{book_name}} can interpolate them.',
+          keyTakeaway: 'Double curly brace placeholders read values from Collection Scope.'
+        },
+        {
+          label: 'Chunk 3: Dynamic Random Key per Row',
+          filename: 'row-isbn.js',
+          code: 'const randomDigits = Math.floor(1000 + Math.random() * 9000);\npm.collectionVariables.set("ISBN", "LIB" + randomDigits);',
+          title: 'Guaranteed Uniqueness Across Iterations',
+          explanation: 'Generates a fresh random ISBN for each iteration row to prevent unique constraint rejections.',
+          keyTakeaway: 'Dynamic generation per row ensures 100 consecutive rows insert without collision.'
+        }
+      ]
+    },
+    {
+      type: 'predict-output',
+      badge: 'IMAGINE & PREDICT',
+      prompt: 'When you upload a CSV file with 3 data rows into the Postman Collection Runner and click Run, how many total request iterations will Postman execute?',
+      options: [
+        'Exactly 3 iterations: Postman automatically sets the iteration count to match the number of data rows in the file',
+        'Only 1 iteration: Postman stops after reading the first line',
+        '30 iterations: Postman multiplies the row count by 10 by default',
+        '0 iterations: Postman requires manual entry of loop counts'
+      ],
+      answerIndex: 0,
+      revealTitle: 'Collection Runner Iteration Count Confirmation',
+      explanation: 'Postman inspects the file! When a CSV or JSON file is uploaded, Postman counts the data rows (excluding the header) and automatically locks the iteration counter to that exact number (3 iterations).'
+    },
+    {
+      type: 'callout',
+      variant: 'tip',
+      title: 'Fresher Trap to Avoid: Using pm.environment for File Data',
+      paragraphs: [
+        'A frequent confusion among freshers is trying to read CSV rows using `pm.environment.get("book_name")`.',
+        'Uploaded CSV rows live strictly inside **Data Scope**, not Environment Scope. Calling `pm.environment.get()` will return undefined!',
+        'Always use `pm.iterationData.get("column_header")` to read fields from your uploaded CSV or JSON files.',
+      ],
+    },
+    {
+      type: 'heading',
+      text: 'Step 3: Debugging Console Traps: The Undefined Variable Bug',
+    },
+    {
+      type: 'bug',
+      filename: 'ddt-bug.js',
+      prompt: 'You run the collection with your CSV file. The tests execute, but in the server database, author is saved as empty string! What caused this bug?',
+      lines: [
+        '// Pre request Script',
+        'const currentAuthor = pm.iterationData.get("author_title");',
+        'pm.collectionVariables.set("author", currentAuthor);',
+        '',
+        '// Request Payload Body',
+        '{ "name": "{{book_name}}", "isbn": "{{ISBN}}", "author": "{{author}}" }',
+      ],
+      bugLine: 2,
+      explain: 'The CSV column header is named "author", but the script looked for "author_title". Because that column header does not exist in the file, pm.iterationData.get returned undefined, storing empty values into the database. Always match script keys with exact CSV header strings.',
+    },
+    {
+      type: 'heading',
+      text: 'Step 4: Executing Bulk Runs in Collection Runner',
+    },
+    {
+      type: 'terminal',
+      command: 'Postman Collection Runner Bulk Results',
+      lines: [
+        'Iteration 1 of 3 (Row 1):',
+        '  POST AddBook: 200 OK (38 ms) -> Msg: "successfully added", ID: "LIB1048101"',
+        '  GET GetBook?id=LIB1048101: 200 OK (29 ms) -> Verified name "Learn Postman Testing", aisle "101"',
+        '  POST DeleteBook: 200 OK (26 ms) -> msg: "book is successfully deleted"',
+        'Iteration 2 of 3 (Row 2):',
+        '  POST AddBook: 200 OK (36 ms) -> Msg: "successfully added", ID: "LIB2071102"',
+        '  GET GetBook?id=LIB2071102: 200 OK (28 ms) -> Verified name "Mastering Git and GitHub", aisle "102"',
+        '  POST DeleteBook: 200 OK (25 ms) -> msg: "book is successfully deleted"',
+        'Iteration 3 of 3 (Row 3):',
+        '  POST AddBook: 200 OK (37 ms) -> Msg: "successfully added", ID: "LIB3038103"',
+        '  GET GetBook?id=LIB3038103: 200 OK (28 ms) -> Verified name "Modern Angular Architecture", aisle "103"',
+        '  POST DeleteBook: 200 OK (25 ms) -> msg: "book is successfully deleted"',
+        'Bulk Execution Completed: 3 iterations, 9 requests, 18 assertions, 0 failures (312 ms)',
+      ],
+    },
+    {
+      type: 'battle-scar',
+      metric: 'Data Parsing Catastrophe',
+      title: 'The Million Dollar Comma Outage: The Peril of Unescaped CSV Delimiters',
+      context: 'An international airline imported route pricing spreadsheets using automated CSV test drivers. A route description contained an unquoted comma ("London, Heathrow to New York"). Because the CSV parser treated the comma as a column delimiter, every subsequent column shifted by one position, moving seat discount percentages into the base fare column. Before the automated suite flagged the issue, thousand dollar transatlantic tickets were briefly sold for ten dollars!',
+      takeaway: 'Always validate and quote external test data files. When ingesting CSV datasets, wrap text strings containing commas in quotes or utilize JSON format for strict schema safety.'
+    },
+    {
+      type: 'triage',
+      title: 'War Room Triage: The Data File Variable Shadowing Trap',
+      scenario: 'You load a CSV file into the Collection Runner with column header isbn. In your Pre request script, you also write: pm.environment.set("isbn", "9999"). When the runner executes, AddBook sends ISBN 1001 from the CSV row instead of 9999. Why did Postman ignore the environment variable?',
+      options: [
+        'Postman environments are automatically disabled when a data file is selected.',
+        'Data scope has higher precedence than Environment scope, so iteration data variables always override environment variables of the same name.',
+        'CSV file values can only be read inside the Tests tab, not in the request body.',
+        'The Collection Runner only supports numeric values in CSV columns.'
+      ],
+      answerIndex: 1,
+      debrief: 'Data scope overrides Environment scope! The Postman variable hierarchy prioritizes Local > Data > Environment > Collection > Global. Because iteration data sits above environment tier, the value from the CSV row automatically overrides your environment setting.',
+      traps: [
+        'Environments remain fully active during data driven runs for non data variables.',
+        '',
+        'CSV values are available across URLs, headers, bodies, and scripts.',
+        'CSV files support text strings, numbers, booleans, and nulls.'
+      ]
+    },
+    {
+      type: 'mission-accomplished',
+      title: 'Mission 2 Accomplished: Library Automation at Full Scale!',
+      text: 'The entire college library catalog is now automated, parameterized across environments, chained end to end with dynamic property transfer, and capable of ingesting hundreds of records in seconds with zero manual effort!',
+    },
+    {
+      type: 'heading',
+      text: 'Step 5: Review and Practice',
+    },
+    {
+      type: 'guess',
+      prompt: 'Which Postman object is specifically designed to read values from an uploaded CSV or JSON file during a Collection run?',
+      options: [
+        'pm.environment',
+        'pm.globals',
+        'pm.iterationData',
+        'pm.dataFile',
+      ],
+      answerIndex: 2,
+      explain: 'The pm.iterationData object is dedicated to the Data Scope. It provides access to column values for the current iteration row using the get() method.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'What is the core architectural advantage of Data Driven Testing?',
+          'It separates test logic from test data. Testers can add, remove, or modify hundreds of test cases in a simple spreadsheet without altering a single line of automation code.',
+        ],
+        [
+          'Why is automated cleanup essential when running data driven tests?',
+          'Without cleanup, inserting hundreds of records would pollute test databases and cause subsequent runs to fail on unique constraints. Chaining DeleteBook at the end of each iteration guarantees clean database state.',
+        ],
+      ],
+    },
+    {
+      type: 'takeaways',
+      items: [
+        'Data Driven Testing runs the same test workflow against multiple datasets from CSV or JSON files.',
+        'Use pm.iterationData.get("column_name") in Pre request scripts to read values for the active row.',
+        'Collection Runner automatically sets iteration counts to match the row count of the uploaded file.',
+      ],
+    },
+    {
+      type: 'victory-milestone',
+      badge: 'MISSION 2 CONQUERED · BULK ENGINE ONLINE',
+      rank: 'DATA DRIVEN AUTOMATION ARCHITECT',
+      title: 'Major Milestone Cleared: Autonomous High Throughput Ingestion Engine Deployed',
+      summary: 'You have conquered Mission 2! You transformed a slow manual copy paste test into an autonomous data driven engine. By feeding external CSV and JSON datasets into the Collection Runner and accessing Data Scope with pm.iterationData, you tested hundreds of records across complete CRUD lifecycles in seconds with zero manual friction.',
+      powers: [
+        'Decoupling business test logic completely from external test data parameters',
+        'Ingesting external CSV and JSON rows dynamically via pm.iterationData.get() without hardcoding',
+        'Executing high throughput collection runs with hundreds of iterations in under a minute',
+        'Pinpoint console debugging: catching silent undefined variable interpolation traps before CI execution',
+      ],
+      disastersPrevented: [
+        'Eliminated hundreds of hours of manual, mind numbing test data entry across release cycles',
+        'Caught obscure boundary and special character defects that only manifest across large external datasets',
+        'Prevented massive test database bloat by executing automated teardown deletions at the end of every iteration',
+      ],
+      warRoomTakeaway: 'When leadership asks whether the new release can handle bulk real world catalog migrations, you do not guess. You point to a 500 row Data Driven run that passed with 100% green assertions in seconds.',
+    },
+    {
+      type: 'cliffhanger',
+      title: 'A new challenge begins: Enterprise Production Hardening',
+      text: 'Happy paths pass at scale. But what happens in production when networks drop, tokens expire, or malformed inputs arrive? In Chapter 9, we launch Mission 3: Advanced Error Handling, negative test matrices, and self healing recovery loops!',
+    },
+  ],
+}

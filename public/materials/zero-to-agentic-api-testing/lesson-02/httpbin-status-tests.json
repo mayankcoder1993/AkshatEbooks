@@ -1,0 +1,22 @@
+{
+  "test_endpoints": [
+    {
+      "method": "GET",
+      "url": "https://httpbin.org/status/200",
+      "expected_status": 200,
+      "meaning": "Success"
+    },
+    {
+      "method": "GET",
+      "url": "https://httpbin.org/status/404",
+      "expected_status": 404,
+      "meaning": "Resource Not Found"
+    },
+    {
+      "method": "GET",
+      "url": "https://httpbin.org/status/500",
+      "expected_status": 500,
+      "meaning": "Internal Server Error"
+    }
+  ]
+}
