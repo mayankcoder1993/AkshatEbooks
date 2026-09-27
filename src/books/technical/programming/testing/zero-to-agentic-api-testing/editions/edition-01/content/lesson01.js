@@ -7,22 +7,25 @@ import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 import postOpImg from '../assets/post-operation-wire-flow.jpg'
 import getOpImg from '../assets/get-operation-wire-flow.jpg'
 import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
-import day1ComicStripImg from '../assets/ch01-day1-intern-comic-strip.jpg'
-import cliffhangerAlarmStripImg from '../assets/ch01-cliffhanger-alarm-strip.jpg'
 
 import s1p1Img from '../assets/illustrations/ch01-scene1-akshay-modern-laptop.jpg'
 import s1p2Img from '../assets/illustrations/ch01-scene1-sameer-chai-modern.jpg'
 import s1p3Img from '../assets/illustrations/ch01-scene1-akshay-chrome.jpg'
 import s1p4Img from '../assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg'
 
-import s2p1Img from '../assets/illustrations/ch01-scene2-panel1-frame-vs-terminal.jpg'
-import s2p2Img from '../assets/illustrations/ch01-scene2-panel2-lifting-the-wire.jpg'
-import s2p3Img from '../assets/illustrations/ch01-scene2-panel3-http-packet-postal.jpg'
-import s2p4Img from '../assets/illustrations/ch01-scene2-panel4-akshay-ready.jpg'
+import s2p1Img from '../assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg'
+import s2p2Img from '../assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg'
+import s2p3Img from '../assets/illustrations/ch01-scene2-panel3-modern-http-packet.jpg'
+import s2p4Img from '../assets/illustrations/ch01-scene2-panel4-modern-akshay-ready.jpg'
 
-import s3p1Img from '../assets/illustrations/ch01-scene3-panel1-akshay-coding.jpg'
-import s3p3Img from '../assets/illustrations/ch01-scene3-panel3.jpg'
+import s3p1Img from '../assets/illustrations/ch01-scene3-panel1-modern-coding.jpg'
+import s3p2Img from '../assets/illustrations/ch01-scene3-panel2-modern-blooper.jpg'
+import s3p3Img from '../assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg'
+import s3p4Img from '../assets/illustrations/ch01-scene3-panel4-modern-server-success.jpg'
+
+import s4p2Img from '../assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg'
 import s4p4Img from '../assets/illustrations/ch01-scene4-panel4.jpg'
+import s5p3Img from '../assets/illustrations/ch01-scene5-panel3-modern-alarm-monitor.jpg'
 
 const serverCodeLines = [
   "import express from 'express'",
@@ -112,24 +115,6 @@ export const lesson01 = {
       status: 'ACTIVE'
     },
     {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'COMIC STRIP · SCENE 1 OF 4',
-      title: 'Akshay First Morning: From Chrome Confusion to the Canteen Analogy',
-      text: 'Akshay sits nervously at his new workstation on his first day as an intern. Sameer arrives with hot ginger chai, discovers Akshay attempting to test an API through Google Chrome, and breaks into a warm smile before explaining how clients and servers really talk.',
-      src: day1ComicStripImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch01-day1-intern-comic-strip.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Three panel comic strip showing Akshay arriving nervously, receiving chai from Sameer, trying to type a URL into Chrome, and Sameer sketching the restaurant analogy.',
-      caption: 'The Day 1 Realization: Before you can test an API, you must know what happens behind the screen.',
-      points: [
-        'Panel 1: Akshay sits at his teak workstation desk with Nagara jali screens in the background, wondering where to begin.',
-        'Panel 2: Sameer arrives carrying two steaming glasses of cutting chai, welcoming Akshay to the backend engineering squad.',
-        'Panel 3: Akshay tries typing an API endpoint into Google Chrome; Sameer chuckles and sketches a dining table, waiter, and kitchen.'
-      ]
-    },
-    {
       type: 'storyboard',
       badge: 'COMIC SCENE 1 OF 4',
       title: 'Day 1 at the Desk: What is an API Anyway?',
@@ -176,7 +161,7 @@ export const lesson01 = {
           title: 'The Secret of the Waiter',
           time: '10:05 AM',
           image: s1p4Img,
-          scene: 'Sameer sketches a simple diagram in Akshay notebook showing a dining table, a waiter holding an order notepad, and a kitchen pantry.',
+          scene: 'Sameer stands at the modern office whiteboard with marker in hand, sketching three clean boxes for Customer, Waiter, and Kitchen.',
           dialogue: {
             speaker: 'Sameer',
             speech: 'When you sit at a dining table, do you walk into the kitchen pantry, chop onions, and light the stove yourself?',
@@ -233,7 +218,7 @@ export const lesson01 = {
           title: 'The Fancy Frame vs The Postcard',
           time: '10:30 AM',
           image: s2p1Img,
-          scene: 'Sameer points to a colorful university homepage on one screen and a black terminal window with raw text on the other screen.',
+          scene: 'Sameer points to a colorful university homepage on a laptop screen and a black terminal window with raw text on an adjacent monitor.',
           dialogue: {
             speaker: 'Sameer',
             speech: 'Look at this webpage, Akshay. The browser is like a decorator. It takes plain text and paints pretty CSS colors, fonts, and drop shadows around it like an ornate picture frame.',
@@ -259,7 +244,7 @@ export const lesson01 = {
           title: 'The Four Parts of an HTTP Packet',
           time: '11:10 AM',
           image: s2p3Img,
-          scene: 'Sameer opens a text editor and writes four simple labels: Method, Path, Headers, and Body.',
+          scene: 'Sameer points to a modern magnetic office whiteboard where four clean colored boxes represent Method, Path, Headers, and Body.',
           dialogue: {
             speaker: 'Sameer',
             speech: 'Every request traveling the wire has four simple parts: What action to take (Method), where to deliver it (Path), meta notes like language or format (Headers), and the payload package itself (Body).',
@@ -272,7 +257,7 @@ export const lesson01 = {
           title: 'The Challenge Accepted',
           time: '11:30 AM',
           image: s2p4Img,
-          scene: 'Akshay rolls up his kurta sleeves and places his hands on the keyboard with a bright grin.',
+          scene: 'Akshay rolls up his kurta sleeves and places his hands on the laptop keyboard with a bright grin.',
           dialogue: {
             speaker: 'Akshay',
             speech: 'I understand the theory now! But how do we actually create a waiter? Can we build our own server right now?',
@@ -355,6 +340,7 @@ export const lesson01 = {
         {
           title: 'The Missing Middleware Blooper',
           time: '01:35 PM',
+          image: s3p2Img,
           scene: 'Akshay writes app.post to register new courses, opens his terminal, and sends a test request. The terminal explodes with a bright red stack trace.',
           dialogue: {
             speaker: 'Akshay',
@@ -380,6 +366,7 @@ export const lesson01 = {
         {
           title: 'Holding Both Ends of the Wire',
           time: '02:00 PM',
+          image: s3p4Img,
           scene: 'Akshay looks at his terminal and editor side by side, his eyes wide with newfound understanding.',
           dialogue: {
             speaker: 'Akshay',
@@ -566,6 +553,7 @@ export const lesson01 = {
         {
           title: 'The Dangerous PUT vs PATCH Trap',
           time: '03:10 PM',
+          image: s4p2Img,
           scene: 'Akshay tries to mark a course as Inactive. He sends a PUT request with only { "status": "Inactive" }. Suddenly, the course title, department, and credits disappear!',
           dialogue: {
             speaker: 'Akshay',
@@ -815,16 +803,16 @@ export const lesson01 = {
       badge: 'COMIC STRIP · EMERGENCY CLIFFHANGER',
       title: 'The Crimson Strobe: Production Alarm Halts Orientation Eve',
       text: 'Akshay and Sameer celebrate their successful Day 1 training quest when suddenly an emergency pager alarm pierces the lab. The wall mounted operations monitor flashes in crimson red, displaying a critical 500 crash on the campus transit shuttle service and setting up the Chapter 2 mission.',
-      src: cliffhangerAlarmStripImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch01-cliffhanger-alarm-strip.jpg',
+      src: s5p3Img,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene5-panel3-modern-alarm-monitor.jpg',
       w: 1408,
       h: 768,
-      alt: 'Three panel comic strip showing Akshay and Sameer high fiving, a red warning strobe light flashing on the ceiling, and both engineers staring seriously at a flashing emergency monitor.',
+      alt: 'Scene panel showing Sameer and Akshay staring up at the large operations monitor glowing with a crimson red emergency alert.',
       caption: 'The Orientation Alarm: When production crashes, training ends and the real mission begins.',
       points: [
-        'Panel 1: Akshay and Sameer exchange high fives after mastering all five CRUD operations in the API Testing Workbench.',
-        'Panel 2: A sudden ceiling strobe flashes crimson red across the engineering lab, startling both engineers.',
-        'Panel 3: Sameer and Akshay stand side by side, staring at the critical 500 error alert on the transit shuttle monitor.'
+        'Sameer and Akshay stand side by side looking up at the large wall mounted operations monitor.',
+        'The operations monitor glows with a dramatic crimson red emergency alert casting across their focused faces.',
+        'Transit Shuttle Service 500 Internal Server Error warning flashes across the screen.'
       ]
     },
     {
