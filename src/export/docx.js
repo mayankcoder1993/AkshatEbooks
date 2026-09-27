@@ -16,7 +16,15 @@ async function blockToDocx(b) {
     case 'heading': return [h(b.text)]
     case 'paragraph': return [p(b.text)]
     case 'image': {
-      const data = await imageLoader(b.src, b);
+      const isSvg = b.file?.toLowerCase().endsWith('.svg') || (typeof b.src === 'string' && b.src.toLowerCase().includes('.svg'));
+      let data = null;
+      if (!isSvg) {
+        try {
+          data = await imageLoader(b.src, b);
+        } catch (e) {
+          data = null;
+        }
+      }
       const width = 560;
       const items = [];
       if (b.badge || b.title) {
@@ -28,15 +36,17 @@ async function blockToDocx(b) {
       if (b.paragraphs?.length) {
         b.paragraphs.forEach(pr => items.push(p(rich(pr))));
       }
-      items.push(new Paragraph({
-        alignment: AlignmentType.CENTER,
-        children: [new ImageRun({
-          data,
-          type: b.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
-          transformation: { width, height: Math.round(width * b.h / b.w) },
-          altText: { title: b.alt, description: b.alt, name: b.alt }
-        })]
-      }));
+      if (data) {
+        items.push(new Paragraph({
+          alignment: AlignmentType.CENTER,
+          children: [new ImageRun({
+            data,
+            type: b.file?.toLowerCase().endsWith('.png') ? 'png' : 'jpg',
+            transformation: { width, height: Math.round(width * (b.h || 768) / (b.w || 1408)) },
+            altText: { title: b.alt, description: b.alt, name: b.alt }
+          })]
+        }));
+      }
       if (b.caption) {
         items.push(p([new TextRun({ text: b.caption, italics: true, color: '5B6575', size: 19 })], { alignment: AlignmentType.CENTER }));
       }

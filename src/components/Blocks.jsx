@@ -244,7 +244,8 @@ function ComicWorkbench({
   dialogue = [],
   ide,
   workbench,
-  breakdown
+  breakdown,
+  svgScreen
 }) {
   return (
     <section className="comic-workbench-card">
@@ -279,7 +280,18 @@ function ComicWorkbench({
           </div>
         )}
 
-        {appType === 'ide' && ide && (
+        {svgScreen && (
+          <div className="comic-screen-mockup svg-screen-frame">
+            <img
+              src={svgScreen.src || svgScreen.file || svgScreen}
+              alt={svgScreen.alt || title || 'Workbench Screen'}
+              className="workbench-svg-image"
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        {appType === 'ide' && ide && !svgScreen && (
           <div className="comic-screen-mockup ide-screen">
             <div className="screen-titlebar ide-titlebar">
               <div className="window-dots">
@@ -296,7 +308,7 @@ function ComicWorkbench({
           </div>
         )}
 
-        {appType === 'api-workbench' && workbench && (
+        {appType === 'api-workbench' && workbench && !svgScreen && (
           <div className="comic-screen-mockup workbench-screen">
             <div className="screen-titlebar wb-titlebar">
               <div className="window-dots">

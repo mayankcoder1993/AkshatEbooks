@@ -4947,6 +4947,18 @@ body:has(.page.fullscreen-mode) .site-header,
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+.comic-screen-mockup.svg-screen-frame {
+  background: #ffffff;
+  padding: 0;
+  border: 1px solid #cbd5e1;
+}
+
+.workbench-svg-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .screen-titlebar {
   padding: 0.6rem 1rem;
   background: #0f172a;

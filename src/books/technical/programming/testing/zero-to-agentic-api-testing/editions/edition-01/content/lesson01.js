@@ -21,6 +21,12 @@ import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
 import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
+import flowSvg from '../assets/svgs/ch01-flow-http-transaction.svg'
+import serverIdeSvg from '../assets/svgs/ch01-workbench-server-ide.svg'
+import getMenuSvg from '../assets/svgs/ch01-workbench-get-menu.svg'
+import postMenuSvg from '../assets/svgs/ch01-workbench-post-menu.svg'
+import terminalServerSvg from '../assets/svgs/ch01-terminal-server.svg'
+
 export const lesson01 = {
   id: 'understanding-apis',
   icon: '',
@@ -86,51 +92,51 @@ export const lesson01 = {
           title: 'The Manual Routine',
           time: '09:15 AM',
           image: ch01Scene1Img,
-          scene: 'Akshay sits at his slim laptop workstation under warm sunlight, methodically checking green boxes on a printed regression sheet.',
+          scene: 'Akshay sits at his shared desk bay in the heritage engineering wing under warm morning sunlight, ticking the same regression checklist column he ticked yesterday.',
           dialogue: {
             speaker: 'Akshay',
-            speech: 'Forty one requests checked by hand. Forty one green rows. Exactly the same checklist as yesterday.'
+            speech: 'Forty one requests checked by hand. Forty one green ticks. Exactly the same checklist as yesterday.',
+            replySpeaker: 'Colleague',
+            replySpeech: 'That is the dream, no? Everything stays green.'
           },
           realization: 'Repetitive manual clicking gives an illusion of safety, but reveals nothing about why requests pass or fail.'
         },
         {
-          title: 'The Mentor Arrives',
-          time: '09:30 AM',
-          image: sameerRefImg,
-          scene: 'Sameer walks into the bay carrying two steaming glasses of cutting chai, stopping behind Akshay desk.',
+          title: 'The Pipeline Fear',
+          time: '09:28 AM',
+          image: akshayRefImg,
+          scene: 'Akshay looks at his checklist, then down at his phone under the desk, secretly searching for continuous integration terms he heard in morning standup.',
           dialogue: {
-            speaker: 'Sameer',
-            speech: 'Checking boxes on paper again, Akshay? Tell me: what did that last checkmark actually test on the physical wire?',
-            replySpeaker: 'Akshay',
-            replySpeech: 'The screen showed the course catalog without errors, so the feature works as intended.'
+            speaker: 'Akshay',
+            speech: 'If the dream is clicking the same button every sprint, why does everyone keep talking about pipeline gates and test runners?',
+            replySpeaker: 'Lead',
+            replySpeech: 'Akshay, the smoke suite needs automation before the campus migration next week.'
           },
-          realization: 'A green user interface tells you that pixels rendered, not that your backend data contracts are solid.'
+          realization: 'Manual testing cannot keep pace with distributed deployments; automated quality gates are essential.'
         },
         {
           title: 'The Browser Address Bar Trap',
           time: '09:42 AM',
-          image: akshayRefImg,
-          scene: 'Akshay types a URL into his browser address bar to show Sameer that the catalog endpoint responds with text.',
+          image: warRoomPanel2Img,
+          scene: 'Akshay opens his browser bar to test an endpoint URL, trying to prove the catalog service is healthy.',
           dialogue: {
             speaker: 'Akshay',
             speech: 'Look, I paste http://localhost:3000/courses right into the browser bar and press enter. It loads data instantly.',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Now use that address bar to create a new course. Or update a tuition fee. Or send an authorization bearer token.'
+            replySpeaker: 'Akshay',
+            replySpeech: 'Wait, how do I use this address bar to create a new course record or send a JSON body?'
           },
           realization: 'Web browsers only issue simple GET requests from their address bar; modern distributed systems require structured verbs and payloads.'
         },
         {
-          title: 'The Restaurant Mental Model',
-          time: '10:05 AM',
-          image: restaurantImg,
-          scene: 'Sameer sketches a three part diagram on the dry erase whiteboard: a customer at a table, a waiter holding an order pad, and a kitchen behind closed doors.',
+          title: 'The Reader Prediction',
+          time: '09:55 AM',
+          image: sameerRefImg,
+          scene: 'Akshay stares at the browser bar, noticing that typing a URL has strict protocol boundaries.',
           dialogue: {
-            speaker: 'Sameer',
-            speech: 'You are the customer. The database is the kitchen. You never walk into the kitchen to grab ingredients. You speak to the waiter.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'And the API is the waiter! It takes my structured request, carries it back, and returns the response.'
+            speaker: 'Akshay',
+            speech: 'The browser bar is convenient for browsing web pages, but it cannot carry request payloads or custom headers.'
           },
-          realization: 'An API acts as a formal messenger enforcing access boundaries between consumers and backends.'
+          realization: 'Before opening an API testing workbench, an engineer must understand what the browser bar cannot do.'
         }
       ]
     },
@@ -178,53 +184,73 @@ export const lesson01 = {
         {
           title: 'The Standoff at the Screen',
           time: '12:04 PM',
-          image: warRoomPanel2Img,
-          scene: 'A long line of hungry students forms behind the order kiosk. Akshay repeatedly taps the tablet screen, hoping the menu will reappear.',
+          image: warRoomPanel1Img,
+          scene: 'A long line of hungry students forms behind the order kiosk in the campus cafeteria. Akshay is on the phone to his colleague while the digital menu board remains frozen on yesterday specials.',
           dialogue: {
             speaker: 'Akshay',
-            speech: 'The tablet screen is completely frozen on yesterday menu. I restarted the kiosk app twice, but nothing changes!'
+            speech: 'It returns something. I think it works?',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Something is not a contract. Show me.'
           },
-          realization: 'Restarting a user interface does nothing when the underlying backend service is unreachable or broken.'
+          realization: 'A screen error is not always a client fault; the real failure lives across the network wire.'
         },
         {
           title: 'Holding the Physical Wire',
           time: '12:12 PM',
           image: ch01Scene2Img,
-          scene: 'Sameer steps forward, reaches beneath the kiosk counter, and points to a blue network cable plugged into the wall terminal.',
+          scene: 'In the lab, Sameer lifts a blue network cable plugged between workstations, pointing toward the server rack.',
           dialogue: {
             speaker: 'Sameer',
-            speech: 'Stop tapping the glass, Akshay. Does the menu live inside that screen, or does it live across this blue wire?',
+            speech: 'When you press the menu app, does the menu live inside that tablet?',
             replySpeaker: 'Akshay',
-            replySpeech: 'It lives in the campus dining database across the network. The tablet just displays what the network returns.'
+            replySpeech: 'No, it fetches it across the campus network. The tablet just displays what the network returns.'
           },
           realization: 'The user interface is merely a presentation mirror; the ground truth of system state lives on the network wire.'
         },
         {
-          title: 'Deconstructing the HTTP Packet',
-          time: '12:25 PM',
-          image: anatomyImg,
-          scene: 'Sameer draws an open envelope on his notepad, labeling four distinct compartments: Method, Path, Headers, and Body.',
+          title: 'The First Law of Distributed Objects',
+          time: '12:20 PM',
+          image: warRoomPanel3Img,
+          scene: 'Sameer slides a printout across the desk with a calm smile.',
           dialogue: {
             speaker: 'Sameer',
-            speech: 'Every request travelling this wire is a postcard in an envelope. Method and Path say what to do. Headers provide context. Body carries data.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'So when the kiosk queries the menu, it sends GET /menu HTTP/1.1 with accept headers, expecting a JSON list in return.'
+            speech: 'Pull up the First Law, it has saved me more weekends than chai. Never assume the thing you call is in the same room as your data.',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Every network call can fail. Now build me the other side of the conversation.'
           },
-          realization: 'HTTP transactions are plain, structured text messages composed of request lines, headers, and payloads.'
+          realization: 'Local calls in memory never drop packets; distributed calls cross fallible networks and must be verified.'
         },
         {
-          title: 'Preparing for First Principles',
-          time: '12:40 PM',
-          image: warRoomPanel4Img,
-          scene: 'Akshay rolls up his sleeves with a determined expression, opening his terminal and API Testing Workbench.',
+          title: 'The Postcard in an Envelope & The Waiter Model',
+          time: '12:35 PM',
+          image: restaurantImg,
+          scene: 'Sameer draws an open envelope on the whiteboard, sketching four compartments: Method, Path, Headers, and Body.',
           dialogue: {
-            speaker: 'Akshay',
-            speech: 'I want to see the raw conversation. How do I inspect the packets without the kiosk UI getting in the way?',
-            replySpeaker: 'Sameer',
-            replySpeech: 'By sending the requests yourself using an API Testing Workbench, and then building the server that answers them.'
+            speaker: 'Sameer',
+            speech: 'You are the customer. The database is the kitchen. You never enter the kitchen directly. You speak to the waiter.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'And the API is the waiter! It carries my structured order, hands it to the kitchen, and brings back the meal.'
           },
-          realization: 'To master API engineering, you must inspect the wire directly without client UI distortions.'
+          realization: 'An API acts as a formal messenger enforcing access boundaries between consumers and backends.'
         }
+      ]
+    },
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'VECTOR WIRE BLUEPRINT',
+      title: 'HTTP Wire Architecture: Client to Backend Lifecycle',
+      text: 'The full journey of an HTTP wire transaction: from client serialization across network sockets to middleware stream buffering and port binding on the backend.',
+      src: flowSvg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-flow-http-transaction.svg',
+      w: 900,
+      h: 320,
+      alt: 'Vector diagram showing Client environment, physical TCP stream buffering, and Express backend on port 3000.',
+      caption: 'HTTP Wire Architecture: How serialized byte chunks cross the wire to port 3000.',
+      points: [
+        'Client Environment: Generates HTTP verb and serialized JSON payload.',
+        'Network Wire: Transmits discrete TCP byte buffers across physical network interfaces.',
+        'Backend Service: express.json middleware buffers incoming stream chunks before route handlers execute.'
       ]
     },
     {
@@ -234,28 +260,11 @@ export const lesson01 = {
       output: ['Wire Response', '200 OK with Content-Type application/json array']
     },
     {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'CORE CONCEPT',
-      title: 'The Restaurant Analogy: Customer, Waiter API, and Kitchen Backend',
-      text: 'To understand APIs from first principles, imagine a dining room. The customer cannot enter the kitchen to inspect raw pots or cook food directly. The waiter takes the customer order, delivers it to the kitchen in standard terms, and returns with the finished meal.',
-      src: restaurantImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-concept-restaurant.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Pedagogical diagram showing Customer (Client UI), Waiter (API Interface), and Kitchen (Backend Database).',
-      caption: 'The Restaurant Mental Model: APIs act as protocol waiters facilitating secure, structured service exchange.',
-      points: [
-        'Customer (Client UI): Requests items from the menu without needing to know kitchen recipes or refrigerator organization.',
-        'Waiter (The API): Delivers requests in an agreed protocol format and returns results or error notifications.',
-        'Kitchen (Backend Database): Prepares data, applies business logic rules, and maintains durable state.'
-      ]
-    },
-    {
       type: 'comic-workbench',
       badge: 'COMIC WORKBENCH · WIRE AUDIT',
       title: 'Auditing the Menu GET Wire Transaction',
       appType: 'api-workbench',
+      svgScreen: getMenuSvg,
       dialogue: [
         {
           speaker: 'Sameer',
@@ -337,8 +346,8 @@ export const lesson01 = {
         {
           title: 'The Two Ends of the Wire',
           time: '02:15 PM',
-          image: warRoomPanel3Img,
-          scene: 'Sameer pulls up a split screen on his workstation monitor. On the left is an empty code editor file named server.js; on the right is a dark terminal prompt.',
+          image: warRoomPanel4Img,
+          scene: 'Sameer pulls up a split screen on his monitor: an empty file named server.js on the left and a dark terminal on the right.',
           dialogue: {
             speaker: 'Sameer',
             speech: 'Before you can test someone else code, you must hold both ends of the wire in your own hands.',
@@ -351,7 +360,7 @@ export const lesson01 = {
           title: 'Assembling Express on Port 3000',
           time: '02:30 PM',
           image: serverAnatomyImg,
-          scene: 'Akshay types the initial Express setup lines into server.js under Sameer watchful eye.',
+          scene: 'Akshay types the initial setup lines into server.js under Sameer watchful eye.',
           dialogue: {
             speaker: 'Akshay',
             speech: 'We import express, create the app instance, and listen on port 3000.',
@@ -364,7 +373,7 @@ export const lesson01 = {
           title: 'The Undefined Body Crash',
           time: '02:48 PM',
           image: ch01Scene3Img,
-          scene: 'Akshay triggers a POST request to add a new course, but the Node console flashes a red stack trace.',
+          scene: 'Akshay triggers a POST request to add a new course, but the terminal flashes a red error stack trace.',
           dialogue: {
             speaker: 'Akshay',
             speech: 'TypeError: Cannot read properties of undefined! But I sent a valid JSON body!',
@@ -374,19 +383,73 @@ export const lesson01 = {
           realization: 'HTTP request bodies arrive as raw TCP binary streams; middleware must buffer and parse them into objects.'
         },
         {
-          title: 'Mounting express.json Middleware',
+          title: 'Mounting express.json & Challenge Reveal',
           time: '03:05 PM',
-          image: warRoomPanel4Img,
+          image: warRoomPanel3Img,
           scene: 'Akshay adds app.use(express.json()) at the top of server.js and restarts the process. The terminal confirms healthy startup.',
           dialogue: {
             speaker: 'Akshay',
-            speech: 'It worked! req.body now contains the parsed course object and returns 201 Created.',
+            speech: 'Wait, when I tried to submit a course from the browser bar earlier, it ignored the body and sent a GET!',
             replySpeaker: 'Sameer',
-            replySpeech: 'Remember that moment. Half of all junior API bugs are missing stream parsers.'
+            replySpeech: 'Because the address bar speaks exactly one dialect: GET with no body. That is why we use an API Testing Workbench.'
           },
           realization: 'Middleware sits directly in the request path, transforming raw wire bytes before route handlers run.'
         }
       ]
+    },
+    {
+      type: 'comic-workbench',
+      badge: 'COMIC WORKBENCH · CODE IMPLEMENTATION',
+      title: 'Constructing server.js in the IDE',
+      appType: 'ide',
+      svgScreen: serverIdeSvg,
+      dialogue: [
+        {
+          speaker: 'Sameer',
+          role: 'Staff Architect',
+          text: 'An API server is simply a program listening on a TCP port, parsing incoming bytes, and sending structured text back.',
+          pointer: 'app.listen(3000)'
+        },
+        {
+          speaker: 'Akshay',
+          role: 'Hero',
+          text: 'I imported express, mounted the JSON middleware, and registered both GET and POST routes on /courses.',
+          pointer: 'app.use(express.json())'
+        }
+      ],
+      ide: {
+        filename: 'server.js',
+        status: 'Active · Node.js v22',
+        code: `import express from 'express'
+
+const app = express()
+app.use(express.json())
+
+const courses = [
+  { code: 'CS101', title: 'Foundations of Computer Systems', department: 'Computer Science', credits: 4, status: 'Active' },
+  { code: 'CS204', title: 'Data Structures and Algorithms', department: 'Computer Science', credits: 4, status: 'Active' }
+]
+
+app.get('/courses', (req, res) => {
+  res.status(200).json({ total: courses.length, courses })
+})
+
+app.post('/courses', (req, res) => {
+  const newCourse = req.body
+  courses.push(newCourse)
+  res.status(201).json({ message: 'Course successfully registered', course: newCourse })
+})
+
+app.listen(3000, () => {
+  console.log('Apex Campus Catalog Service live on port 3000')
+})`
+      },
+      breakdown: {
+        input: 'Node server.js executed in the terminal.',
+        explanation: 'The Node.js process binds to port 3000, initializes the in memory courses array, and waits for incoming HTTP TCP connections.',
+        output: 'Terminal logs confirmation: Apex Campus Catalog Service live on port 3000.',
+        trapAndFix: 'Senior Savior Trap: Forgetting app.use(express.json()) causes req.body to remain undefined on POST requests. Golden Rule: Express readable streams require explicit body parsing middleware to reconstruct JSON objects from network buffers.'
+      }
     },
     {
       type: 'blueprint',
@@ -615,77 +678,6 @@ export const lesson01 = {
       ]
     },
     {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'SERVER MECHANICS',
-      title: 'Express Server Code Anatomy: The Request Lifecycle in Node.js',
-      text: 'A web server is a program that binds to a TCP port, listens for incoming connections, executes middleware transformations, matches request paths against routes, and writes serialized responses back to the socket.',
-      src: serverAnatomyImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/express-server-code-anatomy.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Code anatomy breakdown of server.js showing import express, express.json middleware, route handlers, and app.listen.',
-      caption: 'Express Server Anatomy: Port listener, middleware pipeline, and route handler dispatch.',
-      points: [
-        'Port Binding: app.listen(3000) opens a network socket on port 3000, waiting for TCP client handshakes.',
-        'Middleware Pipeline: app.use(express.json()) intercepts incoming binary chunks and parses them into req.body.',
-        'Route Dispatcher: app.get and app.post match URL paths to JavaScript callback functions.'
-      ]
-    },
-    {
-      type: 'comic-workbench',
-      badge: 'COMIC WORKBENCH · CODE IMPLEMENTATION',
-      title: 'Constructing server.js in the IDE',
-      appType: 'ide',
-      dialogue: [
-        {
-          speaker: 'Sameer',
-          role: 'Staff Architect',
-          text: 'An API server is simply a program listening on a TCP port, parsing incoming bytes, and sending structured text back.',
-          pointer: 'app.listen(3000)'
-        },
-        {
-          speaker: 'Akshay',
-          role: 'Hero',
-          text: 'I imported express, mounted the JSON middleware, and registered both GET and POST routes on /courses.',
-          pointer: 'app.use(express.json())'
-        }
-      ],
-      ide: {
-        filename: 'server.js',
-        status: 'Active · Node.js v22',
-        code: `import express from 'express'
-
-const app = express()
-app.use(express.json())
-
-const courses = [
-  { code: 'CS101', title: 'Foundations of Computer Systems', department: 'Computer Science', credits: 4, status: 'Active' },
-  { code: 'CS204', title: 'Data Structures and Algorithms', department: 'Computer Science', credits: 4, status: 'Active' }
-]
-
-app.get('/courses', (req, res) => {
-  res.status(200).json({ total: courses.length, courses })
-})
-
-app.post('/courses', (req, res) => {
-  const newCourse = req.body
-  courses.push(newCourse)
-  res.status(201).json({ message: 'Course successfully registered', course: newCourse })
-})
-
-app.listen(3000, () => {
-  console.log('Apex Campus Catalog Service live on port 3000')
-})`
-      },
-      breakdown: {
-        input: 'Node server.js executed in the terminal.',
-        explanation: 'The Node.js process binds to port 3000, initializes the in memory courses array, and waits for incoming HTTP TCP connections.',
-        output: 'Terminal logs confirmation: Apex Campus Catalog Service live on port 3000.',
-        trapAndFix: 'Senior Savior Trap: Forgetting app.use(express.json()) causes req.body to remain undefined on POST requests. Golden Rule: Express readable streams require explicit body parsing middleware to reconstruct JSON objects from network buffers.'
-      }
-    },
-    {
       type: 'triage',
       title: 'The Undefined Body Incident Triage',
       scenario: 'Akshay sends a POST request with body { "code": "CS102", "title": "Discrete Mathematics" } to /courses. The server crashes with TypeError: Cannot read properties of undefined. What is the root cause in server.js?',
@@ -715,9 +707,9 @@ app.listen(3000, () => {
           scene: 'Akshay opens the API Testing Workbench, configuring tabs for POST, GET, PUT, PATCH, and DELETE against the local catalog service.',
           dialogue: {
             speaker: 'Akshay',
-            speech: 'POST creates a resource. GET retrieves it. But what is the exact difference between PUT and PATCH?',
+            speech: 'Create, read, update, patch, delete. Five moves, any service.',
             replySpeaker: 'Sameer',
-            replySpeech: 'PUT replaces the entire document. PATCH applies a surgical delta to specific attributes.'
+            replySpeech: 'Five moves, yes. Any service? Ask the mainframe team how their moves reply. CRUD is universal vocabulary; dialects differ.'
           },
           realization: 'HTTP verbs have precise architectural contracts; choosing the wrong verb causes silent data bugs.'
         },
@@ -730,7 +722,7 @@ app.listen(3000, () => {
             speaker: 'Akshay',
             speech: 'The department and credits are gone! The server replaced the whole object with my single field!',
             replySpeaker: 'Sameer',
-            replySpeech: 'That is the PUT contract in action. If you only want to update status, use PATCH.'
+            replySpeech: 'That is the PUT contract in action. Think of a brass thali plate. PUT swaps out the whole plate; PATCH just refills one bowl.'
           },
           realization: 'PUT is complete resource replacement; PATCH is partial modification.'
         },
@@ -761,6 +753,52 @@ app.listen(3000, () => {
           realization: 'The transition from manual tester to wire auditor begins with understanding first principles.'
         }
       ]
+    },
+    {
+      type: 'comic-workbench',
+      badge: 'COMIC WORKBENCH · CRUD AUDIT',
+      title: 'Auditing Course Creation with POST',
+      appType: 'api-workbench',
+      svgScreen: postMenuSvg,
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Hero',
+          text: 'POST /catalog returned 201 Created in 24 milliseconds, and the response echoed the saved object with its new ID!',
+          pointer: 'Status 201 Created'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Staff Architect',
+          text: 'Notice that POST is non idempotent. If you click Send three times, you create three separate courses in the database.',
+          pointer: 'Non idempotent POST semantics'
+        }
+      ],
+      workbench: {
+        method: 'POST',
+        url: 'http://localhost:3000/catalog',
+        headers: {
+          'Host': 'localhost:3000',
+          'Content-Type': 'application/json'
+        },
+        body: `{
+  "title": "Algorithms and Architecture",
+  "seats": 25
+}`,
+        responseStatus: '201 Created',
+        responseTime: '24 ms',
+        responseBody: `{
+  "id": 103,
+  "title": "Algorithms and Architecture",
+  "seats": 25
+}`
+      },
+      breakdown: {
+        input: 'POST /catalog carrying JSON body { "title": "Algorithms and Architecture", "seats": 25 }.',
+        explanation: 'Headers declare Content-Type application/json. express.json buffers the TCP socket chunks, reassembles the string, parses the object into req.body, and the route handler pushes to catalog array.',
+        output: '201 Created with echoed object including newly assigned identifier 103.',
+        trapAndFix: 'Senior Savior Trap: Testing only happy path 200 GET requests and skipping POST body serialization checks. Golden Rule: Always verify that your client sets Content-Type application/json when dispatching request payloads.'
+      }
     },
     {
       type: 'image',
