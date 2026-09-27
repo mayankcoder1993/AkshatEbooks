@@ -1,5 +1,5 @@
 /* ============================================================
-   Sarva Gyana Koshah Books — global styles
+   Sarva Gyana Koshah Books: global styles
    Themes via CSS variables; print forces light + content only.
    ============================================================ */
 
@@ -4709,8 +4709,9 @@ body:has(.page.fullscreen-mode) .site-header,
 
 .panel-art-image {
   width: 100%;
-  height: 260px;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
   display: block;
 }
 
@@ -5095,6 +5096,9 @@ body:has(.page.fullscreen-mode) .site-header,
   font-size: 0.85rem;
   line-height: 1.55;
   overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
   color: #e2e8f0;
 }
 
@@ -5103,6 +5107,7 @@ body:has(.page.fullscreen-mode) .site-header,
   align-items: center;
   gap: 0.65rem;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .http-verb-badge {
@@ -5124,11 +5129,13 @@ body:has(.page.fullscreen-mode) .site-header,
   font-size: 0.85rem;
   color: #f1f5f9;
   font-weight: 600;
+  word-break: break-all;
 }
 
 .wb-headers-pane, .wb-body-pane, .wb-response-pane {
   padding: 0.75rem 1rem;
   border-top: 1px solid #334155;
+  min-width: 0;
 }
 
 .pane-label, .response-label {
@@ -5144,9 +5151,12 @@ body:has(.page.fullscreen-mode) .site-header,
 .pane-content, .response-body-content {
   margin: 0;
   font-family: var(--font-mono, monospace);
-  font-size: 0.82rem;
-  line-height: 1.45;
+  font-size: 0.84rem;
+  line-height: 1.5;
   color: #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
   overflow-x: auto;
 }
 
@@ -5259,6 +5269,97 @@ body:has(.page.fullscreen-mode) .site-header,
     color: #0f172a;
   }
 }
+
+/* ========================================================================= */
+/* UNIFIED COMIC STORY CELL & RESPONSIVE WORKBENCH                           */
+/* ========================================================================= */
+
+.comic-story-cell {
+  background: #ffffff;
+  border: 2px solid #0f172a;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.75rem 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.comic-context-bar {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 0.65rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.comic-context-badge {
+  background: #0284c7;
+  color: #ffffff;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-right: 0.5rem;
+}
+
+.comic-context-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.comic-context-time {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.comic-takeaway-bar {
+  background: #f8fafc;
+  border-top: 1.5px solid #cbd5e1;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  color: #334155;
+  line-height: 1.45;
+}
+
+.comic-takeaway-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.wb-grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  border-bottom: 1px solid #cbd5e1;
+  background: #ffffff;
+}
+
+.wb-col {
+  padding: 1.25rem;
+  min-width: 0;
+}
+
+.wb-col-input {
+  background: #ffffff;
+  border-right: 1px solid #cbd5e1;
+}
+
+@media (max-width: 780px) {
+  .wb-col-input {
+    border-right: none;
+    border-bottom: 1px solid #cbd5e1;
+  }
+}
+
+.wb-col-output {
+  background: #f8fafc;
+}
+
 
 
 

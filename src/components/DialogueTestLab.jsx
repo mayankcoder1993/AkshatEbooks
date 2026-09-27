@@ -3,12 +3,12 @@ import cableImage from '../books/technical/programming/testing/zero-to-agentic-a
 
 export default function DialogueTestLab({ onBackToBook }) {
   const [previewWidth, setPreviewWidth] = useState('100%')
-  const [workbenchLayout, setWorkbenchLayout] = useState('auto') // 'auto', 'stacked', 'split'
+  const [workbenchLayout, setWorkbenchLayout] = useState('sequential') // 'sequential' (default full width), 'split'
 
   const sameerShort = 'Does the menu live inside that tablet?'
   const akshayShort = 'No, it fetches it across the campus network.'
 
-  const isStacked = workbenchLayout === 'stacked' || previewWidth === '480px' || (workbenchLayout === 'auto' && previewWidth === '840px')
+  const isSplit = workbenchLayout === 'split' && previewWidth === '100%'
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '1.5rem 1rem', fontFamily: 'system-ui, -apple-system, sans-serif', color: '#1e293b' }}>
@@ -61,24 +61,18 @@ export default function DialogueTestLab({ onBackToBook }) {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#475569' }}>Workbench Mode:</span>
+            <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#475569' }}>Workbench Layout:</span>
             <button
-              onClick={() => setWorkbenchLayout('auto')}
-              style={{ padding: '0.3rem 0.7rem', borderRadius: '4px', border: workbenchLayout === 'auto' ? '2px solid #059669' : '1px solid #cbd5e1', background: workbenchLayout === 'auto' ? '#dcfce7' : '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.78rem' }}
+              onClick={() => setWorkbenchLayout('sequential')}
+              style={{ padding: '0.3rem 0.7rem', borderRadius: '4px', border: workbenchLayout === 'sequential' ? '2px solid #059669' : '1px solid #cbd5e1', background: workbenchLayout === 'sequential' ? '#dcfce7' : '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.78rem' }}
             >
-              ⚙️ Auto Adaptive
+              ⊟ Full-Width Sequential (Recommended)
             </button>
             <button
               onClick={() => setWorkbenchLayout('split')}
               style={{ padding: '0.3rem 0.7rem', borderRadius: '4px', border: workbenchLayout === 'split' ? '2px solid #059669' : '1px solid #cbd5e1', background: workbenchLayout === 'split' ? '#dcfce7' : '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.78rem' }}
             >
-              ⊞ Side-by-Side
-            </button>
-            <button
-              onClick={() => setWorkbenchLayout('stacked')}
-              style={{ padding: '0.3rem 0.7rem', borderRadius: '4px', border: workbenchLayout === 'stacked' ? '2px solid #059669' : '1px solid #cbd5e1', background: workbenchLayout === 'stacked' ? '#dcfce7' : '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.78rem' }}
-            >
-              ⊟ Stacked (Full Width)
+              ⊞ Side-by-Side Split
             </button>
           </div>
         </div>

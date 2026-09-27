@@ -33,6 +33,34 @@ Never skipped. Never abbreviated. Never created after content begins.
 
 ---
 
+## The Comic Story Cell Standard Architecture
+
+Every comic beat in every SGK book must follow the unified 4-layer sandwich standard:
+
+1. TOP CONTEXT BAR:
+   A clean dark navy header bar outside the art containing:
+   - Panel badge (e.g. PANEL 1, PANEL 2)
+   - Scene beat title in uppercase
+   - Narrative timestamp and physical setting
+   This ensures setting context without placing text labels over illustration pixels.
+
+2. NEGATIVE SPACE SPEECH CLOUDS:
+   Speech balloons must NEVER cover character faces, eyes, hands, or focal tools:
+   - Clouds are constrained to <= 28 percent container width.
+   - Pinned strictly in verified empty negative spaces (e.g. upper outer wall corners, ceiling margins above equipment).
+   - Styled with speaker badges, avatar icons, colored borders, and directional pointer tails angling toward character mouths.
+   - Pacing constraint: Short, punchy lines only (under 15 words per cloud). If a character has more to say, split into a subsequent beat or reaction panel.
+
+3. 100 PERCENT UNCROPPED 16:9 ARTWORK:
+   - Every illustration rendered with aspect-ratio: 16 / 9 and height: auto.
+   - Zero fixed-height clipping or object-fit: cover cropping.
+
+4. BOTTOM GROUNDING STRIP:
+   - A light slate takeaway box beneath the artwork.
+   - Summarizes the core physical principle, engineering insight, or lesson realization before advancing to the next beat.
+
+---
+
 ## Content Type Tagging System
 
 Before designing any scene beat, the Creative Director Agent

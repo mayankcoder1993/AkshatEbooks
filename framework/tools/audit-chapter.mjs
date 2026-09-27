@@ -45,10 +45,28 @@ let chapterData = null
 
 function parseJsChapterFallback(content) {
   const blocks = []
-  const blockTypePattern = /type:\s*['"]([a-zA-Z0-9_-]+)['"]/g
-  let match
-  while ((match = blockTypePattern.exec(content)) !== null) {
-    blocks.push({ type: match[1] })
+  const blockMatches = content.split(/\{\s*type:\s*['"]/)
+  for (let i = 1; i < blockMatches.length; i++) {
+    const chunk = blockMatches[i]
+    const typeMatch = chunk.match(/^([a-zA-Z0-9_-]+)['"]/)
+    if (typeMatch) {
+      const type = typeMatch[1]
+      const block = { type }
+      if (chunk.includes('breakdown:')) {
+        block.breakdown = true
+      }
+      if (chunk.includes('realization:')) {
+        block.panels = [{ realization: true }]
+      }
+      blocks.push(block)
+    }
+  }
+  if (blocks.length === 0) {
+    const blockTypePattern = /type:\s*['"]([a-zA-Z0-9_-]+)['"]/g
+    let match
+    while ((match = blockTypePattern.exec(content)) !== null) {
+      blocks.push({ type: match[1] })
+    }
   }
   return { blocks, rawContent: content }
 }
@@ -117,7 +135,7 @@ try {
 // ─── BLOCK TYPE CATEGORISATION ──────────────────────────────
 
 const VISUAL_BLOCKS = new Set([
-  'scene-panel', 'action-beat', 'cliffhanger-panel', 'character-scene', 'storyboard', 'image'
+  'scene-panel', 'action-beat', 'cliffhanger-panel', 'character-scene', 'storyboard', 'image', 'flow', 'blueprint'
 ])
 const DIALOGUE_BLOCKS = new Set([
   'dialogue-exchange', 'thought-bubble'

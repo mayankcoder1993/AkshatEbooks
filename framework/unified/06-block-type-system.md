@@ -173,6 +173,39 @@ Technical constraint: Never use fuzzy bitmap screenshots.
   Never reference trademarked software names.
   Always use SVG templates from the framework templates folder.
 
+The Programming Screen Working Way (Universal Architecture):
+  Every programming workbench must provide dedicated breathing room for
+  Input, Processing, Output, and Explanation to guarantee zero cropping across
+  both Web View and Book View:
+
+  1. DEDICATED INPUT PANE:
+     - Method badge and full target URL.
+     - Formatted request payload or chunked source code.
+     - Code containers must enforce `white-space: pre-wrap` and `word-break: break-word`
+       so lines never clip or require horizontal scrolling that blows out margins.
+
+  2. WIRE PROCESSING MONITOR:
+     - Clear visual steps: TCP socket handshake, middleware stream buffering,
+       route execution.
+     - Teaches the runtime mechanism between client input and server response.
+
+  3. DETERMINISTIC OUTPUT PANE:
+     - Prominent HTTP status pill (e.g. 200 OK, 201 Created) with latency and size.
+     - Formatted response JSON payload or terminal stdout stream with auto-wrapping.
+
+  4. CHUNKED CODE BREAKDOWN:
+     - Never present monolithic walls of code.
+     - Break implementations into discrete chunks with line callouts (`👉`).
+
+  5. SENIOR SAVIOR QUAD EMBED:
+     - Every workbench is anchored by a Senior Savior card detailing the specific
+       Trap avoided and the memorable Golden Rule.
+
+  6. RESPONSIVE CONTAINER SAFETY:
+     - Use CSS Grid with `min-width: 0` on all columns to prevent container blowouts.
+     - On viewport widths below 840px (including iframe preview panes and print views),
+       the workbench automatically stacks Input above Output in full-width sequential flow.
+
 ---
 
 ### BLOCK TYPE: quad-card
