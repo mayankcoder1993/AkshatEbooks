@@ -10,10 +10,10 @@ import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
 import day1ComicStripImg from '../assets/ch01-day1-intern-comic-strip.jpg'
 import cliffhangerAlarmStripImg from '../assets/ch01-cliffhanger-alarm-strip.jpg'
 
-import s1p1Img from '../assets/illustrations/ch01-scene1-akshay-arrival.jpg'
-import s1p2Img from '../assets/illustrations/ch01-scene1-sameer-chai.jpg'
+import s1p1Img from '../assets/illustrations/ch01-scene1-akshay-modern-laptop.jpg'
+import s1p2Img from '../assets/illustrations/ch01-scene1-sameer-chai-modern.jpg'
 import s1p3Img from '../assets/illustrations/ch01-scene1-akshay-chrome.jpg'
-import s1p4Img from '../assets/illustrations/ch01-scene1-sameer-restaurant-sketch.jpg'
+import s1p4Img from '../assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg'
 
 import s2p1Img from '../assets/illustrations/ch01-scene2-panel1-frame-vs-terminal.jpg'
 import s2p2Img from '../assets/illustrations/ch01-scene2-panel2-lifting-the-wire.jpg'
