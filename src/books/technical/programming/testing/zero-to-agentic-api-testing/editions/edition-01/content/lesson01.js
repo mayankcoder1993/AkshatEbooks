@@ -10,6 +10,20 @@ import putPatchDeleteImg from '../assets/put-patch-delete-comparison.jpg'
 import day1ComicStripImg from '../assets/ch01-day1-intern-comic-strip.jpg'
 import cliffhangerAlarmStripImg from '../assets/ch01-cliffhanger-alarm-strip.jpg'
 
+import s1p1Img from '../assets/illustrations/ch01-scene1-akshay-arrival.jpg'
+import s1p2Img from '../assets/illustrations/ch01-scene1-sameer-chai.jpg'
+import s1p3Img from '../assets/illustrations/ch01-scene1-akshay-chrome.jpg'
+import s1p4Img from '../assets/illustrations/ch01-scene1-sameer-restaurant-sketch.jpg'
+
+import s2p1Img from '../assets/illustrations/ch01-scene2-panel1-frame-vs-terminal.jpg'
+import s2p2Img from '../assets/illustrations/ch01-scene2-panel2-lifting-the-wire.jpg'
+import s2p3Img from '../assets/illustrations/ch01-scene2-panel3-http-packet-postal.jpg'
+import s2p4Img from '../assets/illustrations/ch01-scene2-panel4-akshay-ready.jpg'
+
+import s3p1Img from '../assets/illustrations/ch01-scene3-panel1-akshay-coding.jpg'
+import s3p3Img from '../assets/illustrations/ch01-scene3-panel3.jpg'
+import s4p4Img from '../assets/illustrations/ch01-scene4-panel4.jpg'
+
 const serverCodeLines = [
   "import express from 'express'",
   "",
@@ -124,6 +138,7 @@ export const lesson01 = {
         {
           title: 'The First Assignment',
           time: '09:30 AM',
+          image: s1p1Img,
           scene: 'Akshay sits nervously at his new teak desk beneath geometric morning sunlight filtering through a carved stone jali screen. Sameer walks over holding two glasses of hot ginger chai.',
           dialogue: {
             speaker: 'Sameer',
@@ -136,6 +151,7 @@ export const lesson01 = {
         {
           title: 'The Google Chrome Experiment',
           time: '09:45 AM',
+          image: s1p3Img,
           scene: 'Akshay opens Google Chrome on his laptop, stares at the blank search bar, and types in the local campus course URL, hitting Enter with high hopes.',
           dialogue: {
             speaker: 'Akshay',
@@ -146,6 +162,7 @@ export const lesson01 = {
         {
           title: 'Sameer Warm Laugh',
           time: '09:50 AM',
+          image: s1p2Img,
           scene: 'Sameer chuckles warmly and pulls up a wooden chair beside Akshay, placing his tea glass on a copper coaster.',
           dialogue: {
             speaker: 'Sameer',
@@ -158,6 +175,7 @@ export const lesson01 = {
         {
           title: 'The Secret of the Waiter',
           time: '10:05 AM',
+          image: s1p4Img,
           scene: 'Sameer sketches a simple diagram in Akshay notebook showing a dining table, a waiter holding an order notepad, and a kitchen pantry.',
           dialogue: {
             speaker: 'Sameer',
@@ -214,6 +232,7 @@ export const lesson01 = {
         {
           title: 'The Fancy Frame vs The Postcard',
           time: '10:30 AM',
+          image: s2p1Img,
           scene: 'Sameer points to a colorful university homepage on one screen and a black terminal window with raw text on the other screen.',
           dialogue: {
             speaker: 'Sameer',
@@ -226,6 +245,7 @@ export const lesson01 = {
         {
           title: 'Why Engineers Say On The Wire',
           time: '10:45 AM',
+          image: s2p2Img,
           scene: 'Sameer lifts a blue Ethernet network cable running from the desk socket into the workstation tower.',
           dialogue: {
             speaker: 'Sameer',
@@ -238,6 +258,7 @@ export const lesson01 = {
         {
           title: 'The Four Parts of an HTTP Packet',
           time: '11:10 AM',
+          image: s2p3Img,
           scene: 'Sameer opens a text editor and writes four simple labels: Method, Path, Headers, and Body.',
           dialogue: {
             speaker: 'Sameer',
@@ -250,6 +271,7 @@ export const lesson01 = {
         {
           title: 'The Challenge Accepted',
           time: '11:30 AM',
+          image: s2p4Img,
           scene: 'Akshay rolls up his kurta sleeves and places his hands on the keyboard with a bright grin.',
           dialogue: {
             speaker: 'Akshay',
@@ -320,6 +342,7 @@ export const lesson01 = {
         {
           title: 'Writing the First Five Lines',
           time: '01:15 PM',
+          image: s3p1Img,
           scene: 'Akshay creates a new file named server.js in his code workspace, typing out the Express import and initial course data array.',
           dialogue: {
             speaker: 'Akshay',
@@ -344,6 +367,7 @@ export const lesson01 = {
         {
           title: 'Mounting express.json',
           time: '01:45 PM',
+          image: s3p3Img,
           scene: 'Sameer points to the top of server.js with a smile. Akshay types app.use(express.json()) and restarts the server.',
           dialogue: {
             speaker: 'Sameer',
@@ -564,16 +588,17 @@ export const lesson01 = {
           realization: 'Different API styles solve different enterprise trade offs; all of them travel across HTTP.'
         },
         {
-          title: 'The Emergency Strobe Alarm',
-          time: '04:45 PM',
-          scene: 'Akshay leans back, celebrating his mastery of all five CRUD operations. Suddenly, a piercing emergency pager alarm shrills across the room, and the operations monitor flashes crimson red!',
+          title: 'The First Milestone Achieved',
+          time: '04:35 PM',
+          image: s4p4Img,
+          scene: 'Akshay celebrates mastering all five CRUD operations with Sameer beside a traditional brass diya lamp.',
           dialogue: {
             speaker: 'Akshay',
-            speech: 'Sameer, what is that sound?! The wall monitor is flashing red: Transit Shuttle Service 500 Internal Server Error!',
+            speech: 'Every request is green, Sameer! I can read, write, update, and inspect responses directly on the wire!',
             replySpeaker: 'Sameer',
-            replySpeech: 'Orientation begins tomorrow morning, and our student transit tracker just crashed in production. Grab your laptop, Akshay. Tomorrow, our real mission begins!'
+            replySpeech: 'You have earned your first milestone, Akshay. You are now officially a wire apprentice!'
           },
-          realization: 'A software engineer training is tested the moment production breaks.'
+          realization: 'Consistent practice across all five operations builds true technical intuition.'
         }
       ]
     },

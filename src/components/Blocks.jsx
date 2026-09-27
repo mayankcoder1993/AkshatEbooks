@@ -399,21 +399,31 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
               {p.time && <span className="panel-time-tag">{p.time}</span>}
             </div>
             <div className="panel-card-body">
+              {p.image && (
+                <div className="panel-artwork-box">
+                  <img src={p.image} alt={p.title || `Panel ${idx + 1}`} className="panel-artwork-img" />
+                </div>
+              )}
               <div className="panel-scene-box">
                 <span className="panel-label">Scene & Action:</span>
                 <p className="panel-scene-text"><RichText text={p.scene} /></p>
               </div>
               {p.dialogue && (
-                <div className="panel-dialogue-box">
-                  <span className="panel-label">Dialogue:</span>
-                  <div className="panel-dialogue-line">
-                    <strong className="dialogue-speaker">{p.dialogue.speaker}:</strong>
-                    <span className="dialogue-quote">"{p.dialogue.speech}"</span>
+                <div className="panel-comic-dialogue-wrap">
+                  <div className="panel-comic-balloon">
+                    <div className="balloon-speaker-tag">
+                      <span className="speaker-avatar">{p.dialogue.speaker === 'Akshay' ? '👨‍💻' : '🧘‍♂️'}</span>
+                      <span>{p.dialogue.speaker}</span>
+                    </div>
+                    <p className="balloon-text">"{p.dialogue.speech}"</p>
                   </div>
                   {p.dialogue.replySpeaker && (
-                    <div className="panel-dialogue-line reply">
-                      <strong className="dialogue-speaker">{p.dialogue.replySpeaker}:</strong>
-                      <span className="dialogue-quote">"{p.dialogue.replySpeech}"</span>
+                    <div className="panel-comic-balloon reply">
+                      <div className="balloon-speaker-tag reply">
+                        <span className="speaker-avatar">{p.dialogue.replySpeaker === 'Akshay' ? '👨‍💻' : '🧘‍♂️'}</span>
+                        <span>{p.dialogue.replySpeaker}</span>
+                      </div>
+                      <p className="balloon-text">"{p.dialogue.replySpeech}"</p>
                     </div>
                   )}
                 </div>
