@@ -5358,6 +5358,45 @@ body:has(.page.fullscreen-mode) .site-header,
   background: #f8fafc;
 }
 
+@media print {
+  .comic-story-cell,
+  .storyboard-panel-card,
+  .comic-workbench-card,
+  .architectural-flow-card,
+  .chunk-shape-card,
+  .victory-milestone-card,
+  .war-room-triage {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #ffffff !important;
+    margin: 1.25rem 0 !important;
+  }
+
+  .wb-grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wb-col-input {
+    border-right: none !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+  }
+
+  .storyboard-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .comic-speech-cloud,
+  .comic-speech-card {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #cbd5e1 !important;
+  }
+}
+
+
 
 
 

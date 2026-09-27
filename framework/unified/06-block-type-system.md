@@ -208,6 +208,109 @@ The Programming Screen Working Way (Universal Architecture):
 
 ---
 
+## Operational Specification: Programming Screen and Workbench Working Way in Web View and Book View
+
+Every technical programming interface block in Sarva Gyana Koshah books must deliver an uncropped, responsive, and pedagogically complete learning environment across both Web View (interactive digital reader) and Book View (paged print and PDF layout). Any AI agent generating technical content must follow this exact working way:
+
+### 1. The 5-Part Architectural Structure
+Every programming screen or workbench block is composed of five coordinated elements:
+
+Part 1: Workbench Header Bar
+- Window control dots (red, yellow, green) simulating a professional developer environment.
+- Tool title: e.g. `API TESTING WORKBENCH · TRANSACTION INSPECTOR` or `CODE IDE · server.js`.
+- Metadata tags: Active port (`PORT: 3000`), server health (`STATUS: ACTIVE`), protocol (`HTTP/1.1`).
+- Avoids trademarked tool names completely (use universal terms like `API Testing Workbench` or `IDE`).
+
+Part 2: Dedicated Input Pane
+- Prominent HTTP method badge (color coded: GET in blue `#0284c7`, POST in green `#10b981`, PUT in amber `#d97706`, PATCH in purple `#8b5cf6`, DELETE in rose `#e11d48`).
+- Target endpoint URL with `word-break: break-all` to prevent margin blowouts.
+- Headers inspection bar (e.g. `Content-Type: application/json`).
+- Formatted request payload or chunked source code.
+- Mandatory CSS on code boxes: `white-space: pre-wrap; word-break: break-word; overflow-wrap: break-word; min-width: 0;`. This guarantees lines wrap naturally and never clip or require horizontal scrolling.
+
+Part 3: Wire Processing Monitor (The Engine Mechanics)
+- Highlights the runtime actions between client dispatch and server response:
+  1. Operating system opens TCP socket and performs three-way handshake.
+  2. Runtime buffers readable stream chunks into memory.
+  3. Body parsing middleware converts bytes into a JavaScript object.
+  4. Server route handler executes database query or logic.
+- Purpose: Demystifies what happens inside the machine instead of treating the server like a black box.
+
+Part 4: Deterministic Output Pane
+- Prominent status code badge (e.g. `200 OK`, `201 CREATED`, `400 BAD REQUEST`, `500 SERVER ERROR`).
+- Live transaction telemetry: Response latency (e.g. `14 ms`) and payload size (e.g. `312 B`).
+- Syntax highlighted response payload (formatted JSON, XML, or terminal stdout) with auto-wrapping.
+
+Part 5: The 4-Part Pedagogical Quad Card (Senior Savior Anchor)
+Every programming workbench concludes with the 4-part breakdown:
+  1. Explicit Input: Exact command or HTTP request sent.
+  2. Under the Hood: Wire and engine byte mechanics.
+  3. Deterministic Output: Expected response status and payload.
+  4. Senior Savior: Common beginner trap avoided and the memorable golden rule.
+
+### 2. Dual Mode Operational Behavior
+
+#### Mode A: Web View (Interactive Digital Reader)
+- Dual layout modes:
+  • Full-Width Sequential (Recommended Default): Stacks Input above Processing and Output in a clean vertical flow. Gives maximum breathing room for wide JSON structures and chunked code blocks.
+  • Side-by-Side Split: Available on desktop viewports (>= 1024px) via `grid-template-columns: 1fr 1fr`. Columns strictly enforce `min-width: 0` to eliminate horizontal scroll overflow.
+- Viewport responsiveness:
+  • On viewports < 840px (including tablet, mobile, and iframe preview panes), the layout automatically transitions to full-width sequential stacking.
+- Interactive features:
+  • One-click copy buttons for request payloads and code snippets.
+  • Interactive status code filtering and collapsible token explainers.
+
+#### Mode B: Book View & Print Mode (Paged Document & PDF Export)
+- Paged sheet integration: Rendered inside `.book-sheet` with print margin safety.
+- Mandatory single-column sequential flow in print:
+  • Side-by-side columns squish code text to unreadable sizes on physical paper. Therefore, in print mode, workbenches ALWAYS render sequentially: Title bar -> Input -> Wire Engine -> Output -> Senior Savior Quad Card.
+- Print typography and contrast:
+  • Monospace font (`Consolas, 'Courier New', monospace`) at 8.5pt to 9pt with `1.45` line height.
+  • Light background `#f8fafc` with crisp border `#cbd5e1` and dark text `#0f172a`. Toner-wasting solid dark backgrounds are inverted to light high-contrast styles.
+- Page break discipline:
+  • Mandatory CSS rule: `break-inside: avoid; page-break-inside: avoid;` applied to `.comic-workbench-card` and `.breakdown-quad-card`.
+  • A workbench unit or its corresponding quad card must not be severed in half across a page boundary.
+- Static rendering:
+  • All interactive reveals and collapsible answers are pre-expanded (`staticMode={true}`) so the printed reader has complete access to answers and diagnostic steps.
+
+### 3. Canonical DOM Blueprint for AI Authors
+```html
+<section className="comic-workbench-card">
+  <div className="comic-workbench-header">
+    <span className="comic-workbench-badge">API TESTING WORKBENCH</span>
+    <h3 className="comic-workbench-title">Creating a Course Entity</h3>
+  </div>
+  <div className="wb-grid-responsive">
+    <!-- Step 1: Input Pane -->
+    <div className="wb-col wb-col-input">
+      <div className="wb-meta-bar">
+        <span className="wb-step-label">STEP 1: REQUEST INPUT</span>
+        <span className="http-verb-badge verb-post">POST</span>
+        <code className="wb-url">http://localhost:3000/catalog</code>
+      </div>
+      <pre className="wb-code-wrap"><code>{ "title": "API Architecture" }</code></pre>
+    </div>
+    <!-- Step 2: Output Pane -->
+    <div className="wb-col wb-col-output">
+      <div className="wb-meta-bar">
+        <span className="wb-step-label">STEP 2: LIVE OUTPUT</span>
+        <span className="status-badge status-201">✓ 201 CREATED</span>
+      </div>
+      <pre className="wb-code-wrap"><code>{ "id": "CS101", "status": "Active" }</code></pre>
+    </div>
+  </div>
+  <!-- 4-Part Pedagogical Card -->
+  <div className="workbench-breakdown-grid">
+    <div className="breakdown-quad-card card-input">...</div>
+    <div className="breakdown-quad-card card-explanation">...</div>
+    <div className="breakdown-quad-card card-output">...</div>
+    <div className="breakdown-quad-card card-trap">...</div>
+  </div>
+</section>
+```
+
+---
+
 ### BLOCK TYPE: quad-card
 
 Category: INTERACTIVE

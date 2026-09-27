@@ -210,3 +210,33 @@ Conflict engine: Unexpected success as a crisis, the contrast
   the viral window closing.
 Natural for: Scaling, optimization, caching, deployment,
   monitoring.
+
+---
+
+## PART D: OPERATIONAL WORKING WAY FOR AI AUTHORS
+
+### D1: The Pair Programming Comic Beat Workflow
+When authoring technical chapters featuring the learner mentor duo (e.g. Akshay and Sameer), AI agents must structure every learning beat according to this sequence:
+
+1. THE CONVERSATIONAL SPARK (Comic Beat):
+   - Akshay encounters an unexpected behavior or holds a naive assumption (e.g. thinking a frozen tablet screen means the hardware glass is defective).
+   - Sameer reframes the problem using a physical first-principles analogy (e.g. the restaurant waiter, the blue Ethernet cable, postcards vs framed pictures).
+   - Dialogues are short, punchy (1 to 2 sentences max), positioned in negative space speech clouds without covering character faces or equipment.
+
+2. THE INTERACTIVE PROGRAMMING INTERFACE (Workbench or SVG Screen):
+   - Rather than jumping straight to explanations, present the actual software screen.
+   - For HTTP/API topics: Display the API Testing Workbench with method badge, URL bar, headers, payload, and live response pane.
+   - For runtime code topics: Display the Code IDE screen with window buttons, active filename tab, syntax highlighted lines, and chunked breakdowns.
+   - Enforce auto-wrapping CSS (`white-space: pre-wrap; word-break: break-word`) so no code or JSON payload clips.
+
+3. THE 4-PART PEDAGOGICAL BREAKDOWN (Quad Card):
+   - Every workbench must be grounded by the 4-part card:
+     • Part 1 (Input): What command or request was sent.
+     • Part 2 (Under the Hood): The byte stream, socket handshake, or kernel action.
+     • Part 3 (Deterministic Output): Exact status code, headers, and body received.
+     • Part 4 (Senior Savior): The real-world production gotcha avoided and memorable golden rule.
+
+4. DUAL-VIEW READINESS:
+   - Web View: Supports responsive side-by-side or stacked layouts, interactive reveals, and copy buttons.
+   - Book View: Enforces single-column sequential stacking, page-break avoidance (`break-inside: avoid`), high-contrast ink legibility, and pre-expanded static reveals.
+

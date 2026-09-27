@@ -454,11 +454,13 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
       {intro && <p className="storyboard-intro"><RichText text={intro} /></p>}
       <div className="storyboard-grid">
         {panels.map((p, idx) => (
-          <div key={idx} className="storyboard-panel-card">
-            <div className="panel-card-top">
-              <span className="panel-num-badge">PANEL {idx + 1}</span>
-              <span className="panel-phase-title">{p.title}</span>
-              {p.time && <span className="panel-time-tag">{p.time}</span>}
+          <div key={idx} className="storyboard-panel-card comic-story-cell">
+            <div className="panel-card-top comic-context-bar">
+              <div>
+                <span className="panel-num-badge comic-context-badge">PANEL {idx + 1}</span>
+                <span className="panel-phase-title comic-context-title">{p.title}</span>
+              </div>
+              {p.time && <span className="panel-time-tag comic-context-time">{p.time}</span>}
             </div>
             {p.image && (
               <div className="panel-art-frame">
@@ -474,10 +476,12 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
               </div>
             )}
             <div className="panel-card-body">
-              <div className="panel-scene-box">
-                <span className="panel-label">Scene & Action:</span>
-                <p className="panel-scene-text"><RichText text={p.scene} /></p>
-              </div>
+              {p.scene && (
+                <div className="panel-scene-box">
+                  <span className="panel-label">Scene & Action:</span>
+                  <p className="panel-scene-text"><RichText text={p.scene} /></p>
+                </div>
+              )}
               {p.dialogue && (
                 <div className="comic-balloon-container">
                   <div className={`comic-speech-balloon speaker-${p.dialogue.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
@@ -501,9 +505,12 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
                 </div>
               )}
               {p.realization && (
-                <div className="panel-realization-box">
-                  <span className="panel-label">The Core Wire Lesson:</span>
-                  <p className="panel-realization-text"><RichText text={p.realization} /></p>
+                <div className="panel-realization-box comic-takeaway-bar">
+                  <span className="comic-takeaway-icon">💡</span>
+                  <div>
+                    <span className="panel-label">The Core Wire Lesson: </span>
+                    <span className="panel-realization-text"><RichText text={p.realization} /></span>
+                  </div>
                 </div>
               )}
             </div>
@@ -1402,7 +1409,81 @@ export function Block({ block: b, staticMode = false }) {
     case 'quiz': return <div className="quiz">{b.items.map(([q,a])=><details className="quiz-item" key={q} open={staticMode}><summary>{q}</summary><p><strong>Answer:</strong> {a}</p></details>)}</div>
     case 'takeaways': return <div className="takeaways">{b.items.map(x=><p className="takeaway" key={x}>◆ {x}</p>)}</div>
     case 'aha': return <section className="aha"><span>THE AHA MOMENT</span><p>{b.text}</p></section>
-    case 'cliffhanger': return <section className="cliffhanger"><span>NEXT DISCOVERY</span><h3>{b.title}</h3><p>{b.text}</p></section>
+    case 'cliffhanger': {
+      const panel = b.cliffhangerPanel || (b.image ? b : null)
+      return (
+        <section className="cliffhanger modern-cliffhanger-box">
+          <div className="cliffhanger-header-bar">
+            <span className="eyebrow">{b.badge || '★ MISSION 1 · PHASE 2 PREVIEW'}</span>
+            <h3>{b.title}</h3>
+          </div>
+          <p className="cliffhanger-text"><RichText text={b.text} /></p>
+          {panel && (
+            <div className="storyboard-panel-card comic-story-cell cliffhanger-cell" style={{ marginTop: '1.25rem' }}>
+              <div className="panel-card-top comic-context-bar">
+                <div>
+                  <span className="panel-num-badge comic-context-badge">CLIFFHANGER</span>
+                  <span className="panel-phase-title comic-context-title">{panel.title || 'THE 500 CRASH'}</span>
+                </div>
+                {panel.time && <span className="panel-time-tag comic-context-time">{panel.time}</span>}
+              </div>
+              {panel.image && (
+                <div className="panel-art-frame">
+                  <img
+                    src={panel.image.src || panel.image.file || panel.image}
+                    alt={panel.image.alt || panel.title || 'Cliffhanger scene'}
+                    className="panel-art-image"
+                    loading="lazy"
+                  />
+                  {panel.image.caption && (
+                    <div className="panel-art-caption">{panel.image.caption}</div>
+                  )}
+                </div>
+              )}
+              <div className="panel-card-body">
+                {panel.scene && (
+                  <div className="panel-scene-box">
+                    <span className="panel-label">Scene & Action:</span>
+                    <p className="panel-scene-text"><RichText text={panel.scene} /></p>
+                  </div>
+                )}
+                {panel.dialogue && (
+                  <div className="comic-balloon-container">
+                    <div className={`comic-speech-balloon speaker-${panel.dialogue.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
+                      <div className="balloon-header">
+                        <span className="balloon-avatar">{panel.dialogue.speaker === 'Akshay' ? '👨‍💻' : '🧘‍♂️'}</span>
+                        <strong className="balloon-speaker-name">{panel.dialogue.speaker?.toUpperCase()}</strong>
+                      </div>
+                      <p className="balloon-text">"{panel.dialogue.speech}"</p>
+                      <div className="balloon-tail" />
+                    </div>
+                    {panel.dialogue.replySpeaker && (
+                      <div className={`comic-speech-balloon reply speaker-${panel.dialogue.replySpeaker?.toLowerCase().replace(/\s+/g, '-')}`}>
+                        <div className="balloon-header">
+                          <span className="balloon-avatar">{panel.dialogue.replySpeaker === 'Akshay' ? '👨‍💻' : '🧘‍♂️'}</span>
+                          <strong className="balloon-speaker-name">{panel.dialogue.replySpeaker?.toUpperCase()}</strong>
+                        </div>
+                        <p className="balloon-text">"{panel.dialogue.replySpeech}"</p>
+                        <div className="balloon-tail reply" />
+                      </div>
+                    )}
+                  </div>
+                )}
+                {panel.realization && (
+                  <div className="panel-realization-box comic-takeaway-bar">
+                    <span className="comic-takeaway-icon">💡</span>
+                    <div>
+                      <span className="panel-label">The Core Wire Lesson: </span>
+                      <span className="panel-realization-text"><RichText text={panel.realization} /></span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </section>
+      )
+    }
     case 'resources': return <div className="resources">{b.items.map(([label,url])=><a href={url} key={url} target="_blank" rel="noreferrer">↗ {label}<small>{url}</small></a>)}</div>
     case 'definition': return <section className="pedagogy-card definition-card"><span className="pedagogy-label">DEFINITION</span><h3>{b.term}</h3><p><RichText text={b.text}/></p>{b.example && <p className="pedagogy-example"><strong>Example:</strong> <RichText text={b.example}/></p>}</section>
     case 'worked-example': return <section className="pedagogy-card worked-example"><span className="pedagogy-label">WORKED EXAMPLE</span><h3>{b.title}</h3><p><strong>Problem:</strong> <RichText text={b.problem}/></p><ol>{b.steps.map(step=><li key={step}><RichText text={step}/></li>)}</ol><p className="worked-result"><strong>Result:</strong> <RichText text={b.result}/></p></section>

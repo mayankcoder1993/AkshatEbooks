@@ -61,6 +61,98 @@ Every comic beat in every SGK book must follow the unified 4-layer sandwich stan
 
 ---
 
+## Operational Specification: Comic Story Cell Working Way in Web View and Book View
+
+Every comic story cell in Sarva Gyana Koshah books must deliver a seamless visual storytelling experience across two distinct rendering environments: Web View (interactive digital reader) and Book View (paged print and PDF layout). Any AI agent generating comic content must follow this exact working way:
+
+### 1. The 4-Layer Sandwich Structure
+Every comic cell is an integrated sandwich unit composed of four vertical layers:
+
+Layer 1: Top Context Header
+- Rendered outside and above the illustration canvas.
+- Background: Dark navy `#0f172a` with light text `#f8fafc`.
+- Contains:
+  • Left badge: High contrast pill (e.g. `PANEL 1`, `SCENE 2 BEAT 1`) in `#0284c7`.
+  • Center/Left title: Scene action title in bold uppercase.
+  • Right metadata: Story timestamp and physical setting (e.g. `09:15 AM · Engineering Bay`).
+- Purpose: Establishes chronological and narrative setting without overlaying text over character artwork.
+
+Layer 2: 100% Uncropped 16:9 Artwork Canvas
+- Aspect ratio: Strictly 16:9 (`aspect-ratio: 16 / 9; width: 100%; height: auto;`).
+- Object fit: `contain` (Never use `cover`, never use fixed pixel heights like `height: 260px` or `max-height: 280px`).
+- Frame styling: Minimal subtle border `#cbd5e1`, rounded corners matching theme.
+- Modern Tech with Madhubani Character Art: Characters pair program at modern workstations with open laptops, optical mice, and server racks while drawn with Madhubani folk linework and traditional attire.
+
+Layer 3: Negative Space Dialogue Cloud Engine
+- Dialogue lines are never presented as disconnected bulk text.
+- Balloons are rendered either as SVG overlays inside the 16:9 viewBox or as compact dialogue cards immediately below the art.
+- Negative Space Placement Constraints:
+  • Maximum balloon width: 28% of canvas width.
+  • Anchor zones: Upper outer margins, empty walls, ceiling negative space.
+  • Absolute prohibition: Never occlude character faces, expressive eyes, gesturing hands, laptop displays, or whiteboard diagrams.
+  • Pointer tails: Directional pointer tails angle toward the speaker mouth.
+  • Pacing rule: 1 to 2 sentences maximum per cloud (under 15 words). If a character needs to explain more, introduce a follow-up reaction panel or transition into a workbench screen.
+- Speaker Avatar & Role Pill:
+  • Akshay: 👨‍💻 Junior QA Engineer (curious, learns by doing).
+  • Sameer: 🧘‍♂️ Staff Architect (calm, first principles mentor).
+
+Layer 4: Bottom Grounding Takeaway Strip
+- Rendered immediately beneath the artwork and dialogue.
+- Background: Soft slate `#f8fafc` with top border `1.5px solid #cbd5e1`.
+- Contains: Icon mark (💡 or ⚡), followed by the bold core principle label and a concise 1 to 2 sentence realization.
+- Purpose: Translates the dramatic character beat into a permanent physical or architectural mental model.
+
+### 2. Dual Mode Operational Behavior
+
+#### Mode A: Web View (Interactive Digital Reader)
+- Container behavior: Fluid responsive layout inside the lesson reader.
+- Responsive breakpoints:
+  • Desktop (>= 1024px): Renders in 2-column storyboard grid (`grid-template-columns: repeat(2, 1fr)`) with comfortable 1.25rem gap, or full-width hero cards.
+  • Tablet (768px - 1023px): Adjusts grid margins, maintains 16:9 uncropped aspect ratio.
+  • Mobile (< 768px): Stacks automatically to single-column full-width flow (`grid-template-columns: 1fr`).
+- Interactivity:
+  • Tap to zoom/inspect high-resolution details on touch devices.
+  • Smooth scroll transitions between scene beats.
+  • Audio narration trigger support when voice tracks are active.
+
+#### Mode B: Book View & Print Mode (Paged Document & PDF Export)
+- Paged sheet integration: Rendered inside `.book-sheet` containers with standardized printable margins (A4: 210mm x 297mm or US Letter: 8.5in x 11in).
+- Page break discipline:
+  • Mandatory CSS rule: `break-inside: avoid; page-break-inside: avoid;` applied to `.comic-story-cell` and `.storyboard-panel-card`.
+  • A comic cell must NEVER break across a physical page boundary. The top bar, artwork, dialogue, and takeaway must stay united on a single printed page.
+- Print typography and contrast:
+  • Minimum print font size: 9pt for dialogue and takeaways, 10pt for titles.
+  • Contrast: Deep charcoal `#0f172a` text on clean white `#ffffff` or light slate `#f8fafc` backgrounds.
+  • Ink optimization: No large black background rectangles that bleed or waste printer toner. Headers use crisp borders with light fills.
+
+### 3. Canonical DOM Blueprint for AI Authors
+```html
+<div class="comic-story-cell">
+  <div class="comic-context-bar">
+    <div>
+      <span class="comic-context-badge">PANEL 1</span>
+      <strong class="comic-context-title">SCENE ACTION TITLE</strong>
+    </div>
+    <span class="comic-context-time">09:15 AM · Engineering Lab</span>
+  </div>
+  <div class="panel-art-frame">
+    <img src="illustration.jpg" alt="Scene description" class="panel-art-image" />
+  </div>
+  <div class="comic-dialogue-strip">
+    <div class="comic-speech-balloon speaker-akshay">
+      <span class="balloon-avatar">👨‍💻</span>
+      <strong>AKSHAY:</strong> "Short punchy line under fifteen words."
+    </div>
+  </div>
+  <div class="comic-takeaway-bar">
+    <span class="comic-takeaway-icon">💡</span>
+    <p class="comic-takeaway-text"><strong>Core Lesson:</strong> Physical principle takeaway.</p>
+  </div>
+</div>
+```
+
+---
+
 ## Content Type Tagging System
 
 Before designing any scene beat, the Creative Director Agent

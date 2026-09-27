@@ -339,7 +339,24 @@ async function blockToDocx(b) {
     case 'quiz': return [h('Check your understanding'),...b.items.flatMap(([q,a],i)=>[p([new TextRun({text:`${i+1}. ${q}`,bold:true})]),p([new TextRun({text:'Answer: ',bold:true,color:colors.teal}),...rich(a)])])]
     case 'takeaways': return [h('Key takeaways'),tableBox('REMEMBER',list(b.items),'EEF7F4')]
     case 'aha': return [tableBox('THE AHA MOMENT',[p([new TextRun({text:b.text,bold:true,color:colors.teal})])],'EAF8F4')]
-    case 'cliffhanger': return [tableBox(`NEXT DISCOVERY · ${b.title}`,[p(b.text)],'EEF1FA')]
+    case 'cliffhanger': {
+      const panel = b.cliffhangerPanel
+      const items = [p(b.text)]
+      if (panel) {
+        items.push(p([new TextRun({ text: `SCENE BEAT: ${panel.title || ''}`, bold: true, color: colors.navy })]))
+        if (panel.scene) items.push(p([new TextRun({ text: 'Scene: ', bold: true }), panel.scene]))
+        if (panel.dialogue) {
+          items.push(p([new TextRun({ text: `${panel.dialogue.speaker}: `, bold: true, color: colors.teal }), `"${panel.dialogue.speech}"`]))
+          if (panel.dialogue.replySpeaker) {
+            items.push(p([new TextRun({ text: `${panel.dialogue.replySpeaker}: `, bold: true, color: colors.indigo }), `"${panel.dialogue.replySpeech}"`]))
+          }
+        }
+        if (panel.realization) {
+          items.push(p([new TextRun({ text: 'The Core Wire Lesson: ', bold: true, color: colors.teal }), panel.realization]))
+        }
+      }
+      return [tableBox(`NEXT DISCOVERY · ${b.title}`, items, 'EEF1FA')]
+    }
     case 'resources': return [h('Keep exploring'),...b.items.map(([label,url])=>new Paragraph({children:[new ExternalHyperlink({link:url,children:[new TextRun({text:label,style:'Hyperlink'})]}),new TextRun({text:` : ${url}`,color:'657084',size:18})]}))]
     case 'definition': return [tableBox(`DEFINITION · ${b.term}`,[p(b.text),...(b.example?[p([new TextRun({text:'Example: ',bold:true}),...rich(b.example)])]:[])],'EEF1FA')]
     case 'worked-example': return [tableBox(`WORKED EXAMPLE · ${b.title}`,[p([new TextRun({text:'Problem: ',bold:true}),...rich(b.problem)]),...list(b.steps,'steps'),p([new TextRun({text:'Result: ',bold:true,color:colors.teal}),...rich(b.result)])],'F3F6FA')]
@@ -350,7 +367,7 @@ async function blockToDocx(b) {
     case 'question': return [tableBox(b.kind==='verified-pyq'?'VERIFIED PAST-YEAR QUESTION':'PRACTICE QUESTION',[p([new TextRun({text:[b.exam,b.year,b.paper,b.marks&&`${b.marks} marks`].filter(Boolean).join(' · '),italics:true,color:'596579'})]),p([new TextRun({text:b.prompt,bold:true})]),p([new TextRun({text:'Model answer: ',bold:true,color:colors.teal}),...rich(b.answer)]),...list(b.marking||[]),...(b.sourceUrl?[p(`Official source: ${b.sourceUrl}`)]:[])],b.kind==='verified-pyq'?'EEF8F6':'FFF8E8')]
     case 'activity': return [tableBox(`ACTIVITY · ${b.title}`,[...(b.materials?.length?[p(`Materials: ${b.materials.join(', ')}`)]:[]),...list(b.steps,'steps'),...(b.safety?[p([new TextRun({text:'Safety: ',bold:true,color:'9A5B00'}),...rich(b.safety)])]:[])],'EEF8F6')]
     case 'reflection': return [tableBox('OPTIONAL REFLECTION',[p(b.prompt),p(b.permission||'You may pause, skip this exercise or return later.'),...list(b.guidance||[])],'F3F0FA')]
-    case 'safety-notice': return [tableBox(b.title||'IMPORTANT SUPPORT NOTE',[p(b.text),...(b.resources||[]).map(([label,url])=>p(`${label} — ${url}`))],'FFF0F0')]
+    case 'safety-notice': return [tableBox(b.title||'IMPORTANT SUPPORT NOTE',[p(b.text),...(b.resources||[]).map(([label,url])=>p(`${label} : ${url}`))],'FFF0F0')]
     default:return []
   }
 }
