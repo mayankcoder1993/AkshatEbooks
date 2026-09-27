@@ -12,6 +12,7 @@ export default function Header({
   onSaveWord,
   exporting,
   onOpenBlueprint,
+  onOpenDialogueLab,
   isWide = false,
   onToggleWideMode = () => {},
   isFullscreen = false,
@@ -98,6 +99,17 @@ export default function Header({
           >
             📋 Blueprint
           </button>
+          {onOpenDialogueLab && (
+            <button
+              type="button"
+              className="btn"
+              style={{ background: '#fef3c7', color: '#92400e', borderColor: '#fcd34d', fontWeight: 700 }}
+              onClick={onOpenDialogueLab}
+              title="Compare Comic Dialogue Delivery Methods"
+            >
+              🧪 Dialogue Lab
+            </button>
+          )}
           <button type="button" className="btn" onClick={onHome}>
             ⌂ Library
           </button>

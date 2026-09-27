@@ -6,6 +6,7 @@ import PrintBook from './components/PrintBook.jsx'
 import Blocks from './components/Blocks.jsx'
 import CurriculumBlueprint from './components/CurriculumBlueprint.jsx'
 import HowToUseGuide from './components/HowToUseGuide.jsx'
+import DialogueTestLab from './components/DialogueTestLab.jsx'
 import { DEFAULT_BOOK_ID, loadBookPackage } from './catalog/generated/registry.js'
 
 const BUILD_BOOK_ID = import.meta.env.VITE_BOOK_ID || DEFAULT_BOOK_ID
@@ -79,6 +80,9 @@ const initialLocation = () => {
     }
   }
 
+  if (window.location.search.includes('view=dialogue-test') || window.location.pathname.includes('dialogue-test')) {
+    return { view: 'dialogue-test', bookId: targetBook, editionId: 'edition-01', preview: false, fullscreen: false, initialActive }
+  }
   if (window.location.search.includes('view=blueprint') || window.location.pathname.includes('blueprint')) {
     return { view: 'blueprint', bookId: targetBook, editionId: 'edition-01', preview: false, fullscreen: false, initialActive }
   }
@@ -266,6 +270,20 @@ export default function App() {
   const toggleWideMode = () => setIsWide(value => !value)
   const openInNewTab = () => {
     window.open(window.location.href, '_blank', 'noopener,noreferrer')
+  }
+
+  if (view === 'dialogue-test') {
+    return (
+      <DialogueTestLab
+        onBackToBook={() => {
+          if (publication) {
+            setView('book')
+          } else {
+            navigate('book', '/', bookId || 'zero-to-agentic-api-testing', editionId || 'edition-01', false)
+          }
+        }}
+      />
+    )
   }
 
   if (view === 'blueprint') {
@@ -456,6 +474,7 @@ export default function App() {
           onSaveWord={saveWord}
           exporting={exporting}
           onOpenBlueprint={openBlueprint}
+          onOpenDialogueLab={() => setView('dialogue-test')}
           isWide={isWide}
           onToggleWideMode={toggleWideMode}
           isFullscreen={isFullscreen}
