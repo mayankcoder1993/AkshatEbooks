@@ -291,7 +291,7 @@ function ComicWorkbench({
           </div>
         )}
 
-        {appType === 'ide' && ide && !svgScreen && (
+        {appType === 'ide' && ide && (
           <div className="comic-screen-mockup ide-screen">
             <div className="screen-titlebar ide-titlebar">
               <div className="window-dots">
@@ -308,7 +308,7 @@ function ComicWorkbench({
           </div>
         )}
 
-        {appType === 'api-workbench' && workbench && !svgScreen && (
+        {appType === 'api-workbench' && workbench && (
           <div className="comic-screen-mockup workbench-screen">
             <div className="screen-titlebar wb-titlebar">
               <div className="window-dots">
@@ -429,16 +429,23 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
                 <p className="panel-scene-text"><RichText text={p.scene} /></p>
               </div>
               {p.dialogue && (
-                <div className="panel-dialogue-box">
-                  <span className="panel-label">Dialogue:</span>
-                  <div className="panel-dialogue-line">
-                    <strong className="dialogue-speaker">{p.dialogue.speaker}:</strong>
-                    <span className="dialogue-quote">"{p.dialogue.speech}"</span>
+                <div className="comic-balloon-container">
+                  <div className={`comic-speech-balloon speaker-${p.dialogue.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <div className="balloon-header">
+                      <span className="balloon-avatar">{p.dialogue.speaker === 'Akshay' ? '👨‍💻' : p.dialogue.speaker === 'Sameer' ? '🧘‍♂️' : '👤'}</span>
+                      <strong className="balloon-speaker-name">{p.dialogue.speaker?.toUpperCase()}</strong>
+                    </div>
+                    <p className="balloon-text">"{p.dialogue.speech}"</p>
+                    <div className="balloon-tail" />
                   </div>
                   {p.dialogue.replySpeaker && (
-                    <div className="panel-dialogue-line reply">
-                      <strong className="dialogue-speaker">{p.dialogue.replySpeaker}:</strong>
-                      <span className="dialogue-quote">"{p.dialogue.replySpeech}"</span>
+                    <div className={`comic-speech-balloon reply speaker-${p.dialogue.replySpeaker?.toLowerCase().replace(/\s+/g, '-')}`}>
+                      <div className="balloon-header">
+                        <span className="balloon-avatar">{p.dialogue.replySpeaker === 'Akshay' ? '👨‍💻' : p.dialogue.replySpeaker === 'Sameer' ? '🧘‍♂️' : '👤'}</span>
+                        <strong className="balloon-speaker-name">{p.dialogue.replySpeaker?.toUpperCase()}</strong>
+                      </div>
+                      <p className="balloon-text">"{p.dialogue.replySpeech}"</p>
+                      <div className="balloon-tail reply" />
                     </div>
                   )}
                 </div>
