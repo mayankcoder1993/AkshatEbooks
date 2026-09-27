@@ -11,11 +11,11 @@
       background: #f1f5f9;
       color: #0f172a;
       margin: 0;
-      padding: 2rem 1rem;
+      padding: 1.5rem 1rem;
       line-height: 1.5;
     }
     .container {
-      max-width: 1080px;
+      max-width: 1100px;
       margin: 0 auto;
       background: #ffffff;
       border-radius: 16px;
@@ -91,24 +91,26 @@
       line-height: 1.45;
     }
     
-    /* WORKBENCH STYLING */
+    /* WORKBENCH STYLING - ZERO CROPPING GUARANTEE */
     .wb-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
       border-bottom: 1px solid #cbd5e1;
-    }
-    @media (max-width: 768px) {
-      .wb-grid { grid-template-columns: 1fr; }
+      background: #ffffff;
     }
     .wb-col {
       padding: 1.25rem;
+      min-width: 0; /* Prevents overflow blowouts in CSS Grid */
     }
     .col-input {
       background: #ffffff;
       border-right: 1px solid #cbd5e1;
     }
-    @media (max-width: 768px) {
-      .col-input { border-right: none; border-bottom: 1px solid #cbd5e1; }
+    @media (max-width: 780px) {
+      .col-input {
+        border-right: none;
+        border-bottom: 1px solid #cbd5e1;
+      }
     }
     .col-output {
       background: #f8fafc;
@@ -118,56 +120,59 @@
       border-radius: 6px;
       overflow: hidden;
       margin-top: 0.5rem;
+      border: 1px solid #1e293b;
     }
     .code-titlebar {
       background: #1e293b;
-      padding: 0.35rem 0.75rem;
+      padding: 0.4rem 0.75rem;
       font-size: 0.72rem;
       color: #94a3b8;
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.3rem;
     }
     pre {
       margin: 0;
-      padding: 0.85rem;
-      font-size: 0.82rem;
-      font-family: Consolas, monospace;
-      line-height: 1.45;
+      padding: 0.85rem 1rem;
+      font-size: 0.84rem;
+      font-family: Consolas, Monaco, monospace;
+      line-height: 1.5;
+      color: #f8fafc;
+      white-space: pre-wrap; /* Auto-wraps code lines so nothing is ever cropped */
+      word-break: break-word;
       overflow-x: auto;
     }
     .callout-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 0.75rem;
       margin-bottom: 1rem;
-    }
-    @media (max-width: 768px) {
-      .callout-grid { grid-template-columns: 1fr; }
     }
     .callout-card {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
       border-radius: 6px;
-      padding: 0.65rem 0.85rem;
+      padding: 0.7rem 0.85rem;
       font-size: 0.82rem;
     }
     .senior-savior {
       background: #fef2f2;
       border: 1.5px solid #fecaca;
       border-radius: 8px;
-      padding: 0.75rem 1rem;
+      padding: 0.85rem 1rem;
       font-size: 0.83rem;
       color: #7f1d1d;
-      line-height: 1.45;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <span class="badge">UNIFIED COMIC & PROGRAMMING INTERFACE SPECIFICATION</span>
-    <h1>Consistent Comic Story Cell & Programming Interface</h1>
+    <span class="badge">LAYOUT REFINEMENT · ZERO CROPPING GUARANTEE</span>
+    <h1>Consistent Comic Story Cell & Uncropped Programming Interface</h1>
     <p class="subtitle">
-      Demonstrating the standard layout template: Context Bar + Negative Space Clouds + Unhidden Character Art + Bottom Principle Strip + 2-Column Input/Process/Output/Explanation Workbench.
+      Program window cropping resolved: Auto-wrapping code blocks, auto-fit responsive grid, and full-width stacked view for narrower screens.
     </p>
 
     <!-- PART 1: THE COMIC STORY CELL -->
@@ -220,7 +225,7 @@
       </div>
     </div>
 
-    <!-- PART 2: THE PROGRAMMING INTERFACE WORKBENCH -->
+    <!-- PART 2: THE PROGRAMMING INTERFACE WORKBENCH (UNCROPPED) -->
     <div class="section-box">
       <!-- Workbench Header -->
       <div class="top-context-bar">
@@ -232,32 +237,32 @@
           </div>
           <strong style="margin-left: 0.4rem;">API TESTING WORKBENCH · INTERACTIVE TRANSACTION RUNNER</strong>
         </div>
-        <div style="display: flex; gap: 0.4rem;">
+        <div style="display: flex; gap: 0.4rem; flex-wrap: wrap;">
           <span style="background: #1e293b; border: 1px solid #334155; color: #38bdf8; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-family: monospace;">PORT: 3000</span>
           <span style="background: #166534; color: #bbf7d0; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px; font-weight: 700;">SERVER: ACTIVE</span>
         </div>
       </div>
 
-      <!-- Split-Pane Grid -->
+      <!-- Split-Pane Grid with auto-fit -->
       <div class="wb-grid">
         <!-- Left: Input -->
         <div class="wb-col col-input">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.3rem;">
             <span style="font-size: 0.75rem; font-weight: 800; color: #0284c7; letter-spacing: 0.05em;">STEP 1 · REQUEST INPUT (CLIENT DISPATCH)</span>
-            <span style="font-size: 0.75rem; color: #64748b;">protocol: HTTP/1.1</span>
+            <span style="font-size: 0.72rem; color: #64748b;">protocol: HTTP/1.1</span>
           </div>
 
-          <div style="display: flex; align-items: center; gap: 0.5rem; background: #f1f5f9; padding: 0.4rem 0.6rem; border-radius: 6px; border: 1px solid #cbd5e1; margin-bottom: 0.65rem;">
-            <span style="background: #10b981; color: #fff; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.5rem; border-radius: 4px;">POST</span>
-            <code style="font-size: 0.85rem; color: #0f172a; font-weight: 600;">http://localhost:3000/catalog</code>
+          <div style="display: flex; align-items: center; gap: 0.5rem; background: #f1f5f9; padding: 0.45rem 0.75rem; border-radius: 6px; border: 1px solid #cbd5e1; margin-bottom: 0.65rem; flex-wrap: wrap;">
+            <span style="background: #10b981; color: #fff; font-weight: 800; font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 4px;">POST</span>
+            <code style="font-size: 0.85rem; color: #0f172a; font-weight: 700; word-break: break-all;">http://localhost:3000/catalog</code>
           </div>
 
           <div class="code-box">
             <div class="code-titlebar">
               <span>Headers: Content-Type: application/json</span>
-              <span>JSON Payload</span>
+              <span style="color: #cbd5e1; fontWeight: 600;">JSON Payload</span>
             </div>
-            <pre style="color: #e2e8f0;">{
+            <pre>{
   "id": "CS101",
   "title": "Foundations of Computer Systems",
   "department": "Computer Science",
@@ -268,12 +273,12 @@
 
         <!-- Right: Processing & Output -->
         <div class="wb-col col-output">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.3rem;">
             <span style="font-size: 0.75rem; font-weight: 800; color: #6366f1; letter-spacing: 0.05em;">STEP 2 · PROCESSING & DETERMINISTIC OUTPUT</span>
-            <span style="font-size: 0.75rem; color: #16a34a; font-weight: 700;">201 CREATED</span>
+            <span style="font-size: 0.75rem; color: #16a34a; font-weight: 700; background: #dcfce7; padding: 0.15rem 0.45rem; border-radius: 4px;">✓ 201 CREATED</span>
           </div>
 
-          <div style="background: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 6px; padding: 0.5rem 0.75rem; margin-bottom: 0.65rem; font-size: 0.78rem; color: #3730a3;">
+          <div style="background: #e0e7ff; border: 1px solid #c7d2fe; border-radius: 6px; padding: 0.5rem 0.75rem; margin-bottom: 0.65rem; font-size: 0.78rem; color: #3730a3; line-height: 1.45;">
             <div style="font-weight: 700; margin-bottom: 0.2rem;">⚙️ Wire Processing Lifecycle:</div>
             <div>1. TCP handshake established on port 3000</div>
             <div>2. <code>express.json()</code> buffers chunked byte stream</div>
@@ -298,29 +303,29 @@
 
       <!-- Lower Section: Token Breakdown & Senior Savior -->
       <div style="padding: 1.25rem; background: #ffffff;">
-        <h4 style="margin: 0 0 0.6rem 0; font-size: 0.92rem; color: #0f172a;">🔎 Chunked Code Breakdown & Token Callouts</h4>
+        <h4 style="margin: 0 0 0.75rem 0; font-size: 0.92rem; color: #0f172a;">🔎 Chunked Code Breakdown & Token Callouts</h4>
         <div class="callout-grid">
           <div class="callout-card">
             <strong style="color: #0284c7;">👉 app.use(express.json())</strong>
-            <p style="margin: 0.2rem 0 0; color: #475569; line-height: 1.4;">
+            <p style="margin: 0.25rem 0 0; color: #475569; line-height: 1.45;">
               Buffers incoming TCP readable stream packets until complete, then parses the JSON string into <code>req.body</code>.
             </p>
           </div>
           <div class="callout-card">
             <strong style="color: #10b981;">👉 res.status(201).json(record)</strong>
-            <p style="margin: 0.2rem 0 0; color: #475569; line-height: 1.4;">
+            <p style="margin: 0.25rem 0 0; color: #475569; line-height: 1.45;">
               Signals the client that a new entity was created successfully and echoes back the confirmed database record over the wire.
             </p>
           </div>
         </div>
 
         <div class="senior-savior">
-          <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.3rem;">
+          <div style="display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.35rem;">
             <span>🛡️</span>
             <strong style="color: #991b1b;">SENIOR SAVIOR · ARCHITECTURAL TRAP & GOLDEN RULE</strong>
           </div>
           <div><strong>The Trap:</strong> Forgetting body parser middleware, causing <code>req.body</code> to be undefined and crashing the handler with a runtime TypeError.</div>
-          <div style="margin-top: 0.25rem;"><strong>The Golden Rule:</strong> An HTTP server is a streaming engine; always mount stream buffering middleware before declaring POST, PUT, or PATCH handlers.</div>
+          <div style="margin-top: 0.3rem;"><strong>The Golden Rule:</strong> An HTTP server is a streaming engine; always mount stream buffering middleware before declaring POST, PUT, or PATCH handlers.</div>
         </div>
       </div>
     </div>
