@@ -172,17 +172,40 @@ async function blockToDocx(b) {
       const items = [
         ...(b.badge ? [p([new TextRun({ text: b.badge, bold: true, color: colors.teal })])] : []),
         ...(b.title ? [p([new TextRun({ text: b.title, bold: true, size: 28, color: colors.navy })])] : []),
-        ...(b.intro ? [p(b.intro)] : []),
-        ...b.panels.flatMap((panel, idx) => [
-          p([new TextRun({ text: `PANEL ${idx + 1}: ${panel.title}${panel.time ? ` (${panel.time})` : ''}`, bold: true, color: colors.navy })]),
-          p([new TextRun({ text: 'Scene: ', bold: true }), panel.scene]),
-          ...(panel.dialogue ? [
-            p([new TextRun({ text: `${panel.dialogue.speaker}: `, bold: true, color: colors.teal }), `"${panel.dialogue.speech}"`]),
-            ...(panel.dialogue.replySpeaker ? [p([new TextRun({ text: `${panel.dialogue.replySpeaker}: `, bold: true, color: colors.indigo }), `"${panel.dialogue.replySpeech}"`])] : [])
-          ] : []),
-          p([new TextRun({ text: 'The Core Wire Lesson: ', bold: true, color: colors.teal }), panel.realization])
-        ])
+        ...(b.intro ? [p(b.intro)] : [])
       ];
+
+      for (let idx = 0; idx < b.panels.length; idx++) {
+        const panel = b.panels[idx];
+        items.push(p([new TextRun({ text: `PANEL ${idx + 1}: ${panel.title}${panel.time ? ` (${panel.time})` : ''}`, bold: true, color: colors.navy })]));
+        if (panel.image) {
+          try {
+            const data = await imageLoader(panel.image.src || panel.image, panel.image);
+            const width = 500;
+            const w = panel.image.w || 1024;
+            const h = panel.image.h || 1024;
+            items.push(new Paragraph({
+              alignment: AlignmentType.CENTER,
+              children: [new ImageRun({
+                data,
+                type: 'jpg',
+                transformation: { width, height: Math.round(width * h / w) },
+                altText: { title: panel.title, description: panel.title, name: panel.title }
+              })]
+            }));
+          } catch (e) {
+            // Keep going if image cannot load
+          }
+        }
+        items.push(p([new TextRun({ text: 'Scene: ', bold: true }), panel.scene]));
+        if (panel.dialogue) {
+          items.push(p([new TextRun({ text: `${panel.dialogue.speaker}: `, bold: true, color: colors.teal }), `"${panel.dialogue.speech}"`]));
+          if (panel.dialogue.replySpeaker) {
+            items.push(p([new TextRun({ text: `${panel.dialogue.replySpeaker}: `, bold: true, color: colors.indigo }), `"${panel.dialogue.replySpeech}"`]));
+          }
+        }
+        items.push(p([new TextRun({ text: 'The Core Wire Lesson: ', bold: true, color: colors.teal }), panel.realization]));
+      }
       return [tableBox(b.title || 'COMIC STORYBOARD', items, 'F8FAFC')];
     }
     case 'comic-workbench': {

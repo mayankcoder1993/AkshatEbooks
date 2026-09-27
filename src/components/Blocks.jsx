@@ -398,32 +398,35 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
               <span className="panel-phase-title">{p.title}</span>
               {p.time && <span className="panel-time-tag">{p.time}</span>}
             </div>
+            {p.image && (
+              <div className="panel-art-frame">
+                <img
+                  src={p.image.src || p.image.file || p.image}
+                  alt={p.image.alt || p.title || 'Comic scene'}
+                  className="panel-art-image"
+                  loading="lazy"
+                />
+                {p.image.caption && (
+                  <div className="panel-art-caption">{p.image.caption}</div>
+                )}
+              </div>
+            )}
             <div className="panel-card-body">
-              {p.image && (
-                <div className="panel-artwork-box">
-                  <img src={p.image} alt={p.title || `Panel ${idx + 1}`} className="panel-artwork-img" />
-                </div>
-              )}
               <div className="panel-scene-box">
                 <span className="panel-label">Scene & Action:</span>
                 <p className="panel-scene-text"><RichText text={p.scene} /></p>
               </div>
               {p.dialogue && (
-                <div className="panel-comic-dialogue-wrap">
-                  <div className="panel-comic-balloon">
-                    <div className="balloon-speaker-tag">
-                      <span className="speaker-avatar">{p.dialogue.speaker === 'Akshay' ? '👨‍💻' : '🧘‍♂️'}</span>
-                      <span>{p.dialogue.speaker}</span>
-                    </div>
-                    <p className="balloon-text">"{p.dialogue.speech}"</p>
+                <div className="panel-dialogue-box">
+                  <span className="panel-label">Dialogue:</span>
+                  <div className="panel-dialogue-line">
+                    <strong className="dialogue-speaker">{p.dialogue.speaker}:</strong>
+                    <span className="dialogue-quote">"{p.dialogue.speech}"</span>
                   </div>
                   {p.dialogue.replySpeaker && (
-                    <div className="panel-comic-balloon reply">
-                      <div className="balloon-speaker-tag reply">
-                        <span className="speaker-avatar">{p.dialogue.replySpeaker === 'Akshay' ? '👨‍💻' : '🧘‍♂️'}</span>
-                        <span>{p.dialogue.replySpeaker}</span>
-                      </div>
-                      <p className="balloon-text">"{p.dialogue.replySpeech}"</p>
+                    <div className="panel-dialogue-line reply">
+                      <strong className="dialogue-speaker">{p.dialogue.replySpeaker}:</strong>
+                      <span className="dialogue-quote">"{p.dialogue.replySpeech}"</span>
                     </div>
                   )}
                 </div>

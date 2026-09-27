@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320" width="100%" class="svg-wire-architecture">
+  <defs>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#0284c7" />
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#16a34a" />
+    </marker>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect x="0" y="0" width="900" height="320" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5" />
+
+  <!-- Title Header -->
+  <text x="30" y="38" fill="#0f172a" font-family="sans-serif" font-size="14" font-weight="800" letter-spacing="0.05em">HTTP WIRE ARCHITECTURE: CLIENT TO BACKEND LIFECYCLE</text>
+  <text x="30" y="58" fill="#64748b" font-family="sans-serif" font-size="12">The request packet crossing physical wires to port 3000</text>
+
+  <!-- Left Box: Client Application -->
+  <g transform="translate(30, 80)">
+    <rect x="0" y="0" width="220" height="200" rx="10" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
+    <rect x="0" y="0" width="220" height="36" rx="10" fill="#e0f2fe" />
+    <text x="110" y="24" text-anchor="middle" fill="#0369a1" font-family="sans-serif" font-size="12" font-weight="800">CLIENT ENVIRONMENT</text>
+    <text x="20" y="65" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="700">API Testing Workbench</text>
+    <text x="20" y="85" fill="#64748b" font-family="sans-serif" font-size="11">Origin: 127.0.0.1:54218</text>
+    
+    <rect x="15" y="105" width="190" height="75" rx="6" fill="#f8fafc" stroke="#e2e8f0" />
+    <text x="25" y="125" fill="#0284c7" font-family="monospace" font-size="11" font-weight="700">POST /catalog</text>
+    <text x="25" y="145" fill="#475569" font-family="monospace" font-size="10.5">Host: localhost:3000</text>
+    <text x="25" y="163" fill="#475569" font-family="monospace" font-size="10.5">Content-Type: JSON</text>
+  </g>
+
+  <!-- Middle Area: Network Wire -->
+  <g transform="translate(270, 80)">
+    <rect x="0" y="0" width="360" height="200" rx="10" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" />
+    <text x="180" y="28" text-anchor="middle" fill="#475569" font-family="sans-serif" font-size="12" font-weight="800" letter-spacing="0.05em">THE NETWORK WIRE (TCP STREAM)</text>
+
+    <!-- Top Flow Arrow: Request -->
+    <line x1="30" y1="75" x2="320" y2="75" stroke="#0284c7" stroke-width="2.5" marker-end="url(#arrow-blue)" />
+    <rect x="90" y="55" width="180" height="24" rx="4" fill="#e0f2fe" stroke="#0284c7" />
+    <text x="180" y="71" text-anchor="middle" fill="#0369a1" font-family="sans-serif" font-size="10.5" font-weight="700">Serialized Byte Stream</text>
+
+    <!-- Center Mechanism Note -->
+    <rect x="30" y="98" width="300" height="44" rx="6" fill="#f1f5f9" />
+    <text x="42" y="116" fill="#334155" font-family="sans-serif" font-size="11" font-weight="600">TCP Chunks arrive in fragments</text>
+    <text x="42" y="132" fill="#64748b" font-family="sans-serif" font-size="10.5">express.json() reassembles chunks into req.body</text>
+
+    <!-- Bottom Flow Arrow: Response -->
+    <line x1="320" y1="170" x2="30" y2="170" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrow-green)" />
+    <rect x="90" y="150" width="180" height="24" rx="4" fill="#dcfce7" stroke="#16a34a" />
+    <text x="180" y="166" text-anchor="middle" fill="#15803d" font-family="sans-serif" font-size="10.5" font-weight="700">HTTP/1.1 201 Created</text>
+  </g>
+
+  <!-- Right Box: Server Environment -->
+  <g transform="translate(650, 80)">
+    <rect x="0" y="0" width="220" height="200" rx="10" fill="#ffffff" stroke="#16a34a" stroke-width="2" />
+    <rect x="0" y="0" width="220" height="36" rx="10" fill="#dcfce7" />
+    <text x="110" y="24" text-anchor="middle" fill="#15803d" font-family="sans-serif" font-size="12" font-weight="800">BACKEND SERVICE</text>
+    <text x="20" y="65" fill="#0f172a" font-family="sans-serif" font-size="13" font-weight="700">Node.js Express Server</text>
+    <text x="20" y="85" fill="#64748b" font-family="sans-serif" font-size="11">Listening on Port: 3000</text>
+    
+    <rect x="15" y="105" width="190" height="75" rx="6" fill="#f8fafc" stroke="#e2e8f0" />
+    <text x="25" y="125" fill="#16a34a" font-family="monospace" font-size="11" font-weight="700">Route: app.post()</text>
+    <text x="25" y="145" fill="#475569" font-family="monospace" font-size="10.5">catalog.push(newCourse)</text>
+    <text x="25" y="163" fill="#15803d" font-family="monospace" font-size="10.5">res.status(201).json()</text>
+  </g>
+</svg>

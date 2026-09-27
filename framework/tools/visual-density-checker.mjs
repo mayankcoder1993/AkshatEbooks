@@ -38,12 +38,7 @@ const blockPatterns = {
     /type:\s*['"]interactive-workbench['"]/g,
     /type:\s*['"]code-workbench['"]/g,
     /type:\s*['"]comic-workbench['"]/g,
-    /type:\s*['"]terminal['"]/g,
-    /type:\s*['"]code['"]/g,
-    /type:\s*['"]runviz['"]/g,
-    /type:\s*['"]flow['"]/g,
-    /type:\s*['"]blueprint['"]/g,
-    /Beat \d+ \((?:workbench-screen|api-inspector|interactive-workbench|code-workbench|comic-workbench|terminal|code|runviz|flow|blueprint)\)/gi,
+    /Beat \d+ \((?:workbench-screen|api-inspector|interactive-workbench|code-workbench|comic-workbench)\)/gi,
     /workbench_type:/g,
     /```(javascript|json|bash|http|xml|yaml)/g
   ],

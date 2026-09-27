@@ -10,6 +10,7 @@
 
 import { readFileSync, existsSync } from 'fs'
 import { resolve, basename } from 'path'
+import { pathToFileURL } from 'url'
 
 // ─── ARGUMENT PARSING ──────────────────────────────────────
 
@@ -95,7 +96,7 @@ try {
   chapterContent = readFileSync(chapterFile, 'utf8')
   if (chapterFile.endsWith('.js') || chapterFile.endsWith('.mjs')) {
     try {
-      const mod = await import(chapterFile)
+      const mod = await import(pathToFileURL(chapterFile).href)
       chapterData = mod.chapter || mod.default || Object.values(mod)[0]
       if (!chapterData || !chapterData.blocks) {
         chapterData = parseJsChapterFallback(chapterContent)
@@ -116,8 +117,7 @@ try {
 // ─── BLOCK TYPE CATEGORISATION ──────────────────────────────
 
 const VISUAL_BLOCKS = new Set([
-  'scene-panel', 'action-beat', 'cliffhanger-panel', 'character-scene', 'storyboard', 'image',
-  'flow', 'blueprint'
+  'scene-panel', 'action-beat', 'cliffhanger-panel', 'character-scene', 'storyboard', 'image'
 ])
 const DIALOGUE_BLOCKS = new Set([
   'dialogue-exchange', 'thought-bubble'
@@ -126,8 +126,7 @@ const INTERACTIVE_BLOCKS = new Set([
   'workbench-screen', 'challenge-prompt', 'challenge-reveal', 'quad-card',
   'api-inspector', 'interactive-workbench', 'pedagogical-quad-card', 'code-workbench',
   'comic-workbench', 'triage', 'predict-output', 'mini-api', 'library-workbench',
-  'battle-scar', 'battle-plan', 'scenario-grid', 'structured-breakdown', 'chunked-code',
-  'code', 'terminal', 'runviz'
+  'battle-scar', 'battle-plan', 'scenario-grid', 'structured-breakdown', 'chunked-code'
 ])
 const PROSE_BLOCKS = new Set([
   'prose-paragraph', 'narration-box', 'exposition-narrative'
