@@ -39,10 +39,14 @@ export default function ApiInspector({
     const startTime = performance.now()
 
     // If it is a real public or localhost URL, attempt browser fetch
-    const canFetch = (url.startsWith('https://api.github.com') || url.startsWith('https://api.bigdatacloud.net') || url.startsWith('http://localhost:5050')) && method === 'GET'
+    const canFetch = (url.startsWith('https://api.github.com') || url.startsWith('https://api.bigdatacloud.net') || url.startsWith('http://localhost:5050') || url.startsWith('/api-mock')) && method === 'GET'
     
     if (canFetch) {
-      fetch(url)
+      let fetchUrl = url
+      if (url.startsWith('http://localhost:5050')) {
+        fetchUrl = url.replace('http://localhost:5050', '/api-mock')
+      }
+      fetch(fetchUrl)
         .then(res => {
           const duration = Math.round(performance.now() - startTime)
           setLiveStatus(`${res.status} ${res.statusText}`)

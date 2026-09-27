@@ -12,6 +12,13 @@ export default defineConfig({
     host: true,
     port: 5173,
     allowedHosts: true,
+    proxy: {
+      '/api-mock': {
+        target: 'http://127.0.0.1:5050',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-mock/, ''),
+      },
+    },
   },
   preview: {
     host: true,
