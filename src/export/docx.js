@@ -320,7 +320,15 @@ async function blockToDocx(b) {
     case 'guess': return [tableBox('MAKE A GUESS',[p(b.prompt),...(b.code?code(b.code.split('\n'),'prediction.py'):[]),...list(b.options.map((x,i)=>`${String.fromCharCode(65+i)}. ${x}`)),p([new TextRun({text:`Answer: ${b.options[b.answerIndex]}. `,bold:true}),...rich(b.explain)])],'F3F0FA')]
     case 'bug': return [tableBox('BUG HUNT',[p(b.prompt),...code(b.lines,'bug_hunt.py'),p([new TextRun({text:`Answer: line ${b.bugLine}. `,bold:true}),...rich(b.explain)])],'FFF4E8')]
     case 'callout': return [tableBox(b.title || 'Note',b.paragraphs.map(x=>p(x)),b.variant==='analogy'?'EEF8F6':'F2F4FA')]
-    case 'flow': return [h('Input → Process → Output'),new Table({width:{size:100,type:WidthType.PERCENTAGE},rows:[new TableRow({children:[b.input,b.process,b.output].map(([a,c])=>new TableCell({borders,shading:{type:ShadingType.CLEAR,fill:'F5F7FB'},children:[p([new TextRun({text:a,bold:true,color:colors.indigo})]),p(c)]}))})]})]
+    case 'flow':
+      if (b.steps || b.intro || !b.input) {
+        return [
+          h(b.title || 'Input → Process → Output'),
+          ...(b.intro ? [p(b.intro)] : []),
+          ...list((b.steps || []).map(s => `${s.step ? s.step + '. ' : ''}${s.name ? s.name + ': ' : ''}${s.desc || ''}`), 'steps')
+        ]
+      }
+      return [h('Input → Process → Output'),new Table({width:{size:100,type:WidthType.PERCENTAGE},rows:[new TableRow({children:[b.input,b.process,b.output].map(([a,c])=>new TableCell({borders,shading:{type:ShadingType.CLEAR,fill:'F5F7FB'},children:[p([new TextRun({text:a,bold:true,color:colors.indigo})]),p(c)]}))})]})]
     case 'blueprint': return [h('Plan before we type'),tableBox('PROGRAM BLUEPRINT',[p(`Purpose: ${b.purpose}`),p(`Input: ${b.input}`),p(`Processing: ${b.processing}`),p(`Output: ${b.output}`),p(`Files: ${b.files.join(', ') || 'None'}`)])]
     case 'code': return [h('The code'),...code(b.lines,b.filename)]
     case 'runviz': return [h('Program run: every step'),...code(b.codeLines,b.filename),...b.steps.flatMap((s,i)=>[p([new TextRun({text:`${i+1}. ${s.title}`,bold:true,color:colors.indigo}),...(s.line?[new TextRun({text:` (line ${s.line})`,italics:true})]:[])]),p(s.explain),...(s.vars?.length?[p(`Memory: ${s.vars.map(v=>`${v.name} = ${v.value}`).join(', ')}`)]:[]),...(s.console?.length?[p(`Console: ${s.console.join(' | ')}`)]:[])])]
@@ -332,10 +340,10 @@ async function blockToDocx(b) {
     case 'takeaways': return [h('Key takeaways'),tableBox('REMEMBER',list(b.items),'EEF7F4')]
     case 'aha': return [tableBox('THE AHA MOMENT',[p([new TextRun({text:b.text,bold:true,color:colors.teal})])],'EAF8F4')]
     case 'cliffhanger': return [tableBox(`NEXT DISCOVERY · ${b.title}`,[p(b.text)],'EEF1FA')]
-    case 'resources': return [h('Keep exploring'),...b.items.map(([label,url])=>new Paragraph({children:[new ExternalHyperlink({link:url,children:[new TextRun({text:label,style:'Hyperlink'})]}),new TextRun({text:` — ${url}`,color:'657084',size:18})]}))]
+    case 'resources': return [h('Keep exploring'),...b.items.map(([label,url])=>new Paragraph({children:[new ExternalHyperlink({link:url,children:[new TextRun({text:label,style:'Hyperlink'})]}),new TextRun({text:` : ${url}`,color:'657084',size:18})]}))]
     case 'definition': return [tableBox(`DEFINITION · ${b.term}`,[p(b.text),...(b.example?[p([new TextRun({text:'Example: ',bold:true}),...rich(b.example)])]:[])],'EEF1FA')]
     case 'worked-example': return [tableBox(`WORKED EXAMPLE · ${b.title}`,[p([new TextRun({text:'Problem: ',bold:true}),...rich(b.problem)]),...list(b.steps,'steps'),p([new TextRun({text:'Result: ',bold:true,color:colors.teal}),...rich(b.result)])],'F3F6FA')]
-    case 'case-study': return [tableBox(`${(b.kind||'REAL CASE').toUpperCase()} · ${b.title}`,[p(b.context),...list(b.points||[]),...(b.source?[p(`Source: ${b.source.label}${b.source.url?` — ${b.source.url}`:''}`)]:[])],'FFF8E8')]
+    case 'case-study': return [tableBox(`${(b.kind||'REAL CASE').toUpperCase()} · ${b.title}`,[p(b.context),...list(b.points||[]),...(b.source?[p(`Source: ${b.source.label}${b.source.url?` : ${b.source.url}`:''}`)]:[])],'FFF8E8')]
     case 'timeline': return [h(b.title),new Table({width:{size:100,type:WidthType.PERCENTAGE},rows:b.items.map(item=>new TableRow({children:[new TableCell({borders,width:{size:22,type:WidthType.PERCENTAGE},shading:{type:ShadingType.CLEAR,fill:'EEF1FA'},children:[p([new TextRun({text:item.date,bold:true,color:colors.indigo})])]}),new TableCell({borders,children:[p([new TextRun({text:item.title,bold:true})]),p(item.text)]})]}))})]
     case 'comparison': return [h(b.title),new Table({width:{size:100,type:WidthType.PERCENTAGE},rows:[new TableRow({children:b.columns.map(column=>new TableCell({borders,shading:{type:ShadingType.CLEAR,fill:'EEF1FA'},children:[p([new TextRun({text:column,bold:true})])]}))}),...b.rows.map(row=>new TableRow({children:row.map(cell=>new TableCell({borders,children:[p(cell)]}))}))]})]
     case 'source-note': return [tableBox(b.label||'SOURCE NOTE',[p(b.claim),...(b.url?[p(b.url)]:[]),...(b.verifiedThrough?[p(`Verified through ${b.verifiedThrough}`)]:[])],'EEF8F6')]

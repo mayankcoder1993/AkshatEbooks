@@ -237,6 +237,56 @@ function StructuredBreakdown({ badge = 'ARCHITECTURAL DECONSTRUCTION', title, in
   )
 }
 
+function ArchitecturalFlow({
+  badge = 'ARCHITECTURAL TRANSACTION FLOW',
+  title,
+  intro,
+  svgScreen,
+  steps = []
+}) {
+  return (
+    <section className="comic-workbench-card architectural-flow-card">
+      <div className="comic-workbench-header">
+        <span className="comic-workbench-badge">{badge}</span>
+        {title && <h3 className="comic-workbench-title">{title}</h3>}
+      </div>
+
+      {intro && (
+        <div style={{ padding: '1rem 1.25rem 0.25rem', color: '#334155', fontSize: '0.95rem', lineHeight: 1.55 }}>
+          <p style={{ margin: 0 }}><RichText text={intro} /></p>
+        </div>
+      )}
+
+      <div className="comic-workbench-main">
+        {svgScreen && (
+          <div className="comic-screen-mockup svg-screen-frame">
+            <img
+              src={svgScreen.src || svgScreen.file || svgScreen}
+              alt={svgScreen.alt || title || 'Architectural Flow'}
+              className="workbench-svg-image"
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        {steps?.length > 0 && (
+          <div className="workbench-breakdown-grid" style={{ marginTop: '1rem' }}>
+            {steps.map(s => (
+              <div key={s.step} className="breakdown-quad-card">
+                <div className="quad-title">
+                  <span className="quad-num">{s.step}</span>
+                  <strong>{s.name}</strong>
+                </div>
+                <p className="quad-text"><RichText text={s.desc} /></p>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
 function ComicWorkbench({
   badge = 'COMIC WORKBENCH',
   title,
@@ -1337,7 +1387,11 @@ export function Block({ block: b, staticMode = false }) {
     case 'guess': return <section className="journey-card guess"><span>MAKE A GUESS</span><h3>{b.prompt}</h3>{b.code && <pre>{b.code}</pre>}<ol>{b.options.map(x=><li key={x}>{x}</li>)}</ol><Reveal label="Show the answer" staticMode={staticMode}><p><strong>Answer: {b.options[b.answerIndex]}.</strong> {b.explain}</p></Reveal></section>
     case 'bug': return <section className="journey-card bug"><span>BUG HUNT</span><h3>{b.prompt}</h3><CodeBlock filename={b.filename || 'snippet'} lines={b.lines}/><Reveal label="Find the bug" staticMode={staticMode}><p><strong>Line {b.bugLine}.</strong> {b.explain}</p></Reveal></section>
     case 'callout': return <section className={`callout ${b.variant || 'note'}`}>{b.title && <h3>{b.title}</h3>}{b.paragraphs.map(p=><p key={p}><RichText text={p}/></p>)}</section>
-    case 'flow': return <><Heading>Input → Process → Output</Heading><FlowDiagram inputLabel={b.input[0]} inputDetail={b.input[1]} processLabel={b.process[0]} processDetail={b.process[1]} outputLabel={b.output[0]} outputDetail={b.output[1]}/></>
+    case 'flow':
+      if (b.steps || b.svgScreen || !b.input) {
+        return <ArchitecturalFlow {...b} />
+      }
+      return <><Heading>Input → Process → Output</Heading><FlowDiagram inputLabel={b.input[0]} inputDetail={b.input[1]} processLabel={b.process[0]} processDetail={b.process[1]} outputLabel={b.output[0]} outputDetail={b.output[1]}/></>
     case 'blueprint': return <ProgramCard {...b}/>
     case 'code': return <CodeBlock lines={b.lines} filename={b.filename}/>
     case 'runviz': return <RunVisualizer staticMode={staticMode} file={b.filename} codeLines={b.codeLines} steps={b.steps}/>
