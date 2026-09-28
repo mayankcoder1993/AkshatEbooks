@@ -5,7 +5,7 @@ import pyramidImg from '../assets/testing-pyramid-focus.jpg'
 export const lesson03 = {
   id: 'postman-setup',
   icon: '',
-  title: 'Automating the Wire Check: Postman Workbench and Assertions',
+  title: 'Automating the Wire Check: API Testing Workbench and Assertions',
   shortTitle: 'Automating the Wire Check',
   subtitle: 'Translating manual verification into automated JavaScript assertions, running test suites, and team collaboration.',
   tags: ['Workbench', 'Assertions', 'JavaScript', 'Automation', 'Collections', 'Collaboration'],

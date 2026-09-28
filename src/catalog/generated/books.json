@@ -54,7 +54,7 @@
       },
       {
         "id": "postman-setup",
-        "title": "Automating the Wire Check: Postman Workbench and Assertions",
+        "title": "Automating the Wire Check: API Testing Workbench and Assertions",
         "subtitle": "Translating manual verification into automated JavaScript assertions, running test suites, and team collaboration."
       },
       {
