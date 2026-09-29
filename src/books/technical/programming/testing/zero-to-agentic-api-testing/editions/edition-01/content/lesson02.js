@@ -12,6 +12,10 @@ import ch02Scene4Img from '../assets/ch02-scene-4-dual-wire-verification.jpg'
 import warRoomStripImg from '../assets/war-room-comic-strip.jpg'
 import warRoomEngineerImg from '../assets/war-room-engineer-first-principles.jpg'
 
+import crash500Svg from '../assets/svgs/ch02-workbench-500-crash.svg'
+import guard400Svg from '../assets/svgs/ch02-workbench-400-guard.svg'
+import contract200Svg from '../assets/svgs/ch02-workbench-200-contract.svg'
+
 export const lesson02 = {
   id: 'rest-crud-status',
   icon: '🚨',
@@ -227,6 +231,7 @@ export const lesson02 = {
       badge: 'COMIC WORKBENCH · CRASH REPRODUCTION',
       title: 'Auditing the Unhandled 500 Crash on the Wire',
       appType: 'api-workbench',
+      svgScreen: crash500Svg,
       dialogue: [
         {
           speaker: 'Akshay',
@@ -328,6 +333,7 @@ export const lesson02 = {
       badge: 'COMIC WORKBENCH · DEFENSIVE REPAIR',
       title: 'Verifying the 400 Bad Request Guard',
       appType: 'api-workbench',
+      svgScreen: guard400Svg,
       dialogue: [
         {
           speaker: 'Akshay',
@@ -459,6 +465,7 @@ export const lesson02 = {
       badge: 'COMIC WORKBENCH · CONTRACT VERIFICATION',
       title: 'Auditing the Valid 200 OK Shuttle Route Contract',
       appType: 'api-workbench',
+      svgScreen: contract200Svg,
       dialogue: [
         {
           speaker: 'Akshay',

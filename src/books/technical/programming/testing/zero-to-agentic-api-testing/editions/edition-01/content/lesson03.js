@@ -5,6 +5,10 @@ import ch03Scene1Img from '../assets/ch03-scene-1-launching-postman.jpg'
 import ch03Scene2Img from '../assets/ch03-scene-2-assertion-sandbox.jpg'
 import ch03Scene3Img from '../assets/ch03-scene-3-mission-triumph.jpg'
 
+import assertionRedSvg from '../assets/svgs/ch03-workbench-assertion-red.svg'
+import dualAssertionsSvg from '../assets/svgs/ch03-workbench-dual-assertions.svg'
+import collectionRunnerSvg from '../assets/svgs/ch03-workbench-collection-runner.svg'
+
 export const lesson03 = {
   id: 'postman-setup',
   icon: '🛡️',
@@ -238,6 +242,7 @@ export const lesson03 = {
       badge: 'COMIC WORKBENCH · ASSERTION DISCIPLINE',
       title: 'Proving Assertions Fail Before Trusting Them Green',
       appType: 'api-workbench',
+      svgScreen: assertionRedSvg,
       dialogue: [
         {
           speaker: 'Akshay',
@@ -358,6 +363,7 @@ export const lesson03 = {
       badge: 'COMIC WORKBENCH · DUAL CONTRACT CHECK',
       title: 'Automating Positive Schema and Negative Guard Assertions',
       appType: 'api-workbench',
+      svgScreen: dualAssertionsSvg,
       dialogue: [
         {
           speaker: 'Akshay',
@@ -469,6 +475,7 @@ export const lesson03 = {
       badge: 'COMIC WORKBENCH · RUNNER AUTOMATION',
       title: 'Executing the 4 Request Transit Collection Runner',
       appType: 'api-workbench',
+      svgScreen: collectionRunnerSvg,
       dialogue: [
         {
           speaker: 'Akshay',
