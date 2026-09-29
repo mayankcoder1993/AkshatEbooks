@@ -11,6 +11,13 @@
 import { readFileSync, existsSync } from 'fs'
 import { resolve, basename } from 'path'
 import { pathToFileURL } from 'url'
+import { register } from 'node:module'
+
+try {
+  register(new URL('../../scripts/image-loader.mjs', import.meta.url))
+} catch {
+  // Ignore if image loader is already registered or unsupported
+}
 
 // ─── ARGUMENT PARSING ──────────────────────────────────────
 
