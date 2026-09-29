@@ -1,12 +1,16 @@
 import workbenchImg from '../assets/postman-workbench-overview.jpg'
 import assertionImg from '../assets/postman-assertion-lifecycle.jpg'
 import pyramidImg from '../assets/testing-pyramid-focus.jpg'
+import ch03Scene1Img from '../assets/ch03-scene-1-launching-postman.jpg'
+import ch03Scene2Img from '../assets/ch03-scene-2-assertion-sandbox.jpg'
+import ch03Scene3Img from '../assets/ch03-scene-3-mission-triumph.jpg'
 
 export const lesson03 = {
   id: 'postman-setup',
-  icon: '',
+  icon: '🛡️',
   title: 'Automating the Wire Check: API Testing Workbench and Assertions',
   shortTitle: 'Automating the Wire Check',
+  badge: 'CHAPTER 03 · AUTOMATED WATCHDOG',
   subtitle: 'Translating manual verification into automated JavaScript assertions, running test suites, and team collaboration.',
   tags: ['Workbench', 'Assertions', 'JavaScript', 'Automation', 'Collections', 'Collaboration'],
   blocks: [
@@ -83,6 +87,7 @@ export const lesson03 = {
         {
           title: 'Examining the Green Badge',
           time: '06:00 PM',
+          image: ch03Scene1Img,
           scene: 'Akshay sits beneath the warm brass desk lamp in Sameer lab, examining a printed test report. Beside the laptop rests a handwritten note: Verify why test passes on empty response. Sameer stands nearby holding his brass chai tumbler.',
           dialogue: {
             speaker: 'Akshay',
@@ -95,6 +100,7 @@ export const lesson03 = {
         {
           title: 'The Sleeper Test Shock',
           time: '06:05 PM',
+          image: workbenchImg,
           scene: 'Akshay stares at the screen, running his fingers through his hair as evening shadows lengthen across the Dravidian stone pillars outside.',
           dialogue: {
             speaker: 'Akshay',
@@ -107,6 +113,7 @@ export const lesson03 = {
         {
           title: 'The Tests Sandbox',
           time: '06:10 PM',
+          image: ch03Scene1Img,
           scene: 'Sameer points to the Tests tab in the workbench with his pencil.',
           dialogue: {
             speaker: 'Sameer',
@@ -119,6 +126,7 @@ export const lesson03 = {
         {
           title: 'Assertions with Teeth',
           time: '06:15 PM',
+          image: ch03Scene2Img,
           scene: 'Sameer sketches a Chai expectation formula on a blank pad beside his chai glass.',
           dialogue: {
             speaker: 'Sameer',
@@ -156,6 +164,7 @@ export const lesson03 = {
         {
           title: 'Writing the Chai Assertion',
           time: '06:20 PM',
+          image: ch03Scene2Img,
           scene: 'Akshay types into the workbench Tests tab: pm.test("Status is 400", function () { pm.response.to.have.status(400); });.',
           dialogue: {
             speaker: 'Akshay',
@@ -168,6 +177,7 @@ export const lesson03 = {
         {
           title: 'The Red Proof',
           time: '06:23 PM',
+          image: assertionImg,
           scene: 'Akshay clicks Send. The response arrives with status 500, and the Test Results tab flashes bright red: AssertionError: expected 500 to equal 400.',
           dialogue: {
             speaker: 'Akshay',
@@ -180,6 +190,7 @@ export const lesson03 = {
         {
           title: 'The Red Before Green Rule',
           time: '06:26 PM',
+          image: ch03Scene2Img,
           scene: 'Sameer points to the red assertion trace on the monitor.',
           dialogue: {
             speaker: 'Sameer',
@@ -192,6 +203,7 @@ export const lesson03 = {
         {
           title: 'The Clean Green Pass',
           time: '06:29 PM',
+          image: ch03Scene3Img,
           scene: 'Akshay points the request at the guarded server. The 400 Bad Request returns in 4 milliseconds, and the Test Results badge turns a clean, verified green.',
           dialogue: {
             speaker: 'Akshay',
@@ -271,6 +283,7 @@ export const lesson03 = {
         {
           title: 'The Four Surfaces Architecture',
           time: '06:35 PM',
+          image: workbenchImg,
           scene: 'Akshay maximizes the workbench interface across a high resolution external monitor in Sameer lab, highlighting each quadrant.',
           dialogue: {
             speaker: 'Akshay',
@@ -283,6 +296,7 @@ export const lesson03 = {
         {
           title: 'Execution Chronology',
           time: '06:38 PM',
+          image: assertionImg,
           scene: 'Sameer sketches a timeline: Pre request Script runs before wire transmission; HTTP exchange travels over network; Tests script runs after response arrives.',
           dialogue: {
             speaker: 'Sameer',
@@ -295,6 +309,7 @@ export const lesson03 = {
         {
           title: 'Writing Dual Contract Checks',
           time: '06:41 PM',
+          image: ch03Scene2Img,
           scene: 'Akshay constructs a dual contract suite for the transit route: asserting status 200, Content Type header application/json, and numeric coordinate keys.',
           dialogue: {
             speaker: 'Akshay',
@@ -307,6 +322,7 @@ export const lesson03 = {
         {
           title: 'The 86 Millisecond Verification',
           time: '06:43 PM',
+          image: ch03Scene3Img,
           scene: 'Akshay clicks Send. Three green passes flash onto the Test Results pane in 86 milliseconds.',
           dialogue: {
             speaker: 'Akshay',
@@ -397,6 +413,7 @@ export const lesson03 = {
         {
           title: 'Configuring the Collection Runner',
           time: '06:45 PM',
+          image: workbenchImg,
           scene: 'Akshay selects the four transit queries in the collection runner: Health Check, Shuttle Omitted Guard, Shuttle Valid Contract, and Catalog Verification.',
           dialogue: {
             speaker: 'Akshay',
@@ -409,6 +426,7 @@ export const lesson03 = {
         {
           title: 'Ten Assertions at Machine Speed',
           time: '06:47 PM',
+          image: ch03Scene3Img,
           scene: 'The Collection Runner summary window fills with green pass badges across all four requests.',
           dialogue: {
             speaker: 'Akshay',
@@ -421,6 +439,7 @@ export const lesson03 = {
         {
           title: 'The Spark of Overconfidence',
           time: '06:50 PM',
+          image: ch03Scene3Img,
           scene: 'Akshay leans back in his chair with folded arms and a triumphant grin.',
           dialogue: {
             speaker: 'Akshay',
@@ -433,6 +452,7 @@ export const lesson03 = {
         {
           title: 'The Library Dawn Challenge',
           time: '06:55 PM',
+          image: ch03Scene3Img,
           scene: 'Sameer gestures toward the campus library courtyard through the carved jali stone window. Headlights pierce the twilight as a large delivery truck unloads stacks of cardboard textbook boxes under a lamppost.',
           dialogue: {
             speaker: 'Sameer',

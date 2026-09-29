@@ -1,12 +1,23 @@
 import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 import wireImg from '../assets/http-wire-anatomy.jpg'
 import crudImg from '../assets/restful-crud-status-guide.jpg'
+import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
+import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
+import ch02Scene1Img from '../assets/ch02-scene-1-transit-crisis.jpg'
+import ch02Scene2Img from '../assets/ch02-scene-2-reproduce-500-crash.jpg'
+import ch02Scene3Img from '../assets/ch02-scene-3-defensive-guard-fix.jpg'
+import ch02Scene4Img from '../assets/ch02-scene-4-dual-wire-verification.jpg'
+import warRoomStripImg from '../assets/war-room-comic-strip.jpg'
+import warRoomEngineerImg from '../assets/war-room-engineer-first-principles.jpg'
 
 export const lesson02 = {
   id: 'rest-crud-status',
-  icon: '',
+  icon: '🚨',
   title: 'Investigating the Incident: Manual Wire Auditing and Status Codes',
   shortTitle: 'Manual Wire Auditing',
+  badge: 'CHAPTER 02 · WAR ROOM INVESTIGATION',
   subtitle: 'The campus transit shuttle crisis, dissecting status code families, comparing URLs, diagnosing the 500 crash by hand, and verifying the 400 guard and 200 contract.',
   tags: ['REST', 'HTTP', 'Status Codes', 'Triage', 'Manual Testing', 'Investigation'],
   blocks: [
@@ -65,6 +76,7 @@ export const lesson02 = {
         {
           title: 'The Frozen Transit Map',
           time: '08:14 PM',
+          image: warRoomPanel1Img,
           scene: 'A large overhead map display hangs frozen in the transit war room between carved Dravidian stone pillars. The evening campus rush starts in twenty minutes, but all shuttle icons have vanished.',
           dialogue: {
             speaker: 'Transit Operator',
@@ -77,6 +89,7 @@ export const lesson02 = {
         {
           title: 'The Familiar Defense',
           time: '08:16 PM',
+          image: warRoomPanel2Img,
           scene: 'Akshay sits at the teak console, clicking the reload button on his testing workbench repeatedly as the amber task lamp casts long shadows.',
           dialogue: {
             speaker: 'Akshay',
@@ -89,6 +102,7 @@ export const lesson02 = {
         {
           title: 'Comparing the Two URLs',
           time: '08:18 PM',
+          image: warRoomPanel3Img,
           scene: 'Sameer points to the workbench console monitor showing two request tabs open side by side.',
           dialogue: {
             speaker: 'Sameer',
@@ -101,6 +115,7 @@ export const lesson02 = {
         {
           title: 'The Standup Confrontation',
           time: '08:19 PM',
+          image: warRoomPanel4Img,
           scene: 'Backend engineers cluster around the server logs as an unhandled exception stack trace scrolls continuously down the terminal.',
           dialogue: {
             speaker: 'Backend Lead',
@@ -156,6 +171,7 @@ export const lesson02 = {
         {
           title: 'The Three Columns',
           time: '08:22 PM',
+          image: ch02Scene1Img,
           scene: 'Sameer stands at the mobile whiteboard with a dry erase marker in hand, sketching three distinct columns while Akshay watches with his notebook open.',
           dialogue: {
             speaker: 'Sameer',
@@ -168,6 +184,7 @@ export const lesson02 = {
         {
           title: 'Replaying the Replicas',
           time: '08:25 PM',
+          image: ch02Scene2Img,
           scene: 'Akshay replays three curl commands in his terminal: one with route omitted, one with name equals nothing, and one with name equals percentage twenty.',
           dialogue: {
             speaker: 'Akshay',
@@ -180,6 +197,7 @@ export const lesson02 = {
         {
           title: 'Inspecting the Stack Trace',
           time: '08:27 PM',
+          image: warRoomEngineerImg,
           scene: 'The terminal screen glows red with a full stack trace pointing directly to RouteLocatorService.lookup in routes.js line 42.',
           dialogue: {
             speaker: 'Sameer',
@@ -192,6 +210,7 @@ export const lesson02 = {
         {
           title: 'Setting the Rule',
           time: '08:29 PM',
+          image: ch02Scene2Img,
           scene: 'Sameer places his brass chai glass on the console table and points to the whiteboard heading.',
           dialogue: {
             speaker: 'Sameer',
@@ -253,6 +272,7 @@ export const lesson02 = {
         {
           title: 'Opening the Route Handler',
           time: '08:31 PM',
+          image: ch02Scene3Img,
           scene: 'Akshay switches to the code editor tab in his IDE workbench, navigating to the shuttle locator route definition.',
           dialogue: {
             speaker: 'Akshay',
@@ -265,6 +285,7 @@ export const lesson02 = {
         {
           title: 'Writing the Fail Fast Check',
           time: '08:33 PM',
+          image: ch02Scene3Img,
           scene: 'Akshay types the defensive guard into the route handler, adding the check and a clear JSON error payload.',
           dialogue: {
             speaker: 'Akshay',
@@ -277,6 +298,7 @@ export const lesson02 = {
         {
           title: 'Replaying the Broken Call',
           time: '08:35 PM',
+          image: ch02Scene4Img,
           scene: 'Akshay hits Send on the omitted parameter request tab in his API Testing Workbench.',
           dialogue: {
             speaker: 'Akshay',
@@ -289,6 +311,7 @@ export const lesson02 = {
         {
           title: 'The Working Contract Remains Safe',
           time: '08:37 PM',
+          image: ch02Scene4Img,
           scene: 'Akshay sends GET /v1/shuttle/route?name=north_loop and sees the green 200 OK badge appear with complete coordinate objects.',
           dialogue: {
             speaker: 'Akshay',
@@ -380,6 +403,7 @@ export const lesson02 = {
         {
           title: 'The Five Families',
           time: '08:40 PM',
+          image: crudImg,
           scene: 'Sameer writes the five numbers across the top of the whiteboard: 1xx, 2xx, 3xx, 4xx, and 5xx, creating a systematic taxonomy table.',
           dialogue: {
             speaker: 'Sameer',
@@ -392,6 +416,7 @@ export const lesson02 = {
         {
           title: 'The Campus Catalog Examples',
           time: '08:43 PM',
+          image: warRoomStripImg,
           scene: 'Akshay writes concrete campus examples under each column on the whiteboard with black marker.',
           dialogue: {
             speaker: 'Akshay',
@@ -404,6 +429,7 @@ export const lesson02 = {
         {
           title: 'The Polite 200 Trap',
           time: '08:46 PM',
+          image: ch02Scene4Img,
           scene: 'Sameer circles the 2xx column in red marker and writes the word Danger underneath it.',
           dialogue: {
             speaker: 'Sameer',
@@ -416,6 +442,7 @@ export const lesson02 = {
         {
           title: 'The Evening Rush Succeeds',
           time: '08:50 PM',
+          image: warRoomEngineerImg,
           scene: 'The overhead operations display springs to life. Green shuttle icons move smoothly across campus routes as students head home without interruption.',
           dialogue: {
             speaker: 'Transit Operator',
