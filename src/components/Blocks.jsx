@@ -457,31 +457,11 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
           <div key={idx} className="storyboard-panel-card comic-story-cell">
             <div className="panel-card-top comic-context-bar">
               <div>
-                <span className="panel-num-badge comic-context-badge">PANEL {idx + 1}</span>
+                
                 <span className="panel-phase-title comic-context-title">{p.title}</span>
               </div>
               {p.time && <span className="panel-time-tag comic-context-time">{p.time}</span>}
             </div>
-            {p.image && (
-              <div className="panel-art-frame">
-                <img
-                  src={p.image.src || p.image.file || p.image}
-                  alt={p.image.alt || p.title || 'Comic scene'}
-                  className="panel-art-image"
-                  loading="lazy"
-                />
-                {p.image.caption && (
-                  <div className="panel-art-caption">{p.image.caption}</div>
-                )}
-              </div>
-            )}
-            <div className="panel-card-body">
-              {p.scene && (
-                <div className="panel-scene-box">
-                  <span className="panel-label">Scene & Action:</span>
-                  <p className="panel-scene-text"><RichText text={p.scene} /></p>
-                </div>
-              )}
               {p.dialogue && (
                 <div className="comic-balloon-container">
                   <div className={`comic-speech-balloon speaker-${p.dialogue.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
@@ -502,6 +482,26 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
                       <div className="balloon-tail reply" />
                     </div>
                   )}
+                </div>
+              )}
+            {p.image && (
+              <div className="panel-art-frame">
+                <img
+                  src={p.image.src || p.image.file || p.image}
+                  alt={p.image.alt || p.title || 'Comic scene'}
+                  className="panel-art-image"
+                  loading="lazy"
+                />
+                {p.image.caption && (
+                  <div className="panel-art-caption">{p.image.caption}</div>
+                )}
+              </div>
+            )}
+            <div className="panel-card-body">
+              {p.scene && (
+                <div className="panel-scene-box">
+                  <span className="panel-label">Scene & Action:</span>
+                  <p className="panel-scene-text"><RichText text={p.scene} /></p>
                 </div>
               )}
               {p.realization && (
