@@ -1,4 +1,3 @@
-import AdminVaultModal from './components/AdminVaultModal.jsx';
 import { useEffect, useState, useRef } from 'react'
 import Header from './components/Header.jsx'
 import LibraryHome from './components/LibraryHome.jsx'
@@ -558,8 +557,6 @@ export default function App() {
                 )}
                 <Blocks blocks={chapterBlocks} />
               </LessonShell>
-      <AdminVaultModal isOpen={showVaultModal} onClose={() => setShowVaultModal(false)} />
-
             </div>
           )}
 

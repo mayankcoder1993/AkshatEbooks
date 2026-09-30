@@ -13,7 +13,6 @@ export default function Header({
   exporting,
   onOpenBlueprint,
   onOpenDialogueLab,
-  onOpenVault,
   isWide = false,
   onToggleWideMode = () => {},
   isFullscreen = false,
@@ -100,15 +99,7 @@ export default function Header({
           >
             📋 Blueprint
           </button>
-                    {onOpenVault && (
-            <button
-              type=" button\n className=tn\n style={{ background: #f0fdf4, color: #166534, borderColor: #86efac, fontWeight: 700 }}
- onClick={onOpenVault}
- title=Admin AI Vault\n >
- 🛡️ AI Vault
- </button>
- )}
- {onOpenDialogueLab && (
+          {onOpenDialogueLab && (
             <button
               type="button"
               className="btn"
