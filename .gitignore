@@ -3,3 +3,8 @@ dist
 single-build
 reports
 
+
+# Dynamic Runtime Secrets
+config/runtime-vault.json
+newkey
+*.enc

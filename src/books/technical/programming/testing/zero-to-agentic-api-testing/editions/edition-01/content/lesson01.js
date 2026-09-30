@@ -29,8 +29,8 @@ export const lesson01 = {
       type: 'chapter-opener',
       missionBadge: 'MISSION 1 · PHASE 1 OF 3: THE WIRE AND LOCAL CATALOG SERVER',
       missionTitle: 'Global Open Data and Web Wire Audit',
-      missionCrisis: 'The Checklist Kingdom and the Presentation Glass Trap',
-      missionContext: 'Akshay spends his morning in the engineering bay manually ticking forty one checklist rows on a printed sheet. When the campus cafeteria menu board freezes, Akshay assumes the tablet screen is broken. Sameer steps in to show him that user interfaces are only presentation mirrors. The true state lives on the physical network wire.',
+      missionCrisis: 'The 10:00 AM Semester Results Meltdown & The Presentation Glass Trap',
+      missionContext: 'At 10:00 AM on results day, twelve thousand students hammer the portal, leaving Akshay staring at a blank screen with a frozen spinner. Principal architect Sameer arrives with cutting chai, bypassing the browser to fetch the marksheet in 18ms via a raw API call. Astounded, Akshay vows to build a dedicated results web app and gift it to the college.',
       missionObjective: 'Understand what an Application Programming Interface does on the network wire, build a runnable Express catalog server from scratch on port 3000, avoid the undefined body crash, and execute all five core CRUD operations.',
       targetSystems: 'Apex Campus Catalog Service · Port 3000 · HTTP Wire Traffic',
       phaseRoadmap: [
@@ -71,13 +71,20 @@ export const lesson01 = {
     {
       type: 'storyboard',
       badge: 'COMIC SCENE 1 OF 4',
-      title: 'The Checklist Kingdom and the Wire Awakening',
+      title: 'The 10:00 AM Results Meltdown and the Wire Awakening',
       intro: 'Morning at the Apex University engineering bay. Akshay starts his day running repetitive manual regression tests from a printed binder before a cafeteria screen standoff leads him to the server room.',
       panels: [
         {
           title: 'The Manual Routine',
           time: '09:15 AM',
           image: laptopImg,
+          promptMeta: {
+            title: 'Akshay at Manual Checklist Bay',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art graphic novel illustration. Akshay, 23-year-old junior QA engineer in a tailored mustard-yellow cotton kurta with rolled sleeves, sitting at a teakwood desk in a sandstone heritage campus wing with Dravidian carved pillars and jali screen windows. Ticking rows on a printed regression checklist sheet with a pen. Laptop with a small scratch on the top-left lid open beside him. Sharp almond eyes with double-line black ink contours, flat vibrant color fills, pure white background (#FFFFFF), print-safe, high detail.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, anime, dark background, gradients, neon, Devanagari script.',
+            targetAsset: 'assets/illustrations/ch01-scene1-akshay-modern-laptop.jpg'
+          },
           scene: 'Akshay sits at his shared desk bay in the heritage engineering wing under warm morning sunlight, ticking the same regression checklist column he ticked yesterday.',
           dialogue: {
             speaker: 'Akshay',
@@ -91,6 +98,13 @@ export const lesson01 = {
           title: 'The Presentation Glass Illusion',
           time: '11:45 AM',
           image: terminalMonitorImg,
+          promptMeta: {
+            title: 'The Presentation Glass Illusion',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer, 40-year-old principal architect in indigo blue kurta and off-white Nehru waistcoat, adjusting wireframe glasses and holding a terracotta cutting chai cup, pointing to a dark terminal monitor. Akshay looks upward in realization. Sandstone heritage lab background, pure white background #FFFFFF, double-line ink contours, print-safe.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg'
+          },
           scene: 'Sameer points to an open laptop showing a browser UI while gesturing toward a dark terminal monitor. Akshay looks upward with sudden realization.',
           dialogue: {
             speaker: 'Sameer',
@@ -104,6 +118,13 @@ export const lesson01 = {
           title: 'Holding the Physical Wire',
           time: '12:12 PM',
           image: networkCableImg,
+          promptMeta: {
+            title: 'Holding the Physical Wire',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art graphic novel panel. In the server lab, Sameer lifts a blue Category 6 Ethernet network cable plugged between workstations, pointing toward the server rack status lights. Akshay observing closely. Double-line black ink contours, pure white background #FFFFFF.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, anime, dark background, gradients.',
+            targetAsset: 'assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg'
+          },
           scene: 'In the lab, Sameer lifts a blue Category 6 network cable plugged between workstations, pointing toward the enterprise server rack.',
           dialogue: {
             speaker: 'Sameer',
@@ -117,6 +138,13 @@ export const lesson01 = {
           title: 'The Whiteboard Waiter Model',
           time: '12:35 PM',
           image: whiteboardWaiterImg,
+          promptMeta: {
+            title: 'The Whiteboard Waiter Model',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer standing beside a glass whiteboard sketching the restaurant waiter architecture: customer, waiter interface, and kitchen database. Akshay taking notes on laptop. Sandstone pillars, pure white background #FFFFFF, traditional floral border accents.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg'
+          },
           scene: 'Sameer stands beside a magnetic dry erase whiteboard sketching the architecture of the client server interaction while Akshay takes notes on his laptop.',
           dialogue: {
             speaker: 'Sameer',
@@ -217,6 +245,13 @@ export const lesson01 = {
           title: 'Pair Programming at the Workstation',
           time: '02:00 PM',
           image: codingPairImg,
+          promptMeta: {
+            title: 'Pair Programming at Workstation',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Akshay and Sameer pair programming side by side at a teakwood workstation. Server.js code editor visible on screen. Sameer calmly gesturing with open palm, Akshay typing with focused determination. Pure white background #FFFFFF, double-line ink contours.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene3-panel1-modern-coding.jpg'
+          },
           scene: 'Akshay types code on his laptop with server.js visible on the screen, while Sameer stands right beside him watching the implementation.',
           dialogue: {
             speaker: 'Sameer',
@@ -230,6 +265,13 @@ export const lesson01 = {
           title: 'The Undefined Body Crash',
           time: '02:25 PM',
           image: blooperCrashImg,
+          promptMeta: {
+            title: 'The Undefined Body Crash',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art comic panel. Akshay in comic distress scratching the back of his head with wide eyes as terminal monitor displays a red stack trace: TypeError Cannot read properties of undefined. Sameer with calm knowing half-smile holding chai. Pure white background #FFFFFF, expressive almond eyes.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene3-panel2-modern-blooper.jpg'
+          },
           scene: 'Akshay triggers a POST request to add a new course, but the terminal flashes a red error stack trace.',
           dialogue: {
             speaker: 'Akshay',
@@ -243,6 +285,13 @@ export const lesson01 = {
           title: 'The Middleware Savior',
           time: '02:40 PM',
           image: middlewareFixImg,
+          promptMeta: {
+            title: 'The Middleware Savior',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer pointing with stylus directly at app.use express.json code line on Akshay laptop screen. Akshay nodding in lightbulb realization moment. Sandstone jali background, pure white background #FFFFFF.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg'
+          },
           scene: 'Sameer leans over, smiling calmly and pointing with his finger directly at the code on Akshay laptop screen.',
           dialogue: {
             speaker: 'Sameer',
@@ -256,6 +305,13 @@ export const lesson01 = {
           title: 'Green Server Startup Triumph',
           time: '02:55 PM',
           image: serverSuccessImg,
+          promptMeta: {
+            title: 'Green Server Startup Triumph',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Akshay pumping fist in victory with wide smile as terminal monitor displays green text 201 Created and server listening on port 3000. Sameer offering affirmative nod. Pure white background #FFFFFF, festive Madhubani border motif.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene3-panel4-modern-server-success.jpg'
+          },
           scene: 'Akshay pumps his fist in victory as the screen glows with green startup success.',
           dialogue: {
             speaker: 'Akshay',
@@ -454,6 +510,13 @@ app.use(express.json());`,
           title: 'Reviewing the Five Moves over Chai',
           time: '03:15 PM',
           image: chaiReviewImg,
+          promptMeta: {
+            title: 'Reviewing Five Moves over Chai',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer and Akshay sitting at teakwood workbench sharing steaming terracotta cups of cutting chai. Server racks humming in soft background. Whiteboard displays 5 verbs: POST GET PUT PATCH DELETE. Pure white background #FFFFFF.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene1-sameer-chai-modern.jpg'
+          },
           scene: 'Sameer offering cutting chai to Akshay at their shared workbench desk, server racks humming softly in the background.',
           dialogue: {
             speaker: 'Sameer',
@@ -467,6 +530,13 @@ app.use(express.json());`,
           title: 'The Brass Thali Trap',
           time: '03:40 PM',
           image: thaliTrapImg,
+          promptMeta: {
+            title: 'The Brass Thali Trap',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art comic panel. Sameer holds a gleaming brass thali dinner plate explaining complete replacement versus single bowl refill, smiling merrily. Akshay looks at screen in surprise realizing PUT wiped out missing fields. Pure white background #FFFFFF, double-line ink contours.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
+            targetAsset: 'assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg'
+          },
           scene: 'Sameer holds an empty thali plate laughing merrily, while Akshay points in dismay at his laptop screen where course properties disappeared.',
           dialogue: {
             speaker: 'Akshay',

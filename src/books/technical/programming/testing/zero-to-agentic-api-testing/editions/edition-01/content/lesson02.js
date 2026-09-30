@@ -176,6 +176,13 @@ export const lesson02 = {
           title: 'The Three Columns',
           time: '08:22 PM',
           image: ch02Scene1Img,
+          promptMeta: {
+            title: '8:14 PM War Room Standoff',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art graphic novel illustration. 8:14 PM at the campus transit war room. A giant wall display monitor shows a frozen transit map with glowing warning borders. Akshay in mustard kurta sits at the terminal looking anxious, while transit operator with arms crossed gestures at the screen. Sameer stands calmly in the background holding a brass chai tumbler. Sandstone Dravidian pillars flanking console, pure white background #FFFFFF, print-safe.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients, neon.',
+            targetAsset: 'assets/ch02-scene-1-transit-crisis.jpg'
+          },
           scene: 'Sameer stands at the mobile whiteboard with a dry erase marker in hand, sketching three distinct columns while Akshay watches with his notebook open.',
           dialogue: {
             speaker: 'Sameer',
@@ -189,6 +196,13 @@ export const lesson02 = {
           title: 'Replaying the Replicas',
           time: '08:25 PM',
           image: ch02Scene2Img,
+          promptMeta: {
+            title: 'Reproducing the 500 Crash',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art comic panel. Akshay sitting at workstation typing curl command without route parameter. Terminal monitor flashes red stack trace: TypeError Cannot read properties of undefined trim. Sameer pointing with stylus to the terminal buffer. Pure white background #FFFFFF, double-line black ink contours.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
+            targetAsset: 'assets/ch02-scene-2-reproduce-500-crash.jpg'
+          },
           scene: 'Akshay replays three curl commands in his terminal: one with route omitted, one with name equals nothing, and one with name equals percentage twenty.',
           dialogue: {
             speaker: 'Akshay',
@@ -278,6 +292,13 @@ export const lesson02 = {
           title: 'Opening the Route Handler',
           time: '08:31 PM',
           image: ch02Scene3Img,
+          promptMeta: {
+            title: 'Installing the Defensive Guard Fix',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer and Akshay reviewing code. On the screen, code editor shows defensive validation check. Akshay smiles with understanding as Sameer nods. Sandstone jali window, pure white background #FFFFFF, rich traditional colors.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
+            targetAsset: 'assets/ch02-scene-3-defensive-guard-fix.jpg'
+          },
           scene: 'Akshay switches to the code editor tab in his IDE workbench, navigating to the shuttle locator route definition.',
           dialogue: {
             speaker: 'Akshay',
@@ -304,6 +325,13 @@ export const lesson02 = {
           title: 'Replaying the Broken Call',
           time: '08:35 PM',
           image: ch02Scene4Img,
+          promptMeta: {
+            title: 'Dual Wire Contract Verification',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Terminal split into two successful verification panes: top pane showing 400 Bad Request defensive guard, bottom pane showing 200 OK valid route coordinates. Akshay celebrating at his desk with fist pump, Sameer smiling calmly. Pure white background #FFFFFF, floral border motifs.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
+            targetAsset: 'assets/ch02-scene-4-dual-wire-verification.jpg'
+          },
           scene: 'Akshay hits Send on the omitted parameter request tab in his API Testing Workbench.',
           dialogue: {
             speaker: 'Akshay',

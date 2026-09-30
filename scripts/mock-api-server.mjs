@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 // mock-api-server.mjs
 // Standalone mock server supporting REST, E-Commerce, OAuth 2.0, SOAP 1.2, and GraphQL
 import http from 'http';
@@ -498,6 +499,117 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     return res.end(JSON.stringify({ data }));
   }
+
+
+  // =========================================================================
+  // ADMIN VAULT & SECURE AI PROXY ENDPOINTS (SpecKit 001-dynamic-admin-vault)
+  // =========================================================================
+  const VAULT_FILE = 'config/runtime-vault.json';
+
+  if (pathname === '/api/admin/ai-status' && method === 'GET') {
+    let configured = false;
+    let aiEnabled = false;
+    if (fs.existsSync(VAULT_FILE)) {
+      try {
+        const vault = JSON.parse(fs.readFileSync(VAULT_FILE, 'utf8'));
+        configured = !!vault.ciphertext;
+        aiEnabled = !!vault.aiEnabled;
+      } catch (e) {}
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({ configured, aiEnabled, provider: 'gemini' }));
+  }
+
+  if (pathname === '/api/admin/ai-config' && method === 'POST') {
+    const raw = await readBody(req);
+    try {
+      const data = JSON.parse(raw);
+      const { passphrase, apiKey, aiEnabled } = data;
+
+      if (!passphrase || passphrase !== 'Akshat') {
+        res.writeHead(401, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ error: 'Unauthorized: Invalid Admin Passphrase' }));
+      }
+
+      const { encryptSecret } = await import('./vault-utils.mjs');
+      if (!fs.existsSync('config')) fs.mkdirSync('config', { recursive: true });
+
+      let vaultData = {};
+      if (fs.existsSync(VAULT_FILE)) {
+        try { vaultData = JSON.parse(fs.readFileSync(VAULT_FILE, 'utf8')); } catch (e) {}
+      }
+
+      if (apiKey) {
+        const encrypted = encryptSecret(apiKey, passphrase);
+        vaultData = Object.assign({}, vaultData, encrypted);
+      }
+      if (typeof aiEnabled === 'boolean') {
+        vaultData.aiEnabled = aiEnabled;
+      }
+
+      fs.writeFileSync(VAULT_FILE, JSON.stringify(vaultData, null, 2), 'utf8');
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ success: true, aiEnabled: vaultData.aiEnabled, configured: !!vaultData.ciphertext }));
+    } catch (err) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: err.message }));
+    }
+  }
+
+  if (pathname === '/api/ai/generate' && method === 'POST') {
+    if (!fs.existsSync(VAULT_FILE)) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'AI generation not configured by administrator.' }));
+    }
+
+    let vault;
+    try {
+      vault = JSON.parse(fs.readFileSync(VAULT_FILE, 'utf8'));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Failed to read vault state.' }));
+    }
+
+    if (!vault.aiEnabled) {
+      res.writeHead(403, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'AI generation is currently disabled by administrator.' }));
+    }
+
+    const raw = await readBody(req);
+    const { prompt } = JSON.parse(raw || '{}');
+    if (!prompt) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Missing prompt.' }));
+    }
+
+    const { decryptSecret } = await import('./vault-utils.mjs');
+    let apiKey;
+    try {
+      apiKey = decryptSecret(vault, 'Akshat');
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Decryption failed. Admin re-authentication required.' }));
+    }
+
+    try {
+      const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' + apiKey;
+      const aiRes = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }]
+        })
+      });
+      const aiData = await aiRes.json();
+      res.writeHead(aiRes.status, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify(aiData));
+    } catch (err) {
+      res.writeHead(502, { 'Content-Type': 'application/json' });
+      return res.end(JSON.stringify({ error: 'Upstream AI provider error: ' + err.message }));
+    }
+  }
+
 
   // 16. Fallback
   res.writeHead(404, { 'Content-Type': 'application/json' });

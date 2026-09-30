@@ -92,6 +92,13 @@ export const lesson03 = {
           title: 'Examining the Green Badge',
           time: '06:00 PM',
           image: ch03Scene1Img,
+          promptMeta: {
+            title: 'The Green Lie Audit',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art graphic novel illustration. Akshay examining a passing green test badge on his laptop screen under a warm brass desk lamp at 6:00 PM. Sameer standing by his desk pointing with spectacles folded in hand to the empty assertion tab. Sandstone carved arch, evening sky through jali, pure white background #FFFFFF, print-safe.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients, neon.',
+            targetAsset: 'assets/ch03-scene-1-launching-postman.jpg'
+          },
           scene: 'Akshay sits beneath the warm brass desk lamp in Sameer lab, examining a printed test report. Beside the laptop rests a handwritten note: Verify why test passes on empty response. Sameer stands nearby holding his brass chai tumbler.',
           dialogue: {
             speaker: 'Akshay',
@@ -131,6 +138,13 @@ export const lesson03 = {
           title: 'Assertions with Teeth',
           time: '06:15 PM',
           image: ch03Scene2Img,
+          promptMeta: {
+            title: 'Chai BDD Assertion Sandbox',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Split workbench visualization showing the Postman Tests sandbox tab where JavaScript assertions execute. Akshay writing pm.response.to.have.status(200). Code elements glowing in clean ink outline. Sameer nodding with approval. Pure white background #FFFFFF, rich traditional earth colors.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
+            targetAsset: 'assets/ch03-scene-2-assertion-sandbox.jpg'
+          },
           scene: 'Sameer sketches a Chai expectation formula on a blank pad beside his chai glass.',
           dialogue: {
             speaker: 'Sameer',
@@ -208,6 +222,13 @@ export const lesson03 = {
           title: 'The Clean Green Pass',
           time: '06:29 PM',
           image: ch03Scene3Img,
+          promptMeta: {
+            title: 'Collection Runner 86 Millisecond Triumph',
+            aspectRatio: '16:9',
+            positivePrompt: 'Madhubani Mithila folk art comic panel. Akshay and Sameer looking at the Collection Runner summary dashboard glowing with 4 requests, 10 assertions passed in 86ms. Akshay smiling broadly with raised fists, Sameer raising his brass chai glass in celebration. Pure white background #FFFFFF, festive border accents.',
+            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
+            targetAsset: 'assets/ch03-scene-3-mission-triumph.jpg'
+          },
           scene: 'Akshay points the request at the guarded server. The 400 Bad Request returns in 4 milliseconds, and the Test Results badge turns a clean, verified green.',
           dialogue: {
             speaker: 'Akshay',
