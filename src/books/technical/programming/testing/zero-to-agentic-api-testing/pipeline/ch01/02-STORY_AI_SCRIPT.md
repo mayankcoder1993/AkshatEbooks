@@ -96,19 +96,19 @@ Panel 4 (Close-up on Sameer's face): A knowing, almost gentle expression. He lif
 
 > **Akshay** *(tapping the screen like mad)*: "It won't open! The little loading circle has been spinning like a ceiling fan for four straight minutes!"
 
-> **Sameer** *(walking up, holding a hot cutting chai, calm as ever)*: "Good morning, Akshay. You and twelve thousand other panicking students are all hammering that exact same refresh button right now."
+> **Sameer** *(walking up, holding a hot cutting chai, calm as ever)*: "Good morning, Akshay. Let me guess: you're standing out here under the stone arches where the campus Wi-Fi drops to one shaky bar."
 
 > **Akshay**: "Did the college server crash?!"
 
-> **Sameer** *(smiling and shaking his head)*: "The server is totally fine. It's just drowning in useless baggage. Look at what your phone browser is trying to download."
+> **Sameer** *(smiling and shaking his head)*: "The server is completely fine. It is your browser that is choking on its own vanity. Look at what your phone is desperately trying to pull through that thin wireless straw."
 
-> *(Sameer angles his tablet screen so Akshay can see the download list.)*
+> *(Sameer angles his tablet screen so Akshay can see the diagnostic waterfall.)*
 
-> **Sameer**: "Before your browser shows your seat number, it insists on downloading a massive photo of the campus trees you see every single day. Then half a megabyte of button colors, giant font files, and heavy code just to show a little animated dropdown menu."
+> **Sameer**: "Before your browser will even render your seat number, it insists on downloading a four-megabyte payload. A massive high-res photo of the campus neem trees, half a megabyte of button styles, huge font packs, and heavy JavaScript frameworks just to paint a decorative header."
 
-> **Akshay** *(eyes wide at the numbers)*: "Almost four megabytes of junk just to show my seat number?!"
+> **Akshay** *(eyes wide at the numbers)*: "Almost four megabytes over a one-bar connection just to read two lines of text?!"
 
-> **Sameer**: "Almost four megabytes. While the only thing you actually need — Hall 302, Seat B-14 — is just one hundred and twenty bytes! That is thirty thousand times smaller. You aren't waiting for your data, Akshay. You're waiting for all the heavy makeup to load."
+> **Sameer**: "Exactly. On a weak signal, four megabytes takes forever or times out. Meanwhile, the actual data you need — Hall 302, Seat B-14 — is just one hundred and twenty bytes! That is thirty thousand times smaller. You aren't waiting on the server, Akshay. You're waiting for the browser to finish painting a museum."
 
 > **Akshay** *(looking nervously at the guards)*: "Sameer, they lock the doors in sixteen minutes!"
 
@@ -239,7 +239,7 @@ When Akshay opened `https://portal.apex.edu` in his mobile browser, the browser 
 │  portal-app.js               │  610 KB  │  App-specific JS      │
 ├──────────────────────────────┼──────────┼───────────────────────┤
 │  TOTAL TRANSFER              │ 3838 KB  │                       │
-│  DOM Interactive             │  ~4200ms │  (on congested server)│
+│  DOM Interactive             │  ~4200ms │ (on weak quad signal) │
 ├──────────────────────────────┴──────────┴───────────────────────┤
 │  Actual data payload needed: 120 bytes (0.003% of total)        │
 └─────────────────────────────────────────────────────────────────┘
