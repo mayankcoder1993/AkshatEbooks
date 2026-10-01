@@ -303,6 +303,7 @@ function ComicWorkbench({
   const currentTab = tabs && tabs.length > 0 ? tabs[activeTabIndex] : null
   const activeWorkbench = currentTab?.workbench || workbench
   const activeIde = currentTab?.ide || ide
+  const activeBreakdown = currentTab?.breakdown || breakdown
   return (
     <section className="comic-workbench-card">
       <div className="comic-workbench-header">
