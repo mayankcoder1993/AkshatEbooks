@@ -1,16 +1,11 @@
 import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 import wireImg from '../assets/http-wire-anatomy.jpg'
 import crudImg from '../assets/restful-crud-status-guide.jpg'
-import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
-import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
-import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
-import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
-import ch02Scene1Img from '../assets/ch02-scene-1-transit-crisis.jpg'
-import ch02Scene2Img from '../assets/ch02-scene-2-reproduce-500-crash.jpg'
-import ch02Scene3Img from '../assets/ch02-scene-3-defensive-guard-fix.jpg'
-import ch02Scene4Img from '../assets/ch02-scene-4-dual-wire-verification.jpg'
-import warRoomStripImg from '../assets/war-room-comic-strip.jpg'
-import warRoomEngineerImg from '../assets/war-room-engineer-first-principles.jpg'
+
+import ch02ComicScene1Svg from '../assets/svgs/ch02-comic-scene1-transit-crisis.svg'
+import ch02ComicScene2Svg from '../assets/svgs/ch02-comic-scene2-reproduce-500.svg'
+import ch02ComicScene3Svg from '../assets/svgs/ch02-comic-scene3-defensive-guard.svg'
+import ch02ComicScene4Svg from '../assets/svgs/ch02-comic-scene4-dual-verification.svg'
 
 import crash500Svg from '../assets/svgs/ch02-workbench-500-crash.svg'
 import guard400Svg from '../assets/svgs/ch02-workbench-400-guard.svg'
@@ -30,7 +25,7 @@ export const lesson02 = {
       missionBadge: 'MISSION 1 · PHASE 2 OF 3: THE MANUAL WIRE INVESTIGATION',
       missionTitle: 'Global Open Data and Web Wire Audit',
       missionCrisis: 'The Campus Transit Shuttle Crash: Diagnosing the 500 Server Error',
-      missionContext: 'The student shuttle tracking service crashed on day one of orientation whenever students opened the route tracker without selecting a destination. The frontend team blamed the backend, while backend logs showed an unhandled NullPointerException. In this phase, we enter the war room to inspect raw HTTP packets by hand, understand status code families, and install defensive guards.',
+      missionContext: 'At 08:14 PM, hours after surviving his morning exam, student apprentice Akshay joins Principal Architect Sameer at the campus Transit Operations desk. The campus transit shuttle tracking service has crashed during the evening rush whenever students open the route tracker without selecting a destination. The frontend team blamed the backend, while backend logs showed an unhandled TypeError. In this phase, Akshay and Sameer inspect raw HTTP packets on the wire by hand, reproduce the unhandled 500 crash via curl, understand status code families, and install a defensive guard returning 400 Bad Request.',
       missionObjective: 'Reproduce the unhandled 500 crash, install a defensive input validation guard, and verify both 400 Bad Request and 200 OK contracts.',
       targetSystems: 'Campus Shuttle Route Locator Service · Port 5050 · HTTP Wire Traffic',
       missionImage: {
@@ -71,66 +66,94 @@ export const lesson02 = {
       rank: 'WIRE PROTOCOL INVESTIGATOR',
       status: 'ACTIVE'
     },
+
+    // =========================================================================
+    // TOPIC 1: THE COMIC STORYBOARD ARC (ALL 4 SCENES)
+    // =========================================================================
     {
       type: 'storyboard',
-      badge: 'COMIC SCENE 1 OF 4',
-      title: '8:14 PM: The War Room Outage',
-      intro: 'Inside the transit operations centre, fingers are pointed across a whiteboard while student phones fail across campus.',
+      badge: 'GRAPHIC COMIC : FOUR SCENES',
+      title: 'The Transit Shuttle Outage and Wire Triage',
+      intro: 'Follow student apprentice Akshay and mentor Sameer in the transit operations room as they reproduce the 500 crash on the wire, distinguish empty parameter variants, install the defensive guard, and verify contracts.',
       panels: [
         {
-          title: 'The Frozen Transit Map',
+          title: 'Scene 1: 08:14 PM: The Frozen Transit Map and the War Room Standoff',
           time: '08:14 PM',
-          image: warRoomPanel1Img,
-          scene: 'A large overhead map display hangs frozen in the transit war room between carved Dravidian stone pillars. The evening campus rush starts in twenty minutes, but all shuttle icons have vanished.',
+          image: {
+            src: ch02ComicScene1Svg,
+            alt: 'Akshay and Sameer in the transit operations room looking at frozen bus tracking display',
+            caption: 'Transit Operations Desk: Evening rush transit monitors freeze with HTTP 500 Internal Server Error.'
+          },
+          embeddedBubbles: true,
+          scene: 'At 08:14 PM, hours after his morning exam, student apprentice Akshay joins Sameer at the transit operations desk. Overhead map screens hang frozen with red error banners as campus shuttles vanish from student phone screens. Teams point fingers between frontend and backend.',
           dialogue: {
-            speaker: 'Transit Operator',
-            speech: 'The shuttle locator went black! Students are stranded at the north gates, and their phones display an internal error screen.',
-            replySpeaker: 'Frontend Lead',
-            replySpeech: 'Our mobile application code did not change. The backend service must be returning garbage.'
+            speaker: 'Akshay',
+            speech: 'The campus transit shuttle map has frozen! Students waiting at bus stops see an empty screen. The terminal log says HTTP 500 Internal Server Error!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Step away from the blame game. The browser and app screens are decorative glass. Come to the terminal and inspect the raw wire.'
           },
           realization: 'When production systems fail, finger pointing between teams begins until someone inspects the network wire.'
         },
         {
-          title: 'The Familiar Defense',
-          time: '08:16 PM',
-          image: warRoomPanel2Img,
-          scene: 'Akshay sits at the teak console, clicking the reload button on his testing workbench repeatedly as the amber task lamp casts long shadows.',
+          title: 'Scene 2: 08:25 PM: Reproducing the 500 Crash on the Wire',
+          time: '08:25 PM',
+          image: {
+            src: ch02ComicScene2Svg,
+            alt: 'Akshay typing curl command without route parameter as terminal shows red TypeError stack trace',
+            caption: 'Terminal Console: Omitted query parameter triggers unhandled TypeError: Cannot read properties of undefined (reading trim).'
+          },
+          embeddedBubbles: true,
+          scene: 'Akshay opens his terminal and fires curl http://localhost:5050/v1/shuttle/route without specifying a route name. The terminal instantly dumps a bright red unhandled stack trace: TypeError: Cannot read properties of undefined (reading trim). Sameer points out the three ways to be empty.',
           dialogue: {
             speaker: 'Akshay',
-            speech: 'It works when I try it on my laptop! I queried the shuttle route three minutes ago and received status 200 OK!',
+            speech: 'I sent GET /v1/shuttle/route with the route name omitted. The server returned HTTP 500 with an unhandled TypeError stack trace!',
             replySpeaker: 'Sameer',
-            replySpeech: 'It works when YOU try it, Akshay. Come to the whiteboard and show me the exact URL you sent.'
+            replySpeech: 'An omitted parameter in Express is undefined, not an empty string. Calling trim on undefined crashes the worker process!'
           },
-          realization: 'Works on my machine is the most dangerous phrase in software engineering because it hides parameter differences.'
+          realization: 'A 500 error is not a hardware failure; it is an uncaught application exception crashing the server process due to missing input guards.'
         },
         {
-          title: 'Comparing the Two URLs',
-          time: '08:18 PM',
-          image: warRoomPanel3Img,
-          scene: 'Sameer points to the workbench console monitor showing two request tabs open side by side.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'Look at the query strings. Your request sent name equals north loop. The mobile application sent the route path with the name parameter completely missing.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'Wait, does leaving off the query parameter make that big a difference to the backend?'
+          title: 'Scene 3: 08:33 PM: Installing the Defensive Input Guard',
+          time: '08:33 PM',
+          image: {
+            src: ch02ComicScene3Svg,
+            alt: 'Akshay and Sameer writing defensive guard in code editor',
+            caption: 'Editor Console: Installing fail fast validation guard checking existence and whitespace before running business logic.'
           },
-          realization: 'A missing parameter is not an empty string; it is a completely absent memory reference.'
+          embeddedBubbles: true,
+          scene: 'Akshay opens the route handler file in his editor. Under Sameer guidance, he writes a fail fast guard: if (!name || !name.trim()) return res.status(400).json({ error: "Bad Request", message: "Query parameter name is required and cannot be empty" }).',
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'I added the guard: if (!name || !name.trim()) return res.status(400) with a clear error payload. We fail fast before calling route lookup!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Clean engineering. 400 Bad Request informs the client that their request was malformed, protecting our server from a fatal crash.'
+          },
+          realization: 'Defensive guards intercept malformed client requests at the door, preventing unhandled server crashes and returning 400 client error contracts.'
         },
         {
-          title: 'The Standup Confrontation',
-          time: '08:19 PM',
-          image: warRoomPanel4Img,
-          scene: 'Backend engineers cluster around the server logs as an unhandled exception stack trace scrolls continuously down the terminal.',
-          dialogue: {
-            speaker: 'Backend Lead',
-            speech: 'The server log reports an uncaught TypeError in RouteLocatorService. The entire request worker process stalled.',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Let us isolate the failure. An API contract must account for every way a client can send empty data.'
+          title: 'Scene 4: 08:37 PM: Dual Wire Contract Verification',
+          time: '08:37 PM',
+          image: {
+            src: ch02ComicScene4Svg,
+            alt: 'Terminal split screen showing 400 Bad Request guard and 200 OK valid route coordinates',
+            caption: 'Dual Verification: Negative guard returns 400 Bad Request in 4ms, while valid query returns 200 OK with live coordinates in 12ms.'
           },
-          realization: 'Unvalidated client inputs become server crashes unless defensive guards intercept them on arrival.'
+          embeddedBubbles: true,
+          scene: 'Akshay tests both endpoints side by side on the terminal. The omitted parameter returns a fast 400 Bad Request in 4ms. The valid query with name=north_loop returns 200 OK with complete route coordinates in 12ms. The wall display comes alive as shuttles resume tracking.',
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Status 400 for the missing parameter in 4ms, and status 200 OK with live coordinates for the valid route! Both ends of the wire contract are verified!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Dual verification complete. Never declare a fix complete until you prove both the defensive guard and the working contract side by side.'
+          },
+          realization: 'Dual verification builds permanent engineering confidence: prove the defect is safely guarded and prove the feature remains intact.'
         }
       ]
     },
+
+    // =========================================================================
+    // SECTION 2: WIRE INSPECTION & TRIAGE
+    // =========================================================================
     {
       type: 'triage',
       title: 'Missing versus Empty Query Parameter Triage',
@@ -164,80 +187,6 @@ export const lesson02 = {
         'Omitted Parameter: URL path /v1/shuttle/route contains no query string; req.query.name is undefined.',
         'Empty Value: URL path /v1/shuttle/route?name= passes key with empty string; req.query.name is "".',
         'Whitespace Value: URL path /v1/shuttle/route?name=%20 passes URL encoded space; req.query.name.trim() is "".'
-      ]
-    },
-    {
-      type: 'storyboard',
-      badge: 'COMIC SCENE 2 OF 4',
-      title: 'Three Ways to Be Empty',
-      intro: 'At the war room whiteboard, Sameer draws three columns to demonstrate how undefined, empty string, and whitespace trigger identical runtime crashes.',
-      panels: [
-        {
-          title: 'The Three Columns',
-          time: '08:22 PM',
-          image: ch02Scene1Img,
-          promptMeta: {
-            title: '8:14 PM War Room Standoff',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art graphic novel illustration. 8:14 PM at the campus transit war room. A giant wall display monitor shows a frozen transit map with glowing warning borders. Akshay in mustard kurta sits at the terminal looking anxious, while transit operator with arms crossed gestures at the screen. Sameer stands calmly in the background holding a brass chai tumbler. Sandstone Dravidian pillars flanking console, pure white background #FFFFFF, print-safe.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients, neon.',
-            targetAsset: 'assets/ch02-scene-1-transit-crisis.jpg'
-          },
-          scene: 'Sameer stands at the mobile whiteboard with a dry erase marker in hand, sketching three distinct columns while Akshay watches with his notebook open.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'There are three distinct ways a request parameter can be empty: undefined when omitted, empty string when present without a value, and whitespace when carrying only spaces.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'And our backend code handles all three differently?'
-          },
-          realization: 'Data absence has multiple shapes; treating them as identical without checking leads to silent crashes.'
-        },
-        {
-          title: 'Replaying the Replicas',
-          time: '08:25 PM',
-          image: ch02Scene2Img,
-          promptMeta: {
-            title: 'Reproducing the 500 Crash',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art comic panel. Akshay sitting at workstation typing curl command without route parameter. Terminal monitor flashes red stack trace: TypeError Cannot read properties of undefined trim. Sameer pointing with stylus to the terminal buffer. Pure white background #FFFFFF, double-line black ink contours.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
-            targetAsset: 'assets/ch02-scene-2-reproduce-500-crash.jpg'
-          },
-          scene: 'Akshay replays three curl commands in his terminal: one with route omitted, one with name equals nothing, and one with name equals percentage twenty.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'All three requests crash with HTTP 500! The server cannot distinguish between them because line 42 calls trim without checking existence!',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Precisely. You have reproduced the root cause under laboratory conditions.'
-          },
-          realization: 'Reproducing all failure variations proves where the contract breaks before writing a single line of fix.'
-        },
-        {
-          title: 'Inspecting the Stack Trace',
-          time: '08:27 PM',
-          image: warRoomEngineerImg,
-          scene: 'The terminal screen glows red with a full stack trace pointing directly to RouteLocatorService.lookup in routes.js line 42.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'Look at the stack trace. Express converts any unhandled JavaScript throw into a generic 500 Internal Server Error.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'So a 500 does not mean the server computer is broken; it means our software threw an exception it forgot to catch.'
-          },
-          realization: 'A 500 error is an uncaught runtime exception leaking past application handlers to the HTTP server wrapper.'
-        },
-        {
-          title: 'Setting the Rule',
-          time: '08:29 PM',
-          image: ch02Scene2Img,
-          scene: 'Sameer places his brass chai glass on the console table and points to the whiteboard heading.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'When the client sends bad data, that is a client fault. It belongs in the 4xx family. Never let a client mistake become a 500 server crash.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'Let us write the defensive guard right now.'
-          },
-          realization: 'Semantic integrity requires returning 400 for bad input and preserving 500 strictly for true server outages.'
-        }
       ]
     },
     {
@@ -281,80 +230,6 @@ export const lesson02 = {
       context: 'In October 2013, the United States federal health insurance exchange launched to massive public failure. Users faced frozen screens, spinning loaders, and unhandled 500 error pages. The congressional post mortem revealed that downstream identity and insurance services had unhandled null parameters and missing validation guards, causing catastrophic cascading timeouts across hundreds of interconnected servers.',
       takeaway: 'When servers fail without defensive guards, a single missing query parameter can crash upstream gateways and lock out millions of users. Validate early, fail fast, and return meaningful 400 client error contracts.',
       metric: 'PRODUCTION ARCHITECTURE LAW'
-    },
-    {
-      type: 'storyboard',
-      badge: 'COMIC SCENE 3 OF 4',
-      title: 'The Defensive Guard',
-      intro: 'Akshay writes a defensive validation guard in the route locator handler to catch empty parameters before business logic executes.',
-      panels: [
-        {
-          title: 'Opening the Route Handler',
-          time: '08:31 PM',
-          image: ch02Scene3Img,
-          promptMeta: {
-            title: 'Installing the Defensive Guard Fix',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer and Akshay reviewing code. On the screen, code editor shows defensive validation check. Akshay smiles with understanding as Sameer nods. Sandstone jali window, pure white background #FFFFFF, rich traditional colors.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
-            targetAsset: 'assets/ch02-scene-3-defensive-guard-fix.jpg'
-          },
-          scene: 'Akshay switches to the code editor tab in his IDE workbench, navigating to the shuttle locator route definition.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'Here is the line. It reads: const normalized = req.query.name.trim(). It never verifies if req.query.name exists at all!',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Now write the guard. Check for existence first, then check for empty whitespace, and terminate early with status 400.'
-          },
-          realization: 'Defensive programming intercepts invalid state before business logic attempts execution.'
-        },
-        {
-          title: 'Writing the Fail Fast Check',
-          time: '08:33 PM',
-          image: ch02Scene3Img,
-          scene: 'Akshay types the defensive guard into the route handler, adding the check and a clear JSON error payload.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'If not name or name dot trim equals empty string, return res dot status 400 dot json with an explicit message.',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Good. You have given the client clear guidance and protected the server from crashing.'
-          },
-          realization: 'A fail fast guard turns a potential fatal crash into a 4 millisecond actionable diagnostic response.'
-        },
-        {
-          title: 'Replaying the Broken Call',
-          time: '08:35 PM',
-          image: ch02Scene4Img,
-          promptMeta: {
-            title: 'Dual Wire Contract Verification',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Terminal split into two successful verification panes: top pane showing 400 Bad Request defensive guard, bottom pane showing 200 OK valid route coordinates. Akshay celebrating at his desk with fist pump, Sameer smiling calmly. Pure white background #FFFFFF, floral border motifs.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
-            targetAsset: 'assets/ch02-scene-4-dual-wire-verification.jpg'
-          },
-          scene: 'Akshay hits Send on the omitted parameter request tab in his API Testing Workbench.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'Status 400 Bad Request! Response time dropped from 42 milliseconds to 4 milliseconds, and the error explains that name is required!',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Now replay the valid route request. We must prove the fix did not harm the working contract.'
-          },
-          realization: 'Every bug fix requires dual verification: proving the defect is guarded and proving the working feature remains intact.'
-        },
-        {
-          title: 'The Working Contract Remains Safe',
-          time: '08:37 PM',
-          image: ch02Scene4Img,
-          scene: 'Akshay sends GET /v1/shuttle/route?name=north_loop and sees the green 200 OK badge appear with complete coordinate objects.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: '200 OK with latitude and longitude intact. Both ends of the contract are verified!',
-            replySpeaker: 'Sameer',
-            replySpeech: 'That is professional engineering. Now let us explore the wider family of status codes.'
-          },
-          realization: 'Dual verification builds lasting confidence in software pipelines.'
-        }
-      ]
     },
     {
       type: 'comic-workbench',
@@ -426,66 +301,6 @@ export const lesson02 = {
         'Tactical Triumph: The Polite 200 Trap fools monitoring dashboards, CDN caches, and automated test runners. Because the HTTP status header reads 200 OK, automated tools assume success and cache the failure payload. Status codes must faithfully represent operational reality.',
         'Diagnostic Trap: HTTP 200 permits any MIME payload type including JSON. The anti pattern is semantic dishonesty, not format violation.',
         'Diagnostic Trap: Network switches and routers operate at Layer 3 and Layer 4. They do not inspect application level JSON strings or rewrite status headers.'
-      ]
-    },
-    {
-      type: 'storyboard',
-      badge: 'COMIC SCENE 4 OF 4',
-      title: 'The Language of Codes',
-      intro: 'With the transit emergency resolved, Sameer walks Akshay through the five HTTP status code families on the war room whiteboard.',
-      panels: [
-        {
-          title: 'The Five Families',
-          time: '08:40 PM',
-          image: crudImg,
-          scene: 'Sameer writes the five numbers across the top of the whiteboard: 1xx, 2xx, 3xx, 4xx, and 5xx, creating a systematic taxonomy table.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'The HTTP status code is a three digit contract between two computers. The first digit defines the family of truth.',
-            replySpeaker: 'Akshay',
-            replySpeech: '1xx is informational, 2xx is success, 3xx is redirection, 4xx is client fault, and 5xx is server fault.'
-          },
-          realization: 'Status codes are the universal grammar of distributed computing across the global internet.'
-        },
-        {
-          title: 'The Campus Catalog Examples',
-          time: '08:43 PM',
-          image: warRoomStripImg,
-          scene: 'Akshay writes concrete campus examples under each column on the whiteboard with black marker.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: '200 for shuttle coordinates. 201 for registering a new student. 400 for our missing route guard. 404 when a book ISBN does not exist. 500 when our server throws an uncaught exception.',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Spot on. You can now diagnose any API conversation simply by looking at the status header.'
-          },
-          realization: 'Connecting abstract HTTP status ranges to concrete daily API interactions cements architectural retention.'
-        },
-        {
-          title: 'The Polite 200 Trap',
-          time: '08:46 PM',
-          image: ch02Scene4Img,
-          scene: 'Sameer circles the 2xx column in red marker and writes the word Danger underneath it.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'The most dangerous bug in software is not a 500 error. A 500 error sounds an alarm. The most dangerous bug is a 200 OK that returns an error payload inside the body.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'Because downstream monitoring assumes everything is fine while the user gets nothing!'
-          },
-          realization: 'A dishonest 200 OK conceals failures from monitoring alarms and automated quality gates.'
-        },
-        {
-          title: 'The Evening Rush Succeeds',
-          time: '08:50 PM',
-          image: warRoomEngineerImg,
-          scene: 'The overhead operations display springs to life. Green shuttle icons move smoothly across campus routes as students head home without interruption.',
-          dialogue: {
-            speaker: 'Transit Operator',
-            speech: 'The shuttle fleet is tracking live! Evening orientation rush is saved.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'We inspected the wire, found the null parameter, installed the 400 guard, and verified the 200 contract.'
-          },
-          realization: 'True quality engineering fixes root causes on the network wire rather than patching symptoms on the glass.'
-        }
       ]
     },
     {

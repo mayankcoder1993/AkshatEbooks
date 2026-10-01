@@ -194,7 +194,8 @@ function handleGetStage(args) {
 
 function handleValidateStory(args) {
   const { chapterNumber, filePath } = args;
-  const defaultPath = path.resolve(process.cwd(), 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/content/lesson01.js');
+  const chPadded = String(chapterNumber).padStart(2, '0');
+  const defaultPath = path.resolve(process.cwd(), `src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/content/lesson${chPadded}.js`);
   const targetPath = filePath ? path.resolve(process.cwd(), filePath) : defaultPath;
 
   if (!fs.existsSync(targetPath)) {
@@ -248,6 +249,44 @@ function handleValidateStory(args) {
       rule: 'Architecture: REST vs SOAP vs GraphQL comparison on APX102',
       pass: /soap/i.test(content) && /graphql/i.test(content) && /rest/i.test(content),
       detail: 'Comparing all three architectures using identical Admit Card query.'
+    });
+  }
+
+  if (chapterNumber === 2) {
+    checks.push({
+      rule: 'Context: Campus Transit Shuttle GPS Crash',
+      pass: /transit/i.test(content) || /shuttle/i.test(content),
+      detail: 'Investigation of campus transit shuttle telemetry service throwing 500 errors.'
+    });
+    checks.push({
+      rule: 'Character: Akshay and Sameer Collaboration',
+      pass: /akshay/i.test(content) && /sameer/i.test(content),
+      detail: 'Akshay and Sameer triaging the service in the API Testing Workbench.'
+    });
+    checks.push({
+      rule: 'Defect: Missing Query Parameter Unhandled 500 Crash',
+      pass: /500/i.test(content) && (/query/i.test(content) || /route/i.test(content)),
+      detail: 'Missing route parameter causes unhandled server crash returning 500.'
+    });
+    checks.push({
+      rule: 'Headers: Request Headers Inspection (Content-Type, User-Agent)',
+      pass: /headers?/i.test(content) || /content-type/i.test(content),
+      detail: 'Inspecting request headers that provide context to the server.'
+    });
+    checks.push({
+      rule: 'Remediation: Defensive Guard returning 400 Bad Request',
+      pass: /400/i.test(content) && /bad request/i.test(content),
+      detail: 'Adding defensive validation guard returning 400 Bad Request instead of crashing with 500.'
+    });
+    checks.push({
+      rule: 'Verification: Dual Wire Verification (200 OK and 400 Bad Request)',
+      pass: /200/i.test(content) && /400/i.test(content),
+      detail: 'Verifying both positive 200 route coordinates and defensive 400 guard.'
+    });
+    checks.push({
+      rule: 'Tooling: API Testing Workbench Manual Eyeball Limitation',
+      pass: /workbench/i.test(content) || /postman/i.test(content) || /manual/i.test(content),
+      detail: 'Recognizing that manual eyeball testing does not scale across redeployments.'
     });
   }
 
