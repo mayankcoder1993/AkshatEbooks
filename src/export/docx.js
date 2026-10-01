@@ -208,7 +208,11 @@ async function blockToDocx(b) {
           }
         }
         items.push(p([new TextRun({ text: 'Scene: ', bold: true }), panel.scene]));
-        if (panel.dialogue) {
+        if (panel.dialogues && panel.dialogues.length > 0) {
+          for (const d of panel.dialogues) {
+            items.push(p([new TextRun({ text: `${d.speaker}: `, bold: true, color: d.speaker === 'Akshay' ? colors.teal : colors.indigo }), `"${d.speech}"`]));
+          }
+        } else if (panel.dialogue) {
           items.push(p([new TextRun({ text: `${panel.dialogue.speaker}: `, bold: true, color: colors.teal }), `"${panel.dialogue.speech}"`]));
           if (panel.dialogue.replySpeaker) {
             items.push(p([new TextRun({ text: `${panel.dialogue.replySpeaker}: `, bold: true, color: colors.indigo }), `"${panel.dialogue.replySpeech}"`]));
@@ -225,6 +229,22 @@ async function blockToDocx(b) {
         ...(b.dialogue ? b.dialogue.flatMap(d => [
           p([new TextRun({ text: `${d.speaker} (${d.role}): `, bold: true, color: d.speaker === 'Akshay' ? colors.teal : colors.indigo }), `"${d.text}"`]),
           ...(d.pointer ? [p([new TextRun({ text: 'Pointing to: ', bold: true, color: colors.slate }), d.pointer])] : [])
+        ]) : []),
+        ...(b.tabs ? b.tabs.flatMap((tab, tIdx) => [
+          p([new TextRun({ text: `TAB ${tIdx + 1}: ${tab.label || ''}`, bold: true, color: colors.teal })]),
+          ...(tab.workbench ? [
+            p([new TextRun({ text: `API Request: ${tab.workbench.method} ${tab.workbench.url}`, bold: true, color: colors.navy })]),
+            ...(tab.workbench.headers ? [p([new TextRun({ text: 'Headers: ', bold: true }), typeof tab.workbench.headers === 'string' ? tab.workbench.headers : JSON.stringify(tab.workbench.headers)])] : []),
+            ...(tab.workbench.body ? [p([new TextRun({ text: 'Request Body: ', bold: true })]), ...code(tab.workbench.body.split('\n'), 'request_body.json')] : []),
+            p([new TextRun({ text: `Live Response: ${tab.workbench.responseStatus}${tab.workbench.responseTime ? ` (${tab.workbench.responseTime})` : ''}`, bold: true, color: colors.navy })]),
+            ...(tab.workbench.responseBody ? code(tab.workbench.responseBody.split('\n'), 'response.json') : [])
+          ] : []),
+          ...(tab.breakdown ? [
+            ...(tab.breakdown.input ? [p([new TextRun({ text: '1. Explicit Input: ', bold: true, color: colors.teal }), ...rich(tab.breakdown.input)])] : []),
+            ...(tab.breakdown.explanation ? [p([new TextRun({ text: '2. Wire & Logic Explanation: ', bold: true, color: colors.indigo }), ...rich(tab.breakdown.explanation)])] : []),
+            ...(tab.breakdown.output ? [p([new TextRun({ text: '3. Deterministic Output: ', bold: true, color: colors.teal }), ...rich(tab.breakdown.output)])] : []),
+            ...(tab.breakdown.trapAndFix ? [p([new TextRun({ text: '4. Senior Savior & Common Trap: ', bold: true, color: colors.navy }), ...rich(tab.breakdown.trapAndFix)])] : [])
+          ] : [])
         ]) : []),
         ...(b.appType === 'ide' && b.ide ? [
           p([new TextRun({ text: `IDE File: ${b.ide.filename} (${b.ide.status})`, bold: true, color: colors.navy })]),

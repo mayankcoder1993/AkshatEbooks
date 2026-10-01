@@ -294,15 +294,45 @@ function ComicWorkbench({
   dialogue = [],
   ide,
   workbench,
+  tabs = [],
   breakdown,
-  svgScreen
+  svgScreen,
+  staticMode
 }) {
+  const [activeTabIndex, setActiveTabIndex] = useState(0)
+  const currentTab = tabs && tabs.length > 0 ? tabs[activeTabIndex] : null
+  const activeWorkbench = currentTab?.workbench || workbench
+  const activeIde = currentTab?.ide || ide
   return (
     <section className="comic-workbench-card">
       <div className="comic-workbench-header">
         <span className="comic-workbench-badge">{badge}</span>
         {title && <h3 className="comic-workbench-title">{title}</h3>}
       </div>
+
+      {tabs && tabs.length > 0 && (
+        <div className="workbench-tab-bar" style={{ display: 'flex', gap: '0.5rem', padding: '0.75rem 1.4rem', background: 'var(--panel-soft)', borderBottom: '1px solid var(--border-soft)', overflowX: 'auto' }}>
+          {tabs.map((t, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => setActiveTabIndex(idx)}
+              style={{
+                padding: '0.35rem 0.85rem',
+                borderRadius: '6px',
+                border: activeTabIndex === idx ? '1px solid #0284c7' : '1px solid #cbd5e1',
+                background: activeTabIndex === idx ? '#0284c7' : '#ffffff',
+                color: activeTabIndex === idx ? '#ffffff' : '#334155',
+                fontWeight: 700,
+                fontSize: '0.8rem',
+                cursor: 'pointer'
+              }}
+            >
+              {t.label || `Tab ${idx + 1}`}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="comic-workbench-main">
         {dialogue?.length > 0 && (
@@ -341,7 +371,7 @@ function ComicWorkbench({
           </div>
         )}
 
-        {appType === 'ide' && ide && (
+        {appType === 'ide' && activeIde && (
           <div className="comic-screen-mockup ide-screen">
             <div className="screen-titlebar ide-titlebar">
               <div className="window-dots">
@@ -349,16 +379,16 @@ function ComicWorkbench({
                 <span className="dot yellow" />
                 <span className="dot green" />
               </div>
-              <span className="screen-filename">📄 {ide.filename || 'server.js'}</span>
-              <span className="screen-status-badge">{ide.status || 'Active'}</span>
+              <span className="screen-filename">📄 {activeIde.filename || 'server.js'}</span>
+              <span className="screen-status-badge">{activeIde.status || 'Active'}</span>
             </div>
             <pre className="screen-code-content">
-              <code>{ide.code}</code>
+              <code>{activeIde.code}</code>
             </pre>
           </div>
         )}
 
-        {appType === 'api-workbench' && workbench && (
+        {appType === 'api-workbench' && activeWorkbench && (
           <div className="comic-screen-mockup workbench-screen">
             <div className="screen-titlebar wb-titlebar">
               <div className="window-dots">
@@ -367,75 +397,75 @@ function ComicWorkbench({
                 <span className="dot green" />
               </div>
               <div className="wb-request-bar">
-                <span className={`http-verb-badge verb-${workbench.method?.toLowerCase()}`}>
-                  {workbench.method || 'GET'}
+                <span className={`http-verb-badge verb-${activeWorkbench.method?.toLowerCase()}`}>
+                  {activeWorkbench.method || 'GET'}
                 </span>
-                <span className="wb-request-url">{workbench.url}</span>
+                <span className="wb-request-url">{activeWorkbench.url}</span>
               </div>
             </div>
 
-            {workbench.headers && (
+            {activeWorkbench.headers && (
               <div className="wb-headers-pane">
                 <span className="pane-label">Request Headers</span>
-                <pre className="pane-content"><code>{typeof workbench.headers === 'string' ? workbench.headers : JSON.stringify(workbench.headers, null, 2)}</code></pre>
+                <pre className="pane-content"><code>{typeof activeWorkbench.headers === 'string' ? activeWorkbench.headers : JSON.stringify(activeWorkbench.headers, null, 2)}</code></pre>
               </div>
             )}
 
-            {workbench.body && (
+            {activeWorkbench.body && (
               <div className="wb-body-pane">
                 <span className="pane-label">Request Body (JSON)</span>
-                <pre className="pane-content"><code>{workbench.body}</code></pre>
+                <pre className="pane-content"><code>{activeWorkbench.body}</code></pre>
               </div>
             )}
 
             <div className="wb-response-pane">
               <div className="response-meta-row">
                 <span className="response-label">Live Response</span>
-                <span className="response-status-badge">{workbench.responseStatus || '200 OK'}</span>
-                {workbench.responseTime && <span className="response-time-badge">{workbench.responseTime}</span>}
+                <span className="response-status-badge">{activeWorkbench.responseStatus || '200 OK'}</span>
+                {activeWorkbench.responseTime && <span className="response-time-badge">{activeWorkbench.responseTime}</span>}
               </div>
-              <pre className="response-body-content"><code>{workbench.responseBody}</code></pre>
+              <pre className="response-body-content"><code>{activeWorkbench.responseBody}</code></pre>
             </div>
           </div>
         )}
       </div>
 
-      {breakdown && (
+      {activeBreakdown && (
         <div className="comic-breakdown-grid">
-          {breakdown.input && (
+          {activeBreakdown.input && (
             <div className="breakdown-quad-card card-input">
               <div className="quad-title">
                 <span className="quad-num">1</span>
                 <strong>Explicit Input</strong>
               </div>
-              <p className="quad-text"><RichText text={breakdown.input} /></p>
+              <p className="quad-text"><RichText text={activeBreakdown.input} /></p>
             </div>
           )}
-          {breakdown.explanation && (
+          {activeBreakdown.explanation && (
             <div className="breakdown-quad-card card-explanation">
               <div className="quad-title">
                 <span className="quad-num">2</span>
                 <strong>Wire & Logic Explanation</strong>
               </div>
-              <p className="quad-text"><RichText text={breakdown.explanation} /></p>
+              <p className="quad-text"><RichText text={activeBreakdown.explanation} /></p>
             </div>
           )}
-          {breakdown.output && (
+          {activeBreakdown.output && (
             <div className="breakdown-quad-card card-output">
               <div className="quad-title">
                 <span className="quad-num">3</span>
                 <strong>Deterministic Output</strong>
               </div>
-              <p className="quad-text"><RichText text={breakdown.output} /></p>
+              <p className="quad-text"><RichText text={activeBreakdown.output} /></p>
             </div>
           )}
-          {breakdown.trapAndFix && (
+          {activeBreakdown.trapAndFix && (
             <div className="breakdown-quad-card card-trap">
               <div className="quad-title">
                 <span className="quad-num">4</span>
                 <strong>Senior Savior & Common Trap</strong>
               </div>
-              <p className="quad-text"><RichText text={breakdown.trapAndFix} /></p>
+              <p className="quad-text"><RichText text={activeBreakdown.trapAndFix} /></p>
             </div>
           )}
         </div>
@@ -444,17 +474,17 @@ function ComicWorkbench({
   )
 }
 
-function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels = [] }) {
+function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns = 2, panels = [] }) {
   return (
-    <section className="storyboard-container">
+    <section className={`storyboard-container columns-${columns}`}>
       <div className="storyboard-header">
         <span className="storyboard-badge">{badge}</span>
         {title && <h3 className="storyboard-title">{title}</h3>}
       </div>
       {intro && <p className="storyboard-intro"><RichText text={intro} /></p>}
-      <div className="storyboard-grid">
+      <div className={`storyboard-grid grid-cols-${columns}`}>
         {panels.map((p, idx) => (
-          <div key={idx} className="storyboard-panel-card comic-story-cell">
+          <div key={idx} className={`storyboard-panel-card comic-story-cell ${p.fullWidth || p.hero ? 'full-width-panel' : ''}`}>
             <div className="panel-card-top comic-context-bar">
               <div>
                 
@@ -462,11 +492,25 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
               </div>
               {p.time && <span className="panel-time-tag comic-context-time">{p.time}</span>}
             </div>
-              {p.dialogue && !p.embeddedBubbles && (
+              {p.dialogues && p.dialogues.length > 0 && !p.embeddedBubbles && (
+                <div className="comic-balloon-container">
+                  {p.dialogues.map((d, dIdx) => (
+                    <div key={dIdx} className={`comic-speech-balloon ${d.reply ? 'reply ' : ''}speaker-${d.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
+                      <div className="balloon-header">
+                        <span className="balloon-avatar">{d.speaker === 'Akshay' ? '👨‍💻' : d.speaker === 'Sameer' ? '🧘‍♂️' : d.speaker === 'Fellow Student' ? '👩‍🎓' : '👤'}</span>
+                        <strong className="balloon-speaker-name">{d.speaker?.toUpperCase()}</strong>
+                      </div>
+                      <p className="balloon-text">"{d.speech}"</p>
+                      <div className={`balloon-tail ${d.reply ? 'reply' : ''}`} />
+                    </div>
+                  ))}
+                </div>
+              )}
+              {p.dialogue && !p.dialogues && !p.embeddedBubbles && (
                 <div className="comic-balloon-container">
                   <div className={`comic-speech-balloon speaker-${p.dialogue.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
                     <div className="balloon-header">
-                      <span className="balloon-avatar">{p.dialogue.speaker === 'Akshay' ? '👨‍💻' : p.dialogue.speaker === 'Sameer' ? '🧘‍♂️' : '👤'}</span>
+                      <span className="balloon-avatar">{p.dialogue.speaker === 'Akshay' ? '👨‍💻' : p.dialogue.speaker === 'Sameer' ? '🧘‍♂️' : p.dialogue.speaker === 'Fellow Student' ? '👩‍🎓' : '👤'}</span>
                       <strong className="balloon-speaker-name">{p.dialogue.speaker?.toUpperCase()}</strong>
                     </div>
                     <p className="balloon-text">"{p.dialogue.speech}"</p>
@@ -475,7 +519,7 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
                   {p.dialogue.replySpeaker && (
                     <div className={`comic-speech-balloon reply speaker-${p.dialogue.replySpeaker?.toLowerCase().replace(/\s+/g, '-')}`}>
                       <div className="balloon-header">
-                        <span className="balloon-avatar">{p.dialogue.replySpeaker === 'Akshay' ? '👨‍💻' : p.dialogue.replySpeaker === 'Sameer' ? '🧘‍♂️' : '👤'}</span>
+                        <span className="balloon-avatar">{p.dialogue.replySpeaker === 'Akshay' ? '👨‍💻' : p.dialogue.replySpeaker === 'Sameer' ? '🧘‍♂️' : p.dialogue.replySpeaker === 'Fellow Student' ? '👩‍🎓' : '👤'}</span>
                         <strong className="balloon-speaker-name">{p.dialogue.replySpeaker?.toUpperCase()}</strong>
                       </div>
                       <p className="balloon-text">"{p.dialogue.replySpeech}"</p>

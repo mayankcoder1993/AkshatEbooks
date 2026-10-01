@@ -4646,8 +4646,31 @@ body:has(.page.fullscreen-mode) .site-header,
   padding: 1.25rem 1.4rem;
 }
 
+.storyboard-grid.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+
+.storyboard-grid.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.storyboard-grid.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.storyboard-panel-card.full-width-panel {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 900px) {
+  .storyboard-grid.grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  .storyboard-grid {
+  .storyboard-grid,
+  .storyboard-grid.grid-cols-2 {
     grid-template-columns: 1fr;
   }
 }
