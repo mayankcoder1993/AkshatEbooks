@@ -462,7 +462,7 @@ function Storyboard({ badge = 'STORYBOARD · FOUR PANELS', title, intro, panels 
               </div>
               {p.time && <span className="panel-time-tag comic-context-time">{p.time}</span>}
             </div>
-              {p.dialogue && (
+              {p.dialogue && !p.embeddedBubbles && (
                 <div className="comic-balloon-container">
                   <div className={`comic-speech-balloon speaker-${p.dialogue.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
                     <div className="balloon-header">

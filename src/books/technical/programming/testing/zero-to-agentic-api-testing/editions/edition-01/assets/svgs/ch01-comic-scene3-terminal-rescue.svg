@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" width="100%" height="100%" style="background:#FFFFFF;">
+  <defs>
+    <filter id="bubbleShadow3" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1B2A4A" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Clean Pure White Background -->
+  <rect width="1200" height="580" fill="#FFFFFF"/>
+
+  <!-- Corridor Bench and Arch Background -->
+  <g stroke="#CBD5E1" stroke-width="2" fill="none">
+    <line x1="50" y1="520" x2="1150" y2="520" stroke="#94A3B8" stroke-width="3"/>
+    <!-- Teakwood Bench -->
+    <rect x="100" y="440" width="340" height="80" rx="4" fill="#F8FAFC" stroke="#94A3B8" stroke-width="2"/>
+    <line x1="120" y1="470" x2="420" y2="470" stroke="#CBD5E1" stroke-width="2"/>
+  </g>
+
+  <!-- Giant Black Terminal Window (Center Left) -->
+  <g transform="translate(100, 160)" filter="url(#bubbleShadow3)">
+    <!-- Terminal Body -->
+    <rect x="0" y="0" width="560" height="340" rx="10" fill="#0F172A" stroke="#334155" stroke-width="3"/>
+    <!-- Terminal Title Bar -->
+    <rect x="0" y="0" width="560" height="36" rx="10" fill="#1E293B"/>
+    <circle cx="20" cy="18" r="6" fill="#EF4444"/>
+    <circle cx="38" cy="18" r="6" fill="#F59E0B"/>
+    <circle cx="56" cy="18" r="6" fill="#10B981"/>
+    <text x="280" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#94A3B8" text-anchor="middle">sameer@apex-terminal: ~ (raw wire)</text>
+
+    <!-- Terminal Content -->
+    <!-- Prompt 1 -->
+    <text x="25" y="70" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="600" fill="#38BDF8">$ curl -s http://portal.apex.edu/api/v1/admitcards/APX102</text>
+    <text x="25" y="92" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600" fill="#64748B">&lt; HTTP/1.1 200 OK | Content-Type: application/json | Time: 14ms</text>
+
+    <!-- JSON Payload Response -->
+    <rect x="20" y="105" width="520" height="210" rx="6" fill="#020617" stroke="#1E293B" stroke-width="1.5"/>
+    <text x="35" y="130" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">{</text>
+    <text x="55" y="150" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38BDF8">"status": <tspan fill="#4ADE80">"CONFIRMED"</tspan>,</text>
+    <text x="55" y="170" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38BDF8">"regNo": <tspan fill="#FDE047">"APX102"</tspan>,</text>
+    <text x="55" y="190" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38BDF8">"studentName": <tspan fill="#FDE047">"Akshay"</tspan>,</text>
+    <text x="55" y="210" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38BDF8">"examCenter": <tspan fill="#FDE047">"Apex Main Hall"</tspan>,</text>
+    <!-- Highlighted Hall & Seat Details -->
+    <rect x="50" y="218" width="460" height="42" fill="#065F46" rx="4" opacity="0.3"/>
+    <text x="55" y="234" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="700" fill="#34D399">"hallNumber": "302",</text>
+    <text x="55" y="252" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="800" fill="#34D399">"seatNumber": "B-14",   <tspan fill="#F59E0B">&lt;-- SAVED IN 14ms!</tspan></text>
+    <text x="55" y="274" font-family="'JetBrains Mono', monospace" font-size="12" fill="#38BDF8">"examDate": <tspan fill="#FDE047">"2026-10-01T09:00:00Z"</tspan></text>
+    <text x="35" y="294" font-family="'JetBrains Mono', monospace" font-size="12" fill="#E2E8F0">}</text>
+
+    <!-- Speed Badge -->
+    <rect x="420" y="55" width="115" height="26" rx="13" fill="#10B981"/>
+    <text x="477" y="72" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF" text-anchor="middle">SPEED: 14ms</text>
+  </g>
+
+  <!-- Sameer Operating Laptop (Right) -->
+  <g transform="translate(680, 220)">
+    <!-- Sameer Torso -->
+    <path d="M 40,90 L 120,90 L 110,210 L 45,210 Z" fill="#1E3A8A" stroke="#0F172A" stroke-width="3"/>
+    <!-- Head & Face -->
+    <circle cx="80" cy="45" r="32" fill="#FDE68A" stroke="#0F172A" stroke-width="3"/>
+    <!-- Hair & Beard -->
+    <path d="M 50,40 Q 60,10 85,10 Q 110,10 110,40 Q 100,28 80,28 Q 65,28 50,40 Z" fill="#334155"/>
+    <path d="M 55,55 Q 80,82 105,55 Q 80,72 55,55 Z" fill="#475569"/>
+    <!-- Spectacles & Calm Expression -->
+    <rect x="62" y="38" width="16" height="12" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <rect x="84" y="38" width="16" height="12" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <line x1="78" y1="44" x2="84" y2="44" stroke="#0F172A" stroke-width="2"/>
+    <circle cx="70" cy="44" r="2.5" fill="#0F172A"/>
+    <circle cx="92" cy="44" r="2.5" fill="#0F172A"/>
+    <path d="M 72,60 Q 80,68 88,60" stroke="#0F172A" stroke-width="2" fill="none"/>
+    <!-- Pointing Finger to Terminal Output -->
+    <path d="M 45,110 L -40,110 L -60,115" stroke="#1E3A8A" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <circle cx="-65" cy="115" r="5" fill="#FDE68A"/>
+  </g>
+
+  <!-- Sameer Speech Bubble -->
+  <g filter="url(#bubbleShadow3)" transform="translate(680, 30)">
+    <path d="M 20,0 L 460,0 Q 480,0 480,20 L 480,105 Q 480,125 460,125 L 140,125 L 120,155 L 115,125 L 20,125 Q 0,125 0,105 L 0,20 Q 0,0 20,0 Z" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5"/>
+    <text x="25" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#15803D">SAMEER (POINTING AT TERMINAL)</text>
+    <text x="25" y="56" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"I did not open the website at all.</text>
+    <text x="25" y="78" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">I spoke directly to the backend over the raw wire.</text>
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#047857">The webpage is decorative glass. The API carries the truth."</text>
+  </g>
+
+  <!-- Student Akshay Astounded (Far Right) -->
+  <g transform="translate(980, 220)">
+    <!-- Akshay Torso -->
+    <path d="M 35,90 L 105,90 L 100,210 L 40,210 Z" fill="#F59E0B" stroke="#B45309" stroke-width="3"/>
+    <!-- Head & Face (Wide Eyes Lightbulb Awakening) -->
+    <circle cx="70" cy="45" r="32" fill="#FDE68A" stroke="#92400E" stroke-width="3"/>
+    <path d="M 40,40 Q 50,10 80,10 Q 100,10 105,35 Q 90,25 70,25 Z" fill="#1E293B"/>
+    <!-- Wide Almond Eyes with Spark -->
+    <circle cx="60" cy="45" r="7" fill="#0F172A"/>
+    <circle cx="82" cy="45" r="7" fill="#0F172A"/>
+    <circle cx="58" cy="42" r="2.5" fill="#FFFFFF"/>
+    <circle cx="80" cy="42" r="2.5" fill="#FFFFFF"/>
+    <!-- Joyful Relieved Smile -->
+    <path d="M 60,62 Q 71,76 82,62" stroke="#991B1B" stroke-width="3.5" fill="none"/>
+    <!-- Lightbulb glowing above Akshay's head -->
+    <circle cx="70" cy="-5" r="16" fill="#FDE047" stroke="#CA8A04" stroke-width="2"/>
+    <path d="M 70,-15 L 70,-25 M 55,-5 L 45,-5 M 85,-5 L 95,-5" stroke="#EAB308" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Akshay Speech Bubble -->
+  <g filter="url(#bubbleShadow3)" transform="translate(80, 30)">
+    <path d="M 20,0 L 470,0 Q 490,0 490,20 L 490,95 Q 490,115 470,115 L 260,115 L 245,145 L 235,115 L 20,115 Q 0,115 0,95 L 0,20 Q 0,0 20,0 Z" fill="#FFFBEB" stroke="#F59E0B" stroke-width="2.5"/>
+    <text x="25" y="28" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#B45309">STUDENT AKSHAY (AWAKENED)</text>
+    <text x="25" y="52" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"Fourteen milliseconds! Hall 302, Seat B-14!</text>
+    <text x="25" y="74" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">The browser was drowning in CSS and fonts,</text>
+    <text x="25" y="96" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#15803D">while the raw data was ready in an instant!"</text>
+  </g>
+
+  <!-- Bottom Narration Caption -->
+  <rect x="60" y="525" width="1080" height="42" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="80" y="551" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#334155"><tspan font-weight="800" fill="#0F172A">SCENE 3:</tspan> College Corridor · 08:40 AM · The 14ms terminal rescue saves Akshay from missing his board exam.</text>
+</svg>

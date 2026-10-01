@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" width="100%" height="100%" style="background:#FFFFFF;">
+  <defs>
+    <filter id="bubbleShadow4" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1B2A4A" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Clean Pure White Background -->
+  <rect width="1200" height="580" fill="#FFFFFF"/>
+
+  <!-- Lab Architecture Background -->
+  <g stroke="#CBD5E1" stroke-width="2" fill="none">
+    <line x1="50" y1="520" x2="1150" y2="520" stroke="#94A3B8" stroke-width="3"/>
+  </g>
+
+  <!-- Giant Whiteboard Diagram (Center) -->
+  <g transform="translate(180, 160)" filter="url(#bubbleShadow4)">
+    <rect x="0" y="0" width="840" height="340" rx="10" fill="#F8FAFC" stroke="#0F172A" stroke-width="3"/>
+    <!-- Whiteboard Frame Header -->
+    <rect x="0" y="0" width="840" height="36" rx="10" fill="#E2E8F0"/>
+    <text x="420" y="24" font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#1E293B" text-anchor="middle">ARCHITECTURAL MODEL: THE RESTAURANT AND THE EXAM COURIER</text>
+
+    <!-- 3 Core Columns: Client / Waiter API / Server Kitchen -->
+    <!-- Column 1: Client / Customer -->
+    <g transform="translate(30, 60)">
+      <rect x="0" y="0" width="220" height="230" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+      <text x="110" y="32" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#1E40AF" text-anchor="middle">CLIENT (CUSTOMER)</text>
+      <!-- Subtitle -->
+      <text x="110" y="52" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#64748B" text-anchor="middle">Sitting at Table / Device</text>
+      <!-- Details -->
+      <rect x="15" y="70" width="190" height="60" rx="4" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="1"/>
+      <text x="25" y="92" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1E293B">Browser / iOS / Android</text>
+      <text x="25" y="112" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#475569">Places Request via URL</text>
+      <!-- College Analogy -->
+      <rect x="15" y="145" width="190" height="65" rx="4" fill="#DBEAFE" stroke="#93C5FD" stroke-width="1"/>
+      <text x="25" y="168" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#1E40AF">STUDENT AKSHAY</text>
+      <text x="25" y="186" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1E3A8A">Needs Room &amp; Seat info</text>
+    </g>
+
+    <!-- Arrow 1: Request -->
+    <g transform="translate(255, 110)">
+      <line x1="5" y1="20" x2="60" y2="20" stroke="#3B82F6" stroke-width="3" stroke-dasharray="4 3"/>
+      <polygon points="65,20 55,14 55,26" fill="#3B82F6"/>
+      <text x="35" y="12" font-family="Inter, sans-serif" font-size="9" font-weight="800" fill="#1D4ED8" text-anchor="middle">REQUEST</text>
+    </g>
+
+    <!-- Column 2: Waiter (API) -->
+    <g transform="translate(325, 50)">
+      <rect x="0" y="0" width="220" height="250" rx="8" fill="#ECFDF5" stroke="#10B981" stroke-width="3"/>
+      <!-- Crown / Badge -->
+      <rect x="40" y="-12" width="140" height="24" rx="12" fill="#10B981"/>
+      <text x="110" y="4" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#FFFFFF" text-anchor="middle">THE MESSENGER</text>
+      <text x="110" y="38" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#065F46" text-anchor="middle">WAITER (THE API)</text>
+      <text x="110" y="58" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#047857" text-anchor="middle">Carries Data Contract</text>
+      <!-- Rules -->
+      <rect x="15" y="75" width="190" height="70" rx="4" fill="#FFFFFF" stroke="#A7F3D0" stroke-width="1"/>
+      <text x="25" y="96" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#065F46">• Does NOT cook food</text>
+      <text x="25" y="114" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#065F46">• Does NOT eat food</text>
+      <text x="25" y="132" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#047857">• Delivers structured data</text>
+      <!-- College Analogy -->
+      <rect x="15" y="160" width="190" height="70" rx="4" fill="#D1FAE5" stroke="#6EE7B7" stroke-width="1"/>
+      <text x="25" y="182" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#065F46">EXAM COURIER API</text>
+      <text x="25" y="200" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#047857">GET /api/v1/admitcards/:id</text>
+      <text x="25" y="216" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#065F46">Returns pure 14ms JSON</text>
+    </g>
+
+    <!-- Arrow 2: Response -->
+    <g transform="translate(255, 170)">
+      <line x1="60" y1="20" x2="5" y2="20" stroke="#10B981" stroke-width="3"/>
+      <polygon points="0,20 10,14 10,26" fill="#10B981"/>
+      <text x="35" y="36" font-family="Inter, sans-serif" font-size="9" font-weight="800" fill="#047857" text-anchor="middle">RESPONSE</text>
+    </g>
+
+    <!-- Arrow 3: Kitchen Handshake -->
+    <g transform="translate(550, 140)">
+      <line x1="5" y1="10" x2="55" y2="10" stroke="#0F172A" stroke-width="2.5"/>
+      <polygon points="60,10 50,5 50,15" fill="#0F172A"/>
+      <line x1="55" y1="30" x2="5" y2="30" stroke="#0F172A" stroke-width="2.5"/>
+      <polygon points="0,30 10,25 10,35" fill="#0F172A"/>
+      <text x="30" y="50" font-family="Inter, sans-serif" font-size="9" font-weight="700" fill="#475569" text-anchor="middle">SOCKET</text>
+    </g>
+
+    <!-- Column 3: Server / Kitchen -->
+    <g transform="translate(615, 60)">
+      <rect x="0" y="0" width="195" height="230" rx="8" fill="#FFF7ED" stroke="#F97316" stroke-width="2"/>
+      <text x="97" y="32" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#C2410C" text-anchor="middle">SERVER (KITCHEN)</text>
+      <text x="97" y="52" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#64748B" text-anchor="middle">Protected Data Store</text>
+      <rect x="15" y="70" width="165" height="60" rx="4" fill="#FFFFFF" stroke="#FED7AA" stroke-width="1"/>
+      <text x="25" y="92" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1E293B">Database &amp; Engine</text>
+      <text x="25" y="112" font-family="Inter, sans-serif" font-size="11" font-weight="500" fill="#475569">Executes SQL / Business</text>
+      <!-- College Analogy -->
+      <rect x="15" y="145" width="165" height="65" rx="4" fill="#FFEDD5" stroke="#FDBA74" stroke-width="1"/>
+      <text x="25" y="168" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#C2410C">EXAM CELL SYSTEM</text>
+      <text x="25" y="186" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#9A3412">Houses all seat allocations</text>
+    </g>
+  </g>
+
+  <!-- Sameer Explaining with Marker (Left) -->
+  <g transform="translate(60, 220)">
+    <path d="M 40,90 L 110,90 L 100,210 L 45,210 Z" fill="#1E3A8A" stroke="#0F172A" stroke-width="3"/>
+    <circle cx="75" cy="45" r="32" fill="#FDE68A" stroke="#0F172A" stroke-width="3"/>
+    <!-- Glasses -->
+    <rect x="62" y="38" width="14" height="10" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <rect x="80" y="38" width="14" height="10" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <circle cx="68" cy="43" r="2" fill="#0F172A"/>
+    <circle cx="86" cy="43" r="2" fill="#0F172A"/>
+    <!-- Arm with Marker -->
+    <path d="M 85,110 L 140,85 L 155,75" stroke="#1E3A8A" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <rect x="155" y="65" width="15" height="6" fill="#10B981" rx="1"/>
+  </g>
+
+  <!-- Sameer Speech Bubble -->
+  <g filter="url(#bubbleShadow4)" transform="translate(50, 20)">
+    <path d="M 20,0 L 480,0 Q 500,0 500,20 L 500,105 Q 500,125 480,125 L 140,125 L 115,155 L 110,125 L 20,125 Q 0,125 0,105 L 0,20 Q 0,0 20,0 Z" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5"/>
+    <text x="25" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#15803D">SAMEER (TEACHING ARCHITECTURE)</text>
+    <text x="25" y="56" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"You cannot walk into the kitchen to cook your food.</text>
+    <text x="25" y="78" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">You call the Waiter. The Waiter takes your order,</text>
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#047857">delivers it to the kitchen, and brings back the dish. The Waiter is the API."</text>
+  </g>
+
+  <!-- Student Akshay Taking Notes (Right) -->
+  <g transform="translate(1040, 230)">
+    <path d="M 35,90 L 105,90 L 95,210 L 40,210 Z" fill="#F59E0B" stroke="#B45309" stroke-width="3"/>
+    <circle cx="70" cy="45" r="32" fill="#FDE68A" stroke="#92400E" stroke-width="3"/>
+    <!-- Notebook & Pen -->
+    <rect x="0" y="110" width="50" height="60" rx="4" fill="#FFFFFF" stroke="#0F172A" stroke-width="2"/>
+    <line x1="8" y1="125" x2="42" y2="125" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="8" y1="140" x2="42" y2="140" stroke="#94A3B8" stroke-width="1.5"/>
+    <line x1="8" y1="155" x2="30" y2="155" stroke="#94A3B8" stroke-width="1.5"/>
+  </g>
+
+  <!-- Akshay Speech Bubble -->
+  <g filter="url(#bubbleShadow4)" transform="translate(680, 20)">
+    <path d="M 20,0 L 460,0 Q 480,0 480,20 L 480,105 Q 480,125 460,125 L 360,125 L 380,155 L 390,125 L 20,125 Q 0,125 0,105 L 0,20 Q 0,0 20,0 Z" fill="#FFFBEB" stroke="#F59E0B" stroke-width="2.5"/>
+    <text x="25" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#B45309">STUDENT AKSHAY (CONNECTING THE DOTS)</text>
+    <text x="25" y="56" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"So the Examination Cell is the Kitchen,</text>
+    <text x="25" y="78" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">my Admit Card is the dish, and the API is</text>
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#B45309">the trusted courier carrying only the exact payload!"</text>
+  </g>
+
+  <!-- Bottom Narration Caption -->
+  <rect x="60" y="525" width="1080" height="42" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="80" y="551" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#334155"><tspan font-weight="800" fill="#0F172A">SCENE 4:</tspan> Post-Exam Engineering Desk · 12:15 PM · Sameer unpacks the Client-Waiter-Server architecture on the whiteboard.</text>
+</svg>

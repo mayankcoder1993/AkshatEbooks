@@ -12,6 +12,7 @@
     "test:snippets": "node scripts/validate-all-snippets.mjs",
     "test:api": "newman run course-materials/zero-to-agentic-api-testing/Zero-to-Agentic-API-Testing.postman_collection.json -e course-materials/zero-to-agentic-api-testing/Campus-Library-Local.postman_environment.json -k",
     "mock:server": "node scripts/mock-api-server.mjs",
+    "pipeline:validate": "node -e \"const { execSync } = require('child_process'); console.log(execSync('node scripts/comic-authoring-mcp.mjs', { input: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'tools/call', params: { name: 'pipeline_validate_story', arguments: { chapterNumber: 1 } } }) + '\\n', encoding: 'utf8' }));\"",
     "prepare:books": "npm run styles && npm run catalog && npm run validate:books",
     "create:book": "node scripts/create-book.mjs",
     "create:edition": "node scripts/create-edition.mjs",

@@ -1,15 +1,9 @@
-import laptopImg from '../assets/illustrations/ch01-scene1-akshay-modern-laptop.jpg'
-import browserTrapImg from '../assets/illustrations/ch01-scene1-akshay-chrome.jpg'
-import terminalMonitorImg from '../assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg'
-import networkCableImg from '../assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg'
-import whiteboardWaiterImg from '../assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg'
-import codingPairImg from '../assets/illustrations/ch01-scene3-panel1-modern-coding.jpg'
-import blooperCrashImg from '../assets/illustrations/ch01-scene3-panel2-modern-blooper.jpg'
-import middlewareFixImg from '../assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg'
-import serverSuccessImg from '../assets/illustrations/ch01-scene3-panel4-modern-server-success.jpg'
-import chaiReviewImg from '../assets/illustrations/ch01-scene1-sameer-chai-modern.jpg'
-import thaliTrapImg from '../assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg'
-import alarmMonitorImg from '../assets/illustrations/ch01-scene5-panel3-modern-alarm-monitor.jpg'
+import admitCardLeakSvg from '../assets/svgs/ch01-comic-scene1-admitcard-leak.svg'
+import portalSpinnerSvg from '../assets/svgs/ch01-comic-scene2-portal-spinner.svg'
+import terminalRescueSvg from '../assets/svgs/ch01-comic-scene3-terminal-rescue.svg'
+import waiterArchSvg from '../assets/svgs/ch01-comic-scene4-waiter-architecture.svg'
+import port3000MiddlewareSvg from '../assets/svgs/ch01-comic-scene5-port3000-middleware.svg'
+import protocolsThaliSvg from '../assets/svgs/ch01-comic-scene6-protocols-thali.svg'
 
 import flowSvg from '../assets/svgs/ch01-flow-http-transaction.svg'
 import getMenuSvg from '../assets/svgs/ch01-workbench-get-menu.svg'
@@ -20,25 +14,25 @@ export const lesson01 = {
   icon: '⚡',
   title: 'Understanding APIs from First Principles',
   shortTitle: 'Understanding APIs',
-  badge: 'CHAPTER 01 · FOUNDATIONS',
+  badge: 'CHAPTER 01 : FOUNDATIONS',
   subtitle: 'The restaurant analogy, the five core operations, building your own minimal server, and tasting REST, SOAP, and GraphQL.',
   tags: ['APIs', 'HTTP', 'Express', 'First Principles', 'CRUD', 'REST', 'SOAP', 'GraphQL'],
 
   blocks: [
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 1 · PHASE 1 OF 3: THE WIRE AND LOCAL CATALOG SERVER',
+      missionBadge: 'MISSION 1 : PHASE 1 OF 3 : THE WIRE AND LOCAL ADMIT CARD SERVER',
       missionTitle: 'Global Open Data and Web Wire Audit',
-      missionCrisis: 'The 10:00 AM Semester Results Meltdown & The Presentation Glass Trap',
-      missionContext: 'At 10:00 AM on results day, twelve thousand students hammer the portal, leaving Akshay staring at a blank screen with a frozen spinner. Principal architect Sameer arrives with cutting chai, bypassing the browser to fetch the marksheet in 18ms via a raw API call. Astounded, Akshay vows to build a dedicated results web app and gift it to the college.',
-      missionObjective: 'Understand what an Application Programming Interface does on the network wire, build a runnable Express catalog server from scratch on port 3000, avoid the undefined body crash, and execute all five core CRUD operations.',
-      targetSystems: 'Apex Campus Catalog Service · Port 3000 · HTTP Wire Traffic',
+      missionCrisis: 'The 08:30 AM Admit Card Meltdown and the Presentation Glass Trap',
+      missionContext: 'At 08:30 AM on exam morning, student Akshay runs across the quad. A water leak in his bag smudges his printed Admit Card, dissolving his Hall and Seat numbers. Gates lock in twenty minutes. Panicking, he tries to re-download on mobile, but twelve thousand concurrent students have crashed the portal into a 504 timeout. Principal Systems Architect Sameer steps in with hot cutting chai, bypasses the browser, and fetches the pure Admit Card JSON directly from the wire in fourteen milliseconds. Astounded, Akshay vows to master APIs and pair programs with Sameer after the exam.',
+      missionObjective: 'Understand what an Application Programming Interface does on the network wire, build a runnable Express Admit Card server on port 3000, avoid the undefined body byte stream crash, and master all five core CRUD verbs.',
+      targetSystems: 'Apex Campus Admit Card Service : Port 3000 : HTTP Wire Traffic',
       phaseRoadmap: [
         {
           phase: 'Phase 1 of 3',
-          title: 'The Wire and the Local Catalog Server',
+          title: 'The Wire and the Local Admit Card Server',
           status: 'current',
-          desc: 'Chapter 1: Assembling Express on port 3000 and auditing the five CRUD verbs across the network wire.'
+          desc: 'Chapter 1: Assembling Express on port 3000, bypassing UI bloat, and auditing the five CRUD verbs across the network wire.'
         },
         {
           phase: 'Phase 2 of 3',
@@ -53,8 +47,8 @@ export const lesson01 = {
           desc: 'Chapter 3: Writing programmatic assertions, test suites, and CI CD automation to lock quality in.'
         }
       ],
-      achieve: 'Understand what an Application Programming Interface actually does on the physical network wire. Distinguish in memory code libraries from network web services. Build a fully runnable Express server from scratch. Master the five essential CRUD verbs (POST, GET, PUT, PATCH, DELETE) and taste the architectural differences between REST, SOAP, and GraphQL.',
-      how: 'Through sequential comic scenes, visual storyboards, interactive code workbenches, and war room diagnostic triage challenges following junior QA engineer Akshay and mentor Sameer.',
+      achieve: 'Understand what an Application Programming Interface actually does on the physical network wire. Distinguish presentation glass from network web services. Build a fully runnable Express server from scratch. Master the five essential CRUD verbs (POST, GET, PUT, PATCH, DELETE) and taste the architectural differences between REST, SOAP, and GraphQL.',
+      how: 'Through sequential comic scenes, visual storyboards, interactive code workbenches, and diagnostic triage challenges following student Akshay and mentor Sameer.',
       carry: 'The mental model of the client server handshake, an intuitive grasp of HTTP status codes, and the confidence to inspect raw wire traffic rather than relying blindly on UI screens.'
     },
     {
@@ -66,156 +60,241 @@ export const lesson01 = {
     },
 
     // =========================================================================
-    // TOPIC 1: THE INVISIBLE WIRE & THE WAITER MODEL
+    // SECTION 1: 18-STEP SYLLABUS PREREQUISITE MATRIX
     // =========================================================================
     {
-      type: 'storyboard',
-      badge: 'COMIC SCENE 1 OF 4',
-      title: 'The 10:00 AM Results Meltdown and the Wire Awakening',
-      intro: 'Morning at the Apex University engineering bay. Akshay starts his day running repetitive manual regression tests from a printed binder before a cafeteria screen standoff leads him to the server room.',
-      panels: [
+      type: 'comparison',
+      title: 'Curriculum Roadmap: 18 Foundational Steps to API Mastery',
+      columns: ['Step', 'Topic Area', 'Pedagogical Role', 'Core Concept and Learning Objective'],
+      rows: [
+        ['Step 01', 'What is an API Really?', 'Foundational Concept', 'Beyond the acronym: An API is an agreed contract of permission between two systems.'],
+        ['Step 02', 'Why APIs Exist', 'Foundational Concept', 'Decoupling frontend and backend, enabling cross-platform reuse across Web, iOS, and Android.'],
+        ['Step 03', 'Client Server Architecture', 'Foundational Concept', 'Request and response handshake: Client asks, Server processes and answers.'],
+        ['Step 04', 'The Restaurant Analogy', 'Intuitive Mental Model', 'Customer is Client, Waiter is API, Kitchen is Server. API carries without cooking or eating.'],
+        ['Step 05', 'Web Page vs API Response', 'Core Distinction', 'Websites deliver heavy HTML, CSS, fonts, and images; APIs deliver pure, lightweight data payloads.'],
+        ['Step 06', 'How Data Moves Across Networks', 'Technical Foundation', 'IP addresses as digital addresses, Ports as doorways, and TCP sockets ensuring reliable byte transfer.'],
+        ['Step 07', 'HTTP from First Principles', 'Protocol Core', 'Application-level stateless protocol governing request methods, headers, and responses over the wire.'],
+        ['Step 08', 'HTTP Methods and CRUD Mapping', 'Core Operations', 'POST (Create), GET (Read), PUT (Replace), PATCH (Partial Update), DELETE (Revoke).'],
+        ['Step 09', 'Anatomy of an HTTP Request', 'Packet Anatomy', 'Verb, Endpoint URL, Headers (Context), Query Params (Filters), and Body Payload.'],
+        ['Step 10', 'Anatomy of an HTTP Response', 'Packet Anatomy', 'Status Code, Status Message, Response Headers, and Structured Data Body.'],
+        ['Step 11', 'HTTP Status Codes Decoded', 'Core Operations', '2xx Success (200, 201), 4xx Client Mistakes (400, 404, 422), 5xx Server Meltdowns (500, 504).'],
+        ['Step 12', 'JSON as the Language of APIs', 'Data Interchange', 'Key-value pairs, types, case sensitivity, and why JSON replaced heavy XML for modern services.'],
+        ['Step 13', 'Endpoints, Resources, and Routes', 'Architecture', 'Organizing around resources (/api/v1/admitcards), collection versus single entity (:id).'],
+        ['Step 14', 'Why Servers Crash: The Undefined Body Trap', 'Advanced Core', 'TCP byte streams require body parsing middleware (express.json()) to populate req.body.'],
+        ['Step 15', 'REST, SOAP, and GraphQL Compared', 'Architecture Showdown', 'Comparing all three architectures against one identical query: Admit Card for APX102.'],
+        ['Step 16', 'The API Testing Mindset', 'Mental Shift', 'Shift from "Why is this page not loading?" to "Which API is failing to deliver this data?"'],
+        ['Step 17', 'Inspecting Live APIs with DevTools', 'Practical Skill', 'Using Browser Network tab, filtering Fetch/XHR, and verifying payload latency in milliseconds.'],
+        ['Step 18', 'Building an API First Thinking Model', 'Capstone Synthesis', 'Connecting every concept back to the campus crisis: reasoning with packets, not pixels.']
+      ]
+    },
+
+    // =========================================================================
+    // SECTION 2: COMPREHENSIVE TOPIC & GOTCHA CHECKLIST
+    // =========================================================================
+    {
+      type: 'structured-breakdown',
+      badge: 'PEDAGOGICAL CHECKLIST',
+      title: 'Crucial Gotchas and Knowledge Traps Addressed in Chapter 1',
+      intro: 'Essential technical boundaries and gotchas every beginner must master before testing APIs.',
+      categories: [
         {
-          title: 'The Manual Routine',
-          time: '09:15 AM',
-          image: laptopImg,
-          promptMeta: {
-            title: 'Akshay at Manual Checklist Bay',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art graphic novel illustration. Akshay, 23-year-old junior QA engineer in a tailored mustard-yellow cotton kurta with rolled sleeves, sitting at a teakwood desk in a sandstone heritage campus wing with Dravidian carved pillars and jali screen windows. Ticking rows on a printed regression checklist sheet with a pen. Laptop with a small scratch on the top-left lid open beside him. Sharp almond eyes with double-line black ink contours, flat vibrant color fills, pure white background (#FFFFFF), print-safe, high detail.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, anime, dark background, gradients, neon, Devanagari script.',
-            targetAsset: 'assets/illustrations/ch01-scene1-akshay-modern-laptop.jpg'
-          },
-          scene: 'Akshay sits at his shared desk bay in the heritage engineering wing under warm morning sunlight, ticking the same regression checklist column he ticked yesterday.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'Forty one requests checked by hand. Forty one green ticks. Exactly the same checklist as yesterday.',
-            replySpeaker: 'Colleague',
-            replySpeech: 'That is the dream, no? Everything stays green.'
-          },
-          realization: 'Repetitive manual clicking gives an illusion of safety, but reveals nothing about why requests pass or fail.'
+          category: 'First Principles',
+          title: 'System Separation and The Wire',
+          explanation: 'Understanding the clear boundary between user interfaces and data services.',
+          points: [
+            'An API is far more than an acronym: Treat it as a contract of permission between two distinct software systems.',
+            'An API does not render buttons, gradients, animations, or fonts; it deals exclusively with data, rules, and access.',
+            'The Presentation Glass Trap: The UI can fail or freeze completely while the backend API remains perfectly healthy.'
+          ]
         },
         {
-          title: 'The Presentation Glass Illusion',
-          time: '11:45 AM',
-          image: terminalMonitorImg,
-          promptMeta: {
-            title: 'The Presentation Glass Illusion',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer, 40-year-old principal architect in indigo blue kurta and off-white Nehru waistcoat, adjusting wireframe glasses and holding a terracotta cutting chai cup, pointing to a dark terminal monitor. Akshay looks upward in realization. Sandstone heritage lab background, pure white background #FFFFFF, double-line ink contours, print-safe.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg'
-          },
-          scene: 'Sameer points to an open laptop showing a browser UI while gesturing toward a dark terminal monitor. Akshay looks upward with sudden realization.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'The cafeteria menu board is frozen on yesterday specials. Stop looking at the glass. The screen only reports what the conversation returned.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'So a frozen screen is not automatically a screen defect?'
-          },
-          realization: 'The user interface is merely a presentation mirror; the ground truth of system state lives on the network wire.'
+          category: 'Networking',
+          title: 'TCP Byte Streams and Port Doorways',
+          explanation: 'How machines identify services and move binary data across sockets.',
+          points: [
+            'IP addresses identify machines, while Ports identify specific service doorways (such as Port 3000 for Admit Cards).',
+            'Bandwidth efficiency: Sending heavy HTML/CSS drains mobile bandwidth; sending lightweight JSON takes milliseconds.',
+            'A server sees packets of structured bytes, not rendered graphical pixels.'
+          ]
         },
         {
-          title: 'Holding the Physical Wire',
-          time: '12:12 PM',
-          image: networkCableImg,
-          promptMeta: {
-            title: 'Holding the Physical Wire',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art graphic novel panel. In the server lab, Sameer lifts a blue Category 6 Ethernet network cable plugged between workstations, pointing toward the server rack status lights. Akshay observing closely. Double-line black ink contours, pure white background #FFFFFF.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, anime, dark background, gradients.',
-            targetAsset: 'assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg'
-          },
-          scene: 'In the lab, Sameer lifts a blue Category 6 network cable plugged between workstations, pointing toward the enterprise server rack.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'When you tap the order button on the tablet, does the catalog live inside that glass?',
-            replySpeaker: 'Akshay',
-            replySpeech: 'No, it lives across the university network on the backend database.'
-          },
-          realization: 'The wire does not lie. Remote calls take real time, cross physical wires, and can fail independently of the client.'
+          category: 'HTTP Verbs',
+          title: 'The Brass Thali Trap: PUT vs PATCH',
+          explanation: 'The danger of confusing complete resource replacement with partial updates.',
+          points: [
+            'PUT is idempotent complete entity replacement: Omitting a field in PUT wipes it out on the server (The Brass Thali Trap).',
+            'PATCH is partial delta modification: Perfect for updating a single attribute (such as changing just seatNumber).',
+            'GET must never carry a sensitive payload body: It is strictly for cacheable, safe data retrieval.'
+          ]
         },
         {
-          title: 'The Whiteboard Waiter Model',
-          time: '12:35 PM',
-          image: whiteboardWaiterImg,
-          promptMeta: {
-            title: 'The Whiteboard Waiter Model',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer standing beside a glass whiteboard sketching the restaurant waiter architecture: customer, waiter interface, and kitchen database. Akshay taking notes on laptop. Sandstone pillars, pure white background #FFFFFF, traditional floral border accents.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg'
-          },
-          scene: 'Sameer stands beside a magnetic dry erase whiteboard sketching the architecture of the client server interaction while Akshay takes notes on his laptop.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'Think of an API like a restaurant waiter. You are the customer. The database is the kitchen. You never enter the kitchen directly; you give your order to the waiter.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'The waiter enforces what I can ask for and delivers the response back to my table!'
-          },
-          realization: 'An API is an agreed contract hiding backend implementation details behind clean request and response rules.'
+          category: 'Middleware',
+          title: 'The Undefined Body Trap and Stream Parsing',
+          explanation: 'Why incoming payloads fail without express.json() body parsing.',
+          points: [
+            'Incoming JSON arrives over TCP as fragmented raw byte chunks, not as pre-parsed JavaScript objects.',
+            'Without app.use(express.json()), Express leaves req.body as undefined, causing runtime TypeError crashes.',
+            'Middleware sits directly in the stream pipeline to intercept, buffer, parse, and attach JSON payloads.'
+          ]
+        },
+        {
+          category: 'Architecture',
+          title: 'REST, SOAP, and GraphQL Compared',
+          explanation: 'Choosing the right architectural paradigm for the problem.',
+          points: [
+            'REST treats Admit Cards as resources; SOAP wraps requests in strict XML envelopes; GraphQL queries only exact fields.',
+            'Over-fetching vs Under-fetching: GraphQL gives precise field selectivity, preventing excess payload transfer.',
+            'API First Mindset: Always inspect DevTools Network tab XHR/Fetch traffic before jumping to visual UI assumptions.'
+          ]
         }
       ]
     },
 
+    // =========================================================================
+    // TOPIC 1: THE COMIC STORYBOARD ARC (ALL 6 SCENES)
+    // =========================================================================
+    {
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
+      title: 'The Admit Card Meltdown and the Wire Awakening',
+      intro: 'Follow student Akshay from a high-stakes quad sprint with a water-damaged hall ticket to the 14ms terminal rescue, the restaurant waiter model, building an Express API on port 3000, and mastering the wire.',
+      panels: [
+        {
+          title: 'Scene 1: The Leaking Bottle and Smudged Hall Ticket',
+          time: '08:30 AM',
+          image: {
+            src: admitCardLeakSvg,
+            alt: 'Akshay racing across campus with leaking water bottle and smudged admit card',
+            caption: 'Apex College Quad: A leaking water bottle obliterates Akshay seat number 20 minutes before board exams.'
+          },
+          embeddedBubbles: true,
+          scene: 'Akshay sprints across the campus quad under the clock tower. A water bottle leak inside his backpack dissolves the blue ink over his Exam Hall and Seat Number. Gates lock in twenty minutes, threatening an automatic year back.',
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Water leaked inside my bag! The blue ink over my Room and Seat number has dissolved! Gates lock in 20 minutes! Without seat details, I face an automatic year-back!',
+            replySpeaker: 'Fellow Student',
+            replySpeech: 'The Admit Card portal is frozen! Twelve thousand students hit it at once and it crashed!'
+          },
+          realization: 'A single point of presentation failure on a physical printed document leaves the student locked out of the exam.'
+        },
+        {
+          title: 'Scene 2: The Portal Collapse and Sameer with Cutting Chai',
+          time: '08:38 AM',
+          image: {
+            src: portalSpinnerSvg,
+            alt: 'Akshay staring in distress at mobile phone showing 504 timeout while Sameer arrives with cutting chai',
+            caption: 'College Corridor: The college portal collapses into an infinite spinner under 12,000 concurrent requests.'
+          },
+          embeddedBubbles: true,
+          scene: 'Outside the exam hall, Akshay repeatedly refreshes portal.apex.edu on his phone, only to encounter an endless white spinner and 504 Gateway Timeout. Principal Systems Architect Sameer calmly walks in holding a steel glass of hot cutting chai.',
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Breathe, Akshay. Screaming at the browser will not bring back a single admit card. The webpage is decorative glass choking on heavy CSS, fonts, and images. Watch the wire.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'I hit refresh twenty times on my phone! The screen is locked on an endless white spinner! How can twelve thousand students bring down the entire university infrastructure?!'
+          },
+          realization: 'The user interface is merely decorative glass; bloated presentation assets cause catastrophic timeouts under peak load.'
+        },
+        {
+          title: 'Scene 3: The 14 Millisecond Terminal Rescue',
+          time: '08:40 AM',
+          image: {
+            src: terminalRescueSvg,
+            alt: 'Black terminal window showing raw HTTP curl request returning JSON in 14ms',
+            caption: 'Corridor Bench: Sameer bypasses the browser and extracts Hall 302, Seat B-14 in 14 milliseconds.'
+          },
+          embeddedBubbles: true,
+          scene: 'Sameer sits at a bench, opens a bare black terminal, and fires a direct HTTP request to /api/v1/admitcards/APX102. In fourteen milliseconds, pure structured JSON returns: Hall 302, Seat B-14. Akshay rushes into the exam in the nick of time.',
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'I did not open the website at all. I spoke directly to the backend over the raw wire. The webpage is decorative glass. The API carries the truth.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Fourteen milliseconds! Hall 302, Seat B-14! The browser was drowning in CSS and fonts, while the raw data was ready in an instant!'
+          },
+          realization: 'Raw wire requests bypass browser presentation overhead entirely, delivering instant truth in milliseconds.'
+        },
+        {
+          title: 'Scene 4: The Whiteboard Restaurant and Exam Courier Model',
+          time: '12:15 PM',
+          image: {
+            src: waiterArchSvg,
+            alt: 'Whiteboard diagram showing Customer Client, Waiter API, and Kitchen Server',
+            caption: 'Engineering Desk: Akshay returns after the exam to understand how the 14ms rescue worked.'
+          },
+          embeddedBubbles: true,
+          scene: 'Meeting at the engineering desk post exam, Sameer sketches the three core columns of web architecture: Customer (Client), Waiter (API), and Kitchen (Server). Akshay takes notes in his journal with rising excitement.',
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'You cannot walk into the kitchen to cook your food. You call the Waiter. The Waiter takes your order, delivers it to the kitchen, and brings back the dish. The Waiter is the API.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'So the Examination Cell is the Kitchen, my Admit Card is the dish, and the API is the trusted courier carrying only the exact payload!'
+          },
+          realization: 'An API does not create or consume data on its own; it acts as an agreed contract carrying structured requests and responses.'
+        },
+        {
+          title: 'Scene 5: Port 3000 Pair Programming and the Undefined Body Bug',
+          time: '01:00 PM',
+          image: {
+            src: port3000MiddlewareSvg,
+            alt: 'Split terminal screen showing req.body is undefined error and express.json middleware fix',
+            caption: 'Workstation Lab: Akshay and Sameer uncover the raw byte stream trap and mount body parsing middleware.'
+          },
+          embeddedBubbles: true,
+          scene: 'Pair programming on port 3000, Akshay writes a POST route to issue Admit Cards but encounters req.body is undefined. Sameer explains TCP byte streams and mounts app.use(express.json()), turning red crashes into green 201 Created triumph.',
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Data arrives as raw bytes over the TCP wire. Express does not guess its format. One line, app.use(express.json()), unboxes the stream into req.body.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'I sent a valid JSON body with student details, but console.log(req.body) returns undefined! Why did the server crash on a simple POST request?!'
+          },
+          realization: 'Network payloads travel as streams of bytes. Servers require explicit body parsing middleware to transform chunks into usable objects.'
+        },
+        {
+          title: 'Scene 6: The Brass Thali Trap and Protocol Showdown',
+          time: '02:15 PM',
+          image: {
+            src: protocolsThaliSvg,
+            alt: 'Multi block diagram showing PUT vs PATCH Brass Thali and REST vs SOAP vs GraphQL comparison on APX102',
+            caption: 'Engineering Bay: Sizing up REST, SOAP, and GraphQL on Admit Card APX102 and mastering PUT vs PATCH.'
+          },
+          embeddedBubbles: true,
+          scene: 'Sameer illustrates the difference between PUT and PATCH using an Indian brass thali dinner plate, then benchmarks REST, SOAP, and GraphQL against the exact same Admit Card APX102 query.',
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'REST gives a clean resource plate, SOAP is an enterprise contract, and GraphQL lets you pick. Now you understand the wire. Next, we test it with intention!',
+            replySpeaker: 'Akshay',
+            replySpeech: 'I will never look at a broken website again and ask "Why is the page failing?" I will inspect the Network tab and find which API failed to deliver!'
+          },
+          realization: 'The transition from Page Viewer to API Thinker is complete. Understanding protocols and request methods unlocks professional API testing.'
+        }
+      ]
+    },
+
+    // =========================================================================
+    // TOPIC 2: ARCHITECTURAL FLOW & PROTOCOL TRIAGE
+    // =========================================================================
     {
       type: 'flow',
-      badge: 'ARCHITECTURAL TRANSACTION FLOW',
-      title: 'Anatomy of an HTTP Request Across the Network Wire',
-      intro: 'Trace how an API request leaves the client device, travels across the network wire, triggers server side execution, and returns a structured response payload.',
-      svgScreen: flowSvg,
-      steps: [
-        {
-          step: 1,
-          name: 'Client Packaging',
-          desc: 'The client formats an HTTP request containing method, target path, headers, and optional payload body.'
-        },
-        {
-          step: 2,
-          name: 'Network Serialization',
-          desc: 'The operating system serializes the request into raw TCP IP byte packets and dispatches them across the wire.'
-        },
-        {
-          step: 3,
-          name: 'Port Listener Receipt',
-          desc: 'The server event loop listening on port 3000 catches the incoming stream chunks and passes them to route handlers.'
-        },
-        {
-          step: 4,
-          name: 'Structured Response Return',
-          desc: 'The server formats an HTTP response status code and JSON payload, returning it over the wire to the client.'
-        }
-      ]
-    },
-
-    // =========================================================================
-    // TOPIC 2: THE BROWSER ADDRESS BAR LIMITATION
-    // =========================================================================
-    {
-      type: 'storyboard',
-      badge: 'COMIC SCENE 2 OF 4',
-      title: 'The Browser Address Bar Dilemma',
-      intro: 'Akshay tries using Chrome to test API mutations, discovering firsthand why software teams rely on dedicated API workbenches.',
-      panels: [
-        {
-          title: 'The Address Bar Trap',
-          time: '01:15 PM',
-          image: browserTrapImg,
-          scene: 'Akshay sits clutching his hair in confusion before his open laptop with an empty browser screen.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'I typed http://localhost:3000/catalog into Chrome and saw data. But how do I send a POST body from this address bar?',
-            replySpeaker: 'Sameer',
-            replySpeech: 'You cannot. The browser address bar speaks exactly one dialect: simple GET requests with no body.'
-          },
-          realization: 'Web browsers are built for page navigation; they cannot easily test custom HTTP verbs, payloads, or authentication headers.'
-        }
+      title: 'Anatomy of the 14ms Admit Card HTTP Transaction',
+      subtitle: 'Tracing the client request packet across TCP sockets to the Express route handler and back.',
+      input: [
+        'Client Terminal Request',
+        'curl -s http://portal.apex.edu/api/v1/admitcards/APX102 over TCP socket port 80/3000'
+      ],
+      process: [
+        'Express Kernel & Route Dispatch',
+        'Socket receives bytes -> express.json() unboxes -> router matches /api/v1/admitcards/:id -> query student store'
+      ],
+      output: [
+        'Structured 200 OK JSON Payload',
+        '{"status":"CONFIRMED","regNo":"APX102","hallNumber":"302","seatNumber":"B-14"} delivered in 14ms'
       ]
     },
 
     {
       type: 'triage',
       title: 'The Browser Address Bar Protocol Triage',
-      scenario: 'Akshay wants to submit a new course record to the server. Why can he not use the Chrome address bar to do this?',
+      scenario: 'Akshay wants to issue a newly generated Admit Card record to the server using POST. Why can he not simply type the JSON into the Chrome browser address bar?',
       options: [
         'The browser address bar is designed strictly for GET navigation and cannot attach JSON payloads or configure custom HTTP headers',
         'Web browsers cannot establish TCP socket connections to port 3000',
@@ -233,102 +312,13 @@ export const lesson01 = {
     },
 
     // =========================================================================
-    // TOPIC 3: BUILDING THE SERVER FROM SCRATCH IN CHUNKS
+    // TOPIC 3: BUILDING THE ADMIT CARD SERVER ON PORT 3000
     // =========================================================================
     {
-      type: 'storyboard',
-      badge: 'COMIC SCENE 3 OF 4',
-      title: 'Assembling the Other Side of the Wire',
-      intro: 'Sameer invites Akshay to pair program at the server rack desk. Together they construct an Express API server from scratch and encounter the classic fresher blooper.',
-      panels: [
-        {
-          title: 'Pair Programming at the Workstation',
-          time: '02:00 PM',
-          image: codingPairImg,
-          promptMeta: {
-            title: 'Pair Programming at Workstation',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Akshay and Sameer pair programming side by side at a teakwood workstation. Server.js code editor visible on screen. Sameer calmly gesturing with open palm, Akshay typing with focused determination. Pure white background #FFFFFF, double-line ink contours.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene3-panel1-modern-coding.jpg'
-          },
-          scene: 'Akshay types code on his laptop with server.js visible on the screen, while Sameer stands right beside him watching the implementation.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'Before you can test someone else code with confidence, you must hold both ends of the wire in your own hands. Open your IDE and create server.js.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'Building the API server myself? Let us do it!'
-          },
-          realization: 'True API testing mastery begins when you understand the server mechanics that receive and process wire packets.'
-        },
-        {
-          title: 'The Undefined Body Crash',
-          time: '02:25 PM',
-          image: blooperCrashImg,
-          promptMeta: {
-            title: 'The Undefined Body Crash',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art comic panel. Akshay in comic distress scratching the back of his head with wide eyes as terminal monitor displays a red stack trace: TypeError Cannot read properties of undefined. Sameer with calm knowing half-smile holding chai. Pure white background #FFFFFF, expressive almond eyes.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene3-panel2-modern-blooper.jpg'
-          },
-          scene: 'Akshay triggers a POST request to add a new course, but the terminal flashes a red error stack trace.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'TypeError: Cannot read properties of undefined! But I sent a valid JSON body with title and department in the workbench! Why is req.body undefined?',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Welcome to Node.js stream mechanics, Akshay. Express does not parse incoming request bodies automatically out of the box.'
-          },
-          realization: 'HTTP request bodies arrive as raw TCP byte stream chunks; servers must explicitly buffer and parse them.'
-        },
-        {
-          title: 'The Middleware Savior',
-          time: '02:40 PM',
-          image: middlewareFixImg,
-          promptMeta: {
-            title: 'The Middleware Savior',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer pointing with stylus directly at app.use express.json code line on Akshay laptop screen. Akshay nodding in lightbulb realization moment. Sandstone jali background, pure white background #FFFFFF.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg'
-          },
-          scene: 'Sameer leans over, smiling calmly and pointing with his finger directly at the code on Akshay laptop screen.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'Mount app.use(express.json()) at the top of your file. It intercepts the incoming stream, pieces the packet chunks together, and populates req.body.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'Now I see it! Without that middleware, req.body remains completely unpopulated.'
-          },
-          realization: 'Middleware functions run sequentially between stream receipt and route handler execution.'
-        },
-        {
-          title: 'Green Server Startup Triumph',
-          time: '02:55 PM',
-          image: serverSuccessImg,
-          promptMeta: {
-            title: 'Green Server Startup Triumph',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Akshay pumping fist in victory with wide smile as terminal monitor displays green text 201 Created and server listening on port 3000. Sameer offering affirmative nod. Pure white background #FFFFFF, festive Madhubani border motif.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene3-panel4-modern-server-success.jpg'
-          },
-          scene: 'Akshay pumps his fist in victory as the screen glows with green startup success.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'Status 201 Created! The server received the payload, assembled the chunks, stored the course, and echoed the object back over the wire!',
-            replySpeaker: 'Sameer',
-            replySpeech: 'First working implementation verified. Now you own both sides of the conversation.'
-          },
-          realization: 'A successful POST request returns HTTP 201 Created along with the persisted record identity.'
-        }
-      ]
-    },
-
-    {
       type: 'chunked-code',
-      badge: 'CHUNKS 1 AND 2 · SERVER BOOT AND GET ENDPOINT',
-      title: 'Initializing Express and Building the Course Catalog',
-      intro: 'Follow along step by step as we build our campus catalog server in digestible chunks.',
+      badge: 'CHUNKS 1 AND 2 : SERVER BOOT AND GET HANDLER',
+      title: 'Initializing Express and Building the Admit Card Service',
+      intro: 'Follow along step by step as we build our campus Admit Card service in digestible chunks.',
       chunks: [
         {
           label: 'Chunk 1: Express Initialization and Port 3000 Listener',
@@ -338,7 +328,7 @@ const app = express();
 const PORT = 3000;
 
 app.listen(PORT, () => {
-  console.log(\`Catalog service listening on port \${PORT}\`);
+  console.log(\`Admit Card service listening on port \${PORT}\`);
 });`,
           explanation: 'Imports the Express web framework, instantiates the application, and binds the event loop to TCP port 3000.',
           callouts: [
@@ -347,344 +337,215 @@ app.listen(PORT, () => {
           ]
         },
         {
-          label: 'Chunk 2: In Memory Catalog Store and GET /catalog Handler',
+          label: 'Chunk 2: In Memory Admit Card Store and GET /api/v1/admitcards/:id Handler',
           filename: 'server.js',
-          code: `const courses = [
-  { id: 'CS101', title: 'Foundations of Computer Systems', dept: 'CS', credits: 4 },
-  { id: 'CS204', title: 'Data Structures and Algorithms', dept: 'CS', credits: 4 },
-  { id: 'EE201', title: 'Circuit Analysis', dept: 'EE', credits: 3 }
-];
+          code: `const admitCards = {
+  'APX102': {
+    status: 'CONFIRMED',
+    regNo: 'APX102',
+    studentName: 'Akshay',
+    examCenter: 'Apex Main Hall',
+    hallNumber: '302',
+    seatNumber: 'B-14',
+    examDate: '2026-10-01T09:00:00Z'
+  }
+};
 
-app.get('/catalog', (req, res) => {
-  res.status(200).json(courses);
+app.get('/api/v1/admitcards/:id', (req, res) => {
+  const card = admitCards[req.params.id];
+  if (!card) {
+    return res.status(404).json({ error: 'Admit Card not found' });
+  }
+  res.status(200).json(card);
 });`,
-          explanation: 'Defines our university courses data structure and registers an HTTP GET route returning status 200 OK with serialized JSON.',
+          explanation: 'Declares the canonical in-memory student record and binds a GET route handler using the :id path parameter. If the record exists, it responds with HTTP 200 OK and clean JSON in milliseconds.',
           callouts: [
-            { line: 'app.get()', note: 'Matches incoming GET requests targeting path /catalog.' },
-            { line: 'res.status(200).json()', note: 'Sets the HTTP response status code to 200 OK and serializes the array to JSON.' }
+            { line: 'req.params.id', note: 'Extracts the path parameter APX102 from the incoming URL.' },
+            { line: 'res.status(200)', note: 'Returns explicit HTTP 200 OK status code alongside the payload.' }
           ]
         }
       ]
     },
 
     {
-      type: 'comic-workbench',
-      badge: 'API WORKBENCH · GET CATALOG VERIFICATION',
-      title: 'Verifying the Catalog Endpoint over the Wire',
-      appType: 'api-workbench',
-      svgScreen: getMenuSvg,
-      dialogue: [
-        {
-          speaker: 'Sameer',
-          role: 'Staff Architect',
-          text: 'Notice the response panel. We received an HTTP 200 OK status code along with an array of four courses in JSON format.',
-          pointer: 'Status 200 OK and response JSON'
-        },
-        {
-          speaker: 'Akshay',
-          role: 'Hero',
-          text: 'The workbench formats the JSON with indentation, shows the response time, and confirms the wire contract!',
-          pointer: 'Formatted JSON array'
-        }
-      ],
-      workbench: {
-        method: 'GET',
-        url: 'http://localhost:3000/catalog',
-        headers: {
-          'Host': 'localhost:3000',
-          'Accept': 'application/json'
-        },
-        responseStatus: '200 OK',
-        responseTime: '12 ms',
-        responseBody: `[
-  { "id": "CS101", "title": "Foundations of Computer Systems", "dept": "CS", "credits": 4 },
-  { "id": "CS204", "title": "Data Structures and Algorithms", "dept": "CS", "credits": 4 },
-  { "id": "EE201", "title": "Circuit Analysis", "dept": "EE", "credits": 3 }
-]`
-      },
-      breakdown: {
-        input: 'GET /catalog dispatched from the API workbench.',
-        explanation: 'The Express route handler reads the in memory array, serializes the items, and flushes headers and bytes across the socket.',
-        output: 'HTTP status 200 OK and 3 items in valid JSON format.',
-        trapAndFix: 'Senior Savior Trap: Assuming status 200 means data is fresh without checking cache headers. Golden Rule: Always verify payload contents and freshness headers.'
-      }
-    },
-
-    {
       type: 'chunked-code',
-      badge: 'CHUNKS 3 AND 4 · STREAM BUFFERING AND POST MUTATION',
-      title: 'Mounting express.json Middleware and Handling POST Payloads',
-      intro: 'Here is the critical fix that solves the undefined body crash and enables reliable POST mutations.',
+      badge: 'CHUNKS 3 AND 4 : THE MIDDLEWARE FIX AND POST HANDLER',
+      title: 'Mounting express.json and Issuing New Admit Cards',
+      intro: 'Here we solve the classic req.body is undefined bug and handle POST requests to create new cards.',
       chunks: [
         {
-          label: 'Chunk 3: Mounting express.json Stream Buffering Middleware',
+          label: 'Chunk 3: Mounting Body Parsing Middleware',
           filename: 'server.js',
-          code: `// Mandatory stream buffering middleware
+          code: `// CRITICAL: Mount body parsing middleware before routes!
 app.use(express.json());`,
-          explanation: 'Tells Express to buffer all incoming TCP readable stream packets until complete, then parse the serialized JSON body into req.body.',
+          explanation: 'Tells Express to buffer incoming TCP byte chunks, parse the payload as JSON, and assign the parsed object to req.body. Without this single line, req.body is undefined.',
           callouts: [
-            { line: 'app.use(express.json())', note: 'Without this line, req.body is undefined on every POST, PUT, and PATCH request!' }
+            { line: 'app.use(express.json())', note: 'The middleware savior that prevents TypeError crashes on all incoming POST, PUT, and PATCH bodies.' }
           ]
         },
         {
-          label: 'Chunk 4: POST /catalog Course Creation Handler',
+          label: 'Chunk 4: POST /api/v1/admitcards Issue Handler',
           filename: 'server.js',
-          code: `app.post('/catalog', (req, res) => {
-  const newCourse = req.body;
-  if (!newCourse.title || !newCourse.dept) {
-    return res.status(400).json({ error: 'Title and department are required' });
+          code: `app.post('/api/v1/admitcards', (req, res) => {
+  const { regNo, studentName, hallNumber, seatNumber } = req.body;
+  
+  if (!regNo || !studentName) {
+    return res.status(400).json({ error: 'regNo and studentName are required' });
   }
-  courses.push(newCourse);
-  res.status(201).json(newCourse);
+
+  admitCards[regNo] = {
+    status: 'ISSUED',
+    regNo,
+    studentName,
+    examCenter: 'Apex Main Hall',
+    hallNumber: hallNumber || 'TBD',
+    seatNumber: seatNumber || 'TBD',
+    examDate: new Date().toISOString()
+  };
+
+  res.status(201).json(admitCards[regNo]);
 });`,
-          explanation: 'Validates mandatory payload keys, appends the new course to the in memory store, and returns HTTP 201 Created.',
+          explanation: 'Reads the validated payload from req.body, stores the new Admit Card in the dictionary, and returns HTTP 201 Created with the persisted record.',
           callouts: [
-            { line: 'res.status(400)', note: 'Defensive validation rejecting malformed payloads before database writes.' },
-            { line: 'res.status(201)', note: 'Standard HTTP status code confirming successful resource creation.' }
+            { line: 'res.status(201)', note: 'Industry standard HTTP 201 Created response indicating successful entity creation.' }
           ]
-        }
-      ]
-    },
-
-    {
-      type: 'comic-workbench',
-      badge: 'API WORKBENCH · POST CREATION VERIFICATION',
-      title: 'Creating a Course Entity and Verifying 201 Created',
-      appType: 'api-workbench',
-      svgScreen: postMenuSvg,
-      dialogue: [
-        {
-          speaker: 'Akshay',
-          role: 'Hero',
-          text: 'I submitted the course payload with title and department, and the server responded with 201 Created and echoed the saved object!',
-          pointer: 'POST /catalog 201 Created'
-        },
-        {
-          speaker: 'Sameer',
-          role: 'Staff Architect',
-          text: 'Notice the HTTP 201 status code. A well designed API never returns a generic 200 on resource creation; it explicitly confirms creation with 201.',
-          pointer: 'HTTP 201 Created semantics'
-        }
-      ],
-      workbench: {
-        method: 'POST',
-        url: 'http://localhost:3000/catalog',
-        headers: {
-          'Host': 'localhost:3000',
-          'Content-Type': 'application/json'
-        },
-        body: `{
-  "id": "CS301",
-  "title": "Database Engineering",
-  "dept": "CS",
-  "credits": 4
-}`,
-        responseStatus: '201 Created',
-        responseTime: '15 ms',
-        responseBody: `{
-  "id": "CS301",
-  "title": "Database Engineering",
-  "dept": "CS",
-  "credits": 4,
-  "status": "Active"
-}`
-      },
-      breakdown: {
-        input: 'POST /catalog with JSON body declaring course CS301.',
-        explanation: 'express.json middleware buffers readable stream data events until the end event fires, parses JSON, and passes control to the route handler.',
-        output: 'Status 201 Created with persisted entity echoed back.',
-        trapAndFix: 'Senior Savior Trap: Reading req.body in Express without express.json middleware. Golden Rule: An HTTP server is a streaming engine; always buffer byte streams before reading payloads.'
-      }
-    },
-
-    // =========================================================================
-    // TOPIC 4: THE FIVE CRUD VERBS & THE THALI TRAP
-    // =========================================================================
-    {
-      type: 'storyboard',
-      badge: 'COMIC SCENE 4 OF 4',
-      title: 'Five Moves and the Thali Overwrite Trap',
-      intro: 'Sameer and Akshay review the five HTTP verbs over cutting chai before Akshay experiences the classic PUT versus PATCH overwrite accident.',
-      panels: [
-        {
-          title: 'Reviewing the Five Moves over Chai',
-          time: '03:15 PM',
-          image: chaiReviewImg,
-          promptMeta: {
-            title: 'Reviewing Five Moves over Chai',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Sameer and Akshay sitting at teakwood workbench sharing steaming terracotta cups of cutting chai. Server racks humming in soft background. Whiteboard displays 5 verbs: POST GET PUT PATCH DELETE. Pure white background #FFFFFF.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene1-sameer-chai-modern.jpg'
-          },
-          scene: 'Sameer offering cutting chai to Akshay at their shared workbench desk, server racks humming softly in the background.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'Take a sip of chai. Now look at the five core moves of the web: POST to create, GET to read, PUT to replace, PATCH to modify partially, and DELETE to remove.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'Five verbs to govern every interaction on the web. Let us test updating a course.'
-          },
-          realization: 'HTTP verbs have precise architectural contracts; choosing the wrong verb causes silent data bugs.'
-        },
-        {
-          title: 'The Brass Thali Trap',
-          time: '03:40 PM',
-          image: thaliTrapImg,
-          promptMeta: {
-            title: 'The Brass Thali Trap',
-            aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art comic panel. Sameer holds a gleaming brass thali dinner plate explaining complete replacement versus single bowl refill, smiling merrily. Akshay looks at screen in surprise realizing PUT wiped out missing fields. Pure white background #FFFFFF, double-line ink contours.',
-            negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, neon.',
-            targetAsset: 'assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg'
-          },
-          scene: 'Sameer holds an empty thali plate laughing merrily, while Akshay points in dismay at his laptop screen where course properties disappeared.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'Wait! I sent a PUT request with only status Inactive to update course CS101. But when I retrieved the record, the title, department, and credits were completely wiped out!',
-            replySpeaker: 'Sameer',
-            replySpeech: 'That is the PUT contract in action. Think of a brass thali plate. PUT swaps out the entire plate with whatever you brought. When you want to refill only one bowl, use PATCH!'
-          },
-          realization: 'PUT is complete resource replacement; PATCH is partial modification.'
         }
       ]
     },
 
     {
       type: 'chunked-code',
-      badge: 'CHUNKS 5 AND 6 · PUT REPLACEMENT VERSUS PATCH DELTA',
-      title: 'Implementing PUT Full Replacement and PATCH Partial Modification',
-      intro: 'Study the route mechanics that separate a destructive full replacement from a safe delta update.',
+      badge: 'CHUNKS 5 AND 6 : THE BRASS THALI TRAP AND DELETION',
+      title: 'PUT vs PATCH and Revoking Admit Cards',
+      intro: 'Understanding why PUT and PATCH are not interchangeable and how to remove resources with DELETE.',
       chunks: [
         {
-          label: 'Chunk 5: PUT Full Resource Replacement Handler',
+          label: 'Chunk 5: PUT (Complete Replacement) vs PATCH (Partial Update)',
           filename: 'server.js',
-          code: `// PUT: Complete Resource Replacement (The Thali Swap)
-app.put('/catalog/:id', (req, res) => {
-  const index = courses.findIndex(c => c.id === req.params.id);
-  if (index === -1) {
-    return res.status(404).json({ error: 'Course not found' });
+          code: `// PUT: The Brass Thali complete replacement
+app.put('/api/v1/admitcards/:id', (req, res) => {
+  // Completely replaces the record. Omitted fields are lost!
+  admitCards[req.params.id] = req.body;
+  res.status(200).json(admitCards[req.params.id]);
+});
+
+// PATCH: Partial update (refilling only the katori)
+app.patch('/api/v1/admitcards/:id', (req, res) => {
+  if (!admitCards[req.params.id]) {
+    return res.status(404).json({ error: 'Record not found' });
   }
-  // Destructive full replacement: omitted fields vanish!
-  courses[index] = { id: req.params.id, ...req.body };
-  res.status(200).json(courses[index]);
+  // Merges only the supplied fields (e.g. just seatNumber)
+  Object.assign(admitCards[req.params.id], req.body);
+  res.status(200).json(admitCards[req.params.id]);
 });`,
-          explanation: 'Replaces the entire record in memory. Any properties omitted in req.body are completely erased.',
+          explanation: 'Demonstrates the crucial distinction between complete resource replacement (PUT) and partial attribute modification (PATCH). If you send only seatNumber with PUT, all other student details are wiped out!',
           callouts: [
-            { line: 'courses[index] = { ... }', note: 'Swaps out the entire object; unmentioned attributes disappear.' }
+            { line: 'PUT', note: 'Replaces the entire record. Any field omitted in the request body is lost.' },
+            { line: 'PATCH', note: 'Safely mutates only specified keys, preserving existing student properties.' }
           ]
         },
         {
-          label: 'Chunk 6: PATCH Partial Modification Handler',
+          label: 'Chunk 6: DELETE /api/v1/admitcards/:id Revocation Handler',
           filename: 'server.js',
-          code: `// PATCH: Partial Modification (Refilling One Bowl)
-app.patch('/catalog/:id', (req, res) => {
-  const course = courses.find(c => c.id === req.params.id);
-  if (!course) {
-    return res.status(404).json({ error: 'Course not found' });
+          code: `app.delete('/api/v1/admitcards/:id', (req, res) => {
+  if (!admitCards[req.params.id]) {
+    return res.status(404).json({ error: 'Admit Card not found' });
   }
-  // Safe selective merge: updates only supplied keys
-  Object.assign(course, req.body);
-  res.status(200).json(course);
+  delete admitCards[req.params.id];
+  res.status(204).send();
 });`,
-          explanation: 'Applies an in place delta merge via Object.assign, updating supplied keys while preserving existing fields.',
+          explanation: 'Removes the Admit Card from memory and returns HTTP 204 No Content, confirming the deletion without unnecessary body payload.',
           callouts: [
-            { line: 'Object.assign(course, req.body)', note: 'Safely merges changes into the existing record without data loss.' }
+            { line: 'res.status(204)', note: '204 No Content confirms success while saving network bandwidth.' }
           ]
         }
       ]
     },
 
     // =========================================================================
-    // TOPIC 5: PROTOCOL TASTING (REST VS SOAP VS GRAPHQL)
+    // TOPIC 4: INTERACTIVE API TESTING WORKBENCHES
     // =========================================================================
     {
-      type: 'comic-workbench',
-      badge: 'COMIC WORKBENCH · PROTOCOL TASTING',
-      title: 'Comparing REST, SOAP, and GraphQL on the Wire',
-      appType: 'api-workbench',
-      dialogue: [
-        {
-          speaker: 'Sameer',
-          role: 'Staff Architect',
-          text: 'Notice that GraphQL always uses POST to a single endpoint. The query document inside the body specifies exactly what fields to return.',
-          pointer: 'POST /graphql query payload'
-        },
-        {
-          speaker: 'Akshay',
-          role: 'Hero',
-          text: 'In REST, I got all course properties whether I needed them or not. With GraphQL, I requested just code and title, and received exactly that!',
-          pointer: 'Selective field response'
-        }
-      ],
-      workbench: {
-        method: 'POST',
-        url: 'http://localhost:3000/graphql',
-        headers: {
-          'Host': 'localhost:3000',
-          'Content-Type': 'application/json'
-        },
-        body: `{
-  "query": "query { course(code: \\"CS101\\") { code title } }"
-}`,
-        responseStatus: '200 OK',
-        responseTime: '22 ms',
-        responseBody: `{
-  "data": {
-    "course": {
-      "code": "CS101",
-      "title": "Foundations of Computer Systems"
-    }
-  }
-}`
-      },
-      breakdown: {
-        input: 'POST /graphql with GraphQL query requesting only code and title attributes.',
-        explanation: 'The GraphQL engine parses the query AST, evaluates field resolvers against the catalog database, and filters out unrequested fields.',
-        output: '200 OK with custom data object containing only the requested fields.',
-        trapAndFix: 'Senior Savior Trap: Expecting HTTP 404 or 500 status codes on GraphQL resolver failures. Golden Rule: GraphQL almost always returns HTTP 200 OK; you must inspect the errors array inside the JSON payload to detect failures.'
-      }
+      type: 'image',
+      layout: 'stacked',
+      badge: 'INTERACTIVE WORKBENCH : GET ADMIT CARD',
+      title: 'Verifying GET /api/v1/admitcards/APX102 in 14ms',
+      text: 'Observe the API Testing Workbench issuing a GET request directly across the local socket. The server responds with HTTP 200 OK and clean JSON in 14 milliseconds, completely bypassing browser rendering overhead.',
+      src: getMenuSvg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-workbench-get-menu.svg',
+      w: 720,
+      h: 395,
+      alt: 'API Testing Workbench showing GET request to /api/v1/admitcards/APX102 with 200 OK status and 14ms latency',
+      caption: 'The Workbench: Fast, deterministic inspection of structured wire data without browser flakiness.',
+      points: [
+        'Method & URL: GET http://localhost:3000/api/v1/admitcards/APX102',
+        'Response Status: HTTP 200 OK with latency under 15 milliseconds',
+        'Data Payload: Pure structured student record with confirmed Hall 302 and Seat B-14'
+      ]
     },
 
+    {
+      type: 'image',
+      layout: 'stacked',
+      badge: 'INTERACTIVE WORKBENCH : POST ISSUE CARD',
+      title: 'Verifying POST /api/v1/admitcards with 201 Created',
+      text: 'Here we forge an HTTP POST request carrying a JSON payload in the request body. With express.json() active, Express unboxes the stream and responds with HTTP 201 Created.',
+      src: postMenuSvg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-workbench-post-menu.svg',
+      w: 720,
+      h: 255,
+      alt: 'API Testing Workbench showing POST request to /api/v1/admitcards with 201 Created status and 18ms latency',
+      caption: 'Issuing a new Admit Card: Validating body parsing middleware on port 3000.',
+      points: [
+        'Method & URL: POST http://localhost:3000/api/v1/admitcards',
+        'Request Body: Raw JSON payload carrying student registration parameters',
+        'Response Status: HTTP 201 Created confirming persistence on the server'
+      ]
+    },
+
+    // =========================================================================
+    // TOPIC 5: PROTOCOL SHOWDOWN & VICTORY MILESTONE
+    // =========================================================================
     {
       type: 'victory-milestone',
-      title: 'Phase 1 Complete: First Principles Wire Mastered',
-      summary: 'Akshay transitioned from passive checklist clicking to active wire auditing, constructing a runnable Express server on port 3000, mastering stream buffer middleware, and verifying all five CRUD operations across REST, SOAP, and GraphQL.',
+      badge: '⚡ ARCHITECTURAL TRIUMPH UNLOCKED',
+      rank: 'APPRENTICE WIRE INSPECTOR',
+      title: 'From Page Viewer to API Thinker',
+      summary: 'Akshay has transitioned from panicking over frozen browser screens to inspecting network sockets and writing Express APIs on port 3000. He understands client server decoupling, knows why req.body becomes undefined, and has seen why 14ms wire data outpaces heavy presentation glass.',
       powers: [
-        'Read raw HTTP wire packets without relying on frontend UI screens',
-        'Assembled a runnable Node.js Express server on port 3000 from scratch',
-        'Mounted express.json middleware to prevent undefined body crashes',
-        'Executed all five core CRUD operations (POST, GET, PUT, PATCH, DELETE)',
-        'Audited the wire differences between REST JSON, SOAP XML, and GraphQL'
+        'Bypassing Decorative Glass: Ability to inspect and query raw HTTP endpoints directly without waiting for heavy UI renders.',
+        'Byte Stream Mastery: Understanding TCP packet chunks and correctly configuring body parsing middleware.',
+        'CRUD Competence: Fluent mapping of POST, GET, PUT, PATCH, and DELETE verbs to real world entity lifecycles.',
+        'Architectural Literacy: Intuitive grasp of the trade-offs between REST resources, SOAP envelopes, and GraphQL queries.'
       ],
       disastersPrevented: [
-        'Prevented silent data erasure caused by confusing PUT full replacement with PATCH delta updates',
-        'Eliminated false bug tickets filed against backend servers when client UIs freeze',
-        'Avoided unhandled Node.js crashes by properly installing readable stream buffering middleware'
+        'The 504 Portal Blackout: Recognizing that heavy UI assets cause server collapse under peak concurrent load.',
+        'The Undefined Body Crash: Preventing runtime TypeError crashes by ensuring middleware is mounted before route handlers.',
+        'The Brass Thali Data Loss: Avoiding catastrophic data loss caused by mistaking PUT complete replacement for PATCH partial update.'
       ],
-      warRoomTakeaway: 'The wire does not lie. When client screens freeze or dashboards misbehave, the seasoned engineer bypasses the glass, opens the API Testing Workbench, and reads the raw HTTP packets directly.'
+      warRoomTakeaway: 'When a web page fails to load, never ask "Why is the screen frozen?" Always open DevTools, inspect the Network tab, and ask: "Which API failed to deliver this data?"'
     },
 
-    // =========================================================================
-    // TOPIC 6: THE CLIFFHANGER (TRANSIT SHUTTLE 500 CRASH)
-    // =========================================================================
     {
       type: 'cliffhanger',
-      badge: 'MISSION 1 · PHASE 2 PREVIEW',
-      title: 'The Campus Transit Shuttle 500 Crash',
-      text: 'Evening settles over Apex University. Akshay and Sameer celebrate their working catalog server with hot samosas when suddenly, an amber alert flashes across the campus operations monitor. The automated GPS transit shuttle tracking system has stopped broadcasting coordinates. Commuter shuttles across the university are navigating blind, and the triage dashboard displays a single ominous error: 500 Internal Server Error. The manual checklist era is officially over. Tomorrow morning, Akshay must step into the war room and track down the phantom crash.',
+      badge: '★ CHAPTER 01 COMPLETE : PREVIEW OF CHAPTER 02',
+      title: 'Next Mission: Getting Started with Postman to Test APIs',
+      text: 'Akshay has proven that data travels as packets across the wire. He knows how to build an Admit Card server on port 3000. But what happens when the college redeploys the service, or an accidental code push breaks the defensive validation? In Chapter 2, Akshay enters the API Testing Workbench, crafts automated assertions, and hunts down live defects before they ever reach students.',
       cliffhangerPanel: {
-        title: 'The Crimson Screen in the Operations Center',
-        time: '07:45 PM',
-        image: alarmMonitorImg,
-        scene: 'Sameer and Akshay stand frozen in front of the giant university operations center monitor. A crimson banner pulses across the screen: 500 INTERNAL SERVER ERROR: TRANSIT SHUTTLE TELEMETRY OFFLINE.',
-        dialogue: {
-          speaker: 'Akshay',
-          speech: 'Five hundred internal server error! Is that another undefined body bug?',
-          replySpeaker: 'Sameer',
-          replySpeech: 'Worse. A 500 means the server threw an unhandled exception and died on the wire. Pack your laptop, Akshay. We are heading into the war room.'
+        title: 'The Upcoming Challenge',
+        time: 'NEXT CHAPTER',
+        image: {
+          src: waiterArchSvg,
+          alt: 'Preview of Chapter 2 testing workbench',
+          caption: 'Chapter 2 Preview: Automating wire checks and building regression gates.'
         },
-        realization: 'A 200 series response confirms success; a 500 series response means the backend crashed under an uncaught failure.'
+        scene: 'Akshay opens the API Testing Workbench to systematically test the college service under synthetic traffic loads.',
+        dialogue: {
+          speaker: 'Sameer',
+          speech: 'Now that you know what an API is and how it works, it is time to test it with intention. Chapter 2 begins!'
+        },
+        realization: 'Knowing how to build an API is only half the journey; the true engineer knows how to prove it cannot break.'
       }
     }
   ]
-}
+};

@@ -1,113 +1,50 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Comic Authoring MCP Server and Chapter 1 Admit Card Overhaul
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
+**Feature ID:** 002-chapter-storyline-overhaul
+**Plan Date:** 2026-10-01
+**Status:** PLANNED
 
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+---
 
-**Note**: This template is filled in by the `/speckit-plan` command; its definition describes the execution workflow.
+## Technical Strategy
 
-## Summary
+1. **Local MCP Authoring Server (`comic-authoring-mcp`):**
+   - Implement a lightweight, zero-dependency Node.js MCP server in `scripts/comic-authoring-mcp.mjs`.
+   - Register it in `~/.gemini/config/mcp_config.json` and generate schema descriptors in `~/.gemini/antigravity-ide/mcp/comic-authoring/`.
+   - Expose tools to guide each authoring stage: checking stage prerequisites, validating narrative continuity, auditing Rule 19 punctuation, generating comic SVGs with embedded speech bubbles, and executing full verification gates.
 
-[Extract from feature spec: primary requirement + technical approach from research]
+2. **Pedagogical Curriculum:**
+   - Embed the 18-step syllabus prerequisite matrix and 9 gotcha categories directly into Chapter 1 front matter.
+   - Lock Student Akshay and Architect Sameer into the 8:30 AM Admit Card crisis.
 
-## Technical Context
+3. **Graphic Comic SVGs:**
+   - Scene 1: Akshay running late, leaking water bottle, dissolved Hall/Seat number ink on Admit Card.
+   - Scene 2: 12,000 student portal crash spinner, Sameer stepping in with hot cutting chai.
+   - Scene 3: Bare black terminal rescue returning 14ms pure JSON (`GET /api/v1/admitcards/APX102`).
+   - Scene 4: Post-exam Restaurant Waiter architecture whiteboard.
+   - Scene 5: Pair programming on port 3000, `req.body is undefined` error and `app.use(express.json())` middleware fix.
+   - Scene 6: Brass Thali PUT vs PATCH demonstration and REST vs SOAP vs GraphQL comparison.
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+4. **Engine Support:**
+   - Configure `Blocks.jsx` to render speech bubbles cleanly above illustrations or directly inside SVG artwork without cluttering the page.
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]
+5. **Quality Gate:**
+   - Zero hyphens or dashes in chapter titles or section headings (Rule 19).
+   - All tests passing (`npm test`).
+   - Production Vite bundle builds cleanly (`npm run build`).
 
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]
+---
 
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
+## Phase Breakdown
 
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
-
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]
-
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
-
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]
-
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
-
-## Constitution Check
-
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
-
-[Gates determined based on constitution file]
-
-## Project Structure
-
-### Documentation (this feature)
-
-```text
-specs/[###-feature]/
-├── plan.md              # This file (/speckit-plan command output)
-├── research.md          # Phase 0 output (/speckit-plan command)
-├── data-model.md        # Phase 1 output (/speckit-plan command)
-├── quickstart.md        # Phase 1 output (/speckit-plan command)
-├── contracts/           # Phase 1 output (/speckit-plan command)
-└── tasks.md             # Phase 2 output (/speckit-tasks command - NOT created by /speckit-plan)
-```
-
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
-
-```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
-```
-
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
-
-## Complexity Tracking
-
-> **Fill ONLY if Constitution Check has violations that must be justified**
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+- **Phase 1: Comic Authoring MCP Server Implementation and Registration**
+  - Implement `scripts/comic-authoring-mcp.mjs`.
+  - Register in MCP configuration and create tool schemas.
+- **Phase 2: Curriculum Structure and Prerequisite Matrix**
+  - Add 18-step matrix and gotcha checklist to `lesson01.js`.
+- **Phase 3: Comic Storyboard and Native SVGs with Embedded Speech Bubbles**
+  - Generate the canonical 6-scene comic SVGs with character artwork and speech bubbles.
+- **Phase 4: Admit Card Server and Architecture Workbench Integration**
+  - Wire port 3000 Admit Card endpoints, middleware explanation, and protocol comparisons.
+- **Phase 5: Empirical Quality Verification**
+  - Run Rule 19 audit, `npm test`, and `npm run build`.

@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" width="100%" height="100%" style="background:#FFFFFF;">
+  <defs>
+    <filter id="bubbleShadow6" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1B2A4A" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Clean Pure White Background -->
+  <rect width="1200" height="580" fill="#FFFFFF"/>
+
+  <!-- Lab Architecture Background -->
+  <g stroke="#CBD5E1" stroke-width="2" fill="none">
+    <line x1="50" y1="520" x2="1150" y2="520" stroke="#94A3B8" stroke-width="3"/>
+  </g>
+
+  <!-- Main Multi-Block Comparison Frame (Center Left) -->
+  <g transform="translate(60, 160)" filter="url(#bubbleShadow6)">
+    <!-- Container -->
+    <rect x="0" y="0" width="760" height="340" rx="10" fill="#F8FAFC" stroke="#0F172A" stroke-width="3"/>
+    <rect x="0" y="0" width="760" height="36" rx="10" fill="#E2E8F0"/>
+    <text x="380" y="24" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#1E293B" text-anchor="middle">ARCHITECTURAL SHOWDOWN: REST vs SOAP vs GRAPHQL ON APX102</text>
+
+    <!-- Block 1: REST -->
+    <g transform="translate(20, 50)">
+      <rect x="0" y="0" width="225" height="150" rx="6" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+      <rect x="0" y="0" width="225" height="26" rx="6" fill="#BFDBFE"/>
+      <text x="12" y="18" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#1E40AF">1. REST (RESOURCE)</text>
+      <text x="12" y="44" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#2563EB">GET /admitcards/APX102</text>
+      <rect x="10" y="55" width="205" height="85" rx="4" fill="#FFFFFF" stroke="#93C5FD" stroke-width="1"/>
+      <text x="18" y="75" font-family="'JetBrains Mono', monospace" font-size="10" fill="#1E293B">{</text>
+      <text x="28" y="92" font-family="'JetBrains Mono', monospace" font-size="10" fill="#047857">"hall": "302",</text>
+      <text x="28" y="108" font-family="'JetBrains Mono', monospace" font-size="10" fill="#047857">"seat": "B-14",</text>
+      <text x="28" y="124" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748B">"status": "CONFIRMED"</text>
+      <text x="18" y="136" font-family="'JetBrains Mono', monospace" font-size="10" fill="#1E293B">}</text>
+    </g>
+
+    <!-- Block 2: SOAP -->
+    <g transform="translate(265, 50)">
+      <rect x="0" y="0" width="230" height="150" rx="6" fill="#FEF2F2" stroke="#EF4444" stroke-width="2"/>
+      <rect x="0" y="0" width="230" height="26" rx="6" fill="#FECACA"/>
+      <text x="12" y="18" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#991B1B">2. SOAP (XML ENVELOPE)</text>
+      <text x="12" y="44" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#DC2626">POST /ws/AdmitCardService</text>
+      <rect x="10" y="55" width="210" height="85" rx="4" fill="#FFFFFF" stroke="#FCA5A5" stroke-width="1"/>
+      <text x="18" y="72" font-family="'JetBrains Mono', monospace" font-size="9" fill="#991B1B">&lt;soap:Envelope&gt;</text>
+      <text x="24" y="88" font-family="'JetBrains Mono', monospace" font-size="9" fill="#991B1B"> &lt;soap:Body&gt;</text>
+      <text x="30" y="104" font-family="'JetBrains Mono', monospace" font-size="9" fill="#1E293B">  &lt;GetHallTicket id="APX102"/&gt;</text>
+      <text x="24" y="120" font-family="'JetBrains Mono', monospace" font-size="9" fill="#991B1B"> &lt;/soap:Body&gt;</text>
+      <text x="18" y="134" font-family="'JetBrains Mono', monospace" font-size="9" fill="#991B1B">&lt;/soap:Envelope&gt;</text>
+    </g>
+
+    <!-- Block 3: GraphQL -->
+    <g transform="translate(515, 50)">
+      <rect x="0" y="0" width="225" height="150" rx="6" fill="#FAF5FF" stroke="#A855F7" stroke-width="2"/>
+      <rect x="0" y="0" width="225" height="26" rx="6" fill="#E9D5FF"/>
+      <text x="12" y="18" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#6B21A8">3. GRAPHQL (PRECISE)</text>
+      <text x="12" y="44" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#7E22CE">POST /graphql (Query)</text>
+      <rect x="10" y="55" width="205" height="85" rx="4" fill="#FFFFFF" stroke="#D8B4FE" stroke-width="1"/>
+      <text x="18" y="75" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6B21A8">query {</text>
+      <text x="26" y="92" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6B21A8"> admitCard(id: "APX102") {</text>
+      <text x="34" y="108" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" fill="#047857">  hallNumber seatNumber</text>
+      <text x="26" y="122" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6B21A8"> }</text>
+      <text x="18" y="136" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6B21A8">}</text>
+    </g>
+
+    <!-- Bottom Half: The Brass Thali Trap (PUT vs PATCH) -->
+    <g transform="translate(20, 215)">
+      <rect x="0" y="0" width="720" height="110" rx="6" fill="#FFFBEB" stroke="#D97706" stroke-width="2"/>
+      <rect x="0" y="0" width="720" height="24" rx="6" fill="#FDE68A"/>
+      <text x="15" y="17" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#92400E">THE BRASS THALI TRAP: COMPLETE REPLACEMENT (PUT) vs PARTIAL UPDATE (PATCH)</text>
+
+      <g transform="translate(15, 35)">
+        <!-- Brass Thali Graphic -->
+        <circle cx="45" cy="35" r="30" fill="#F59E0B" stroke="#B45309" stroke-width="2"/>
+        <circle cx="45" cy="35" r="22" fill="#FDE68A" stroke="#B45309" stroke-width="1"/>
+        <circle cx="35" cy="28" r="7" fill="#FBBF24" stroke="#92400E" stroke-width="1"/>
+        <circle cx="55" cy="28" r="7" fill="#FBBF24" stroke="#92400E" stroke-width="1"/>
+        <circle cx="45" cy="46" r="7" fill="#FBBF24" stroke="#92400E" stroke-width="1"/>
+
+        <!-- Explanation text -->
+        <text x="95" y="24" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0F172A"><tspan fill="#DC2626">PUT /admitcards/APX102</tspan> replaces the ENTIRE thali plate. If you omit roomNumber, it is WIPED OUT!</text>
+        <text x="95" y="46" font-family="Inter, sans-serif" font-size="12" font-weight="700" fill="#0F172A"><tspan fill="#16A34A">PATCH /admitcards/APX102</tspan> refills only one specific bowl (katori). Perfect for changing just the seat!</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- Sameer Explaining (Right Center) -->
+  <g transform="translate(860, 220)">
+    <path d="M 40,90 L 110,90 L 100,210 L 45,210 Z" fill="#1E3A8A" stroke="#0F172A" stroke-width="3"/>
+    <circle cx="75" cy="45" r="32" fill="#FDE68A" stroke="#0F172A" stroke-width="3"/>
+    <!-- Spectacles -->
+    <rect x="62" y="38" width="14" height="10" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <rect x="80" y="38" width="14" height="10" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <!-- Pointing towards comparison -->
+    <path d="M 45,110 L -30,110 L -50,110" stroke="#1E3A8A" stroke-width="10" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Sameer Speech Bubble -->
+  <g filter="url(#bubbleShadow6)" transform="translate(680, 20)">
+    <path d="M 20,0 L 480,0 Q 500,0 500,20 L 500,105 Q 500,125 480,125 L 260,125 L 245,155 L 235,125 L 20,125 Q 0,125 0,105 L 0,20 Q 0,0 20,0 Z" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5"/>
+    <text x="25" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#15803D">SAMEER (CLOSING MENTORSHIP)</text>
+    <text x="25" y="56" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"REST gives a clean resource plate, SOAP</text>
+    <text x="25" y="78" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">is an enterprise contract, and GraphQL lets you pick.</text>
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#047857">Now you understand the wire. Next, we test it with intention!"</text>
+  </g>
+
+  <!-- Akshay Inspired (Far Right) -->
+  <g transform="translate(1040, 230)">
+    <path d="M 35,90 L 105,90 L 95,210 L 40,210 Z" fill="#F59E0B" stroke="#B45309" stroke-width="3"/>
+    <circle cx="70" cy="45" r="32" fill="#FDE68A" stroke="#92400E" stroke-width="3"/>
+    <!-- Confident Smile -->
+    <path d="M 60,62 Q 71,74 82,62" stroke="#991B1B" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Akshay Speech Bubble -->
+  <g filter="url(#bubbleShadow6)" transform="translate(80, 20)">
+    <path d="M 20,0 L 460,0 Q 480,0 480,20 L 480,105 Q 480,125 460,125 L 360,125 L 380,155 L 390,125 L 20,125 Q 0,125 0,105 L 0,20 Q 0,0 20,0 Z" fill="#FFFBEB" stroke="#F59E0B" stroke-width="2.5"/>
+    <text x="25" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#B45309">STUDENT AKSHAY (API THINKER)</text>
+    <text x="25" y="56" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"I will never look at a broken website again</text>
+    <text x="25" y="78" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">and ask 'Why is the page failing?' I will inspect</text>
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#B45309">the Network tab and find which API failed to deliver!"</text>
+  </g>
+
+  <!-- Bottom Narration Caption -->
+  <rect x="60" y="525" width="1080" height="42" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="80" y="551" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#334155"><tspan font-weight="800" fill="#0F172A">SCENE 6:</tspan> Engineering Bay · 02:15 PM · Akshay completes the mindset shift from page viewer to API Thinker.</text>
+</svg>

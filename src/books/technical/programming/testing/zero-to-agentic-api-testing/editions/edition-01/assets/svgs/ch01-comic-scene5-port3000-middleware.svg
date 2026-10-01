@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 580" width="100%" height="100%" style="background:#FFFFFF;">
+  <defs>
+    <filter id="bubbleShadow5" x="-5%" y="-5%" width="115%" height="115%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1B2A4A" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <!-- Clean Pure White Background -->
+  <rect width="1200" height="580" fill="#FFFFFF"/>
+
+  <!-- Lab Workstation Architecture Background -->
+  <g stroke="#CBD5E1" stroke-width="2" fill="none">
+    <line x1="50" y1="520" x2="1150" y2="520" stroke="#94A3B8" stroke-width="3"/>
+  </g>
+
+  <!-- Big Code and Terminal Dual-Panel Frame (Center Left) -->
+  <g transform="translate(80, 160)" filter="url(#bubbleShadow5)">
+    <!-- Main Outer Container -->
+    <rect x="0" y="0" width="680" height="340" rx="10" fill="#0F172A" stroke="#334155" stroke-width="3"/>
+    <!-- Header -->
+    <rect x="0" y="0" width="680" height="36" rx="10" fill="#1E293B"/>
+    <circle cx="20" cy="18" r="6" fill="#EF4444"/>
+    <circle cx="38" cy="18" r="6" fill="#F59E0B"/>
+    <circle cx="56" cy="18" r="6" fill="#10B981"/>
+    <text x="340" y="24" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" fill="#94A3B8" text-anchor="middle">server.js · Port 3000 · The Undefined Body Trap &amp; Middleware Fix</text>
+
+    <!-- Split Screen: Left (The Crash) vs Right (The Fix) -->
+    <!-- Left Pane: The Crash -->
+    <g transform="translate(15, 50)">
+      <rect x="0" y="0" width="315" height="270" rx="6" fill="#020617" stroke="#991B1B" stroke-width="2"/>
+      <rect x="0" y="0" width="315" height="26" rx="6" fill="#450A0A"/>
+      <text x="12" y="18" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#F87171">BEFORE: REQ.BODY IS UNDEFINED</text>
+      <!-- Code Snippet -->
+      <text x="12" y="48" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94A3B8">// Missing express.json()</text>
+      <text x="12" y="68" font-family="'JetBrains Mono', monospace" font-size="11" fill="#F43F5E">app.post('/api/v1/admitcards', (req, res) =&gt; {</text>
+      <text x="24" y="88" font-family="'JetBrains Mono', monospace" font-size="11" fill="#E2E8F0">  console.log(req.body);</text>
+      <text x="24" y="108" font-family="'JetBrains Mono', monospace" font-size="11" fill="#F43F5E">  const name = req.body.name;</text>
+      <text x="12" y="128" font-family="'JetBrains Mono', monospace" font-size="11" fill="#F43F5E">});</text>
+      <!-- Red Crash Stacktrace -->
+      <rect x="8" y="145" width="299" height="115" rx="4" fill="#180404" stroke="#DC2626" stroke-width="1.5"/>
+      <text x="16" y="168" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#EF4444">TypeError: Cannot read properties</text>
+      <text x="16" y="186" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#EF4444">of undefined (reading 'name')</text>
+      <text x="16" y="210" font-family="'JetBrains Mono', monospace" font-size="10" fill="#FCA5A5">Raw bytes arrive over socket.</text>
+      <text x="16" y="226" font-family="'JetBrains Mono', monospace" font-size="10" fill="#FCA5A5">Express does not parse them automatically!</text>
+      <text x="16" y="246" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="800" fill="#F87171">[SERVER LOG]: undefined</text>
+    </g>
+
+    <!-- Right Pane: The Middleware Savior -->
+    <g transform="translate(345, 50)">
+      <rect x="0" y="0" width="320" height="270" rx="6" fill="#020617" stroke="#059669" stroke-width="2"/>
+      <rect x="0" y="0" width="320" height="26" rx="6" fill="#064E3B"/>
+      <text x="12" y="18" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#34D399">AFTER: THE MIDDLEWARE SAVIOR</text>
+      <!-- Code Snippet -->
+      <text x="12" y="48" font-family="'JetBrains Mono', monospace" font-size="11" fill="#94A3B8">// Mount body parser</text>
+      <rect x="8" y="55" width="304" height="24" fill="#065F46" rx="3"/>
+      <text x="12" y="72" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="800" fill="#A7F3D0">app.use(express.json()); // &lt;-- SAVIOR</text>
+      <text x="12" y="98" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38BDF8">app.post('/api/v1/admitcards', (req, res) =&gt; {</text>
+      <text x="24" y="116" font-family="'JetBrains Mono', monospace" font-size="11" fill="#E2E8F0">  const { regNo, name } = req.body;</text>
+      <text x="24" y="134" font-family="'JetBrains Mono', monospace" font-size="11" fill="#4ADE80">  res.status(201).json({ status: 'ISSUED' });</text>
+      <text x="12" y="152" font-family="'JetBrains Mono', monospace" font-size="11" fill="#38BDF8">});</text>
+      <!-- Green Success Box -->
+      <rect x="8" y="165" width="304" height="95" rx="4" fill="#022c22" stroke="#10B981" stroke-width="1.5"/>
+      <text x="16" y="188" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#34D399">HTTP/1.1 201 Created</text>
+      <text x="16" y="206" font-family="'JetBrains Mono', monospace" font-size="10" fill="#6EE7B7">JSON parsed successfully into req.body</text>
+      <text x="16" y="226" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700" fill="#A7F3D0">[SERVER]: Listening on Port 3000</text>
+      <text x="16" y="246" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="800" fill="#34D399">Admit Card Service Ready!</text>
+    </g>
+  </g>
+
+  <!-- Akshay Confused then Realizing (Right Center) -->
+  <g transform="translate(800, 230)">
+    <path d="M 35,90 L 105,90 L 95,210 L 40,210 Z" fill="#F59E0B" stroke="#B45309" stroke-width="3"/>
+    <circle cx="70" cy="45" r="32" fill="#FDE68A" stroke="#92400E" stroke-width="3"/>
+    <!-- Confused / Inquisitive Expression -->
+    <circle cx="60" cy="45" r="6" fill="#0F172A"/>
+    <circle cx="82" cy="45" r="6" fill="#0F172A"/>
+    <path d="M 62,65 Q 71,60 80,65" stroke="#991B1B" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Akshay Speech Bubble -->
+  <g filter="url(#bubbleShadow5)" transform="translate(80, 20)">
+    <path d="M 20,0 L 460,0 Q 480,0 480,20 L 480,105 Q 480,125 460,125 L 360,125 L 375,155 L 385,125 L 20,125 Q 0,125 0,105 L 0,20 Q 0,0 20,0 Z" fill="#FFFBEB" stroke="#F59E0B" stroke-width="2.5"/>
+    <text x="25" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#B45309">STUDENT AKSHAY (DIAGNOSING BUG)</text>
+    <text x="25" y="56" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"I sent a valid JSON body with student details,</text>
+    <text x="25" y="78" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">but console.log(req.body) returns undefined!</text>
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#DC2626">Why did the server crash on a simple POST request?!"</text>
+  </g>
+
+  <!-- Sameer Mentoring (Far Right) -->
+  <g transform="translate(1000, 220)">
+    <path d="M 40,90 L 110,90 L 100,210 L 45,210 Z" fill="#1E3A8A" stroke="#0F172A" stroke-width="3"/>
+    <circle cx="75" cy="45" r="32" fill="#FDE68A" stroke="#0F172A" stroke-width="3"/>
+    <!-- Spectacles -->
+    <rect x="62" y="38" width="14" height="10" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <rect x="80" y="38" width="14" height="10" rx="2" fill="none" stroke="#0F172A" stroke-width="2"/>
+    <circle cx="68" cy="43" r="2" fill="#0F172A"/>
+    <circle cx="86" cy="43" r="2" fill="#0F172A"/>
+    <!-- Pointing Finger to express.json() -->
+    <path d="M 50,110 L -40,110 L -60,110" stroke="#1E3A8A" stroke-width="10" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Sameer Speech Bubble -->
+  <g filter="url(#bubbleShadow5)" transform="translate(680, 20)">
+    <path d="M 20,0 L 480,0 Q 500,0 500,20 L 500,105 Q 500,125 480,125 L 140,125 L 115,155 L 110,125 L 20,125 Q 0,125 0,105 L 0,20 Q 0,0 20,0 Z" fill="#F0FDF4" stroke="#16A34A" stroke-width="2.5"/>
+    <text x="25" y="30" font-family="Inter, sans-serif" font-size="14" font-weight="800" fill="#15803D">SAMEER (EXPLAINING BYTE STREAMS)</text>
+    <text x="25" y="56" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">"Data arrives as raw bytes over the TCP wire.</text>
+    <text x="25" y="78" font-family="Inter, sans-serif" font-size="15" font-weight="700" fill="#0F172A">Express does not guess its format. One line,</text>
+    <text x="25" y="100" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#047857">app.use(express.json()), unboxes the stream into req.body."</text>
+  </g>
+
+  <!-- Bottom Narration Caption -->
+  <rect x="60" y="525" width="1080" height="42" rx="6" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.5"/>
+  <text x="80" y="551" font-family="Inter, sans-serif" font-size="14" font-weight="600" fill="#334155"><tspan font-weight="800" fill="#0F172A">SCENE 5:</tspan> Workstation Lab · 01:00 PM · Akshay and Sameer uncover the byte stream trap and mount body parsing middleware on port 3000.</text>
+</svg>
