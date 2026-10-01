@@ -1,9 +1,9 @@
-import admitCardLeakSvg from '../assets/svgs/ch01-comic-scene1-admitcard-leak.svg'
-import portalSpinnerSvg from '../assets/svgs/ch01-comic-scene2-portal-spinner.svg'
-import terminalRescueSvg from '../assets/svgs/ch01-comic-scene3-terminal-rescue.svg'
-import waiterArchSvg from '../assets/svgs/ch01-comic-scene4-waiter-architecture.svg'
-import port3000MiddlewareSvg from '../assets/svgs/ch01-comic-scene5-port3000-middleware.svg'
-import protocolsThaliSvg from '../assets/svgs/ch01-comic-scene6-protocols-thali.svg'
+import panel1Img from '../assets/illustrations/ch01-scene1-panel1.jpg'
+import panel2Img from '../assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg'
+import panel3Img from '../assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg'
+import panel4Img from '../assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg'
+import panel5Img from '../assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg'
+import panel6Img from '../assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg'
 
 import flowSvg from '../assets/svgs/ch01-flow-http-transaction.svg'
 import getMenuSvg from '../assets/svgs/ch01-workbench-get-menu.svg'
@@ -160,112 +160,124 @@ export const lesson01 = {
       intro: 'Follow student Akshay from a high-stakes quad sprint with a water-damaged hall ticket to the 14ms terminal rescue, the restaurant waiter model, building an Express API on port 3000, and mastering the wire.',
       panels: [
         {
-          title: 'Scene 1: The Leaking Bottle and Smudged Hall Ticket',
-          time: '08:30 AM',
-          image: {
-            src: admitCardLeakSvg,
-            alt: 'Akshay racing across campus with leaking water bottle and smudged admit card',
-            caption: 'Apex College Quad: A leaking water bottle obliterates Akshay seat number 20 minutes before board exams.'
-          },
-          embeddedBubbles: true,
-          scene: 'Akshay sprints across the campus quad under the clock tower. A water bottle leak inside his backpack dissolves the blue ink over his Exam Hall and Seat Number. Gates lock in twenty minutes, threatening an automatic year back.',
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'Water leaked inside my bag! The blue ink over my Room and Seat number has dissolved! Gates lock in 20 minutes! Without seat details, I face an automatic year-back!',
-            replySpeaker: 'Fellow Student',
-            replySpeech: 'The Admit Card portal is frozen! Twelve thousand students hit it at once and it crashed!'
-          },
-          realization: 'A single point of presentation failure on a physical printed document leaves the student locked out of the exam.'
-        },
-        {
-          title: 'Scene 2: The Portal Collapse and Sameer with Cutting Chai',
-          time: '08:38 AM',
-          image: {
-            src: portalSpinnerSvg,
-            alt: 'Akshay staring in distress at mobile phone showing 504 timeout while Sameer arrives with cutting chai',
-            caption: 'College Corridor: The college portal collapses into an infinite spinner under 12,000 concurrent requests.'
-          },
-          embeddedBubbles: true,
-          scene: 'Outside the exam hall, Akshay repeatedly refreshes portal.apex.edu on his phone, only to encounter an endless white spinner and 504 Gateway Timeout. Principal Systems Architect Sameer calmly walks in holding a steel glass of hot cutting chai.',
-          dialogue: {
-            speaker: 'Sameer',
-            speech: 'Breathe, Akshay. Screaming at the browser will not bring back a single admit card. The webpage is decorative glass choking on heavy CSS, fonts, and images. Watch the wire.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'I hit refresh twenty times on my phone! The screen is locked on an endless white spinner! How can twelve thousand students bring down the entire university infrastructure?!'
-          },
-          realization: 'The user interface is merely decorative glass; bloated presentation assets cause catastrophic timeouts under peak load.'
-        },
-        {
-          title: 'Scene 3: The 14 Millisecond Terminal Rescue',
+          title: 'The Ink Dissolves on the Quad',
           time: '08:40 AM',
           image: {
-            src: terminalRescueSvg,
-            alt: 'Black terminal window showing raw HTTP curl request returning JSON in 14ms',
-            caption: 'Corridor Bench: Sameer bypasses the browser and extracts Hall 302, Seat B-14 in 14 milliseconds.'
+            src: panel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene1-panel1.jpg',
+            w: 1365,
+            h: 768,
+            alt: 'Akshay examining the smudged admit card sheet at his desk under Dravidian pillars and jali screen.',
+            caption: 'Apex Campus Quad: The paper admit card with water soaked seat numbers 20 minutes before the board exam.'
           },
-          embeddedBubbles: true,
-          scene: 'Sameer sits at a bench, opens a bare black terminal, and fires a direct HTTP request to /api/v1/admitcards/APX102. In fourteen milliseconds, pure structured JSON returns: Hall 302, Seat B-14. Akshay rushes into the exam in the nick of time.',
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'The water bottle leaked right into my bag! The room and seat numbers are completely dissolved into blue smudge!',
+            replySpeaker: 'Fellow Student',
+            replySpeech: 'Gate closes in twenty minutes, Akshay! Try downloading the PDF again from the college portal!'
+          },
+          scene: 'Akshay sprints past the quad with twenty minutes to the exam, staring in horror as water soaks through his paper admit card, completely blurring his room and seat numbers.',
+          realization: 'A physical paper printout is only as reliable as its last copy; digital data must be reachable in an emergency.'
+        },
+        {
+          title: 'The White Screen Portal Spinner',
+          time: '08:44 AM',
+          image: {
+            src: panel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg',
+            w: 1365,
+            h: 768,
+            alt: 'Sameer showing the laptop decorative glass choking on presentation bloat while pointing to terminal.',
+            caption: 'Campus Corridor: Twelve thousand students crash the portal into an infinite white spinner.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'I have refreshed the portal eight times! The browser is completely frozen on a white screen spinner!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Twelve thousand students are hitting that server right now. The website is choking on its own heavy CSS, fonts, and images.'
+          },
+          scene: 'Akshay taps his mobile screen frantically under the arcade corridor, but the college admit card portal is trapped in an infinite spinning wheel.',
+          realization: 'The user interface is merely decorative glass; bloated presentation assets easily choke servers during traffic spikes.'
+        },
+        {
+          title: 'The 14 Millisecond Terminal Rescue',
+          time: '08:46 AM',
+          image: {
+            src: panel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg',
+            w: 1365,
+            h: 768,
+            alt: 'Sameer holding network cable between two systems, explaining raw wire transport to Akshay.',
+            caption: 'Terminal Console: Sameer extracts Hall 302, Seat B-14 over the raw wire in fourteen milliseconds.'
+          },
           dialogue: {
             speaker: 'Sameer',
-            speech: 'I did not open the website at all. I spoke directly to the backend over the raw wire. The webpage is decorative glass. The API carries the truth.',
+            speech: 'I did not open the browser at all. I spoke directly to the backend over the raw wire. GET /api/v1/admitcards/APX102 returned JSON in 14ms.',
             replySpeaker: 'Akshay',
             replySpeech: 'Fourteen milliseconds! Hall 302, Seat B-14! The browser was drowning in CSS and fonts, while the raw data was ready in an instant!'
           },
+          scene: 'Sameer opens a bare black terminal, fires a direct wire request, and extracts the exact hall and seat number in 14 milliseconds, getting Akshay into the exam.',
           realization: 'Raw wire requests bypass browser presentation overhead entirely, delivering instant truth in milliseconds.'
         },
         {
-          title: 'Scene 4: The Whiteboard Restaurant and Exam Courier Model',
+          title: 'The Whiteboard Restaurant Model',
           time: '12:15 PM',
           image: {
-            src: waiterArchSvg,
-            alt: 'Whiteboard diagram showing Customer Client, Waiter API, and Kitchen Server',
-            caption: 'Engineering Desk: Akshay returns after the exam to understand how the 14ms rescue worked.'
+            src: panel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg',
+            w: 1365,
+            h: 768,
+            alt: 'Sameer sketching the restaurant waiter analogy on the glass whiteboard for Akshay.',
+            caption: 'Whiteboard Architecture: The Waiter (API) carries requests to the kitchen (server) and dishes to the table (client).'
           },
-          embeddedBubbles: true,
-          scene: 'Meeting at the engineering desk post exam, Sameer sketches the three core columns of web architecture: Customer (Client), Waiter (API), and Kitchen (Server). Akshay takes notes in his journal with rising excitement.',
           dialogue: {
             speaker: 'Sameer',
-            speech: 'You cannot walk into the kitchen to cook your food. You call the Waiter. The Waiter takes your order, delivers it to the kitchen, and brings back the dish. The Waiter is the API.',
+            speech: 'Think of an API as the waiter in a South Indian restaurant. You are the customer at the table. The chef is the server database. The waiter takes your order and brings your dosa without eating the food or cooking in the kitchen.',
             replySpeaker: 'Akshay',
             replySpeech: 'So the Examination Cell is the Kitchen, my Admit Card is the dish, and the API is the trusted courier carrying only the exact payload!'
           },
-          realization: 'An API does not create or consume data on its own; it acts as an agreed contract carrying structured requests and responses.'
+          scene: 'Hours after surviving the board exam, Akshay sits at Sameer research desk as Sameer maps the restaurant client server model on the whiteboard.',
+          realization: 'An API is an agreed courier contract: it accepts client parameters, delegates execution to backend resources, and delivers results without owning storage.'
         },
         {
-          title: 'Scene 5: Port 3000 Pair Programming and the Undefined Body Bug',
-          time: '01:00 PM',
+          title: 'Pair Programming Port 3000 Server',
+          time: '01:10 PM',
           image: {
-            src: port3000MiddlewareSvg,
-            alt: 'Split terminal screen showing req.body is undefined error and express.json middleware fix',
-            caption: 'Workstation Lab: Akshay and Sameer uncover the raw byte stream trap and mount body parsing middleware.'
+            src: panel5Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg',
+            w: 1365,
+            h: 768,
+            alt: 'Sameer leaning over Akshay laptop pointing to middleware fix while Akshay codes on port 3000.',
+            caption: 'Pair Programming: Installing express.json middleware to parse incoming byte streams into req.body objects.'
           },
-          embeddedBubbles: true,
-          scene: 'Pair programming on port 3000, Akshay writes a POST route to issue Admit Cards but encounters req.body is undefined. Sameer explains TCP byte streams and mounts app.use(express.json()), turning red crashes into green 201 Created triumph.',
           dialogue: {
-            speaker: 'Sameer',
-            speech: 'Data arrives as raw bytes over the TCP wire. Express does not guess its format. One line, app.use(express.json()), unboxes the stream into req.body.',
-            replySpeaker: 'Akshay',
-            replySpeech: 'I sent a valid JSON body with student details, but console.log(req.body) returns undefined! Why did the server crash on a simple POST request?!'
+            speaker: 'Akshay',
+            speech: 'I started our server on port 3000 and sent a POST body, but req.body is undefined! The server received the request but cannot read the data!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'HTTP request bodies arrive as raw streaming network byte chunks. Without express.json() middleware, Express never assembles those chunks into a JavaScript object.'
           },
-          realization: 'Network payloads travel as streams of bytes. Servers require explicit body parsing middleware to transform chunks into usable objects.'
+          scene: 'Akshay and Sameer pair program on port 3000. When Akshay encounters the undefined body byte stream bug, Sameer mounts the JSON middleware.',
+          realization: 'HTTP request bodies arrive as raw streaming network byte chunks; middleware must parse JSON streams before route handlers can inspect properties.'
         },
         {
-          title: 'Scene 6: The Brass Thali Trap and Protocol Showdown',
-          time: '02:15 PM',
+          title: 'The Brass Thali Protocol Feast',
+          time: '02:30 PM',
           image: {
-            src: protocolsThaliSvg,
-            alt: 'Multi block diagram showing PUT vs PATCH Brass Thali and REST vs SOAP vs GraphQL comparison on APX102',
-            caption: 'Engineering Bay: Sizing up REST, SOAP, and GraphQL on Admit Card APX102 and mastering PUT vs PATCH.'
+            src: panel6Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg',
+            w: 1365,
+            h: 768,
+            alt: 'Sameer holding an empty brass thali plate laughing warmly while Akshay points at the screen in comic shock.',
+            caption: 'The Protocol Feast: Understanding the Brass Thali PUT versus PATCH trap and comparing REST, SOAP, and GraphQL.'
           },
-          embeddedBubbles: true,
-          scene: 'Sameer illustrates the difference between PUT and PATCH using an Indian brass thali dinner plate, then benchmarks REST, SOAP, and GraphQL against the exact same Admit Card APX102 query.',
           dialogue: {
             speaker: 'Sameer',
-            speech: 'REST gives a clean resource plate, SOAP is an enterprise contract, and GraphQL lets you pick. Now you understand the wire. Next, we test it with intention!',
+            speech: 'Remember the Brass Thali rule: PUT replaces the entire thali. If you send only sambar, the waiter throws away the rice and rasam! PATCH tops up only the sambar katori.',
             replySpeaker: 'Akshay',
-            replySpeech: 'I will never look at a broken website again and ask "Why is the page failing?" I will inspect the Network tab and find which API failed to deliver!'
+            replySpeech: 'And SOAP is a sealed brass courier dabba with strict XML seals, while GraphQL lets me order exact katoris without taking the whole meal!'
           },
-          realization: 'The transition from Page Viewer to API Thinker is complete. Understanding protocols and request methods unlocks professional API testing.'
+          scene: 'Sameer and Akshay conclude their architectural briefing by testing all five CRUD operations and comparing REST, SOAP, and GraphQL on APX102.',
+          realization: 'Protocol architectures reflect communication trade-offs: REST prioritizes standard verbs, SOAP enforces strict typed envelopes, and GraphQL optimizes client query precision.'
         }
       ]
     },
@@ -535,7 +547,10 @@ app.patch('/api/v1/admitcards/:id', (req, res) => {
         title: 'The Upcoming Challenge',
         time: 'NEXT CHAPTER',
         image: {
-          src: waiterArchSvg,
+          src: panel4Img,
+          file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg',
+          w: 1365,
+          h: 768,
           alt: 'Preview of Chapter 2 testing workbench',
           caption: 'Chapter 2 Preview: Automating wire checks and building regression gates.'
         },

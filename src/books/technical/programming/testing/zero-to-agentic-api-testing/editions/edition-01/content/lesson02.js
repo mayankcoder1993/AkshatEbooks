@@ -2,10 +2,10 @@ import warRoomImg from '../assets/apex-campus-crisis-war-room.jpg'
 import wireImg from '../assets/http-wire-anatomy.jpg'
 import crudImg from '../assets/restful-crud-status-guide.jpg'
 
-import ch02ComicScene1Svg from '../assets/svgs/ch02-comic-scene1-transit-crisis.svg'
-import ch02ComicScene2Svg from '../assets/svgs/ch02-comic-scene2-reproduce-500.svg'
-import ch02ComicScene3Svg from '../assets/svgs/ch02-comic-scene3-defensive-guard.svg'
-import ch02ComicScene4Svg from '../assets/svgs/ch02-comic-scene4-dual-verification.svg'
+import ch02Scene1Img from '../assets/ch02-scene-1-transit-crisis.jpg'
+import ch02Scene2Img from '../assets/ch02-scene-2-reproduce-500-crash.jpg'
+import ch02Scene3Img from '../assets/ch02-scene-3-defensive-guard-fix.jpg'
+import ch02Scene4Img from '../assets/ch02-scene-4-dual-wire-verification.jpg'
 
 import crash500Svg from '../assets/svgs/ch02-workbench-500-crash.svg'
 import guard400Svg from '../assets/svgs/ch02-workbench-400-guard.svg'
@@ -80,72 +80,80 @@ export const lesson02 = {
           title: 'Scene 1: 08:14 PM: The Frozen Transit Map and the War Room Standoff',
           time: '08:14 PM',
           image: {
-            src: ch02ComicScene1Svg,
-            alt: 'Akshay and Sameer in the transit operations room looking at frozen bus tracking display',
+            src: ch02Scene1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-1-transit-crisis.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and transit team examining frozen campus transit map showing HTTP 500 error.',
             caption: 'Transit Operations Desk: Evening rush transit monitors freeze with HTTP 500 Internal Server Error.'
           },
-          embeddedBubbles: true,
-          scene: 'At 08:14 PM, hours after his morning exam, student apprentice Akshay joins Sameer at the transit operations desk. Overhead map screens hang frozen with red error banners as campus shuttles vanish from student phone screens. Teams point fingers between frontend and backend.',
           dialogue: {
             speaker: 'Akshay',
             speech: 'The campus transit shuttle map has frozen! Students waiting at bus stops see an empty screen. The terminal log says HTTP 500 Internal Server Error!',
             replySpeaker: 'Sameer',
             replySpeech: 'Step away from the blame game. The browser and app screens are decorative glass. Come to the terminal and inspect the raw wire.'
           },
+          scene: 'At 08:14 PM, hours after his morning exam, student apprentice Akshay joins Sameer at the transit operations desk. Overhead map screens hang frozen with red error banners as campus shuttles vanish from student phone screens. Teams point fingers between frontend and backend.',
           realization: 'When production systems fail, finger pointing between teams begins until someone inspects the network wire.'
         },
         {
           title: 'Scene 2: 08:25 PM: Reproducing the 500 Crash on the Wire',
           time: '08:25 PM',
           image: {
-            src: ch02ComicScene2Svg,
-            alt: 'Akshay typing curl command without route parameter as terminal shows red TypeError stack trace',
+            src: ch02Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-2-reproduce-500-crash.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay typing curl command without route parameter as terminal shows red TypeError stack trace.',
             caption: 'Terminal Console: Omitted query parameter triggers unhandled TypeError: Cannot read properties of undefined (reading trim).'
           },
-          embeddedBubbles: true,
-          scene: 'Akshay opens his terminal and fires curl http://localhost:5050/v1/shuttle/route without specifying a route name. The terminal instantly dumps a bright red unhandled stack trace: TypeError: Cannot read properties of undefined (reading trim). Sameer points out the three ways to be empty.',
           dialogue: {
             speaker: 'Akshay',
             speech: 'I sent GET /v1/shuttle/route with the route name omitted. The server returned HTTP 500 with an unhandled TypeError stack trace!',
             replySpeaker: 'Sameer',
             replySpeech: 'An omitted parameter in Express is undefined, not an empty string. Calling trim on undefined crashes the worker process!'
           },
+          scene: 'Akshay opens his terminal and fires curl http://localhost:5050/v1/shuttle/route without specifying a route name. The terminal instantly dumps a bright red unhandled stack trace: TypeError: Cannot read properties of undefined (reading trim). Sameer points out the three ways to be empty.',
           realization: 'A 500 error is not a hardware failure; it is an uncaught application exception crashing the server process due to missing input guards.'
         },
         {
           title: 'Scene 3: 08:33 PM: Installing the Defensive Input Guard',
           time: '08:33 PM',
           image: {
-            src: ch02ComicScene3Svg,
-            alt: 'Akshay and Sameer writing defensive guard in code editor',
+            src: ch02Scene3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-3-defensive-guard-fix.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer reviewing defensive validation check in code editor.',
             caption: 'Editor Console: Installing fail fast validation guard checking existence and whitespace before running business logic.'
           },
-          embeddedBubbles: true,
-          scene: 'Akshay opens the route handler file in his editor. Under Sameer guidance, he writes a fail fast guard: if (!name || !name.trim()) return res.status(400).json({ error: "Bad Request", message: "Query parameter name is required and cannot be empty" }).',
           dialogue: {
             speaker: 'Akshay',
             speech: 'I added the guard: if (!name || !name.trim()) return res.status(400) with a clear error payload. We fail fast before calling route lookup!',
             replySpeaker: 'Sameer',
             replySpeech: 'Clean engineering. 400 Bad Request informs the client that their request was malformed, protecting our server from a fatal crash.'
           },
+          scene: 'Akshay opens the route handler file in his editor. Under Sameer guidance, he writes a fail fast guard: if (!name || !name.trim()) return res.status(400).json({ error: "Bad Request", message: "Query parameter name is required and cannot be empty" }).',
           realization: 'Defensive guards intercept malformed client requests at the door, preventing unhandled server crashes and returning 400 client error contracts.'
         },
         {
           title: 'Scene 4: 08:37 PM: Dual Wire Contract Verification',
           time: '08:37 PM',
           image: {
-            src: ch02ComicScene4Svg,
-            alt: 'Terminal split screen showing 400 Bad Request guard and 200 OK valid route coordinates',
+            src: ch02Scene4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-4-dual-wire-verification.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Terminal split screen showing 400 Bad Request guard and 200 OK valid route coordinates.',
             caption: 'Dual Verification: Negative guard returns 400 Bad Request in 4ms, while valid query returns 200 OK with live coordinates in 12ms.'
           },
-          embeddedBubbles: true,
-          scene: 'Akshay tests both endpoints side by side on the terminal. The omitted parameter returns a fast 400 Bad Request in 4ms. The valid query with name=north_loop returns 200 OK with complete route coordinates in 12ms. The wall display comes alive as shuttles resume tracking.',
           dialogue: {
             speaker: 'Akshay',
             speech: 'Status 400 for the missing parameter in 4ms, and status 200 OK with live coordinates for the valid route! Both ends of the wire contract are verified!',
             replySpeaker: 'Sameer',
             replySpeech: 'Dual verification complete. Never declare a fix complete until you prove both the defensive guard and the working contract side by side.'
           },
+          scene: 'Akshay tests both endpoints side by side on the terminal. The omitted parameter returns a fast 400 Bad Request in 4ms. The valid query with name=north_loop returns 200 OK with complete route coordinates in 12ms. The wall display comes alive as shuttles resume tracking.',
           realization: 'Dual verification builds permanent engineering confidence: prove the defect is safely guarded and prove the feature remains intact.'
         }
       ]
