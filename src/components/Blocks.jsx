@@ -341,7 +341,15 @@ function ComicWorkbench({
             {dialogue.map((d, i) => (
               <div key={i} className={`comic-speech-card speaker-${d.speaker?.toLowerCase()}`}>
                 <div className="comic-speaker-bar">
-                  <span className="comic-avatar-indicator">{d.speaker === 'Akshay' ? '👨‍💻' : '🧘‍♂️'}</span>
+                  <span className="comic-avatar-indicator">
+                    {d.avatarSrc ? (
+                      <img src={d.avatarSrc} alt={d.speaker} className="comic-speaker-avatar-img" />
+                    ) : d.speaker === 'Akshay' ? (
+                      '👨‍💻'
+                    ) : (
+                      '🧘‍♂️'
+                    )}
+                  </span>
                   <div className="comic-speaker-info">
                     <strong className="comic-speaker-name">{d.speaker}</strong>
                     <span className="comic-speaker-role">{d.role}</span>

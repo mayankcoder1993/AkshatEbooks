@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 400" width="100%" height="100%">
+  <defs>
+    <filter id="sameerShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0F172A" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <!-- Aura / Soft Grounding Glow -->
+  <circle cx="160" cy="220" r="130" fill="#EEF2FF" opacity="0.6"/>
+
+  <g filter="url(#sameerShadow)" transform="translate(40, 20)">
+    <!-- Indigo Raw-Silk Kurta Body -->
+    <path d="M 60,160 L 180,160 L 195,340 L 45,340 Z" fill="#1E3A8A" stroke="#0F172A" stroke-width="4"/>
+    <!-- Gold Embroidered Collar & Placket -->
+    <path d="M 110,160 L 130,160 L 125,230 L 115,230 Z" fill="#D97706" stroke="#92400E" stroke-width="2"/>
+    <circle cx="120" cy="180" r="2.5" fill="#FEF3C7"/>
+    <circle cx="120" cy="195" r="2.5" fill="#FEF3C7"/>
+    <circle cx="120" cy="210" r="2.5" fill="#FEF3C7"/>
+
+    <!-- Left Arm Resting Calmly -->
+    <path d="M 65,170 L 40,240 L 55,270" stroke="#1E3A8A" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <circle cx="55" cy="275" r="10" fill="#FDE68A" stroke="#92400E" stroke-width="2"/>
+
+    <!-- Right Arm Holding Chai Glass Holder -->
+    <path d="M 175,170 L 190,230 L 155,255" stroke="#1E3A8A" stroke-width="18" stroke-linecap="round" fill="none"/>
+    <circle cx="155" cy="260" r="10" fill="#FDE68A" stroke="#92400E" stroke-width="2"/>
+
+    <!-- Ornate Brass Cutting Chai Glass Holder -->
+    <!-- Handle & Base -->
+    <rect x="140" y="245" width="36" height="42" rx="4" fill="none" stroke="#D97706" stroke-width="3"/>
+    <path d="M 140,265 C 130,265 130,280 140,280" fill="none" stroke="#D97706" stroke-width="3"/>
+    <!-- Faceted Glass -->
+    <polygon points="144,248 172,248 168,284 148,284" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.5" opacity="0.9"/>
+    <!-- Amber Cutting Chai -->
+    <polygon points="146,256 170,256 167,282 149,282" fill="#B45309"/>
+    <!-- Steam Swirls -->
+    <path d="M 152,242 Q 150,232 154,222" stroke="#CBD5E1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <path d="M 162,240 Q 166,230 162,220" stroke="#CBD5E1" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+    <!-- Mature Neck -->
+    <rect x="105" y="130" width="30" height="35" fill="#FDE68A" stroke="#92400E" stroke-width="3"/>
+
+    <!-- Head & Face -->
+    <ellipse cx="120" cy="95" rx="38" ry="44" fill="#FDE68A" stroke="#0F172A" stroke-width="4"/>
+
+    <!-- Hair (Neat Salt-and-Pepper) -->
+    <path d="M 82,90 C 80,50 100,40 120,40 C 145,40 160,50 158,90 C 150,60 135,55 120,55 C 105,55 90,62 82,90 Z" fill="#1E293B"/>
+    <path d="M 95,50 Q 105,44 115,50" stroke="#94A3B8" stroke-width="2" fill="none"/>
+    <path d="M 125,50 Q 135,44 145,50" stroke="#94A3B8" stroke-width="2" fill="none"/>
+
+    <!-- Trimmed Salt-and-Pepper Beard & Mustache -->
+    <path d="M 90,105 C 90,135 110,148 120,148 C 130,148 150,135 150,105 C 140,118 130,122 120,122 C 110,122 100,118 90,105 Z" fill="#1E293B"/>
+    <path d="M 98,125 Q 120,140 142,125" stroke="#94A3B8" stroke-width="2.5" fill="none"/>
+    <path d="M 106,112 Q 120,116 134,112" stroke="#0F172A" stroke-width="3" fill="none"/>
+
+    <!-- Almond Badam Eyes (Calm & Piercing) -->
+    <ellipse cx="106" cy="92" rx="7" ry="4" fill="#0F172A"/>
+    <ellipse cx="134" cy="92" rx="7" ry="4" fill="#0F172A"/>
+    <circle cx="104" cy="91" r="1.5" fill="#FFFFFF"/>
+    <circle cx="132" cy="91" r="1.5" fill="#FFFFFF"/>
+
+    <!-- Round Wireframe Brass Spectacles -->
+    <circle cx="106" cy="92" r="14" fill="none" stroke="#D97706" stroke-width="2.5"/>
+    <circle cx="134" cy="92" r="14" fill="none" stroke="#D97706" stroke-width="2.5"/>
+    <line x1="120" y1="92" x2="120" y2="92" stroke="#D97706" stroke-width="3"/>
+    <line x1="92" y1="92" x2="82" y2="88" stroke="#D97706" stroke-width="2"/>
+    <line x1="148" y1="92" x2="158" y2="88" stroke="#D97706" stroke-width="2"/>
+
+    <!-- Serene Smile under Mustache -->
+    <path d="M 113,122 Q 120,126 127,122" stroke="#0F172A" stroke-width="2" fill="none"/>
+  </g>
+
+  <!-- Name Badge Tag -->
+  <rect x="70" y="365" width="180" height="26" rx="13" fill="#1E3A8A"/>
+  <text x="160" y="382" font-family="Inter, sans-serif" font-size="11" font-weight="800" fill="#FEF3C7" text-anchor="middle">SAMEER · PRINCIPAL ARCHITECT</text>
+</svg>

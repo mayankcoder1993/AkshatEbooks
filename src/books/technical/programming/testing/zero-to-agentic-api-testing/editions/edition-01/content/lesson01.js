@@ -6,6 +6,20 @@ import panel5Img from '../assets/illustrations/ch01-scene-05-byte-stream-trap.jp
 import panel6Img from '../assets/illustrations/ch01-scene-06a-brass-thali.jpg'
 import cliffhangerImg from '../assets/illustrations/ch01-scene-06b-three-paradigms.jpg'
 
+import scene1Svg from '../assets/svgs/ch01-comic-scene1-admitcard-leak.svg'
+import scene2Svg from '../assets/svgs/ch01-comic-scene2-portal-spinner.svg'
+import scene3Svg from '../assets/svgs/ch01-comic-scene3-terminal-rescue.svg'
+import scene4Svg from '../assets/svgs/ch01-comic-scene4-waiter-architecture.svg'
+import scene5Svg from '../assets/svgs/ch01-comic-scene5-port3000-middleware.svg'
+import scene6Svg from '../assets/svgs/ch01-comic-scene6-protocols-thali.svg'
+
+import akshayPanicSvg from '../assets/svgs/characters/akshay-panic.svg'
+import akshayCodingSvg from '../assets/svgs/characters/akshay-coding.svg'
+import akshayEurekaSvg from '../assets/svgs/characters/akshay-eureka.svg'
+import sameerChaiSvg from '../assets/svgs/characters/sameer-chai.svg'
+import sameerPointingSvg from '../assets/svgs/characters/sameer-pointing.svg'
+import sameerThaliSvg from '../assets/svgs/characters/sameer-thali.svg'
+
 import flowSvg from '../assets/svgs/ch01-flow-http-transaction.svg'
 import getMenuSvg from '../assets/svgs/ch01-workbench-get-menu.svg'
 import postMenuSvg from '../assets/svgs/ch01-workbench-post-menu.svg'
@@ -166,13 +180,14 @@ export const lesson01 = {
           title: 'The Ink Dissolves on the Quad',
           time: '08:40 AM',
           image: {
-            src: panel1Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-01-ink-dissolves.jpg',
-            w: 1408,
-            h: 768,
+            src: scene1Svg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-comic-scene1-admitcard-leak.svg',
+            w: 1200,
+            h: 580,
             alt: 'Akshay running in panic across the sunny red sandstone quadrangle with water dripping from his satchel, holding a smeared blue admit card.',
             caption: 'Apex Campus Quadrangle: Ancient carved sandstone arches meet modern cyan data lines, as Akshay stares in shock at his soaked hall ticket.'
           },
+          embeddedBubbles: true,
           dialogues: [
             {
               speaker: 'Akshay',
@@ -200,13 +215,14 @@ export const lesson01 = {
           title: 'The White Screen Portal Spinner',
           time: '08:44 AM',
           image: {
-            src: panel2Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-02-portal-spinner.jpg',
-            w: 1408,
-            h: 768,
+            src: scene2Svg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-comic-scene2-portal-spinner.svg',
+            w: 1200,
+            h: 580,
             alt: 'Akshay tapping frantically on his mobile phone frozen on a spinning loading circle under a sandstone archway as Sameer approaches with cutting chai.',
             caption: 'Cloister Arcade: Akshay struggles on a 1-bar connection while Sameer observes the browser waterfall bloat.'
           },
+          embeddedBubbles: true,
           dialogues: [
             {
               speaker: 'Akshay',
@@ -245,13 +261,14 @@ export const lesson01 = {
           hero: true,
           fullWidth: true,
           image: {
-            src: panel3Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-03-terminal-rescue.jpg',
-            w: 1408,
-            h: 768,
+            src: scene3Svg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-comic-scene3-terminal-rescue.svg',
+            w: 1200,
+            h: 580,
             alt: 'Sameer typing on a matte black terminal slate on a stone ledge while amber JSON text flashes and Akshay turns to sprint toward closing brass doors.',
             caption: 'Terminal Console: Sameer extracts Hall 302, Seat B-14 over the raw wire in fourteen milliseconds.'
           },
+          embeddedBubbles: true,
           dialogues: [
             {
               speaker: 'Sameer',
@@ -298,11 +315,13 @@ export const lesson01 = {
         {
           speaker: 'Akshay',
           role: 'Apprentice Engineer',
+          avatarSrc: akshayPanicSvg,
           text: 'My phone was pulling 3.8 megabytes of fonts and photos just to read 120 bytes of hall ticket information!'
         },
         {
           speaker: 'Sameer',
           role: 'Principal Systems Architect',
+          avatarSrc: sameerChaiSvg,
           text: 'When signal strength drops, asset waterfalls fail. An API bypasses the Presentation Glass entirely and queries the socket directly.'
         }
       ],
@@ -381,13 +400,14 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           title: 'Post Exam Chai at the Stepwell Veranda',
           time: '12:15 PM',
           image: {
-            src: panel4Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-04-canteen-waiter.jpg',
-            w: 1408,
-            h: 768,
-            alt: 'Sameer and Akshay sitting on a sunlit veranda with chai and samosas while a waiter carries a brass tray between tables.',
+            src: scene4Svg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-comic-scene4-waiter-architecture.svg',
+            w: 1200,
+            h: 580,
+            alt: 'Sameer explaining the client waiter kitchen architectural model on the whiteboard to Akshay.',
             caption: 'Veranda Workshop: The client server relationship mapped to the customer, waiter, and kitchen.'
           },
+          embeddedBubbles: true,
           dialogues: [
             {
               speaker: 'Akshay',
@@ -480,13 +500,14 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           title: 'Pair Programming on Port 3000',
           time: '01:10 PM',
           image: {
-            src: panel5Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-05-byte-stream-trap.jpg',
-            w: 1408,
-            h: 768,
+            src: scene5Svg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-comic-scene5-port3000-middleware.svg',
+            w: 1200,
+            h: 580,
             alt: 'Akshay coding on port 3000 at a workshop desk with server racks while Sameer smiles and points out the byte stream fix.',
             caption: 'Pair Programming: Installing express.json middleware to parse incoming byte streams into req.body objects.'
           },
+          embeddedBubbles: true,
           dialogues: [
             {
               speaker: 'Akshay',
@@ -562,11 +583,13 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
         {
           speaker: 'Akshay',
           role: 'Apprentice Engineer',
+          avatarSrc: akshayCodingSvg,
           text: 'When I sent JSON to my POST endpoint, the server responded with received: undefined!'
         },
         {
           speaker: 'Sameer',
           role: 'Principal Systems Architect',
+          avatarSrc: sameerPointingSvg,
           text: 'HTTP requests arrive as fragmented TCP stream buffers. app.use(express.json()) assembles those chunks into req.body.'
         }
       ],
@@ -658,13 +681,14 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           title: 'The Brass Thali Platter Analogy',
           time: '02:30 PM',
           image: {
-            src: panel6Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-06a-brass-thali.jpg',
-            w: 1408,
-            h: 768,
+            src: sameerThaliSvg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/characters/sameer-thali.svg',
+            w: 1200,
+            h: 700,
             alt: 'Sameer holding an ornate brass thali with six katoris while Akshay listens intently with roti in hand.',
             caption: 'Dining Courtyard: Six katoris represent the properties of a resource record.'
           },
+          embeddedBubbles: true,
           dialogues: [
             {
               speaker: 'Sameer',
@@ -744,11 +768,13 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
         {
           speaker: 'Akshay',
           role: 'Apprentice Engineer',
+          avatarSrc: akshayEurekaSvg,
           text: 'Testing all five operations sequentially: GET, POST, PUT, PATCH, and DELETE on port 3000.'
         },
         {
           speaker: 'Sameer',
           role: 'Principal Systems Architect',
+          avatarSrc: sameerThaliSvg,
           text: 'Pay close attention to Tab 3 and Tab 4. Witness the Brass Thali wipe on PUT versus the safe field retention on PATCH.'
         }
       ],
@@ -908,13 +934,14 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           title: 'The Glass Whiteboard Showdown',
           time: '03:15 PM',
           image: {
-            src: cliffhangerImg,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-06b-three-paradigms.jpg',
-            w: 1408,
-            h: 768,
+            src: scene6Svg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/svgs/ch01-comic-scene6-protocols-thali.svg',
+            w: 1200,
+            h: 580,
             alt: 'Sameer sketching three columns on an illuminated glass whiteboard showing REST, SOAP, and GraphQL side by side.',
             caption: 'Workshop Whiteboard: Comparing REST resource URIs, SOAP XML envelopes, and GraphQL field selection.'
           },
+          embeddedBubbles: true,
           dialogues: [
             {
               speaker: 'Sameer',
@@ -990,11 +1017,13 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
         {
           speaker: 'Sameer',
           role: 'Principal Systems Architect',
+          avatarSrc: sameerChaiSvg,
           text: 'Notice the contrast: REST delivers clean JSON, SOAP packages everything in strict XML envelopes, and GraphQL queries only requested fields.'
         },
         {
           speaker: 'Akshay',
           role: 'Apprentice Engineer',
+          avatarSrc: akshayEurekaSvg,
           text: 'In GraphQL, the client asks for only hall and seat, and the server returns exactly those two properties!'
         }
       ],
