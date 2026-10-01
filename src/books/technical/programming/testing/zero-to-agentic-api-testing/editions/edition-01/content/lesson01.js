@@ -1,9 +1,10 @@
-import panel1Img from '../assets/illustrations/ch01-scene1-panel1.jpg'
-import panel2Img from '../assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg'
-import panel3Img from '../assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg'
-import panel4Img from '../assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg'
-import panel5Img from '../assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg'
-import panel6Img from '../assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg'
+import panel1Img from '../assets/illustrations/ch01-scene-01-ink-dissolves.jpg'
+import panel2Img from '../assets/illustrations/ch01-scene-02-portal-spinner.jpg'
+import panel3Img from '../assets/illustrations/ch01-scene-03-terminal-rescue.jpg'
+import panel4Img from '../assets/illustrations/ch01-scene-04-canteen-waiter.jpg'
+import panel5Img from '../assets/illustrations/ch01-scene-05-byte-stream-trap.jpg'
+import panel6Img from '../assets/illustrations/ch01-scene-06a-brass-thali.jpg'
+import cliffhangerImg from '../assets/illustrations/ch01-scene-06b-three-paradigms.jpg'
 
 import flowSvg from '../assets/svgs/ch01-flow-http-transaction.svg'
 import getMenuSvg from '../assets/svgs/ch01-workbench-get-menu.svg'
@@ -164,10 +165,10 @@ export const lesson01 = {
           time: '08:40 AM',
           image: {
             src: panel1Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene1-panel1.jpg',
-            w: 1365,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-01-ink-dissolves.jpg',
+            w: 1408,
             h: 768,
-            alt: 'Akshay examining the smudged admit card sheet at his desk under Dravidian pillars and jali screen.',
+            alt: 'Akshay running across the sun drenched college quadrangle in panic holding a water soaked admit card with dissolved blue ink.',
             caption: 'Apex Campus Quad: The paper admit card with water soaked seat numbers 20 minutes before the board exam.'
           },
           dialogue: {
@@ -184,10 +185,10 @@ export const lesson01 = {
           time: '08:44 AM',
           image: {
             src: panel2Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene2-panel1-modern-frame-terminal.jpg',
-            w: 1365,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-02-portal-spinner.jpg',
+            w: 1408,
             h: 768,
-            alt: 'Sameer showing the laptop decorative glass choking on presentation bloat while pointing to terminal.',
+            alt: 'Akshay tapping frantically on his phone frozen on a loading spinner while Sameer arrives holding hot cutting chai.',
             caption: 'Campus Corridor: Twelve thousand students crash the portal into an infinite white spinner.'
           },
           dialogue: {
@@ -204,10 +205,10 @@ export const lesson01 = {
           time: '08:46 AM',
           image: {
             src: panel3Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene2-panel2-modern-network-cable.jpg',
-            w: 1365,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-03-terminal-rescue.jpg',
+            w: 1408,
             h: 768,
-            alt: 'Sameer holding network cable between two systems, explaining raw wire transport to Akshay.',
+            alt: 'Sameer typing on a black terminal slate on a stone ledge while Akshay turns in shock and sprints toward exam hall doors.',
             caption: 'Terminal Console: Sameer extracts Hall 302, Seat B-14 over the raw wire in fourteen milliseconds.'
           },
           dialogue: {
@@ -224,10 +225,10 @@ export const lesson01 = {
           time: '12:15 PM',
           image: {
             src: panel4Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg',
-            w: 1365,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-04-canteen-waiter.jpg',
+            w: 1408,
             h: 768,
-            alt: 'Sameer sketching the restaurant waiter analogy on the glass whiteboard for Akshay.',
+            alt: 'Sameer and Akshay sitting on a sunlit veranda with chai and samosas while a waiter carries a brass tray between tables.',
             caption: 'Whiteboard Architecture: The Waiter (API) carries requests to the kitchen (server) and dishes to the table (client).'
           },
           dialogue: {
@@ -244,10 +245,10 @@ export const lesson01 = {
           time: '01:10 PM',
           image: {
             src: panel5Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene3-panel3-modern-middleware-fix.jpg',
-            w: 1365,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-05-byte-stream-trap.jpg',
+            w: 1408,
             h: 768,
-            alt: 'Sameer leaning over Akshay laptop pointing to middleware fix while Akshay codes on port 3000.',
+            alt: 'Akshay coding on port 3000 at a workshop desk with server racks while Sameer smiles and points out the byte stream fix.',
             caption: 'Pair Programming: Installing express.json middleware to parse incoming byte streams into req.body objects.'
           },
           dialogue: {
@@ -264,10 +265,10 @@ export const lesson01 = {
           time: '02:30 PM',
           image: {
             src: panel6Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene4-panel2-modern-thali-trap.jpg',
-            w: 1365,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-06a-brass-thali.jpg',
+            w: 1408,
             h: 768,
-            alt: 'Sameer holding an empty brass thali plate laughing warmly while Akshay points at the screen in comic shock.',
+            alt: 'Sameer theatrically lifting an ornate brass thali with six katoris while Akshay laughs and pulls back his plate in realization.',
             caption: 'The Protocol Feast: Understanding the Brass Thali PUT versus PATCH trap and comparing REST, SOAP, and GraphQL.'
           },
           dialogue: {
@@ -547,11 +548,11 @@ app.patch('/api/v1/admitcards/:id', (req, res) => {
         title: 'The Upcoming Challenge',
         time: 'NEXT CHAPTER',
         image: {
-          src: panel4Img,
-          file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene1-whiteboard-waiter-modern.jpg',
-          w: 1365,
+          src: cliffhangerImg,
+          file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch01-scene-06b-three-paradigms.jpg',
+          w: 1408,
           h: 768,
-          alt: 'Preview of Chapter 2 testing workbench',
+          alt: 'Sameer and Akshay toasting chai in front of the illuminated architectural whiteboard, looking ahead to automated testing.',
           caption: 'Chapter 2 Preview: Automating wire checks and building regression gates.'
         },
         scene: 'Akshay opens the API Testing Workbench to systematically test the college service under synthetic traffic loads.',

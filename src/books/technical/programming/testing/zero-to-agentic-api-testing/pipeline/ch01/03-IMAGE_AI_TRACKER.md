@@ -64,13 +64,13 @@
 
 | Scene # | Scene Title | Asset Filename | Status | Review Status | Image File Location | Editorial Comments & Required Changes |
 | :---: | :--- | :--- | :---: | :---: | :--- | :--- |
-| **01** | The Ink Dissolves on the Quad | `ch01-scene-01-ink-dissolves.jpg` | `Pending` | `Not Reviewed` | `pipeline/ch01/resources/ch01-scene-01-ink-dissolves.jpg` | *(Awaiting generation)* |
-| **02** | The White Screen Portal Spinner | `ch01-scene-02-portal-spinner.jpg` | `Pending` | `Not Reviewed` | `pipeline/ch01/resources/ch01-scene-02-portal-spinner.jpg` | *(Awaiting generation)* |
-| **03** | The 14 Millisecond Terminal Rescue | `ch01-scene-03-terminal-rescue.jpg` | `Pending` | `Not Reviewed` | `pipeline/ch01/resources/ch01-scene-03-terminal-rescue.jpg` | *(Awaiting generation)* |
-| **04** | The Whiteboard Restaurant Model | `ch01-scene-04-canteen-waiter.jpg` | `Pending` | `Not Reviewed` | `pipeline/ch01/resources/ch01-scene-04-canteen-waiter.jpg` | *(Awaiting generation)* |
-| **05** | Pair Programming: Port 3000 & Byte Stream | `ch01-scene-05-byte-stream-trap.jpg` | `Pending` | `Not Reviewed` | `pipeline/ch01/resources/ch01-scene-05-byte-stream-trap.jpg` | *(Awaiting generation)* |
-| **06A** | The Five CRUD Verbs & Brass Thali Rule | `ch01-scene-06a-brass-thali.jpg` | `Pending` | `Not Reviewed` | `pipeline/ch01/resources/ch01-scene-06a-brass-thali.jpg` | *(Awaiting generation)* |
-| **06B** | The Three Paradigms: REST, SOAP, GraphQL | `ch01-scene-06b-three-paradigms.jpg` | `Pending` | `Not Reviewed` | `pipeline/ch01/resources/ch01-scene-06b-three-paradigms.jpg` | *(Awaiting generation)* |
+| **01** | The Ink Dissolves on the Quad | `ch01-scene-01-ink-dissolves.jpg` | `Generated` | `Approved` | `pipeline/ch01/resources/ch01-scene-01-ink-dissolves.jpg` | 16:9 widescreen, authentic Madhubani border, excellent panic expression and blurred admit card ink. |
+| **02** | The White Screen Portal Spinner | `ch01-scene-02-portal-spinner.jpg` | `Generated` | `Approved` | `pipeline/ch01/resources/ch01-scene-02-portal-spinner.jpg` | Sandstone arch with cutting chai holder, excellent contrast between anxious Akshay and calm Sameer. |
+| **03** | The 14 Millisecond Terminal Rescue | `ch01-scene-03-terminal-rescue.jpg` | `Generated` | `Approved` | `pipeline/ch01/resources/ch01-scene-03-terminal-rescue.jpg` | Cloister setting with amber slate, closing brass exam hall doors in background, clear 16:9 ratio. |
+| **04** | The Whiteboard Restaurant Model | `ch01-scene-04-canteen-waiter.jpg` | `Generated` | `Approved` | `pipeline/ch01/resources/ch01-scene-04-canteen-waiter.jpg` | Canteen veranda over stepwell, cheerful waiter with tiered brass tray, chai and samosas on table. |
+| **05** | Pair Programming: Port 3000 & Byte Stream | `ch01-scene-05-byte-stream-trap.jpg` | `Generated` | `Approved` | `pipeline/ch01/resources/ch01-scene-05-byte-stream-trap.jpg` | Workshop desk with server racks, terminal window, blue Ethernet cables, and brass Ganesha idol. |
+| **06A** | The Five CRUD Verbs & Brass Thali Rule | `ch01-scene-06a-brass-thali.jpg` | `Generated` | `Approved` | `pipeline/ch01/resources/ch01-scene-06a-brass-thali.jpg` | Ornate brass thali with six katoris, expressive theatrical posture from Sameer, laughing Akshay. |
+| **06B** | The Three Paradigms: REST, SOAP, GraphQL | `ch01-scene-06b-three-paradigms.jpg` | `Generated` | `Approved` | `pipeline/ch01/resources/ch01-scene-06b-three-paradigms.jpg` | Evening sunset stepwell background, transparent illuminated diagram whiteboard, chai toast. |
 
 ---
 
