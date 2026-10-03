@@ -4641,9 +4641,9 @@ body:has(.page.fullscreen-mode) .site-header,
 
 .storyboard-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
-  padding: 1.25rem 1.4rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  padding: 1.25rem 0.5rem;
 }
 
 .storyboard-grid.grid-cols-1 {
@@ -4651,11 +4651,13 @@ body:has(.page.fullscreen-mode) .site-header,
 }
 
 .storyboard-grid.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 }
 
-.storyboard-grid.grid-cols-3 {
-  grid-template-columns: repeat(3, 1fr);
+@media (min-width: 1400px) {
+  .storyboard-grid.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .storyboard-panel-card.full-width-panel {

@@ -495,7 +495,7 @@ function ComicWorkbench({
   )
 }
 
-function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns = 2, panels = [], realization }) {
+function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns = 1, panels = [], realization }) {
   const [zoomLevel, setZoomLevel] = useState(100)
   const [lightboxPanel, setLightboxPanel] = useState(null)
   const [lightboxZoom, setLightboxZoom] = useState(100)
@@ -623,9 +623,9 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                           const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
                           const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : d.speaker?.toUpperCase()
 
-                          // Top offset stays strictly within top 4% to 8% to clear characters
-                          const topOffset = dIdx === 0 ? '4%' : alignLeft ? '5%' : '5%'
-                          const maxWidth = isFullWidth ? '32%' : '44%'
+                          // Ultra-compact positioning tucked tight into top 2% headroom so faces remain 100% visible
+                          const topOffset = dIdx === 0 ? '2%' : alignLeft ? '2%' : '2%'
+                          const maxWidth = isFullWidth ? '28%' : '36%'
 
                           return (
                             <div
@@ -633,27 +633,27 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                               style={{
                                 position: 'absolute',
                                 top: topOffset,
-                                left: alignLeft ? '2.5%' : 'auto',
-                                right: alignLeft ? 'auto' : '2.5%',
+                                left: alignLeft ? '2%' : 'auto',
+                                right: alignLeft ? 'auto' : '2%',
                                 maxWidth,
-                                background: 'rgba(255, 255, 255, 0.96)',
-                                backdropFilter: 'blur(8px)',
-                                border: `2px solid ${accentColor}`,
-                                borderRadius: '10px',
-                                padding: '0.4rem 0.65rem',
-                                boxShadow: '0 6px 18px rgba(0, 0, 0, 0.28)',
+                                background: 'rgba(255, 255, 255, 0.94)',
+                                backdropFilter: 'blur(6px)',
+                                border: `1.5px solid ${accentColor}`,
+                                borderRadius: '6px',
+                                padding: '0.2rem 0.45rem',
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.22)',
                                 pointerEvents: 'auto',
                                 zIndex: 10
                               }}
                             >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.15rem' }}>
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.08rem' }}>
                                 <span style={{
                                   background: accentColor,
                                   color: '#ffffff',
-                                  fontSize: '0.62rem',
+                                  fontSize: '0.52rem',
                                   fontWeight: 800,
-                                  padding: '0.08rem 0.32rem',
-                                  borderRadius: '3px',
+                                  padding: '0.04rem 0.25rem',
+                                  borderRadius: '2px',
                                   letterSpacing: '0.04em'
                                 }}>
                                   {tagLabel}
@@ -661,8 +661,8 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                               </div>
                               <p style={{
                                 margin: 0,
-                                fontSize: 'clamp(0.68rem, 0.95vw, 0.82rem)',
-                                lineHeight: 1.34,
+                                fontSize: 'clamp(0.58rem, 0.72vw, 0.68rem)',
+                                lineHeight: 1.25,
                                 color: '#0f172a',
                                 fontStyle: 'italic',
                                 fontWeight: 600
@@ -670,28 +670,28 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                                 "{d.speech}"
                               </p>
 
-                              {/* Directional Pointer Tail */}
+                              {/* Subtle Directional Pointer Tail */}
                               <div style={{
                                 position: 'absolute',
-                                bottom: '-8px',
-                                left: alignLeft ? '18px' : 'auto',
-                                right: alignLeft ? 'auto' : '18px',
+                                bottom: '-6px',
+                                left: alignLeft ? '12px' : 'auto',
+                                right: alignLeft ? 'auto' : '12px',
                                 width: 0,
                                 height: 0,
-                                borderLeft: '7px solid transparent',
-                                borderRight: '7px solid transparent',
-                                borderTop: `8px solid ${accentColor}`
+                                borderLeft: '5px solid transparent',
+                                borderRight: '5px solid transparent',
+                                borderTop: `6px solid ${accentColor}`
                               }} />
                               <div style={{
                                 position: 'absolute',
-                                bottom: '-5px',
-                                left: alignLeft ? '19px' : 'auto',
-                                right: alignLeft ? 'auto' : '19px',
+                                bottom: '-4px',
+                                left: alignLeft ? '13px' : 'auto',
+                                right: alignLeft ? 'auto' : '13px',
                                 width: 0,
                                 height: 0,
-                                borderLeft: '6px solid transparent',
-                                borderRight: '6px solid transparent',
-                                borderTop: '6px solid #ffffff'
+                                borderLeft: '4px solid transparent',
+                                borderRight: '4px solid transparent',
+                                borderTop: '4px solid #ffffff'
                               }} />
                             </div>
                           )
