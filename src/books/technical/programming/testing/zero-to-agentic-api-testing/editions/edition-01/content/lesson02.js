@@ -79,6 +79,7 @@ export const lesson02 = {
         {
           title: 'Scene 1: 08:14 PM: The Frozen Transit Map and the War Room Standoff',
           time: '08:14 PM',
+          layout: 'hero',
           image: {
             src: ch02Scene1Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-1-transit-crisis.jpg',
@@ -99,6 +100,7 @@ export const lesson02 = {
         {
           title: 'Scene 2: 08:25 PM: Reproducing the 500 Crash on the Wire',
           time: '08:25 PM',
+          layout: 'duo',
           image: {
             src: ch02Scene2Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-2-reproduce-500-crash.jpg',
@@ -119,6 +121,7 @@ export const lesson02 = {
         {
           title: 'Scene 3: 08:33 PM: Installing the Defensive Input Guard',
           time: '08:33 PM',
+          layout: 'duo',
           image: {
             src: ch02Scene3Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-3-defensive-guard-fix.jpg',
@@ -139,6 +142,7 @@ export const lesson02 = {
         {
           title: 'Scene 4: 08:37 PM: Dual Wire Contract Verification',
           time: '08:37 PM',
+          layout: 'hero',
           image: {
             src: ch02Scene4Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-4-dual-wire-verification.jpg',

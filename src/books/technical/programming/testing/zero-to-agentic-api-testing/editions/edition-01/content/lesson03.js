@@ -91,6 +91,7 @@ export const lesson03 = {
         {
           title: 'Examining the Green Badge',
           time: '06:00 PM',
+          layout: 'duo',
           image: ch03Scene1Img,
           promptMeta: {
             title: 'The Green Lie Audit',
@@ -111,6 +112,7 @@ export const lesson03 = {
         {
           title: 'The Sleeper Test Shock',
           time: '06:05 PM',
+          layout: 'duo',
           image: workbenchImg,
           scene: 'Akshay stares at the screen, running his fingers through his hair as evening shadows lengthen across the Dravidian stone pillars outside.',
           dialogue: {
@@ -124,6 +126,7 @@ export const lesson03 = {
         {
           title: 'The Tests Sandbox',
           time: '06:10 PM',
+          layout: 'duo',
           image: ch03Scene1Img,
           scene: 'Sameer points to the Tests tab in the workbench with his pencil.',
           dialogue: {
@@ -137,6 +140,7 @@ export const lesson03 = {
         {
           title: 'Assertions with Teeth',
           time: '06:15 PM',
+          layout: 'duo',
           image: ch03Scene2Img,
           promptMeta: {
             title: 'Chai BDD Assertion Sandbox',
@@ -440,6 +444,7 @@ export const lesson03 = {
         {
           title: 'Configuring the Collection Runner',
           time: '06:45 PM',
+          layout: 'duo',
           image: workbenchImg,
           scene: 'Akshay selects the four transit queries in the collection runner: Health Check, Shuttle Omitted Guard, Shuttle Valid Contract, and Catalog Verification.',
           dialogue: {
@@ -453,6 +458,7 @@ export const lesson03 = {
         {
           title: 'Ten Assertions at Machine Speed',
           time: '06:47 PM',
+          layout: 'duo',
           image: ch03Scene3Img,
           scene: 'The Collection Runner summary window fills with green pass badges across all four requests.',
           dialogue: {
@@ -466,6 +472,7 @@ export const lesson03 = {
         {
           title: 'The Spark of Overconfidence',
           time: '06:50 PM',
+          layout: 'duo',
           image: ch03Scene3Img,
           scene: 'Akshay leans back in his chair with folded arms and a triumphant grin.',
           dialogue: {
@@ -479,6 +486,7 @@ export const lesson03 = {
         {
           title: 'The Library Dawn Challenge',
           time: '06:55 PM',
+          layout: 'duo',
           image: ch03Scene3Img,
           scene: 'Sameer gestures toward the campus library courtyard through the carved jali stone window. Headlights pierce the twilight as a large delivery truck unloads stacks of cardboard textbook boxes under a lamppost.',
           dialogue: {

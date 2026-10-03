@@ -574,47 +574,37 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
         }}
       >
         {panels.map((p, idx) => {
-          const isFullWidth = p.fullWidth || p.hero || p.layout === 'full'
+          const layoutClass = p.layout ? `comic-panel-${p.layout}` : (p.fullWidth || p.hero) ? 'comic-panel-hero' : ''
 
           return (
             <div
               key={idx}
-              className={`storyboard-panel-card comic-story-cell ${isFullWidth ? 'full-width-panel' : ''}`}
-              style={{
-                cursor: 'pointer'
-              }}
+              className={`comic-panel-frame ${layoutClass}`}
               onClick={() => {
                 setLightboxPanel(p)
                 setLightboxZoom(100)
               }}
               title="Click panel to open full-resolution Lightbox"
             >
-              <div className="panel-card-top comic-context-bar">
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <span style={{ background: '#0284c7', color: '#ffffff', fontSize: '0.62rem', fontWeight: 800, padding: '0.12rem 0.4rem', borderRadius: '3px' }}>
-                    BEAT {idx + 1}
-                  </span>
-                  <span className="panel-phase-title comic-context-title">{p.title}</span>
+              <div className="comic-panel-inner">
+                {/* Comic Scene Time / Beat Stamp (Top Corner Pill) */}
+                <div className="comic-beat-tag">
+                  <span className="comic-beat-num">P.{idx + 1}</span>
+                  {p.time && <span className="comic-beat-time">{p.time}</span>}
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  {p.time && <span className="panel-time-tag comic-context-time">{p.time}</span>}
-                  <span style={{ fontSize: '0.72rem', color: '#94a3b8' }} title="Click to view full screen">⛶</span>
-                </div>
-              </div>
 
-              {p.image && (
-                <div className="panel-art-frame">
-                  <div style={{ position: 'relative', width: '100%', lineHeight: 0, overflow: 'hidden', background: '#0f172a' }}>
+                {p.image && (
+                  <div className="comic-art-container">
                     <img
                       src={p.image.src || p.image.file || p.image}
                       alt={p.image.alt || p.title || 'Comic scene'}
-                      className="panel-art-image"
+                      className="comic-art-image"
                       loading="lazy"
                     />
 
-                    {/* Inside-Image Speech Balloons (Floating strictly within Top 22% negative ceiling) */}
+                    {/* Inside-Image Speech Balloons (Floating strictly within Top 2% negative headroom) */}
                     {(p.dialogues || p.dialogue) && (
-                      <div className="panel-embedded-balloons-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+                      <div className="comic-balloons-layer">
                         {(p.dialogues || (p.dialogue ? [p.dialogue, p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null].filter(Boolean) : [])).map((d, dIdx) => {
                           const isAkshay = d.speaker?.toLowerCase().includes('akshay')
                           const isSameer = d.speaker?.toLowerCase().includes('sameer')
@@ -623,93 +613,38 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                           const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
                           const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : d.speaker?.toUpperCase()
 
-                          // Ultra-compact positioning tucked tight into top 2% headroom so faces remain 100% visible
-                          const topOffset = dIdx === 0 ? '2%' : alignLeft ? '2%' : '2%'
-                          const maxWidth = isFullWidth ? '28%' : '36%'
-
                           return (
                             <div
                               key={dIdx}
-                              style={{
-                                position: 'absolute',
-                                top: topOffset,
-                                left: alignLeft ? '2%' : 'auto',
-                                right: alignLeft ? 'auto' : '2%',
-                                maxWidth,
-                                background: 'rgba(255, 255, 255, 0.94)',
-                                backdropFilter: 'blur(6px)',
-                                border: `1.5px solid ${accentColor}`,
-                                borderRadius: '6px',
-                                padding: '0.2rem 0.45rem',
-                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.22)',
-                                pointerEvents: 'auto',
-                                zIndex: 10
-                              }}
+                              className={`comic-balloon-box ${alignLeft ? 'balloon-left' : 'balloon-right'}`}
+                              style={{ borderColor: accentColor }}
                             >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', marginBottom: '0.08rem' }}>
-                                <span style={{
-                                  background: accentColor,
-                                  color: '#ffffff',
-                                  fontSize: '0.52rem',
-                                  fontWeight: 800,
-                                  padding: '0.04rem 0.25rem',
-                                  borderRadius: '2px',
-                                  letterSpacing: '0.04em'
-                                }}>
+                              <div className="comic-balloon-header">
+                                <span className="comic-balloon-tag" style={{ background: accentColor }}>
                                   {tagLabel}
                                 </span>
                               </div>
-                              <p style={{
-                                margin: 0,
-                                fontSize: 'clamp(0.58rem, 0.72vw, 0.68rem)',
-                                lineHeight: 1.25,
-                                color: '#0f172a',
-                                fontStyle: 'italic',
-                                fontWeight: 600
-                              }}>
+                              <p className="comic-balloon-speech">
                                 "{d.speech}"
                               </p>
-
-                              {/* Subtle Directional Pointer Tail */}
-                              <div style={{
-                                position: 'absolute',
-                                bottom: '-6px',
-                                left: alignLeft ? '12px' : 'auto',
-                                right: alignLeft ? 'auto' : '12px',
-                                width: 0,
-                                height: 0,
-                                borderLeft: '5px solid transparent',
-                                borderRight: '5px solid transparent',
-                                borderTop: `6px solid ${accentColor}`
-                              }} />
-                              <div style={{
-                                position: 'absolute',
-                                bottom: '-4px',
-                                left: alignLeft ? '13px' : 'auto',
-                                right: alignLeft ? 'auto' : '13px',
-                                width: 0,
-                                height: 0,
-                                borderLeft: '4px solid transparent',
-                                borderRight: '4px solid transparent',
-                                borderTop: '4px solid #ffffff'
-                              }} />
+                              {/* Directional Tail */}
+                              <div
+                                className={`comic-balloon-tail ${alignLeft ? 'tail-left' : 'tail-right'}`}
+                                style={{ borderTopColor: accentColor }}
+                              />
                             </div>
                           )
                         })}
                       </div>
                     )}
-                  </div>
-                  {p.image.caption && (
-                    <div className="panel-art-caption">{p.image.caption}</div>
-                  )}
-                </div>
-              )}
 
-              <div className="panel-card-body" onClick={(e) => e.stopPropagation()}>
-                {p.scene && (
-                  <div className="panel-scene-box">
-                    <span className="panel-label">Scene & Action:</span>
-                    <p className="panel-scene-text"><RichText text={p.scene} /></p>
+                    {/* Classic Comic Narration Caption Box (Tucked into bottom of panel) */}
+                    {p.scene && (
+                      <div className="comic-narration-overlay" onClick={(e) => e.stopPropagation()}>
+                        <span className="comic-narration-label">{p.title || 'SCENE'}</span>
+                        <p className="comic-narration-text"><RichText text={p.scene} /></p>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
