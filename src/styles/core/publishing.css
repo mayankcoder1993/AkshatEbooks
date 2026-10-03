@@ -4797,6 +4797,7 @@ body:has(.page.fullscreen-mode) .site-header,
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+  object-position: center 30%; /* Shift up to cut off bottom corner logos */
   display: block;
 }
 
@@ -4878,35 +4879,30 @@ body:has(.page.fullscreen-mode) .site-header,
   right: 12px;
 }
 
-/* Authentic Comic Narration Overlay (Yellow/Parchment Caption Box at bottom) */
-.comic-narration-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(254, 252, 232, 0.94); /* Warm parchment yellow */
-  border-top: 2px solid #ca8a04;
-  padding: 0.4rem 0.75rem 0.45rem;
+/* Authentic Comic Narration Caption (Placed directly underneath the image) */
+.comic-narration-caption {
+  background: #fffbeb; /* Warm soft parchment */
+  border-top: 2px solid #0f172a;
+  padding: 0.5rem 0.85rem 0.6rem;
   box-sizing: border-box;
-  z-index: 12;
-  pointer-events: auto;
+  flex: 1;
 }
 
 .comic-narration-label {
-  font-size: 0.62rem;
+  font-size: 0.65rem;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #854d0e;
+  color: #92400e;
   display: block;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.15rem;
 }
 
 .comic-narration-text {
   margin: 0;
-  font-size: clamp(0.68rem, 0.8vw, 0.78rem);
-  line-height: 1.35;
-  color: #1c1917;
+  font-size: clamp(0.72rem, 0.82vw, 0.82rem);
+  line-height: 1.45;
+  color: #1e293b;
   font-weight: 500;
 }
 

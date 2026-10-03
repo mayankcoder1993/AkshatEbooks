@@ -660,13 +660,14 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                       </div>
                     )}
 
-                    {/* Classic Comic Narration Caption Box (Tucked into bottom of panel) */}
-                    {p.scene && (
-                      <div className="comic-narration-overlay" onClick={(e) => e.stopPropagation()}>
-                        <span className="comic-narration-label">{p.title || 'SCENE'}</span>
-                        <p className="comic-narration-text"><RichText text={p.scene} /></p>
-                      </div>
-                    )}
+                  </div>
+                )}
+
+                {/* Comic Narration Caption (Placed directly below image) */}
+                {p.scene && (
+                  <div className="comic-narration-caption" onClick={(e) => e.stopPropagation()}>
+                    <span className="comic-narration-label">{p.title || 'SCENE'}</span>
+                    <p className="comic-narration-text"><RichText text={p.scene} /></p>
                   </div>
                 )}
               </div>
