@@ -1,4 +1,4 @@
-# Book Brief — Python for Absolute Beginners
+# Book Brief: Python for Absolute Beginners
 
 ## Identity
 
@@ -24,7 +24,9 @@ Use current official Python documentation as the main technical authority. Use G
 
 ## Structure
 
-Completed chapters cover Hello World, code-to-machine routes, variables and data types. The next planned chapter teaches `input()` and the rule that input begins as a string. Lessons use professional visuals, predictions, concrete code, execution steps, guided practice, bug hunts, checks and transitions.
+The approved redesign uses eight substantial chapters across two multi-chapter learning arcs. Arc 1 builds a deterministic local study assistant through first execution, values, collections, control flow, functions and input. Arc 2 rescues and strengthens that application through OOP, modules, packages, exception handling and tests. Only an arc-opening chapter receives a full goal card. Middle chapters use compact progress strips and varied experiences such as laboratories, decision mazes, assembly workshops, design studios and reliability trials.
+
+The assistant is the first stage of a continuing project. Later books can add an LLM adapter, LangChain, LangGraph, FastAPI, an optional desktop GUI, a Django portal and deployment without discarding the Python core. The master Book 1 scope is defined in `shared/research/end-to-end-book-plan.md`. The cross-book architecture is defined in `/docs/shared-agent-series-plan.md`. The current five published lessons are source material for consolidation into the first two redesigned chapters.
 
 ## Publication
 

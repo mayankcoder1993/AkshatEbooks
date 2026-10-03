@@ -1,4 +1,4 @@
-# Python for Absolute Beginners — Book-Specific AI Instructions
+# Python for Absolute Beginners: Book-Specific AI Instructions
 
 Read root `AGENTS.md`, the core editorial standard, AI authoring workflow, `TECHNICAL` profile and this book's `BOOK_BRIEF.md` first.
 

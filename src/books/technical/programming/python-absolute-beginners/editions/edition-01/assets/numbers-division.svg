@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650">
+  <rect width="1200" height="650" fill="#fbf8f1"/>
+  <text x="600" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#1b3155">Seven counters, three questions</text>
+  <g fill="#1b8790" stroke="#12666d" stroke-width="3">
+    <circle cx="300" cy="135" r="30"/><circle cx="400" cy="135" r="30"/><circle cx="500" cy="135" r="30"/><circle cx="600" cy="135" r="30"/><circle cx="700" cy="135" r="30"/><circle cx="800" cy="135" r="30"/><circle cx="900" cy="135" r="30"/>
+  </g>
+  <text x="600" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" fill="#52647c">Put 7 counters into groups of 4</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="60" y="245" width="1080" height="105" rx="18" fill="#ffffff" stroke="#d7d0c2" stroke-width="2"/>
+    <text x="115" y="310" font-size="42" font-weight="700" fill="#684dcc">/</text>
+    <text x="205" y="285" font-size="24" font-weight="700" fill="#1b3155">What is the complete quotient?</text>
+    <text x="205" y="325" font-size="30" fill="#52647c">7 / 4 = 1.75</text>
+
+    <rect x="60" y="375" width="1080" height="105" rx="18" fill="#ffffff" stroke="#d7d0c2" stroke-width="2"/>
+    <text x="105" y="440" font-size="42" font-weight="700" fill="#c88b18">//</text>
+    <text x="205" y="415" font-size="24" font-weight="700" fill="#1b3155">How many whole groups fit?</text>
+    <text x="205" y="455" font-size="30" fill="#52647c">7 // 4 = 1</text>
+
+    <rect x="60" y="505" width="1080" height="105" rx="18" fill="#ffffff" stroke="#d7d0c2" stroke-width="2"/>
+    <text x="110" y="570" font-size="42" font-weight="700" fill="#bf3e3e">%</text>
+    <text x="205" y="545" font-size="24" font-weight="700" fill="#1b3155">How many counters remain?</text>
+    <text x="205" y="585" font-size="30" fill="#52647c">7 % 4 = 3</text>
+  </g>
+</svg>

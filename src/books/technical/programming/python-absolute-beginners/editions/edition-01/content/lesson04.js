@@ -4,11 +4,11 @@ import plusByType from '../assets/type-changes-plus.jpg'
 const codeLines = ['name = "Asha"', 'age = 12', 'height = 1.52', 'is_learning = True', 'print(type(name))', 'print(age + 1)']
 export const lesson04 = {
   id: 'data-types', icon: '🧬', title: 'Data Types: What Kind of Value?', shortTitle: 'Data Types',
-  subtitle: 'Meet strings, integers, floats and booleans—and see why type changes what Python can do.', tags: ['Types', 'Memory', '18 min'],
+  subtitle: 'Meet strings, integers, floats and booleans, and see why type changes what Python can do.', tags: ['Types', 'Memory', '18 min'],
   blocks: [
+    { type: 'arc-progress', arcTitle: 'Create a Local Study Assistant', step: 4, total: 5, currentFocus: 'Choose values by behavior', variant: 'classification', label: 'SORTING CHALLENGE', title: 'Sort four values by what they mean', text: 'A learner profile contains `"Asha"`, `12`, `1.52` and `True`. Before Python reveals the answer, we will classify each value and predict what it can do.', weKnowLabel: 'Values to sort', weNeedLabel: 'Sorting rules', weKnow: ['`"Asha"` looks like text.', '`12` and `1.52` look numeric.', '`True` answers a yes-or-no question.'], weNeed: ['Name the type of each value.', 'Use each type only with operations that make sense.'] },
+    { type: 'think', prompt: 'Before looking at the type cards, how would you sort `"Asha"`, `12`, `1.52` and `True`?', answer: '`"Asha"` is text. `12` is a whole number. `1.52` is a decimal number. `True` is a truth value. Python names these types `str`, `int`, `float` and `bool`.' },
     { type: 'image', src: image, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/data-types.jpg', w: 1536, h: 1024, alt: 'A memory hub connects to cards for text, whole numbers, decimals and true-or-false values.', caption: 'A type tells Python what kind of value it is handling.', points: ['`str` stores text.', '`int` stores whole numbers.', '`float` stores decimal numbers.', '`bool` stores `True` or `False`.'] },
-    { type: 'mission', title: 'Sort our values', text: 'A profile needs a name, age, height and learning status. These values are different kinds of data.', weKnow: ['Variables give values names.'], weNeed: ['A way to identify each kind of value.', 'Rules for what each kind can do.'] },
-    { type: 'think', prompt: 'Are `12` and `"12"` the same value?', answer: 'No. 12 is a number we can add. "12" is text made of two characters.' },
     { type: 'heading', text: 'A type is a value’s category' },
     { type: 'paragraph', text: 'A **data type** tells Python what kind of value it has. The type also tells Python which operations make sense.' },
     { type: 'callout', variant: 'note', title: 'Four types to begin with', paragraphs: ['`str` means string, which is text. `int` means integer, which is a whole number. `float` is a number with a decimal point. `bool` is either `True` or `False`.', 'The type belongs to the value. A variable name can later refer to a value of another type. This is called **dynamic typing**. Python tracks the type while the program runs.'] },
@@ -38,6 +38,6 @@ export const lesson04 = {
     { type: 'quiz', items: [['Which type stores a whole number?', 'int stores whole numbers such as 0, 12 and -5.'], ['What is a bool?', 'A truth value: True or False.'], ['Why is "5" not an int?', 'Quotes make it a string.'], ['What does dynamic typing mean here?', 'Python tracks types while the program runs, and one name can later refer to a value of another type.']] },
     { type: 'takeaways', items: ['str stores text; int stores whole numbers.', 'float stores decimal numbers; bool stores True or False.', 'The type belongs to the value and controls valid operations.', 'type(value) reports a value’s type.', 'int() and str() perform explicit conversions.'] },
     { type: 'resources', items: [['Python built-in types', 'https://docs.python.org/3/library/stdtypes.html']] },
-    { type: 'cliffhanger', title: 'The Next Coding Frontier', text: 'Our First Code Series continues in future editions: mastering user input with input(), conditional branching, loop iterations, and object hierarchies!' },
+    { type: 'cliffhanger', title: 'How does a reader give us a value?', text: 'Next, we use input() and learn why typed input begins as a string.' },
   ],
 }

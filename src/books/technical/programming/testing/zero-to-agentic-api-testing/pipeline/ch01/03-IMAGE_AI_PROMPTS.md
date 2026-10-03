@@ -10,7 +10,7 @@ This document specifies the exact generative image prompts for the Image AI and 
 - **Line Work:** Bold, double-line black ink outlines (`#1E1B18`) on character contours, drapery folds, and architectural edges. Fine cross-hatching and dotting for traditional texture.
 - **Eyes & Features:** Signature Madhubani almond-shaped (*badam*) eyes with sharp double-line upper lids, pointed corners, and expressive high pupils.
 - **Architectural Setting:** Grand red sandstone arches, geometric carved *jali* lattice screens filtering golden sunlight, teakwood workbenches, and brass accents, harmoniously integrated with subtle modern technology: whisper-thin cyan optical fiber data conduits flush inside stone mortar grooves, sleek matte-black diagnostic slates, and edge-server cylinders nestled naturally among neem tree roots.
-- **Border:** Every image is framed by an intricate traditional Madhubani ornamental border featuring stylized peacocks, swimming fish, and blooming lotus vines with sharp corner rosettes.
+- **Framing & Composition:** Full bleed borderless composition, edge-to-edge cinematic graphic novel artwork. No borders, no picture frames, no floral or ornamental edges.
 - **Color Palette:** Rich, warm, saturated flat gouache fills:
   - Sandstone Ochre (`#D97706` / `#B45309`)
   - Indigo / Deep Teal (`#1E3A8A` / `#0F766E`)
@@ -47,7 +47,7 @@ This document specifies the exact generative image prompts for the Image AI and 
 
 #### Image AI Generation Prompt:
 ```text
-Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Wide dynamic action panel. Akshay, a 23-year-old Indian student with sleek short black hair and expressive almond badam eyes, sprints across a sun-drenched college quadrangle in panic. His white cotton kurta with embroidered collar billows behind him, messenger bag bouncing. He holds up a water-soaked, crumpled paper admit card with smeared blue watercolor blotches in horror. In the background, majestic red sandstone arches inspired by Mughal Fatehpur Sikri with intricate jali lattice screens, old leafy neem trees, and students walking toward massive brass-studded exam hall doors. Intricate Madhubani ornamental border frame of peacocks and lotus flowers along all four edges. Bold double-line black ink outlines, rich flat gouache color fills, golden morning sunlight, sharp focus, no text or words on image, clean 16:9 ratio.
+Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Wide dynamic action panel. Akshay, a 23-year-old Indian student with sleek short black hair and expressive almond badam eyes, sprints across a sun-drenched college quadrangle in panic. His white cotton kurta with embroidered collar billows behind him, messenger bag bouncing. He holds up a water-soaked, crumpled paper admit card with smeared blue watercolor blotches in horror. In the background, majestic red sandstone arches inspired by Mughal Fatehpur Sikri with intricate jali lattice screens, old leafy neem trees, and students walking toward massive brass-studded exam hall doors. Full bleed borderless composition, edge-to-edge cinematic graphic novel illustration, Bold double-line black ink outlines, rich flat gouache color fills, golden morning sunlight, sharp focus, no text or words on image, clean 16:9 ratio.
 ```
 
 #### SVG Speech Bubble Overlay Map:
@@ -87,7 +87,7 @@ Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. W
 
 #### Image AI Generation Prompt:
 ```text
-Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Medium two-shot composition under a carved sandstone archway. Akshay, with stressed almond badam eyes, hunches over a glowing glass mobile phone, tapping frantically with his thumb. Sameer, a 40-year-old distinguished mentor with salt-and-pepper beard, wireframe round spectacles, and an indigo raw-silk kurta with gold trim, steps in from the right holding an ornate brass cutting chai holder with hot tea. Sameer gestures calmly with a knowing smile. Dappled sunlight through geometric jali screens, leafy neem branch visible outside the arch, faint glowing cyan data conduit embedded in stone wall. Intricate traditional Madhubani peacock and fish floral border framing the 16:9 canvas. Rich gouache earth tones, crisp ink line work, pure white background elements, no text or letters in the illustration.
+Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Medium two-shot composition under a carved sandstone archway. Akshay, with stressed almond badam eyes, hunches over a glowing glass mobile phone, tapping frantically with his thumb. Sameer, a 40-year-old distinguished mentor with salt-and-pepper beard, wireframe round spectacles, and an indigo raw-silk kurta with gold trim, steps in from the right holding an ornate brass cutting chai holder with hot tea. Sameer gestures calmly with a knowing smile. Dappled sunlight through geometric jali screens, leafy neem branch visible outside the arch, faint glowing cyan data conduit embedded in stone wall. Full bleed borderless composition, edge-to-edge cinematic graphic novel illustration, Rich gouache earth tones, crisp ink line work, pure white background elements, no text or letters in the illustration.
 ```
 
 #### SVG Speech Bubble Overlay Map:
@@ -126,7 +126,7 @@ Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. M
 
 #### Image AI Generation Prompt:
 ```text
-Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Action panel in cloister. Sameer taps a sleek matte-black portable terminal resting on a carved stone ledge. The terminal screen has an amber glow. Akshay stands beside him, badam almond eyes dilated in absolute shock and astonishment, clutching his messenger bag strap, already pivoting his foot to sprint. In the blurred background, grand brass exam hall doors are beginning to close with a proctor holding a clipboard. Authentic Madhubani decorative floral border frame with peacocks and fish. Flat gouache textures in antique gold, amber, indigo, and terracotta, sharp double-line ink contours, clean composition, 16:9 widescreen, no words or code rendered in the artwork.
+Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Action panel in cloister. Sameer taps a sleek matte-black portable terminal resting on a carved stone ledge. The terminal screen has an amber glow. Akshay stands beside him, badam almond eyes dilated in absolute shock and astonishment, clutching his messenger bag strap, already pivoting his foot to sprint. In the blurred background, grand brass exam hall doors are beginning to close with a proctor holding a clipboard. Full bleed borderless composition, edge-to-edge cinematic graphic novel illustration, Flat gouache textures in antique gold, amber, indigo, and terracotta, sharp double-line ink contours, clean composition, 16:9 widescreen, no words or code rendered in the artwork.
 ```
 
 #### SVG Speech Bubble Overlay Map:
@@ -242,7 +242,7 @@ Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. W
 
 #### Image AI Generation Prompt:
 ```text
-Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Dining scene. Sameer with spectacles and trimmed beard dramatically holds up a large ornate circular Indian brass thali platter with six brass katoris bowls (dal, paneer, vegetables, rice), gesturing with humorous theatrical flair as if threatening to wipe the plate clean. Across the table, Akshay pulls his own plate back with both arms in comic alarm and realization, mouth open in laughter. Teak dining table, clay water jug, sunlit arched jali veranda in background. Authentic Madhubani peacock and lotus border frame. Deep saffron, turmeric yellow, brass gold, and lapis blue tones, sharp double-line ink outlines, 16:9 widescreen, no text on image.
+Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Dining scene. Sameer with spectacles and trimmed beard dramatically holds up a large ornate circular Indian brass thali platter with six brass katoris bowls (dal, paneer, vegetables, rice), gesturing with humorous theatrical flair as if threatening to wipe the plate clean. Across the table, Akshay pulls his own plate back with both arms in comic alarm and realization, mouth open in laughter. Teak dining table, clay water jug, sunlit arched jali veranda in background. Full bleed borderless composition, edge-to-edge cinematic graphic novel illustration, Deep saffron, turmeric yellow, brass gold, and lapis blue tones, sharp double-line ink outlines, 16:9 widescreen, no text on image.
 ```
 
 #### SVG Speech Bubble Overlay Map:
@@ -281,7 +281,7 @@ Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. D
 
 #### Image AI Generation Prompt:
 ```text
-Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Workshop synthesis panel. Sameer stands beside a transparent glass architectural whiteboard divided into three glowing sketched columns. He raises a cup of cutting chai in a toast to Akshay. Akshay sits relaxed at the teak table, badam almond eyes calm and radiant with confidence, nodding as he holds his own tea glass. Sunset amber rays stream through deep sandstone stepwell arches in the background, illuminating quiet server racks. Intricate traditional Madhubani peacock and lotus border frame. Rich evening color palette of burnt orange, terracotta, deep indigo, and warm brass, double black ink outlines, 16:9 widescreen, no words or code in the artwork.
+Madhubani Mithila folk art graphic novel illustration, 16:9 widescreen format. Workshop synthesis panel. Sameer stands beside a transparent glass architectural whiteboard divided into three glowing sketched columns. He raises a cup of cutting chai in a toast to Akshay. Akshay sits relaxed at the teak table, badam almond eyes calm and radiant with confidence, nodding as he holds his own tea glass. Sunset amber rays stream through deep sandstone stepwell arches in the background, illuminating quiet server racks. Full bleed borderless composition, edge-to-edge cinematic graphic novel illustration, Rich evening color palette of burnt orange, terracotta, deep indigo, and warm brass, double black ink outlines, 16:9 widescreen, no words or code in the artwork.
 ```
 
 #### SVG Speech Bubble Overlay Map:

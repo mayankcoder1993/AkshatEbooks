@@ -1,4 +1,4 @@
-# Python overview transcript — fact-completeness audit
+# Python overview transcript: fact-completeness audit
 
 - **Source type:** supplied lecture transcript
 - **Audited:** 2026-09-20

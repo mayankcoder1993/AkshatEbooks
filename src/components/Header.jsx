@@ -36,21 +36,6 @@ export default function Header({
             <span className="chip-num">P</span>
             Preface
           </button>
-          <button
-            className={active === 'how-to-use' ? 'chip active' : 'chip'}
-            onClick={() => onSelect('how-to-use')}
-          >
-            <span className="chip-num">?</span>
-            How to Use
-          </button>
-          <button
-            className={active === 'briefing-0' ? 'chip active mission-chip' : 'chip mission-chip'}
-            onClick={() => onSelect('briefing-0')}
-            title="Enterprise Mission 1 Briefing"
-          >
-            <span className="chip-num">M1</span>
-            Mission 1
-          </button>
           {lessons.map((lesson, index) => (
             <button
               key={lesson.id}

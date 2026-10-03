@@ -337,15 +337,8 @@ export default function App() {
 
   const { lessons, BOOK, BRAND, PREFACE } = publication
   const isPreface = active === 'preface'
-  const isHowToUse = active === 'how-to-use'
-  const isBriefing = typeof active === 'string' && active.startsWith('briefing-')
-  const briefingLessonIndex = isBriefing ? parseInt(active.replace('briefing-', ''), 10) : null
-  const briefingLesson = isBriefing && briefingLessonIndex !== null ? lessons[briefingLessonIndex] : null
-  const briefingOpener = briefingLesson ? briefingLesson.blocks.find(b => b.type === 'chapter-opener') : null
   const isChapter = typeof active === 'number'
   const lesson = isChapter ? lessons[active] : null
-  const lessonOpener = lesson ? lesson.blocks.find(b => b.type === 'chapter-opener') : null
-  const chapterBlocks = lesson ? lesson.blocks.filter(b => b.type !== 'chapter-opener') : []
 
   const savePdf = () => {
     setPreview(true)
@@ -386,15 +379,11 @@ export default function App() {
               <option value="print-cover">Cover</option>
               <option value="print-toc">Table of Contents</option>
               <option value="print-preface">Preface</option>
-              <option value="print-how-to">How to use this book</option>
-              {lessons.map((l, i) => [
-                <option key={`briefing-${l.id}`} value={`print-briefing-${l.id}`}>
-                  Mission Briefing: Chapter {i + 1}
-                </option>,
+              {lessons.map((l, i) => (
                 <option key={l.id} value={`print-${l.id}`}>
                   Chapter {i + 1}: {l.title}
                 </option>
-              ])}
+              ))}
               <option value="print-about">About the Author</option>
             </select>
           </div>
@@ -497,65 +486,10 @@ export default function App() {
             </article>
           )}
 
-          {isHowToUse && (
-            <article className="lesson lesson-enter">
-              <header className="lesson-hero">
-                <div className="lesson-hero-meta">
-                  <span className="pill accent">Frontmatter · Guide</span>
-                  <span className="pill">Active Recall</span>
-                  <span className="pill">Mastery Framework</span>
-                </div>
-                <p className="lesson-eyebrow">Frontmatter</p>
-                <h1 className="lesson-title">How to Use This Book for Maximum Mastery</h1>
-                <p className="lesson-subtitle">Active prediction, wire level observation, runnable code sandboxes, and defensive recovery habits.</p>
-              </header>
-              <HowToUseGuide items={BOOK?.howToUse || []} />
-            </article>
-          )}
-
-          {isBriefing && briefingLesson && briefingOpener && (
-            <article className="lesson lesson-enter mission-briefing-view">
-              <header className="lesson-hero">
-                <div className="lesson-hero-meta">
-                  <span className="pill accent">Enterprise Mission Briefing</span>
-                  <span className="pill">{briefingOpener.missionBadge || `Mission Phase ${briefingLessonIndex + 1}`}</span>
-                </div>
-                <p className="lesson-eyebrow">{briefingOpener.missionBadge || 'MISSION BRIEFING'}</p>
-                <h1 className="lesson-title">{briefingOpener.missionCrisis || briefingOpener.missionTitle || briefingLesson.title}</h1>
-                <p className="lesson-subtitle">{briefingLesson.subtitle}</p>
-              </header>
-              <Blocks blocks={[briefingOpener]} />
-              <div className="briefing-action-bar">
-                <button
-                  type="button"
-                  className="btn primary large-btn"
-                  onClick={() => setActive(briefingLessonIndex)}
-                >
-                  Begin Chapter {briefingLessonIndex + 1} Investigation →
-                </button>
-              </div>
-            </article>
-          )}
-
           {isChapter && lesson && (
             <div key={lesson.id}>
               <LessonShell lesson={lesson} index={active} total={lessons.length} unitLabel={BOOK.unitLabel}>
-                {lessonOpener && (
-                  <div className="chapter-mission-context-banner">
-                    <div className="context-left">
-                      <span className="context-badge">{lessonOpener.missionBadge || 'MISSION BRIEFING'}</span>
-                      <span className="context-title">{lessonOpener.missionCrisis || lessonOpener.missionTitle}</span>
-                    </div>
-                    <button
-                      type="button"
-                      className="btn small"
-                      onClick={() => setActive(`briefing-${active}`)}
-                    >
-                      📋 View Mission Briefing
-                    </button>
-                  </div>
-                )}
-                <Blocks blocks={chapterBlocks} />
+                <Blocks blocks={lesson.blocks} />
               </LessonShell>
             </div>
           )}
@@ -565,14 +499,8 @@ export default function App() {
               className="btn"
               disabled={isPreface}
               onClick={() => {
-                if (isHowToUse) setActive('preface')
-                else if (isBriefing) {
-                  if (briefingLessonIndex === 0) setActive('how-to-use')
-                  else setActive(briefingLessonIndex - 1)
-                }
-                else if (isChapter) {
-                  if (lessonOpener) setActive(`briefing-${active}`)
-                  else if (active === 0) setActive('how-to-use')
+                if (isChapter) {
+                  if (active === 0) setActive('preface')
                   else setActive(value => value - 1)
                 }
               }}
@@ -581,24 +509,15 @@ export default function App() {
             </button>
             <span>
               {isPreface && 'Frontmatter: Preface'}
-              {isHowToUse && 'Frontmatter: How to Use This Book'}
-              {isBriefing && `Mission Briefing: Chapter ${briefingLessonIndex + 1}`}
               {isChapter && `Chapter ${active + 1} of ${lessons.length}`}
             </span>
             <button
               className="btn primary"
               disabled={isChapter && active === lessons.length - 1}
               onClick={() => {
-                if (isPreface) setActive('how-to-use')
-                else if (isHowToUse) setActive('briefing-0')
-                else if (isBriefing) setActive(briefingLessonIndex)
-                else if (isChapter) {
-                  const nextIndex = active + 1
-                  if (nextIndex < lessons.length) {
-                    const nextHasOpener = lessons[nextIndex]?.blocks.some(b => b.type === 'chapter-opener')
-                    if (nextHasOpener) setActive(`briefing-${nextIndex}`)
-                    else setActive(nextIndex)
-                  }
+                if (isPreface) setActive(0)
+                else if (isChapter && active < lessons.length - 1) {
+                  setActive(value => value + 1)
                 }
               }}
             >
