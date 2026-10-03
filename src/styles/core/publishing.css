@@ -4810,28 +4810,28 @@ body:has(.page.fullscreen-mode) .site-header,
 
 .comic-balloon-box {
   position: absolute;
-  top: 2%;
-  max-width: 38%;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(6px);
+  top: 6px;
+  max-width: 32%;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
   border: 1.5px solid #0284c7;
   border-radius: 6px;
-  padding: 0.2rem 0.45rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  padding: 0.16rem 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   pointer-events: auto;
   box-sizing: border-box;
 }
 
 .comic-panel-hero .comic-balloon-box {
-  max-width: 28%;
+  max-width: 24%;
 }
 
 .comic-balloon-box.balloon-left {
-  left: 2%;
+  left: 6px;
 }
 
 .comic-balloon-box.balloon-right {
-  right: 2%;
+  right: 6px;
 }
 
 .comic-balloon-header {

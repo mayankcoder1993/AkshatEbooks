@@ -573,7 +573,29 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
           zoom: zoomLevel !== 100 ? `${zoomLevel}%` : undefined
         }}
       >
-        {panels.map((p, idx) => {
+        {panels.flatMap((p, pIdx) => {
+          // Extract dialogues
+          const rawDialogues = p.dialogues || (p.dialogue ? [
+            p.dialogue,
+            p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null
+          ].filter(Boolean) : [])
+
+          // If a panel has multiple dialogues, bifurcate them into distinct panels so each image has at most ONE dialogue balloon
+          if (rawDialogues.length > 1) {
+            return rawDialogues.map((d, dIdx) => ({
+              ...p,
+              _subBeatKey: `${pIdx}-${dIdx}`,
+              title: dIdx === 0 ? p.title : `${p.title} (Reaction)`,
+              layout: p.layout || (dIdx === 0 ? 'duo' : 'duo'),
+              image: (dIdx > 0 && (p.replyImage || p.image2)) ? (p.replyImage || p.image2) : p.image,
+              dialogues: [d],
+              dialogue: null,
+              scene: dIdx === 0 ? p.scene : null // Narration only on first beat
+            }))
+          }
+
+          return [{ ...p, _subBeatKey: `${pIdx}-0` }]
+        }).map((p, idx) => {
           const layoutClass = p.layout ? `comic-panel-${p.layout}` : (p.fullWidth || p.hero) ? 'comic-panel-hero' : ''
 
           return (

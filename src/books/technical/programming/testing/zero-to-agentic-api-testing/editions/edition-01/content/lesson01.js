@@ -7,6 +7,7 @@ import act01Scene07Img from '../assets/illustrations/acts/act1/act01_scene07_aks
 import act01Scene09Img from '../assets/illustrations/acts/act1/act01_scene09_sameer_arrival_chai.jpg'
 import act01Scene09ServerImg from '../assets/illustrations/acts/act1/act01_scene09_alt_cloister_server_rack.jpg'
 import act01Scene11Img from '../assets/illustrations/acts/act1/act01_scene11_sameer_diagnostic_slate_14ms.jpg'
+import act01Scene12Img from '../assets/illustrations/acts/act1/act01_scene12_akshay_shock_relief.jpg'
 import act01Scene13Img from '../assets/illustrations/acts/act1/act01_scene13_students_running_exam_gates.jpg'
 
 import act02Scene14Img from '../assets/illustrations/acts/act2/act02_scene14_research_workshop_interior.jpg'
@@ -274,44 +275,65 @@ export const lesson01 = {
           realization: 'APIs eliminate presentation tax. When you speak directly to the server in structured data, network constraints become irrelevant.'
         },
         {
-          title: 'The 14 Millisecond Terminal Rescue',
+          title: 'The 14 Millisecond Terminal Query',
           time: '08:46 AM',
-          hero: true,
-          fullWidth: true,
+          layout: 'duo',
           image: {
             src: act01Scene11Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act1/act01_scene11_sameer_diagnostic_slate_14ms.jpg',
             w: 1200,
             h: 675,
-            alt: 'Sameer holding a diagnostic slate projecting a cyan and amber wire inspection HUD while Akshay reacts in jaw-dropping awe.',
+            alt: 'Sameer holding a diagnostic slate projecting a cyan and amber wire inspection HUD.',
             caption: 'Terminal Console: Sameer extracts Hall 302, Seat B-14 over the raw wire in fourteen milliseconds.'
           },
-          dialogues: [
-            {
-              speaker: 'Sameer',
-              speech: 'Done. Hall 302. Seat B-14. Took fourteen milliseconds.'
-            },
-            {
-              speaker: 'Akshay',
-              reply: true,
-              speech: 'Wait, fourteen milliseconds?! My phone wasted four whole minutes spinning in circles, and your screen answered before I even blinked?!'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'Your phone tried to build a giant palace just to show a tiny sticky note. I just grabbed the sticky note directly.'
-            },
-            {
-              speaker: 'Akshay',
-              reply: true,
-              speech: 'Hall 302, Seat B-14! I have to sprint! Sameer, what kind of black magic was that?!'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'Not magic, Akshay: an API call! Go pass your exam and meet me in Room 7 behind the stepwell. I will show you how it works!'
-            }
-          ],
-          scene: 'Sameer opens a bare black terminal, fires a direct wire request, and extracts the exact hall and seat number in 14 milliseconds, getting Akshay into the exam.',
-          realization: 'An API call goes directly to the server and asks for exactly the data you need: nothing more. It skips every layer of visual presentation. That is why it returned in 14 milliseconds what the browser could not deliver in 4 minutes.'
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Done. Hall 302. Seat B-14. Took fourteen milliseconds.'
+          },
+          scene: 'Sameer opens a bare black terminal, fires a direct wire request, and extracts the exact hall and seat number in 14 milliseconds.',
+          realization: 'An API call goes directly to the server and asks for exactly the data you need: nothing more. It skips every layer of visual presentation.'
+        },
+        {
+          title: 'Shock and Relief under the Archway',
+          time: '08:46 AM',
+          layout: 'duo',
+          image: {
+            src: act01Scene12Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act1/act01_scene12_akshay_shock_relief.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Akshay reacting in jaw-dropping awe and relief as room digits appear.',
+            caption: 'Instant Verdict: Akshay stares in disbelief as four minutes of spinning collapses into 14ms.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Wait, fourteen milliseconds?! My phone wasted four whole minutes spinning in circles, and your screen answered before I even blinked?!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Your phone tried to build a giant palace just to show a tiny sticky note. I grabbed the sticky note directly.'
+          },
+          scene: 'Akshay gasps in astonishment, looking between his frozen smartphone screen and Sameer diagnostic slate.',
+          realization: 'The browser waterfall downloads megabytes of styling and scripts; the API wire payload was merely 120 bytes of JSON.'
+        },
+        {
+          title: 'Sprint to Hall 302',
+          time: '08:47 AM',
+          layout: 'duo',
+          image: {
+            src: act01Scene13Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act1/act01_scene13_students_running_exam_gates.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Akshay sprinting toward the exam gates with verified hall ticket digits in mind.',
+            caption: 'Main Quad: Akshay dashes toward the examination doors as the warning bell rings.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Hall 302, Seat B-14! I have to sprint! Sameer, what kind of black magic was that?!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Not magic, Akshay: an API call! Go pass your exam and meet me in Room 7 behind the stepwell. I will show you how it works!'
+          },
+          scene: 'Akshay sprints past the quad gates just as the bell tolls, shouting back in gratitude as Sameer sips his chai with quiet satisfaction.',
+          realization: 'Understanding APIs turns mysterious infrastructure failures into predictable, inspectable network transactions.'
         }
       ]
     },
