@@ -1,9 +1,9 @@
 import workbenchImg from '../assets/postman-workbench-overview.jpg'
 import assertionImg from '../assets/postman-assertion-lifecycle.jpg'
 import pyramidImg from '../assets/testing-pyramid-focus.jpg'
-import ch03Scene1Img from '../assets/ch03-scene-1-launching-postman.jpg'
 import ch03Scene2Img from '../assets/ch03-scene-2-assertion-sandbox.jpg'
 import ch03Scene3Img from '../assets/ch03-scene-3-mission-triumph.jpg'
+import ch03GreenBadgeEmptyArrayImg from '../assets/illustrations/reactions/ch03-green-badge-empty-array.jpg'
 
 import assertionRedSvg from '../assets/svgs/ch03-workbench-assertion-red.svg'
 import dualAssertionsSvg from '../assets/svgs/ch03-workbench-dual-assertions.svg'
@@ -92,7 +92,22 @@ export const lesson03 = {
           title: 'Examining the Green Badge',
           time: '06:00 PM',
           layout: 'duo',
-          image: ch03Scene1Img,
+          image: {
+            src: ch03GreenBadgeEmptyArrayImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-green-badge-empty-array.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'API testing workbench showing a green 200 status while the coordinates response is empty.',
+            caption: 'False Green: A passing status can conceal an empty response when the test checks only execution.'
+          },
+          replyImage: {
+            src: ch03Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch03-scene-2-assertion-sandbox.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'API testing workbench Tests tab displaying an assertion failure for an empty result.',
+            caption: 'Assertion Tab: A meaningful matcher exposes the empty result instead of silently passing it.'
+          },
           promptMeta: {
             title: 'The Green Lie Audit',
             aspectRatio: '16:9',
@@ -127,7 +142,8 @@ export const lesson03 = {
           title: 'The Tests Sandbox',
           time: '06:10 PM',
           layout: 'duo',
-          image: ch03Scene1Img,
+          image: ch03Scene2Img,
+          replyImage: workbenchImg,
           scene: 'Sameer points to the Tests tab in the workbench with his pencil.',
           dialogue: {
             speaker: 'Sameer',
@@ -491,7 +507,7 @@ export const lesson03 = {
           scene: 'Sameer gestures toward the campus library courtyard through the carved jali stone window. Headlights pierce the twilight as a large delivery truck unloads stacks of cardboard textbook boxes under a lamppost.',
           dialogue: {
             speaker: 'Sameer',
-            speech: 'Five hundred new textbooks arrive by dawn. Meera must catalog every one into the library database. Can your four request collection handle dynamic IDs, duplicate conflicts, and deletion workflows?',
+            speech: 'Five hundred books arrive by dawn. Meera must catalog them. Can your four request collection handle dynamic IDs, duplicate conflicts, and deletion workflows?',
             replySpeaker: 'Akshay',
             replySpeech: 'Dynamic IDs? But my requests used hardcoded URLs...'
           },

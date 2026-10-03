@@ -239,7 +239,7 @@ export const lesson01 = {
             {
               speaker: 'Sameer',
               reply: true,
-              speech: 'The server is completely fine. It is your browser that is choking on its own vanity. Your phone is pulling nearly four megabytes of heavy photos, button styles, and React bundles through a thin wireless straw just to read two lines of text!'
+              speech: 'The server is fine. Your browser is choking on nearly four megabytes of photos, styles, and React bundles just to show two lines of text.'
             },
             {
               speaker: 'Akshay',
@@ -264,11 +264,11 @@ export const lesson01 = {
             {
               speaker: 'Sameer',
               reply: true,
-              speech: 'Exactly. The actual data you need: Hall 302, Seat B-14: is just one hundred and twenty bytes! That is thirty thousand times smaller. Put away the heavy browser; we are going to walk straight into the kitchen.'
+              speech: 'Exactly. Hall 302 and Seat B14 are only 120 bytes. That is thirty thousand times smaller. Put away the browser. We will walk straight into the kitchen.'
             },
             {
               speaker: 'Sameer',
-              speech: 'Look at what I am doing: no web pages, no heavy photos, no button scripts. I am sending the server just one simple question over the wire: give me the admit card for student APX102.'
+              speech: 'See? No web page, photos, or scripts. I am sending one wire question: give me the admit card for student APX102.'
             }
           ],
           scene: 'Sameer rests his slim diagnostic slate on the carved balustrade, bypassing HTML, CSS, and client-side JavaScript to query the raw API endpoint directly over the wire.',
@@ -445,7 +445,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           dialogues: [
             {
               speaker: 'Akshay',
-              speech: 'I survived! Hall 302, Seat B-14 conquered with minutes to spare. Now please tell me: how on earth did you get that admit card in fourteen milliseconds when all our phones were completely frozen?!'
+              speech: 'I made it! Hall 302 and Seat B14 with minutes to spare. How did you get my admit card in fourteen milliseconds while every phone was frozen?'
             }
           ],
           scene: 'Hours after surviving the board exam, Akshay enters Sameer quiet workshop, eager to understand the architectural secret that rescued him.'
@@ -512,7 +512,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Spot on. The kitchen is the server and its database. It has the chef, the stove, and the ingredients. You are never allowed to walk inside and mess with the pots.'
+              speech: 'Spot on. The kitchen is the server and database. It holds the chef, stove, and ingredients. Clients never walk in and touch the pots.'
             }
           ],
           scene: 'Sameer illustrates the kitchen as the isolated, secure backend environment where state mutations and queries actually execute.',
@@ -537,7 +537,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             {
               speaker: 'Sameer',
               reply: true,
-              speech: 'Exactly! But notice what the waiter does and does not do. The waiter does not cook the meal, does not eat your food, and does not wash the dishes. He is simply a courier. He takes your order slip to the kitchen, and carries the cooked plate back to your table.'
+              speech: 'Exactly. The waiter does not cook, eat, or wash dishes. He carries your order to the kitchen and the finished plate back to your table.'
             },
             {
               speaker: 'Akshay',
@@ -546,7 +546,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             {
               speaker: 'Sameer',
               reply: true,
-              speech: 'Spot on. The menu lists what you can ask for and how to order it. If you ask for pizza at a dosa stall, the waiter shakes his head and returns a polite 404 Not Found.'
+              speech: 'Spot on. The menu says what you can request and how to order it. Ask for pizza at a dosa stall and the waiter returns a polite 404 Not Found.'
             }
           ],
           scene: 'Sameer sketches the three boxes on the whiteboard: Customer, Waiter, and Kitchen, demonstrating how the courier carries payloads without altering them.',
@@ -566,7 +566,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Your phone browser told the waiter: Wait! Before I look at my food, please repaint the dining room walls, hang crystal chandeliers, and play some background music! You buried him under party decorations.'
+              speech: 'Your browser told the waiter to repaint the room, hang chandeliers, and play music before serving your food. It buried the request under decoration.'
             },
             {
               speaker: 'Akshay',
@@ -650,7 +650,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'When curl sends JSON, it shoots across the wire as a TCP byte stream: like water blasting out of a garden hose in little splashy chunks. The server sees a puddle of raw bytes trickling in over time.'
+              speech: 'When curl sends JSON, it crosses the wire as TCP byte chunks, like water from a hose. The server receives raw bytes over time, not a ready object.'
             },
             {
               speaker: 'Sameer',
@@ -826,7 +826,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'GET: Take a good look at this plate. Dal makhani, paneer, aloo, raita, pickle, kheer. You are looking with your eyes. Nothing gets eaten, nothing gets spilled. It is safe and idempotent.'
+              speech: 'GET means inspect this plate with your eyes. Nothing is eaten or spilled. Repetition leaves the state unchanged. It is safe and idempotent.'
             },
             {
               speaker: 'Akshay',
@@ -851,7 +851,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Look at the attendant bringing a brand-new brass platter to the next table. That table was completely empty ten seconds ago. That is HTTP POST: allocating a new resource entity in the database collection!'
+              speech: 'See the attendant bring a fresh brass platter to an empty table. That is POST: creating a new resource in the collection.'
             },
             {
               speaker: 'Akshay',
@@ -876,11 +876,11 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'PUT: Brace yourself, because this is where thousands of sleepy developers blow up their databases. PUT does not mean tweak this one tiny thing. PUT means: swap out the whole entire plate!'
+              speech: 'PUT replaces the whole plate. It does not tweak one field. Send only dal and rice, and paneer and kheer disappear.'
             },
             {
               speaker: 'Sameer',
-              speech: 'If your request only mentions dal and rice, the waiter literally dumps your plate and brings back a tray with only dal and rice. Your paneer? In the bin! Your kheer? Gone forever!'
+              speech: 'If your request names only dal and rice, the waiter swaps the whole plate. Paneer and kheer are gone.'
             },
             {
               speaker: 'Akshay',
@@ -1110,7 +1110,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
             },
             {
               speaker: 'Sameer',
-              speech: 'SOAP is the grumpy corporate lawyer in a three-piece suit. It wraps every tiny message in a giant, triple-sealed XML envelope with strict WSDL validation contracts.'
+              speech: 'SOAP is a strict corporate contract. It wraps each message in a large XML envelope with WSDL validation.'
             },
             {
               speaker: 'Akshay',
@@ -1143,7 +1143,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Look at this sealed iron chest. Heavy, locked with brass rivets, and guarded by sealed scrolls. That is SOAP! It does not trust casual network wires: it wraps every payload in an immutable XML envelope with strict security headers.'
+              speech: 'This iron chest is SOAP: heavy, sealed, and strict. It wraps every payload in an XML envelope with security headers.'
             },
             {
               speaker: 'Akshay',
