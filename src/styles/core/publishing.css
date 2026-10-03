@@ -4727,15 +4727,28 @@ body:has(.page.fullscreen-mode) .site-header,
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
+.comic-speech-balloon.reply {
+  margin-left: 1.5rem;
+}
+
+.comic-speech-balloon:not(.reply) {
+  margin-right: 1.5rem;
+}
+
 .comic-speech-balloon.speaker-akshay {
   border-color: #0284c7;
   background: #f0f9ff;
 }
 
-.comic-speech-balloon.speaker-sameer,
-.comic-speech-balloon.speaker-fellow-student {
-  border-color: #6366f1;
+.comic-speech-balloon.speaker-sameer {
+  border-color: #4f46e5;
   background: #f5f3ff;
+}
+
+.comic-speech-balloon.speaker-fellow-student,
+.comic-speech-balloon.speaker-fellow-students {
+  border-color: #d97706;
+  background: #fffbeb;
 }
 
 .balloon-header {
@@ -4750,21 +4763,25 @@ body:has(.page.fullscreen-mode) .site-header,
 }
 
 .balloon-speaker-name {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #0284c7;
 }
 
-.comic-speech-balloon.speaker-sameer .balloon-speaker-name,
-.comic-speech-balloon.speaker-fellow-student .balloon-speaker-name {
-  color: #6366f1;
+.comic-speech-balloon.speaker-sameer .balloon-speaker-name {
+  color: #4f46e5;
+}
+
+.comic-speech-balloon.speaker-fellow-student .balloon-speaker-name,
+.comic-speech-balloon.speaker-fellow-students .balloon-speaker-name {
+  color: #b45309;
 }
 
 .balloon-text {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   line-height: 1.5;
   color: #1e293b;
   font-style: italic;
@@ -4774,23 +4791,32 @@ body:has(.page.fullscreen-mode) .site-header,
 .balloon-tail {
   position: absolute;
   bottom: -7px;
-  left: 20px;
+  left: 24px;
   width: 12px;
   height: 7px;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   background: #0284c7;
 }
 
-.comic-speech-balloon.speaker-sameer .balloon-tail,
-.comic-speech-balloon.speaker-fellow-student .balloon-tail {
-  background: #6366f1;
+.balloon-tail.reply {
+  left: auto;
+  right: 24px;
+}
+
+.comic-speech-balloon.speaker-sameer .balloon-tail {
+  background: #4f46e5;
+}
+
+.comic-speech-balloon.speaker-fellow-student .balloon-tail,
+.comic-speech-balloon.speaker-fellow-students .balloon-tail {
+  background: #d97706;
 }
 
 .panel-art-frame {
   width: 100%;
   position: relative;
   background: #ffffff;
-  padding: 0 1.1rem;
+  padding: 0;
   box-sizing: border-box;
 }
 

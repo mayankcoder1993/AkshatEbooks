@@ -11,6 +11,19 @@ const h = (text, level=HeadingLevel.HEADING_2) => new Paragraph({ heading:level,
 const tableBox = (title, children, fill='F7F9FC') => new Table({ width:{size:100,type:WidthType.PERCENTAGE}, rows:[new TableRow({children:[new TableCell({borders,shading:{type:ShadingType.CLEAR,fill},margins:{top:130,bottom:130,left:160,right:160},children:[p([new TextRun({text:title,bold:true,color:colors.navy})]),...children]})]})] })
 function code(lines, filename) { return [p([new TextRun({text:filename,bold:true,font:'Consolas',color:colors.indigo})]), ...lines.map((line,i)=>p([new TextRun({text:`${String(i+1).padStart(2,' ')}  ${line || ' '}`,font:'Consolas',size:19})],{shading:{type:ShadingType.CLEAR,fill:'F4F6F9'},spacing:{after:0,line:260},keepLines:true}))] }
 function list(items, numbering='bullet') { return items.map(item=>p(rich(item),{numbering:{reference:numbering,level:0}})) }
+function bytecodeMapToDocx(b) {
+  const content = []
+  for (const [groupIndex, group] of b.groups.entries()) {
+    content.push(p([new TextRun({text:`SOURCE ${groupIndex+1}: `,bold:true,color:colors.indigo}),new TextRun({text:group.source,font:'Consolas',bold:true})]))
+    for (const [actionIndex, action] of group.actions.entries()) {
+      content.push(p([new TextRun({text:`${actionIndex+1}. ${action.opcode}: `,bold:true,color:colors.teal}),...rich(action.action)]))
+      if (action.state) content.push(p([new TextRun({text:'State: ',bold:true}),...rich(action.state)]))
+    }
+  }
+  if (b.command) content.push(p([new TextRun({text:'Try it: ',bold:true}),new TextRun({text:b.command,font:'Consolas'})]))
+  if (b.caption) content.push(p([new TextRun({text:b.caption,italics:true,color:'596579'})]))
+  return [tableBox(`BYTECODE ACTIONS · ${b.version}`, content, 'F0F4FA')]
+}
 async function blockToDocx(b) {
   switch(b.type) {
     case 'heading': return [h(b.text)]
@@ -386,6 +399,12 @@ async function blockToDocx(b) {
     case 'source-note': return [tableBox(b.label||'SOURCE NOTE',[p(b.claim),...(b.url?[p(b.url)]:[]),...(b.verifiedThrough?[p(`Verified through ${b.verifiedThrough}`)]:[])],'EEF8F6')]
     case 'question': return [tableBox(b.kind==='verified-pyq'?'VERIFIED PAST-YEAR QUESTION':'PRACTICE QUESTION',[p([new TextRun({text:[b.exam,b.year,b.paper,b.marks&&`${b.marks} marks`].filter(Boolean).join(' · '),italics:true,color:'596579'})]),p([new TextRun({text:b.prompt,bold:true})]),p([new TextRun({text:'Model answer: ',bold:true,color:colors.teal}),...rich(b.answer)]),...list(b.marking||[]),...(b.sourceUrl?[p(`Official source: ${b.sourceUrl}`)]:[])],b.kind==='verified-pyq'?'EEF8F6':'FFF8E8')]
     case 'activity': return [tableBox(`ACTIVITY · ${b.title}`,[...(b.materials?.length?[p(`Materials: ${b.materials.join(', ')}`)]:[]),...list(b.steps,'steps'),...(b.safety?[p([new TextRun({text:'Safety: ',bold:true,color:'9A5B00'}),...rich(b.safety)])]:[])],'EEF8F6')]
+    case 'arc-start': return [tableBox(`LEARNING ARC · ${b.arcTitle}`,[p([new TextRun({text:b.title,bold:true,color:colors.navy}),new TextRun({text:`  Step ${b.step} of ${b.total}`,italics:true,color:'596579'})]),p(rich(b.text)),p([new TextRun({text:`${b.weKnowLabel || 'Starting tools'}: `,bold:true}),...rich(b.weKnow.join(' • '))]),p([new TextRun({text:`${b.weNeedLabel || 'What this arc will unlock'}: `,bold:true}),...rich(b.weNeed.join(' • '))])],'EEF5FA')]
+    case 'arc-progress': return [tableBox(`${b.arcTitle} · STEP ${b.step} OF ${b.total}`,[p([new TextRun({text:`Now: ${b.currentFocus}. `,bold:true,color:colors.indigo}),...rich(b.text)])],'F3F6FA')]
+    case 'bytecode-map': return bytecodeMapToDocx(b)
+    case 'challenge': return [tableBox(`SKILL TRIAL · ${b.rank} · ${b.title}`,[p(b.brief),...list(b.steps,'steps'),p([new TextRun({text:'Win condition: ',bold:true,color:colors.teal}),...rich(b.winCondition)]),...(b.stretch?[p([new TextRun({text:'Stretch move: ',bold:true,color:colors.indigo}),...rich(b.stretch)])]:[])],'FFF8E8')]
+    case 'victory': return [tableBox(`RANK EARNED · ${b.rank}`,[p('You proved that you can:'),...list(b.proof),p([new TextRun({text:'Next target: ',bold:true,color:colors.indigo}),...rich(b.next)])],'EAF8F4')]
+    case 'arithmetic-exercise': return [tableBox('SIMPLE EXERCISE · Numbers: Simple Arithmetic',[p('Write an expression that equals 100.'),p([new TextRun({text:'Examples: ',bold:true}),...rich('`50 + 50` or `110 - 10`.')]),p('See if you can use more than one arithmetic operator. Write only one expression and submit only one line of code.'),p([new TextRun({text:'Success check: ',bold:true}),new TextRun('If your expression results in 100, your solution is correct.')])],'EEF8F6')]
     case 'reflection': return [tableBox('OPTIONAL REFLECTION',[p(b.prompt),p(b.permission||'You may pause, skip this exercise or return later.'),...list(b.guidance||[])],'F3F0FA')]
     case 'safety-notice': return [tableBox(b.title||'IMPORTANT SUPPORT NOTE',[p(b.text),...(b.resources||[]).map(([label,url])=>p(`${label} : ${url}`))],'FFF0F0')]
     default:return []

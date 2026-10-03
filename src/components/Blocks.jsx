@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import CodeBlock from './CodeBlock.jsx'
 import FlowDiagram from './FlowDiagram.jsx'
 import ProgramCard from './ProgramCard.jsx'
@@ -6,6 +6,7 @@ import RunVisualizer from './RunVisualizer.jsx'
 import TerminalWindow from './TerminalWindow.jsx'
 import PipelineVisualizer from './PipelineVisualizer.jsx'
 import ApiInspector from './ApiInspector.jsx'
+import ArithmeticExercise from './ArithmeticExercise.jsx'
 
 function RichText({ text = '' }) {
   const regex = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\([^)]+\))/g
@@ -405,11 +406,16 @@ function ComicWorkbench({
                 <span className="dot yellow" />
                 <span className="dot green" />
               </div>
-              <div className="wb-request-bar">
+              <div className="wb-request-bar" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexWrap: 'wrap' }}>
                 <span className={`http-verb-badge verb-${activeWorkbench.method?.toLowerCase()}`}>
                   {activeWorkbench.method || 'GET'}
                 </span>
                 <span className="wb-request-url">{activeWorkbench.url}</span>
+                {activeWorkbench.url?.includes(':3000') && (
+                  <span style={{ background: '#0284c7', color: '#fff', fontSize: '0.65rem', fontWeight: 800, padding: '0.1rem 0.35rem', borderRadius: '3px', marginLeft: 'auto' }}>
+                    PORT 3000: HOST SOCKET
+                  </span>
+                )}
               </div>
             </div>
 
@@ -422,7 +428,10 @@ function ComicWorkbench({
 
             {activeWorkbench.body && (
               <div className="wb-body-pane">
-                <span className="pane-label">Request Body (JSON)</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.25rem' }}>
+                  <span className="pane-label">Request Body (JSON Payload)</span>
+                  <span style={{ fontSize: '0.72rem', color: '#0284c7', fontWeight: 600 }}>Stream buffered via express.json()</span>
+                </div>
                 <pre className="pane-content"><code>{activeWorkbench.body}</code></pre>
               </div>
             )}
@@ -432,6 +441,9 @@ function ComicWorkbench({
                 <span className="response-label">Live Response</span>
                 <span className="response-status-badge">{activeWorkbench.responseStatus || '200 OK'}</span>
                 {activeWorkbench.responseTime && <span className="response-time-badge">{activeWorkbench.responseTime}</span>}
+                <span style={{ fontSize: '0.72rem', color: '#16a34a', fontWeight: 600, marginLeft: 'auto' }}>
+                  ✓ Direct Wire Payload (Zero Browser Bloat)
+                </span>
               </div>
               <pre className="response-body-content"><code>{activeWorkbench.responseBody}</code></pre>
             </div>
@@ -484,92 +496,328 @@ function ComicWorkbench({
 }
 
 function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns = 2, panels = [] }) {
+  const [zoomLevel, setZoomLevel] = useState(100)
+  const [lightboxPanel, setLightboxPanel] = useState(null)
+  const [lightboxZoom, setLightboxZoom] = useState(100)
+  const gridContainerRef = useRef(null)
+
+  // Touchpad pinch-to-zoom listener (Ctrl + Wheel on trackpad/mouse)
+  useEffect(() => {
+    const el = gridContainerRef.current
+    if (!el) return
+
+    const handleWheel = (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault()
+        const delta = e.deltaY < 0 ? 5 : -5
+        setZoomLevel((prev) => Math.min(160, Math.max(75, prev + delta)))
+      }
+    }
+
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => el.removeEventListener('wheel', handleWheel)
+  }, [])
+
+  const handleZoomIn = () => setZoomLevel((z) => Math.min(160, z + 15))
+  const handleZoomOut = () => setZoomLevel((z) => Math.max(75, z - 15))
+  const handleZoomReset = () => setZoomLevel(100)
+
   return (
     <section className={`storyboard-container columns-${columns}`}>
       <div className="storyboard-header">
-        <span className="storyboard-badge">{badge}</span>
-        {title && <h3 className="storyboard-title">{title}</h3>}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', flexWrap: 'wrap', flex: 1 }}>
+          <span className="storyboard-badge">{badge}</span>
+          {title && <h3 className="storyboard-title">{title}</h3>}
+        </div>
+
+        {/* Reader Canvas Zoom & Inspection Toolbar */}
+        <div className="storyboard-zoom-toolbar" style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: '#ffffff', padding: '0.25rem 0.5rem', borderRadius: '8px', border: '1px solid #cbd5e1', boxShadow: '0 1px 3px rgba(0,0,0,0.05)' }}>
+          <span style={{ fontSize: '0.72rem', fontWeight: 800, color: '#64748b', marginRight: '0.2rem' }}>ZOOM:</span>
+          <button
+            type="button"
+            onClick={handleZoomOut}
+            title="Zoom out comic grid"
+            style={{ width: '28px', height: '26px', border: '1px solid #cbd5e1', background: '#f8fafc', borderRadius: '4px', cursor: 'pointer', fontWeight: 800, fontSize: '0.9rem', color: '#1e293b' }}
+          >
+            −
+          </button>
+          <button
+            type="button"
+            onClick={handleZoomReset}
+            title="Reset to 100% (or pinch touchpad to zoom)"
+            style={{ minWidth: '46px', height: '26px', border: '1px solid #cbd5e1', background: '#ffffff', borderRadius: '4px', cursor: 'pointer', fontWeight: 700, fontSize: '0.72rem', color: '#0284c7' }}
+          >
+            {zoomLevel}%
+          </button>
+          <button
+            type="button"
+            onClick={handleZoomIn}
+            title="Zoom in comic grid"
+            style={{ width: '28px', height: '26px', border: '1px solid #cbd5e1', background: '#f8fafc', borderRadius: '4px', cursor: 'pointer', fontWeight: 800, fontSize: '0.9rem', color: '#1e293b' }}
+          >
+            +
+          </button>
+          <span style={{ fontSize: '0.68rem', color: '#94a3b8', marginLeft: '0.3rem' }}>
+            (or Ctrl + Pinch Touchpad)
+          </span>
+        </div>
       </div>
+
       {intro && <p className="storyboard-intro"><RichText text={intro} /></p>}
-      <div className={`storyboard-grid grid-cols-${columns}`}>
-        {panels.map((p, idx) => (
-          <div key={idx} className={`storyboard-panel-card comic-story-cell ${p.fullWidth || p.hero ? 'full-width-panel' : ''}`}>
-            <div className="panel-card-top comic-context-bar">
-              <div>
-                
-                <span className="panel-phase-title comic-context-title">{p.title}</span>
-              </div>
-              {p.time && <span className="panel-time-tag comic-context-time">{p.time}</span>}
-            </div>
-              {p.dialogues && p.dialogues.length > 0 && !p.embeddedBubbles && (
-                <div className="comic-balloon-container">
-                  {p.dialogues.map((d, dIdx) => (
-                    <div key={dIdx} className={`comic-speech-balloon ${d.reply ? 'reply ' : ''}speaker-${d.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
-                      <div className="balloon-header">
-                        <span className="balloon-avatar">{d.speaker === 'Akshay' ? '👨‍💻' : d.speaker === 'Sameer' ? '🧘‍♂️' : d.speaker === 'Fellow Student' ? '👩‍🎓' : '👤'}</span>
-                        <strong className="balloon-speaker-name">{d.speaker?.toUpperCase()}</strong>
-                      </div>
-                      <p className="balloon-text">"{d.speech}"</p>
-                      <div className={`balloon-tail ${d.reply ? 'reply' : ''}`} />
-                    </div>
-                  ))}
+
+      <div
+        ref={gridContainerRef}
+        className={`storyboard-grid grid-cols-${columns}`}
+        style={{
+          transformOrigin: 'top center',
+          zoom: zoomLevel !== 100 ? `${zoomLevel}%` : undefined
+        }}
+      >
+        {panels.map((p, idx) => {
+          const isFullWidth = p.fullWidth || p.hero || p.layout === 'full'
+
+          return (
+            <div
+              key={idx}
+              className={`storyboard-panel-card comic-story-cell ${isFullWidth ? 'full-width-panel' : ''}`}
+              style={{
+                cursor: 'pointer'
+              }}
+              onClick={() => {
+                setLightboxPanel(p)
+                setLightboxZoom(100)
+              }}
+              title="Click panel to open full-resolution Lightbox"
+            >
+              <div className="panel-card-top comic-context-bar">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ background: '#0284c7', color: '#ffffff', fontSize: '0.62rem', fontWeight: 800, padding: '0.12rem 0.4rem', borderRadius: '3px' }}>
+                    BEAT {idx + 1}
+                  </span>
+                  <span className="panel-phase-title comic-context-title">{p.title}</span>
                 </div>
-              )}
-              {p.dialogue && !p.dialogues && !p.embeddedBubbles && (
-                <div className="comic-balloon-container">
-                  <div className={`comic-speech-balloon speaker-${p.dialogue.speaker?.toLowerCase().replace(/\s+/g, '-')}`}>
-                    <div className="balloon-header">
-                      <span className="balloon-avatar">{p.dialogue.speaker === 'Akshay' ? '👨‍💻' : p.dialogue.speaker === 'Sameer' ? '🧘‍♂️' : p.dialogue.speaker === 'Fellow Student' ? '👩‍🎓' : '👤'}</span>
-                      <strong className="balloon-speaker-name">{p.dialogue.speaker?.toUpperCase()}</strong>
-                    </div>
-                    <p className="balloon-text">"{p.dialogue.speech}"</p>
-                    <div className="balloon-tail" />
-                  </div>
-                  {p.dialogue.replySpeaker && (
-                    <div className={`comic-speech-balloon reply speaker-${p.dialogue.replySpeaker?.toLowerCase().replace(/\s+/g, '-')}`}>
-                      <div className="balloon-header">
-                        <span className="balloon-avatar">{p.dialogue.replySpeaker === 'Akshay' ? '👨‍💻' : p.dialogue.replySpeaker === 'Sameer' ? '🧘‍♂️' : p.dialogue.replySpeaker === 'Fellow Student' ? '👩‍🎓' : '👤'}</span>
-                        <strong className="balloon-speaker-name">{p.dialogue.replySpeaker?.toUpperCase()}</strong>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  {p.time && <span className="panel-time-tag comic-context-time">{p.time}</span>}
+                  <span style={{ fontSize: '0.72rem', color: '#94a3b8' }} title="Click to view full screen">⛶</span>
+                </div>
+              </div>
+
+              {p.image && (
+                <div className="panel-art-frame">
+                  <div style={{ position: 'relative', width: '100%', lineHeight: 0, overflow: 'hidden', background: '#0f172a' }}>
+                    <img
+                      src={p.image.src || p.image.file || p.image}
+                      alt={p.image.alt || p.title || 'Comic scene'}
+                      className="panel-art-image"
+                      loading="lazy"
+                    />
+
+                    {/* Inside-Image Speech Balloons (Floating strictly within Top 22% negative ceiling) */}
+                    {(p.dialogues || p.dialogue) && (
+                      <div className="panel-embedded-balloons-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+                        {(p.dialogues || (p.dialogue ? [p.dialogue, p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null].filter(Boolean) : [])).map((d, dIdx) => {
+                          const isAkshay = d.speaker?.toLowerCase().includes('akshay')
+                          const isSameer = d.speaker?.toLowerCase().includes('sameer')
+                          const isReply = Boolean(d.reply) || (!isAkshay && dIdx > 0)
+                          const alignLeft = !isReply
+                          const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
+                          const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : d.speaker?.toUpperCase()
+
+                          // Top offset stays strictly within top 4% to 8% to clear characters
+                          const topOffset = dIdx === 0 ? '4%' : alignLeft ? '5%' : '5%'
+                          const maxWidth = isFullWidth ? '32%' : '44%'
+
+                          return (
+                            <div
+                              key={dIdx}
+                              style={{
+                                position: 'absolute',
+                                top: topOffset,
+                                left: alignLeft ? '2.5%' : 'auto',
+                                right: alignLeft ? 'auto' : '2.5%',
+                                maxWidth,
+                                background: 'rgba(255, 255, 255, 0.96)',
+                                backdropFilter: 'blur(8px)',
+                                border: `2px solid ${accentColor}`,
+                                borderRadius: '10px',
+                                padding: '0.4rem 0.65rem',
+                                boxShadow: '0 6px 18px rgba(0, 0, 0, 0.28)',
+                                pointerEvents: 'auto',
+                                zIndex: 10
+                              }}
+                            >
+                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.15rem' }}>
+                                <span style={{
+                                  background: accentColor,
+                                  color: '#ffffff',
+                                  fontSize: '0.62rem',
+                                  fontWeight: 800,
+                                  padding: '0.08rem 0.32rem',
+                                  borderRadius: '3px',
+                                  letterSpacing: '0.04em'
+                                }}>
+                                  {tagLabel}
+                                </span>
+                              </div>
+                              <p style={{
+                                margin: 0,
+                                fontSize: 'clamp(0.68rem, 0.95vw, 0.82rem)',
+                                lineHeight: 1.34,
+                                color: '#0f172a',
+                                fontStyle: 'italic',
+                                fontWeight: 600
+                              }}>
+                                "{d.speech}"
+                              </p>
+
+                              {/* Directional Pointer Tail */}
+                              <div style={{
+                                position: 'absolute',
+                                bottom: '-8px',
+                                left: alignLeft ? '18px' : 'auto',
+                                right: alignLeft ? 'auto' : '18px',
+                                width: 0,
+                                height: 0,
+                                borderLeft: '7px solid transparent',
+                                borderRight: '7px solid transparent',
+                                borderTop: `8px solid ${accentColor}`
+                              }} />
+                              <div style={{
+                                position: 'absolute',
+                                bottom: '-5px',
+                                left: alignLeft ? '19px' : 'auto',
+                                right: alignLeft ? 'auto' : '19px',
+                                width: 0,
+                                height: 0,
+                                borderLeft: '6px solid transparent',
+                                borderRight: '6px solid transparent',
+                                borderTop: '6px solid #ffffff'
+                              }} />
+                            </div>
+                          )
+                        })}
                       </div>
-                      <p className="balloon-text">"{p.dialogue.replySpeech}"</p>
-                      <div className="balloon-tail reply" />
-                    </div>
+                    )}
+                  </div>
+                  {p.image.caption && (
+                    <div className="panel-art-caption">{p.image.caption}</div>
                   )}
                 </div>
               )}
-            {p.image && (
-              <div className="panel-art-frame">
-                <img
-                  src={p.image.src || p.image.file || p.image}
-                  alt={p.image.alt || p.title || 'Comic scene'}
-                  className="panel-art-image"
-                  loading="lazy"
-                />
-                {p.image.caption && (
-                  <div className="panel-art-caption">{p.image.caption}</div>
+
+              <div className="panel-card-body" onClick={(e) => e.stopPropagation()}>
+                {p.scene && (
+                  <div className="panel-scene-box">
+                    <span className="panel-label">Scene & Action:</span>
+                    <p className="panel-scene-text"><RichText text={p.scene} /></p>
+                  </div>
+                )}
+                {p.realization && (
+                  <div className="panel-realization-box comic-takeaway-bar">
+                    <span className="comic-takeaway-icon">💡</span>
+                    <div>
+                      <span className="panel-label">The Core Wire Lesson: </span>
+                      <span className="panel-realization-text"><RichText text={p.realization} /></span>
+                    </div>
+                  </div>
                 )}
               </div>
-            )}
-            <div className="panel-card-body">
-              {p.scene && (
-                <div className="panel-scene-box">
-                  <span className="panel-label">Scene & Action:</span>
-                  <p className="panel-scene-text"><RichText text={p.scene} /></p>
-                </div>
-              )}
-              {p.realization && (
-                <div className="panel-realization-box comic-takeaway-bar">
-                  <span className="comic-takeaway-icon">💡</span>
-                  <div>
-                    <span className="panel-label">The Core Wire Lesson: </span>
-                    <span className="panel-realization-text"><RichText text={p.realization} /></span>
-                  </div>
-                </div>
-              )}
+            </div>
+          )
+        })}
+      </div>
+
+      {/* FULLSCREEN LIGHTBOX MODAL WITH TOUCHPAD / WHEEL ZOOM */}
+      {lightboxPanel && (
+        <div
+          className="comic-lightbox-backdrop"
+          style={{
+            position: 'fixed',
+            inset: 0,
+            background: 'rgba(15, 23, 42, 0.94)',
+            backdropFilter: 'blur(10px)',
+            zIndex: 9999,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '1.5rem'
+          }}
+          onClick={() => setLightboxPanel(null)}
+        >
+          {/* Lightbox Toolbar */}
+          <div
+            style={{
+              position: 'absolute',
+              top: '1.25rem',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.75rem',
+              background: '#1e293b',
+              padding: '0.5rem 1rem',
+              borderRadius: '999px',
+              border: '1px solid #334155',
+              zIndex: 10000
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span style={{ color: '#f8fafc', fontSize: '0.85rem', fontWeight: 700 }}>
+              {lightboxPanel.title}
+            </span>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', borderLeft: '1px solid #475569', paddingLeft: '0.75rem' }}>
+              <button
+                type="button"
+                onClick={() => setLightboxZoom((z) => Math.max(50, z - 20))}
+                style={{ background: '#334155', color: '#fff', border: 'none', width: '28px', height: '28px', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}
+              >
+                −
+              </button>
+              <span style={{ color: '#38bdf8', fontSize: '0.8rem', fontWeight: 700, minWidth: '45px', textAlign: 'center' }}>
+                {lightboxZoom}%
+              </span>
+              <button
+                type="button"
+                onClick={() => setLightboxZoom((z) => Math.min(220, z + 20))}
+                style={{ background: '#334155', color: '#fff', border: 'none', width: '28px', height: '28px', borderRadius: '4px', cursor: 'pointer', fontWeight: 700 }}
+              >
+                +
+              </button>
+              <button
+                type="button"
+                onClick={() => setLightboxPanel(null)}
+                style={{ background: '#ef4444', color: '#fff', border: 'none', padding: '0.2rem 0.65rem', borderRadius: '4px', cursor: 'pointer', fontWeight: 700, marginLeft: '0.5rem', fontSize: '0.78rem' }}
+              >
+                ✕ Close (Esc)
+              </button>
             </div>
           </div>
-        ))}
-      </div>
+
+          {/* Expanded Image View */}
+          <div
+            style={{
+              maxWidth: '92vw',
+              maxHeight: '82vh',
+              overflow: 'auto',
+              borderRadius: '8px',
+              boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={lightboxPanel.image?.src || lightboxPanel.image?.file || lightboxPanel.image}
+              alt={lightboxPanel.title}
+              style={{
+                width: `${lightboxZoom}%`,
+                height: 'auto',
+                display: 'block',
+                transition: 'width 0.15s ease'
+              }}
+            />
+          </div>
+        </div>
+      )}
     </section>
   )
 }
@@ -1546,6 +1794,12 @@ export function Block({ block: b, staticMode = false }) {
     case 'source-note': return <aside className="source-note"><strong>{b.label || 'Source note'}</strong><p><RichText text={b.claim}/></p>{b.url && <a href={b.url} target="_blank" rel="noreferrer">{b.url}</a>}{b.verifiedThrough && <small>Verified through {b.verifiedThrough}</small>}</aside>
     case 'question': return <section className={`pedagogy-card question-card ${b.kind || 'practice'}`}><span className="pedagogy-label">{b.kind === 'verified-pyq' ? 'VERIFIED PAST-YEAR QUESTION' : 'PRACTICE QUESTION'}</span><div className="question-meta">{[b.exam,b.year,b.paper,b.marks && `${b.marks} marks`].filter(Boolean).map(item=><span key={item}>{item}</span>)}</div><h3>{b.prompt}</h3><Reveal label="Show model answer" staticMode={staticMode}><p><RichText text={b.answer}/></p>{b.marking?.length > 0 && <ul>{b.marking.map(point=><li key={point}><RichText text={point}/></li>)}</ul>}{b.sourceUrl && <a href={b.sourceUrl} target="_blank" rel="noreferrer">Official source</a>}</Reveal></section>
     case 'activity': return <section className="pedagogy-card activity-card"><span className="pedagogy-label">ACTIVITY</span><h3>{b.title}</h3>{b.materials?.length > 0 && <p><strong>Materials:</strong> {b.materials.join(', ')}</p>}<ol>{b.steps.map(step=><li key={step}><RichText text={step}/></li>)}</ol>{b.safety && <p className="activity-safety"><strong>Safety:</strong> <RichText text={b.safety}/></p>}</section>
+    case 'arc-start': return <section className="arc-start"><div className="arc-start-top"><span className="eyebrow">LEARNING ARC</span><span className="arc-count">{b.total} connected steps</span></div><h2>{b.arcTitle}</h2><h3>{b.title}</h3><p><RichText text={b.text}/></p><div className="arc-start-grid"><div><strong>{b.weKnowLabel || 'Starting tools'}</strong><ul>{(b.weKnow || []).map(x=><li key={x}><RichText text={x}/></li>)}</ul></div><div><strong>{b.weNeedLabel || 'What this arc will unlock'}</strong><ul>{(b.weNeed || []).map(x=><li key={x}><RichText text={x}/></li>)}</ul></div></div><div className="arc-meter" aria-label={`Step ${b.step} of ${b.total}`}>{Array.from({length:b.total},(_,index)=><span className={index < b.step ? 'complete' : ''} key={index}/>)}</div></section>
+    case 'arc-progress': return <section className="arc-progress" aria-label={`${b.arcTitle}, step ${b.step} of ${b.total}`}><div><span>{b.arcTitle}</span><strong>{b.step} of {b.total} complete</strong></div><div className="arc-meter">{Array.from({length:b.total},(_,index)=><span className={index < b.step ? 'complete' : ''} key={index}/>)}</div><p><strong>Now:</strong> {b.currentFocus}. <RichText text={b.text}/></p></section>
+    case 'bytecode-map': return <section className="bytecode-map" aria-label={b.title || 'Python source code mapped to bytecode actions'}><div className="bytecode-version">{b.version}</div>{b.groups.map((group,groupIndex)=><article className="bytecode-group" key={group.source}><div className="bytecode-source"><span>SOURCE {groupIndex+1}</span><code>{group.source}</code></div><div className="bytecode-down" aria-hidden="true">↓</div><ol className="bytecode-actions">{group.actions.map((action,index)=><li key={`${action.opcode}-${index}`}><span className="bytecode-step">{index+1}</span><div><code>{action.opcode}</code><strong>{action.action}</strong>{action.state && <p>{action.state}</p>}</div></li>)}</ol></article>)}{b.command && <p className="bytecode-command"><span>TRY IT</span><code>{b.command}</code></p>}{b.caption && <p className="bytecode-caption">{b.caption}</p>}</section>
+    case 'challenge': return <section className="power-challenge"><div className="challenge-rank"><span>SKILL TRIAL</span><strong>{b.rank}</strong></div><div className="challenge-copy"><h2>{b.title}</h2><p><RichText text={b.brief}/></p><ol>{b.steps.map(step=><li key={step}><RichText text={step}/></li>)}</ol><p className="win-condition"><strong>Win condition:</strong> <RichText text={b.winCondition}/></p>{b.stretch && <p className="stretch-goal"><strong>Stretch move:</strong> <RichText text={b.stretch}/></p>}</div></section>
+    case 'victory': return <section className="victory-panel"><div className="victory-mark" aria-hidden="true">✓</div><div><span>RANK EARNED</span><h2>{b.rank}</h2><p>You proved that you can:</p><ul>{b.proof.map(item=><li key={item}><RichText text={item}/></li>)}</ul><p className="next-target"><strong>Next target:</strong> <RichText text={b.next}/></p></div></section>
+    case 'arithmetic-exercise': return <ArithmeticExercise staticMode={staticMode}/>
     case 'reflection': return <section className="pedagogy-card reflection-card"><span className="pedagogy-label">OPTIONAL REFLECTION</span><h3>{b.prompt}</h3><p>{b.permission || 'You may pause, skip this exercise or return later.'}</p>{b.guidance?.length > 0 && <Reveal label="Show gentle guidance" staticMode={staticMode}><ul>{b.guidance.map(point=><li key={point}><RichText text={point}/></li>)}</ul></Reveal>}</section>
     case 'safety-notice': return <aside className="safety-notice"><strong>{b.title || 'Important support note'}</strong><p><RichText text={b.text}/></p>{b.resources?.map(([label,url])=><a href={url} key={url} target="_blank" rel="noreferrer">{label}</a>)}</aside>
     default: return null

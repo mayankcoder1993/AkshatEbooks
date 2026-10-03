@@ -5,7 +5,7 @@ import { buildBookDocument, setImageLoader } from '../src/export/docx.js'
 import { loadBookPackage } from '../src/catalog/generated/registry.js'
 
 const publication = await loadBookPackage('python-absolute-beginners', 'edition-01')
-if (publication.BOOK.editionId !== 'edition-01' || publication.lessons.length !== 4) throw new Error('Edition registry did not load the expected current book')
+if (publication.BOOK.editionId !== 'edition-01' || publication.lessons.length !== 8) throw new Error('Edition registry did not load the expected current book')
 
 const synthetic = {
   BRAND: publication.BRAND,
