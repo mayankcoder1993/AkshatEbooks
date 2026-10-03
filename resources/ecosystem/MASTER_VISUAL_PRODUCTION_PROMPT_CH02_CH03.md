@@ -642,3 +642,313 @@ Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly border
 | **Ch 03** | Scene 4 | Panel 46 | `action-beat` | Sameer sets down chai with ominous clink | Sameer (*"Four toy requests"*) | ✅ Prompt Ready |
 | **Ch 03** | Scene 4 | Panel 47 | `thought-bubble` | Akshay's unearned overconfidence | Akshay (*"Why make such a fuss?"*) | ✅ Prompt Ready |
 | **Ch 03** | Scene 4 | Panel 48 | `cliffhanger-panel` | 500-book delivery truck in pouring rain | Narrator caption (*"500 books by dawn"*) | ✅ Prompt Ready |
+
+---
+
+## 🛠️ SECTION 4: STEP-BY-STEP TECHNICAL APPLICATION SCREENS (WAYS 1 TO 4)
+
+> 🛑 **TECHNICAL SCREEN PRODUCTION PROTOCOL:**
+> - **Aspect Ratio:** 16:9 widescreen (`--ar 16:9`), full bleed, strictly borderless.
+> - **Zero Human Figures, Zero Tribal Decor:** Pure developer workstations, real dark-mode code editors, terminal consoles, and Postman interfaces.
+> - **Monospace Vector Typography:** `JetBrains Mono` or `Fira Code`.
+> - **Pedagogy:** Code is built **step-by-step in small atomic chunks (2 to 5 lines)**, explaining exactly what each chunk achieves and showing wire/memory consequences.
+
+---
+
+### WAY 1: DUAL-STACK CODE COMPARISON (Node.js Express vs Python FastAPI)
+
+#### Screen W1.1 · Byte Stream Ingestion: Express Middleware vs FastAPI Pydantic (Chapter 01)
+- **Asset Filename:** `app_screen_w1_ch01_byte_stream_express_vs_fastapi.png`
+- **Application Display:** Split-pane dark-mode code editor (VS Code on left, PyCharm on right).
+  - **Left Window (Node.js Express v2):**
+    ```javascript
+    const express = require('express');
+    const app = express();
+    
+    // 🔍 STEP-BY-STEP ADDITION 1: Explicit Byte-Stream Middleware
+    // Assembles incoming TCP chunks into req.body before route handlers execute
+    app.use(express.json());
+    
+    app.post('/api/v1/admitcards', (req, res) => {
+      const { name, rollNumber } = req.body;
+      return res.status(201).json({ status: "success", card: req.body });
+    });
+    ```
+  - **Right Window (Python FastAPI Equivalent):**
+    ```python
+    from fastapi import FastAPI, status
+    from pydantic import BaseModel, Field
+    app = FastAPI()
+    
+    # 🔍 STEP-BY-STEP ADDITION 1: Declarative Schema Validation
+    # Intercepts raw ASGI stream and enforces types before handler executes
+    class AdmitCardSchema(BaseModel):
+        name: str = Field(..., min_length=2)
+        rollNumber: str
+    
+    @app.post("/api/v1/admitcards", status_code=status.HTTP_201_CREATED)
+    async def create_admit_card(card: AdmitCardSchema):
+        return {"status": "success", "card": card}
+    ```
+- **Diagnostic Annotations:**
+  - **Left Window Callout (Green Box):** *"Node.js: Imperative Assembly — Omitting app.use(express.json()) leaves req.body undefined!"*
+  - **Right Window Callout (Cyan Box):** *"FastAPI: Declarative Invariant — Automatic 422 Unprocessable Entity generated if payload violates schema."*
+  - **Bottom Banner (Amber Note):** *"Why Node.js in this book? Postman's assertion sandbox is powered natively by JavaScript; learning JS on the server creates an unbroken mental bridge to test scripts."*
+- **Flow AI / Midjourney Prompt:**
+```text
+Full-bleed 16:9 dual software application screenshot, modern dark-mode development environments side-by-side with zero decorative borders, zero humans, zero folk art. Left side: VS Code editor showing clean Node.js Express route handler with an emerald-green highlighted line 'app.use(express.json())' and an annotated green badge 'Imperative Middleware'. Right side: PyCharm editor showing Python FastAPI code with a Pydantic schema model highlighted in cyan with an annotated badge 'Declarative Pydantic Validation'. Terminal output bar across the bottom displaying 'HTTP/1.1 201 Created' in green. Crisp JetBrains Mono typography, authentic code syntax highlighting, clean technical diagrammatic style. --ar 16:9
+```
+
+---
+
+#### Screen W1.2 · Defensive Route Guarding: Express Manual Guard vs FastAPI Query Boundary (Chapter 02)
+- **Asset Filename:** `app_screen_w1_ch02_defensive_guard_express_vs_fastapi.png`
+- **Application Display:** Side-by-side comparison of handling missing query strings.
+  - **Left Window (Node.js Express Fail-Fast Guard):**
+    ```javascript
+    router.get('/v1/transit/routes', (req, res) => {
+      const { route } = req.query;
+      
+      // 🛡️ STEP-BY-STEP ADDITION 2: Fail-Fast Defensive Guard (4 Lines)
+      // Catches undefined, empty string "", and whitespace " " before calling business logic
+      if (!route || route.trim() === '') {
+        return res.status(400).json({
+          error: "Bad Request",
+          message: "Query parameter 'route' is required and cannot be whitespace"
+        });
+      }
+      return res.status(200).json(getRouteData(route.trim()));
+    });
+    ```
+  - **Right Window (Python FastAPI Query Validation):**
+    ```python
+    from fastapi import FastAPI, Query, status
+    
+    @app.get("/v1/transit/routes", status_code=status.HTTP_200_OK)
+    async def get_transit_route(
+        # 🛡️ STEP-BY-STEP ADDITION 2: Declarative Boundary Guard
+        # Ellipsis (...) marks it required; min_length=1 rejects empty strings!
+        route: str = Query(..., min_length=1, description="Transit route key")
+    ):
+        return get_route_data(route.strip())
+    ```
+- **Diagnostic Annotations:**
+  - **Left Annotation:** *"Express: Returns 400 Bad Request in 4ms. Protects worker from fatal TypeError crash on route.trim()."*
+  - **Right Annotation:** *"FastAPI: Returns 422 Unprocessable Entity in 3ms. Rejection occurs at framework router boundary before user handler executes."*
+- **Flow AI / Midjourney Prompt:**
+```text
+Full-bleed 16:9 split code comparison interface. Left side: VS Code editor showing Express.js defensive guard code with 'res.status(400)' highlighted in emerald green with callout 'Manual Fail-Fast'. Right side: PyCharm editor showing Python FastAPI code with 'Query(..., min_length=1)' highlighted in cyan with callout 'Declarative Boundary Guard'. Beneath each editor, a terminal status bar displays HTTP response metrics: Left shows '400 Bad Request (4ms)' in amber, Right shows '422 Unprocessable Entity (3ms)' in cyan. Both status bars display 'Server Process Healthy (0 Crashes)' in green. Clean modern software IDE screenshot, high-contrast syntax highlighting. --ar 16:9
+```
+
+---
+
+### WAY 2: THREE-TIER PIPELINE FLOW (Physical Hardware, Memory & Process Stack)
+
+#### Screen W2.1 · The Anatomy of Missing vs Empty vs Whitespace (Chapter 02)
+- **Asset Filename:** `app_screen_w2_ch02_memory_stack_three_empties.png`
+- **Application Display:** 3-Column Architectural Memory Allocation Diagram.
+  - **Column 1: `undefined` (Parameter Omitted):**
+    - Input: `GET /v1/transit/routes`
+    - TCP Wire Buffer: `GET /v1/transit/routes HTTP/1.1\r\nHost: localhost\r\n\r\n`
+    - Node.js V8 Heap State: Memory slot `req.query.route` $\to$ **UNALLOCATED / PRIMITIVE `undefined`**.
+    - Operation: `undefined.trim()` $\to$ **CRASH!** `TypeError: Cannot read properties of undefined (reading 'trim')` $\to$ **`HTTP 500`**.
+  - **Column 2: `""` (Empty String):**
+    - Input: `GET /v1/transit/routes?route=`
+    - TCP Wire Buffer: `route=` (Key present, 0 value bytes).
+    - Node.js V8 Heap State: Memory slot allocated $\to$ String Object of length `0`.
+    - Operation: `"".trim()` returns `""` $\to$ Passes trim, but fails downstream database key lookup $\to$ **`HTTP 404 / 400`**.
+  - **Column 3: `" "` (Whitespace String):**
+    - Input: `GET /v1/transit/routes?route=%20`
+    - TCP Wire Buffer: `route=%20` (Hex `0x20` space byte).
+    - Node.js V8 Heap State: Memory slot allocated $\to$ String Object of length `1`.
+    - Operation: `" ".trim()` returns `""` (length `0`) $\to$ Fails if trimmed check is active!
+- **Diagnostic Annotations:**
+  - Red Warning Circle on Column 1: *"The Fatal Trap: undefined is NOT an object; calling methods on it kills the thread!"*
+  - Golden Savior Box: *"The Golden Rule: Check existence first (`!route`), then check trimmed length (`route.trim() === ''`)."*
+- **Flow AI / Midjourney Prompt:**
+```text
+Full-bleed 16:9 architectural systems diagram, modern software memory visualization. Three distinct vertical columns on a slate-gray background: Column 1 'State A: Undefined (Omitted Parameter)', Column 2 'State B: Empty String (\"\")', Column 3 'State C: Whitespace (\" \")'. In Column 1, a memory slot points to a null pointer with an explosive crimson warning badge (#E53935) showing 'TypeError on .trim()'. Columns 2 and 3 show allocated memory blocks with string lengths. At the bottom, a high-contrast wire buffer visualizer shows raw hex byte packets. Clear typography, JetBrains Mono font, sharp vector arrows, clean technical educational infographic. --ar 16:9
+```
+
+---
+
+#### Screen W2.2 · The Four Surfaces of Postman: Directional Execution Lifecycle (Chapter 03)
+- **Asset Filename:** `app_screen_w2_ch03_postman_four_surfaces_lifecycle.png`
+- **Application Display:** Postman 2026 UI mapped with a glowing animated execution circuit.
+  - **Surface 1: Request Builder (Top-Left, Cyan Border):**
+    - Method `GET`, URL `http://localhost:5050/v1/transit/routes?route=campus_loop_north`.
+    - Label: `① WHAT YOU SEND (Client Intent)`.
+  - **Surface 2: Network Wire Flight (Center Pipe):**
+    - Physical network packet animation traveling across port 5050.
+  - **Surface 3: Response Viewer (Bottom-Left, Amber Border):**
+    - Status `200 OK`, Latency `86 ms`, Response Body `{"status":"success","coordinates":[...]}`.
+    - Label: `② WHAT THE WIRE RETURNS (Historical Reality)`.
+  - **Surface 4: Tests Sandbox (Top-Right, Indigo Border):**
+    - JavaScript environment running `pm.test` with Chai BDD matchers.
+    - Label: `③ HOW YOU JUDGE (The JavaScript Jury)`.
+  - **Surface 5: Test Results Pane (Bottom-Right, Green Border):**
+    - `PASS: Status is 200`, `PASS: Coordinates array length > 0`.
+    - Label: `④ THE FINAL VERDICT (Quality Certification)`.
+- **Diagnostic Annotations:**
+  - Numbered circular badges ① $\to$ ② $\to$ ③ $\to$ ④.
+  - Invariant Callout: *"CRITICAL LIFECYCLE: The Tests sandbox (③) executes strictly AFTER the response returns (②). You cannot modify an in-flight packet from test scripts!"*
+- **Flow AI / Midjourney Prompt:**
+```text
+Full-bleed 16:9 software interface diagram, Postman application UI mapped with a glowing sequential execution circuit. Four distinct application quadrants are highlighted with glowing neon borders: Quadrant 1 (Top-Left, Cyan) '1: Request Builder', Quadrant 2 (Bottom-Left, Amber) '2: Response Viewer', Quadrant 3 (Top-Right, Indigo) '3: Tests Sandbox', and Quadrant 4 (Bottom-Right, Green) '4: Test Results'. An illuminated pulse arrow connects Quadrant 1 down to Quadrant 2, then up to Quadrant 3, and down to Quadrant 4, illustrating the strict post-response execution order. Monospace typography, razor-sharp vector UI rendering, high-tech dark theme. --ar 16:9
+```
+
+---
+
+### WAY 3: INTERACTIVE POSTMAN DIAGNOSTIC WORKBENCH (Tooling In Action)
+
+#### Screen W3.1 · The Polite 200 Trap vs Honest 400 Bad Request (Chapter 02)
+- **Asset Filename:** `app_screen_w3_ch02_polite_200_vs_honest_400.png`
+- **Application Display:** Split-pane Postman response comparison.
+  - **Pane A (The Lie · Polite 200):**
+    - Status Badge: `200 OK` in glowing Emerald Green (`#10B981`).
+    - Body:
+      ```json
+      {
+        "status": "error",
+        "error_code": 4041,
+        "message": "Transit route does not exist"
+      }
+      ```
+    - Pointer: Labeled *"❌ THE DECEPTIVE CONTRACT: HTTP Status lies; automated runners report green!"*
+  - **Pane B (The Truth · Honest 400):**
+    - Status Badge: `400 Bad Request` in Warning Amber (`#F59E0B`).
+    - Body:
+      ```json
+      {
+        "error": "Bad Request",
+        "message": "Query parameter 'route' is required"
+      }
+      ```
+    - Pointer: Labeled *"✅ THE HONEST CONTRACT: Status accurately reflects client error at the boundary."*
+- **Flow AI / Midjourney Prompt:**
+```text
+Full-bleed 16:9 UI screenshot of Postman response pane comparing two API responses side-by-side. Left side: 'The Deceptive 200 OK' showing a glowing green 200 status badge above an error JSON payload '{\"status\": \"error\", \"message\": \"route not found\"}' with a red warning arrow labeled 'The Lie: False Success'. Right side: 'The Honest 400 Bad Request' showing an amber 400 status badge above a clean validation error JSON with a green checkmark arrow labeled 'The Truth: Honest Rejection'. High-contrast dark theme Postman UI, crisp typography, professional technical documentation graphic. --ar 16:9
+```
+
+---
+
+#### Screen W3.2 · The Red Bar Reversal: Toy Test vs Matcher with Teeth (Chapter 03)
+- **Asset Filename:** `app_screen_w3_ch03_toy_assertion_vs_red_bar.png`
+- **Application Display:** Before-and-After Assertion Engineering.
+  - **Before (Top Half · The Toy Test Passing on Empty Data):**
+    - Test Script: `pm.test("Status is 200", () => { pm.response.to.have.status(200); });`.
+    - Response Body: `{"route":"campus_loop","coordinates":[]}`.
+    - Test Result: `PASS (1/1)` in green. (False Confidence!).
+  - **After (Bottom Half · The Assertion with Teeth Exploding Red):**
+    - Test Script:
+      ```javascript
+      pm.test("Route contains active GPS waypoints", () => {
+          const data = pm.response.json();
+          pm.expect(data.coordinates).to.be.an("array");
+          pm.expect(data.coordinates.length).to.be.above(0); // 🦷 STEP-BY-STEP ADDITION: Teeth!
+      });
+      ```
+    - Test Result: Bold, clinical **RED BAR (`#E53935`)**:
+      `FAIL: Route contains active GPS waypoints | AssertionError: expected 0 to be above 0`.
+- **Diagnostic Annotations:**
+  - Gold Star on Red Bar: *"THE RED PROOF: A test that has never failed has never proven anything!"*
+- **Flow AI / Midjourney Prompt:**
+```text
+Full-bleed 16:9 Postman interface screenshot showing a dramatic before-and-after assertion comparison. Top half: A superficial test checking only status 200 showing a green PASS badge while the JSON body displays an empty array 'coordinates: []'. Bottom half: A deep Chai assertion verifying 'coordinates.length > 0' erupting in a bold, clinical scarlet-red failure banner (#E53935) with 'AssertionError: expected 0 to be above 0'. An illuminated gold badge highlights the red bar with label 'The Honest Red Bar: The Watchdog is Awake'. Dark theme, crisp text, authentic software UI design. --ar 16:9
+```
+
+---
+
+### WAY 4: HEADLESS NEWMAN CI/CD PIPELINE (Terminal Automation)
+
+#### Screen W4.1 · The Headless Watchdog: Newman CLI Execution Matrix (Chapter 03)
+- **Asset Filename:** `app_screen_w4_ch03_newman_cli_execution_matrix.png`
+- **Application Display:** Full-screen dark-mode developer terminal (`JetBrains Mono` font).
+  - **Execution Command:**
+    ```bash
+    $ newman run transit-suite.postman_collection.json -e campus-local.postman_environment.json
+    ```
+  - **Newman ASCII Table Summary:**
+    ```text
+    ┌─────────────────────────┬─────────────────────┬────────────────────┐
+    │                         │            executed │             failed │
+    ├─────────────────────────┼─────────────────────┼────────────────────┤
+    │              iterations │                   1 │                  0 │
+    │                requests │                   4 │                  0 │
+    │            test-scripts │                   4 │                  0 │
+    │      prerequest-scripts │                   0 │                  0 │
+    │              assertions │                  10 │                  0 │
+    ├─────────────────────────┼─────────────────────┼────────────────────┤
+    │   total run-duration: 86ms                      │  status: PASS      │
+    └─────────────────────────────────────────────────┴────────────────────┘
+    ```
+  - **Process Exit Code:** `Process completed with exit code 0 (Quality Gate Passed)`.
+- **Diagnostic Annotations:**
+  - Cyan Arrow pointing to `total run-duration: 86ms`.
+  - Green Shield labeled *"Zero UI Overhead: Headless regression runner ready for GitHub Actions CI/CD pipeline."*
+- **Flow AI / Midjourney Prompt:**
+```text
+Full-bleed 16:9 authentic developer terminal console screenshot. Dark charcoal background with crisp JetBrains Mono monospace font. Top line shows command: 'newman run transit-suite.postman_collection.json'. Below, a perfectly formatted ASCII grid summary table displays execution metrics: '4 requests executed, 10 assertions passed, 0 failed, total run-duration: 86ms'. Each sequential HTTP request is listed below the table with emerald green checkmarks (✓) beside each assertion and status pills [200 OK] and [400 Bad Request]. Clean command-line interface, high readability, professional DevOps aesthetic. --ar 16:9
+```
+
+---
+
+## 📋 SECTION 5: COMPLETE COMBINED ASSET AUDIT TABLE (ALL 55 IMAGES)
+
+| Chapter | Asset ID | Type | Focus Beat / Code Invariant | Speakers / Target Stack | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Ch 02** | `ch02_act1_scene01` | Narrative Panel | Wide War Room transit outage establishing | Ambient War Room Tension | ✅ Ready |
+| **Ch 02** | `ch02_act1_scene02` | Narrative Panel | Devs and Transit Lead arguing at whiteboard | Operator, Frontend, Backend | ✅ Ready |
+| **Ch 02** | `ch02_act1_scene03` | Narrative Panel | Akshay defensive speed-clicking at console | Akshay (*"Works on my machine!"*) | ✅ Ready |
+| **Ch 02** | `ch02_act1_scene04` | Narrative Panel | Sameer steps out of archway with chai | Sameer, Akshay | ✅ Ready |
+| **Ch 02** | `ch02_act1_scene05` | Narrative Panel | Sameer points directly at query string | Sameer (*"Show me the wire"*), Akshay | ✅ Ready |
+| **Ch 02** | `ch02_act1_scene06` | Narrative Panel | Side-by-side URL wire comparison | Akshay, Sameer | ✅ Ready |
+| **Ch 02** | `ch02_act2_scene07` | Narrative Panel | Sameer draws 3 columns on whiteboard | Sameer (*"Three ways to be empty"*) | ✅ Ready |
+| **Ch 02** | `ch02_act2_scene08` | Narrative Panel | Akshay notes memory allocations in graph book | Akshay (*"Undefined vs null vs empty"*) | ✅ Ready |
+| **Ch 02** | `ch02_act2_scene09` | Narrative Panel | Akshay replays the three edge cases | Concentrating squint | ✅ Ready |
+| **Ch 02** | `ch02_act2_scene10` | Narrative Panel | Terminal crimson 500 crash explodes | Akshay (*"TypeError on trim()"*), Sameer | ✅ Ready |
+| **Ch 02** | `ch02_act2_scene11` | Narrative Panel | Sameer cites October 2013 Healthcare.gov | Sameer (*"Same failure shape"*) | ✅ Ready |
+| **Ch 02** | `ch02_act2_scene12` | Narrative Panel | Sameer commands: *"Write the guard"* | Sameer, Akshay | ✅ Ready |
+| **Ch 02** | `ch02_act3_scene13` | Narrative Panel | Akshay sits upright to write defensive guard | Akshay, Sameer observing | ✅ Ready |
+| **Ch 02** | `ch02_act3_scene14` | Narrative Panel | Sameer refuses fallback default data | Akshay, Sameer (*"Never invent data"*) | ✅ Ready |
+| **Ch 02** | `ch02_act3_scene15` | Narrative Panel | Macro typing `if (!route) return 400` | Code editor on screen | ✅ Ready |
+| **Ch 02** | `ch02_act3_scene16` | Narrative Panel | Replaying 400 Bad Request in 4ms | Akshay (*"Process stayed alive!"*) | ✅ Ready |
+| **Ch 02** | `ch02_act3_scene17` | Narrative Panel | Transit wall dispatch map unfreezes | Operator celebrates in background | ✅ Ready |
+| **Ch 02** | `ch02_act3_scene18` | Narrative Panel | Akshay's earned smile of quiet relief | Portrait close-up | ✅ Ready |
+| **Ch 02** | `ch02_act4_scene19` | Narrative Panel | Sameer reviews 1xx-5xx on whiteboard | Sameer (*"Status code taxonomy"*) | ✅ Ready |
+| **Ch 02** | `ch02_act4_scene20` | Narrative Panel | Akshay recites campus status examples | Akshay, Sameer | ✅ Ready |
+| **Ch 02** | `ch02_act4_scene21` | Narrative Panel | Sameer reveals 2xx as the Silent Failure | Sameer (*"The Liar's Parish"*) | ✅ Ready |
+| **Ch 02** | `ch02_act4_scene22` | Narrative Panel | The Polite 200 Trap visual card | Green 200 badge vs Error payload | ✅ Ready |
+| **Ch 02** | `ch02_act4_scene23` | Narrative Panel | Sameer places 10-check test sheet on desk | Sameer (*"Find the lie"*) | ✅ Ready |
+| **Ch 02** | `ch02_act4_scene24` | Narrative Panel | Akshay hooked by the green lie under lamp | Narrator caption (*"Nine hours left"*) | ✅ Ready |
+| **Ch 03** | `ch03_act1_scene25` | Narrative Panel | Systems lab at twilight wide establishing | Ambient Lab Tranquility | ✅ Ready |
+| **Ch 03** | `ch03_act1_scene26` | Narrative Panel | Akshay auditing empty coordinates under lamp | Akshay with drafting pencil | ✅ Ready |
+| **Ch 03** | `ch03_act1_scene27` | Narrative Panel | Akshay outraged at passing empty array | Akshay (*"How can it pass?!"*) | ✅ Ready |
+| **Ch 03** | `ch03_act1_scene28` | Narrative Panel | Sameer explains execution vs truth | Sameer (*"Asserted execution, not truth"*) | ✅ Ready |
+| **Ch 03** | `ch03_act1_scene29` | Narrative Panel | Akshay's wake-up call on industry tests | Akshay (*"Regression suites sleeping"*) | ✅ Ready |
+| **Ch 03** | `ch03_act1_scene30` | Narrative Panel | Sameer introduces Chai matchers with teeth | Sameer, Akshay | ✅ Ready |
+| **Ch 03** | `ch03_act2_scene31` | Narrative Panel | Sameer enforces Red Before Green | Sameer (*"Make it fail first"*) | ✅ Ready |
+| **Ch 03** | `ch03_act2_scene32` | Narrative Panel | Akshay types Chai length assertion | Macro code typing | ✅ Ready |
+| **Ch 03** | `ch03_act2_scene33` | Narrative Panel | Electric triumph of the Red Bar (`#E53935`) | Akshay fist pump, Sameer chai salute | ✅ Ready |
+| **Ch 03** | `ch03_act2_scene34` | Narrative Panel | *"Do not apologize for red!"* | Sameer (*"Proof watchdog is awake"*), Akshay | ✅ Ready |
+| **Ch 03** | `ch03_act2_scene35` | Narrative Panel | Replaying against fixed route (Earned Green) | Akshay (*"Green is earned!"*) | ✅ Ready |
+| **Ch 03** | `ch03_act2_scene36` | Narrative Panel | Sameer cites $460M Knight Capital disaster | Sameer (*"August 2012"*) | ✅ Ready |
+| **Ch 03** | `ch03_act3_scene37` | Narrative Panel | High-angle overview of the 4 Postman surfaces | Sameer with stylus, Akshay | ✅ Ready |
+| **Ch 03** | `ch03_act3_scene38` | Narrative Panel | Akshay sketches 4 quadrants in notebook | Akshay (*"Send, Judge, Return, Verdict"*) | ✅ Ready |
+| **Ch 03** | `ch03_act3_scene39` | Narrative Panel | Sameer teaches post-response timing | Sameer (*"Sandbox runs after response"*) | ✅ Ready |
+| **Ch 03** | `ch03_act3_scene40` | Narrative Panel | Writing deep multi-property schema tests | Macro keyboard and screen | ✅ Ready |
+| **Ch 03** | `ch03_act3_scene41` | Narrative Panel | The 86ms latency badge appears | Akshay (*"Eighty-six milliseconds!"*) | ✅ Ready |
+| **Ch 03** | `ch03_act3_scene42` | Narrative Panel | Sameer locks Dual Contract Invariant | Sameer (*"Automate both sides"*) | ✅ Ready |
+| **Ch 03** | `ch03_act4_scene43` | Narrative Panel | Tight profile: Akshay clicks Run Collection | Optical mouse click, cyan blue glow | ✅ Ready |
+| **Ch 03** | `ch03_act4_scene44` | Narrative Panel | Collection Runner summary dashboard | 4 requests, 10 assertions, 86 ms | ✅ Ready |
+| **Ch 03** | `ch03_act4_scene45` | Narrative Panel | Akshay smug celebration & Lead in doorway | Akshay (*"I've got this mastered!"*), Lead | ✅ Ready |
+| **Ch 03** | `ch03_act4_scene46` | Narrative Panel | Sameer sets down chai with ominous clink | Sameer (*"Four toy requests"*) | ✅ Ready |
+| **Ch 03** | `ch03_act4_scene47` | Narrative Panel | Akshay's unearned overconfidence | Akshay (*"Why make such a fuss?"*) | ✅ Ready |
+| **Ch 03** | `ch03_act4_scene48` | Narrative Panel | 500-book delivery truck in pouring rain | Narrator caption (*"500 books by dawn"*) | ✅ Ready |
+| **Screens** | `app_screen_w1_ch01` | Pure App Screen | Middleware Byte Stream: Express vs FastAPI | Node.js Express vs Python FastAPI | ✅ Ready |
+| **Screens** | `app_screen_w1_ch02` | Pure App Screen | Defensive Route Guard: Express vs FastAPI | Node.js Express vs Python FastAPI | ✅ Ready |
+| **Screens** | `app_screen_w2_ch02` | Pure App Screen | Memory Allocations: Undefined, Empty, Space | V8 Heap Allocation Anatomy | ✅ Ready |
+| **Screens** | `app_screen_w2_ch03` | Pure App Screen | Postman 4 Surfaces Directional Circuit | Postman Request $\to$ Wire $\to$ Tests | ✅ Ready |
+| **Screens** | `app_screen_w3_ch02` | Pure App Screen | The Polite 200 Trap Dissection | Postman 2026 Response Viewer | ✅ Ready |
+| **Screens** | `app_screen_w3_ch03` | Pure App Screen | The Honest Red Bar: Assertions with Teeth | Postman Tests Sandbox / Chai BDD | ✅ Ready |
+| **Screens** | `app_screen_w4_ch03` | Pure App Screen | Headless Newman Matrix Execution in 86ms | Newman CLI / Terminal Console | ✅ Ready |
