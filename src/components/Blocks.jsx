@@ -495,7 +495,7 @@ function ComicWorkbench({
   )
 }
 
-function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns = 2, panels = [] }) {
+function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns = 2, panels = [], realization }) {
   const [zoomLevel, setZoomLevel] = useState(100)
   const [lightboxPanel, setLightboxPanel] = useState(null)
   const [lightboxZoom, setLightboxZoom] = useState(100)
@@ -719,7 +719,7 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
       </div>
 
       {/* ACT CAPSTONE TAKEAWAY (Rendered cleanly once at the end of the Act) */}
-      {(b.realization || panels.find(p => p.actTakeaway)?.realization || panels[panels.length - 1]?.realization) && (
+      {(realization || panels.find(p => p.actTakeaway)?.realization || panels[panels.length - 1]?.realization) && (
         <div
           className="storyboard-act-takeaway"
           style={{
@@ -741,7 +741,7 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
               ACT MILESTONE WIRE LESSON
             </div>
             <p style={{ margin: 0, fontSize: '0.92rem', lineHeight: 1.55, color: '#1e293b', fontWeight: 500 }}>
-              <RichText text={b.realization || panels.find(p => p.actTakeaway)?.realization || panels[panels.length - 1]?.realization} />
+              <RichText text={realization || panels.find(p => p.actTakeaway)?.realization || panels[panels.length - 1]?.realization} />
             </p>
           </div>
         </div>
