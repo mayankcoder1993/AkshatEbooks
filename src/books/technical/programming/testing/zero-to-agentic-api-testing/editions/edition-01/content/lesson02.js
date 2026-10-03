@@ -3,9 +3,11 @@ import wireImg from '../assets/http-wire-anatomy.jpg'
 import crudImg from '../assets/restful-crud-status-guide.jpg'
 
 import ch02Scene1Img from '../assets/ch02-scene-1-transit-crisis.jpg'
-import ch02Scene2Img from '../assets/ch02-scene-2-reproduce-500-crash.jpg'
-import ch02Scene3Img from '../assets/ch02-scene-3-defensive-guard-fix.jpg'
 import ch02Scene4Img from '../assets/ch02-scene-4-dual-wire-verification.jpg'
+import ch02Terminal500Img from '../assets/illustrations/reactions/ch02-terminal-500-red-stack.jpg'
+import ch02Guard400Img from '../assets/illustrations/reactions/ch02-code-editor-400-guard.jpg'
+import ch02AkshayTypingImg from '../assets/illustrations/reactions/ch02-akshay-typing-guard.jpg'
+import ch02SameerSlateImg from '../assets/illustrations/reactions/ch02-sameer-pointing-slate.jpg'
 
 import crash500Svg from '../assets/svgs/ch02-workbench-500-crash.svg'
 import guard400Svg from '../assets/svgs/ch02-workbench-400-guard.svg'
@@ -102,12 +104,20 @@ export const lesson02 = {
           time: '08:25 PM',
           layout: 'duo',
           image: {
-            src: ch02Scene2Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-2-reproduce-500-crash.jpg',
-            w: 1408,
+            src: ch02Terminal500Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-terminal-500-red-stack.jpg',
+            w: 1376,
             h: 768,
-            alt: 'Akshay typing curl command without route parameter as terminal shows red TypeError stack trace.',
-            caption: 'Terminal Console: Omitted query parameter triggers unhandled TypeError: Cannot read properties of undefined (reading trim).'
+            alt: 'Akshay types at a laptop glowing red with a TypeError stack trace while Sameer observes from the background.',
+            caption: 'Terminal Console: An omitted query parameter triggers an unhandled TypeError stack trace and HTTP 500 response.'
+          },
+          replyImage: {
+            src: ch02Guard400Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-code-editor-400-guard.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Code editor highlighting a defensive route validation guard before business logic runs.',
+            caption: 'Guard Blueprint: A boundary check turns malformed input into an explicit HTTP 400 response.'
           },
           dialogue: {
             speaker: 'Akshay',
@@ -123,12 +133,20 @@ export const lesson02 = {
           time: '08:33 PM',
           layout: 'duo',
           image: {
-            src: ch02Scene3Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-3-defensive-guard-fix.jpg',
-            w: 1408,
+            src: ch02AkshayTypingImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-akshay-typing-guard.jpg',
+            w: 1376,
             h: 768,
-            alt: 'Akshay and Sameer reviewing defensive validation check in code editor.',
-            caption: 'Editor Console: Installing fail fast validation guard checking existence and whitespace before running business logic.'
+            alt: 'Akshay types a defensive validation guard at a workstation in the warm engineering lab.',
+            caption: 'Implementation Beat: Akshay types the fail fast validation guard before route lookup begins.'
+          },
+          replyImage: {
+            src: ch02SameerSlateImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-sameer-pointing-slate.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer points to the validation logic on an illuminated diagnostic slate while Akshay reviews it.',
+            caption: 'Review Beat: Sameer confirms that the guard keeps malformed requests from reaching business logic.'
           },
           dialogue: {
             speaker: 'Akshay',

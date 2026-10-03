@@ -33,6 +33,44 @@ function Reveal({ label, children, staticMode }) {
 }
 function Heading({ children }) { return <h2 className="section-heading">{children}</h2> }
 
+function getPanelDialogues(panel) {
+  if (panel.dialogues) return panel.dialogues
+  if (!panel.dialogue) return []
+  return [
+    panel.dialogue,
+    panel.dialogue.replySpeaker
+      ? { speaker: panel.dialogue.replySpeaker, speech: panel.dialogue.replySpeech, reply: true }
+      : null
+  ].filter(Boolean)
+}
+
+function ComicPanelBalloon({ dialogue, index }) {
+  const isAkshay = dialogue.speaker?.toLowerCase().includes('akshay')
+  const isSameer = dialogue.speaker?.toLowerCase().includes('sameer')
+  const isReply = Boolean(dialogue.reply) || (!isAkshay && index > 0)
+  const alignLeft = !isReply
+  const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
+  const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : dialogue.speaker?.toUpperCase()
+
+  return (
+    <div
+      className={`comic-balloon-box ${alignLeft ? 'balloon-left' : 'balloon-right'}`}
+      style={{ borderColor: accentColor }}
+    >
+      <div className="comic-balloon-header">
+        <span className="comic-balloon-tag" style={{ background: accentColor }}>
+          {tagLabel}
+        </span>
+      </div>
+      <p className="comic-balloon-speech">"{dialogue.speech}"</p>
+      <div
+        className={`comic-balloon-tail ${alignLeft ? 'tail-left' : 'tail-right'}`}
+        style={{ borderTopColor: accentColor }}
+      />
+    </div>
+  )
+}
+
 function MissionHud({ mission, phase, rank, status = 'ACTIVE' }) {
   return (
     <aside className="mission-hud-banner">
@@ -574,13 +612,9 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
         }}
       >
         {panels.flatMap((p, pIdx) => {
-          // Extract dialogues
-          const rawDialogues = p.dialogues || (p.dialogue ? [
-            p.dialogue,
-            p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null
-          ].filter(Boolean) : [])
+          const rawDialogues = getPanelDialogues(p)
 
-          // If a panel has multiple dialogues, bifurcate them into distinct panels so each image has at most ONE dialogue balloon
+          // If a panel has multiple dialogues, bifurcate them into distinct panels so each image has at most one dialogue balloon
           if (rawDialogues.length > 1) {
             return rawDialogues.map((d, dIdx) => ({
               ...p,
@@ -597,6 +631,7 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
           return [{ ...p, _subBeatKey: `${pIdx}-0` }]
         }).map((p, idx) => {
           const layoutClass = p.layout ? `comic-panel-${p.layout}` : (p.fullWidth || p.hero) ? 'comic-panel-hero' : ''
+          const panelDialogues = getPanelDialogues(p)
 
           return (
             <div
@@ -606,14 +641,22 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                 setLightboxPanel(p)
                 setLightboxZoom(100)
               }}
-              title="Click panel to open full-resolution Lightbox"
             >
               <div className="comic-panel-inner">
-                {/* Comic Scene Time / Beat Stamp (Top Corner Pill) */}
-                <div className="comic-beat-tag">
-                  <span className="comic-beat-num">P.{idx + 1}</span>
-                  {p.time && <span className="comic-beat-time">{p.time}</span>}
+                <div className="comic-panel-meta">
+                  <div className="comic-beat-tag">
+                    <span className="comic-beat-num">P.{idx + 1}</span>
+                    {p.time && <span className="comic-beat-time">{p.time}</span>}
+                  </div>
                 </div>
+
+                {panelDialogues.length > 0 && (
+                  <div className="comic-dialogue-dock">
+                    {panelDialogues.map((dialogue, dialogueIndex) => (
+                      <ComicPanelBalloon key={dialogueIndex} dialogue={dialogue} index={dialogueIndex} />
+                    ))}
+                  </div>
+                )}
 
                 {p.image && (
                   <div className="comic-art-container">
@@ -623,43 +666,6 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                       className="comic-art-image"
                       loading="lazy"
                     />
-
-                    {/* Inside-Image Speech Balloons (Floating strictly within Top 2% negative headroom) */}
-                    {(p.dialogues || p.dialogue) && (
-                      <div className="comic-balloons-layer">
-                        {(p.dialogues || (p.dialogue ? [p.dialogue, p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null].filter(Boolean) : [])).map((d, dIdx) => {
-                          const isAkshay = d.speaker?.toLowerCase().includes('akshay')
-                          const isSameer = d.speaker?.toLowerCase().includes('sameer')
-                          const isReply = Boolean(d.reply) || (!isAkshay && dIdx > 0)
-                          const alignLeft = !isReply
-                          const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
-                          const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : d.speaker?.toUpperCase()
-
-                          return (
-                            <div
-                              key={dIdx}
-                              className={`comic-balloon-box ${alignLeft ? 'balloon-left' : 'balloon-right'}`}
-                              style={{ borderColor: accentColor }}
-                            >
-                              <div className="comic-balloon-header">
-                                <span className="comic-balloon-tag" style={{ background: accentColor }}>
-                                  {tagLabel}
-                                </span>
-                              </div>
-                              <p className="comic-balloon-speech">
-                                "{d.speech}"
-                              </p>
-                              {/* Directional Tail */}
-                              <div
-                                className={`comic-balloon-tail ${alignLeft ? 'tail-left' : 'tail-right'}`}
-                                style={{ borderTopColor: accentColor }}
-                              />
-                            </div>
-                          )
-                        })}
-                      </div>
-                    )}
-
                   </div>
                 )}
 
