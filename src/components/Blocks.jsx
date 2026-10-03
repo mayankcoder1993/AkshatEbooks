@@ -587,7 +587,6 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                 setLightboxPanel(p)
                 setLightboxZoom(100)
               }}
-              title="Click panel to open full-resolution Lightbox"
             >
               <div className="panel-card-top comic-context-bar">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -612,92 +611,84 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                       loading="lazy"
                     />
 
-                    {/* Inside-Image Speech Balloons (Floating strictly within Top 22% negative ceiling) */}
-                    {(p.dialogues || p.dialogue) && (
-                      <div className="panel-embedded-balloons-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-                        {(p.dialogues || (p.dialogue ? [p.dialogue, p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null].filter(Boolean) : [])).map((d, dIdx) => {
-                          const isAkshay = d.speaker?.toLowerCase().includes('akshay')
-                          const isSameer = d.speaker?.toLowerCase().includes('sameer')
-                          const isReply = Boolean(d.reply) || (!isAkshay && dIdx > 0)
-                          const alignLeft = !isReply
-                          const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
-                          const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : d.speaker?.toUpperCase()
+                    {/* Inside-Image Speech Balloons: Render ONLY if short single speech (<=16 words) to guarantee zero face/prop occlusion */}
+                    {(() => {
+                      const allDialogues = p.dialogues || (p.dialogue ? [p.dialogue, p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null].filter(Boolean) : [])
+                      const isShortSingle = allDialogues.length === 1 && allDialogues[0].speech.split(' ').length <= 16
 
-                          // Top offset stays strictly within top 4% to 8% to clear characters
-                          const topOffset = dIdx === 0 ? '4%' : alignLeft ? '5%' : '5%'
-                          const maxWidth = isFullWidth ? '32%' : '44%'
+                      if (!isShortSingle) return null
 
-                          return (
-                            <div
-                              key={dIdx}
-                              style={{
-                                position: 'absolute',
-                                top: topOffset,
-                                left: alignLeft ? '2.5%' : 'auto',
-                                right: alignLeft ? 'auto' : '2.5%',
-                                maxWidth,
-                                background: 'rgba(255, 255, 255, 0.96)',
-                                backdropFilter: 'blur(8px)',
-                                border: `2px solid ${accentColor}`,
-                                borderRadius: '10px',
-                                padding: '0.4rem 0.65rem',
-                                boxShadow: '0 6px 18px rgba(0, 0, 0, 0.28)',
-                                pointerEvents: 'auto',
-                                zIndex: 10
-                              }}
-                            >
-                              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.15rem' }}>
-                                <span style={{
-                                  background: accentColor,
-                                  color: '#ffffff',
-                                  fontSize: '0.62rem',
-                                  fontWeight: 800,
-                                  padding: '0.08rem 0.32rem',
-                                  borderRadius: '3px',
-                                  letterSpacing: '0.04em'
-                                }}>
-                                  {tagLabel}
-                                </span>
-                              </div>
-                              <p style={{
-                                margin: 0,
-                                fontSize: 'clamp(0.68rem, 0.95vw, 0.82rem)',
-                                lineHeight: 1.34,
-                                color: '#0f172a',
-                                fontStyle: 'italic',
-                                fontWeight: 600
+                      const d = allDialogues[0]
+                      const isAkshay = d.speaker?.toLowerCase().includes('akshay')
+                      const isSameer = d.speaker?.toLowerCase().includes('sameer')
+                      const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
+                      const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : d.speaker?.toUpperCase()
+
+                      return (
+                        <div className="panel-embedded-balloons-overlay" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '3%',
+                              left: '2%',
+                              maxWidth: isFullWidth ? '28%' : '36%',
+                              background: 'rgba(255, 255, 255, 0.98)',
+                              backdropFilter: 'blur(8px)',
+                              border: `2px solid ${accentColor}`,
+                              borderRadius: '8px',
+                              padding: '0.35rem 0.55rem',
+                              boxShadow: '0 4px 14px rgba(0, 0, 0, 0.3)',
+                              pointerEvents: 'auto',
+                              zIndex: 10
+                            }}
+                          >
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginBottom: '0.15rem' }}>
+                              <span style={{
+                                background: accentColor,
+                                color: '#ffffff',
+                                fontSize: '0.62rem',
+                                fontWeight: 800,
+                                padding: '0.08rem 0.32rem',
+                                borderRadius: '3px',
+                                letterSpacing: '0.04em'
                               }}>
-                                "{d.speech}"
-                              </p>
-
-                              {/* Directional Pointer Tail */}
-                              <div style={{
-                                position: 'absolute',
-                                bottom: '-8px',
-                                left: alignLeft ? '18px' : 'auto',
-                                right: alignLeft ? 'auto' : '18px',
-                                width: 0,
-                                height: 0,
-                                borderLeft: '7px solid transparent',
-                                borderRight: '7px solid transparent',
-                                borderTop: `8px solid ${accentColor}`
-                              }} />
-                              <div style={{
-                                position: 'absolute',
-                                bottom: '-5px',
-                                left: alignLeft ? '19px' : 'auto',
-                                right: alignLeft ? 'auto' : '19px',
-                                width: 0,
-                                height: 0,
-                                borderLeft: '6px solid transparent',
-                                borderRight: '6px solid transparent',
-                                borderTop: '6px solid #ffffff'
-                              }} />
+                                {tagLabel}
+                              </span>
                             </div>
-                          )
-                        })}
-                      </div>
-                    )}
+                            <p style={{
+                              margin: 0,
+                              fontSize: 'clamp(0.68rem, 0.9vw, 0.82rem)',
+                              lineHeight: 1.34,
+                              color: '#0f172a',
+                              fontStyle: 'italic',
+                              fontWeight: 600
+                            }}>
+                              "{d.speech}"
+                            </p>
+                            <div style={{
+                              position: 'absolute',
+                              bottom: '-8px',
+                              left: '18px',
+                              width: 0,
+                              height: 0,
+                              borderLeft: '7px solid transparent',
+                              borderRight: '7px solid transparent',
+                              borderTop: `8px solid ${accentColor}`
+                            }} />
+                            <div style={{
+                              position: 'absolute',
+                              bottom: '-5px',
+                              left: '19px',
+                              width: 0,
+                              height: 0,
+                              borderLeft: '6px solid transparent',
+                              borderRight: '6px solid transparent',
+                              borderTop: '6px solid #ffffff'
+                            }} />
+                          </div>
+                        </div>
+                      )
+                    })()}
                   </div>
                   {p.image.caption && (
                     <div className="panel-art-caption">{p.image.caption}</div>
@@ -705,13 +696,87 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                 </div>
               )}
 
-              <div className="panel-card-body" onClick={(e) => e.stopPropagation()}>
-                {p.scene && (
-                  <div className="panel-scene-box">
-                    <span className="panel-label">Scene & Action:</span>
-                    <p className="panel-scene-text"><RichText text={p.scene} /></p>
+              {/* Zero-Occlusion Comic Dialogue Ribbon (Rendered below artwork for conversational depth without blocking artwork) */}
+              {(() => {
+                const allDialogues = p.dialogues || (p.dialogue ? [p.dialogue, p.dialogue.replySpeaker ? { speaker: p.dialogue.replySpeaker, speech: p.dialogue.replySpeech, reply: true } : null].filter(Boolean) : [])
+                const isShortSingle = allDialogues.length === 1 && allDialogues[0].speech.split(' ').length <= 16
+
+                if (isShortSingle || allDialogues.length === 0) return null
+
+                return (
+                  <div
+                    className="comic-dialogue-ribbon"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      padding: '0.65rem 0.85rem',
+                      background: '#f8fafc',
+                      borderTop: '1px solid #e2e8f0',
+                      borderBottom: '1px solid #e2e8f0',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '0.45rem'
+                    }}
+                  >
+                    {allDialogues.map((d, dIdx) => {
+                      const isAkshay = d.speaker?.toLowerCase().includes('akshay')
+                      const isSameer = d.speaker?.toLowerCase().includes('sameer')
+                      const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
+                      const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : d.speaker?.toUpperCase()
+                      const isReply = Boolean(d.reply) || (!isAkshay && dIdx > 0)
+
+                      return (
+                        <div
+                          key={dIdx}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: isReply ? 'flex-end' : 'flex-start',
+                            width: '100%'
+                          }}
+                        >
+                          <div style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.35rem',
+                            marginBottom: '0.12rem'
+                          }}>
+                            <span style={{
+                              background: accentColor,
+                              color: '#ffffff',
+                              fontSize: '0.62rem',
+                              fontWeight: 800,
+                              padding: '0.08rem 0.32rem',
+                              borderRadius: '3px',
+                              letterSpacing: '0.04em'
+                            }}>
+                              {tagLabel}
+                            </span>
+                          </div>
+                          <div
+                            style={{
+                              maxWidth: '85%',
+                              background: isReply ? '#f0fdf4' : '#ffffff',
+                              border: `1.5px solid ${accentColor}`,
+                              borderRadius: isReply ? '10px 2px 10px 10px' : '2px 10px 10px 10px',
+                              padding: '0.4rem 0.7rem',
+                              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
+                              fontSize: 'clamp(0.72rem, 0.95vw, 0.84rem)',
+                              lineHeight: 1.4,
+                              color: '#0f172a',
+                              fontStyle: 'italic',
+                              fontWeight: 500
+                            }}
+                          >
+                            "{d.speech}"
+                          </div>
+                        </div>
+                      )
+                    })}
                   </div>
-                )}
+                )
+              })()}
+
+              <div className="panel-card-body" onClick={(e) => e.stopPropagation()}>
                 {p.realization && (
                   <div className="panel-realization-box comic-takeaway-bar">
                     <span className="comic-takeaway-icon">💡</span>

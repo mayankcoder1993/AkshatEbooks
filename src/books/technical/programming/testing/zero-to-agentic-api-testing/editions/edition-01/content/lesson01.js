@@ -1,5 +1,6 @@
 import act01Scene02Img from '../assets/illustrations/acts/act1/act01_scene02_leaking_brass_bottle.jpg'
 import act01Scene03Img from '../assets/illustrations/acts/act1/act01_scene03_akshay_soaked_admit_card.jpg'
+import act01Scene04Img from '../assets/illustrations/acts/act1/act01_scene04_smeared_watercolor_admit_card.jpg'
 import act01Scene05Img from '../assets/illustrations/acts/act1/act01_scene05_akshay_sprinting_panic.jpg'
 import act01Scene06Img from '../assets/illustrations/acts/act1/act01_scene06_two_students_running_panic.jpg'
 import act01Scene07Img from '../assets/illustrations/acts/act1/act01_scene07_akshay_tapping_phone_screen.jpg'
@@ -8,18 +9,31 @@ import act01Scene09ServerImg from '../assets/illustrations/acts/act1/act01_scene
 import act01Scene11Img from '../assets/illustrations/acts/act1/act01_scene11_sameer_diagnostic_slate_14ms.jpg'
 import act01Scene13Img from '../assets/illustrations/acts/act1/act01_scene13_students_running_exam_gates.jpg'
 
+import act02Scene14Img from '../assets/illustrations/acts/act2/act02_scene14_research_workshop_interior.jpg'
 import act02Scene15Img from '../assets/illustrations/acts/act2/act02_scene15_brass_kettle_pouring_chai.jpg'
+import act02Scene17Img from '../assets/illustrations/acts/act2/act02_scene17_restaurant_customer_client.jpg'
 import act02Scene18Img from '../assets/illustrations/acts/act2/act02_scene18_canteen_waiter_api.jpg'
+import act02Scene19Img from '../assets/illustrations/acts/act2/act02_scene19_commercial_kitchen_database.jpg'
 import act02Scene21Img from '../assets/illustrations/acts/act2/act02_scene21_bullock_cart_vs_royal_courier.jpg'
 
 import act03Scene27Img from '../assets/illustrations/acts/act3/act03_scene27_reaction_typeerror_crash.jpg'
+import act03Scene29Img from '../assets/illustrations/acts/act3/act03_scene29_sameer_points_physical_wire.jpg'
 import act03Scene30Img from '../assets/illustrations/acts/act3/act03_scene30_byte_stream_waterfall_aqueduct.jpg'
 import act03Scene32Img from '../assets/illustrations/acts/act3/act03_scene32_two_men_success_201_created.jpg'
 
 import act04Scene33Img from '../assets/illustrations/acts/act4/act04_scene33_veranda_lunch_table_setup.jpg'
+import act04Scene34Img from '../assets/illustrations/acts/act4/act04_scene34_sitting_down_protocol_feast.jpg'
+import act04Scene35Img from '../assets/illustrations/acts/act4/act04_scene35_post_placing_brand_new_thali.jpg'
+import act04Scene36Img from '../assets/illustrations/acts/act4/act04_scene36_get_inspecting_without_touching.jpg'
+import act04Scene37Img from '../assets/illustrations/acts/act4/act04_scene37_put_replacing_entire_platter.jpg'
 import act04Scene38Img from '../assets/illustrations/acts/act4/act04_scene38_patch_topping_up_dal.jpg'
 
+import act05Scene44Img from '../assets/illustrations/acts/act5/act05_scene44_walking_up_spiral_staircase.jpg'
+import act05Scene45Img from '../assets/illustrations/acts/act5/act05_scene45_sunset_rooftop_pavilion_wide.jpg'
 import act05Scene46Img from '../assets/illustrations/acts/act5/act05_scene46_sameer_slate_blackboard_canopy.jpg'
+import act05Scene47Img from '../assets/illustrations/acts/act5/act05_scene47_paradigm_rest_standardized_postcard.jpg'
+import act05Scene48Img from '../assets/illustrations/acts/act5/act05_scene48_soap_armored_lockbox.jpg'
+import act05Scene49Img from '../assets/illustrations/acts/act5/act05_scene49_paradigm_graphql_spice_market.jpg'
 import act05Scene52Img from '../assets/illustrations/acts/act5/act05_scene52_chai_toast_to_network_wire.jpg'
 
 import scene1Svg from '../assets/svgs/ch01-comic-scene1-admitcard-leak.svg'
@@ -104,8 +118,7 @@ export const lesson01 = {
             alt: 'Polished brass water bottle leaking inside unzipped canvas messenger bag over folded paper admit cards.',
             caption: 'Apex Campus: Inside Akshay satchel, the loose bottle cap leaks, drowning paper admit cards in water.'
           },
-          scene: 'Inside Akshay canvas satchel, the screw cap of his brass bottle works loose. Water pools across his examination hall ticket, dissolving the printed ink into running indigo watercolor blotches.',
-          realization: 'Physical paper is fragile and ephemeral. The ultimate source of truth is never the printout: it is the canonical database record waiting on the server.'
+          scene: 'Inside Akshay canvas satchel, the screw cap of his brass bottle works loose. Water pools across his examination hall ticket, dissolving the printed ink into running indigo watercolor blotches.'
         },
         {
           title: 'The Ink Dissolves on the Quad',
@@ -124,8 +137,26 @@ export const lesson01 = {
               speech: 'My water bottle cap opened inside my bag! My admit card looks like a melted blueberry popsicle! Where is my seat number?!'
             }
           ],
-          scene: 'Akshay sprints past the quad with twenty minutes to the exam, staring in horror as water soaks through his paper admit card, completely blurring his room and seat numbers.',
-          realization: 'When the physical document fails, the data still exists on the server. The question is not whether the data is there: it is whether you can reach it in time.'
+          scene: 'Akshay sprints past the quad with twenty minutes to the exam, staring in horror as water soaks through his paper admit card, completely blurring his room and seat numbers.'
+        },
+        {
+          title: 'The Ruined Hall Ticket',
+          time: '08:41 AM',
+          image: {
+            src: act01Scene04Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act1/act01_scene04_smeared_watercolor_admit_card.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Trembling fingers holding the ruined waterlogged examination hall ticket with running blue ink.',
+            caption: 'Ruined Document: Water dissolves the blue printed ink over the hall and seat number box, rendering the printout completely illegible.'
+          },
+          dialogues: [
+            {
+              speaker: 'Akshay',
+              speech: 'The ink ran right over the room number! It is completely blank! Security will never let me through the entrance gate without verified room digits!'
+            }
+          ],
+          scene: 'Macro close-up of Akshay trembling hands gripping the ruined hall ticket as dissolved indigo ink feints across the wet paper fiber.'
         },
         {
           title: 'Fellow Students Rush Past the Gates',
@@ -145,8 +176,7 @@ export const lesson01 = {
               speech: 'Stop staring at wet paper, Akshay! Gates lock at nine sharp! Open portal.apex.edu on your phone before security turns you away for the entire year!'
             }
           ],
-          scene: 'Panicked classmates sprint past toward Hall 302, shouting that the gates close in minutes and urging him to pull up the campus web portal.',
-          realization: 'Everyone assumes the web browser is the only door to data, unaware that thousands of simultaneous browser requests create an instant traffic choke.'
+          scene: 'Panicked classmates sprint past toward Hall 302, shouting that the gates close in minutes and urging him to pull up the campus web portal.'
         },
         {
           title: 'Frantic Screen Tapping under the Arch',
@@ -165,8 +195,7 @@ export const lesson01 = {
               speech: 'It will not open! The little loading circle has been spinning like a ceiling fan for four straight minutes!'
             }
           ],
-          scene: 'Akshay taps his mobile screen frantically under the arcade corridor, but the college admit card portal is trapped in an infinite spinning wheel.',
-          realization: 'When thousands of users hit a monolithic web frontend simultaneously, presentation pipelines collapse under their own graphical weight.'
+          scene: 'Akshay taps his mobile screen frantically under the arcade corridor, but the college admit card portal is trapped in an infinite spinning wheel.'
         },
         {
           title: 'Sameer Arrives with Cutting Chai',
@@ -381,8 +410,27 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
       columns: 2,
       panels: [
         {
-          title: 'Post Exam Chai at the Stepwell Veranda',
+          title: 'Entering the Stepwell Research Workshop',
           time: '12:15 PM',
+          image: {
+            src: act02Scene14Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act2/act02_scene14_research_workshop_interior.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Wide sunlit research workshop with teakwood workbenches, slate chalkboards, and brass scientific instruments.',
+            caption: 'Apex Campus Stepwell: Akshay arrives at Sameer peaceful engineering sanctuary after surviving the morning exam.'
+          },
+          dialogues: [
+            {
+              speaker: 'Akshay',
+              speech: 'I survived! Hall 302, Seat B-14 conquered with minutes to spare. Now please tell me: how on earth did you get that admit card in fourteen milliseconds when all our phones were completely frozen?!'
+            }
+          ],
+          scene: 'Hours after surviving the board exam, Akshay enters Sameer quiet workshop, eager to understand the architectural secret that rescued him.'
+        },
+        {
+          title: 'Post Exam Chai at the Stepwell Veranda',
+          time: '12:20 PM',
           image: {
             src: act02Scene15Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act2/act02_scene15_brass_kettle_pouring_chai.jpg',
@@ -393,10 +441,6 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           },
           dialogues: [
             {
-              speaker: 'Akshay',
-              speech: 'I survived! Hall 302, Seat B-14 conquered with minutes to spare. Now please tell me: how on earth did you get that admit card in fourteen milliseconds when all our phones were completely frozen?!'
-            },
-            {
               speaker: 'Sameer',
               reply: true,
               speech: 'Sit back, take a sip of hot chai, and let us use some common sense. Have you ever eaten at a South Indian restaurant?'
@@ -404,27 +448,56 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             {
               speaker: 'Akshay',
               speech: 'Sameer, I am an engineering student. My entire life runs on canteen parathas and cheap tea!'
-            },
+            }
+          ],
+          scene: 'Sameer pours hot cutting chai into brass-held glasses, setting up the fundamental real-world analogy of client, courier, and kitchen.'
+        },
+        {
+          title: 'The Customer at the Table: The Client',
+          time: '12:25 PM',
+          image: {
+            src: act02Scene17Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act2/act02_scene17_restaurant_customer_client.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'A customer sitting at a carved teak dining table in a courtyard restaurant before an empty brass thali plate.',
+            caption: 'The Client Role: You sit at the table with an empty plate, formulating a specific demand.'
+          },
+          dialogues: [
             {
               speaker: 'Sameer',
-              reply: true,
-              speech: 'Perfect! Then you already understand how big computer systems talk to each other. You sit at the table: in tech terms, you are the client. You want something: your exam admit card. You have a request.'
+              speech: 'Perfect! You sit at the table: in tech terms, you are the client. You want something: your exam admit card. You formulate a request.'
             },
             {
               speaker: 'Akshay',
-              speech: 'And the kitchen is the server?'
-            },
-            {
-              speaker: 'Sameer',
               reply: true,
-              speech: 'Spot on. The kitchen is the server and its database. It has the chef, the stove, and the ingredients. You are not allowed to walk inside and mess with the pots.'
+              speech: 'And the kitchen is the server?'
             }
           ],
-          scene: 'Hours after surviving the board exam, Akshay sits at Sameer research desk as Sameer maps the restaurant client server model on the whiteboard.',
-          realization: 'The client and server must remain decoupled: the client requests data, the server processes data, and neither invades the internal space of the other.'
+          scene: 'Sameer sketches the client sitting at the dining table, waiting for structured nourishment.'
         },
         {
-          title: 'The Waiter Courier and the Menu Contract',
+          title: 'The Steaming Kitchen: The Server and Database',
+          time: '12:30 PM',
+          image: {
+            src: act02Scene19Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act2/act02_scene19_commercial_kitchen_database.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Bustling commercial kitchen with flaming copper pans, clay tandoors, and disciplined cooks at work.',
+            caption: 'The Server and Database: The kitchen holds the ingredients, recipes, and state. Clients never walk inside.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'Spot on. The kitchen is the server and its database. It has the chef, the stove, and the ingredients. You are never allowed to walk inside and mess with the pots.'
+            }
+          ],
+          scene: 'Sameer illustrates the kitchen as the isolated, secure backend environment where state mutations and queries actually execute.',
+          realization: 'The client and server must remain strictly decoupled: the client requests data, the server processes data, and neither invades the internal space of the other.'
+        },
+        {
+          title: 'The Waiter Courier: The API and the Menu Contract',
           time: '12:45 PM',
           image: {
             src: act02Scene18Img,
@@ -446,15 +519,6 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             },
             {
               speaker: 'Akshay',
-              speech: 'And my phone browser?!'
-            },
-            {
-              speaker: 'Sameer',
-              reply: true,
-              speech: 'Your phone browser told the waiter: Wait! Before I look at my food, please repaint the dining room walls, hang crystal chandeliers, and play some background music! You buried him under party decorations.'
-            },
-            {
-              speaker: 'Akshay',
               speech: 'And the menu is the contract!'
             },
             {
@@ -465,6 +529,30 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           ],
           scene: 'Sameer sketches the three boxes on the whiteboard: Customer, Waiter, and Kitchen, demonstrating how the courier carries payloads without altering them.',
           realization: 'An API is a courier with a contract: it carries structured requests to the server and structured responses back to the client. It never cooks, never stores, and never renders.'
+        },
+        {
+          title: 'The 4MB Browser Cart vs the Lean Wire Courier',
+          time: '12:55 PM',
+          image: {
+            src: act02Scene21Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act2/act02_scene21_bullock_cart_vs_royal_courier.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Split comparison between an overloaded bullock cart carrying heavy furniture and an agile royal horse courier carrying a sealed letter.',
+            caption: 'Presentation Tax: The browser cart hauls 4 megabytes of decoration; the wire courier gallops with 120 bytes.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'Your phone browser told the waiter: Wait! Before I look at my food, please repaint the dining room walls, hang crystal chandeliers, and play some background music! You buried him under party decorations.'
+            },
+            {
+              speaker: 'Akshay',
+              reply: true,
+              speech: 'While an API call just sends the courier on a swift horse to grab the exact sealed note directly!'
+            }
+          ],
+          scene: 'Sameer contrasts the slow, heavily decorated browser experience with the raw velocity of lightweight API couriers.'
         }
       ]
     },
@@ -480,7 +568,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
       columns: 2,
       panels: [
         {
-          title: 'Pair Programming on Port 3000',
+          title: 'Pair Programming on Port 3000: The TypeError Crash',
           time: '01:10 PM',
           image: {
             src: act03Scene27Img,
@@ -497,30 +585,44 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             },
             {
               speaker: 'Akshay',
-              speech: 'Now let me test my POST route. I will shoot over some JSON with curl and watch the server echo it back.'
-            },
-            {
-              speaker: 'Akshay',
               speech: 'Wait, hold on! I sent my name and exam in the body, but the server just replied: received: undefined?! Where on earth did my data go?'
+            }
+          ],
+          scene: 'Akshay starts his Express server on port 3000 and dispatches a POST request, but is baffled when req.body returns undefined.'
+        },
+        {
+          title: 'Looking at the Physical Network Wire',
+          time: '01:18 PM',
+          image: {
+            src: act03Scene29Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act3/act03_scene29_sameer_points_physical_wire.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Sameer leaning forward with veteran authority at the workbench, pointing a steady index finger to the braided network cable plugged into the server port.',
+            caption: 'The Wire Reality: Sameer points to the physical RJ-45 patch cable, demystifying abstract network abstractions.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'You are making the classic rookie mistake. You assume sending JSON across the wire is like handing someone a neat letter inside an envelope.'
             },
             {
               speaker: 'Sameer',
-              reply: true,
-              speech: 'You are making the classic rookie mistake. You assume sending JSON across the wire is like handing someone a neat letter inside an envelope.'
+              speech: 'Look at that physical wire. Copper and glass fibers do not know what a JavaScript object is. They only understand pulses of electrical and optical voltage.'
             }
           ],
-          scene: 'Akshay starts his Express server on port 3000 and dispatches a POST request, but is baffled when req.body returns undefined.',
+          scene: 'Sameer points to the physical network wire, grounding the software failure in electrical and packet realities.',
           realization: 'The server receives streaming network byte chunks, not ready-made JavaScript objects. Without a body parser, req.body remains undefined.'
         },
         {
-          title: 'The Byte Stream Translation Fix',
+          title: 'The Byte Stream Sieve: Assembling the Chunks',
           time: '01:25 PM',
           image: {
             src: act03Scene30Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act3/act03_scene30_byte_stream_waterfall_aqueduct.jpg',
             w: 1200,
             h: 675,
-            alt: 'Sameer sketching an aqueduct sieve showing raw TCP byte stream chunks being buffered into an orderly req.body object.',
+            alt: 'An intricate mechanical brass sieve mechanism on a teakwood workshop bench, receiving raw unparsed streams of colorful ceramic puzzle tiles and neatly sorting them.',
             caption: 'The Byte Stream Sieve: Express middleware intercepts raw TCP byte chunks and reassembles them before route handlers run.'
           },
           dialogues: [
@@ -531,12 +633,23 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             {
               speaker: 'Sameer',
               speech: 'Express does not guess. It leaves req.body completely blank unless you install a catcher. Stick app.use(express.json()) right above your routes.'
-            },
-            {
-              speaker: 'Akshay',
-              reply: true,
-              speech: 'One line of middleware... Let me reboot and fire curl again!'
-            },
+            }
+          ],
+          scene: 'Sameer explains TCP streaming buffers and demonstrates why mounting express.json() is essential before registering any route handlers.',
+          realization: 'Data travels over the network as a raw stream of byte chunks. Without middleware to collect and parse those pieces, req.body stays undefined.'
+        },
+        {
+          title: 'Victory on Port 3000: 201 Created',
+          time: '01:30 PM',
+          image: {
+            src: act03Scene32Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act3/act03_scene32_two_men_success_201_created.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Akshay pumping a celebratory fist in the air with a broad victorious grin as the dual monitors glow with emerald-green 201 Created status.',
+            caption: 'Triumphant Milestone: One line of middleware turns raw socket bytes into a structured JavaScript payload.'
+          },
+          dialogues: [
             {
               speaker: 'Akshay',
               reply: true,
@@ -547,8 +660,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
               speech: 'Remember this forever: wires carry raw bytes, not JavaScript objects. Middleware is the worker that turns noise into meaning.'
             }
           ],
-          scene: 'Sameer explains TCP streaming buffers and demonstrates why mounting express.json() is essential before registering any route handlers.',
-          realization: 'Data travels over the network as a raw stream of byte chunks. Without middleware to collect and parse those pieces, req.body stays undefined.'
+          scene: 'Akshay successfully verifies that express.json() converts the raw TCP buffer into a clean JavaScript object.'
         }
       ]
     },
@@ -660,48 +772,84 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
       columns: 2,
       panels: [
         {
-          title: 'The Brass Thali Platter Analogy',
+          title: 'Sitting Down for the Protocol Feast',
           time: '02:30 PM',
           image: {
-            src: act04Scene33Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene33_veranda_lunch_table_setup.jpg',
+            src: act04Scene34Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene34_sitting_down_protocol_feast.jpg',
             w: 1200,
             h: 675,
-            alt: 'Sameer and Akshay seated at an outdoor stone veranda table with steaming brass lunch thalis and small bowls of curries.',
-            caption: 'Dining Courtyard: Six katoris on the brass platter represent the fields of a structured database record.'
+            alt: 'Akshay and Sameer sitting cross-legged on crimson floor cushions before low carved dining tables with gleaming brass thali platters.',
+            caption: 'Dining Veranda: Sameer and Akshay sit down before the five HTTP verbs take culinary form.'
           },
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Whenever you talk to an API, you only ever do five basic moves. Five verbs. And this lunch thali is about to teach you every single one.'
-            },
+              speech: 'Whenever you talk to an API, you only ever do five basic moves. Five verbs. And this lunch feast is about to teach you every single one.'
+            }
+          ],
+          scene: 'Akshay and Sameer sit before traditional brass lunch thalis on the veranda, ready to map database operations to dining rituals.'
+        },
+        {
+          title: 'GET: Inspecting the Platter Without Touching',
+          time: '02:35 PM',
+          image: {
+            src: act04Scene36Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene36_get_inspecting_without_touching.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Akshay leaning over his gleaming brass thali with hands resting politely on his lap, inspecting the colorful bowls of spiced curries and rice without touching them.',
+            caption: 'Safe Inspection: Looking with your eyes changes zero state in the kitchen. That is HTTP GET.'
+          },
+          dialogues: [
             {
               speaker: 'Sameer',
               speech: 'GET: Take a good look at this plate. Dal makhani, paneer, aloo, raita, pickle, kheer. You are looking with your eyes. Nothing gets eaten, nothing gets spilled. It is safe and idempotent.'
             },
             {
+              speaker: 'Akshay',
+              reply: true,
+              speech: 'Inspecting the plate ten times leaves the food completely untouched. GET never mutates state!'
+            }
+          ],
+          scene: 'Sameer demonstrates GET as visual read-only inspection: safe, cacheable, and idempotent.',
+          realization: 'GET is safe and idempotent: inspecting a resource ten times leaves the database unchanged. POST creates new entities and is not idempotent.'
+        },
+        {
+          title: 'POST: Creating a Brand New Platter',
+          time: '02:38 PM',
+          image: {
+            src: act04Scene35Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene35_post_placing_brand_new_thali.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Canteen attendant placing a brand new brass thali platter with bowls onto the teak table.',
+            caption: 'Entity Creation: The attendant places a brand-new, steaming brass thali platter on the table, representing HTTP POST.'
+          },
+          dialogues: [
+            {
               speaker: 'Sameer',
-              speech: 'POST: I just dropped a fresh, hot roti on your plate. Boom: something new was created that was not there two seconds ago. That is POST. It is not idempotent: do that three times and you get three rotis!'
+              speech: 'Look at the attendant bringing a brand-new brass platter to the next table. That table was completely empty ten seconds ago. That is HTTP POST: allocating a new resource entity in the database collection!'
             },
             {
               speaker: 'Akshay',
               reply: true,
-              speech: 'GET looks, POST cooks! What happens when I want to update my order?'
+              speech: 'And the server assigns it a unique identity, returning HTTP 201 Created!'
             }
           ],
-          scene: 'Sameer introduces GET as safe visual inspection and POST as non-idempotent resource creation.',
-          realization: 'GET is safe and idempotent: inspecting a resource ten times leaves the database unchanged. POST creates new entities and is not idempotent.'
+          scene: 'The canteen attendant arrives with a full, fresh brass thali platter, representing non-idempotent entity creation.',
+          realization: 'POST is non-idempotent: issuing three consecutive POST requests creates three distinct records in the database collection.'
         },
         {
-          title: 'The Brass Thali Trap: PUT vs PATCH',
+          title: 'The Brass Thali Trap: PUT Replaces the Entire Platter',
           time: '02:45 PM',
           image: {
-            src: act04Scene38Img,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene38_patch_topping_up_dal.jpg',
+            src: act04Scene37Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene37_put_replacing_entire_platter.jpg',
             w: 1200,
             h: 675,
-            alt: 'Close-up of a carved brass ladle pouring dal into one single katori without disturbing the surrounding rotis, rice, and kheer.',
-            caption: 'The Brass Thali Rule: PUT replaces the whole platter; PATCH surgically tops up a single katori.'
+            alt: 'Sameer lifting the entire brass thali off the table, setting down a replacement plate containing only flatbread while Akshay gasps in alarm.',
+            caption: 'The PUT Trap: PUT swaps out the whole entire plate. Anything omitted from your payload is thrown in the trash!'
           },
           dialogues: [
             {
@@ -716,11 +864,22 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
               speaker: 'Akshay',
               reply: true,
               speech: 'Hey! Keep your hands off my paneer! That is terrifying!'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'That is the Brass Thali Trap! Junior coders hit PUT thinking they are updating an email, and accidentally delete the customer phone number and address because they omitted them from the JSON body.'
-            },
+            }
+          ],
+          scene: 'Sameer dramatically lifts the entire thali away to demonstrate that HTTP PUT replaces the complete resource record from scratch.'
+        },
+        {
+          title: 'PATCH: Surgical Precision Topping Up the Dal',
+          time: '02:48 PM',
+          image: {
+            src: act04Scene38Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene38_patch_topping_up_dal.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Close-up of a carved brass ladle pouring dal into one single katori without disturbing the surrounding rotis, rice, and kheer.',
+            caption: 'The Brass Thali Rule: PUT replaces the whole platter; PATCH surgically tops up a single katori.'
+          },
+          dialogues: [
             {
               speaker: 'Sameer',
               speech: 'PATCH: The polite surgical scalpel. PATCH tells the kitchen: Leave everything alone, just add a swirl of cream to my dal. Only the delta changes.'
@@ -731,7 +890,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
               speech: 'And DELETE clears the table and returns 204 No Content!'
             }
           ],
-          scene: 'Sameer mimes dumping the whole plate to demonstrate PUT total replacement, then uses a spoon to show PATCH surgical delta updates.',
+          scene: 'Sameer uses a brass ladle to top up a single katori, showing how PATCH updates only the specific fields specified in the request body.',
           realization: 'PUT replaces the entire resource from scratch: anything you leave out gets wiped clean. PATCH updates only the fields you send. Remember the Brass Thali Rule: PUT replaces the whole plate; PATCH tops up a single bowl.'
         }
       ]
@@ -947,6 +1106,31 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           ],
           scene: 'Sameer breaks down the three communication paradigms, demonstrating that all three are variations of the courier waiter model.',
           realization: 'Protocol architectures reflect trade-offs: REST prioritizes simplicity and standard verbs, SOAP enforces strict typed contracts, and GraphQL optimizes payload precision.'
+        },
+        {
+          title: 'SOAP: The Armored Royal Lockbox',
+          time: '03:35 PM',
+          image: {
+            src: act05Scene48Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene48_soap_armored_lockbox.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Sealed iron royal chest reinforced with heavy brass rivets and wax-sealed contracts.',
+            caption: 'Enterprise Envelope: The sealed iron chest represents a SOAP envelope carrying strict WSDL schemas, digital signatures, and XML structures.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'Look at this sealed iron chest. Heavy, locked with brass rivets, and guarded by sealed scrolls. That is SOAP! It does not trust casual network wires: it wraps every payload in an immutable XML envelope with strict security headers.'
+            },
+            {
+              speaker: 'Akshay',
+              reply: true,
+              speech: 'Heavy to carry, but impossible to tamper with. That is why banking and government treasuries never abandon it!'
+            }
+          ],
+          scene: 'Sameer points to the sealed iron chest metaphor, explaining why high-compliance enterprise domains rely on strict XML contracts.',
+          realization: 'SOAP trades lightweight speed for absolute contract enforcement, type safety, and standardized security headers.'
         },
         {
           title: 'Sunset Chai Toast: Welcome to the Wire',

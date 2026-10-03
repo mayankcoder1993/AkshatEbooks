@@ -199,32 +199,56 @@ PROPOSED FUTURE EXPANSION TITLES:
 
 ---
 
-## 5. PROMPT TEMPLATE TO SEND TO THE AUDITING AI
+## 5. MASTER PROMPT TEMPLATE TO SEND TO THE AUDITING AI
 
-Copy and paste everything below into Claude 3.7 Sonnet, GPT-4o, or Gemini:
+Copy and paste the exact block below into Claude 3.7 Sonnet, GPT-4o, or Gemini (with Web Search / Internet Browsing enabled):
 
 ```text
 [TRACK:STRATEGIC-CURRICULUM-AUDIT]
-You are a Principal Software Architect and Technical Publishing Director reviewing the attached Master Curriculum Blueprint for Sarva Gyana Koshah Books.
+You are a Principal Software Architect, Industry Technical Lead, and Publishing Director reviewing the Master Curriculum Architecture for Sarva Gyana Koshah Books.
 
-DOCUMENT UNDER REVIEW:
-Master Curriculum Architecture & Cross-AI Deliberation Brief (Books 1 to 4)
+ONLINE REPOSITORY & LIVE CONTEXT REFERENCE:
+Please search the internet and inspect the materials, current course architectures, live interactive examples, and curriculum designs at:
+https://nologin.in/akshatpython
+(Also search authoritative 2025–2026 sources: CPython 3.13 changelogs, PEP 703 Free-Threaded GIL, FastAPI/Pydantic v2 release notes, Model Context Protocol / MCP GitHub repositories, Newman/Postman docs, LangGraph / CrewAI production post-mortems).
+
+DOCUMENT ATTACHED / UNDER REVIEW:
+Master Curriculum Architecture & Cross-AI Deliberation Brief (Books 1 through 4)
+- Book 1: First Bytecode: Python from Your First Line to Your First Commit (8 Chapters)
+- Book 2: Modern Python Backend Frameworks: FastAPI, Django and Flask Under Production Fire (12 Chapters)
+- Book 3: Zero to Agentic API Testing: Automated Quality with Postman & Newman (13 Chapters)
+- Book 4: Autonomous Agentic Systems: Building & Testing AI Swarms (12 Chapters)
+- Ecosystem Doctrine: The 7-Layer Vibe-Code Audit Protocol & Character Universe (Akshay, Palash, Sameer, Swati, etc.)
 
 YOUR MISSION:
-Perform a rigorous, critical audit of the 4-book curriculum, the anti-vibe-coding doctrine, the ensemble character universe, and future expansion scope.
+Perform an exhaustive, unfiltered audit by researching the internet and evaluating our complete curriculum against the latest industry reality, production failure modes, and pedagogical durability.
 
-PLEASE PROVIDE:
-1. Technical Currency Audit (2025–2026):
-   - Are there emerging shifts in Python (e.g. Python 3.13 free-threaded GIL / nogil, JIT compiler, uv package manager, Pydantic v2.10, LangGraph 0.2+) that must be explicitly added to the syllabi?
-   - In Book 4 (Agentic AI), does the Model Context Protocol (MCP) section reflect the latest Anthropic / open-source specification practices?
-2. Narrative and Character Consistency Review:
-   - Does Akshay's journey from Book 3 (student saving admit card on Port 3000 -> SDE offer) to Book 1 (foundational grounding) to Books 2 & 4 (production engineer) feel emotionally engaging and authentic?
-   - How can Palash, Swati, Sachin, Shivam, and Sameer be maximized to maintain dramatic tension without becoming repetitive?
-3. Gap Identification:
-   - What critical real-world failure modes or edge cases are missing from the 8-chapter Book 1, 12-chapter Book 2, 13-chapter Book 3, or 12-chapter Book 4 syllabi?
-4. Future Scope & Additional Book Recommendations:
-   - What should Book 5 and Book 6 be to complete the developer's journey from absolute beginner to high-frequency systems architect?
-   - Recommend exact titles and deliverable projects for the next 2 proposed books.
+PLEASE PROVIDE AN IN-DEPTH AUDIT REPORT COVERING:
 
-Deliver your response with maximum engineering depth, specific code examples where appropriate, and actionable syllabus edits.
+1. Live Context & Internet Research Audit:
+   - Based on your inspection of https://nologin.in/akshatpython and current 2025–2026 tech trends, how well does our first-principles anti-vibe-coding strategy align with real industry expectations?
+   - What cutting-edge 2025–2026 shifts are missing?
+     * Python 3.13+ Free-Threaded GIL (PEP 703) and experimental JIT compiler.
+     * The `uv` / Astral tooling ecosystem replacing `pip`/`venv`.
+     * Pydantic v2.10 performance and serialization updates.
+     * Model Context Protocol (MCP) dynamic tool servers, JSON-RPC 2.0 framing, and local LLM sidecars.
+     * LangGraph 0.2+ durable execution and Human-in-the-Loop checkpointers.
+
+2. Critical Syllabi Gap Analysis (Failure Modes & Edge Cases):
+   - Review each book's syllabus:
+     * Book 1 (8 Chapters): Are there missing memory, scope, or CPython internals traps?
+     * Book 2 (12 Chapters): Are there unaddressed ASGI, connection pool, or migration race conditions?
+     * Book 3 (13 Chapters): Are there critical API testing gotchas (OAuth refresh races, idempotency keys, contract drift) omitted?
+     * Book 4 (12 Chapters): What additional multi-agent failure modes (e.g., prompt injection cascades, MCP privilege escalation) should be incorporated?
+
+3. Ensemble Character Dynamics & Emotional Authenticity:
+   - Critique Akshay's career arc (from campus student with a soaked admit card on Port 3000 -> SDE offer letter -> junior backend engineer -> AI testing architect).
+   - How can the dynamic between Akshay, Palash (the prompt-happy vibe-coder), Swati (the schema sentinel), and Sameer (the serene tea-drinking systems architect) be kept fresh, humorous, and impactful across all 4 books without feeling repetitive?
+
+4. Strategic Roadmap & Next Book Recommendations:
+   - To complete the developer's journey from novice to high-frequency systems architect, what should Book 5 and Book 6 be?
+   - Propose exact titles, 10–12 chapter syllabus outlines, and capstone project deliverables for the next two logical titles (e.g., Distributed Systems & Event Streaming; High-Performance Python & Rust Extensions).
+
+Provide your recommendations with maximum technical rigor, concrete code and architecture examples, and actionable syllabus edits.
 ```
+
