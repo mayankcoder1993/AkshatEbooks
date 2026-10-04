@@ -1,0 +1,30 @@
+{
+  "rag_level": "universal",
+  "id": "UNIV-AESTHETICS-MADHUBANI",
+  "title": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard",
+  "version": "2.0.0",
+  "status": "canon",
+  "supersedes": null,
+  "superseded_by": null,
+  "target_scope": "all_illustrated_books",
+  "description": "Art direction combining ancient Mithila folk art linework with sleek modern Indian engineering environments.",
+  "positive_invariants": {
+    "contours": "crisp double line black ink linework",
+    "eyes": "distinctive sharp almond shaped eyes filled with intensity",
+    "color_palette": "flat saturated gouache fills in indigo, mustard turmeric, terracotta, copper orange, and sandstone cream",
+    "decorative_patterns": "kachni cross hatching and bharni solid fill patterns on architectural arches and fabric borders",
+    "modern_props": "open slim laptops, optical mice, modern smartphones, server cloisters, cutting chai in faceted glass glasses with brass holders",
+    "lighting": "warm Indian sunlight, courtyard sandstone shadows, golden twilight"
+  },
+  "negative_constraints": {
+    "prohibited_elements": [
+      "medieval fantasy clutter",
+      "parchment scrolls",
+      "brass compasses or protractors",
+      "alchemical or apothecary jars",
+      "crude stick figures or generic vector clipart",
+      "Devanagari or Hindi text inside illustrations",
+      "AI watermarks or Gemini logo artifacts"
+    ]
+  }
+}

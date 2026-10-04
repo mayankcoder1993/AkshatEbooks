@@ -1,0 +1,65 @@
+{
+  "rag_level": "book",
+  "book_id": "zero-to-agentic-api-testing",
+  "id": "BOOK-TECHNICAL-STATE",
+  "title": "Technical State and Endpoints Ledger",
+  "version": "1.0.0",
+  "status": "canon",
+  "servers": {
+    "local_exercise_server": {
+      "framework": "Express.js",
+      "port": 3000,
+      "base_url": "http://localhost:3000",
+      "middleware": ["express.json()"],
+      "endpoints": [
+        {
+          "verb": "GET",
+          "path": "/api/admit-card/:rollNo",
+          "status": 200,
+          "description": "Fetches candidate admit card by roll number"
+        },
+        {
+          "verb": "POST",
+          "path": "/api/students",
+          "status": 201,
+          "description": "Enrolls a new student record into the in-memory store"
+        },
+        {
+          "verb": "PUT",
+          "path": "/api/students/:id",
+          "status": 200,
+          "description": "Total replacement of student record; unprovided keys are cleared"
+        },
+        {
+          "verb": "PATCH",
+          "path": "/api/students/:id",
+          "status": 200,
+          "description": "Surgical update of specified student fields without affecting unmentioned keys"
+        },
+        {
+          "verb": "DELETE",
+          "path": "/api/students/:id",
+          "status": 204,
+          "description": "Removes student record permanently"
+        }
+      ]
+    },
+    "mock_central_api": {
+      "port": 5050,
+      "base_url": "http://localhost:5050",
+      "health_check": "http://localhost:5050/health"
+    }
+  },
+  "core_traps": {
+    "undefined_body": {
+      "cause": "Omitting app.use(express.json()) middleware in Express 4.16+",
+      "symptom": "TypeError: Cannot read properties of undefined (reading 'name')",
+      "remedy": "Mount express.json() before all route handlers"
+    },
+    "put_data_loss": {
+      "cause": "Treating PUT like PATCH; supplying only changed fields",
+      "symptom": "Existing record fields not included in payload are wiped or reset to null",
+      "remedy": "Always transmit complete resource representation with PUT, or use PATCH for partial edits"
+    }
+  }
+}

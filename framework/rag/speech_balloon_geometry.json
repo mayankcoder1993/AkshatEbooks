@@ -1,0 +1,51 @@
+{
+  "rag_level": "universal",
+  "id": "UNIV-BALLOON-GEOMETRY",
+  "title": "Graphic Novel Speech Balloon and Negative Headroom Geometry",
+  "version": "2.0.0",
+  "status": "canon",
+  "supersedes": null,
+  "superseded_by": null,
+  "target_scope": "all_illustrated_books",
+  "description": "Mathematical layout constraints ensuring speech balloons reside inside the 16:9 illustration canvas without face occlusion.",
+  "geometry": {
+    "canvas_aspect_ratio": "16:9",
+    "lettering_zone": "top 25% negative headroom (empty sky, stone arches, ceiling beams, blank walls)",
+    "vertical_top_offset": "4%",
+    "horizontal_offset": "3%",
+    "max_width_percentage": "34%",
+    "max_character_count": 120,
+    "max_word_count": 18,
+    "face_occlusion_tolerance": "0%",
+    "tail_direction": "downward towards speaker mouth or posture",
+    "background_styling": "rgba(255, 255, 255, 0.96) glassmorphism blur(8px)",
+    "border_width": "2px solid character accent color"
+  },
+  "speaker_palette": {
+    "akshay": {
+      "accent": "#0284c7",
+      "tag": "AKSHAY",
+      "default_position": "top-left"
+    },
+    "sameer": {
+      "accent": "#7c3aed",
+      "tag": "SAMEER",
+      "default_position": "top-right"
+    },
+    "rohan": {
+      "accent": "#059669",
+      "tag": "ROHAN",
+      "default_position": "top-right"
+    },
+    "examiner": {
+      "accent": "#dc2626",
+      "tag": "EXAMINER",
+      "default_position": "top-right"
+    }
+  },
+  "pacing_rules": {
+    "max_speakers_per_panel": 1,
+    "conversational_replies": "bifurcate into shot and reverse reaction panels",
+    "prose_overflow": "move deep technical explanations to sub-art deck captions or Senior Savior takeaway cards"
+  }
+}

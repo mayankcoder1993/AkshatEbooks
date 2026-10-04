@@ -1,0 +1,49 @@
+{
+  "rag_level": "universal",
+  "id": "UNIV-RULE-19",
+  "title": "Rule 19 Lexical Purity Invariant",
+  "version": "2.0.0",
+  "status": "canon",
+  "supersedes": null,
+  "superseded_by": null,
+  "target_scope": "all_books_all_domains",
+  "description": "Zero tolerance invariant prohibiting hyphens and dashes in all user facing prose, dialogue, chapter titles, and captions.",
+  "invariants": {
+    "prohibited_characters": [
+      "-",
+      "—",
+      "–"
+    ],
+    "prohibited_locations": [
+      "chapter_titles",
+      "section_headings",
+      "speech_balloons",
+      "scene_captions",
+      "takeaway_cards",
+      "senior_savior_boxes",
+      "triage_scenarios",
+      "mission_briefs"
+    ],
+    "permitted_exceptions": [
+      "inline_code_identifiers_in_backticks",
+      "code_blocks",
+      "filesystem_file_paths_in_backticks",
+      "terminal_command_flags_in_backticks",
+      "package_names_in_backticks"
+    ],
+    "replacement_lexicon": {
+      "well-known": "celebrated",
+      "first-class": "primary",
+      "step-by-step": "sequential",
+      "real-time": "live",
+      "end-to-end": "complete",
+      "line-by-line": "successive",
+      "under-the-hood": "beneath the surface"
+    }
+  },
+  "enforcement": {
+    "cli_tool": "framework/tools/rule19-checker.mjs",
+    "threshold": "100% zero violations",
+    "ci_blocker": true
+  }
+}

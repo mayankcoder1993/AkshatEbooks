@@ -1,0 +1,41 @@
+{
+  "rag_level": "universal",
+  "id": "UNIV-PEDAGOGICAL-CARD",
+  "title": "Universal 4-Part Pedagogical Card Invariant",
+  "version": "2.0.0",
+  "status": "canon",
+  "supersedes": null,
+  "superseded_by": null,
+  "target_scope": "all_books_all_domains",
+  "description": "The four part structural invariant mapping inputs, processing mechanics, verifiable outputs, and senior insights across every academic domain.",
+  "card_structure": {
+    "tier_1_input": {
+      "definition": "The exact stimulus, request, raw data, legal scenario, economic shock, or exam question.",
+      "tech_domain": "HTTP Method, Request URL, Headers, and Raw JSON Body",
+      "law_domain": "Facts of the dispute, statutory section, and petitioner prayer",
+      "economics_domain": "Market shock, supply shift, policy interest rate change",
+      "math_domain": "Initial condition, theorem hypothesis, input matrix"
+    },
+    "tier_2_under_the_hood": {
+      "definition": "The step by step transformation pipeline, internal machinery, and causal mechanism.",
+      "tech_domain": "TCP socket buffering, stream chunking, express.json() deserialization, routing table lookup",
+      "law_domain": "Constitutional bench interpretation, judicial doctrine, precedence analysis",
+      "economics_domain": "Equilibrium adjustment, price clearing mechanism, velocity multiplier",
+      "math_domain": "Successive algebraic proof transformations, matrix row reductions"
+    },
+    "tier_3_output": {
+      "definition": "The verifiable, observable terminal outcome, status, response, or verdict.",
+      "tech_domain": "HTTP Status Code (e.g. 201 Created), Response Headers, and JSON response payload",
+      "law_domain": "Operative order, writ remedy, declared legal precedent",
+      "economics_domain": "New market clearing price, welfare distribution, deadweight loss",
+      "math_domain": "Q.E.D. final derived equation, eigenvalue set, geometric graph"
+    },
+    "tier_4_senior_savior": {
+      "definition": "The mentor defensive insight, production edge case warning, or exam winning rubric.",
+      "tech_domain": "Sameer defensive architecture rule, silent failure avoidance, wire inspection habit",
+      "law_domain": "Senior Advocate courtroom strategy, doctrine exception, dissenting opinion hook",
+      "economics_domain": "Unintended consequences warning, inflation expectation trap, elasticity limit",
+      "math_domain": "Singularity trap warning, boundary condition check, shortcut mnemonic"
+    }
+  }
+}

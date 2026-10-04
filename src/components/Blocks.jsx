@@ -44,28 +44,71 @@ function getPanelDialogues(panel) {
   ].filter(Boolean)
 }
 
-function ComicPanelBalloon({ dialogue, index }) {
-  const isAkshay = dialogue.speaker?.toLowerCase().includes('akshay')
-  const isSameer = dialogue.speaker?.toLowerCase().includes('sameer')
-  const isReply = Boolean(dialogue.reply) || (!isAkshay && index > 0)
-  const alignLeft = !isReply
-  const accentColor = isAkshay ? '#0284c7' : isSameer ? '#4f46e5' : '#ca8a04'
-  const tagLabel = isAkshay ? 'AKSHAY' : isSameer ? 'SAMEER' : dialogue.speaker?.toUpperCase()
+function ComicPanelBalloon({ dialogue, index, isLightbox = false }) {
+  const speaker = dialogue.speaker?.toLowerCase() || ''
+  const isAkshay = speaker.includes('akshay')
+  const isSameer = speaker.includes('sameer')
+  const isRohan = speaker.includes('rohan')
+  const isExaminer = speaker.includes('examiner') || speaker.includes('guard') || speaker.includes('proctor')
+
+  // Placement: default Akshay left, Sameer right unless explicitly configured
+  let alignLeft = true
+  if (dialogue.position === 'top-right' || dialogue.position === 'right') {
+    alignLeft = false
+  } else if (dialogue.position === 'top-left' || dialogue.position === 'left') {
+    alignLeft = true
+  } else {
+    // Automatic fallback based on character or reply
+    if (isSameer || isRohan || isExaminer || Boolean(dialogue.reply) || index > 0) {
+      alignLeft = false
+    } else {
+      alignLeft = true
+    }
+  }
+
+  const accentColor = isAkshay
+    ? '#0284c7'
+    : isSameer
+      ? '#7c3aed'
+      : isRohan
+        ? '#059669'
+        : isExaminer
+          ? '#dc2626'
+          : '#ca8a04'
+
+  const tagLabel = isAkshay
+    ? 'AKSHAY'
+    : isSameer
+      ? 'SAMEER'
+      : dialogue.speaker?.toUpperCase() || 'VOICE'
+
+  const tone = dialogue.tone || dialogue.emotion || null
 
   return (
     <div
-      className={`comic-balloon-box ${alignLeft ? 'balloon-left' : 'balloon-right'}`}
-      style={{ borderColor: accentColor }}
+      className={`comic-balloon-box ${alignLeft ? 'balloon-left' : 'balloon-right'} ${isLightbox ? 'lightbox-balloon' : ''}`}
+      style={{
+        borderColor: accentColor,
+        maxWidth: isLightbox ? '32%' : '34%'
+      }}
     >
       <div className="comic-balloon-header">
         <span className="comic-balloon-tag" style={{ background: accentColor }}>
           {tagLabel}
         </span>
+        {tone && (
+          <span style={{ fontSize: '0.62rem', color: '#64748b', fontWeight: 600 }}>
+            {tone}
+          </span>
+        )}
       </div>
       <p className="comic-balloon-speech">"{dialogue.speech}"</p>
       <div
         className={`comic-balloon-tail ${alignLeft ? 'tail-left' : 'tail-right'}`}
         style={{ borderTopColor: accentColor }}
+      />
+      <div
+        className="comic-balloon-tail-inner"
       />
     </div>
   )
@@ -533,6 +576,112 @@ function ComicWorkbench({
   )
 }
 
+function QuadCard({ badge = 'PEDAGOGICAL CONTRACT', title, subtitle, input, underTheHood, output, seniorSavior, breakdown }) {
+  const bInput = input || breakdown?.input
+  const bUnderTheHood = underTheHood || breakdown?.explanation || breakdown?.underTheHood
+  const bOutput = output || breakdown?.output
+  const bSeniorSavior = seniorSavior || breakdown?.trapAndFix || breakdown?.seniorSavior
+
+  return (
+    <section className="pedagogical-quad-deck" style={{ margin: '1.75rem 0', background: '#ffffff', border: '1.5px solid #cbd5e1', borderRadius: '12px', padding: '1.25rem', boxShadow: '0 4px 16px rgba(0,0,0,0.04)' }}>
+      <div className="quad-deck-header" style={{ marginBottom: '1rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.75rem' }}>
+        <span className="quad-deck-badge" style={{ background: '#0284c7', color: '#ffffff', fontSize: '0.72rem', fontWeight: 800, padding: '0.2rem 0.55rem', borderRadius: '4px', letterSpacing: '0.05em' }}>
+          {badge}
+        </span>
+        {title && <h3 className="quad-deck-title" style={{ margin: '0.5rem 0 0.2rem', fontSize: '1.25rem', fontWeight: 800, color: '#0f172a' }}>{title}</h3>}
+        {subtitle && <p className="quad-deck-subtitle" style={{ margin: 0, fontSize: '0.85rem', color: '#64748b' }}>{subtitle}</p>}
+      </div>
+
+      <div className="comic-breakdown-grid">
+        {bInput && (
+          <div className="breakdown-quad-card card-input">
+            <div className="quad-title">
+              <span className="quad-num">1</span>
+              <strong>{bInput.title || 'Explicit Input (Stimulus & Contract)'}</strong>
+            </div>
+            <div className="quad-text">
+              {typeof bInput === 'string' ? <RichText text={bInput} /> : (
+                <>
+                  {bInput.method && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                      <span className={`http-method ${bInput.method.toLowerCase()}`} style={{ fontWeight: 800, fontSize: '0.72rem', padding: '0.15rem 0.4rem', borderRadius: '3px', background: '#e0f2fe', color: '#0369a1' }}>{bInput.method}</span>
+                      <code style={{ fontSize: '0.8rem', background: '#f1f5f9', padding: '0.15rem 0.4rem', borderRadius: '3px' }}>{bInput.url}</code>
+                    </div>
+                  )}
+                  {bInput.desc && <p style={{ margin: '0 0 0.4rem' }}><RichText text={bInput.desc} /></p>}
+                  {bInput.code && <pre className="quad-code-snippet" style={{ margin: 0, padding: '0.5rem', background: '#0f172a', color: '#38bdf8', borderRadius: '6px', fontSize: '0.75rem' }}><code>{bInput.code}</code></pre>}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {bUnderTheHood && (
+          <div className="breakdown-quad-card card-explanation">
+            <div className="quad-title">
+              <span className="quad-num">2</span>
+              <strong>{bUnderTheHood.title || 'Under the Hood (Pipeline & Wire Mechanics)'}</strong>
+            </div>
+            <div className="quad-text">
+              {typeof bUnderTheHood === 'string' ? <RichText text={bUnderTheHood} /> : (
+                <>
+                  {bUnderTheHood.desc && <p style={{ margin: '0 0 0.4rem' }}><RichText text={bUnderTheHood.desc} /></p>}
+                  {bUnderTheHood.steps && (
+                    <ol style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.82rem', lineHeight: 1.45 }}>
+                      {bUnderTheHood.steps.map((st, i) => <li key={i}><RichText text={st} /></li>)}
+                    </ol>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {bOutput && (
+          <div className="breakdown-quad-card card-output">
+            <div className="quad-title">
+              <span className="quad-num">3</span>
+              <strong>{bOutput.title || 'Deterministic Output (Observable Response)'}</strong>
+            </div>
+            <div className="quad-text">
+              {typeof bOutput === 'string' ? <RichText text={bOutput} /> : (
+                <>
+                  {bOutput.status && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>
+                      <span className="response-status-badge" style={{ fontWeight: 800, fontSize: '0.72rem', padding: '0.15rem 0.4rem', borderRadius: '3px', background: '#dcfce7', color: '#166534' }}>{bOutput.status}</span>
+                      {bOutput.time && <span style={{ fontSize: '0.72rem', color: '#64748b' }}>{bOutput.time}</span>}
+                    </div>
+                  )}
+                  {bOutput.desc && <p style={{ margin: '0 0 0.4rem' }}><RichText text={bOutput.desc} /></p>}
+                  {bOutput.body && <pre className="quad-code-snippet" style={{ margin: 0, padding: '0.5rem', background: '#0f172a', color: '#4ade80', borderRadius: '6px', fontSize: '0.75rem' }}><code>{bOutput.body}</code></pre>}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+
+        {bSeniorSavior && (
+          <div className="breakdown-quad-card card-trap">
+            <div className="quad-title">
+              <span className="quad-num">4</span>
+              <strong>{bSeniorSavior.title || 'Senior Savior & Architectural Defensive Rule'}</strong>
+            </div>
+            <div className="quad-text">
+              {typeof bSeniorSavior === 'string' ? <RichText text={bSeniorSavior} /> : (
+                <>
+                  {bSeniorSavior.aphorism && <div style={{ fontStyle: 'italic', fontWeight: 700, color: '#991b1b', marginBottom: '0.3rem' }}>"{bSeniorSavior.aphorism}"</div>}
+                  {bSeniorSavior.rule && <p style={{ margin: '0 0 0.3rem' }}><strong>Rule:</strong> <RichText text={bSeniorSavior.rule} /></p>}
+                  {bSeniorSavior.trap && <p style={{ margin: 0, color: '#b91c1c' }}>⚠️ <strong>Trap:</strong> <RichText text={bSeniorSavior.trap} /></p>}
+                </>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
 function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns = 1, panels = [], realization }) {
   const [zoomLevel, setZoomLevel] = useState(100)
   const [lightboxPanel, setLightboxPanel] = useState(null)
@@ -650,15 +799,7 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                   </div>
                 </div>
 
-                {panelDialogues.length > 0 && (
-                  <div className="comic-dialogue-dock">
-                    {panelDialogues.map((dialogue, dialogueIndex) => (
-                      <ComicPanelBalloon key={dialogueIndex} dialogue={dialogue} index={dialogueIndex} />
-                    ))}
-                  </div>
-                )}
-
-                {p.image && (
+                {p.image ? (
                   <div className="comic-art-container">
                     <img
                       src={p.image.src || p.image.file || p.image}
@@ -666,7 +807,23 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
                       className="comic-art-image"
                       loading="lazy"
                     />
+
+                    {panelDialogues.length > 0 && (
+                      <div className="comic-balloons-layer">
+                        {panelDialogues.map((dialogue, dialogueIndex) => (
+                          <ComicPanelBalloon key={dialogueIndex} dialogue={dialogue} index={dialogueIndex} />
+                        ))}
+                      </div>
+                    )}
                   </div>
+                ) : (
+                  panelDialogues.length > 0 && (
+                    <div className="comic-balloons-fallback" style={{ padding: '0.75rem', background: '#f8fafc' }}>
+                      {panelDialogues.map((dialogue, dialogueIndex) => (
+                        <ComicPanelBalloon key={dialogueIndex} dialogue={dialogue} index={dialogueIndex} />
+                      ))}
+                    </div>
+                  )
                 )}
 
                 {/* Comic Narration Caption (Placed directly below image) */}
@@ -783,22 +940,32 @@ function Storyboard({ badge = 'GRAPHIC COMIC STORYBOARD', title, intro, columns 
             style={{
               maxWidth: '92vw',
               maxHeight: '82vh',
+              position: 'relative',
               overflow: 'auto',
               borderRadius: '8px',
               boxShadow: '0 20px 50px rgba(0,0,0,0.5)'
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={lightboxPanel.image?.src || lightboxPanel.image?.file || lightboxPanel.image}
-              alt={lightboxPanel.title}
-              style={{
-                width: `${lightboxZoom}%`,
-                height: 'auto',
-                display: 'block',
-                transition: 'width 0.15s ease'
-              }}
-            />
+            <div style={{ position: 'relative', width: `${lightboxZoom}%`, margin: '0 auto' }}>
+              <img
+                src={lightboxPanel.image?.src || lightboxPanel.image?.file || lightboxPanel.image}
+                alt={lightboxPanel.title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  transition: 'width 0.15s ease'
+                }}
+              />
+              {getPanelDialogues(lightboxPanel).length > 0 && (
+                <div className="comic-balloons-layer">
+                  {getPanelDialogues(lightboxPanel).map((dialogue, dialogueIndex) => (
+                    <ComicPanelBalloon key={dialogueIndex} dialogue={dialogue} index={dialogueIndex} isLightbox />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
@@ -1566,6 +1733,8 @@ export function Block({ block: b, staticMode = false }) {
     case 'structured-breakdown': return <StructuredBreakdown {...b} />
     case 'storyboard': return <Storyboard {...b} />
     case 'comic-workbench': return <ComicWorkbench {...b} />
+    case 'quad-card':
+    case 'pedagogical-quad-card': return <QuadCard {...b} />
     case 'mission':
       return (
         <section className="mission modern-mission-box">

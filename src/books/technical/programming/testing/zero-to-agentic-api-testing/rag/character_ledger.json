@@ -1,0 +1,91 @@
+{
+  "rag_level": "book",
+  "book_id": "zero-to-agentic-api-testing",
+  "id": "BOOK-CHARACTERS",
+  "title": "Character Continuity Ledger",
+  "version": "1.0.0",
+  "status": "canon",
+  "supersedes": null,
+  "superseded_by": null,
+  "characters": {
+    "akshay": {
+      "full_name": "Akshay Sharma",
+      "age": 24,
+      "role": "Software Engineering Student and Junior Apprentice",
+      "origin": "North Indian (Lucknow)",
+      "appearance": {
+        "hair": "Neat black hair, wind ruffled in panic scenes",
+        "eyes": "Sharp almond shaped eyes, expressive and intense",
+        "attire": "Crisp white cotton kurta with sleeves rolled up to mid forearms, casual blue denims",
+        "forehead": "Clean forehead with zero sectarian or religious markings",
+        "props": [
+          "Silver scratched laptop covered in developer sticker marks",
+          "Smartphone with cracked screen protector",
+          "Leaking brass water bottle with loose rubber washer",
+          "Canvas satchel bag"
+        ]
+      },
+      "voice_profile": {
+        "tone": "Earnest, analytical, high energy, panic prone under deadlines, rapid learner",
+        "speech_style": "Short visceral exclamations, direct questions, eureka moments",
+        "balloon_accent": "#0284c7"
+      }
+    },
+    "sameer": {
+      "full_name": "Sameer Krishnamurthy",
+      "age": 40,
+      "role": "Principal Systems Architect and Senior Mentor",
+      "origin": "South Indian (Chennai / Bangalore)",
+      "appearance": {
+        "hair": "Neat salt and pepper hair",
+        "facial_hair": "Closely trimmed, dignified salt and pepper beard",
+        "eyes": "Calm, observant almond eyes behind round brass framed spectacles",
+        "attire": "Peacock indigo raw silk kurta over cream cotton trousers",
+        "props": [
+          "Faceted cutting chai glass resting inside an ornate brass wire holder",
+          "Compact 13 inch titanium diagnostic tablet showing green terminal telemetry",
+          "Brass tea samovar on office desk"
+        ]
+      },
+      "voice_profile": {
+        "tone": "Calm, stoic, ironic humor, speaks in foundational first principles",
+        "speech_style": "Unflappable, succinct, philosophical engineering aphorisms",
+        "balloon_accent": "#7c3aed"
+      }
+    },
+    "rohan": {
+      "full_name": "Rohan Verma",
+      "age": 24,
+      "role": "Akshay Batchmate and Panicked Student",
+      "attire": "Olive green cotton kurta",
+      "props": [
+        "Wristwatch showing 08:35 AM",
+        "Ruined exam syllabus sheet"
+      ],
+      "balloon_accent": "#059669"
+    },
+    "examiner": {
+      "full_name": "Chief Proctor Sharma",
+      "age": 55,
+      "role": "Campus Hall Proctor and Gatekeeper",
+      "attire": "Formal maroon waistcoat over grey shirt",
+      "props": [
+        "Brass padlock and chain",
+        "Iron gate keys"
+      ],
+      "balloon_accent": "#dc2626"
+    }
+  },
+  "mentorship_rules": {
+    "three_chapter_chai_rule": "Every 3 chapters, Sameer and Akshay pause for cutting chai to reflect on architectural first principles"
+  },
+  "_amendments_audit_log": [
+    {
+      "timestamp": "2026-10-04T21:11:40.163882Z",
+      "author": "agentic_publishing_engine",
+      "key": "mentorship_rules",
+      "rationale": "Formalize the 3 chapter cutting chai pause rule",
+      "status": "ratified"
+    }
+  ]
+}

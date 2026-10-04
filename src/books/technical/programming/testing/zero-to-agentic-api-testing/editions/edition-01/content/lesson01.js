@@ -20,6 +20,7 @@ import act02Scene21Img from '../assets/illustrations/acts/act2/act02_scene21_bul
 import act03Scene27Img from '../assets/illustrations/acts/act3/act03_scene27_reaction_typeerror_crash.jpg'
 import act03Scene29Img from '../assets/illustrations/acts/act3/act03_scene29_sameer_points_physical_wire.jpg'
 import act03Scene30Img from '../assets/illustrations/acts/act3/act03_scene30_byte_stream_waterfall_aqueduct.jpg'
+import act03Scene31Img from '../assets/illustrations/acts/act3/act03_scene31_adding_express_json_middleware.jpg'
 import act03Scene32Img from '../assets/illustrations/acts/act3/act03_scene32_two_men_success_201_created.jpg'
 
 import act04Scene33Img from '../assets/illustrations/acts/act4/act04_scene33_veranda_lunch_table_setup.jpg'
@@ -28,6 +29,7 @@ import act04Scene35Img from '../assets/illustrations/acts/act4/act04_scene35_pos
 import act04Scene36Img from '../assets/illustrations/acts/act4/act04_scene36_get_inspecting_without_touching.jpg'
 import act04Scene37Img from '../assets/illustrations/acts/act4/act04_scene37_put_replacing_entire_platter.jpg'
 import act04Scene38Img from '../assets/illustrations/acts/act4/act04_scene38_patch_topping_up_dal.jpg'
+import act04Scene41Img from '../assets/illustrations/acts/act4/act04_scene41_status_2xx_green_royal_garden.jpg'
 
 import act05Scene44Img from '../assets/illustrations/acts/act5/act05_scene44_walking_up_spiral_staircase.jpg'
 import act05Scene45Img from '../assets/illustrations/acts/act5/act05_scene45_sunset_rooftop_pavilion_wide.jpg'
@@ -421,6 +423,39 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
       ]
     },
 
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : THE WIRE RESCUE',
+      title: 'Direct Wire Inspection vs Browser Waterfall Bloat',
+      subtitle: 'Bypassing megabytes of presentation glass to fetch pure JSON from the wire',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/api/v1/admitcards/APX102',
+        desc: 'Direct wire request for candidate examination hall ticket.',
+        code: 'curl -i http://localhost:5050/api/v1/admitcards/APX102 -H "Accept: application/json"'
+      },
+      underTheHood: {
+        desc: 'Bypassing the entire browser presentation engine: no HTML parsing, no CSS styling, no React hydration.',
+        steps: [
+          'Client opens TCP connection directly to campus API gateway.',
+          'HTTP GET request reaches the admit card database service.',
+          'Database reads 120 bytes of JSON without compiling DOM elements.',
+          'Payload returns across network in a single TCP packet.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '14ms',
+        desc: 'Pure JSON payload delivered in fourteen milliseconds.',
+        body: '{\n  "status": "success",\n  "rollNo": "APX102",\n  "hall": 302,\n  "seat": "B14",\n  "verified": true\n}'
+      },
+      seniorSavior: {
+        aphorism: 'The browser is a presentation glass; wire data is almost always featherweight.',
+        rule: 'When testing systems, always inspect network wire payloads before debugging UI components.',
+        trap: 'Confusing client rendering delays with server API latency leads to debugging the wrong tier.'
+      }
+    },
+
     // =========================================================================
     // ACT 2: THE CANTEEN COURIER MODEL & CONTRACT RULES
     // =========================================================================
@@ -650,15 +685,30 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'When curl sends JSON, it crosses the wire as TCP byte chunks, like water from a hose. The server receives raw bytes over time, not a ready object.'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'Express does not guess. It leaves req.body completely blank unless you install a catcher. Stick app.use(express.json()) right above your routes.'
+              speech: 'Express leaves req.body blank unless you install a catcher. Stick app.use(express.json()) above your routes!'
             }
           ],
           scene: 'Sameer explains TCP streaming buffers and demonstrates why mounting express.json() is essential before registering any route handlers.',
           realization: 'Data travels over the network as a raw stream of byte chunks. Without middleware to collect and parse those pieces, req.body stays undefined.'
+        },
+        {
+          title: 'Mounting Express JSON Middleware',
+          time: '01:28 PM',
+          image: {
+            src: act03Scene31Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act3/act03_scene31_adding_express_json_middleware.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Akshay typing app.use(express.json()) into the code editor on his laptop with Sameer nodding beside him.',
+            caption: 'Middleware Mount: Akshay installs express.json() right above his POST route to assemble incoming byte streams.'
+          },
+          dialogues: [
+            {
+              speaker: 'Akshay',
+              speech: 'Adding app.use(express.json())... It catches the byte stream and builds the body object!'
+            }
+          ],
+          scene: 'Akshay adds app.use(express.json()) above his route handlers, instructing Express to buffer incoming chunks before dispatching requests.'
         },
         {
           title: 'Victory on Port 3000: 201 Created',
@@ -675,11 +725,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             {
               speaker: 'Akshay',
               reply: true,
-              speech: 'Yes! received: { name: "Akshay Mehra" }! It actually read the data!'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'Remember this forever: wires carry raw bytes, not JavaScript objects. Middleware is the worker that turns noise into meaning.'
+              speech: 'Yes! Status 201 Created! It read the incoming JSON and stored my student record!'
             }
           ],
           scene: 'Akshay successfully verifies that express.json() converts the raw TCP buffer into a clean JavaScript object.'
@@ -783,6 +829,39 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
       ]
     },
 
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : THE TCP BYTE STREAM',
+      title: 'Express JSON Middleware and Stream Buffering',
+      subtitle: 'Overcoming the undefined body trap through stream chunk buffering on port 3000',
+      input: {
+        method: 'POST',
+        url: 'http://localhost:3000/api/students',
+        desc: 'Client transmits JSON payload across the wire.',
+        code: 'curl -X POST http://localhost:3000/api/students -H "Content-Type: application/json" -d \'{"name": "Akshay"}\''
+      },
+      underTheHood: {
+        desc: 'Operating system socket splits payload into TCP segments. Express must collect chunks before route logic fires.',
+        steps: [
+          'TCP packets arrive over the network as disconnected raw byte chunks.',
+          'Readable stream fires data events into server memory buffers.',
+          'express.json() concatenates chunks into a complete UTF-8 string.',
+          'JSON.parse deserializes text and attaches resulting object to req.body.'
+        ]
+      },
+      output: {
+        status: '201 Created',
+        time: '18ms',
+        desc: 'Server successfully parses body and assigns persistent ID.',
+        body: '{\n  "status": "success",\n  "studentId": "STU1094",\n  "name": "Akshay"\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Copper cables transfer streaming byte pulses, not JavaScript objects.',
+        rule: 'Always mount express.json() before registering POST, PUT, or PATCH routes.',
+        trap: 'Omitting express.json() leaves req.body undefined, crashing handlers attempting property access.'
+      }
+    },
+
     // =========================================================================
     // ACT 4: THE FIVE CRUD VERBS & THE BRASS THALI RULE
     // =========================================================================
@@ -793,6 +872,25 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
       intro: 'Over a traditional six-katori lunch thali, Sameer illustrates the life cycle of server entities, exposing the devastating data wiping trap of HTTP PUT.',
       columns: 2,
       panels: [
+        {
+          title: 'Veranda Lunch Table Setup',
+          time: '02:25 PM',
+          image: {
+            src: act04Scene33Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene33_veranda_lunch_table_setup.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Wide view of the stepwell dining veranda with carved sandstone columns and gleaming brass thali platters.',
+            caption: 'Dining Veranda: The canteen staff prepares gleaming brass thalis, setting the stage for the five HTTP verbs.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'Lunch is served. Every action you can perform on a database entity maps to what we do at this table.'
+            }
+          ],
+          scene: 'Wide view of the open dining veranda overlooking the stepwell, where gleaming brass thali platters await the afternoon session.'
+        },
         {
           title: 'Sitting Down for the Protocol Feast',
           time: '02:30 PM',
@@ -807,7 +905,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Whenever you talk to an API, you only ever do five basic moves. Five verbs. And this lunch feast is about to teach you every single one.'
+              speech: 'Whenever you talk to an API, you only ever perform five basic moves: the five core CRUD verbs.'
             }
           ],
           scene: 'Akshay and Sameer sit before traditional brass lunch thalis on the veranda, ready to map database operations to dining rituals.'
@@ -826,12 +924,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'GET means inspect this plate with your eyes. Nothing is eaten or spilled. Repetition leaves the state unchanged. It is safe and idempotent.'
-            },
-            {
-              speaker: 'Akshay',
-              reply: true,
-              speech: 'Inspecting the plate ten times leaves the food completely untouched. GET never mutates state!'
+              speech: 'GET means inspect this plate with your eyes. Safe and idempotent. Looking changes nothing in the kitchen.'
             }
           ],
           scene: 'Sameer demonstrates GET as visual read-only inspection: safe, cacheable, and idempotent.',
@@ -850,13 +943,8 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           },
           dialogues: [
             {
-              speaker: 'Sameer',
-              speech: 'See the attendant bring a fresh brass platter to an empty table. That is POST: creating a new resource in the collection.'
-            },
-            {
               speaker: 'Akshay',
-              reply: true,
-              speech: 'And the server assigns it a unique identity, returning HTTP 201 Created!'
+              speech: 'POST is bringing a brand new thali to the table. The server assigns it an ID and returns 201 Created!'
             }
           ],
           scene: 'The canteen attendant arrives with a full, fresh brass thali platter, representing non-idempotent entity creation.',
@@ -876,16 +964,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'PUT replaces the whole plate. It does not tweak one field. Send only dal and rice, and paneer and kheer disappear.'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'If your request names only dal and rice, the waiter swaps the whole plate. Paneer and kheer are gone.'
-            },
-            {
-              speaker: 'Akshay',
-              reply: true,
-              speech: 'Hey! Keep your hands off my paneer! That is terrifying!'
+              speech: 'The Brass Thali Trap! PUT replaces the whole plate! If you omit the paneer, the kitchen wipes it out!'
             }
           ],
           scene: 'Sameer dramatically lifts the entire thali away to demonstrate that HTTP PUT replaces the complete resource record from scratch.'
@@ -903,17 +982,31 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           },
           dialogues: [
             {
-              speaker: 'Sameer',
-              speech: 'PATCH: The polite surgical scalpel. PATCH tells the kitchen: Leave everything alone, just add a swirl of cream to my dal. Only the delta changes.'
-            },
-            {
               speaker: 'Akshay',
-              reply: true,
-              speech: 'And DELETE clears the table and returns 204 No Content!'
+              speech: 'PATCH is surgical! Leave everything alone, just add a swirl of cream to my dal. Only the delta updates!'
             }
           ],
           scene: 'Sameer uses a brass ladle to top up a single katori, showing how PATCH updates only the specific fields specified in the request body.',
           realization: 'PUT replaces the entire resource from scratch: anything you leave out gets wiped clean. PATCH updates only the fields you send. Remember the Brass Thali Rule: PUT replaces the whole plate; PATCH tops up a single bowl.'
+        },
+        {
+          title: 'The Three HTTP Status Kingdoms',
+          time: '02:55 PM',
+          image: {
+            src: act04Scene41Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act4/act04_scene41_status_2xx_green_royal_garden.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Allegorical illustration of status code kingdoms: green royal garden for 2xx success, closed wicket gate for 4xx client errors, and kitchen fire for 5xx server errors.',
+            caption: 'Status Kingdoms: HTTP status codes communicate server outcomes clearly across distributed network systems.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'Status codes are server weather reports: 2xx green garden, 4xx locked wicket, 5xx kitchen fire.'
+            }
+          ],
+          scene: 'Sameer summarizes HTTP response codes into three distinct kingdoms: 2xx success, 4xx client mistake, and 5xx internal server breakdown.'
         }
       ]
     },
@@ -1082,6 +1175,39 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
       ]
     },
 
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : ENTITY MUTATION',
+      title: 'The Brass Thali Rule: PUT Total Replacement vs PATCH Surgical Delta',
+      subtitle: 'Preventing catastrophic data loss when updating database collections',
+      input: {
+        method: 'PUT vs PATCH',
+        url: 'http://localhost:3000/api/students/APX102',
+        desc: 'Comparing total replacement against partial property update.',
+        code: '// PUT: Replaces entire record\n{ "name": "Akshay" }\n\n// PATCH: Modifies only target field\n{ "email": "akshay@campus.edu" }'
+      },
+      underTheHood: {
+        desc: 'PUT constructs a brand new entity and swaps it into storage. PATCH merges incoming keys into existing state.',
+        steps: [
+          'PUT receives payload and overwrites existing record completely.',
+          'Any omitted properties in PUT request payload are wiped or set to null.',
+          'PATCH fetches existing record first and applies partial object merge.',
+          'Omitted properties in PATCH payload remain untouched in the database.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '12ms',
+        desc: 'Server returns modified student entity.',
+        body: '{\n  "status": "updated",\n  "student": {\n    "roll": "APX102",\n    "name": "Akshay",\n    "email": "akshay@campus.edu"\n  }\n}'
+      },
+      seniorSavior: {
+        aphorism: 'PUT replaces the whole platter; PATCH surgically tops up a single bowl.',
+        rule: 'Send complete resource representations with PUT, or use PATCH for partial updates.',
+        trap: 'Sending partial payloads to PUT wipes all unmentioned fields silently.'
+      }
+    },
+
     // =========================================================================
     // ACT 5: THE THREE PARADIGMS SYNTHESIS & SUNSET TOAST
     // =========================================================================
@@ -1093,8 +1219,46 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
       columns: 2,
       panels: [
         {
-          title: 'The Glass Whiteboard Showdown',
-          time: '03:15 PM',
+          title: 'Ascending the Sandstone Watchtower',
+          time: '04:45 PM',
+          image: {
+            src: act05Scene44Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene44_walking_up_spiral_staircase.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Akshay and Sameer climbing a curved sandstone spiral staircase illuminated by slit windows.',
+            caption: 'Watchtower Stairs: Climbing toward the open rooftop as twilight approaches.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'Come upstairs. You understand the wire and verbs. Now look at the architectural landscape.'
+            }
+          ],
+          scene: 'Sameer and Akshay climb the ancient sandstone spiral staircase toward the rooftop pavilion to survey system paradigms.'
+        },
+        {
+          title: 'The Sunset Rooftop Pavilion',
+          time: '05:00 PM',
+          image: {
+            src: act05Scene45Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene45_sunset_rooftop_pavilion_wide.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'Panoramic golden hour view from the open rooftop pavilion overlooking the stepwell campus.',
+            caption: 'Rooftop Horizon: Golden sunlight spreads across the campus, framing the architectural showdown.'
+          },
+          dialogues: [
+            {
+              speaker: 'Akshay',
+              speech: 'From up here, the entire campus network feels like one giant living nervous system!'
+            }
+          ],
+          scene: 'From the breezy rooftop pavilion, Akshay and Sameer look across the glowing campus roofs as evening begins.'
+        },
+        {
+          title: 'The Slate Blackboard Showdown',
+          time: '05:15 PM',
           image: {
             src: act05Scene46Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene46_sameer_slate_blackboard_canopy.jpg',
@@ -1106,32 +1270,34 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'What saved your life this morning: GET /api/v1/admitcards/APX102: that is called REST. It is clean, simple, and built on uniform URLs and standard HTTP verbs.'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'SOAP is a strict corporate contract. It wraps each message in a large XML envelope with WSDL validation.'
-            },
-            {
-              speaker: 'Akshay',
-              reply: true,
-              speech: 'Why would anyone use that?'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'When international banks transfer five million dollars, nobody wants casual. They want ironclad, tamper-proof contracts with strict schemas.'
-            },
-            {
-              speaker: 'Sameer',
-              speech: 'GraphQL flips the table: the client picks only the exact bites it wants. A phone can ask for only hall and seat, eliminating over-fetching!'
+              speech: 'Three great philosophies govern distributed systems today: REST, SOAP, and GraphQL. Let us compare them.'
             }
           ],
           scene: 'Sameer breaks down the three communication paradigms, demonstrating that all three are variations of the courier waiter model.',
           realization: 'Protocol architectures reflect trade-offs: REST prioritizes simplicity and standard verbs, SOAP enforces strict typed contracts, and GraphQL optimizes payload precision.'
         },
         {
+          title: 'REST: The Standardized Open Postcard',
+          time: '05:25 PM',
+          image: {
+            src: act05Scene47Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene47_paradigm_rest_standardized_postcard.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'A crisp parchment postcard with clear address lines and franked postal stamps resting on a cedar desk.',
+            caption: 'Standardized Postcard: REST relies on universal URIs and standard HTTP methods that any postal worker can read.'
+          },
+          dialogues: [
+            {
+              speaker: 'Sameer',
+              speech: 'REST is a standard open postcard. Clear address, standard stamps, readable by any courier on earth.'
+            }
+          ],
+          scene: 'Sameer introduces REST as an open postal card: simple, standardized, cacheable, and understood by all network intermediaries.'
+        },
+        {
           title: 'SOAP: The Armored Royal Lockbox',
-          time: '03:35 PM',
+          time: '05:35 PM',
           image: {
             src: act05Scene48Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene48_soap_armored_lockbox.jpg',
@@ -1143,20 +1309,34 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'This iron chest is SOAP: heavy, sealed, and strict. It wraps every payload in an XML envelope with security headers.'
-            },
-            {
-              speaker: 'Akshay',
-              reply: true,
-              speech: 'Heavy to carry, but impossible to tamper with. That is why banking and government treasuries never abandon it!'
+              speech: 'SOAP is an armored bank vault with wax seals and heavy XML contracts. Rigid, heavy, enterprise safe.'
             }
           ],
           scene: 'Sameer points to the sealed iron chest metaphor, explaining why high-compliance enterprise domains rely on strict XML contracts.',
           realization: 'SOAP trades lightweight speed for absolute contract enforcement, type safety, and standardized security headers.'
         },
         {
+          title: 'GraphQL: The Tailored Spice Market Basket',
+          time: '05:45 PM',
+          image: {
+            src: act05Scene49Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene49_paradigm_graphql_spice_market.jpg',
+            w: 1200,
+            h: 675,
+            alt: 'A woven bamboo spice basket holding precisely measured pinch bowls of saffron, star anise, and green cardamom.',
+            caption: 'Field Precision: GraphQL allows clients to request exact fields, preventing over-fetching over cellular links.'
+          },
+          dialogues: [
+            {
+              speaker: 'Akshay',
+              speech: 'GraphQL is a spice market basket! The client asks for only hall and seat digits, and gets zero unwanted data!'
+            }
+          ],
+          scene: 'Akshay grasps GraphQL query flexibility: mobile clients declare their required data shape, eliminating over-fetching.'
+        },
+        {
           title: 'Sunset Chai Toast: Welcome to the Wire',
-          time: '04:00 PM',
+          time: '06:00 PM',
           image: {
             src: act05Scene52Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act5/act05_scene52_chai_toast_to_network_wire.jpg',
@@ -1167,26 +1347,12 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           },
           dialogues: [
             {
-              speaker: 'Akshay',
-              speech: 'This morning at the quad gate, I was just a stressed-out user waiting on a frozen spinning wheel. Now I see the whole secret engine purring behind the curtain!'
-            },
-            {
               speaker: 'Sameer',
-              reply: true,
-              speech: 'Look at you. No longer a page viewer waiting on frozen glass. Welcome to the other side of the wire, engineer.'
-            },
-            {
-              speaker: 'Akshay',
-              speech: 'An official API thinker!'
-            },
-            {
-              speaker: 'Sameer',
-              reply: true,
-              speech: 'Good. Rest up tonight. Tomorrow in Chapter 2, we open our workbench and start breaking and testing APIs like pros.'
+              speech: 'To the wire, Akshay. Today you saw through the glass. Tomorrow, we test it to destruction.'
             }
           ],
-          scene: 'Akshay and Sameer clink their chai glasses in celebration of mastering the network wire.',
-          realization: 'When a webpage hangs, never ask "Why is the screen frozen?" Always open DevTools, inspect the wire, and ask: "Which API failed to deliver this data?"'
+          scene: 'Akshay and Sameer clink cutting chai glasses against the twilight sky, celebrating Akshay transformation from an anxious student into a wire inspector.',
+          realization: 'Understanding APIs transforms the engineer from a passive consumer of brittle user interfaces into a master of distributed contracts.'
         }
       ]
     },
@@ -1312,6 +1478,38 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           }
         }
       ]
+    },
+
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : THE THREE PARADIGMS',
+      title: 'Architectural Showdown: REST vs SOAP vs GraphQL',
+      subtitle: 'Selecting the optimal network contract model for your system requirements',
+      input: {
+        method: 'Admit Card Query Comparison',
+        url: 'GET /admitcards/APX102 | SOAP Action | query { student { hall seat } }',
+        desc: 'Comparing the three distinct request formats for retrieving candidate exam details.',
+        code: '// REST:\nGET /api/v1/admitcards/APX102\n\n// GraphQL:\nquery { student(id: "APX102") { hall seat } }'
+      },
+      underTheHood: {
+        desc: 'Underlying protocol mechanics: URL resource dispatching versus XML schema envelope processing versus AST field graph resolution.',
+        steps: [
+          'REST leverages standard HTTP verbs and status codes for uniform caching.',
+          'SOAP serializes payloads into XML envelopes validated against WSDL contracts.',
+          'GraphQL parses client queries into abstract syntax trees and executes field resolvers.'
+        ]
+      },
+      output: {
+        status: '200 OK across all paradigms',
+        time: '14ms REST | 48ms SOAP | 22ms GraphQL',
+        desc: 'Observable payload trade-offs across simplicity, contract rigor, and field precision.',
+        body: '{\n  "hall": 302,\n  "seat": "B14"\n}'
+      },
+      seniorSavior: {
+        aphorism: 'No protocol is universally superior; each solves a different engineering constraint.',
+        rule: 'Choose REST for public APIs, SOAP for strict banking compliance, and GraphQL for data hungry mobile clients.',
+        trap: 'Building GraphQL when simple REST endpoints suffice adds unnecessary schema and caching complexity.'
+      }
     },
 
     // =========================================================================

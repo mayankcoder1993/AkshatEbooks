@@ -1,0 +1,43 @@
+{
+  "rag_level": "universal",
+  "id": "UNIV-AUDIT-GATES",
+  "title": "Comprehensive Quality Audit Gates and Scoring Engine",
+  "version": "2.0.0",
+  "status": "canon",
+  "supersedes": null,
+  "superseded_by": null,
+  "target_scope": "all_books_all_domains",
+  "description": "Deterministic scoring engine requiring a minimum 90 percent composite score across five pedagogical and structural pillars.",
+  "scoring_rubric": {
+    "passing_threshold_percentage": 90,
+    "total_rubric_points": 47,
+    "pillars": {
+      "pedagogical_rigor": {
+        "max_points": 10,
+        "criteria": "Clear problem stakes, progressive complexity, 4-tier pedagogical cards present, senior mentor epiphanies"
+      },
+      "rule19_lexical_purity": {
+        "max_points": 10,
+        "criteria": "Zero hyphens or dashes in all user prose, headings, dialogues, and callouts (0 violations = 10 pts, else 0 pts)"
+      },
+      "visual_comic_geometry": {
+        "max_points": 10,
+        "criteria": "Inside-image balloons, top 25% negative headroom, zero face occlusion, <=120 character speech limits"
+      },
+      "technical_accuracy_and_code": {
+        "max_points": 10,
+        "criteria": "100% runnable code examples, zero undefined crashes, defensive error handling, test harness passes"
+      },
+      "character_and_world_continuity": {
+        "max_points": 7,
+        "criteria": "Consistent attire, realistic dialogue voice, authentic Indian setting, cohesive narrative arc"
+      }
+    }
+  },
+  "automated_linters": [
+    "framework/tools/rule19-checker.mjs",
+    "framework/tools/audit-chapter.mjs",
+    "npm test",
+    "scripts/run_snippet_tests.sh"
+  ]
+}

@@ -1,0 +1,202 @@
+[
+  {
+    "doc_id": "UNIV-AUDIT-GATES",
+    "chunk_id": "UNIV-AUDIT-GATES_summary",
+    "title": "Comprehensive Quality Audit Gates and Scoring Engine",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/audit_quality_gates.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Comprehensive Quality Audit Gates and Scoring Engine. Deterministic scoring engine requiring a minimum 90 percent composite score across five pedagogical and structural pillars.. Scope: all_books_all_domains Status: canon"
+  },
+  {
+    "doc_id": "UNIV-AUDIT-GATES",
+    "chunk_id": "UNIV-AUDIT-GATES_description",
+    "title": "Comprehensive Quality Audit Gates and Scoring Engine [description]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/audit_quality_gates.json",
+    "status": "canon",
+    "category": "description",
+    "text": "Comprehensive Quality Audit Gates and Scoring Engine -> description: \"Deterministic scoring engine requiring a minimum 90 percent composite score across five pedagogical and structural pillars.\""
+  },
+  {
+    "doc_id": "UNIV-AUDIT-GATES",
+    "chunk_id": "UNIV-AUDIT-GATES_scoring_rubric",
+    "title": "Comprehensive Quality Audit Gates and Scoring Engine [scoring_rubric]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/audit_quality_gates.json",
+    "status": "canon",
+    "category": "scoring_rubric",
+    "text": "Comprehensive Quality Audit Gates and Scoring Engine -> scoring_rubric: {\"passing_threshold_percentage\": 90, \"total_rubric_points\": 47, \"pillars\": {\"pedagogical_rigor\": {\"max_points\": 10, \"criteria\": \"Clear problem stakes, progressive complexity, 4-tier pedagogical cards present, senior mentor epiphanies\"}, \"rule19_lexical_purity\": {\"max_points\": 10, \"criteria\": \"Zero hyphens or dashes in all user prose, headings, dialogues, and callouts (0 violations = 10 pts, else 0 pts)\"}, \"visual_comic_geometry\": {\"max_points\": 10, \"criteria\": \"Inside-image balloons, top 25% negative headroom, zero face occlusion, <=120 character speech limits\"}, \"technical_accuracy_and_code\": {\"max_points\": 10, \"criteria\": \"100% runnable code examples, zero undefined crashes, defensive error handling, test harness passes\"}, \"character_and_world_continuity\": {\"max_points\": 7, \"criteria\": \"Consistent attire, realistic dialogue voice, authentic Indian setting, cohesive narrative arc\"}}}"
+  },
+  {
+    "doc_id": "UNIV-AUDIT-GATES",
+    "chunk_id": "UNIV-AUDIT-GATES_automated_linters",
+    "title": "Comprehensive Quality Audit Gates and Scoring Engine [automated_linters]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/audit_quality_gates.json",
+    "status": "canon",
+    "category": "automated_linters",
+    "text": "Comprehensive Quality Audit Gates and Scoring Engine -> automated_linters: [\"framework/tools/rule19-checker.mjs\", \"framework/tools/audit-chapter.mjs\", \"npm test\", \"scripts/run_snippet_tests.sh\"]"
+  },
+  {
+    "doc_id": "UNIV-AESTHETICS-MADHUBANI",
+    "chunk_id": "UNIV-AESTHETICS-MADHUBANI_summary",
+    "title": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/madhubani_folk_tech_aesthetic.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard. Art direction combining ancient Mithila folk art linework with sleek modern Indian engineering environments.. Scope: all_illustrated_books Status: canon"
+  },
+  {
+    "doc_id": "UNIV-AESTHETICS-MADHUBANI",
+    "chunk_id": "UNIV-AESTHETICS-MADHUBANI_description",
+    "title": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard [description]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/madhubani_folk_tech_aesthetic.json",
+    "status": "canon",
+    "category": "description",
+    "text": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard -> description: \"Art direction combining ancient Mithila folk art linework with sleek modern Indian engineering environments.\""
+  },
+  {
+    "doc_id": "UNIV-AESTHETICS-MADHUBANI",
+    "chunk_id": "UNIV-AESTHETICS-MADHUBANI_positive_invariants",
+    "title": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard [positive_invariants]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/madhubani_folk_tech_aesthetic.json",
+    "status": "canon",
+    "category": "positive_invariants",
+    "text": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard -> positive_invariants: {\"contours\": \"crisp double line black ink linework\", \"eyes\": \"distinctive sharp almond shaped eyes filled with intensity\", \"color_palette\": \"flat saturated gouache fills in indigo, mustard turmeric, terracotta, copper orange, and sandstone cream\", \"decorative_patterns\": \"kachni cross hatching and bharni solid fill patterns on architectural arches and fabric borders\", \"modern_props\": \"open slim laptops, optical mice, modern smartphones, server cloisters, cutting chai in faceted glass glasses with brass holders\", \"lighting\": \"warm Indian sunlight, courtyard sandstone shadows, golden twilight\"}"
+  },
+  {
+    "doc_id": "UNIV-AESTHETICS-MADHUBANI",
+    "chunk_id": "UNIV-AESTHETICS-MADHUBANI_negative_constraints",
+    "title": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard [negative_constraints]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/madhubani_folk_tech_aesthetic.json",
+    "status": "canon",
+    "category": "negative_constraints",
+    "text": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard -> negative_constraints: {\"prohibited_elements\": [\"medieval fantasy clutter\", \"parchment scrolls\", \"brass compasses or protractors\", \"alchemical or apothecary jars\", \"crude stick figures or generic vector clipart\", \"Devanagari or Hindi text inside illustrations\", \"AI watermarks or Gemini logo artifacts\"]}"
+  },
+  {
+    "doc_id": "UNIV-PEDAGOGICAL-CARD",
+    "chunk_id": "UNIV-PEDAGOGICAL-CARD_summary",
+    "title": "Universal 4-Part Pedagogical Card Invariant",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/pedagogical_card_universal.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Universal 4-Part Pedagogical Card Invariant. The four part structural invariant mapping inputs, processing mechanics, verifiable outputs, and senior insights across every academic domain.. Scope: all_books_all_domains Status: canon"
+  },
+  {
+    "doc_id": "UNIV-PEDAGOGICAL-CARD",
+    "chunk_id": "UNIV-PEDAGOGICAL-CARD_description",
+    "title": "Universal 4-Part Pedagogical Card Invariant [description]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/pedagogical_card_universal.json",
+    "status": "canon",
+    "category": "description",
+    "text": "Universal 4-Part Pedagogical Card Invariant -> description: \"The four part structural invariant mapping inputs, processing mechanics, verifiable outputs, and senior insights across every academic domain.\""
+  },
+  {
+    "doc_id": "UNIV-PEDAGOGICAL-CARD",
+    "chunk_id": "UNIV-PEDAGOGICAL-CARD_card_structure",
+    "title": "Universal 4-Part Pedagogical Card Invariant [card_structure]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/pedagogical_card_universal.json",
+    "status": "canon",
+    "category": "card_structure",
+    "text": "Universal 4-Part Pedagogical Card Invariant -> card_structure: {\"tier_1_input\": {\"definition\": \"The exact stimulus, request, raw data, legal scenario, economic shock, or exam question.\", \"tech_domain\": \"HTTP Method, Request URL, Headers, and Raw JSON Body\", \"law_domain\": \"Facts of the dispute, statutory section, and petitioner prayer\", \"economics_domain\": \"Market shock, supply shift, policy interest rate change\", \"math_domain\": \"Initial condition, theorem hypothesis, input matrix\"}, \"tier_2_under_the_hood\": {\"definition\": \"The step by step transformation pipeline, internal machinery, and causal mechanism.\", \"tech_domain\": \"TCP socket buffering, stream chunking, express.json() deserialization, routing table lookup\", \"law_domain\": \"Constitutional bench interpretation, judicial doctrine, precedence analysis\", \"economics_domain\": \"Equilibrium adjustment, price clearing mechanism, velocity multiplier\", \"math_domain\": \"Successive algebraic proof transformations, matrix row reductions\"}, \"tier_3_output\": {\"definition\": \"The verifiable, observable terminal outcome, status, response, or verdict.\", \"tech_domain\": \"HTTP Status Code (e.g. 201 Created), Response Headers, and JSON response payload\", \"law_domain\": \"Operative order, writ remedy, declared legal precedent\", \"economics_domain\": \"New market clearing price, welfare distribution, deadweight loss\", \"math_domain\": \"Q.E.D. final derived equation, eigenvalue set, geometric graph\"}, \"tier_4_senior_savior\": {\"definition\": \"The mentor defensive insight, production edge case warning, or exam winning rubric.\", \"tech_domain\": \"Sameer defensive architecture rule, silent failure avoidance, wire inspection habit\", \"law_domain\": \"Senior Advocate courtroom strategy, doctrine exception, dissenting opinion hook\", \"economics_domain\": \"Unintended consequences warning, inflation expectation trap, elasticity limit\", \"math_domain\": \"Singularity trap warning, boundary condition check, shortcut mnemonic\"}}"
+  },
+  {
+    "doc_id": "UNIV-RULE-19",
+    "chunk_id": "UNIV-RULE-19_summary",
+    "title": "Rule 19 Lexical Purity Invariant",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/rule19_standard.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Rule 19 Lexical Purity Invariant. Zero tolerance invariant prohibiting hyphens and dashes in all user facing prose, dialogue, chapter titles, and captions.. Scope: all_books_all_domains Status: canon"
+  },
+  {
+    "doc_id": "UNIV-RULE-19",
+    "chunk_id": "UNIV-RULE-19_description",
+    "title": "Rule 19 Lexical Purity Invariant [description]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/rule19_standard.json",
+    "status": "canon",
+    "category": "description",
+    "text": "Rule 19 Lexical Purity Invariant -> description: \"Zero tolerance invariant prohibiting hyphens and dashes in all user facing prose, dialogue, chapter titles, and captions.\""
+  },
+  {
+    "doc_id": "UNIV-RULE-19",
+    "chunk_id": "UNIV-RULE-19_invariants",
+    "title": "Rule 19 Lexical Purity Invariant [invariants]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/rule19_standard.json",
+    "status": "canon",
+    "category": "invariants",
+    "text": "Rule 19 Lexical Purity Invariant -> invariants: {\"prohibited_characters\": [\"-\", \"\u2014\", \"\u2013\"], \"prohibited_locations\": [\"chapter_titles\", \"section_headings\", \"speech_balloons\", \"scene_captions\", \"takeaway_cards\", \"senior_savior_boxes\", \"triage_scenarios\", \"mission_briefs\"], \"permitted_exceptions\": [\"inline_code_identifiers_in_backticks\", \"code_blocks\", \"filesystem_file_paths_in_backticks\", \"terminal_command_flags_in_backticks\", \"package_names_in_backticks\"], \"replacement_lexicon\": {\"well-known\": \"celebrated\", \"first-class\": \"primary\", \"step-by-step\": \"sequential\", \"real-time\": \"live\", \"end-to-end\": \"complete\", \"line-by-line\": \"successive\", \"under-the-hood\": \"beneath the surface\"}}"
+  },
+  {
+    "doc_id": "UNIV-RULE-19",
+    "chunk_id": "UNIV-RULE-19_enforcement",
+    "title": "Rule 19 Lexical Purity Invariant [enforcement]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/rule19_standard.json",
+    "status": "canon",
+    "category": "enforcement",
+    "text": "Rule 19 Lexical Purity Invariant -> enforcement: {\"cli_tool\": \"framework/tools/rule19-checker.mjs\", \"threshold\": \"100% zero violations\", \"ci_blocker\": true}"
+  },
+  {
+    "doc_id": "UNIV-BALLOON-GEOMETRY",
+    "chunk_id": "UNIV-BALLOON-GEOMETRY_summary",
+    "title": "Graphic Novel Speech Balloon and Negative Headroom Geometry",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/speech_balloon_geometry.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Graphic Novel Speech Balloon and Negative Headroom Geometry. Mathematical layout constraints ensuring speech balloons reside inside the 16:9 illustration canvas without face occlusion.. Scope: all_illustrated_books Status: canon"
+  },
+  {
+    "doc_id": "UNIV-BALLOON-GEOMETRY",
+    "chunk_id": "UNIV-BALLOON-GEOMETRY_description",
+    "title": "Graphic Novel Speech Balloon and Negative Headroom Geometry [description]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/speech_balloon_geometry.json",
+    "status": "canon",
+    "category": "description",
+    "text": "Graphic Novel Speech Balloon and Negative Headroom Geometry -> description: \"Mathematical layout constraints ensuring speech balloons reside inside the 16:9 illustration canvas without face occlusion.\""
+  },
+  {
+    "doc_id": "UNIV-BALLOON-GEOMETRY",
+    "chunk_id": "UNIV-BALLOON-GEOMETRY_geometry",
+    "title": "Graphic Novel Speech Balloon and Negative Headroom Geometry [geometry]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/speech_balloon_geometry.json",
+    "status": "canon",
+    "category": "geometry",
+    "text": "Graphic Novel Speech Balloon and Negative Headroom Geometry -> geometry: {\"canvas_aspect_ratio\": \"16:9\", \"lettering_zone\": \"top 25% negative headroom (empty sky, stone arches, ceiling beams, blank walls)\", \"vertical_top_offset\": \"4%\", \"horizontal_offset\": \"3%\", \"max_width_percentage\": \"34%\", \"max_character_count\": 120, \"max_word_count\": 18, \"face_occlusion_tolerance\": \"0%\", \"tail_direction\": \"downward towards speaker mouth or posture\", \"background_styling\": \"rgba(255, 255, 255, 0.96) glassmorphism blur(8px)\", \"border_width\": \"2px solid character accent color\"}"
+  },
+  {
+    "doc_id": "UNIV-BALLOON-GEOMETRY",
+    "chunk_id": "UNIV-BALLOON-GEOMETRY_speaker_palette",
+    "title": "Graphic Novel Speech Balloon and Negative Headroom Geometry [speaker_palette]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/speech_balloon_geometry.json",
+    "status": "canon",
+    "category": "speaker_palette",
+    "text": "Graphic Novel Speech Balloon and Negative Headroom Geometry -> speaker_palette: {\"akshay\": {\"accent\": \"#0284c7\", \"tag\": \"AKSHAY\", \"default_position\": \"top-left\"}, \"sameer\": {\"accent\": \"#7c3aed\", \"tag\": \"SAMEER\", \"default_position\": \"top-right\"}, \"rohan\": {\"accent\": \"#059669\", \"tag\": \"ROHAN\", \"default_position\": \"top-right\"}, \"examiner\": {\"accent\": \"#dc2626\", \"tag\": \"EXAMINER\", \"default_position\": \"top-right\"}}"
+  },
+  {
+    "doc_id": "UNIV-BALLOON-GEOMETRY",
+    "chunk_id": "UNIV-BALLOON-GEOMETRY_pacing_rules",
+    "title": "Graphic Novel Speech Balloon and Negative Headroom Geometry [pacing_rules]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/speech_balloon_geometry.json",
+    "status": "canon",
+    "category": "pacing_rules",
+    "text": "Graphic Novel Speech Balloon and Negative Headroom Geometry -> pacing_rules: {\"max_speakers_per_panel\": 1, \"conversational_replies\": \"bifurcate into shot and reverse reaction panels\", \"prose_overflow\": \"move deep technical explanations to sub-art deck captions or Senior Savior takeaway cards\"}"
+  }
+]

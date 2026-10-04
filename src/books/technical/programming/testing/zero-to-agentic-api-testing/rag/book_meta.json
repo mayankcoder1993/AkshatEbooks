@@ -1,0 +1,212 @@
+[
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_summary",
+    "title": "Graphic Novel Artwork Asset Manifest",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Graphic Novel Artwork Asset Manifest. . Scope:  Status: canon"
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_book_id",
+    "title": "Graphic Novel Artwork Asset Manifest [book_id]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "book_id",
+    "text": "Graphic Novel Artwork Asset Manifest -> book_id: \"zero-to-agentic-api-testing\""
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_base_path",
+    "title": "Graphic Novel Artwork Asset Manifest [base_path]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "base_path",
+    "text": "Graphic Novel Artwork Asset Manifest -> base_path: \"src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/\""
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_aspect_ratio",
+    "title": "Graphic Novel Artwork Asset Manifest [aspect_ratio]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "aspect_ratio",
+    "text": "Graphic Novel Artwork Asset Manifest -> aspect_ratio: \"16:9\""
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_resolution",
+    "title": "Graphic Novel Artwork Asset Manifest [resolution]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "resolution",
+    "text": "Graphic Novel Artwork Asset Manifest -> resolution: \"1200x675\""
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_style",
+    "title": "Graphic Novel Artwork Asset Manifest [style]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "style",
+    "text": "Graphic Novel Artwork Asset Manifest -> style: \"modern_tech_madhubani_hybrid\""
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_total_illustrations",
+    "title": "Graphic Novel Artwork Asset Manifest [total_illustrations]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "total_illustrations",
+    "text": "Graphic Novel Artwork Asset Manifest -> total_illustrations: 35"
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_negative_headroom_zone",
+    "title": "Graphic Novel Artwork Asset Manifest [negative_headroom_zone]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "negative_headroom_zone",
+    "text": "Graphic Novel Artwork Asset Manifest -> negative_headroom_zone: \"top 25% ceiling\""
+  },
+  {
+    "doc_id": "BOOK-ASSET-MANIFEST",
+    "chunk_id": "BOOK-ASSET-MANIFEST_acts",
+    "title": "Graphic Novel Artwork Asset Manifest [acts]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/asset_manifest.json",
+    "status": "canon",
+    "category": "acts",
+    "text": "Graphic Novel Artwork Asset Manifest -> acts: [\"acts/act1/act01_scene01_sunny_campus_quadrangle.jpg\", \"acts/act1/act01_scene02_leaking_brass_bottle.jpg\", \"acts/act1/act01_scene03_akshay_soaked_admit_card.jpg\", \"acts/act1/act01_scene04_smeared_watercolor_admit_card.jpg\", \"acts/act1/act01_scene05_akshay_sprinting_panic.jpg\", \"acts/act1/act01_scene06_two_students_running_panic.jpg\", \"acts/act1/act01_scene07_akshay_tapping_phone_screen.jpg\", \"acts/act1/act01_scene09_sameer_arrival_chai.jpg\", \"acts/act1/act01_scene09_alt_cloister_server_rack.jpg\", \"acts/act1/act01_scene11_sameer_diagnostic_slate_14ms.jpg\", \"acts/act2/act02_scene14_research_workshop_interior.jpg\", \"acts/act2/act02_scene15_brass_kettle_pouring_chai.jpg\", \"acts/act2/act02_scene17_restaurant_customer_client.jpg\", \"acts/act2/act02_scene18_canteen_waiter_api.jpg\", \"acts/act2/act02_scene19_commercial_kitchen_database.jpg\", \"acts/act2/act02_scene21_bullock_cart_vs_royal_courier.jpg\", \"acts/act3/act03_scene27_reaction_typeerror_crash.jpg\", \"acts/act3/act03_scene29_sameer_points_physical_wire.jpg\", \"acts/act3/act03_scene30_byte_stream_waterfall_aqueduct.jpg\", \"acts/act3/act03_scene31_adding_express_json_middleware.jpg\", \"acts/act3/act03_scene32_two_men_success_201_created.jpg\", \"acts/act4/act04_scene33_veranda_lunch_table_setup.jpg\", \"acts/act4/act04_scene34_sitting_down_protocol_feast.jpg\", \"acts/act4/act04_scene36_get_inspecting_without_touching.jpg\", \"acts/act4/act04_scene35_post_placing_brand_new_thali.jpg\", \"acts/act4/act04_scene37_put_replacing_entire_platter.jpg\", \"acts/act4/act04_scene38_patch_topping_up_dal.jpg\", \"acts/act4/act04_scene41_status_2xx_green_royal_garden.jpg\", \"acts/act5/act05_scene44_walking_up_spiral_staircase.jpg\", \"acts/act5/act05_scene45_sunset_rooftop_pavilion_wide.jpg\", \"acts/act5/act05_scene46_sameer_slate_blackboard_canopy.jpg\", \"acts/act5/act05_scene47_paradigm_rest_standardized_postcard.jpg\", \"acts/act5/act05_scene48_soap_armored_lockbox.jpg\", \"acts/act5/act05_scene49_paradigm_graphql_spice_market.jpg\", \"acts/act5/act05_scene52_chai_toast_to_network_wire.jpg\"]"
+  },
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS_summary",
+    "title": "Character Continuity Ledger",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/character_ledger.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Character Continuity Ledger. . Scope:  Status: canon"
+  },
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS_book_id",
+    "title": "Character Continuity Ledger [book_id]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/character_ledger.json",
+    "status": "canon",
+    "category": "book_id",
+    "text": "Character Continuity Ledger -> book_id: \"zero-to-agentic-api-testing\""
+  },
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS_characters",
+    "title": "Character Continuity Ledger [characters]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/character_ledger.json",
+    "status": "canon",
+    "category": "characters",
+    "text": "Character Continuity Ledger -> characters: {\"akshay\": {\"full_name\": \"Akshay Sharma\", \"age\": 24, \"role\": \"Software Engineering Student and Junior Apprentice\", \"origin\": \"North Indian (Lucknow)\", \"appearance\": {\"hair\": \"Neat black hair, wind ruffled in panic scenes\", \"eyes\": \"Sharp almond shaped eyes, expressive and intense\", \"attire\": \"Crisp white cotton kurta with sleeves rolled up to mid forearms, casual blue denims\", \"forehead\": \"Clean forehead with zero sectarian or religious markings\", \"props\": [\"Silver scratched laptop covered in developer sticker marks\", \"Smartphone with cracked screen protector\", \"Leaking brass water bottle with loose rubber washer\", \"Canvas satchel bag\"]}, \"voice_profile\": {\"tone\": \"Earnest, analytical, high energy, panic prone under deadlines, rapid learner\", \"speech_style\": \"Short visceral exclamations, direct questions, eureka moments\", \"balloon_accent\": \"#0284c7\"}}, \"sameer\": {\"full_name\": \"Sameer Krishnamurthy\", \"age\": 40, \"role\": \"Principal Systems Architect and Senior Mentor\", \"origin\": \"South Indian (Chennai / Bangalore)\", \"appearance\": {\"hair\": \"Neat salt and pepper hair\", \"facial_hair\": \"Closely trimmed, dignified salt and pepper beard\", \"eyes\": \"Calm, observant almond eyes behind round brass framed spectacles\", \"attire\": \"Peacock indigo raw silk kurta over cream cotton trousers\", \"props\": [\"Faceted cutting chai glass resting inside an ornate brass wire holder\", \"Compact 13 inch titanium diagnostic tablet showing green terminal telemetry\", \"Brass tea samovar on office desk\"]}, \"voice_profile\": {\"tone\": \"Calm, stoic, ironic humor, speaks in foundational first principles\", \"speech_style\": \"Unflappable, succinct, philosophical engineering aphorisms\", \"balloon_accent\": \"#7c3aed\"}}, \"rohan\": {\"full_name\": \"Rohan Verma\", \"age\": 24, \"role\": \"Akshay Batchmate and Panicked Student\", \"attire\": \"Olive green cotton kurta\", \"props\": [\"Wristwatch showing 08:35 AM\", \"Ruined exam syllabus sheet\"], \"balloon_accent\": \"#059669\"}, \"examiner\": {\"full_name\": \"Chief Proctor Sharma\", \"age\": 55, \"role\": \"Campus Hall Proctor and Gatekeeper\", \"attire\": \"Formal maroon waistcoat over grey shirt\", \"props\": [\"Brass padlock and chain\", \"Iron gate keys\"], \"balloon_accent\": \"#dc2626\"}}"
+  },
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS_mentorship_rules",
+    "title": "Character Continuity Ledger [mentorship_rules]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/character_ledger.json",
+    "status": "canon",
+    "category": "mentorship_rules",
+    "text": "Character Continuity Ledger -> mentorship_rules: {\"three_chapter_chai_rule\": \"Every 3 chapters, Sameer and Akshay pause for cutting chai to reflect on architectural first principles\"}"
+  },
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS__amendments_audit_log",
+    "title": "Character Continuity Ledger [_amendments_audit_log]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/character_ledger.json",
+    "status": "canon",
+    "category": "_amendments_audit_log",
+    "text": "Character Continuity Ledger -> _amendments_audit_log: [{\"timestamp\": \"2026-10-04T21:11:40.163882Z\", \"author\": \"agentic_publishing_engine\", \"key\": \"mentorship_rules\", \"rationale\": \"Formalize the 3 chapter cutting chai pause rule\", \"status\": \"ratified\"}]"
+  },
+  {
+    "doc_id": "BOOK-NARRATIVE-BEATS",
+    "chunk_id": "BOOK-NARRATIVE-BEATS_summary",
+    "title": "Chapter 01 35-Beat Complete Narrative Arc",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/narrative_beats_act1_to_5.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Chapter 01 35-Beat Complete Narrative Arc. . Scope:  Status: canon"
+  },
+  {
+    "doc_id": "BOOK-NARRATIVE-BEATS",
+    "chunk_id": "BOOK-NARRATIVE-BEATS_book_id",
+    "title": "Chapter 01 35-Beat Complete Narrative Arc [book_id]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/narrative_beats_act1_to_5.json",
+    "status": "canon",
+    "category": "book_id",
+    "text": "Chapter 01 35-Beat Complete Narrative Arc -> book_id: \"zero-to-agentic-api-testing\""
+  },
+  {
+    "doc_id": "BOOK-NARRATIVE-BEATS",
+    "chunk_id": "BOOK-NARRATIVE-BEATS_acts",
+    "title": "Chapter 01 35-Beat Complete Narrative Arc [acts]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/narrative_beats_act1_to_5.json",
+    "status": "canon",
+    "category": "acts",
+    "text": "Chapter 01 35-Beat Complete Narrative Arc -> acts: {\"act_1\": {\"title\": \"The Quad Crisis and the 14ms Wire Rescue\", \"beats_count\": 10, \"beats\": [{\"beat\": 1, \"asset\": \"act01_scene01_sunny_campus_quadrangle.jpg\", \"time\": \"08:28 AM\", \"setting\": \"Campus Quadrangle\", \"shot\": \"Wide Establishing Shot\", \"speaker\": null}, {\"beat\": 2, \"asset\": \"act01_scene02_leaking_brass_bottle.jpg\", \"time\": \"08:30 AM\", \"setting\": \"Inside Satchel Bag\", \"shot\": \"Extreme Close-Up\", \"speaker\": null}, {\"beat\": 3, \"asset\": \"act01_scene03_akshay_soaked_admit_card.jpg\", \"time\": \"08:32 AM\", \"setting\": \"Under Sandstone Arch\", \"shot\": \"Medium Shot\", \"speaker\": \"Akshay\", \"line\": \"My water bottle leaked in my bag! The ink is completely dissolved!\"}, {\"beat\": 4, \"asset\": \"act01_scene04_smeared_watercolor_admit_card.jpg\", \"time\": \"08:33 AM\", \"setting\": \"Under Sandstone Arch\", \"shot\": \"Macro Detail\", \"speaker\": null}, {\"beat\": 5, \"asset\": \"act01_scene05_akshay_sprinting_panic.jpg\", \"time\": \"08:35 AM\", \"setting\": \"Paved Colonnade\", \"shot\": \"Dynamic Tracking\", \"speaker\": \"Akshay\", \"line\": \"Twelve thousand students are hitting the portal at once. It just timed out!\"}, {\"beat\": 6, \"asset\": \"act01_scene06_two_students_running_panic.jpg\", \"time\": \"08:36 AM\", \"setting\": \"Paved Colonnade\", \"shot\": \"Two-Shot Medium\", \"speaker\": \"Rohan\", \"line\": \"Twenty minutes until gates lock, Akshay! The portal is down for everyone!\"}, {\"beat\": 7, \"asset\": \"act01_scene07_akshay_tapping_phone_screen.jpg\", \"time\": \"08:38 AM\", \"setting\": \"Corridor Pillar\", \"shot\": \"Over-the-Shoulder Medium\", \"speaker\": \"Akshay\", \"line\": \"Spinning circle of doom... Why won't the browser render my roll number?!\"}, {\"beat\": 8, \"asset\": \"act01_scene09_sameer_arrival_chai.jpg\", \"time\": \"08:40 AM\", \"setting\": \"Architecture Cloister\", \"shot\": \"Medium Shot\", \"speaker\": \"Sameer\", \"line\": \"Breathe, Akshay. The browser is choking on images and CSS, not your data.\"}, {\"beat\": 9, \"asset\": \"act01_scene09_alt_cloister_server_rack.jpg\", \"time\": \"08:41 AM\", \"setting\": \"Server Cloister Vault\", \"shot\": \"Atmospheric Interior\", \"speaker\": null}, {\"beat\": 10, \"asset\": \"act01_scene11_sameer_diagnostic_slate_14ms.jpg\", \"time\": \"08:42 AM\", \"setting\": \"Sandstone Bench\", \"shot\": \"Medium Two-Shot\", \"speaker\": \"Sameer\", \"line\": \"Here is your JSON admit card from the wire. Fourteen milliseconds flat.\"}]}, \"act_2\": {\"title\": \"The Stepwell Canteen Courier Model\", \"beats_count\": 6, \"beats\": [{\"beat\": 11, \"asset\": \"act02_scene14_research_workshop_interior.jpg\", \"time\": \"12:15 PM\", \"setting\": \"Research Cloister Workshop\", \"shot\": \"Wide Establishing\", \"speaker\": null}, {\"beat\": 12, \"asset\": \"act02_scene15_brass_kettle_pouring_chai.jpg\", \"time\": \"12:20 PM\", \"setting\": \"Chai Corner Table\", \"shot\": \"Sensory Close-Up\", \"speaker\": \"Sameer\", \"line\": \"Chai first. An engineer who panics sees magic; an engineer who understands sees wires.\"}, {\"beat\": 13, \"asset\": \"act02_scene17_restaurant_customer_client.jpg\", \"time\": \"12:25 PM\", \"setting\": \"Canteen Veranda\", \"shot\": \"Medium Shot\", \"speaker\": \"Sameer\", \"line\": \"You are the customer sitting at the table. You want butter naan, but you cannot enter the kitchen.\"}, {\"beat\": 14, \"asset\": \"act02_scene18_canteen_waiter_api.jpg\", \"time\": \"12:30 PM\", \"setting\": \"Canteen Hall\", \"shot\": \"Medium Action\", \"speaker\": \"Sameer\", \"line\": \"The waiter is the API. He takes your exact order on a notepad and carries it safely past the swinging kitchen doors.\"}, {\"beat\": 15, \"asset\": \"act02_scene19_commercial_kitchen_database.jpg\", \"time\": \"12:35 PM\", \"setting\": \"Industrial Kitchen\", \"shot\": \"Dynamic Wide Interior\", \"speaker\": null}, {\"beat\": 16, \"asset\": \"act02_scene21_bullock_cart_vs_royal_courier.jpg\", \"time\": \"12:45 PM\", \"setting\": \"Stepwell Overlook\", \"shot\": \"Allegorical Comparative Wide\", \"speaker\": \"Sameer\", \"line\": \"The browser is a heavy four megabyte bullock cart. An API call is a pure hundred byte courier on horseback.\"}]}, \"act_3\": {\"title\": \"Building Port 3000 and the Undefined Body Crash\", \"beats_count\": 5, \"beats\": [{\"beat\": 17, \"asset\": \"act03_scene27_reaction_typeerror_crash.jpg\", \"time\": \"02:10 PM\", \"setting\": \"Pair Programming Bench\", \"shot\": \"Medium Two-Shot\", \"speaker\": \"Akshay\", \"line\": \"TypeError! req.body is undefined! I sent valid JSON in my cURL command!\"}, {\"beat\": 18, \"asset\": \"act03_scene29_sameer_points_physical_wire.jpg\", \"time\": \"02:15 PM\", \"setting\": \"Workbench Terminal\", \"shot\": \"Close-Up Over Shoulder\", \"speaker\": \"Sameer\", \"line\": \"Look at the physical Ethernet wire, Akshay. What travels across copper?\"}, {\"beat\": 19, \"asset\": \"act03_scene30_byte_stream_waterfall_aqueduct.jpg\", \"time\": \"02:20 PM\", \"setting\": \"Conceptual Aqueduct Sieve\", \"shot\": \"Allegorical Conceptual Macro\", \"speaker\": \"Sameer\", \"line\": \"TCP does not know JSON. It streams fragmented raw bytes across the wire. Without a parser, it slips through your fingers.\"}, {\"beat\": 20, \"asset\": \"act03_scene31_adding_express_json_middleware.jpg\", \"time\": \"02:30 PM\", \"setting\": \"Code Editor Screen\", \"shot\": \"Medium Coding Shot\", \"speaker\": \"Akshay\", \"line\": \"Adding app.use(express.json())... It reassembles the byte stream into an object!\"}, {\"beat\": 21, \"asset\": \"act03_scene32_two_men_success_201_created.jpg\", \"time\": \"02:40 PM\", \"setting\": \"Terminal Screen\", \"shot\": \"Medium Two-Shot Triumph\", \"speaker\": \"Akshay\", \"line\": \"Status 201 Created! The student record is stored in memory!\"}]}, \"act_4\": {\"title\": \"The Brass Thali Feast and CRUD Operations\", \"beats_count\": 7, \"beats\": [{\"beat\": 22, \"asset\": \"act04_scene33_veranda_lunch_table_setup.jpg\", \"time\": \"03:15 PM\", \"setting\": \"Veranda Lunch Table\", \"shot\": \"Wide Establishing\", \"speaker\": null}, {\"beat\": 23, \"asset\": \"act04_scene34_sitting_down_protocol_feast.jpg\", \"time\": \"03:20 PM\", \"setting\": \"Veranda Lunch Table\", \"shot\": \"Medium Two-Shot\", \"speaker\": \"Sameer\", \"line\": \"Every interaction with a server maps to dining rules. Let us decode the five core verbs.\"}, {\"beat\": 24, \"asset\": \"act04_scene36_get_inspecting_without_touching.jpg\", \"time\": \"03:25 PM\", \"setting\": \"Lunch Table\", \"shot\": \"Medium Close-Up\", \"speaker\": \"Sameer\", \"line\": \"GET is reading the menu or inspecting the thali. Safe and idempotent. Looking changes nothing.\"}, {\"beat\": 25, \"asset\": \"act04_scene35_post_placing_brand_new_thali.jpg\", \"time\": \"03:30 PM\", \"setting\": \"Lunch Table\", \"shot\": \"Medium Action\", \"speaker\": \"Akshay\", \"line\": \"POST is bringing a brand new thali to the table. Each call creates a new resource!\"}, {\"beat\": 26, \"asset\": \"act04_scene37_put_replacing_entire_platter.jpg\", \"time\": \"03:35 PM\", \"setting\": \"Lunch Table\", \"shot\": \"Dramatic Close-Up\", \"speaker\": \"Sameer\", \"line\": \"The Brass Thali Trap! PUT replaces the entire platter! If you omit the katori, it vanishes!\"}, {\"beat\": 27, \"asset\": \"act04_scene38_patch_topping_up_dal.jpg\", \"time\": \"03:40 PM\", \"setting\": \"Lunch Table\", \"shot\": \"Precision Close-Up\", \"speaker\": \"Akshay\", \"line\": \"PATCH is surgical. A spoonful of hot dal toppings without replacing the platter.\"}, {\"beat\": 28, \"asset\": \"act04_scene41_status_2xx_green_royal_garden.jpg\", \"time\": \"03:50 PM\", \"setting\": \"Status Kingdoms Overview\", \"shot\": \"Triptych Allegory\", \"speaker\": \"Sameer\", \"line\": \"Status codes are server weather reports: 2xx green garden, 4xx locked wicket, 5xx kitchen fire.\"}]}, \"act_5\": {\"title\": \"Architectural Showdown and Sunset Toast\", \"beats_count\": 7, \"beats\": [{\"beat\": 29, \"asset\": \"act05_scene44_walking_up_spiral_staircase.jpg\", \"time\": \"05:10 PM\", \"setting\": \"Sandstone Watchtower\", \"shot\": \"Architectural Vertical Tracking\", \"speaker\": null}, {\"beat\": 30, \"asset\": \"act05_scene45_sunset_rooftop_pavilion_wide.jpg\", \"time\": \"05:25 PM\", \"setting\": \"Rooftop Pavilion\", \"shot\": \"Golden Hour Wide\", \"speaker\": null}, {\"beat\": 31, \"asset\": \"act05_scene46_sameer_slate_blackboard_canopy.jpg\", \"time\": \"05:35 PM\", \"setting\": \"Slate Chalkboard Under Canopy\", \"shot\": \"Medium Shot\", \"speaker\": \"Sameer\", \"line\": \"Three philosophies shape modern distributed systems. REST, SOAP, and GraphQL.\"}, {\"beat\": 32, \"asset\": \"act05_scene47_paradigm_rest_standardized_postcard.jpg\", \"time\": \"05:45 PM\", \"setting\": \"Rooftop Table\", \"shot\": \"Allegorical Conceptual\", \"speaker\": \"Sameer\", \"line\": \"REST is a standard open postcard. Clear address, standard stamps, readable by any courier.\"}, {\"beat\": 33, \"asset\": \"act05_scene48_soap_armored_lockbox.jpg\", \"time\": \"05:55 PM\", \"setting\": \"Rooftop Table\", \"shot\": \"Allegorical Conceptual\", \"speaker\": \"Sameer\", \"line\": \"SOAP is an armored bank vault with wax seals and heavy XML contracts. Rigid, heavy, enterprise safe.\"}, {\"beat\": 34, \"asset\": \"act05_scene49_paradigm_graphql_spice_market.jpg\", \"time\": \"06:10 PM\", \"setting\": \"Rooftop Table\", \"shot\": \"Allegorical Conceptual\", \"speaker\": \"Akshay\", \"line\": \"GraphQL is a spice market basket! The client asks for cardamom and clove, and gets only that!\"}, {\"beat\": 35, \"asset\": \"act05_scene52_chai_toast_to_network_wire.jpg\", \"time\": \"06:30 PM\", \"setting\": \"Rooftop Parapet\", \"shot\": \"Warm Twilight Two-Shot\", \"speaker\": \"Sameer\", \"line\": \"To the wire, Akshay. Today you saw through the glass. Tomorrow, we test it to destruction.\"}]}}"
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_summary",
+    "title": "Technical State and Endpoints Ledger",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Technical State and Endpoints Ledger. . Scope:  Status: canon"
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_book_id",
+    "title": "Technical State and Endpoints Ledger [book_id]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "book_id",
+    "text": "Technical State and Endpoints Ledger -> book_id: \"zero-to-agentic-api-testing\""
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_servers",
+    "title": "Technical State and Endpoints Ledger [servers]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "servers",
+    "text": "Technical State and Endpoints Ledger -> servers: {\"local_exercise_server\": {\"framework\": \"Express.js\", \"port\": 3000, \"base_url\": \"http://localhost:3000\", \"middleware\": [\"express.json()\"], \"endpoints\": [{\"verb\": \"GET\", \"path\": \"/api/admit-card/:rollNo\", \"status\": 200, \"description\": \"Fetches candidate admit card by roll number\"}, {\"verb\": \"POST\", \"path\": \"/api/students\", \"status\": 201, \"description\": \"Enrolls a new student record into the in-memory store\"}, {\"verb\": \"PUT\", \"path\": \"/api/students/:id\", \"status\": 200, \"description\": \"Total replacement of student record; unprovided keys are cleared\"}, {\"verb\": \"PATCH\", \"path\": \"/api/students/:id\", \"status\": 200, \"description\": \"Surgical update of specified student fields without affecting unmentioned keys\"}, {\"verb\": \"DELETE\", \"path\": \"/api/students/:id\", \"status\": 204, \"description\": \"Removes student record permanently\"}]}, \"mock_central_api\": {\"port\": 5050, \"base_url\": \"http://localhost:5050\", \"health_check\": \"http://localhost:5050/health\"}}"
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_core_traps",
+    "title": "Technical State and Endpoints Ledger [core_traps]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/testing/zero-to-agentic-api-testing/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "core_traps",
+    "text": "Technical State and Endpoints Ledger -> core_traps: {\"undefined_body\": {\"cause\": \"Omitting app.use(express.json()) middleware in Express 4.16+\", \"symptom\": \"TypeError: Cannot read properties of undefined (reading 'name')\", \"remedy\": \"Mount express.json() before all route handlers\"}, \"put_data_loss\": {\"cause\": \"Treating PUT like PATCH; supplying only changed fields\", \"symptom\": \"Existing record fields not included in payload are wiped or reset to null\", \"remedy\": \"Always transmit complete resource representation with PUT, or use PATCH for partial edits\"}}"
+  }
+]
