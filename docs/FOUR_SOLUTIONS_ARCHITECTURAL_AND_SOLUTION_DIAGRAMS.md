@@ -2,9 +2,17 @@
 
 This document provides dedicated, forensic system architecture and solution workflow diagrams for each of the four AI proposals (`agentic ai`, `AI A`, `AI B`, and `AI MAX`), followed by the unified master architecture that synthesizes their best engineering breakthroughs.
 
+![Architectural Overview: Four AI Proposals Comparison and Master Synthesis](assets/diagram-02-four-ai-proposals-comparison.png)
+
+*Figure 1: High level comparative matrix contrasting agentic ai, AI A, AI B, and AI MAX across all eight publishing architectural pillars, synthesizing them into the unified Sarva Gyana Koshah framework.*
+
 ---
 
 ## 1. Solution 1: `agentic ai` (Canon Hygiene and Thin State Machine Architecture)
+
+![Publishing Pipeline and State Machine Architecture](assets/architecture-04-publishing-ide-pipeline.jpg)
+
+*Figure 2: Modern Tech Madhubani folk tech visualization of the multi stage publishing pipeline, human approval gates, and deterministic quality linters.*
 
 ### 1.1 Architectural Philosophy
 * **Core Thesis:** The primary bottleneck in scaling is not code complexity, but **canon hygiene and provenance drift** (stale drafts, conflicting rules, superseded scores).
@@ -86,6 +94,10 @@ This document provides dedicated, forensic system architecture and solution work
 
 ## 2. Solution 2: `AI A` (The Pedagogical Compiler and 5-Layer RAG Architecture)
 
+![Hierarchical RAG Knowledge Architecture](assets/architecture-01-hierarchical-rag-knowledge.jpg)
+
+*Figure 3: Modern Tech Madhubani illustration of the two tier hierarchical knowledge tree, universal invariants, and continuous learning feedback loop.*
+
 ### 2.1 Architectural Philosophy
 * **Core Thesis:** Publishing is a **software compilation process**. The Domain Descriptor and Knowledge Graph represent the *source code*, the 8-stage pipeline is the *compiler*, the 5-layer RAG functions as the *CPU*, the Madhubani art engine is the *GPU*, and the 20-framework specifications act as the *operating system*.
 * **Key Innovation:** The **"Book Becomes a Source" Flywheel** where published, certified chapters are ingested back into RAG layers L2 and L3, dramatically accelerating subsequent books.
@@ -162,6 +174,10 @@ This document provides dedicated, forensic system architecture and solution work
 
 ## 3. Solution 3: `AI B` (Universal Subject Interface and Vision Driven Geometry)
 
+![Inside Image Speech Balloon Geometry](assets/architecture-02-speech-balloon-headroom-geometry.jpg)
+
+*Figure 4: Modern Tech Madhubani visual blueprint of inside image floating speech balloon geometry, preserving character faces and emotion in the negative headroom zone.*
+
 ### 3.1 Architectural Philosophy
 * **Core Thesis:** The system must define an abstract `Subject` interface capable of handling technical code, constitutional law, physics, or classical music.
 * **Key Innovation:** Computer vision and saliency detection dynamically map **safe lettering zones** inside illustrations to prevent character occlusion computationally, while a multi-agent authoring guild governs narrative handoffs.
@@ -231,6 +247,10 @@ This document provides dedicated, forensic system architecture and solution work
 ---
 
 ## 4. Solution 4: `AI MAX` (The Domain Ontology and 4-Tier Hard Constraint Engine)
+
+![Multi Domain Pedagogical Archetypes](assets/architecture-03-multi-domain-pedagogical-archetypes.jpg)
+
+*Figure 5: Modern Tech Madhubani visualization of diverse knowledge disciplines united under universal pedagogical archetypes.*
 
 ### 4.1 Architectural Philosophy
 * **Core Thesis:** The system requires a three layer decoupled architecture: **Domain Ontology Layer**, **Hierarchical RAG Engine**, and **Koshah Studio IDE**.
@@ -311,12 +331,24 @@ This document provides dedicated, forensic system architecture and solution work
 
 ## 5. Master Synthesis Diagram: The Unified Sarva Gyana Koshah Architecture
 
+![Complete Tech Stack Packages and Frameworks Architecture](assets/diagram-01-complete-tech-stack-packages.png)
+
+*Figure 6: Complete technical stack architecture detailing every package, library, and framework across all four layers: React 18, Vite 6, FAISS CPU, Sentence Transformers, OpenCV, Newman, and Ajv.*
+
 This master synthesis unites the best engineering breakthroughs from all four proposals while discarding external server bloat:
 
 1. **From `agentic ai`:** Canon hygiene frontmatter with `superseded_by` chains, thin pausable state machine, and the rule that speakers must appear in the panel.
 2. **From `AI A`:** The 5-layer RAG model (L0 to L4), the "Book Becomes a Source" flywheel, and the 3-chapter chai mentorship pause.
 3. **From `AI B`:** Universal subject abstraction and computer-vision safe-zone boundary checks.
 4. **From `AI MAX`:** Universal 4-part card domain proofs, the 6 cinematic panel shot archetypes, and the 47-point audit checklist.
+
+![Hierarchical RAG Dataflow and Amendment Gate](assets/diagram-03-hierarchical-rag-packages-flow.png)
+
+*Figure 7: Two tier hierarchical RAG vector indexing pipeline, conflict resolution cascade, and agent continuous learning gate with mandatory human approval.*
+
+![Graphic Novel Speech Balloon Geometry and Sub Art Deck Architecture](assets/diagram-04-speech-balloon-geometry-subart-deck.png)
+
+*Figure 8: Precise visual geometry of the graphic novel panel: 16:9 canvas, top 25% negative headroom lettering zone, 120 character spoken limit, and the four part pedagogical card below.*
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
