@@ -1,0 +1,40 @@
+{
+  "rag_level": "universal",
+  "id": "UNIV-AGENT-PIPELINE",
+  "title": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard",
+  "version": "2.0.0",
+  "status": "canon",
+  "supersedes": null,
+  "superseded_by": null,
+  "target_scope": "all_contributing_ais",
+  "description": "Standardized protocol for Architect AI, Story AI, Flow AI Prompt generation, Image Triage into useful and not useful folders, and Compositor wiring.",
+  "style_boundary_rule": {
+    "software_architecture_diagrams": "Standard technical engineering diagrams only (packages, flowcharts, schemas). NEVER folk art or Madhubani style.",
+    "book_illustrations": "Modern Tech Madhubani Hybrid style reserved exclusively for storybook narrative panels and characters.",
+    "laptop_screen_rule": "Laptops, terminals, and screens must show photorealistic, syntax highlighted code (VS Code dark mode, Node.js CLI text). Never decorative squiggles on screens."
+  },
+  "pipeline_stages": [
+    "1. Architect AI: Syllabus and concept DAG (01-ARCHITECT_AI_SYLLABUS.md)",
+    "2. Story AI: Scene script with dialogues and emotional states (02-STORY_AI_SCRIPT.md)",
+    "3. Prompt AI: Flow AI image prompts without text, with vivid emotions and 25-30% headroom (03-IMAGE_AI_PROMPTS.md)",
+    "4. Flow AI: Image generation and dropping into incoming directory",
+    "5. Triage AI: Review against 5 fatal filters and sort into organized/useful/ and organized/not_useful/",
+    "6. Compositor AI: Wire approved images from useful/ into chapter content (lessonXX.js), overlay dialogues in negative headroom, mount workbenches and 4-tier cards",
+    "7. Quality Gate AI: Run audit-chapter.mjs (>=90%), rule19-checker.mjs (100% clean), and amend_rag.py upon user confirmation"
+  ],
+  "triage_filters": {
+    "fatal_rejection_triggers": [
+      "Low headroom violation (heads in top 25-30% of canvas)",
+      "Text or speech balloons baked into image art",
+      "Folk art motifs or tribal squiggles on screens or code",
+      "Decorative borders or picture frames",
+      "Character drift or wrong attire"
+    ],
+    "useful_criteria": [
+      "16:9 widescreen full bleed",
+      "Empty negative headroom in top 25-30% (sky, arches, rafters)",
+      "Vivid emotional expressions matching scene script",
+      "Authentic hardware and heritage architecture blend"
+    ]
+  }
+}

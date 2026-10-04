@@ -80,6 +80,56 @@
     "text": "Modern Tech Madhubani Hybrid Visual Aesthetics Standard -> negative_constraints: {\"prohibited_elements\": [\"medieval fantasy clutter\", \"parchment scrolls\", \"brass compasses or protractors\", \"alchemical or apothecary jars\", \"crude stick figures or generic vector clipart\", \"Devanagari or Hindi text inside illustrations\", \"AI watermarks or Gemini logo artifacts\"]}"
   },
   {
+    "doc_id": "UNIV-AGENT-PIPELINE",
+    "chunk_id": "UNIV-AGENT-PIPELINE_summary",
+    "title": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/multi_agent_pipeline_standard.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard. Standardized protocol for Architect AI, Story AI, Flow AI Prompt generation, Image Triage into useful and not useful folders, and Compositor wiring.. Scope: all_contributing_ais Status: canon"
+  },
+  {
+    "doc_id": "UNIV-AGENT-PIPELINE",
+    "chunk_id": "UNIV-AGENT-PIPELINE_description",
+    "title": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard [description]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/multi_agent_pipeline_standard.json",
+    "status": "canon",
+    "category": "description",
+    "text": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard -> description: \"Standardized protocol for Architect AI, Story AI, Flow AI Prompt generation, Image Triage into useful and not useful folders, and Compositor wiring.\""
+  },
+  {
+    "doc_id": "UNIV-AGENT-PIPELINE",
+    "chunk_id": "UNIV-AGENT-PIPELINE_style_boundary_rule",
+    "title": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard [style_boundary_rule]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/multi_agent_pipeline_standard.json",
+    "status": "canon",
+    "category": "style_boundary_rule",
+    "text": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard -> style_boundary_rule: {\"software_architecture_diagrams\": \"Standard technical engineering diagrams only (packages, flowcharts, schemas). NEVER folk art or Madhubani style.\", \"book_illustrations\": \"Modern Tech Madhubani Hybrid style reserved exclusively for storybook narrative panels and characters.\", \"laptop_screen_rule\": \"Laptops, terminals, and screens must show photorealistic, syntax highlighted code (VS Code dark mode, Node.js CLI text). Never decorative squiggles on screens.\"}"
+  },
+  {
+    "doc_id": "UNIV-AGENT-PIPELINE",
+    "chunk_id": "UNIV-AGENT-PIPELINE_pipeline_stages",
+    "title": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard [pipeline_stages]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/multi_agent_pipeline_standard.json",
+    "status": "canon",
+    "category": "pipeline_stages",
+    "text": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard -> pipeline_stages: [\"1. Architect AI: Syllabus and concept DAG (01-ARCHITECT_AI_SYLLABUS.md)\", \"2. Story AI: Scene script with dialogues and emotional states (02-STORY_AI_SCRIPT.md)\", \"3. Prompt AI: Flow AI image prompts without text, with vivid emotions and 25-30% headroom (03-IMAGE_AI_PROMPTS.md)\", \"4. Flow AI: Image generation and dropping into incoming directory\", \"5. Triage AI: Review against 5 fatal filters and sort into organized/useful/ and organized/not_useful/\", \"6. Compositor AI: Wire approved images from useful/ into chapter content (lessonXX.js), overlay dialogues in negative headroom, mount workbenches and 4-tier cards\", \"7. Quality Gate AI: Run audit-chapter.mjs (>=90%), rule19-checker.mjs (100% clean), and amend_rag.py upon user confirmation\"]"
+  },
+  {
+    "doc_id": "UNIV-AGENT-PIPELINE",
+    "chunk_id": "UNIV-AGENT-PIPELINE_triage_filters",
+    "title": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard [triage_filters]",
+    "rag_level": "universal",
+    "source_file": "/home/user/AkshatEbooks/framework/rag/multi_agent_pipeline_standard.json",
+    "status": "canon",
+    "category": "triage_filters",
+    "text": "Multi Agent Publishing Pipeline and Flow AI Collaboration Standard -> triage_filters: {\"fatal_rejection_triggers\": [\"Low headroom violation (heads in top 25-30% of canvas)\", \"Text or speech balloons baked into image art\", \"Folk art motifs or tribal squiggles on screens or code\", \"Decorative borders or picture frames\", \"Character drift or wrong attire\"], \"useful_criteria\": [\"16:9 widescreen full bleed\", \"Empty negative headroom in top 25-30% (sky, arches, rafters)\", \"Vivid emotional expressions matching scene script\", \"Authentic hardware and heritage architecture blend\"]}"
+  },
+  {
     "doc_id": "UNIV-PEDAGOGICAL-CARD",
     "chunk_id": "UNIV-PEDAGOGICAL-CARD_summary",
     "title": "Universal 4-Part Pedagogical Card Invariant",
