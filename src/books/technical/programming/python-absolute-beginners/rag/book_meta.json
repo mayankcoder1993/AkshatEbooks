@@ -1,0 +1,72 @@
+[
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS_summary",
+    "title": "Python for Absolute Beginners Character Continuity Ledger",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/python-absolute-beginners/rag/character_ledger.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Python for Absolute Beginners Character Continuity Ledger. . Scope:  Status: canon"
+  },
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS_book_id",
+    "title": "Python for Absolute Beginners Character Continuity Ledger [book_id]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/python-absolute-beginners/rag/character_ledger.json",
+    "status": "canon",
+    "category": "book_id",
+    "text": "Python for Absolute Beginners Character Continuity Ledger -> book_id: \"python-absolute-beginners\""
+  },
+  {
+    "doc_id": "BOOK-CHARACTERS",
+    "chunk_id": "BOOK-CHARACTERS_characters",
+    "title": "Python for Absolute Beginners Character Continuity Ledger [characters]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/python-absolute-beginners/rag/character_ledger.json",
+    "status": "canon",
+    "category": "characters",
+    "text": "Python for Absolute Beginners Character Continuity Ledger -> characters: {\"kabir\": {\"full_name\": \"Kabir Sharma\", \"age\": 19, \"role\": \"First year engineering student learning Python\", \"origin\": \"Varanasi\", \"appearance\": {\"hair\": \"Neat black hair\", \"eyes\": \"Curious almond shaped eyes\", \"attire\": \"Ochre yellow cotton kurta with rolled sleeves, casual jeans\", \"props\": [\"Matte black laptop\", \"Paper notebook with hand drawn flowcharts\"]}, \"voice_profile\": {\"tone\": \"Eager, inquisitive, occasionally overwhelmed by syntax errors\", \"balloon_accent\": \"#0284c7\"}}, \"dr_meera\": {\"full_name\": \"Dr. Meera Iyer\", \"age\": 42, \"role\": \"Senior Computing Scientist and Mentor\", \"origin\": \"Madurai / Bangalore\", \"appearance\": {\"hair\": \"Braided dark hair with silver strands\", \"eyes\": \"Sharp observant almond eyes behind square tortoiseshell glasses\", \"attire\": \"Earthy terracotta handloom sari with printed border\", \"props\": [\"Faceted chai glass\", \"Brass slate stylus\", \"Hardware micro controller\"]}, \"voice_profile\": {\"tone\": \"Patient, clear, grounded in physical metaphors\", \"balloon_accent\": \"#7c3aed\"}}}"
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_summary",
+    "title": "Python Foundations Technical State and Syntax Ledger",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/python-absolute-beginners/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "summary",
+    "text": "Python Foundations Technical State and Syntax Ledger. . Scope:  Status: canon"
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_book_id",
+    "title": "Python Foundations Technical State and Syntax Ledger [book_id]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/python-absolute-beginners/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "book_id",
+    "text": "Python Foundations Technical State and Syntax Ledger -> book_id: \"python-absolute-beginners\""
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_runtime",
+    "title": "Python Foundations Technical State and Syntax Ledger [runtime]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/python-absolute-beginners/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "runtime",
+    "text": "Python Foundations Technical State and Syntax Ledger -> runtime: {\"language\": \"Python 3.11+\", \"environment\": \"Interactive REPL and script files\", \"core_mechanics\": [\"Dynamic typing with type hints\", \"Indentation based block scoping (4 spaces)\", \"Pass by assignment object references\", \"Zero indexed sequencing\"]}"
+  },
+  {
+    "doc_id": "BOOK-TECHNICAL-STATE",
+    "chunk_id": "BOOK-TECHNICAL-STATE_core_traps",
+    "title": "Python Foundations Technical State and Syntax Ledger [core_traps]",
+    "rag_level": "book",
+    "source_file": "src/books/technical/programming/python-absolute-beginners/rag/technical_state_ledger.json",
+    "status": "canon",
+    "category": "core_traps",
+    "text": "Python Foundations Technical State and Syntax Ledger -> core_traps: {\"indentation_error\": {\"cause\": \"Mixing tabs and spaces or inconsistent indentation levels\", \"symptom\": \"IndentationError: unexpected indent\", \"remedy\": \"Standardize on 4 spaces per block level\"}, \"type_error_concatenation\": {\"cause\": \"Attempting to concatenate str and int with plus operator\", \"symptom\": \"TypeError: can only concatenate str (not 'int') to str\", \"remedy\": \"Use f-strings or explicit str() conversion\"}}"
+  }
+]

@@ -1,0 +1,42 @@
+{
+  "rag_level": "book",
+  "book_id": "python-absolute-beginners",
+  "id": "BOOK-CHARACTERS",
+  "title": "Python for Absolute Beginners Character Continuity Ledger",
+  "version": "1.0.0",
+  "status": "canon",
+  "characters": {
+    "kabir": {
+      "full_name": "Kabir Sharma",
+      "age": 19,
+      "role": "First year engineering student learning Python",
+      "origin": "Varanasi",
+      "appearance": {
+        "hair": "Neat black hair",
+        "eyes": "Curious almond shaped eyes",
+        "attire": "Ochre yellow cotton kurta with rolled sleeves, casual jeans",
+        "props": ["Matte black laptop", "Paper notebook with hand drawn flowcharts"]
+      },
+      "voice_profile": {
+        "tone": "Eager, inquisitive, occasionally overwhelmed by syntax errors",
+        "balloon_accent": "#0284c7"
+      }
+    },
+    "dr_meera": {
+      "full_name": "Dr. Meera Iyer",
+      "age": 42,
+      "role": "Senior Computing Scientist and Mentor",
+      "origin": "Madurai / Bangalore",
+      "appearance": {
+        "hair": "Braided dark hair with silver strands",
+        "eyes": "Sharp observant almond eyes behind square tortoiseshell glasses",
+        "attire": "Earthy terracotta handloom sari with printed border",
+        "props": ["Faceted chai glass", "Brass slate stylus", "Hardware micro controller"]
+      },
+      "voice_profile": {
+        "tone": "Patient, clear, grounded in physical metaphors",
+        "balloon_accent": "#7c3aed"
+      }
+    }
+  }
+}

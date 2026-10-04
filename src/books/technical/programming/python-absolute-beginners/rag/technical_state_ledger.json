@@ -1,0 +1,30 @@
+{
+  "rag_level": "book",
+  "book_id": "python-absolute-beginners",
+  "id": "BOOK-TECHNICAL-STATE",
+  "title": "Python Foundations Technical State and Syntax Ledger",
+  "version": "1.0.0",
+  "status": "canon",
+  "runtime": {
+    "language": "Python 3.11+",
+    "environment": "Interactive REPL and script files",
+    "core_mechanics": [
+      "Dynamic typing with type hints",
+      "Indentation based block scoping (4 spaces)",
+      "Pass by assignment object references",
+      "Zero indexed sequencing"
+    ]
+  },
+  "core_traps": {
+    "indentation_error": {
+      "cause": "Mixing tabs and spaces or inconsistent indentation levels",
+      "symptom": "IndentationError: unexpected indent",
+      "remedy": "Standardize on 4 spaces per block level"
+    },
+    "type_error_concatenation": {
+      "cause": "Attempting to concatenate str and int with plus operator",
+      "symptom": "TypeError: can only concatenate str (not 'int') to str",
+      "remedy": "Use f-strings or explicit str() conversion"
+    }
+  }
+}
