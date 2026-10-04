@@ -4752,21 +4752,26 @@ body:has(.page.fullscreen-mode) .site-header,
   flex-direction: column;
 }
 
-/* Comic Scene Beat Tag (Top Corner Badge) */
+/* Comic Scene Beat Tag: outside the artwork so it never conceals a face. */
+.comic-panel-meta {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 30px;
+  padding: 4px 6px;
+  background: #0f172a;
+  box-sizing: border-box;
+}
+
 .comic-beat-tag {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 15;
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(4px);
+  align-self: center;
+  background: rgba(30, 41, 59, 0.98);
   color: #ffffff;
   padding: 0.18rem 0.45rem;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.24);
   pointer-events: none;
 }
 
@@ -4797,11 +4802,54 @@ body:has(.page.fullscreen-mode) .site-header,
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  object-position: center 30%; /* Shift up to cut off bottom corner logos */
+  object-position: center 30%;
   display: block;
+  /* Trim the generated bottom corners while preserving the upper character framing. */
+  transform: scale(1.055);
+  transform-origin: center 30%;
 }
 
-/* Comic Balloons Overlay Layer (Tucked strictly in top 2% negative space) */
+/* Face safe speech dock: dialogue is above the art, never on a character face. */
+.comic-dialogue-dock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.45rem 0.55rem 0.7rem;
+  background: #f8fafc;
+  border-bottom: 2px solid #0f172a;
+  box-sizing: border-box;
+}
+
+.comic-panel-frame .comic-dialogue-dock .comic-balloon-box {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  max-width: min(100%, 34rem);
+  padding: 0.25rem 0.5rem;
+  background: #ffffff;
+}
+
+.comic-dialogue-dock .comic-balloon-box.balloon-left {
+  left: auto;
+  align-self: flex-start;
+}
+
+.comic-dialogue-dock .comic-balloon-box.balloon-right {
+  right: auto;
+  align-self: flex-end;
+}
+
+.comic-dialogue-dock .comic-balloon-speech {
+  font-size: clamp(0.72rem, 0.84vw, 0.82rem);
+  line-height: 1.4;
+}
+
+.comic-dialogue-dock .comic-balloon-tail {
+  bottom: -7px;
+}
+
+/* Kept for backwards compatibility with externally authored panels. */
 .comic-balloons-layer {
   position: absolute;
   inset: 0;
@@ -5527,6 +5575,16 @@ body:has(.page.fullscreen-mode) .site-header,
   .storyboard-grid {
     grid-template-columns: 1fr !important;
     gap: 1.5rem !important;
+  }
+
+  .comic-panel-frame,
+  .comic-panel-frame.comic-panel-hero,
+  .comic-panel-frame.comic-panel-full,
+  .comic-panel-frame.comic-panel-duo,
+  .comic-panel-frame.comic-panel-trio,
+  .comic-panel-frame.comic-panel-wide,
+  .comic-panel-frame.comic-panel-narrow {
+    grid-column: 1 !important;
   }
 
   .comic-speech-cloud,
