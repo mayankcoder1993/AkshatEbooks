@@ -166,14 +166,60 @@ At 08:14 PM, hours after surviving his morning exam, apprentice Akshay joins Pri
 
 ---
 
-## 4. Chapters 03 Through 13 Narrative & Pedagogical Master Blueprint
+## 4. Chapter 03: Getting Started with the API Testing Workbench (Postman & Chai Assertions)
 
-### Chapter 03: Getting Started with the API Testing Workbench (Postman & Chai Assertions)
-* **Crisis:** The Green Lie Unmasked. Akshay audits Sameer printed test sheet and discovers that 9 assertions were validating HTTP status alone, missing a corrupted database payload.
-* **Pedagogical Core:** Moving from terminal curl friction to Postman Collections; writing automated JavaScript assertions (`pm.test`, `pm.expect`); the **Red Before Green Rule** (forcing test failure before writing code); the Knight Capital 460 million dollar disaster.
-* **Workbench:** Postman 4-surface inspector with live Chai assertion editor and Collection Runner.
+### 4.1 Mission Context and Crisis
+At 09:15 PM, following the successful resolution of the transit shuttle crisis, apprentice Akshay reviews an automated test collection handed to him by a senior quality engineer. Ten requests run against the campus portal; all ten return bright green pass badges. Akshay prepares to sign off on midnight release readiness. Principal Systems Architect Sameer halts him, setting down his cutting chai tumbler. Sameer forces Akshay to send malformed credentials and observed something shocking: the test suite still reports one hundred percent green passes. An assertion testing only data types celebrated an unauthorized authentication failure. Together, they dissect the anatomy of the Postman execution sandbox, examine the catastrophic Apple 2014 goto fail incident, enforce the Red Before Green Rule, and write dual contract assertions that never lie.
 
-### Chapter 04: Assertions and Automated Validations (Campus Library REST API)
+### 4.2 Scene Beats Matrix (24 Narrative Beats)
+
+| Beat | Time | Setting | Shot Archetype | Speaker | Spoken Dialogue (<120 chars) | Emotion | Target Asset |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| P.01 | 09:15 PM | Automation Lab | Wide Establishing | Akshay | "Ten requests executed and ten green badges! The student portal is certified ready!" | Triumphant Joy | `pipeline/ch03/organized/useful/ch03_scene01_akshay_celebrating_runner.jpg` |
+| P.02 | 09:16 PM | Workstation Display | Close Up Screen | Akshay | "Zero failures, zero errors! Midnight deployment is going to be effortless!" | Naive Confidence | `pipeline/ch03/organized/useful/ch03_scene02_glowing_green_runner_screen.jpg` |
+| P.03 | 09:17 PM | Teak Console Desk | Over Shoulder | Sameer | "A green suite is easy to produce, Akshay. An honest suite is remarkably rare." | Poised Skepticism | `pipeline/ch03/organized/useful/ch03_scene03_sameer_sips_chai_shadow.jpg` |
+| P.04 | 09:18 PM | Teak Console Desk | Medium Two Shot | Sameer | "Send invalid credentials to the authentication endpoint and run your suite again." | The Mentor Challenge | `pipeline/ch03/organized/useful/ch03_scene04_sameer_points_at_token_test.jpg` |
+| P.05 | 09:20 PM | Mechanical Keyboard | Action Macro | Akshay | "Sending invalid password... Running the authentication check now." | Eager Verification | `pipeline/ch03/organized/useful/ch03_scene05_akshay_typing_wrong_password.jpg` |
+| P.06 | 09:21 PM | Workstation Display | Dutch Angle Screen | Akshay | "Wait! The response status is 401 Unauthorized, but the test badge is bright green?!" | Bewildered Shock | `pipeline/ch03/organized/useful/ch03_scene06_green_badge_on_401_error.jpg` |
+| P.07 | 09:22 PM | Code Editor Window | Macro Script | Sameer | "Look at line three. pm.expect(data).to.be.an('object'). What is a 401 error body?" | Forensic Diagnosis | `pipeline/ch03/organized/useful/ch03_scene07_sameer_highlights_flawed_script.jpg` |
+| P.08 | 09:23 PM | Teak Console Desk | Close Up Face | Akshay | "A JSON error body is still a JavaScript object! The assertion passed on failure!" | Humbling Epiphany | `pipeline/ch03/organized/useful/ch03_scene08_akshay_hands_on_temple_shock.jpg` |
+| P.09 | 09:25 PM | Slate Blackboard | Medium Action | Sameer | "A test that passes on broken input is not a guard. It is a dangerous placebo." | Architectural Truth | `pipeline/ch03/organized/useful/ch03_scene09_sameer_writes_red_before_green.jpg` |
+| P.10 | 09:27 PM | Lab Archive Desk | Close Up Folder | Sameer | "Apple 2014 goto fail. Duplicated jump bypassed SSL and every test reported green." | Historical Gravity | `pipeline/ch03/organized/useful/ch03_scene10_sameer_displays_apple_cve.jpg` |
+| P.11 | 09:29 PM | Slate Blackboard | Detailed Diagram | Sameer | "The Red Before Green Rule. Intentionally break the assertion before trusting success." | Unbending Standard | `pipeline/ch03/organized/useful/ch03_scene11_red_before_green_formula.jpg` |
+| P.12 | 09:31 PM | Split Screen IDE | Over Shoulder | Akshay | "First I assert status 200, then I assert expected property studentCount..." | Focused Precision | `pipeline/ch03/organized/useful/ch03_scene12_akshay_writing_dual_contract.jpg` |
+| P.13 | 09:33 PM | Split Screen IDE | Action Macro | Sameer | "Now intentionally alter the expected property to a bogus key name, Akshay." | The Sensitivity Test | `pipeline/ch03/organized/useful/ch03_scene13_sameer_guides_synthetic_error.jpg` |
+| P.14 | 09:35 PM | Terminal Window | Dutch Angle Screen | Akshay | "AssertionError! expected undefined to equal 45! The runner turned crimson red!" | Controlled Failure | `pipeline/ch03/organized/useful/ch03_scene14_crimson_red_runner_failure.jpg` |
+| P.15 | 09:37 PM | Teak Console Desk | Medium Two Shot | Sameer | "Now your test has eyes. You have proven that when data breaks, the test screams." | Earned Respect | `pipeline/ch03/organized/useful/ch03_scene15_sameer_nods_at_crimson_screen.jpg` |
+| P.16 | 09:39 PM | Code Editor Window | Macro Script | Akshay | "Restoring the legitimate key name... Running the verified test suite now!" | Disciplined Pride | `pipeline/ch03/organized/useful/ch03_scene16_akshay_restores_valid_key.jpg` |
+| P.17 | 09:41 PM | Workstation Display | High Key Light | Akshay | "Bright green pass! But this time it is earned through verified sensitivity!" | Authentic Triumph | `pipeline/ch03/organized/useful/ch03_scene17_legitimate_green_pass_earned.jpg` |
+| P.18 | 09:43 PM | Blackboard Diagram | Wide Lab View | Sameer | "Never chain unchecked dots on response objects. Use to.have.nested.property." | Defensive Strategy | `pipeline/ch03/organized/useful/ch03_scene18_nested_property_diagram.jpg` |
+| P.19 | 09:45 PM | Workstation Monitor | Over Shoulder | Akshay | "Without safe traversal, an error response throws unhandled TypeError and crashes!" | Defensive Awakening | `pipeline/ch03/organized/useful/ch03_scene19_traversal_crash_prevented.jpg` |
+| P.20 | 09:47 PM | Automation Console | Full Screen Runner | Akshay | "Executing the full 18 request collection in the unattended Collection Runner!" | Production Mastery | `pipeline/ch03/organized/useful/ch03_scene20_full_collection_runner_executing.jpg` |
+| P.21 | 09:49 PM | Operations Summary | Close Up Metric | Sameer | "54 assertions evaluated across 18 endpoints in 842ms. Zero false positives." | Verified Reality | `pipeline/ch03/organized/useful/ch03_scene21_runner_metrics_table_clean.jpg` |
+| P.22 | 09:51 PM | Console Desk | Medium Close Up | Sameer | "Your tests now protect students instead of soothing your engineering ego." | Master to Pupil | `pipeline/ch03/organized/useful/ch03_scene22_sameer_offers_chai_toast.jpg` |
+| P.23 | 09:53 PM | Library Desk Terminal | Sudden Action | Ops Alert | "Incoming urgent alert from the campus library checkout payment gateway!" | Sudden Crisis | `pipeline/ch03/organized/useful/ch03_scene23_red_beacon_library_terminal.jpg` |
+| P.24 | 09:55 PM | Terminal Window | Cliffhanger Hook | Sameer | "A student was charged twelve times for a single textbook reservation. Look at the verb." | Cliffhanger Hook | `pipeline/ch03/organized/useful/ch03_scene24_duplicate_charge_ledger_reveal.jpg` |
+
+### 4.3 Four Part Pedagogical Cards (Chapter 3)
+* **Card 1 (The False Green Test Lie):**
+  - *Input:* `POST /api/v1/auth/tokens` with invalid credentials and flawed test assertion.
+  - *Under the Hood:* API returns `401 Unauthorized` with JSON error body. Flawed test script executes `pm.expect(data).to.be.an('object')`. JavaScript engine evaluates error object as true, emitting a false green pass.
+  - *Output:* Test reports green pass despite `401 Unauthorized` response code on the physical wire.
+  - *Senior Savior:* Never assert generic object types without checking explicit status codes and exact business values. An error response is still an object.
+* **Card 2 (The Red Before Green Rule):**
+  - *Input:* `GET /api/v1/courses/CS101/roster` with deliberately injected property mismatch.
+  - *Under the Hood:* Author injects synthetic failure expecting nonexistent key `enrolledLearnerCount`. Runner fails red with `AssertionError: expected undefined to equal 45`, proving sensitivity. Author then applies real key `studentCount`.
+  - *Output:* First execution fails crimson red (sensitivity proven); second execution passes legitimate green (contract verified).
+  - *Senior Savior:* Never trust a test you have not seen fail red with your own eyes. Intentionally break the assertion condition first before certifying green.
+* **Card 3 (Dual Status and Body Contract):**
+  - *Input:* `GET /api/v1/students/STU-9921` with valid authorization token.
+  - *Under the Hood:* Runner evaluates two distinct gates: transport protocol gate (`pm.response.to.have.status(200)`) and data schema gate (`pm.expect(data).to.have.nested.property('department', 'Computer Science')`).
+  - *Output:* Both transport status and JSON payload contract verified simultaneously in under 500ms.
+  - *Senior Savior:* Transport status tells you the wire was reached; payload schema tells you the data was correct. Always verify both gates side by side.
+
+---
+
+## 5. Chapters 04 Through 13 Narrative & Pedagogical Master Blueprint
 * **Crisis:** The Ghost ISBN Incident. The campus library system accepts duplicate book records with negative prices and missing titles because requests lack schema contract validation.
 * **Pedagogical Core:** Structural JSON contract validation; defensive status assertions; testing non idempotent POST creations against idempotent GET reads; the 201 Created and 409 Conflict contracts.
 * **Workbench:** Full CRUD workbench exercising `POST /v1/books` and `GET /v1/books/:id`.
