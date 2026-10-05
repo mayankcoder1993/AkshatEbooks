@@ -2,7 +2,8 @@ import gapImage from '../assets/why-python-gap.png'
 import possibilitiesImage from '../assets/python-possibilities.png'
 
 export const PREFACE = {
-  title: 'Preface: Why Was Python Needed?',
+  title: 'Preface: Why Was Python Needed? The Visual Middle Path',
+  subtitle: 'Learning to think in code with visual mental models, first principles, and zero copy pasting.',
   blocks: [
     { type: 'image', src: gapImage, file: 'src/books/technical/programming/python-absolute-beginners/editions/edition-01/assets/why-python-gap.png', w: 1200, h: 600, alt: 'Shell scripts are quick for small system tasks but harder to grow. C programs provide control and speed but can require more code for small tools. An arrow leads to Python, which offers readable code, reusable modules and connections to existing tools.', caption: 'Python offered a practical middle path between quick scripts and larger systems programs.' },
     { type: 'paragraph', text: 'Python was created to solve a real problem. Programmers wanted to build useful tools without writing a large, difficult program for every small job.' },

@@ -5593,3 +5593,188 @@ body:has(.page.fullscreen-mode) .site-header,
 
 
 
+
+/* ==========================================================================
+   PREFACE PUBLISHER BANNER (IDENTICAL ACROSS ALL BOOKS)
+   ========================================================================== */
+
+.preface-publisher-banner {
+  background: linear-gradient(180deg, #fbf8f1 0%, #ffffff 100%);
+  border: 1px solid #e7ded0;
+  border-radius: 14px;
+  padding: 2.2rem 2rem 1.6rem 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 20px rgba(74, 13, 31, 0.04);
+}
+
+.publisher-insignia-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.8rem;
+  border-bottom: 1px solid #ebd9c0;
+}
+
+.insignia-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 110px;
+}
+
+.publisher-crest-img,
+.publisher-mark-img {
+  width: 84px;
+  height: 84px;
+  object-fit: contain;
+  border-radius: 50%;
+  padding: 4px;
+  background: #ffffff;
+  border: 2px solid #d4af37;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.2);
+}
+
+.insignia-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #78350f;
+  text-align: center;
+}
+
+.publisher-identity-center {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.publisher-eyebrow {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a8842c;
+  background: #faf2dc;
+  border: 1px solid #ebd9c0;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.publisher-imprint-title {
+  margin: 0.2rem 0;
+  font-family: var(--font-heading);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1e1b4b;
+  letter-spacing: -0.01em;
+}
+
+.publisher-group-subtitle {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #4338ca;
+}
+
+.publisher-tagline {
+  margin: 0 0 0.8rem 0;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #4b5563;
+}
+
+.publisher-meta-tags {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.pub-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  color: #374151;
+}
+
+.publisher-commitments-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+  padding-top: 1.6rem;
+}
+
+.commitment-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.commitment-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.commitment-num {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #b45309;
+}
+
+.commitment-title {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.commitment-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #4b5563;
+}
+
+.about-book-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.8rem;
+}
+
+.about-book-divider .divider-line {
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.about-book-divider .divider-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #6b7280;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 640px) {
+  .publisher-insignia-row {
+    flex-direction: column;
+    text-align: center;
+  }
+  .publisher-commitments-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -131,6 +131,17 @@ const server = http.createServer(async (req, res) => {
     return res.end(JSON.stringify({ statusCode: 404, error: 'Unknown shuttle route' }));
   }
 
+  // 1f. Polite 200 Trap Demonstration (POST /v1/campus/shuttle/reserve)
+  if (pathname === '/v1/campus/shuttle/reserve' && method === 'POST') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    return res.end(JSON.stringify({
+      status: 'failed',
+      code: 'EXPIRED_PASS',
+      error: 'Student semester transit pass expired',
+      seatConfirmed: false
+    }));
+  }
+
   // 2. REST Campus Library: AddBook (POST /v1/books)
   if (pathname === '/v1/books' && method === 'POST') {
     const raw = await readBody(req);

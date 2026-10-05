@@ -112,6 +112,10 @@ async function runValidation() {
   assert(shuttleValid.status === 200, 'Shuttle valid route returns 200 OK');
   assert(shuttleValid.body.status === 'in_transit' && typeof shuttleValid.body.coordinates.latitude === 'number', 'Shuttle 200 returns valid numeric coordinates');
 
+  const polite200 = await request('POST', '/v1/campus/shuttle/reserve');
+  assert(polite200.status === 200, 'Polite 200 returns status 200 OK');
+  assert(polite200.body.status === 'failed' && polite200.body.code === 'EXPIRED_PASS', 'Polite 200 returns failed payload demonstrating semantic lie');
+
   // --- 2. REST LIBRARY CRUD WORKFLOW (Chapters 4, 5, 6, 7) ---
   console.log('\n--- Checking Chapters 4, 5, 6, 7 REST Library Workflow ---');
   const uniqueAisle = Math.floor(1000 + Math.random() * 9000).toString();

@@ -27,7 +27,7 @@ export const lesson02 = {
       missionBadge: 'MISSION 1 · PHASE 2 OF 3: THE MANUAL WIRE INVESTIGATION',
       missionTitle: 'Global Open Data and Web Wire Audit',
       missionCrisis: 'The Campus Transit Shuttle Crash: Diagnosing the 500 Server Error',
-      missionContext: 'At 08:14 PM, hours after surviving his morning exam, student apprentice Akshay joins Principal Architect Sameer at the campus Transit Operations desk. The campus transit shuttle tracking service has crashed during the evening rush whenever students open the route tracker without selecting a destination. The frontend team blamed the backend, while backend logs showed an unhandled TypeError. In this phase, Akshay and Sameer inspect raw HTTP packets on the wire by hand, reproduce the unhandled 500 crash via curl, understand status code families, and install a defensive guard returning 400 Bad Request.',
+      missionContext: 'At 08:14 PM, hours after surviving his morning exam, student apprentice Akshay joins Principal Architect Sameer at the campus Transit Operations desk. The campus transit shuttle tracking service has crashed during evening rush whenever students open the route tracker without selecting a destination. The frontend team blamed the backend, while backend logs showed an unhandled TypeError. In this phase, Akshay and Sameer inspect raw HTTP packets on the wire by hand, reproduce the unhandled 500 crash via curl, understand status code families, and install a defensive guard returning 400 Bad Request.',
       missionObjective: 'Reproduce the unhandled 500 crash, install a defensive input validation guard, and verify both 400 Bad Request and 200 OK contracts.',
       targetSystems: 'Campus Shuttle Route Locator Service · Port 5050 · HTTP Wire Traffic',
       missionImage: {
@@ -70,7 +70,7 @@ export const lesson02 = {
     },
 
     // =========================================================================
-    // TOPIC 1: THE COMIC STORYBOARD ARC (ALL 4 SCENES)
+    // TOPIC 1: THE COMIC STORYBOARD ARC (ALL 4 SCENES FROM MASTER STORY LEDGER)
     // =========================================================================
     {
       type: 'storyboard',
@@ -92,9 +92,9 @@ export const lesson02 = {
           },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'The campus transit shuttle map has frozen! Students waiting at bus stops see an empty screen. The terminal log says HTTP 500 Internal Server Error!',
+            speech: 'Fifty shuttle routes go live in twenty minutes and apps are completely blank!',
             replySpeaker: 'Sameer',
-            replySpeech: 'Step away from the blame game. The browser and app screens are decorative glass. Come to the terminal and inspect the raw wire.'
+            replySpeech: 'Never test through a browser button during incident triage. Open raw curl.'
           },
           scene: 'At 08:14 PM, hours after his morning exam, student apprentice Akshay joins Sameer at the transit operations desk. Overhead map screens hang frozen with red error banners as campus shuttles vanish from student phone screens. Teams point fingers between frontend and backend.',
           realization: 'When production systems fail, finger pointing between teams begins until someone inspects the network wire.'
@@ -121,11 +121,11 @@ export const lesson02 = {
           },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'I sent GET /v1/shuttle/route with the route name omitted. The server returned HTTP 500 with an unhandled TypeError stack trace!',
+            speech: 'TypeError! Cannot read properties of undefined reading trim! Status 500!',
             replySpeaker: 'Sameer',
-            replySpeech: 'An omitted parameter in Express is undefined, not an empty string. Calling trim on undefined crashes the worker process!'
+            replySpeech: 'An uncaught runtime crash leaked past your handler. That is what 500 means.'
           },
-          scene: 'Akshay opens his terminal and fires curl http://localhost:5050/v1/shuttle/route without specifying a route name. The terminal instantly dumps a bright red unhandled stack trace: TypeError: Cannot read properties of undefined (reading trim). Sameer points out the three ways to be empty.',
+          scene: 'Akshay opens his terminal and fires curl http://localhost:5050/v1/campus/shuttle/coordinates without specifying a route name. The terminal instantly dumps a bright red unhandled stack trace: TypeError: Cannot read properties of undefined (reading trim). Sameer points out the three ways to be empty.',
           realization: 'A 500 error is not a hardware failure; it is an uncaught application exception crashing the server process due to missing input guards.'
         },
         {
@@ -150,108 +150,126 @@ export const lesson02 = {
           },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'I added the guard: if (!name || !name.trim()) return res.status(400) with a clear error payload. We fail fast before calling route lookup!',
+            speech: 'if (!route || route.trim() === "") return res.status(400).json({ error })...',
             replySpeaker: 'Sameer',
-            replySpeech: 'Clean engineering. 400 Bad Request informs the client that their request was malformed, protecting our server from a fatal crash.'
+            replySpeech: 'Never invent data for a broken client. Fail fast at the front door.'
           },
-          scene: 'Akshay opens the route handler file in his editor. Under Sameer guidance, he writes a fail fast guard: if (!name || !name.trim()) return res.status(400).json({ error: "Bad Request", message: "Query parameter name is required and cannot be empty" }).',
-          realization: 'Defensive guards intercept malformed client requests at the door, preventing unhandled server crashes and returning 400 client error contracts.'
+          scene: 'Akshay opens the route controller in his editor. Sameer prevents him from substituting a default route, teaching him that client errors must fail fast with 400 Bad Request. Akshay types the perimeter check: if (!route || route.trim() === "") return res.status(400).json({ error: "route parameter is required" }).',
+          realization: 'Good API design fails fast at the perimeter. Never let invalid input enter downstream business logic.'
         },
         {
-          title: 'Scene 4: 08:37 PM: Dual Wire Contract Verification',
-          time: '08:37 PM',
+          title: 'Scene 4: 08:40 PM: Dual Verification and Status Code Architecture',
+          time: '08:40 PM',
           layout: 'hero',
           image: {
             src: ch02Scene4Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-4-dual-wire-verification.jpg',
             w: 1408,
             h: 768,
-            alt: 'Terminal split screen showing 400 Bad Request guard and 200 OK valid route coordinates.',
-            caption: 'Dual Verification: Negative guard returns 400 Bad Request in 4ms, while valid query returns 200 OK with live coordinates in 12ms.'
+            alt: 'Akshay and Sameer reviewing side by side terminals showing 400 Bad Request and 200 OK.',
+            caption: 'Dual Verification Display: Negative guard returns 400 Bad Request in 4ms, positive query returns 200 OK with route coordinates.'
           },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'Status 400 for the missing parameter in 4ms, and status 200 OK with live coordinates for the valid route! Both ends of the wire contract are verified!',
+            speech: '400 Bad Request in 4ms for invalid queries! Status 200 OK for valid routes!',
             replySpeaker: 'Sameer',
-            replySpeech: 'Dual verification complete. Never declare a fix complete until you prove both the defensive guard and the working contract side by side.'
+            replySpeech: 'Dual verification complete. Always verify the negative guard and positive contract side by side.'
           },
-          scene: 'Akshay tests both endpoints side by side on the terminal. The omitted parameter returns a fast 400 Bad Request in 4ms. The valid query with name=north_loop returns 200 OK with complete route coordinates in 12ms. The wall display comes alive as shuttles resume tracking.',
-          realization: 'Dual verification builds permanent engineering confidence: prove the defect is safely guarded and prove the feature remains intact.'
+          scene: 'With the guard saved, Akshay tests both boundary conditions side by side in split terminal panes. An omitted route immediately yields HTTP 400 Bad Request in 4ms. A valid route query returns HTTP 200 OK with complete shuttle coordinates. The overhead transit map unfreezes as live bus locations resume streaming.',
+          realization: 'Testing a single happy path is professional negligence. Complete verification tests both the boundary guard and the contract fulfillment side by side.'
         }
       ]
     },
 
     // =========================================================================
-    // SECTION 2: WIRE INSPECTION & TRIAGE
+    // TOPIC 2: PARAMETER EMPTY STATES AND QUERY STRING ANATOMY
     // =========================================================================
     {
       type: 'triage',
       title: 'Missing versus Empty Query Parameter Triage',
-      scenario: 'Akshay compares the working call GET /v1/shuttle/route?name=north_loop against the failing call GET /v1/shuttle/route where name is completely omitted. What does Node.js Express do when a query parameter is absent from the URL?',
+      scenario: 'During the evening transit incident, frontend developers claimed their app was sending the route parameter. Backend engineers saw undefined in Express. When inspecting GET /v1/campus/shuttle/coordinates on the wire, why does omitting the key cause undefined in JavaScript?',
       options: [
-        'Express assigns undefined to req.query.name when the parameter is omitted from the request URL',
-        'Express automatically populates req.query.name with an empty string so string methods never throw',
-        'Express synthesizes a default value based on the previous HTTP request received on port 5050'
+        'Query string parsers only populate object keys present in the raw URI; omitting ?route leaves req.query.route undefined, causing crashes if string methods like trim() are called without an existence check',
+        'HTTP servers automatically convert missing parameters into the string null before passing them to application handlers',
+        'The TCP network layer drops packets that do not include question mark query delimiters'
       ],
       answerIndex: 0,
-      debrief: 'Tactical Triumph: An omitted query parameter results in undefined in req.query. If backend logic attempts to execute string methods such as req.query.name.trim() without checking existence, the V8 runtime throws TypeError: Cannot read properties of undefined, resulting in an unhandled 500 Internal Server Error.',
+      debrief: 'Tactical Triumph: In Node.js Express, req.query is built dynamically from the request line. If ?route is omitted entirely, req.query.route is undefined. Calling .trim() on undefined throws an uncaught TypeError that halts worker threads and produces an unhandled 500 error.',
       traps: [
-        'Tactical Triumph: An omitted query parameter results in undefined in req.query. If backend logic attempts to execute string methods such as req.query.name.trim() without checking existence, the V8 runtime throws TypeError: Cannot read properties of undefined, resulting in an unhandled 500 Internal Server Error.',
-        'Diagnostic Trap: Express does not invent empty strings for absent parameters. An omitted key is strictly undefined.',
-        'Diagnostic Trap: HTTP is stateless; Express handlers never retain state from previous requests across separate client sockets.'
+        'Tactical Triumph: In Node.js Express, req.query is built dynamically from the request line. If ?route is omitted entirely, req.query.route is undefined. Calling .trim() on undefined throws an uncaught TypeError that halts worker threads and produces an unhandled 500 error.',
+        'Diagnostic Trap: HTTP has no concept of JavaScript null. Values exist as raw bytes or are completely absent from the wire.',
+        'Diagnostic Trap: TCP is a transport protocol; it does not read URI query characters or evaluate application level syntax.'
       ]
     },
     {
       type: 'image',
       layout: 'stacked',
-      badge: 'PARAMETER WIRE INSPECTION',
+      badge: 'HTTP WIRE ANATOMY',
       title: 'Inspecting Query Parameters on the Network Wire',
-      text: 'Query strings append key value pairs to the request URI after a question mark. When a client omits a query parameter, Express parses the property as undefined. Invoking string operations on undefined crashes the worker thread.',
+      text: 'Query parameters reside in the URL request line following a question mark delimiter. Multiple parameters join with ampersands. Because the wire carries raw text, the server must parse parameters defensively before executing business logic.',
       src: wireImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/http-wire-anatomy.jpg',
       w: 1408,
       h: 768,
-      alt: 'Technical diagram showing query string parsing from raw URL to Express req.query object.',
-      caption: 'Query String Parsing: How missing parameters evaluate to undefined inside the server process.',
+      alt: 'Detailed network wire diagram illustrating the structure of HTTP request lines, query parameters, headers, and payload separation.',
+      caption: 'The Wire Protocol: How query parameters travel across the network to backend parsers.',
       points: [
-        'Omitted Parameter: URL path /v1/shuttle/route contains no query string; req.query.name is undefined.',
-        'Empty Value: URL path /v1/shuttle/route?name= passes key with empty string; req.query.name is "".',
-        'Whitespace Value: URL path /v1/shuttle/route?name=%20 passes URL encoded space; req.query.name.trim() is "".'
+        'The Request Line contains the HTTP verb, path, query string, and protocol version.',
+        'Parameter Omission: /v1/campus/shuttle/coordinates provides no route key, leaving req.query.route undefined.',
+        'Empty Value: /v1/campus/shuttle/coordinates?route= provides the key with empty string value.',
+        'Whitespace Value: /v1/campus/shuttle/coordinates?route=%20 provides URL encoded spaces that require trim() sanitization.',
+        'Defensive Rule: Always test all three empty variants to guarantee server resilience.'
       ]
     },
+
+    // =========================================================================
+    // TOPIC 3: WORKBENCH 1 & QUAD-CARD 1: AUDITING THE 500 CRASH
+    // =========================================================================
     {
       type: 'comic-workbench',
-      badge: 'COMIC WORKBENCH · CRASH REPRODUCTION',
+      badge: 'COMIC WORKBENCH · CRASH DIAGNOSTIC',
       title: 'Auditing the Unhandled 500 Crash on the Wire',
       appType: 'api-workbench',
       svgScreen: crash500Svg,
       dialogue: [
         {
           speaker: 'Akshay',
-          role: 'Hero',
-          text: 'I sent GET /v1/shuttle/route with the route name parameter omitted. The server returned HTTP 500 Internal Server Error with a leaked stack trace!',
+          role: 'Apprentice',
+          text: 'I ran curl without the route query parameter and got a wall of red error text!',
           pointer: 'Status 500 Internal Server Error'
         },
         {
           speaker: 'Sameer',
-          role: 'Staff Architect',
-          text: 'Notice the problem: a 500 tells the client that the server broke itself. In truth, the client sent missing data, but our server crashed because it lacked an input guard.',
-          pointer: 'Backend Stack Trace'
+          role: 'Principal Systems Architect',
+          text: 'Look at the stack trace. The handler assumed route would always exist.',
+          pointer: 'Uncaught TypeError Stack Dump'
         }
       ],
       workbench: {
         method: 'GET',
-        url: 'http://localhost:5050/v1/shuttle/route',
+        url: 'http://localhost:5050/status/500',
         headers: 'Accept: application/json',
         responseStatus: '500 Internal Server Error',
-        responseTime: '42ms',
-        responseBody: '{\n  "error": "Internal Server Error",\n  "message": "TypeError: Cannot read properties of undefined (reading \'trim\')",\n  "stack": "at RouteLocatorService.lookup (/server/routes.js:42:24)"\n}'
+        responseTime: '18ms',
+        responseBody: '{\n  "statusCode": 500,\n  "error": "Internal Server Error",\n  "message": "TypeError: Cannot read properties of undefined (reading \'trim\')",\n  "stack": "at shuttleHandler (server.js:42:24)\\n    at Layer.handle [as handle_request] (router.js:58:5)"\n}'
       },
       breakdown: {
-        input: 'Client issues GET /v1/shuttle/route across port 5050 with query parameter name completely omitted.',
-        explanation: 'Backend code accesses req.query.name.trim() immediately. Because req.query.name is undefined, the V8 engine throws an unhandled TypeError, terminating request execution and forcing Express to return status 500.',
-        output: 'HTTP status 500 Internal Server Error with stack trace leak, blinding the mobile client to the actual input error.',
-        trapAndFix: 'Senior Savior Trap: Assuming an absent parameter is handled the same as an empty string. Golden Rule: Never call string operations on request parameters without validating existence and non empty values first.'
+        input: {
+          title: 'Omitted Route Parameter',
+          detail: 'Client issues GET /v1/campus/shuttle/coordinates without providing the mandatory route query parameter.'
+        },
+        explanation: {
+          title: 'Uncaught TypeError Exception',
+          detail: 'Express assigns undefined to req.query.route. The route handler calls route.trim() without an existence check, crashing the process worker.'
+        },
+        output: {
+          title: 'Status 500 Server Error Leak',
+          detail: 'HTTP 500 Internal Server Error with HTML stack dump, exposing internal file paths and blinding the client to the real issue.'
+        },
+        trap: {
+          title: 'Absent Parameter Confusion',
+          detail: 'Senior Savior Trap: Assuming undefined behaves identically to empty string. Never invoke string operations without validating existence first.'
+        }
       }
     },
     {
@@ -261,6 +279,10 @@ export const lesson02 = {
       takeaway: 'When servers fail without defensive guards, a single missing query parameter can crash upstream gateways and lock out millions of users. Validate early, fail fast, and return meaningful 400 client error contracts.',
       metric: 'PRODUCTION ARCHITECTURE LAW'
     },
+
+    // =========================================================================
+    // TOPIC 4: WORKBENCH 2 & QUAD-CARD 2: THE 400 BAD REQUEST GUARD
+    // =========================================================================
     {
       type: 'comic-workbench',
       badge: 'COMIC WORKBENCH · DEFENSIVE REPAIR',
@@ -270,32 +292,48 @@ export const lesson02 = {
       dialogue: [
         {
           speaker: 'Akshay',
-          role: 'Hero',
-          text: 'I replayed the request without the parameter. Instead of a 500 crash, we get 400 Bad Request with a clear message explaining that the route name is required!',
+          role: 'Apprentice',
+          text: 'I replayed the request without the parameter and received 400 Bad Request with an actionable message!',
           pointer: 'Status 400 Bad Request'
         },
         {
           speaker: 'Sameer',
-          role: 'Staff Architect',
+          role: 'Principal Systems Architect',
           text: 'Clean and honest. 400 tells the client that the problem is their request, not server health.',
           pointer: 'Guarded JSON Message'
         }
       ],
       workbench: {
         method: 'GET',
-        url: 'http://localhost:5050/v1/shuttle/route',
+        url: 'http://localhost:5050/v1/campus/shuttle/coordinates',
         headers: 'Accept: application/json',
         responseStatus: '400 Bad Request',
         responseTime: '4ms',
-        responseBody: '{\n  "error": "Bad Request",\n  "message": "Query parameter \'name\' is required and cannot be empty"\n}'
+        responseBody: '{\n  "statusCode": 400,\n  "error": "route parameter is required",\n  "hint": "Provide a valid route identifier such as campus_loop_north"\n}'
       },
       breakdown: {
-        input: 'Client issues GET /v1/shuttle/route with missing or whitespace name parameter.',
-        explanation: 'The fail fast guard checks (!name || name.trim() === "") before calling database or locator services. It intercepts invalid input and terminates the response immediately.',
-        output: 'HTTP status 400 Bad Request with actionable JSON error contract: Query parameter name is required.',
-        trapAndFix: 'Senior Savior Trap: Returning HTTP 200 with an error object inside the body to avoid alarming frontend teams. Golden Rule: 400 communicates client error; never use 200 for malformed input.'
+        input: {
+          title: 'Malformed Query Parameter',
+          detail: 'Client sends omitted or whitespace route parameter GET /v1/campus/shuttle/coordinates.'
+        },
+        explanation: {
+          title: 'Fail Fast Perimeter Defense',
+          detail: 'Defensive guard if (!route || route.trim() === "") halts execution before business logic or database queries run.'
+        },
+        output: {
+          title: 'Status 400 with Actionable Message',
+          detail: 'HTTP status 400 Bad Request with structured JSON: route parameter is required and cannot be empty.'
+        },
+        trap: {
+          title: 'The Fallback Route Temptation',
+          detail: 'Senior Savior Trap: Inventing fallback data for malformed requests. Fail fast so clients correct their query parameters immediately.'
+        }
       }
     },
+
+    // =========================================================================
+    // TOPIC 5: THE FIVE STATUS CODE FAMILIES
+    // =========================================================================
     {
       type: 'image',
       layout: 'stacked',
@@ -316,6 +354,61 @@ export const lesson02 = {
         '5xx Server Error: The server encountered an unexpected condition that prevented it from fulfilling the request (500, 502, 503).'
       ]
     },
+
+    // =========================================================================
+    // TOPIC 6: WORKBENCH 3 & QUAD-CARD 3: THE 200 OK CONTRACT VERIFICATION
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'COMIC WORKBENCH · CONTRACT VERIFICATION',
+      title: 'Auditing the Valid 200 OK Shuttle Route Contract',
+      appType: 'api-workbench',
+      svgScreen: contract200Svg,
+      dialogue: [
+        {
+          speaker: 'Akshay',
+          role: 'Apprentice',
+          text: 'Now when I query campus_loop_north, the server responds with 200 OK and live telemetry!',
+          pointer: 'Status 200 OK with coordinates'
+        },
+        {
+          speaker: 'Sameer',
+          role: 'Principal Systems Architect',
+          text: 'Both contracts are satisfied: the negative guard returns 400 Bad Request, and the positive lookup returns 200 OK.',
+          pointer: 'Positive Contract Response'
+        }
+      ],
+      workbench: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/campus/shuttle/coordinates?route=campus_loop_north',
+        headers: 'Accept: application/json',
+        responseStatus: '200 OK',
+        responseTime: '12ms',
+        responseBody: '{\n  "route": "campus_loop_north",\n  "shuttleId": "BUS_104",\n  "status": "in_transit",\n  "coordinates": {\n    "latitude": 42.3601,\n    "longitude": -71.0942\n  },\n  "speedMph": 24,\n  "nextStop": "Apex Student Union",\n  "estimatedArrivalMinutes": 3\n}'
+      },
+      breakdown: {
+        input: {
+          title: 'Authorized Route Query',
+          detail: 'Client sends GET /v1/campus/shuttle/coordinates?route=campus_loop_north with verified route key.'
+        },
+        explanation: {
+          title: 'Verified Service Execution',
+          detail: 'Request clears defensive guard, matches route in geospatial dispatcher, and retrieves active bus telemetry.'
+        },
+        output: {
+          title: 'Status 200 with Geolocation JSON',
+          detail: 'HTTP status 200 OK with verified bus coordinates, status in_transit, and estimated arrival minutes.'
+        },
+        trap: {
+          title: 'Happy Path Blindness',
+          detail: 'Senior Savior Trap: Testing only positive routes. Dual verification is mandatory: test the negative guard and positive contract side by side.'
+        }
+      }
+    },
+
+    // =========================================================================
+    // TOPIC 7: WORKBENCH 4 & QUAD-CARD 4: THE POLITE 200 TRAP (CARD 4 COMPLETE)
+    // =========================================================================
     {
       type: 'triage',
       title: 'The Polite 200 Incident Triage',
@@ -335,39 +428,55 @@ export const lesson02 = {
     },
     {
       type: 'comic-workbench',
-      badge: 'COMIC WORKBENCH · CONTRACT VERIFICATION',
-      title: 'Auditing the Valid 200 OK Shuttle Route Contract',
+      badge: 'COMIC WORKBENCH · SILENT DEFECT DETECTION',
+      title: 'Auditing the Polite 200 Trap on the Wire',
       appType: 'api-workbench',
       svgScreen: contract200Svg,
       dialogue: [
         {
           speaker: 'Akshay',
-          role: 'Hero',
-          text: 'Now when I send GET /v1/shuttle/route?name=north_loop, the server responds with 200 OK and valid bus coordinates!',
-          pointer: 'Status 200 OK with coordinates'
+          role: 'Apprentice',
+          text: 'Wait! The response status header says 200 OK, but the JSON body says the transaction failed?!',
+          pointer: 'Status 200 OK with failure body'
         },
         {
           speaker: 'Sameer',
-          role: 'Staff Architect',
-          text: 'Both contracts are now satisfied: the negative guard returns 400 Bad Request, and the positive lookup returns 200 OK with full route data.',
-          pointer: 'Positive Contract Response'
+          role: 'Principal Systems Architect',
+          text: 'The polite 200 lie. Automated test runners check the 200 status and report green, masking the real defect.',
+          pointer: 'Semantic Dishonesty Mismatch'
         }
       ],
       workbench: {
-        method: 'GET',
-        url: 'http://localhost:5050/v1/shuttle/route?name=north_loop',
-        headers: 'Accept: application/json',
-        responseStatus: '200 OK',
-        responseTime: '12ms',
-        responseBody: '{\n  "route": "north_loop",\n  "status": "Active",\n  "stops": 8,\n  "coordinates": {\n    "latitude": 12.9716,\n    "longitude": 77.5946\n  }\n}'
+        method: 'POST',
+        url: 'http://localhost:5050/v1/campus/shuttle/reserve',
+        headers: 'Content-Type: application/json',
+        responseStatus: '200 OK (Semantic Lie)',
+        responseTime: '15ms',
+        responseBody: '{\n  "status": "failed",\n  "code": "EXPIRED_PASS",\n  "error": "Student semester transit pass expired",\n  "seatConfirmed": false\n}'
       },
       breakdown: {
-        input: 'Client sends GET /v1/shuttle/route?name=north_loop with valid route query parameter.',
-        explanation: 'The request passes the fail fast guard, enters the locator query, finds the active shuttle coordinates, and serializes the JSON response.',
-        output: 'HTTP status 200 OK returning the complete route object with active coordinates.',
-        trapAndFix: 'Senior Savior Trap: Only testing happy path 200 queries and assuming edge cases never happen in production. Golden Rule: Dual verification is mandatory; prove the negative 400 guard and the positive 200 contract side by side.'
+        input: {
+          title: 'Expired Shuttle Reservation Request',
+          detail: 'Client attempts bus seat reservation with an expired semester transit pass.'
+        },
+        explanation: {
+          title: 'Semantic Protocol Dishonesty',
+          detail: 'Backend catches business validation failure but returns HTTP transport status 200 OK instead of 402 or 403.'
+        },
+        output: {
+          title: 'Green Checkmark Masking Defect',
+          detail: 'HTTP status 200 OK with payload failure body. CI runners mark test passed while reservation fails for the student.'
+        },
+        trap: {
+          title: 'The Polite 200 Trap Law',
+          detail: 'Senior Savior Trap: Wrapping failure in polite 200 OK to avoid scary errors. Always use authentic HTTP status semantics so distributed networks respond correctly.'
+        }
       }
     },
+
+    // =========================================================================
+    // TOPIC 8: VICTORY AND CLIFFHANGER
+    // =========================================================================
     {
       type: 'victory-milestone',
       title: 'Phase 2 Complete: Manual Wire Auditing and Status Codes Mastered',

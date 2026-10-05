@@ -1,4 +1,5 @@
 import Blocks from './Blocks.jsx'
+import PrefaceHeader from './PrefaceHeader.jsx'
 
 function RichLine({ text }) {
   const parts = text.split(/(\*\*[^*]+\*\*)/g)
@@ -79,7 +80,11 @@ export default function PrintBook({ publication }) {
         </div>
       )}
     </section>
-    <section className="front-page book-sheet" data-page-label="Preface" id="print-preface"><h1>{PREFACE.title}</h1><Blocks blocks={PREFACE.blocks} staticMode/></section>
+    <section className="front-page book-sheet" data-page-label="Preface" id="print-preface">
+      <PrefaceHeader brand={BRAND} book={BOOK} />
+      <h1>{PREFACE.title}</h1>
+      <Blocks blocks={PREFACE.blocks} staticMode/>
+    </section>
     {lessons.map((l, i) => (
       <section
         className="chapter-wrapper book-sheet"

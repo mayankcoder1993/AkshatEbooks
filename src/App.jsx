@@ -4,6 +4,7 @@ import LibraryHome from './components/LibraryHome.jsx'
 import LessonShell from './components/LessonShell.jsx'
 import PrintBook from './components/PrintBook.jsx'
 import Blocks from './components/Blocks.jsx'
+import PrefaceHeader from './components/PrefaceHeader.jsx'
 import CurriculumBlueprint from './components/CurriculumBlueprint.jsx'
 import HowToUseGuide from './components/HowToUseGuide.jsx'
 import DialogueTestLab from './components/DialogueTestLab.jsx'
@@ -472,6 +473,7 @@ export default function App() {
         <main className={`page ${isWide ? 'wide-mode' : ''} ${isFullscreen ? 'fullscreen-mode' : ''}`}>
           {isPreface && PREFACE && (
             <article className="lesson lesson-enter">
+              <PrefaceHeader brand={BRAND} book={BOOK} />
               <header className="lesson-hero">
                 <div className="lesson-hero-meta">
                   <span className="pill accent">Frontmatter · Preface</span>
@@ -480,7 +482,7 @@ export default function App() {
                 </div>
                 <p className="lesson-eyebrow">Frontmatter</p>
                 <h1 className="lesson-title">{PREFACE.title}</h1>
-                <p className="lesson-subtitle">The invisible nervous system of modern computing, first principles, and the transition from human clicks to automated pipelines.</p>
+                <p className="lesson-subtitle">{PREFACE.subtitle || BOOK.subtitle}</p>
               </header>
               <Blocks blocks={PREFACE.blocks} />
             </article>
