@@ -94,10 +94,10 @@ export const lesson02 = {
             speaker: 'Akshay',
             speech: 'Fifty shuttle routes go live in twenty minutes and apps are completely blank!',
             replySpeaker: 'Sameer',
-            replySpeech: 'Never test through a browser button during incident triage. Open raw curl.'
+            replySpeech: 'Stop pointing fingers. A blank app tells you nothing. Open your terminal and send the request with curl.'
           },
           scene: 'At 08:14 PM, hours after his morning exam, student apprentice Akshay joins Sameer at the transit operations desk. Overhead map screens hang frozen with red error banners as campus shuttles vanish from student phone screens. Teams point fingers between frontend and backend.',
-          realization: 'When production systems fail, finger pointing between teams begins until someone inspects the network wire.'
+          realization: 'When production systems fail, finger pointing between teams begins until someone inspects the actual HTTP request.'
         },
         {
           title: 'Scene 2: 08:25 PM: Reproducing the 500 Crash on the Wire',
@@ -483,14 +483,14 @@ export const lesson02 = {
       summary: 'Akshay successfully diagnosed the campus shuttle 500 crash by hand, categorized parameter empty states, installed a fail fast validation guard, and mastered the five HTTP status code families.',
       powers: [
         'Ability to distinguish omitted undefined parameters from empty strings and whitespace',
-        'Diagnosing unhandled server crashes through raw wire inspection and stack trace analysis',
+        'Diagnosing unhandled server crashes through direct HTTP endpoint inspection and stack trace analysis',
         'Implementing fail fast input validation guards returning clean 400 Bad Request contracts',
         'Full semantic mastery of the five HTTP status families from 1xx to 5xx'
       ],
       disastersPrevented: [
         'Prevented evening transit orientation shutdown by resolving the unhandled 500 route locator crash',
         'Eliminated silent data corruption caused by the Polite 200 Trap',
-        'Stopped finger pointing between frontend and backend teams by establishing the network wire as the single source of truth'
+        'Stopped finger pointing between frontend and backend teams by establishing the actual HTTP request and response as the single source of truth'
       ]
     },
     {

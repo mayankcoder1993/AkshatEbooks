@@ -71,7 +71,7 @@ export const lesson01 = {
       type: 'chapter-opener',
       missionBadge: 'CHAPTER 01 : FOUNDATIONS : THE WIRED AWAKENING',
       missionTitle: 'The Wire and the 14ms Rescue',
-      missionCrisis: 'The 08:30 AM Admit Card Meltdown and the Presentation Glass Trap',
+      missionCrisis: 'The 08:30 AM Admit Card Meltdown and the Heavy Webpage Timeout',
       missionContext: 'At 08:30 AM on exam morning, student Akshay runs across the quad. A water leak in his bag smudges his printed Admit Card, dissolving his Hall and Seat numbers. Gates lock in twenty minutes. Panicking, he tries to re-download on mobile, but twelve thousand concurrent students have crashed the portal into a 504 timeout. Principal Systems Architect Sameer steps in with hot cutting chai, bypasses the browser, and fetches the pure Admit Card JSON directly from the wire in fourteen milliseconds. Astounded, Akshay vows to master APIs and pair programs with Sameer after the exam.',
       missionObjective: 'Understand what an Application Programming Interface does on the network wire, build a runnable Express Admit Card server on port 3000, avoid the undefined body byte stream crash, and master all five core CRUD verbs.',
       targetSystems: 'Apex Campus Admit Card Service : Port 3000 : HTTP Wire Traffic',
@@ -95,9 +95,9 @@ export const lesson01 = {
           desc: 'Chapter 3: Writing programmatic assertions, test suites, and CI CD automation to lock quality in.'
         }
       ],
-      achieve: 'Understand what an Application Programming Interface actually does on the physical network wire. Distinguish presentation glass from network web services. Build a fully runnable Express server from scratch. Master the five essential CRUD verbs (POST, GET, PUT, PATCH, DELETE) and taste the architectural differences between REST, SOAP, and GraphQL.',
+      achieve: 'Understand what an Application Programming Interface actually does behind the browser. Distinguish heavy webpage bundles from lightweight backend data. Build a fully runnable Express server from scratch. Master the five essential CRUD verbs (POST, GET, PUT, PATCH, DELETE) and taste the architectural differences between REST, SOAP, and GraphQL.',
       how: 'Through sequential comic scenes, visual storyboards, interactive code workbenches, and diagnostic triage challenges following student Akshay and mentor Sameer.',
-      carry: 'The mental model of the client server handshake, an intuitive grasp of HTTP status codes, and the confidence to inspect raw wire traffic rather than relying blindly on UI screens.'
+      carry: 'The mental model of the client server handshake, an intuitive grasp of HTTP status codes, and the confidence to inspect network requests directly rather than relying blindly on UI screens.'
     },
 
     // =========================================================================
@@ -224,7 +224,7 @@ export const lesson01 = {
             }
           ],
           scene: 'Principal Systems Architect Sameer steps out from the cloister colonnade with hot cutting chai in a traditional brass wire holder, smiling with veteran composure as Akshay panics over the frozen portal.',
-          realization: 'The senior engineer diagnoses the architecture before touching a single wire. Panic looks at symptoms; mastery identifies bottlenecks.'
+          realization: 'The senior architect diagnoses network bottlenecks before jumping to conclusions. Panic looks at symptoms; engineering finds the actual constraint.'
         },
         {
           title: 'The Browser Vanity Choke',
@@ -235,7 +235,7 @@ export const lesson01 = {
             w: 1200,
             h: 675,
             alt: 'Akshay listening intently as Sameer points to an enterprise server rack recessed inside an ancient vaulted sandstone alcove.',
-            caption: 'Server Vault Alcove: Pulsing cyan server LEDs illuminate the contrast between heavy HTML and pure wire data.'
+            caption: 'Server Vault Alcove: Pulsing cyan server LEDs illuminate the contrast between heavy HTML pages and pure backend JSON.'
           },
           dialogues: [
             {
@@ -249,10 +249,10 @@ export const lesson01 = {
             }
           ],
           scene: 'Sameer gestures toward the recessed server rack alcove, explaining that the backend is processing requests flawlessly, but the bloated client presentation bundle cannot fit through the weak Wi-Fi signal.',
-          realization: 'The browser is a presentation glass: it downloads megabytes of decoration before showing you the bytes you actually need. The data itself on the raw network wire is almost always tiny.'
+          realization: 'Webpages carry megabytes of visual assets, styling, and scripts before showing you the data you actually need. The backend API response itself is tiny JSON.'
         },
         {
-          title: 'Bypassing the Presentation Glass',
+          title: 'Querying the Pure API Directly',
           time: '08:45 AM',
           image: {
             src: act01Scene11Img,
@@ -260,21 +260,21 @@ export const lesson01 = {
             w: 1200,
             h: 675,
             alt: 'Sameer resting his slim matte-black diagnostic tablet on a stone ledge, preparing to query the server socket directly.',
-            caption: 'Wire Inspection Console: Sameer unsheathes the diagnostic slate to ask the server directly.'
+            caption: 'Network Console: Sameer opens his terminal to query the backend API directly with curl.'
           },
           dialogues: [
             {
               speaker: 'Sameer',
               reply: true,
-              speech: 'Exactly. Hall 302 and Seat B14 are only 120 bytes. That is thirty thousand times smaller. Put away the browser. We will walk straight into the kitchen.'
+              speech: 'Exactly. Hall 302 and Seat B14 are only 120 bytes. Put away the browser. We will query the API directly with curl.'
             },
             {
               speaker: 'Sameer',
-              speech: 'See? No web page, photos, or scripts. I am sending one wire question: give me the admit card for student APX102.'
+              speech: 'See? No HTML, no heavy styles or scripts. Just a direct GET request for student APX102.'
             }
           ],
-          scene: 'Sameer rests his slim diagnostic slate on the carved balustrade, bypassing HTML, CSS, and client-side JavaScript to query the raw API endpoint directly over the wire.',
-          realization: 'APIs eliminate presentation tax. When you speak directly to the server in structured data, network constraints become irrelevant.'
+          scene: 'Sameer rests his laptop on the carved balustrade, bypassing HTML, CSS, and client-side JavaScript to query the raw API endpoint directly over HTTP.',
+          realization: 'APIs eliminate frontend download bloat. When you speak directly to the backend in structured JSON, low bandwidth is no longer a blocker.'
         },
         {
           title: 'The 14 Millisecond Terminal Query',
@@ -286,13 +286,13 @@ export const lesson01 = {
             w: 1200,
             h: 675,
             alt: 'Sameer holding a diagnostic slate projecting a cyan and amber wire inspection HUD.',
-            caption: 'Terminal Console: Sameer extracts Hall 302, Seat B-14 over the raw wire in fourteen milliseconds.'
+            caption: 'Terminal Console: Sameer extracts Hall 302, Seat B14 via an HTTP GET request in fourteen milliseconds.'
           },
           dialogue: {
             speaker: 'Sameer',
-            speech: 'Done. Hall 302. Seat B-14. Took fourteen milliseconds.'
+            speech: 'Done. Hall 302. Seat B14. Took fourteen milliseconds.'
           },
-          scene: 'Sameer opens a bare black terminal, fires a direct wire request, and extracts the exact hall and seat number in 14 milliseconds.',
+          scene: 'Sameer opens his terminal, fires a direct curl request, and extracts the exact hall and seat number in 14 milliseconds.',
           realization: 'An API call goes directly to the server and asks for exactly the data you need: nothing more. It skips every layer of visual presentation.'
         },
         {
@@ -330,7 +330,7 @@ export const lesson01 = {
           },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'Hall 302, Seat B-14! I have to sprint! Sameer, what kind of black magic was that?!',
+            speech: 'Hall 302, Seat B14! I have to sprint! Sameer, how did you get that so fast?!',
             replySpeaker: 'Sameer',
             replySpeech: 'Not magic, Akshay: an API call! Go pass your exam and meet me in Room 7 behind the stepwell. I will show you how it works!'
           },
@@ -341,12 +341,12 @@ export const lesson01 = {
     },
 
     // =========================================================================
-    // CODE INTERFACE 1: THE BROWSER WATERFALL VS RAW WIRE PAYLOAD
+    // CODE INTERFACE 1: THE BROWSER WATERFALL VS API JSON PAYLOAD
     // =========================================================================
     {
       type: 'comic-workbench',
-      badge: 'EQUIPMENT BENCH 1 : BROWSER WATERFALL CHOKE VS 14ms WIRE PAYLOAD',
-      title: 'Measuring Presentation Overhead against Pure Wire Data',
+      badge: 'EQUIPMENT BENCH 1 : BROWSER WATERFALL CHOKE VS 14ms API PAYLOAD',
+      title: 'Measuring Presentation Overhead against Pure API Data',
       appType: 'api-workbench',
       dialogue: [
         {
@@ -359,7 +359,7 @@ export const lesson01 = {
           speaker: 'Sameer',
           role: 'Principal Systems Architect',
           avatarSrc: sameerChaiSvg,
-          text: 'When signal strength drops, asset waterfalls fail. An API bypasses the Presentation Glass entirely and queries the socket directly.'
+          text: 'When connection speed drops, downloading megabytes of web page assets will time out. But a direct API query transfers the lightweight JSON response in milliseconds.'
         }
       ],
       tabs: [
@@ -427,7 +427,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
       type: 'quad-card',
       badge: 'PEDAGOGICAL CONTRACT 1 : THE WIRE RESCUE',
       title: 'Direct Wire Inspection vs Browser Waterfall Bloat',
-      subtitle: 'Bypassing megabytes of presentation glass to fetch pure JSON from the wire',
+      subtitle: 'Bypassing megabytes of frontend page bloat to fetch pure JSON from the backend',
       input: {
         method: 'GET',
         url: 'http://localhost:5050/api/v1/admitcards/APX102',
@@ -450,8 +450,8 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
         body: '{\n  "status": "success",\n  "rollNo": "APX102",\n  "hall": 302,\n  "seat": "B14",\n  "verified": true\n}'
       },
       seniorSavior: {
-        aphorism: 'The browser is a presentation glass; wire data is almost always featherweight.',
-        rule: 'When testing systems, always inspect network wire payloads before debugging UI components.',
+        aphorism: 'Webpages carry heavy visual layout bloat; API data payloads are almost always featherweight.',
+        rule: 'When testing web systems, always inspect the API network request before debugging UI components.',
         trap: 'Confusing client rendering delays with server API latency leads to debugging the wrong tier.'
       }
     },
@@ -588,7 +588,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           realization: 'An API is a courier with a contract: it carries structured requests to the server and structured responses back to the client. It never cooks, never stores, and never renders.'
         },
         {
-          title: 'The 4MB Browser Cart vs the Lean Wire Courier',
+          title: 'Heavy Frontend Bundles vs Lightweight API Requests',
           time: '12:55 PM',
           image: {
             src: act02Scene21Img,
@@ -596,20 +596,20 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
             w: 1200,
             h: 675,
             alt: 'Split comparison between an overloaded bullock cart carrying heavy furniture and an agile royal horse courier carrying a sealed letter.',
-            caption: 'Presentation Tax: The browser cart hauls 4 megabytes of decoration; the wire courier gallops with 120 bytes.'
+            caption: 'Asset Overhead: The browser downloads 4 megabytes of layout assets; the API courier delivers 120 bytes of JSON.'
           },
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Your browser told the waiter to repaint the room, hang chandeliers, and play music before serving your food. It buried the request under decoration.'
+              speech: 'A browser downloads heavy styles, fonts, and script bundles before rendering. It buries the data under frontend overhead.'
             },
             {
               speaker: 'Akshay',
               reply: true,
-              speech: 'While an API call just sends the courier on a swift horse to grab the exact sealed note directly!'
+              speech: 'While an API client requests only the data: no fonts, no styles, just the pure JSON payload!'
             }
           ],
-          scene: 'Sameer contrasts the slow, heavily decorated browser experience with the raw velocity of lightweight API couriers.'
+          scene: 'Sameer contrasts heavy frontend web page downloads with the clean speed of targeted backend API requests.'
         }
       ]
     },
@@ -648,28 +648,28 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           scene: 'Akshay starts his Express server on port 3000 and dispatches a POST request, but is baffled when req.body returns undefined.'
         },
         {
-          title: 'Looking at the Physical Network Wire',
+          title: 'Understanding Network Byte Streams',
           time: '01:18 PM',
           image: {
             src: act03Scene29Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/acts/act3/act03_scene29_sameer_points_physical_wire.jpg',
             w: 1200,
             h: 675,
-            alt: 'Sameer leaning forward with veteran authority at the workbench, pointing a steady index finger to the braided network cable plugged into the server port.',
-            caption: 'The Wire Reality: Sameer points to the physical RJ-45 patch cable, demystifying abstract network abstractions.'
+            alt: 'Sameer leaning forward with veteran authority at the workbench, pointing to the network cable plugged into the server port.',
+            caption: 'Protocol Reality: Sameer explains network data streams, demystifying how Express handles incoming payloads.'
           },
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'You are making the classic rookie mistake. You assume sending JSON across the wire is like handing someone a neat letter inside an envelope.'
+              speech: 'You made the classic rookie assumption: expecting Express to automatically parse incoming JSON payloads.'
             },
             {
               speaker: 'Sameer',
-              speech: 'Look at that physical wire. Copper and glass fibers do not know what a JavaScript object is. They only understand pulses of electrical and optical voltage.'
+              speech: 'HTTP requests arrive as a stream of raw byte buffers. Express will not parse that stream into req.body unless you mount middleware.'
             }
           ],
-          scene: 'Sameer points to the physical network wire, grounding the software failure in electrical and packet realities.',
-          realization: 'The server receives streaming network byte chunks, not ready-made JavaScript objects. Without a body parser, req.body remains undefined.'
+          scene: 'Sameer explains TCP streaming buffers and why Express requires parsing middleware before route handlers can access req.body.',
+          realization: 'The server receives streaming network byte chunks, not ready-made JavaScript objects. Without express.json(), req.body remains undefined.'
         },
         {
           title: 'The Byte Stream Sieve: Assembling the Chunks',
@@ -705,7 +705,7 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
           dialogues: [
             {
               speaker: 'Akshay',
-              speech: 'Adding app.use(express.json())... It catches the byte stream and builds the body object!'
+              speech: 'Adding app.use(express.json())... It parses incoming stream buffers into req.body!'
             }
           ],
           scene: 'Akshay adds app.use(express.json()) above his route handlers, instructing Express to buffer incoming chunks before dispatching requests.'
@@ -856,7 +856,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
         body: '{\n  "status": "success",\n  "studentId": "STU1094",\n  "name": "Akshay"\n}'
       },
       seniorSavior: {
-        aphorism: 'Copper cables transfer streaming byte pulses, not JavaScript objects.',
+        aphorism: 'TCP sockets transfer raw streaming bytes, not JavaScript objects.',
         rule: 'Always mount express.json() before registering POST, PUT, or PATCH routes.',
         trap: 'Omitting express.json() leaves req.body undefined, crashing handlers attempting property access.'
       }
@@ -1232,7 +1232,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'Come upstairs. You understand the wire and verbs. Now look at the architectural landscape.'
+              speech: 'Come upstairs. You understand HTTP verbs and JSON payloads. Now look at the architectural landscape.'
             }
           ],
           scene: 'Sameer and Akshay climb the ancient sandstone spiral staircase toward the rooftop pavilion to survey system paradigms.'
@@ -1335,7 +1335,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           scene: 'Akshay grasps GraphQL query flexibility: mobile clients declare their required data shape, eliminating over-fetching.'
         },
         {
-          title: 'Sunset Chai Toast: Welcome to the Wire',
+          title: 'Sunset Chai Toast: Welcome to API Engineering',
           time: '06:00 PM',
           image: {
             src: act05Scene52Img,
@@ -1343,16 +1343,16 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
             w: 1200,
             h: 675,
             alt: 'Sameer and Akshay clinking cutting chai glasses against the warm amber sunset over ancient sandstone domes.',
-            caption: 'Sunset Milestone: Akshay transforms from a stressed page viewer into a confident API thinker.'
+            caption: 'Sunset Milestone: Akshay transforms from a stressed page viewer into a confident API engineer.'
           },
           dialogues: [
             {
               speaker: 'Sameer',
-              speech: 'To the wire, Akshay. Today you saw through the glass. Tomorrow, we test it to destruction.'
+              speech: 'Good work today, Akshay. Today you bypassed the UI and spoke to the API. Tomorrow, we test it to destruction.'
             }
           ],
-          scene: 'Akshay and Sameer clink cutting chai glasses against the twilight sky, celebrating Akshay transformation from an anxious student into a wire inspector.',
-          realization: 'Understanding APIs transforms the engineer from a passive consumer of brittle user interfaces into a master of distributed contracts.'
+          scene: 'Akshay and Sameer clink cutting chai glasses against the twilight sky, celebrating Akshay transformation from an anxious student into a confident API engineer.',
+          realization: 'Understanding APIs transforms the engineer from a passive user of web interfaces into an architect of robust backend contracts.'
         }
       ]
     },
@@ -1559,11 +1559,11 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
     {
       type: 'victory-milestone',
       badge: '⚡ ARCHITECTURAL TRIUMPH UNLOCKED',
-      rank: 'APPRENTICE WIRE INSPECTOR',
-      title: 'From Page Viewer to API Thinker',
-      summary: 'Akshay has transitioned from panicking over frozen browser screens to inspecting network sockets and writing Express APIs on port 3000. He understands client server decoupling, knows why req.body becomes undefined, and has seen why 14ms wire data outpaces heavy presentation glass.',
+      rank: 'APPRENTICE API ENGINEER',
+      title: 'From Page Viewer to API Engineer',
+      summary: 'Akshay has transitioned from panicking over frozen browser screens to querying network endpoints and building Express APIs on port 3000. He understands client server decoupling, knows why req.body becomes undefined, and has seen why lightweight JSON outpaces bloated webpage bundles.',
       powers: [
-        'Bypassing Decorative Glass: Ability to inspect and query raw HTTP endpoints directly without waiting for heavy UI renders.',
+        'Direct API Inspection: Ability to query backend HTTP endpoints directly without waiting for heavy frontend assets.',
         'Byte Stream Mastery: Understanding TCP packet chunks and correctly configuring body parsing middleware.',
         'CRUD Competence: Fluent mapping of POST, GET, PUT, PATCH, and DELETE verbs to real world entity lifecycles.',
         'Architectural Literacy: Intuitive grasp of the trade-offs between REST resources, SOAP envelopes, and GraphQL queries.'
@@ -1590,7 +1590,7 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
           w: 1200,
           h: 675,
           alt: 'Sameer and Akshay toasting chai against the sunset horizon, ready for automated testing in Chapter 2.',
-          caption: 'Chapter 2 Preview: Automating wire checks and building regression gates.'
+          caption: 'Chapter 2 Preview: Automating API checks and building regression gates.'
         },
         scene: 'Akshay opens the API Testing Workbench to systematically test the college service under synthetic traffic loads.',
         dialogue: {

@@ -38,7 +38,7 @@
 
 ---
 
-## 2. Chapter 01: Understanding APIs from First Principles (The Wire and The Glass)
+## 2. Chapter 01: Understanding APIs from First Principles (Network Requests and Direct Payloads)
 
 ### 2.1 Mission Context and Crisis
 At 08:30 AM on exam morning, student Akshay discovers his brass water bottle has leaked inside his bag, dissolving his printed Admit Card ink. Gates lock at 09:00 AM. Panicking, he tries downloading the card on mobile, but twelve thousand concurrent students crash the portal into a 504 timeout. Principal Architect Sameer steps forward with cutting chai, bypasses the browser waterfall, and fetches the pure admit card JSON directly from the wire in fourteen milliseconds.
@@ -61,14 +61,14 @@ At 08:30 AM on exam morning, student Akshay discovers his brass water bottle has
 | P.12 | 08:44 AM | Sandstone Bench | Reaction Shot | Akshay | "Wait, fourteen milliseconds?! My phone spun for four minutes!" | Astounded Relief | `acts/act1/act01_scene12_akshay_shock_relief.jpg` |
 | P.13 | 08:45 AM | Examination Hall Arch | High Angle Dynamic | Proctor | "Exam gates closing in two minutes! Hall ticket inspection now!" | Final Countdown | `acts/act1/act01_scene13_students_running_exam_gates.jpg` |
 | P.14 | 12:15 PM | Research Workshop | Wide Establishing | Akshay | "I made it! Hall 302 with minutes to spare. Teach me how you did that!" | Eager Curiosity | `acts/act2/act02_scene14_research_workshop_interior.jpg` |
-| P.15 | 12:20 PM | Chai Corner Table | Close Up Pour | Sameer | "Chai first. An engineer who panics sees magic; one who understands sees wires." | Warm Wisdom | `acts/act2/act02_scene15_brass_kettle_pouring_chai.jpg` |
+| P.15 | 12:20 PM | Chai Corner Table | Close Up Pour | Sameer | "Chai first, Akshay. Panic looks at symptoms. Engineering inspects the request and response." | Warm Wisdom | `acts/act2/act02_scene15_brass_kettle_pouring_chai.jpg` |
 | P.16 | 12:25 PM | Canteen Veranda | Medium Shot | Sameer | "You are the customer at the dining table. You cannot enter the kitchen." | Intuitive Metaphor | `acts/act2/act02_scene17_restaurant_customer_client.jpg` |
 | P.17 | 12:30 PM | Canteen Hall | Medium Action | Sameer | "The waiter is the API. He carries your exact order past the swinging doors." | Clear Architecture | `acts/act2/act02_scene18_canteen_waiter_api.jpg` |
 | P.18 | 12:35 PM | Commercial Kitchen | Dynamic Wide | None | None | High Throughput Backend | `acts/act2/act02_scene19_commercial_kitchen_database.jpg` |
-| P.19 | 12:45 PM | Stepwell Overlook | Comparative Wide | Sameer | "The browser is a heavy four megabyte cart. The API call is a pure courier." | Sharp Contrast | `acts/act2/act02_scene21_bullock_cart_vs_royal_courier.jpg` |
+| P.19 | 12:45 PM | Stepwell Overlook | Comparative Wide | Sameer | "Webpages carry megabytes of visual assets. An API request asks only for data." | Sharp Contrast | `acts/act2/act02_scene21_bullock_cart_vs_royal_courier.jpg` |
 | P.20 | 01:10 PM | Workbench Terminal | Medium Two Shot | Akshay | "Bare bones server ready on port 3000! Let us send our first POST request!" | Enthusiastic Coding | `acts/act3/act03_scene27_reaction_typeerror_crash.jpg` |
 | P.21 | 01:15 PM | Workbench Terminal | Close Up Screen | Akshay | "TypeError! req.body is undefined! Where did my JSON payload go?!" | Shock & Confusion | `acts/act3/act03_scene27_reaction_typeerror_crash.jpg` |
-| P.22 | 01:18 PM | Workbench Terminal | Over Shoulder | Sameer | "Look at the physical Ethernet wire. Copper does not know JavaScript objects." | Physical Reality Check | `acts/act3/act03_scene29_sameer_points_physical_wire.jpg` |
+| P.22 | 01:18 PM | Workbench Terminal | Over Shoulder | Sameer | "The network delivers raw byte streams. Express needs a parser for JSON." | Technical Reality Check | `acts/act3/act03_scene29_sameer_points_physical_wire.jpg` |
 | P.23 | 01:25 PM | Mechanical Sieve | Conceptual Macro | Sameer | "TCP streams fragmented bytes. Express needs a catcher to assemble them." | Illuminating Theory | `acts/act3/act03_scene30_byte_stream_waterfall_aqueduct.jpg` |
 | P.24 | 01:28 PM | Code Editor | Action Coding | Akshay | "Adding app.use(express.json())... It catches the byte stream!" | Focused Implementation | `acts/act3/act03_scene31_adding_express_json_middleware.jpg` |
 | P.25 | 01:30 PM | Workbench Terminal | Triumphant Medium | Akshay | "Status 201 Created! The student record is stored in memory!" | Victorious Relief | `acts/act3/act03_scene32_two_men_success_201_created.jpg` |
@@ -82,19 +82,19 @@ At 08:30 AM on exam morning, student Akshay discovers his brass water bottle has
 | P.33 | 04:45 PM | Watchtower Stairs | Vertical Tracking | Sameer | "Come upstairs. You understand verbs; now look at the architectural landscape." | Mentorship Elevation | `acts/act5/act05_scene44_walking_up_spiral_staircase.jpg` |
 | P.34 | 05:00 PM | Rooftop Pavilion | Golden Hour Wide | Akshay | "From up here, the entire network feels like one living nervous system!" | Panoramic Vision | `acts/act5/act05_scene45_sunset_rooftop_pavilion_wide.jpg` |
 | P.35 | 05:15 PM | Slate Blackboard | Medium Action | Sameer | "Three great philosophies govern distributed systems: REST, SOAP, and GraphQL." | Architectural Paradigm | `acts/act5/act05_scene46_sameer_slate_blackboard_canopy.jpg` |
-| P.36 | 06:00 PM | Rooftop Parapet | Twilight Two Shot | Sameer | "To the wire, Akshay. Today you saw through the glass. Tomorrow, we test." | Milestone Toast | `acts/act5/act05_scene52_chai_toast_to_network_wire.jpg` |
+| P.36 | 06:00 PM | Rooftop Parapet | Twilight Two Shot | Sameer | "Good work today, Akshay. Today you bypassed the UI and spoke to the API. Tomorrow, we test." | Milestone Toast | `acts/act5/act05_scene52_chai_toast_to_network_wire.jpg` |
 
 ### 2.3 Four Part Pedagogical Cards (Chapter 1)
 * **Card 1 (Wire Rescue):**
   - *Input:* `GET /api/v1/admitcards/APX102`
   - *Under the Hood:* Direct TCP socket query bypassing HTML parsing, CSS cascade, and React hydration.
   - *Output:* `200 OK` with 120 byte JSON payload in 14ms.
-  - *Senior Savior:* The browser is a presentation glass; wire data is featherweight.
+  - *Senior Savior:* Webpages carry heavy visual bloat; API data is almost always featherweight.
 * **Card 2 (Byte Stream & Middleware):**
   - *Input:* `POST /api/students` with JSON payload.
   - *Under the Hood:* Sockets stream raw packet chunks; `express.json()` aggregates buffer chunks and attaches object to `req.body`.
   - *Output:* `201 Created` with student record.
-  - *Senior Savior:* Copper cables stream bytes, not objects; always mount `express.json()` before route handlers.
+  - *Senior Savior:* Sockets stream raw bytes, not objects; always mount `express.json()` before route handlers.
 * **Card 3 (The Brass Thali Rule):**
   - *Input:* `PUT` vs `PATCH` payload targeting `/api/students/APX102`.
   - *Under the Hood:* PUT replaces entire record; omitted keys are wiped. PATCH performs selective object merge.
@@ -111,7 +111,7 @@ At 08:30 AM on exam morning, student Akshay discovers his brass water bottle has
 ## 3. Chapter 02: Investigating the Incident: Manual Wire Auditing and Status Codes
 
 ### 3.1 Mission Context and Crisis
-At 08:14 PM, hours after surviving his morning exam, apprentice Akshay joins Principal Architect Sameer at the Transit Operations war room. Campus transit route trackers have frozen during evening rush whenever students open the map without selecting a specific route. Frontend developers blame backend timeouts; backend developers claim their services are healthy. Akshay and Sameer inspect the raw wire, reproduce the unhandled 500 TypeError via curl, install a defensive fail fast input guard returning 400 Bad Request, and verify the contract with 200 OK.
+At 08:14 PM, hours after surviving his morning exam, apprentice Akshay joins Principal Architect Sameer at the Transit Operations war room. Campus transit route trackers have frozen during evening rush whenever students open the map without selecting a specific route. Frontend developers blame backend timeouts; backend developers claim their services are healthy. Akshay and Sameer inspect the HTTP request directly, reproduce the unhandled 500 TypeError via curl, install a defensive fail fast input guard returning 400 Bad Request, and verify the contract with 200 OK.
 
 ### 2.2 Scene Beats Matrix (24 Narrative Beats)
 
@@ -120,8 +120,8 @@ At 08:14 PM, hours after surviving his morning exam, apprentice Akshay joins Pri
 | P.01 | 08:14 PM | War Room Colonnade | Wide Establishing | Ops Lead | "Fifty shuttle routes go live in twenty minutes and apps are completely blank!" | High Stakes Crisis | `pipeline/ch02/organized/useful/ch02_scene01_war_room_wide.jpg` |
 | P.02 | 08:15 PM | Whiteboard Standoff | Medium Two Shot | Dev Lead | "Frontend claims our API is broken, but our container logs report healthy status!" | Inter Team Blame | `pipeline/ch02/organized/useful/ch02_scene02_developers_clash.jpg` |
 | P.03 | 08:16 PM | Teak Console Desk | Over Shoulder | Akshay | "It works when I click it on my laptop! Why is it failing in production?!" | Anxious Confusion | `pipeline/ch02/organized/useful/ch02_scene03_akshay_speed_clicking.jpg` |
-| P.04 | 08:17 PM | Teak Console Desk | Medium Two Shot | Sameer | "It works when YOU try it, Akshay. Show me what goes onto the physical wire." | Stoic Authority | `pipeline/ch02/organized/useful/ch02_scene04_sameer_steps_forward.jpg` |
-| P.05 | 08:18 PM | Terminal Display | Close Up Focus | Sameer | "Never test through a browser button during incident triage. Open raw curl." | Production Discipline | `pipeline/ch02/organized/useful/ch02_scene05_point_at_wire_query.jpg` |
+| P.04 | 08:17 PM | Teak Console Desk | Medium Two Shot | Sameer | "It works when YOU click it, Akshay. Show me the exact HTTP request you are sending." | Stoic Authority | `pipeline/ch02/organized/useful/ch02_scene04_sameer_steps_forward.jpg` |
+| P.05 | 08:18 PM | Terminal Display | Close Up Focus | Sameer | "Never guess from a UI button during an incident. Open terminal and run curl." | Production Discipline | `pipeline/ch02/organized/useful/ch02_scene05_point_at_wire_query.jpg` |
 | P.06 | 08:19 PM | Split Terminal Panes | Macro Split Screen | Sameer | "Compare both requests side by side. What is different about the failing query?" | Forensic Observation | `pipeline/ch02/organized/useful/ch02_scene06_side_by_side_query.jpg` |
 | P.07 | 08:20 PM | Porcelain Whiteboard | Medium Action | Sameer | "Three distinct ways to be empty: omitted undefined, empty string, and whitespace." | Architectural First Principles | `pipeline/ch02/organized/useful/ch02_scene07_three_columns_whiteboard.jpg` |
 | P.08 | 08:21 PM | Teak Console Desk | Close Up Notes | Akshay | "To human eyes they look identical, but server memory treats them as different states!" | Analytical Awakening | `pipeline/ch02/organized/useful/ch02_scene08_akshay_graph_notebook.jpg` |
@@ -153,7 +153,7 @@ At 08:14 PM, hours after surviving his morning exam, apprentice Akshay joins Pri
   - *Under the Hood:* Defensive gateway check intercepts parameter before business logic: `if (!name || name.trim() === '') return res.status(400)`.
   - *Output:* `HTTP/1.1 400 Bad Request` in 4ms with structured JSON error payload.
   - *Senior Savior:* Never invent fallback data for a malformed client request. Fail fast with an actionable 400 contract.
-* **Card 3 (Dual Wire Contract Verification):**
+* **Card 3 (Dual HTTP Contract Verification):**
   - *Input:* Replaying negative malformed request alongside positive valid request `GET /v1/shuttle/route?name=NorthLoop`.
   - *Under the Hood:* Dual execution paths verified simultaneously in CI harness: negative path halts at guard (400), positive path queries geospatial database (200).
   - *Output:* Guard returns `400 Bad Request`; Contract returns `200 OK` with verified `{ latitude, longitude }` coordinates.
@@ -204,7 +204,7 @@ At 09:15 PM, following the successful resolution of the transit shuttle crisis, 
 * **Card 1 (The False Green Test Lie):**
   - *Input:* `POST /api/v1/auth/tokens` with invalid credentials and flawed test assertion.
   - *Under the Hood:* API returns `401 Unauthorized` with JSON error body. Flawed test script executes `pm.expect(data).to.be.an('object')`. JavaScript engine evaluates error object as true, emitting a false green pass.
-  - *Output:* Test reports green pass despite `401 Unauthorized` response code on the physical wire.
+  - *Output:* Test reports green pass despite `401 Unauthorized` response code returned by the server.
   - *Senior Savior:* Never assert generic object types without checking explicit status codes and exact business values. An error response is still an object.
 * **Card 2 (The Red Before Green Rule):**
   - *Input:* `GET /api/v1/courses/CS101/roster` with deliberately injected property mismatch.
@@ -215,7 +215,7 @@ At 09:15 PM, following the successful resolution of the transit shuttle crisis, 
   - *Input:* `GET /api/v1/students/STU-9921` with valid authorization token.
   - *Under the Hood:* Runner evaluates two distinct gates: transport protocol gate (`pm.response.to.have.status(200)`) and data schema gate (`pm.expect(data).to.have.nested.property('department', 'Computer Science')`).
   - *Output:* Both transport status and JSON payload contract verified simultaneously in under 500ms.
-  - *Senior Savior:* Transport status tells you the wire was reached; payload schema tells you the data was correct. Always verify both gates side by side.
+  - *Senior Savior:* Transport status tells you the HTTP status was reached; payload schema tells you the data was correct. Always verify both gates side by side.
 
 ---
 
