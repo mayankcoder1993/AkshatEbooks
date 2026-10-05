@@ -219,10 +219,65 @@ At 09:15 PM, following the successful resolution of the transit shuttle crisis, 
 
 ---
 
-## 5. Chapters 04 Through 13 Narrative & Pedagogical Master Blueprint
-* **Crisis:** The Ghost ISBN Incident. The campus library system accepts duplicate book records with negative prices and missing titles because requests lack schema contract validation.
-* **Pedagogical Core:** Structural JSON contract validation; defensive status assertions; testing non idempotent POST creations against idempotent GET reads; the 201 Created and 409 Conflict contracts.
-* **Workbench:** Full CRUD workbench exercising `POST /v1/books` and `GET /v1/books/:id`.
+## 5. Chapter 04: The Ghost ISBN Incident (CRUD Lifecycle, Unique Constraints, and State Collision)
+
+### 5.1 Mission Context and Crisis
+At 10:15 PM, following the successful creation of the automated assertion watchdog in Chapter 3, apprentice Akshay moves to the Central Library systems archive to test the new campus book catalog service on port 5050. The library system manages cataloging, aisle positioning, and book acquisitions under strict unique constraints. Akshay sends an initial POST request, creating a book record and receiving 201 Created. However, when replaying the request, the database creates a second identical row with the same ISBN and aisle coordinates. Two students could reserve the exact same physical copy. Sameer steps in, citing the disastrous 2015 Heathrow flight seat 14A collision and Amazon 2016 Prime Day double inventory deduction. Together, they dissect the Time of Check to Time of Use (TOCTOU) race window, move uniqueness enforcement from fragile application checks to database indexes, implement atomic upserts with ON CONFLICT, return honest 409 Conflict responses, eliminate the Zombie Read with soft delete filters, and experience the friction of manual copy paste before moving to data driven test automation.
+
+### 5.2 Scene Beats Matrix (24 Narrative Beats)
+
+| Beat | Time | Setting | Shot Archetype | Speaker | Spoken Dialogue (<120 chars) | Emotion | Target Asset |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| P.01 | 10:15 PM | Central Library Stacks | Wide Establishing | None | None | Quiet Midnight Grandeur | `pipeline/ch04/organized/useful/ch04_scene01_library_stacks_wide.jpg` |
+| P.02 | 10:17 PM | Teak Catalog Desk | Medium Shot | Akshay | "The new library catalog service is deployed on port 5050. Ready to test AddBook!" | Eager Professionalism | `pipeline/ch04/organized/useful/ch04_scene02_akshay_library_console.jpg` |
+| P.03 | 10:20 PM | Workbench Terminal | Action Macro | Akshay | "Sending POST /v1/books with ISBN 9780134685991... Status 201 Created!" | First Success | `pipeline/ch04/organized/useful/ch04_scene03_first_addbook_201.jpg` |
+| P.04 | 10:22 PM | Terminal Header Inspect | Close Up Screen | Sameer | "Notice the Location header: /v1/books/42. 201 gives the client the new address." | Protocol Discipline | `pipeline/ch04/organized/useful/ch04_scene04_location_header_inspect.jpg` |
+| P.05 | 10:25 PM | Teak Catalog Desk | Medium Two Shot | Sameer | "Now send the exact same POST payload a second time. What does your API do?" | The Mentor Test | `pipeline/ch04/organized/useful/ch04_scene05_sameer_prompts_duplicate.jpg` |
+| P.06 | 10:27 PM | Split Terminal Panes | Dutch Angle Screen | Akshay | "Wait! It returned 201 Created again with a new ID! Two rows for one book?!" | Mounting Horror | `pipeline/ch04/organized/useful/ch04_scene06_duplicate_row_created.jpg` |
+| P.07 | 10:29 PM | Library Archive Aisle | Two Shot Tracking | Sameer | "A ghost book. Two students will reserve the same physical copy tomorrow." | The Looming Defect | `pipeline/ch04/organized/useful/ch04_scene07_two_students_one_book.jpg` |
+| P.08 | 10:31 PM | Teak Console Desk | Over Shoulder | Sameer | "Heathrow 2015. Two passengers were issued boarding passes for seat 14A on the same flight." | Historical Gravity | `pipeline/ch04/organized/useful/ch04_scene08_heathrow_seat_14a_cve.jpg` |
+| P.09 | 10:33 PM | Code Editor Window | Action Coding | Akshay | "I will add an if check before the INSERT! Query SELECT first to see if it exists!" | Junior Shortcut | `pipeline/ch04/organized/useful/ch04_scene09_akshay_types_select_check.jpg` |
+| P.10 | 10:36 PM | Porcelain Whiteboard | Detailed Diagram | Sameer | "Two concurrent requests execute SELECT at the same millisecond. Both see zero rows." | Architectural Reality | `pipeline/ch04/organized/useful/ch04_scene10_toctou_race_timeline.jpg` |
+| P.11 | 10:38 PM | Teak Console Desk | Close Up Face | Akshay | "Time of Check to Time of Use! The application check is blind to concurrency!" | Humbling Awakening | `pipeline/ch04/organized/useful/ch04_scene11_akshay_realizes_toctou.jpg` |
+| P.12 | 10:40 PM | Database Console | Macro Terminal | Sameer | "The database index is the only wall that holds under concurrent load. Add the UNIQUE index." | Database Authority | `pipeline/ch04/organized/useful/ch04_scene12_unique_index_sql_add.jpg` |
+| P.13 | 10:42 PM | SQL Terminal Window | Action Macro | Akshay | "ALTER TABLE books ADD CONSTRAINT unique_isbn UNIQUE (isbn)... Table updated!" | Solid Foundation | `pipeline/ch04/organized/useful/ch04_scene13_alter_table_unique_executed.jpg` |
+| P.14 | 10:44 PM | Code Editor Window | Macro Script | Sameer | "Now write the atomic upsert: ON CONFLICT (isbn) DO NOTHING. Check row count." | Atomic Architecture | `pipeline/ch04/organized/useful/ch04_scene14_atomic_on_conflict_upsert.jpg` |
+| P.15 | 10:46 PM | Workbench Terminal | Action Beat | Akshay | "Replaying duplicate POST... HTTP 409 Conflict in 6 milliseconds!" | Honest Contract | `pipeline/ch04/organized/useful/ch04_scene15_status_409_conflict_returned.jpg` |
+| P.16 | 10:48 PM | Teak Console Desk | Medium Two Shot | Sameer | "409 tells the client the request is valid, but conflicts with server state." | Semantic Truth | `pipeline/ch04/organized/useful/ch04_scene16_sameer_explains_409.jpg` |
+| P.17 | 10:50 PM | Split Screen Display | Action Macro | Akshay | "Now testing teardown! POST /v1/books/delete with ISBN... 200 OK returned!" | Teardown Verification | `pipeline/ch04/organized/useful/ch04_scene17_delete_endpoint_200.jpg` |
+| P.18 | 10:52 PM | Workbench Terminal | Dutch Angle Screen | Akshay | "Wait! I sent GET /v1/books/42 to confirm deletion and it returned 200 with the book?!" | Bewildered Shock | `pipeline/ch04/organized/useful/ch04_scene18_zombie_read_200_ok.jpg` |
+| P.19 | 10:54 PM | SQL Query Editor | Close Up Query | Sameer | "The Zombie Read. Your soft delete updated deleted_at, but your GET omitted the filter." | Forensic Insight | `pipeline/ch04/organized/useful/ch04_scene19_zombie_query_filter_missing.jpg` |
+| P.20 | 10:56 PM | Code Editor Window | Precision Coding | Akshay | "Adding WHERE id = $1 AND deleted_at IS NULL... Replaying GET query now!" | Code Fortification | `pipeline/ch04/organized/useful/ch04_scene20_adding_deleted_at_filter.jpg` |
+| P.21 | 10:58 PM | Terminal Display | High Key Light | Akshay | "Status 404 Not Found! The deleted book is completely invisible to clients!" | Full CRUD Mastery | `pipeline/ch04/organized/useful/ch04_scene21_404_not_found_verified.jpg` |
+| P.22 | 11:02 PM | Teak Console Desk | Close Up Notes | Akshay | "I have had to copy and paste this ISBN and book ID twelve times across tabs!" | Developer Friction | `pipeline/ch04/organized/useful/ch04_scene22_akshay_copy_paste_frustration.jpg` |
+| P.23 | 11:05 PM | Lab Blackboard | Medium Two Shot | Sameer | "Manual copy paste does not scale. Next, we let automated data files drive our tests." | The Next Horizon | `pipeline/ch04/organized/useful/ch04_scene23_sameer_introduces_data_driven.jpg` |
+| P.24 | 11:10 PM | Library Veranda Night | Cliffhanger Hook | Ops Alert | "Monsoon delivery arrived! Five hundred new textbooks need batch verification before dawn!" | Monsoon Cliffhanger | `pipeline/ch04/organized/useful/ch04_scene24_monsoon_delivery_crates.jpg` |
+
+### 5.3 Four Part Pedagogical Cards (Chapter 4)
+* **Card 1 (Resource Creation with 201 and Location Header):**
+  - *Input:* `POST /v1/books` with body `{ "isbn": "9780134685991", "title": "Pragmatic Programmer", "author": "David Thomas", "aisle": "A3" }`.
+  - *Under the Hood:* Express parses body, queries database with atomic insert, writes row to disk, updates B tree index, and sets `Location: /v1/books/42`.
+  - *Output:* `201 Created` with `Location` header and complete book JSON payload in 14ms.
+  - *Senior Savior:* 201 means creation with an address; 200 means acknowledgment. Never omit the Location header.
+* **Card 2 (Unique Composite Constraint & 409 Conflict):**
+  - *Input:* Duplicate `POST /v1/books` with an existing ISBN.
+  - *Under the Hood:* Unique database index detects key collision, `ON CONFLICT (isbn) DO NOTHING` prevents write, query returns zero rows, and Express formats 409 Conflict.
+  - *Output:* `409 Conflict` in 6ms with structured JSON explaining that the ISBN already exists.
+  - *Senior Savior:* Application checks are courtesy; database constraints are law.
+* **Card 3 (Soft Delete and The Zombie 404 Guard):**
+  - *Input:* `GET /v1/books/42` for a record whose `deleted_at` column is non null.
+  - *Under the Hood:* Query enforces `WHERE id = $1 AND deleted_at IS NULL`. Row is excluded from result set, triggering 404 Not Found.
+  - *Output:* `404 Not Found` with `{ "error": "No book found with ID 42" }`.
+  - *Senior Savior:* Every query touching a soft delete table must include `AND deleted_at IS NULL`.
+* **Card 4 (The 404 vs Empty Array Ambiguity):**
+  - *Input:* `GET /v1/books/999` (single entity) vs `GET /v1/books?author=Unknown` (collection query).
+  - *Under the Hood:* Single entity address check returns 404 when absent; collection filter returns 200 with `[]` when zero items match.
+  - *Output:* Single missing resource returns `404 Not Found`; empty collection query returns `200 OK` with `[]`.
+  - *Senior Savior:* Singular endpoints return 404 on absence; collection endpoints return 200 with an empty array.
+
+---
+
+## 6. Chapters 05 Through 13 Narrative & Pedagogical Master Blueprint
 
 ### Chapter 05: Data Driven Testing and Collections (CSV and JSON Matrix Runs)
 * **Crisis:** The Monsoon Book Drop. Five hundred textbooks arrive in torrential rain. Manual testing takes 2 hours; gates lock in 15 minutes.
