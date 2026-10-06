@@ -2,7 +2,16 @@ import lifecycleImg from '../assets/postman-assertion-lifecycle.jpg'
 import ch05Scene1Img from '../assets/ch05-scene-1-assertions-briefing.jpg'
 import ch05Scene2Img from '../assets/ch05-scene-2-pm-test-chai.jpg'
 import ch05Scene3Img from '../assets/ch05-scene-3-schema-contract-validation.jpg'
-import dataDrivenImg from '../assets/data-driven-testing-iteration.jpg'
+import ch05RainDockImg from '../assets/illustrations/ch05/ch05_rain_lashing_dock.jpg'
+import ch05ManifestImg from '../assets/illustrations/ch05/ch05_waterlogged_manifest.jpg'
+import ch05TypingImg from '../assets/illustrations/ch05/ch05_akshay_typing_tests.jpg'
+import ch05SameerPointingImg from '../assets/illustrations/ch05/ch05_sameer_pointing_tests.jpg'
+import ch05ChaiAssertImg from '../assets/illustrations/ch05/ch05_postman_chai_assertions.jpg'
+import ch05CasingFailImg from '../assets/illustrations/ch05/ch05_postman_casing_failure.jpg'
+import ch05AnanyaSchemaImg from '../assets/illustrations/ch05/ch05_ananya_reviewing_schema.jpg'
+import ch05NewmanRunImg from '../assets/illustrations/ch05/ch05_newman_batch_run.jpg'
+import ch05TeamWatchImg from '../assets/illustrations/ch05/ch05_team_watching_batch.jpg'
+import ch05CelebrationImg from '../assets/illustrations/ch05/ch05_team_celebration_dawn.jpg'
 
 export const lesson05 = {
   id: 'javascript-assertions',
@@ -39,18 +48,18 @@ export const lesson05 = {
     },
 
     // =========================================================================
-    // GRAPHIC COMIC ARC : THREE SCENES FROM MASTER STORY LEDGER
+    // GRAPHIC COMIC ARC : SIX SCENES FROM MASTER STORY LEDGER
     // =========================================================================
     {
       type: 'storyboard',
-      badge: 'GRAPHIC COMIC : THREE SCENES',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
       title: 'The Monsoon Book Drop and Machine Speed Assertions',
-      intro: 'Follow apprentice Akshay, Chief Librarian Mrs. Iyer, Frontend Lead Ananya, and architect Sameer at the library loading dock as they confront five hundred incoming textbooks in torrential rain, build Chai assertions, and verify schemas at machine speed.',
+      intro: 'Follow apprentice Akshay, Chief Librarian Mrs. Iyer, Frontend Lead Ananya, and architect Sameer at the library loading dock as they confront five hundred incoming textbooks in torrential rain, build Chai assertions, overcome casing traps, and verify schemas at machine speed.',
       panels: [
         {
           title: 'Scene 1: 11:15 PM: The Monsoon Book Drop and Loading Bay Standoff',
           time: '11:15 PM',
-          layout: 'hero',
+          layout: 'duo',
           image: {
             src: ch05Scene1Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch05-scene-1-assertions-briefing.jpg',
@@ -58,6 +67,14 @@ export const lesson05 = {
             h: 768,
             alt: 'Akshay, Mrs. Iyer, and Sameer reviewing textbooks on the rain lashed loading dock.',
             caption: 'Loading Bay Standoff: Five hundred physical textbooks arrive in the monsoon; manual entry will take twelve hours.'
+          },
+          replyImage: {
+            src: ch05RainDockImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_rain_lashing_dock.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Torrential rain pouring over the loading bay pavilion outside the library.',
+            caption: 'Monsoon Torrent: Water pools on the tarmac as five hundred crates await cataloging.'
           },
           dialogue: {
             speaker: 'Mrs. Iyer',
@@ -69,7 +86,36 @@ export const lesson05 = {
           realization: 'Manual verification of bulk data collapses under operational deadlines; automated data driven execution is mandatory.'
         },
         {
-          title: 'Scene 2: 11:35 PM: The pm.test Sandbox and Chai Matchers',
+          title: 'Scene 2: 11:24 PM: Waterlogged Manifests and The Eyeball Trap',
+          time: '11:24 PM',
+          layout: 'duo',
+          image: {
+            src: ch05ManifestImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_waterlogged_manifest.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay and Mrs. Iyer inspecting water damaged paper packing lists with smeared ink.',
+            caption: 'The Paper Defect: Smeared numbers and missing aisle columns prove manual checklists are doomed.'
+          },
+          replyImage: {
+            src: ch05TypingImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_akshay_typing_tests.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay opening the Tests tab on his silver laptop keyboard under the brass lamp.',
+            caption: 'Opening the Sandbox: Akshay fires up the Tests tab to encode verification rules into code.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'The rain smeared the ink on row forty two! Is the price four hundred or nine hundred?!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Human eyeballs tire after ten records. We encode the acceptance rules into the Tests tab once.'
+          },
+          scene: 'Under the dim loading bay lights, raindrops seep into the paper shipping sheets. Akshay realizes that checking five hundred rows manually invites catastrophic transcription errors. Sameer directs him to automate the acceptance rules.',
+          realization: 'Automated test scripts remove human cognitive fatigue from validation tasks.'
+        },
+        {
+          title: 'Scene 3: 11:35 PM: The pm.test Sandbox and Chai Matchers',
           time: '11:35 PM',
           layout: 'duo',
           image: {
@@ -80,18 +126,55 @@ export const lesson05 = {
             alt: 'Akshay typing Chai assertions in the workbench Tests tab as Sameer points to status and schema matchers.',
             caption: 'The JavaScript Sandbox: Authoring Chai status, latency, and schema assertions in the Tests tab.'
           },
+          replyImage: {
+            src: ch05SameerPointingImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_sameer_pointing_tests.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer pointing at the pm.test assertion block on the developer laptop screen.',
+            caption: 'Precision Matchers: Sameer enforces strict equality and response time thresholds below 200 milliseconds.'
+          },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'Writing pm.test for status 200 and schema validation across our collection!',
+            speech: 'Writing pm.test for status 200 and response time below two hundred milliseconds!',
             replySpeaker: 'Sameer',
-            replySpeech: 'Never test bulk data by hand. We parameterize one request and let Newman drive five hundred rows.'
+            replySpeech: 'Check the wire headers too. Verify Content-Type is application/json charset utf 8.'
           },
           scene: 'Akshay configures the workbench Tests tab sandbox. Sameer shows him how Chai assertions validate response status, latency budgets, and body schemas at machine speed.',
           realization: 'The workbench embedded Node.js sandbox gives test engineers the full programmatic power of Chai matchers and Ajv schemas.'
         },
         {
-          title: 'Scene 3: 11:58 PM: Schema Contracts and Newman Iteration Batch',
-          time: '11:58 PM',
+          title: 'Scene 4: 11:44 PM: The Casing Disparity Ambush',
+          time: '11:44 PM',
+          layout: 'duo',
+          image: {
+            src: ch05ChaiAssertImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_postman_chai_assertions.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Postman test execution interface showing passing assertions alongside one unexpected red failure.',
+            caption: 'First Assertion Suite: Green status assertions pass, but bookName returns undefined.'
+          },
+          replyImage: {
+            src: ch05CasingFailImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_postman_casing_failure.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Assertion failure detail displaying AssertionError: expected undefined to equal Operating Systems.',
+            caption: 'Casing Trap: The legacy service returns book_name in snake_case, but the frontend expected bookName.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Red failure! AssertionError: expected undefined to equal Operating Systems Concepts! Why?!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'The server returns snake_case book_name, not camelCase bookName. JavaScript is strictly case sensitive.'
+          },
+          scene: 'Akshay runs his first multi-assertion test script and hits an immediate red failure. While the status code is 200, checking jsonData.bookName yields undefined because the legacy database driver outputs snake_case book_name.',
+          realization: 'Contract testing catches naming convention mismatches before they crash downstream frontend applications.'
+        },
+        {
+          title: 'Scene 5: 11:52 PM: Schema Contracts and Ananya Defense',
+          time: '11:52 PM',
           layout: 'duo',
           image: {
             src: ch05Scene3Img,
@@ -102,21 +185,50 @@ export const lesson05 = {
             caption: 'Automated Triumph: Five hundred iterations verified with zero failures in twelve seconds.'
           },
           replyImage: {
-            src: dataDrivenImg,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/data-driven-testing-iteration.jpg',
-            w: 1408,
+            src: ch05AnanyaSchemaImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_ananya_reviewing_schema.jpg',
+            w: 1376,
             h: 768,
-            alt: 'Data driven testing iteration diagram showing CSV file feeding requests into Newman runner.',
-            caption: 'Data Driven Matrix: External CSV feeds variable rows into parameterized request templates.'
+            alt: 'Ananya inspecting the JSON Schema contract model on the lab workstation monitor.',
+            caption: 'Contract Guardian: Ananya demands type strictness for bookId string and price integer.'
+          },
+          dialogue: {
+            speaker: 'Ananya',
+            speech: 'If a single book returns price as a string instead of a number, my checkout cart breaks for everyone.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Locking down the Ajv JSON schema now. Every field type and required key is strictly asserted.'
+          },
+          scene: 'Frontend Lead Ananya joins Akshay at the developer station. She explains how mobile client parsing crashes when unexpected types appear. Akshay wraps the response in a formal JSON Schema validator using tv4/Ajv inside Postman.',
+          realization: 'JSON Schema assertions validate structure, data types, and required properties across entire payloads in a single line.'
+        },
+        {
+          title: 'Scene 6: 11:58 PM: Newman Batch Velocity and Dawn Clearance',
+          time: '11:58 PM',
+          layout: 'duo',
+          image: {
+            src: ch05NewmanRunImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_newman_batch_run.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Command line terminal showing fast Newman CLI collection runner executing five hundred iterations.',
+            caption: 'Command Line Velocity: Newman runs the collection headlessly with fifteen hundred assertions passing.'
+          },
+          replyImage: {
+            src: ch05CelebrationImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_team_celebration_dawn.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'The engineering team celebrating in the lab as dawn breaks outside the sandstone arches.',
+            caption: 'Dawn Victory: Five hundred books verified and cataloged before the library gates open.'
           },
           dialogue: {
             speaker: 'Akshay',
-            speech: '500 iterations, 1500 assertions, zero failures in twelve seconds flat!',
-            replySpeaker: 'Ananya',
-            replySpeech: 'Search app is responding with zero lag. Clean JSON payloads across every aisle.'
+            speech: '500 iterations, 1500 assertions, zero failures in twelve seconds flat! All green!',
+            replySpeaker: 'Mrs. Iyer',
+            replySpeech: 'Accurate to the last comma. The stacks open at eight on schedule. Good work, engineers.'
           },
-          scene: 'With CSV parameterization and strict Ajv schema contracts verified, Akshay fires Newman CLI in the terminal. All 500 records stream through green in 12 seconds flat. Mrs. Iyer gives a nod of austere approval.',
-          realization: 'Automated batch assertions convert twelve hours of manual copy paste labor into seconds of deterministic verification.'
+          scene: 'With Chai assertions and schema validation locked in, Akshay executes the Newman CLI runner. 500 records stream through green in 12 seconds flat. Mrs. Iyer reviews the terminal output and gives her austere approval as dawn breaks over the campus arches.',
+          realization: 'Automated batch assertions convert twelve hours of error-prone manual labor into seconds of deterministic verification.'
         }
       ]
     },
