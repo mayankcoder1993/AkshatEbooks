@@ -1,0 +1,96 @@
+[
+  {
+    "id": "kb-universal-rule19",
+    "keyword": "RULE-19",
+    "aliases": [
+      "NO-DASHES",
+      "NO-HYPHENS"
+    ],
+    "title": "Universal Publishing Invariant: Strict Rule 19",
+    "category": "universal_invariant",
+    "url": "framework/core/validator-audit-engine.md",
+    "tags": [
+      "rule19",
+      "editorial",
+      "prose_standards",
+      "typography"
+    ],
+    "content": "Strict Rule 19 prohibits all hyphens, em-dashes, and en-dashes in plain English prose, book headers, captions, titles, and dialogue. The only exceptions are code syntax identifiers, markdown structural bullets, and verified URLs. All sentences must use colons, commas, parentheses, or rewrites."
+  },
+  {
+    "id": "kb-universal-balloon-geometry",
+    "keyword": "BALLOON-GEOMETRY",
+    "aliases": [
+      "INSIDE-IMAGE-DIALOGUE",
+      "HEADROOM-COORDINATES"
+    ],
+    "title": "Universal Publishing Invariant: Inside Image Balloon Geometry",
+    "category": "universal_invariant",
+    "url": "framework/core/style-and-aesthetics.md",
+    "tags": [
+      "dialogue",
+      "comic_layout",
+      "zero_occlusion",
+      "negative_headroom"
+    ],
+    "content": "Speech balloons must reside strictly inside the artwork image frame, anchored in the top 25 percent negative headroom (sky, stone arches, ceiling rafters). Positioning uses top-left or top-right coordinates with a maximum width of 34 percent. Character faces, hands, and props must never be covered. Spoken dialogue must remain under 120 characters."
+  },
+  {
+    "id": "kb-universal-pedagogical-quad",
+    "keyword": "PEDAGOGICAL-QUAD",
+    "aliases": [
+      "FOUR-PART-CARD",
+      "SUB-ART-DECK"
+    ],
+    "title": "Universal Publishing Invariant: Four Part Pedagogical Card",
+    "category": "universal_invariant",
+    "url": "framework/core/validator-audit-engine.md",
+    "tags": [
+      "pedagogy",
+      "quad_card",
+      "input_hood_output_savior"
+    ],
+    "content": "Every technical lesson requires the 4 part pedagogical grounding deck: (1) Input: concrete HTTP verb, URI, and headers; (2) Under the Hood: exact memory, buffer, and socket lifecycle; (3) Output: verified status code and payload contract; (4) Senior Savior: punchy architectural aphorism and common rookie pitfall to avoid."
+  },
+  {
+    "id": "kb-universal-madhubani-tech",
+    "keyword": "MADHUBANI-FOLK-TECH",
+    "aliases": [
+      "FOLK-TECH-STYLE",
+      "HERITAGE-TECH"
+    ],
+    "title": "Universal Publishing Invariant: Modern Tech with Madhubani Art",
+    "category": "universal_invariant",
+    "url": "framework/core/style-and-aesthetics.md",
+    "tags": [
+      "art_style",
+      "madhubani",
+      "folk_art",
+      "character_design"
+    ],
+    "content": "Visual styling blends authentic modern engineering with Madhubani Mithila graphic novel line art. Characters feature double line ink outlines, sharp almond eyes, and traditional attire. Laptops, terminals, and screens must display crisp, authentic photorealistic code text and CLI commands, never decorative squiggles."
+  },
+  {
+    "id": "kb-book-system-doubts",
+    "keyword": "SYSTEM-DOUBTS",
+    "aliases": [
+      "HOW-TECH-WORKS",
+      "RICK-ENGINEERING",
+      "EVERYDAY-TECH"
+    ],
+    "title": "How Everyday Tech Actually Works: Everyday Systems Demystified",
+    "category": "future_book_concept",
+    "url": "https://www.instagram.com/rick.theengineer/",
+    "tags": [
+      "system_design",
+      "visual_explainer",
+      "everyday_engineering",
+      "websockets",
+      "encryption",
+      "security",
+      "push_notifications",
+      "payment_gateways"
+    ],
+    "content": "A future visual graphic novel series answering common engineering curiosities and architectural doubts. Inspired by visual system design breakdowns like Rick the Engineer (https://www.instagram.com/rick.theengineer/). Key topics: (1) How instant Facebook messages travel across the world in milliseconds via persistent WebSockets; (2) How end to end encryption secures WhatsApp chats using Diffie Hellman key exchange and the Signal protocol; (3) What happens behind the scenes when a user swipes a credit card at a terminal; (4) How GPS satellites triangulate a moving smartphone in a cab; (5) How Netflix streams 4K video without buffering using distributed CDN edge points. Trigger keyword: SYSTEM-DOUBTS."
+  }
+]

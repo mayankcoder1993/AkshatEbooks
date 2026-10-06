@@ -1,0 +1,72 @@
+[
+  {
+    "id": "book-api-cast",
+    "keyword": "CAST-CHARACTERS",
+    "title": "Zero to Agentic API Testing: Character Roster and Dynamic Roles",
+    "category": "character_ledger",
+    "tags": [
+      "akshay",
+      "sameer",
+      "ananya",
+      "rohan",
+      "mrs_iyer"
+    ],
+    "content": "Akshay: 24-year-old apprentice engineer in white cotton kurta. Sameer: 40-year-old Principal Systems Architect with salt-and-pepper beard, brass spectacles, sipping cutting chai. Ananya: sharp, impatient Frontend Lead demanding predictable REST contracts. Rohan: competitive classmate who looks for shortcuts. Mrs. Iyer: strict campus Chief Librarian who enforces physical shelf accuracy."
+  },
+  {
+    "id": "book-api-ch01",
+    "keyword": "CH01-WIRED-AWAKENING",
+    "title": "Chapter 01: Foundations and the 14ms Direct Wire Rescue",
+    "category": "chapter_ledger",
+    "tags": [
+      "ch01",
+      "port_3000",
+      "express",
+      "crud_verbs",
+      "waterfall_bloat"
+    ],
+    "content": "Admit card ink dissolves 20 minutes before entrance exam. Akshay phone spins on 3.8MB webpage bundle over weak Wi-Fi. Sameer bypasses frontend bloat and fetches 120-byte JSON admit card via direct API query in 14ms. Akshay pairs with Sameer, bootstrapping Express on port 3000, overcoming undefined req.body stream chunking with express.json(), and exploring the 5 CRUD verbs."
+  },
+  {
+    "id": "book-api-ch02",
+    "keyword": "CH02-TRANSIT-WAR-ROOM",
+    "title": "Chapter 02: Transit Shuttle Crisis and Unhandled 500 Crash",
+    "category": "chapter_ledger",
+    "tags": [
+      "ch02",
+      "transit_shuttle",
+      "500_error",
+      "fail_fast_400",
+      "empty_states"
+    ],
+    "content": "Evening campus shuttle tracking monitors freeze with 500 Internal Server Error when route parameter is omitted. Akshay reproduces crash via curl, finding unhandled TypeError on undefined.trim(). Sameer cites Facebook 2021 BGP blackout and AWS S3 2017 argument errors. Akshay installs fail fast guard returning 400 Bad Request in 4ms, establishes dual verification, and maps the 5 status code families."
+  },
+  {
+    "id": "book-api-ch03",
+    "keyword": "CH03-GREEN-LIE-WATCHDOG",
+    "title": "Chapter 03: The Green Lie, Chai Assertions, and Red Before Green",
+    "category": "chapter_ledger",
+    "tags": [
+      "ch03",
+      "knight_capital",
+      "apple_goto_fail",
+      "red_before_green",
+      "empty_callback"
+    ],
+    "content": "Senior engineer hands Akshay a 100 percent green test suite. Sameer demonstrates that an assertion testing generic object types passes on 401 Unauthorized errors because error payloads are objects. Sameer cites Knight Capital 440 million dollar catastrophe and Apple goto fail vulnerability. Akshay learns V8 empty callback execution mechanics, writes Node.js collection JSON audit scripts, enforces Red Before Green, and writes dual contract assertions."
+  },
+  {
+    "id": "book-api-ch04",
+    "keyword": "CH04-GHOST-ISBN-INCIDENT",
+    "title": "Chapter 04: The Ghost ISBN Incident and Unique Database Constraints",
+    "category": "chapter_ledger",
+    "tags": [
+      "ch04",
+      "heathrow_seat_14a",
+      "amazon_prime_day",
+      "409_conflict",
+      "unique_index"
+    ],
+    "content": "Campus library book catalog service accepts duplicate book records with identical ISBN and aisle coordinates. Two students could reserve the same physical copy. Sameer cites Heathrow 2015 seat 14A collision and Amazon Prime Day double inventory deductions. Akshay learns the TOCTOU race window between application SELECT and INSERT, adds database UNIQUE constraint on isbn, writes atomic upsert with ON CONFLICT, returns 409 Conflict, eliminates the Zombie Read with deleted_at IS NULL filter, and experiences the pain of manual copy paste before automated collections."
+  }
+]

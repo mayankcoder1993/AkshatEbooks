@@ -1,87 +1,54 @@
 #!/usr/bin/env python3
-"""
-Sarva Gyana Koshah - Hierarchical FAISS RAG Search Engine
-Queries Tier 1 Universal RAG and Tier 2 Book-Level RAG with priority resolution.
-"""
-
-import os
 import sys
-import json
 import argparse
-import numpy as np
-import faiss
+import os
 
-# Import embedding function from indexer
-from index_rag import embed_text, EMBEDDING_DIM
+# Add parent of framework to python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-def search_index(index_path, meta_path, query_vec, top_k=5):
-    if not os.path.exists(index_path) or not os.path.exists(meta_path):
-        return []
-    
-    index = faiss.read_index(index_path)
-    with open(meta_path, "r", encoding="utf-8") as f:
-        metadata = json.load(f)
-        
-    query_matrix = np.array([query_vec], dtype=np.float32)
-    faiss.normalize_L2(query_matrix)
-    
-    scores, indices = index.search(query_matrix, min(top_k, len(metadata)))
-    
-    results = []
-    for score, idx in zip(scores[0], indices[0]):
-        if idx >= 0 and idx < len(metadata):
-            item = dict(metadata[idx])
-            item["score"] = float(score)
-            results.append(item)
-    return results
+from framework.rag.store import KnowledgeStore
 
 def main():
-    parser = argparse.ArgumentParser(description="Query Sarva Gyana Koshah Hierarchical FAISS RAG")
-    parser.add_argument("query", type=str, help="Search query string")
-    parser.add_argument("--scope", choices=["all", "universal", "book"], default="all", help="Search scope")
-    parser.add_argument("--book-dir", type=str, default="src/books/technical/programming/testing/zero-to-agentic-api-testing", help="Path to book directory")
-    parser.add_argument("--top-k", type=int, default=4, help="Number of results to retrieve per scope")
+    parser = argparse.ArgumentParser(description="Query the Framework FAISS Vector Knowledge Store")
+    parser.add_argument("query", help="Text query or keyword to search for")
+    parser.add_argument("--keyword", "-k", help="Exact keyword match", action="store_true")
+    parser.add_argument("--top", "-t", type=int, default=3, help="Number of results to return")
     args = parser.parse_args()
 
-    query_vec = embed_text(args.query)
-    
-    univ_results = []
-    book_results = []
-    
-    univ_dir = os.path.abspath("framework/rag")
-    if args.scope in ["all", "universal"]:
-        univ_index = os.path.join(univ_dir, "universal.index")
-        univ_meta = os.path.join(univ_dir, "universal_meta.json")
-        univ_results = search_index(univ_index, univ_meta, query_vec, top_k=args.top_k)
-        
-    if args.scope in ["all", "book"]:
-        book_rag_dir = os.path.join(args.book_dir, "rag")
-        book_index = os.path.join(book_rag_dir, "book.index")
-        book_meta = os.path.join(book_rag_dir, "book_meta.json")
-        book_results = search_index(book_index, book_meta, query_vec, top_k=args.top_k)
-        
-    print(f"\n========================================================")
-    print(f"  SARVA GYANA KOSHAH - HIERARCHICAL RAG SEARCH")
-    print(f"  Query: '{args.query}' | Scope: {args.scope}")
-    print(f"========================================================\n")
-    
-    if univ_results:
-        print("🏛️  TIER 1: UNIVERSAL INVARIANTS (Absolute Canon)")
-        print("--------------------------------------------------------")
-        for res in univ_results:
-            print(f"• [{res['doc_id']}] (Score: {res['score']:.3f}) - {res['title']}")
-            print(f"  Category: {res['category']} | Status: {res['status']}")
-            preview = res['text'][:220].replace('\n', ' ')
-            print(f"  Snippet: {preview}...\n")
-            
-    if book_results:
-        print("📖  TIER 2: BOOK-LEVEL CONTINUITY & TECHNICAL STATE")
-        print("--------------------------------------------------------")
-        for res in book_results:
-            print(f"• [{res['doc_id']}] (Score: {res['score']:.3f}) - {res['title']}")
-            print(f"  Category: {res['category']} | Status: {res['status']}")
-            preview = res['text'][:220].replace('\n', ' ')
-            print(f"  Snippet: {preview}...\n")
+    store = KnowledgeStore()
 
-if __name__ == "__main__":
+    print("\n" + "=" * 60)
+    print("  FRAMEWORK FAISS RAG KNOWLEDGE QUERY")
+    print("=" * 60)
+    print(f"Query: '{args.query}' | Indexed Documents: {len(store.documents)}\n")
+
+    if args.keyword:
+        results = store.search_by_keyword(args.query)
+        if not results:
+            print("No exact keyword matches found. Falling back to semantic search...\n")
+            results = store.search_semantic(args.query, top_k=args.top)
+    else:
+        # Check keyword first
+        kw_matches = store.search_by_keyword(args.query)
+        if kw_matches:
+            results = kw_matches
+        else:
+            results = store.search_semantic(args.query, top_k=args.top)
+
+    if not results:
+        print("No matching knowledge base documents found.")
+        return
+
+    for i, (score, doc) in enumerate(results, start=1):
+        print(f"[{i}] Match Score: {score:.4f}")
+        print(f"    Category: {doc.get('category', 'general')}")
+        print(f"    Keyword:  {doc.get('keyword', 'None')}")
+        print(f"    Title:    {doc.get('title', 'Untitled')}")
+        if 'url' in doc:
+            print(f"    Link/URL: {doc.get('url')}")
+        print(f"    Tags:     {', '.join(doc.get('tags', []))}")
+        print(f"    Content Preview:\n{doc.get('content', '')[:300]}...\n")
+        print("-" * 60)
+
+if __name__ == '__main__':
     main()

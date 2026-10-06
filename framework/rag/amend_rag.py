@@ -1,130 +1,57 @@
 #!/usr/bin/env python3
-"""
-Sarva Gyana Koshah - Autonomous RAG Amendment Tool
-Enforces conflict resolution, provenance tracking, user confirmation gates,
-and automatic FAISS re-indexing.
-"""
-
-import os
 import sys
-import json
 import argparse
-from datetime import datetime
+import os
 
-# Import indexers
-from index_rag import index_universal, index_book
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 
-def load_json(path):
-    if not os.path.exists(path):
-        return None
-    with open(path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-def save_json(path, data):
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-def check_conflicts(target_data, proposed_key, proposed_value):
-    conflicts = []
-    if proposed_key in target_data:
-        existing = target_data[proposed_key]
-        if existing != proposed_value:
-            conflicts.append({
-                "type": "key_overwrite",
-                "key": proposed_key,
-                "current": existing,
-                "proposed": proposed_value
-            })
-    return conflicts
+from framework.rag.store import KnowledgeStore
 
 def main():
-    parser = argparse.ArgumentParser(description="Amend Sarva Gyana Koshah Hierarchical RAG Canon")
-    parser.add_argument("--tier", choices=["universal", "book"], required=True, help="RAG tier to amend")
-    parser.add_argument("--file", type=str, required=True, help="Filename of JSON canon document (e.g. character_ledger.json)")
-    parser.add_argument("--book-dir", type=str, default="src/books/technical/programming/testing/zero-to-agentic-api-testing", help="Path to book directory if tier is book")
-    parser.add_argument("--key", type=str, required=True, help="Top-level key to amend or append")
-    parser.add_argument("--value-json", type=str, required=True, help="JSON string of the value to insert")
-    parser.add_argument("--rationale", type=str, required=True, help="Engineering rationale for this amendment")
-    parser.add_argument("--author", type=str, default="agentic_publishing_engine", help="Author/Agent ID")
-    parser.add_argument("--confirm", action="store_true", help="Explicit user confirmation flag required to write changes")
+    parser = argparse.ArgumentParser(description="Amend or Add an Entry to the Framework FAISS Knowledge Base")
+    parser.add_argument("--keyword", "-k", required=True, help="Unique trigger keyword (e.g. SYSTEM-DOUBTS)")
+    parser.add_argument("--title", "-t", required=True, help="Entry or Book Title")
+    parser.add_argument("--category", "-c", default="future_book_concept", help="Category of entry")
+    parser.add_argument("--url", "-u", default="", help="Relevant reference URL or inspiration link")
+    parser.add_argument("--content", help="Detailed content or summary")
+    parser.add_argument("--tags", default="", help="Comma separated tags")
+    parser.add_argument("--aliases", default="", help="Comma separated keyword aliases")
+    parser.add_argument("--confirm", action="store_true", help="Auto confirm amendment")
+
     args = parser.parse_args()
+    store = KnowledgeStore()
 
-    # Determine file path
-    if args.tier == "universal":
-        target_dir = os.path.abspath("framework/rag")
-    else:
-        target_dir = os.path.join(args.book_dir, "rag")
-        
-    target_path = os.path.join(target_dir, args.file)
-    if not os.path.exists(target_path):
-        print(f"❌ Error: Target file {target_path} does not exist.")
-        sys.exit(1)
-        
-    doc = load_json(target_path)
-    
-    try:
-        new_val = json.loads(args.value_json)
-    except Exception as e:
-        print(f"❌ Error: Invalid JSON in --value-json: {e}")
-        sys.exit(1)
-        
-    # Analyze conflicts
-    conflicts = check_conflicts(doc, args.key, new_val)
-    
-    print("\n" + "="*60)
-    print("  SARVA GYANA KOSHAH - AUTONOMOUS RAG AMENDMENT GATE")
-    print("="*60)
-    print(f"Target Document : {target_path}")
-    print(f"Tier            : {args.tier.upper()}")
-    print(f"Key to Amend    : {args.key}")
-    print(f"Author / Agent  : {args.author}")
-    print(f"Rationale       : {args.rationale}")
-    print(f"Timestamp       : {datetime.utcnow().isoformat()}Z")
-    print("-"*60)
-    
-    if conflicts:
-        print("⚠️  POTENTIAL CONFLICTS DETECTED:")
-        for c in conflicts:
-            print(f"  • Existing value for '{c['key']}': {json.dumps(c['current'], indent=2)}")
-            print(f"  • Proposed new value: {json.dumps(c['proposed'], indent=2)}")
-    else:
-        print("✅ No structural conflicts found. New or additive amendment.")
-        
-    print("\nPROPOSED CHANGE PAYLOAD:")
-    print(json.dumps({args.key: new_val}, indent=2, ensure_ascii=False))
-    print("-"*60)
-    
-    # USER CONFIRMATION GATE
+    doc_data = {
+        "id": f"kb-{args.keyword.lower().replace('_', '-')}",
+        "keyword": args.keyword.upper(),
+        "aliases": [a.strip().upper() for a in args.aliases.split(",") if a.strip()],
+        "title": args.title,
+        "category": args.category,
+        "url": args.url,
+        "tags": [t.strip() for t in args.tags.split(",") if t.strip()],
+        "content": args.content or f"Knowledge base entry for {args.title}."
+    }
+
+    print("\n" + "=" * 60)
+    print("  PROPOSED FAISS RAG KNOWLEDGE BASE AMENDMENT")
+    print("=" * 60)
+    print(f"Keyword:  {doc_data['keyword']}")
+    print(f"Aliases:  {doc_data['aliases']}")
+    print(f"Title:    {doc_data['title']}")
+    print(f"Category: {doc_data['category']}")
+    print(f"URL:      {doc_data['url']}")
+    print(f"Tags:     {doc_data['tags']}")
+    print(f"Content:  {doc_data['content']}")
+    print("=" * 60)
+
     if not args.confirm:
-        print("\n⛔ CONFIRMATION GATE HALTED: --confirm flag was not passed.")
-        print("To protect canon integrity, all RAG amendments require explicit agreement.")
-        print("Pass '--confirm' to ratify this change and trigger FAISS vector re-indexing.")
-        sys.exit(2)
-        
-    # Write amendment
-    doc[args.key] = new_val
-    if "_amendments_audit_log" not in doc:
-        doc["_amendments_audit_log"] = []
-        
-    doc["_amendments_audit_log"].append({
-        "timestamp": datetime.utcnow().isoformat() + "Z",
-        "author": args.author,
-        "key": args.key,
-        "rationale": args.rationale,
-        "status": "ratified"
-    })
-    
-    save_json(target_path, doc)
-    print(f"✨ Canon file updated successfully: {target_path}")
-    
-    # Trigger automatic FAISS re-indexing
-    print("\n🔄 Re-indexing FAISS vector embeddings...")
-    if args.tier == "universal":
-        index_universal()
-    else:
-        index_book(args.book_dir)
-        
-    print("\n✅ Amendment ratified, saved, and FAISS vector index recomputed!\n")
+        user_input = input("\nDo you agree and confirm adding this entry to FAISS? (y/N): ").strip().lower()
+        if user_input not in ('y', 'yes'):
+            print("Amendment aborted by user.")
+            sys.exit(0)
 
-if __name__ == "__main__":
+    store.add_document(doc_data)
+    print(f"\n[SUCCESS] Entry '{doc_data['keyword']}' successfully indexed in FAISS vector store!")
+
+if __name__ == '__main__':
     main()
