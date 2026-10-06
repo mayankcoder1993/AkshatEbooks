@@ -4,6 +4,17 @@ import ch04Scene1Img from '../assets/ch04-scene-1-library-mission.jpg'
 import ch04Scene2Img from '../assets/ch04-scene-2-duplicate-collision.jpg'
 import ch04Scene3Img from '../assets/ch04-scene-3-copy-paste-teardown.jpg'
 
+import ch04LibrarianImg from '../assets/illustrations/ch04/ch04_akshay_and_librarian.jpg'
+import ch04LaptopDeskImg from '../assets/illustrations/ch04/ch04_laptop_on_desk_library.jpg'
+import ch04SameerLibraryImg from '../assets/illustrations/ch04/ch04_sameer_and_akshay_library.jpg'
+import ch04GhostBookImg from '../assets/illustrations/ch04/ch04_ghost_book_in_aisle.jpg'
+import ch04ShockImg from '../assets/illustrations/ch04/ch04_akshay_library_shock.jpg'
+import ch04Conflict409Img from '../assets/illustrations/ch04/ch04_409_conflict_response.jpg'
+import ch04WhiteboardImg from '../assets/illustrations/ch04/ch04_whiteboard_toctou.jpg'
+import ch04NotesFrictionImg from '../assets/illustrations/ch04/ch04_akshay_notes_friction.jpg'
+import ch04MonsoonOutsideImg from '../assets/illustrations/ch04/ch04_monsoon_delivery_outside.jpg'
+import ch04SameerDeskImg from '../assets/illustrations/ch04/ch04_sameer_teaches_at_desk.jpg'
+
 export const lesson04 = {
   id: 'library-crud',
   icon: '',
@@ -114,14 +125,14 @@ export const lesson04 = {
     // =========================================================================
     {
       type: 'storyboard',
-      badge: 'GRAPHIC COMIC : THREE SCENES',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
       title: 'The Ghost ISBN Incident and CRUD Wire Discovery',
-      intro: 'Follow apprentice Akshay, Chief Librarian Mrs. Iyer, and architect Sameer inside the Central Library stacks as they map AddBook, discover duplicate key collisions, and diagnose the soft delete zombie read.',
+      intro: 'Follow apprentice Akshay, Chief Librarian Mrs. Iyer, and architect Sameer inside the Central Library stacks as they map AddBook, discover duplicate key collisions, examine TOCTOU concurrency on the whiteboard, and diagnose the soft delete zombie read.',
       panels: [
         {
           title: 'Scene 1: 10:15 PM: The Central Library Stacks and First AddBook',
           time: '10:15 PM',
-          layout: 'hero',
+          layout: 'duo',
           image: {
             src: ch04Scene1Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-1-library-mission.jpg',
@@ -129,6 +140,14 @@ export const lesson04 = {
             h: 768,
             alt: 'Akshay and Mrs. Iyer at the teak catalog desk in the vaulted Central Library stacks.',
             caption: 'Library Console: Testing the newly deployed AddBook endpoint on port 5050 under the stern gaze of Mrs. Iyer.'
+          },
+          replyImage: {
+            src: ch04LibrarianImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_akshay_and_librarian.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Mrs. Iyer observing Akshay closely at the library catalog desk.',
+            caption: 'Guardian of the Stacks: Mrs. Iyer demands total catalog truth before opening tomorrow morning.'
           },
           dialogue: {
             speaker: 'Akshay',
@@ -151,9 +170,17 @@ export const lesson04 = {
             alt: 'Akshay looking at duplicate book IDs on screen as Sameer points out the constraint collision.',
             caption: 'State Collision: Replaying the AddBook POST without unique constraints creates duplicate ghost rows for a single ISBN.'
           },
+          replyImage: {
+            src: ch04ShockImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_akshay_library_shock.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay holding his head in disbelief as duplicate book IDs appear on screen.',
+            caption: 'The Ghost Book Shock: Two rows created for one physical copy in the database.'
+          },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'Wait! It returned 200 with another ID for the same ISBN! Two rows for one book?!',
+            speech: 'Wait! It returned 201 Created with another ID for the same ISBN! Two rows for one book?!',
             replySpeaker: 'Sameer',
             replySpeech: 'A ghost book. Heathrow 2015 issued seat 14A twice. Add a unique index now.'
           },
@@ -161,9 +188,67 @@ export const lesson04 = {
           realization: 'Application level existence checks are vulnerable to concurrency race conditions. Database unique constraints are mandatory.'
         },
         {
-          title: 'Scene 3: 10:50 PM: Copy Paste Teardown and The Soft Delete Zombie',
-          time: '10:50 PM',
-          layout: 'hero',
+          title: 'Scene 3: 10:36 PM: The TOCTOU Concurrency Race on the Whiteboard',
+          time: '10:36 PM',
+          layout: 'duo',
+          image: {
+            src: ch04WhiteboardImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_whiteboard_toctou.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer drawing the TOCTOU concurrency race window on the library whiteboard.',
+            caption: 'TOCTOU Architecture: Two concurrent threads execute SELECT at the same millisecond; both see zero rows.'
+          },
+          replyImage: {
+            src: ch04GhostBookImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_ghost_book_in_aisle.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer and Akshay examining a physical textbook down the narrow library aisle.',
+            caption: 'Physical Truth: Reality holds only one book; the database must enforce uniqueness.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Time of Check to Time of Use. Two threads check SELECT at the same millisecond. Application checks are blind.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'The database unique index is the only wall that holds under concurrent load!'
+          },
+          scene: 'Sameer steps to the whiteboard to diagram the TOCTOU race window. When two concurrent requests arrive simultaneously, application-level checks evaluate true for both. Only an ACID-compliant unique constraint at the database layer prevents duplicate row creation.',
+          realization: 'Never rely on application memory for uniqueness. Enforce constraints at the database boundary.'
+        },
+        {
+          title: 'Scene 4: 10:46 PM: Atomic ON CONFLICT and Honest HTTP 409',
+          time: '10:46 PM',
+          layout: 'duo',
+          image: {
+            src: ch04Conflict409Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_409_conflict_response.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'API testing tool showing explicit 409 Conflict status on duplicate replay.',
+            caption: 'Semantic Truth: 409 Conflict signals valid syntax conflicting with existing server state.'
+          },
+          replyImage: {
+            src: ch04SameerDeskImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_sameer_teaches_at_desk.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer guiding Akshay through atomic conflict handling at the teak desk.',
+            caption: 'Atomic Upsert: ON CONFLICT DO NOTHING returns actionable conflict status.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Replaying duplicate POST... HTTP 409 Conflict in 6 milliseconds! The database rejected the write!',
+            replySpeaker: 'Sameer',
+            replySpeech: '409 Conflict tells the client: your request syntax was valid, but conflicts with server state.'
+          },
+          scene: 'With ALTER TABLE unique_isbn in place, Akshay updates the route handler with ON CONFLICT DO NOTHING. When replayed, the server returns an honest HTTP 409 Conflict in 6ms rather than silently creating duplicate records.',
+          realization: 'Honest HTTP status codes guide client behavior. 409 Conflict explicitly communicates state collisions.'
+        },
+        {
+          title: 'Scene 5: 10:54 PM: The Soft Delete Zombie and Teardown Verification',
+          time: '10:54 PM',
+          layout: 'duo',
           image: {
             src: ch04Scene3Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-3-copy-paste-teardown.jpg',
@@ -171,6 +256,14 @@ export const lesson04 = {
             h: 768,
             alt: 'Akshay holding his head in frustration copying IDs across browser tabs while Sameer explains soft deletes.',
             caption: 'Teardown Dilemma: Copying composite keys across tabs creates fatigue, while soft deleted records reappear in query results.'
+          },
+          replyImage: {
+            src: ch04NotesFrictionImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_akshay_notes_friction.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay noting down IDs in his spiral notebook surrounded by Postman tabs.',
+            caption: 'Developer Friction: Manually copying generated IDs across tabs wastes sprint hours.'
           },
           dialogue: {
             speaker: 'Akshay',
@@ -180,9 +273,39 @@ export const lesson04 = {
           },
           scene: 'Akshay deletes the record and queries GetBook, only to find the book still returned because the query omitted WHERE deleted_at IS NULL. Furthermore, copying and pasting IDs between AddBook, GetBook, and DeleteBook proves exhausting.',
           realization: 'Manual copy paste testing does not scale, and soft delete implementations require explicit filtering across all read queries.'
+        },
+        {
+          title: 'Scene 6: 11:10 PM: The Monsoon Delivery and Batch Automation Cliffhanger',
+          time: '11:10 PM',
+          layout: 'duo',
+          image: {
+            src: ch04MonsoonOutsideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_monsoon_delivery_outside.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Torrential monsoon rain pouring outside the library loading bay under night sky.',
+            caption: 'Monsoon Arrival: Two trucks carrying 500 physical textbooks arrive at the loading bay.'
+          },
+          replyImage: {
+            src: ch04SameerLibraryImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_sameer_and_akshay_library.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer and Akshay turning toward the loading bay as thunder rumbles.',
+            caption: 'The Automation Cliffhanger: Five hundred textbooks need batch verification before dawn.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Five hundred new textbooks just arrived at the loading bay! Mrs. Iyer needs them verified by dawn!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Never verify bulk data by hand. Next, we parameterize our requests and let Newman drive the batch.'
+          },
+          scene: 'Thunder rumbles as torrential monsoon rain begins outside. An operations worker announces the arrival of two logistics trucks carrying five hundred textbooks that must be verified in the catalog before classes start at dawn. Manual testing has reached its absolute limit.',
+          realization: 'Enterprise scale demands data driven automation. External data files and automated runners must replace manual clicking.'
         }
       ]
     },
+
     {
       type: 'heading',
       text: 'Step 1: The Library CRUD Lifecycle Sequence',
