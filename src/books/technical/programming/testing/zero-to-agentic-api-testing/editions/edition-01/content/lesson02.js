@@ -10,6 +10,9 @@ import ch02Terminal500Img from '../assets/illustrations/reactions/ch02-terminal-
 import ch02Guard400Img from '../assets/illustrations/reactions/ch02-code-editor-400-guard.jpg'
 import ch02AkshayTypingImg from '../assets/illustrations/reactions/ch02-akshay-typing-guard.jpg'
 import ch02SameerSlateImg from '../assets/illustrations/reactions/ch02-sameer-pointing-slate.jpg'
+import ch02DevelopersArguingImg from '../assets/illustrations/reactions/ch02-developers-arguing.jpg'
+import ch02TransitArguingImg from '../assets/illustrations/reactions/ch02-transit-workers-arguing.jpg'
+import ch02MenCelebratingImg from '../assets/illustrations/reactions/ch02-men-celebrating.jpg'
 
 import crash500Svg from '../assets/svgs/ch02-workbench-500-crash.svg'
 import guard400Svg from '../assets/svgs/ch02-workbench-400-guard.svg'
@@ -83,7 +86,7 @@ export const lesson02 = {
         {
           title: 'Scene 1: 08:14 PM: The Frozen Transit Map and the War Room Standoff',
           time: '08:14 PM',
-          layout: 'hero',
+          layout: 'duo',
           image: {
             src: ch02Scene1Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-1-transit-crisis.jpg',
@@ -91,6 +94,14 @@ export const lesson02 = {
             h: 768,
             alt: 'Akshay, Ananya, and transit team examining frozen campus transit map showing HTTP 500 error.',
             caption: 'Transit Operations Desk: Evening rush transit monitors freeze with HTTP 500 Internal Server Error.'
+          },
+          replyImage: {
+            src: ch02DevelopersArguingImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-developers-arguing.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Developers arguing intensely in the campus war room over broken backend routes.',
+            caption: 'War Room Standoff: Frontend engineers and backend developers clash over unhandled wire errors.'
           },
           dialogue: {
             speaker: 'Ananya',
@@ -162,7 +173,7 @@ export const lesson02 = {
         {
           title: 'Scene 4: 08:40 PM: Dual Verification and Status Code Architecture',
           time: '08:40 PM',
-          layout: 'hero',
+          layout: 'duo',
           image: {
             src: ch02Scene4Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-4-dual-wire-verification.jpg',
@@ -170,6 +181,14 @@ export const lesson02 = {
             h: 768,
             alt: 'Akshay and Sameer reviewing side by side terminals showing 400 Bad Request and 200 OK.',
             caption: 'Dual Verification Display: Negative guard returns 400 Bad Request in 4ms, positive query returns 200 OK with route coordinates.'
+          },
+          replyImage: {
+            src: ch02MenCelebratingImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-men-celebrating.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Engineers celebrating in the transit operations room as live shuttle tracking resumes.',
+            caption: 'Triumph on the Wire: The dual verification passes and campus transit services recover.'
           },
           dialogue: {
             speaker: 'Akshay',

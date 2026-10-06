@@ -4,6 +4,11 @@ import pyramidImg from '../assets/testing-pyramid-focus.jpg'
 import ch03Scene2Img from '../assets/ch03-scene-2-assertion-sandbox.jpg'
 import ch03Scene3Img from '../assets/ch03-scene-3-mission-triumph.jpg'
 import ch03GreenBadgeEmptyArrayImg from '../assets/illustrations/reactions/ch03-green-badge-empty-array.jpg'
+import ch03PostmanFailureImg from '../assets/illustrations/reactions/ch03-postman-test-failure.jpg'
+import ch03NewmanTerminalImg from '../assets/illustrations/reactions/ch03-newman-terminal-exec.jpg'
+import ch03DashboardResultsImg from '../assets/illustrations/reactions/ch03-dashboard-automated-results.jpg'
+import ch03MentorApprenticeWorkbenchImg from '../assets/illustrations/reactions/ch03-mentor-apprentice-workbench.jpg'
+import ch03TwoMenDrinkingChaiImg from '../assets/illustrations/reactions/ch03-two-men-drinking-chai.jpg'
 
 import assertionRedSvg from '../assets/svgs/ch03-workbench-assertion-red.svg'
 import dualAssertionsSvg from '../assets/svgs/ch03-workbench-dual-assertions.svg'
@@ -128,7 +133,22 @@ export const lesson03 = {
           title: 'The Sleeper Test Shock',
           time: '06:05 PM',
           layout: 'duo',
-          image: workbenchImg,
+          image: {
+            src: ch03MentorApprenticeWorkbenchImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-mentor-apprentice-workbench.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer and Akshay sitting side by side at workbench analyzing sleeper tests.',
+            caption: 'Sleeper Test Shock: Akshay and Sameer uncover assertions that pass on empty payloads.'
+          },
+          replyImage: {
+            src: ch03GreenBadgeEmptyArrayImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-green-badge-empty-array.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Workbench screen showing false green status on empty payload.',
+            caption: 'Silent Failure: A test passing without verifying payload structure provides no proof of correctness.'
+          },
           scene: 'Akshay stares at the screen, running his fingers through his hair as evening shadows lengthen across the Dravidian stone pillars outside.',
           dialogue: {
             speaker: 'Akshay',
@@ -215,7 +235,23 @@ export const lesson03 = {
         {
           title: 'The Red Proof',
           time: '06:23 PM',
-          image: assertionImg,
+          layout: 'duo',
+          image: {
+            src: ch03PostmanFailureImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-postman-test-failure.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Postman workbench interface highlighting red assertion failure.',
+            caption: 'The Red Proof: AssertionError expected 500 to equal 400 catches the unhandled crash.'
+          },
+          replyImage: {
+            src: ch03Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch03-scene-2-assertion-sandbox.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer reviewing the red assertion failure in the test sandbox.',
+            caption: 'Vigilant Watchdog: The red assertion trace provides empirical proof of failure detection.'
+          },
           scene: 'Akshay clicks Send. The response arrives with status 500, and the Test Results tab flashes bright red: AssertionError: expected 500 to equal 400.',
           dialogue: {
             speaker: 'Akshay',
@@ -560,7 +596,22 @@ export const lesson03 = {
           title: 'Configuring the Collection Runner',
           time: '06:45 PM',
           layout: 'duo',
-          image: workbenchImg,
+          image: {
+            src: workbenchImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-workbench-overview.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'API testing workbench collection runner configuration screen.',
+            caption: 'Batch Automation: Sequencing all four transit queries in the runner.'
+          },
+          replyImage: {
+            src: ch03NewmanTerminalImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-newman-terminal-exec.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Command line terminal executing automated collection suite.',
+            caption: 'Automated Pipeline: Newman CLI running collections headlessly in milliseconds.'
+          },
           scene: 'Akshay selects the four transit queries in the collection runner: Health Check, Shuttle Omitted Guard, Shuttle Valid Contract, and Catalog Verification.',
           dialogue: {
             speaker: 'Akshay',
@@ -574,7 +625,22 @@ export const lesson03 = {
           title: 'Ten Assertions at Machine Speed',
           time: '06:47 PM',
           layout: 'duo',
-          image: ch03Scene3Img,
+          image: {
+            src: ch03DashboardResultsImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-dashboard-automated-results.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Summary dashboard displaying ten green assertions passed across four requests.',
+            caption: 'Runner Verdict: 4 requests executed, 10 assertions passed in 86 milliseconds.'
+          },
+          replyImage: {
+            src: ch03Scene3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch03-scene-3-mission-triumph.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer smiling and celebrating the clean passing runner summary.',
+            caption: 'Mission Triumph: Akshay and Sameer salute the passing automated regression suite.'
+          },
           scene: 'The Collection Runner summary window fills with green pass badges across all four requests.',
           dialogue: {
             speaker: 'Akshay',
@@ -588,7 +654,22 @@ export const lesson03 = {
           title: 'The Spark of Overconfidence',
           time: '06:50 PM',
           layout: 'duo',
-          image: ch03Scene3Img,
+          image: {
+            src: ch03TwoMenDrinkingChaiImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-two-men-drinking-chai.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer and Akshay sharing chai in the lab as twilight sets over campus.',
+            caption: 'Twilight Chai: Akshay reflects on automation speed while Sameer prepares the next test challenge.'
+          },
+          replyImage: {
+            src: ch03Scene3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch03-scene-3-mission-triumph.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay triumphant at the lab desk while Sameer observes thoughtfully.',
+            caption: 'The Overconfidence Spark: Celebrating early victory before encountering dynamic enterprise scale.'
+          },
           scene: 'Akshay leans back in his chair with folded arms and a triumphant grin.',
           dialogue: {
             speaker: 'Akshay',

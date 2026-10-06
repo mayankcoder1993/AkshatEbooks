@@ -93,7 +93,6 @@ function ComicPanelBalloon({ dialogue, index, isLightbox = false }) {
           : isRohan
             ? 'ROHAN'
             : dialogue.speaker?.toUpperCase() || 'VOICE'
-      : dialogue.speaker?.toUpperCase() || 'VOICE'
 
   const tone = dialogue.tone || dialogue.emotion || null
 
