@@ -68,5 +68,20 @@
       "unique_index"
     ],
     "content": "Campus library book catalog service accepts duplicate book records with identical ISBN and aisle coordinates. Two students could reserve the same physical copy. Sameer cites Heathrow 2015 seat 14A collision and Amazon Prime Day double inventory deductions. Akshay learns the TOCTOU race window between application SELECT and INSERT, adds database UNIQUE constraint on isbn, writes atomic upsert with ON CONFLICT, returns 409 Conflict, eliminates the Zombie Read with deleted_at IS NULL filter, and experiences the pain of manual copy paste before automated collections."
+  },
+  {
+    "id": "book-api-ch05",
+    "keyword": "CH05-MONSOON-BOOK-DROP",
+    "title": "Chapter 05: The Monsoon Book Drop and Data Driven Iteration Batches",
+    "category": "chapter_ledger",
+    "tags": [
+      "ch05",
+      "monsoon_drop",
+      "newman_cli",
+      "csv_parameterization",
+      "uk_payroll",
+      "phe_covid19"
+    ],
+    "content": "At 11:15 PM in torrential rain, 500 physical textbooks arrive at the library loading dock. Chief Librarian Mrs. Iyer demands full catalog entry before dawn, while Ananya warns of search app crashes. Manual entry would take 12 hours. Sameer introduces data driven testing with CSV parameterization and Newman. First run crashes due to invisible UTF 8 BOM header bytes (backslash uFEFF isbn). Row 6 shifts columns due to unescaped commas, recalling the UK 2019 payroll disaster. Row 15 fails because Excel auto converted ISBNs into subtraction formulas, echoing Public Health England COVID 19 record losses. Iteration 2 leaks createdBookId across rows, leading Akshay to install collection pre request cleanup. Akshay maps string status codes to integers with parseInt and fires Newman CLI, completing 500 requests and 1,500 assertions in 12 seconds flat."
   }
 ]

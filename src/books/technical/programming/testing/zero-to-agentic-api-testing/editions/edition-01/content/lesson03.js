@@ -115,12 +115,12 @@ export const lesson03 = {
             negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients, neon.',
             targetAsset: 'assets/ch03-scene-1-launching-postman.jpg'
           },
-          scene: 'Akshay sits beneath the warm brass desk lamp in Sameer lab, examining a printed test report. Beside the laptop rests a handwritten note: Verify why test passes on empty response. Sameer stands nearby holding his brass chai tumbler.',
+          scene: 'Akshay sits beneath the warm brass desk lamp in Sameer lab examining a test run. Fellow apprentice Rohan strolls past boasting about his 100% green test suite. But when Akshay looks closer at the response pane, the coordinates array is completely empty.',
           dialogue: {
-            speaker: 'Akshay',
-            speech: 'The test badge displays passed in green, but when I look at the response pane, the coordinates array is empty. How can a test pass when data is missing?',
+            speaker: 'Rohan',
+            speech: 'Why write complex assertions? My whole suite passes 100% green without checking payload fields!',
             replySpeaker: 'Sameer',
-            replySpeech: 'Because your test asserted execution, not truth. You asked the runner if the script ran, not if the payload was correct.'
+            replySpeech: 'Because your tests asserted execution, not truth. You asked the runner if the script ran, not if data was valid.'
           },
           realization: 'A test that merely runs without throwing an exception provides zero evidence of software correctness.'
         },
@@ -132,7 +132,7 @@ export const lesson03 = {
           scene: 'Akshay stares at the screen, running his fingers through his hair as evening shadows lengthen across the Dravidian stone pillars outside.',
           dialogue: {
             speaker: 'Akshay',
-            speech: 'I have spent two years trusting green ticks. If a green badge can pass on empty data, half our sprint regression suites might be sleeping on the job.',
+            speech: 'If a green badge can pass on empty data, half our sprint regression suites might be sleeping on the job.',
             replySpeaker: 'Sameer',
             replySpeech: 'Welcome to the reality of the Silent Failure. An unassertive test is worse than no test, because it gives false confidence.'
           },
@@ -314,10 +314,109 @@ export const lesson03 = {
       }
     },
     {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : THE FALSE GREEN LIE',
+      title: 'The Matcherless Assertion and False Green Pass',
+      subtitle: 'Why omitting Chai matchers causes tests to report green even when data is corrupt',
+      input: {
+        method: 'POST',
+        url: 'http://localhost:5050/v1/auth/tokens',
+        desc: 'Testing an endpoint with invalid credentials using an unhardened test script.',
+        code: 'pm.test("Status check", function () {\n    console.log(pm.response.code);\n});'
+      },
+      underTheHood: {
+        desc: 'In the Node.js sandbox, tests pass by default unless an AssertionError is thrown.',
+        steps: [
+          'Server returns HTTP 401 Unauthorized with JSON error payload.',
+          'Sandbox executes the callback function inside pm.test wrapper.',
+          'console.log statement prints 401 to developer console.',
+          'Function reaches closing brace without throwing any exception.',
+          'Postman test runner marks test as GREEN PASSED because zero errors were thrown.'
+        ]
+      },
+      output: {
+        status: '401 Unauthorized',
+        time: '6ms',
+        desc: 'Server failed as expected, but runner falsely reported test PASSED.',
+        body: '{\n  "error": "Unauthorized",\n  "message": "Invalid API key provided"\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Never assert execution; always assert truth.',
+        rule: 'Every pm.test must contain at least one explicit Chai expectation or matcher.',
+        trap: 'Logging response properties with console.log without an assertion produces a sleeper test that always passes.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : RED BEFORE GREEN',
+      title: 'The Red Before Green Verification Discipline',
+      subtitle: 'Proving test sensitivity against synthetic failures before trusting a green result',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/courses/CS101/roster',
+        desc: 'Intentionally injecting an impossible expectation into the assertion callback.',
+        code: 'pm.test("Verify enrollment count", function () {\n    const data = pm.response.json();\n    // Intentionally expect 999 instead of 45 to verify failure sensitivity\n    pm.expect(data.enrolledCount).to.equal(999);\n});'
+      },
+      underTheHood: {
+        desc: 'Deliberately forcing a mismatch proves the test script is capable of failing.',
+        steps: [
+          'Server returns HTTP 200 OK with enrolledCount equal to 45.',
+          'Test callback executes Chai comparison: 45 === 999.',
+          'Chai engine throws AssertionError: expected 45 to equal 999.',
+          'Runner intercepts exception and marks test as CRIMSON RED FAILED.',
+          'Author restores real contract (45) knowing the test has proven diagnostic teeth.'
+        ]
+      },
+      output: {
+        status: 'AssertionError: expected 45 to equal 999',
+        time: '8ms',
+        desc: 'Test turns bright red, proving the watchdog is alert and active.',
+        body: 'FAIL: Verify enrollment count | AssertionError: expected 45 to equal 999'
+      },
+      seniorSavior: {
+        aphorism: 'Never trust a green test you have not seen fail with your own eyes.',
+        rule: 'Prove an assertion fails against unhardened code before certifying it green.',
+        trap: 'Assuming a green checkmark proves software correctness without proving failure sensitivity.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : DUAL STATUS & BODY CONTRACT',
+      title: 'The Dual Transport Status and Body Schema Contract',
+      subtitle: 'Simultaneously checking the HTTP transport envelope and the business payload',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/students/STU-9921',
+        desc: 'Querying student profile with dual transport and data contract checks.',
+        code: 'pm.test("Status is 200 and student verified", function () {\n    pm.response.to.have.status(200);\n    const data = pm.response.json();\n    pm.expect(data).to.have.property("department", "Computer Science");\n    pm.expect(data.active).to.be.true;\n});'
+      },
+      underTheHood: {
+        desc: 'Runner evaluates transport protocol status before evaluating deep payload properties.',
+        steps: [
+          'Transport gate verifies pm.response.to.have.status(200).',
+          'Payload parser parses raw byte stream into JavaScript JSON object.',
+          'Property matcher verifies department strictly equals Computer Science.',
+          'Boolean matcher verifies active flag is strictly true.',
+          'Test succeeds only when transport envelope and application payload agree.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '14ms',
+        desc: 'All dual assertions pass in fourteen milliseconds.',
+        body: '{\n  "studentId": "STU-9921",\n  "department": "Computer Science",\n  "active": true,\n  "courses": ["CS101", "CS204"]\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Transport status confirms delivery; body payload confirms truth.',
+        rule: 'Always assert the HTTP response status code before parsing body properties.',
+        trap: 'Parsing response JSON without asserting status code first causes unhandled parse crashes on 500 error pages.'
+      }
+    },
+    {
       type: 'battle-scar',
-      title: 'The 460 Million Dollar Silent Guard Disaster',
-      context: 'In August 2012, Knight Capital deployed automated high frequency trading software to production. A critical safety guard that was supposed to halt duplicate orders had not been tested against failure scenarios in years. When a configuration flag sent unintended trade traffic, the dormant guard remained silently green while the algorithm bought and sold millions of shares into market chaos. The firm lost 460 million dollars in forty five minutes and faced insolvency before noon.',
-      takeaway: 'A guard that has never been observed failing is an open door. Automated test assertions must be proven to catch real regressions under live failure conditions.',
+      title: 'The Knight Capital $440M Collapse and Apple Goto Fail Catastrophe',
+      context: 'On August 1, 2012, Knight Capital pushed a new release to eight trading servers. The deployment dashboard showed all green: every server alive, every port open, every connection established. But an old dead code subroutine called Power Peg was accidentally reactivated. Within 45 minutes, automated systems bought high and sold low across 154 stocks at machine speed, losing $440 million and driving the firm into insolvency before lunch. The tests had asked "is the server alive?" but never asked "is the behavioral output correct?" Six months later, Apple shipped an SSL certificate validation bug in iOS and OS X where a duplicate goto fail line skipped certificate checks entirely. Apple test suites had verified that valid certificates were accepted, but never verified that invalid certificates were rejected. Both disasters stemmed from the same sin: trusting green tests that were never proven to fail.',
+      takeaway: 'A guard that has never been observed failing is an open door. Automated test assertions must be proven to catch real regressions under live failure conditions before being trusted.',
       metric: 'PRODUCTION RECOVERY LAW'
     },
     {

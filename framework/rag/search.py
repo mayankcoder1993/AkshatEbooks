@@ -13,12 +13,29 @@ def main():
     parser.add_argument("query", help="Text query or keyword to search for")
     parser.add_argument("--keyword", "-k", help="Exact keyword match", action="store_true")
     parser.add_argument("--top", "-t", type=int, default=3, help="Number of results to return")
+    parser.add_argument("--book", "-b", help="Book ID or path to query book-level RAG instead of universal", default=None)
     args = parser.parse_args()
 
-    store = KnowledgeStore()
+    if args.book:
+        if os.path.exists(args.book):
+            rag_dir = args.book if os.path.isdir(args.book) else os.path.dirname(args.book)
+        else:
+            rag_dir = os.path.join(
+                os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')),
+                "src/books/technical/programming/testing",
+                args.book,
+                "rag"
+            )
+        db_path = os.path.join(rag_dir, "knowledge_base.json")
+        idx_path = os.path.join(rag_dir, "knowledge.index")
+        store = KnowledgeStore(db_path=db_path, index_path=idx_path)
+        store_label = f"BOOK LEVEL ({args.book})"
+    else:
+        store = KnowledgeStore()
+        store_label = "FRAMEWORK UNIVERSAL"
 
     print("\n" + "=" * 60)
-    print("  FRAMEWORK FAISS RAG KNOWLEDGE QUERY")
+    print(f"  {store_label} FAISS RAG QUERY")
     print("=" * 60)
     print(f"Query: '{args.query}' | Indexed Documents: {len(store.documents)}\n")
 

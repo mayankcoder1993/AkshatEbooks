@@ -49,9 +49,11 @@ function ComicPanelBalloon({ dialogue, index, isLightbox = false }) {
   const isAkshay = speaker.includes('akshay')
   const isSameer = speaker.includes('sameer')
   const isRohan = speaker.includes('rohan')
+  const isAnanya = speaker.includes('ananya')
+  const isIyer = speaker.includes('iyer')
   const isExaminer = speaker.includes('examiner') || speaker.includes('guard') || speaker.includes('proctor')
 
-  // Placement: default Akshay left, Sameer right unless explicitly configured
+  // Placement: default Akshay left, Sameer/others right unless explicitly configured
   let alignLeft = true
   if (dialogue.position === 'top-right' || dialogue.position === 'right') {
     alignLeft = false
@@ -59,7 +61,7 @@ function ComicPanelBalloon({ dialogue, index, isLightbox = false }) {
     alignLeft = true
   } else {
     // Automatic fallback based on character or reply
-    if (isSameer || isRohan || isExaminer || Boolean(dialogue.reply) || index > 0) {
+    if (isSameer || isRohan || isAnanya || isIyer || isExaminer || Boolean(dialogue.reply) || index > 0) {
       alignLeft = false
     } else {
       alignLeft = true
@@ -70,16 +72,27 @@ function ComicPanelBalloon({ dialogue, index, isLightbox = false }) {
     ? '#0284c7'
     : isSameer
       ? '#7c3aed'
-      : isRohan
-        ? '#059669'
-        : isExaminer
-          ? '#dc2626'
-          : '#ca8a04'
+      : isAnanya
+        ? '#e11d48'
+        : isIyer
+          ? '#b45309'
+          : isRohan
+            ? '#059669'
+            : isExaminer
+              ? '#dc2626'
+              : '#ca8a04'
 
   const tagLabel = isAkshay
     ? 'AKSHAY'
     : isSameer
       ? 'SAMEER'
+      : isAnanya
+        ? 'ANANYA'
+        : isIyer
+          ? 'MRS. IYER'
+          : isRohan
+            ? 'ROHAN'
+            : dialogue.speaker?.toUpperCase() || 'VOICE'
       : dialogue.speaker?.toUpperCase() || 'VOICE'
 
   const tone = dialogue.tone || dialogue.emotion || null

@@ -1,4 +1,8 @@
 import lifecycleImg from '../assets/postman-assertion-lifecycle.jpg'
+import ch05Scene1Img from '../assets/ch05-scene-1-assertions-briefing.jpg'
+import ch05Scene2Img from '../assets/ch05-scene-2-pm-test-chai.jpg'
+import ch05Scene3Img from '../assets/ch05-scene-3-schema-contract-validation.jpg'
+import dataDrivenImg from '../assets/data-driven-testing-iteration.jpg'
 
 export const lesson05 = {
   id: 'javascript-assertions',
@@ -20,18 +24,101 @@ export const lesson05 = {
       missionBadge: 'MISSION 2 · PHASE 2 OF 6',
       missionTitle: 'Automating Student and Campus Services at Scale',
       missionCrisis: 'Eliminating Eyeball Traps: Machine Speed JavaScript Assertions',
-      missionContext: 'Manual verification of hundreds of textbook responses is impossible for human eyes to sustain. A missing JSON key or a latency spike to two seconds will easily slip past manual review. In this phase, we harness the embedded Node.js sandbox inside Postman to write Chai assertions that validate status codes, response times, header values, and schema contracts in milliseconds.',
+      missionContext: 'Manual verification of hundreds of textbook responses is impossible for human eyes to sustain. A missing JSON key or a latency spike to two seconds will easily slip past manual review. In this phase, we harness the embedded Node.js sandbox inside API Testing Workbench to write Chai assertions that validate status codes, response times, header values, and schema contracts in milliseconds.',
       missionObjective: 'Automate status code, response time, header, and JSON schema assertions with strict casing validation.',
-      targetSystems: 'Postman Embedded Node.js Sandbox · Chai Assertion Library · Library REST Engine',
-      achieve: 'Transform manual eyeball checks into machine speed quality gates by mastering the Postman JavaScript execution sandbox, Chai matchers, and JSON schema validation.',
-      how: 'Deconstruct the Postman request lifecycle, explore core JavaScript variable rules, build robust Chai status and response assertions, and validate strict schema contracts accounting for production casing disparities.',
+      targetSystems: 'API Testing Workbench Embedded Node.js Sandbox · Chai Assertion Library · Library REST Engine',
+      achieve: 'Transform manual eyeball checks into machine speed quality gates by mastering the workbench JavaScript execution sandbox, Chai matchers, and JSON schema validation.',
+      how: 'Deconstruct the workbench request lifecycle, explore core JavaScript variable rules, build robust Chai status and response assertions, and validate strict schema contracts accounting for production casing disparities.',
       carry: 'A battle tested suite of JavaScript assertions verifying status codes, response timing budgets, and schema properties that you will parameterize with dynamic environments in Chapter 6.'
     },
     {
       type: 'mission-tracker',
       badge: 'MISSION 2 PROGRESS · STEP 2 OF 5',
       title: 'Continuing Mission 2: Replacing the Manual Eyeball Test',
-      text: 'In Chapter 4, we added a book to our campus catalog, but we verified the response by visually inspecting the screen. Humans cannot inspect thousands of JSON responses by eye without missing missing properties or slow response times. Our next step in Mission 2 is replacing eyeball checks with automated JavaScript assertions: mastering the JavaScript fundamentals that power the Postman sandbox, writing code in the Tests tab to validate status codes, response headers, latency budgets, and data schemas in milliseconds.',
+      text: 'In Chapter 4, we added a book to our campus catalog, but we verified the response by visually inspecting the screen. Humans cannot inspect thousands of JSON responses by eye without missing missing properties or slow response times. Our next step in Mission 2 is replacing eyeball checks with automated JavaScript assertions: mastering the JavaScript fundamentals that power the workbench sandbox, writing code in the Tests tab to validate status codes, response headers, latency budgets, and data schemas in milliseconds.',
+    },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : THREE SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
+    {
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : THREE SCENES',
+      title: 'The Monsoon Book Drop and Machine Speed Assertions',
+      intro: 'Follow apprentice Akshay, Chief Librarian Mrs. Iyer, Frontend Lead Ananya, and architect Sameer at the library loading dock as they confront five hundred incoming textbooks in torrential rain, build Chai assertions, and verify schemas at machine speed.',
+      panels: [
+        {
+          title: 'Scene 1: 11:15 PM: The Monsoon Book Drop and Loading Bay Standoff',
+          time: '11:15 PM',
+          layout: 'hero',
+          image: {
+            src: ch05Scene1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch05-scene-1-assertions-briefing.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay, Mrs. Iyer, and Sameer reviewing textbooks on the rain lashed loading dock.',
+            caption: 'Loading Bay Standoff: Five hundred physical textbooks arrive in the monsoon; manual entry will take twelve hours.'
+          },
+          dialogue: {
+            speaker: 'Mrs. Iyer',
+            speech: 'Five hundred textbooks in these crates. Every copy must be verified in the catalog by dawn.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Five hundred manual requests will take twelve hours! Gates lock in forty minutes!'
+          },
+          scene: 'At 11:15 PM, a torrential monsoon downpour lashes the central library loading dock as logistics trucks arrive with 500 textbooks. Mrs. Iyer demands full catalog entry before dawn, while Ananya warns that her search app will crash on any malformed record.',
+          realization: 'Manual verification of bulk data collapses under operational deadlines; automated data driven execution is mandatory.'
+        },
+        {
+          title: 'Scene 2: 11:35 PM: The pm.test Sandbox and Chai Matchers',
+          time: '11:35 PM',
+          layout: 'duo',
+          image: {
+            src: ch05Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch05-scene-2-pm-test-chai.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay typing Chai assertions in the workbench Tests tab as Sameer points to status and schema matchers.',
+            caption: 'The JavaScript Sandbox: Authoring Chai status, latency, and schema assertions in the Tests tab.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Writing pm.test for status 200 and schema validation across our collection!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Never test bulk data by hand. We parameterize one request and let Newman drive five hundred rows.'
+          },
+          scene: 'Akshay configures the workbench Tests tab sandbox. Sameer shows him how Chai assertions validate response status, latency budgets, and body schemas at machine speed.',
+          realization: 'The workbench embedded Node.js sandbox gives test engineers the full programmatic power of Chai matchers and Ajv schemas.'
+        },
+        {
+          title: 'Scene 3: 11:58 PM: Schema Contracts and Newman Iteration Batch',
+          time: '11:58 PM',
+          layout: 'duo',
+          image: {
+            src: ch05Scene3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch05-scene-3-schema-contract-validation.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Ananya examining green assertion passes across the terminal as batch execution completes.',
+            caption: 'Automated Triumph: Five hundred iterations verified with zero failures in twelve seconds.'
+          },
+          replyImage: {
+            src: dataDrivenImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/data-driven-testing-iteration.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Data driven testing iteration diagram showing CSV file feeding requests into Newman runner.',
+            caption: 'Data Driven Matrix: External CSV feeds variable rows into parameterized request templates.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: '500 iterations, 1500 assertions, zero failures in twelve seconds flat!',
+            replySpeaker: 'Ananya',
+            replySpeech: 'Search app is responding with zero lag. Clean JSON payloads across every aisle.'
+          },
+          scene: 'With CSV parameterization and strict Ajv schema contracts verified, Akshay fires Newman CLI in the terminal. All 500 records stream through green in 12 seconds flat. Mrs. Iyer gives a nod of austere approval.',
+          realization: 'Automated batch assertions convert twelve hours of manual copy paste labor into seconds of deterministic verification.'
+        }
+      ]
     },
     {
       type: 'heading',
@@ -41,14 +128,14 @@ export const lesson05 = {
       type: 'image',
       layout: 'stacked',
       badge: 'EXECUTION LIFECYCLE',
-      title: 'Postman Execution Lifecycle: Pre Request, Network Wire, and Assertions',
-      text: 'Postman separates execution into three distinct phases for every HTTP transaction: Pre request Script to seed dynamic parameters, Network Transmission over the wire, and Tests script to parse responses and assert business contracts at machine speed.',
+      title: 'API Testing Workbench Execution Lifecycle: Pre Request, Network Wire, and Assertions',
+      text: 'The workbench separates execution into three distinct phases for every HTTP transaction: Pre request Script to seed dynamic parameters, Network Transmission over the wire, and Tests script to parse responses and assert business contracts at machine speed.',
       src: lifecycleImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-assertion-lifecycle.jpg',
       w: 1408,
       h: 768,
-      alt: 'Postman script execution lifecycle: Pre request script runs before network call, HTTP request and response travel across the wire, Tests script runs assertions after response arrives.',
-      caption: 'The complete three stage execution lifecycle of every Postman request.',
+      alt: 'Workbench script execution lifecycle: Pre request script runs before network call, HTTP request and response travel across the wire, Tests script runs assertions after response arrives.',
+      caption: 'The complete three stage execution lifecycle of every workbench request.',
       points: [
         'Stage 1 (Pre request Script): Runs before the HTTP request is built. Ideal for calculating timestamps, generating unique numbers, and configuring headers.',
         'Stage 2 (Network Transmission): The HTTP packet travels across the wire and the server returns status code, headers, and body.',
@@ -61,7 +148,7 @@ export const lesson05 = {
     },
     {
       type: 'paragraph',
-      text: 'Why do API automation engineers need JavaScript? Because Postman contains a full Node.js execution sandbox. Every time you write code in the Pre request Script or Tests tabs, Postman executes your JavaScript directly. Understanding fundamental language mechanics prevents subtle bugs in your test suites.',
+      text: 'Why do API automation engineers need JavaScript? Because the workbench contains a full Node.js execution sandbox. Every time you write code in the Pre request Script or Tests tabs, the workbench executes your JavaScript directly. Understanding fundamental language mechanics prevents subtle bugs in your test suites.',
     },
     {
       type: 'steps',
@@ -118,7 +205,7 @@ export const lesson05 = {
     },
     {
       type: 'paragraph',
-      text: 'To register an automated test case in Postman, we use the `pm.test` wrapper function with a description string and an assertion callback.',
+      text: 'To register an automated test case in the workbench, we use the `pm.test` wrapper function with a description string and an assertion callback.',
     },
     {
       type: 'code',
@@ -136,7 +223,7 @@ export const lesson05 = {
       variant: 'note',
       title: 'Micro Chunk Breakdown: Understanding the 3 Lines',
       paragraphs: [
-        '• Line 1: `pm.test("...", function () {` tells Postman to register a new test card in the Test Results panel with your chosen label.',
+        '• Line 1: `pm.test("...", function () {` tells the workbench to register a new test card in the Test Results panel with your chosen label.',
         '• Line 2: `pm.response.to.have.status(200);` is the assertion. If the server returned 200, the test turns GREEN. If the server returned 404 or 500, it turns RED and displays the discrepancy.',
         '• Line 3: `});` cleanly closes the JavaScript callback function block.',
       ],
@@ -188,12 +275,12 @@ export const lesson05 = {
       options: [
         'PASS 3 of 3: Three green checkmarks confirming status, header, and body message',
         'FAIL: Because the server response did not include a timestamp',
-        'ERROR: Because Postman cannot check string inclusion',
+        'ERROR: Because the workbench cannot check string inclusion',
         'TIMEOUT: Because latency was measured in milliseconds'
       ],
       answerIndex: 0,
       revealTitle: 'AddBook Assertion Test Results Confirmation',
-      explanation: 'All three assertions pass green! Postman confirmed the 200 status, validated latency was 145 ms (well below 1200 ms), and confirmed that Msg included "successfully added" with a valid ID string!'
+      explanation: 'All three assertions pass green! The workbench confirmed the 200 status, validated latency was 145 ms (well below 1200 ms), and confirmed that Msg included "successfully added" with a valid ID string!'
     },
     {
       type: 'callout',
@@ -246,7 +333,7 @@ export const lesson05 = {
     },
     {
       type: 'paragraph',
-      text: 'JSON Schema validation checks the entire structural contract: verifying that required fields exist and data types remain stable across server releases. Because each endpoint has its own specific contract, we write each schema validation script in that endpoint own Tests tab in Postman.',
+      text: 'JSON Schema validation checks the entire structural contract: verifying that required fields exist and data types remain stable across server releases. Because each endpoint has its own specific contract, we write each schema validation script in that endpoint own Tests tab in the workbench.',
     },
     {
       type: 'code',
@@ -332,18 +419,150 @@ export const lesson05 = {
       }
     },
     {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : DYNAMIC PARAMETERIZATION',
+      title: 'Parameterized POST with CSV Data and Scope Precedence',
+      subtitle: 'Mapping external CSV columns into request templates via workbench Data scope',
+      input: {
+        method: 'POST',
+        url: 'http://localhost:5050/v1/books',
+        desc: 'Request template with variable placeholders fed by external CSV rows.',
+        code: '{\n  "isbn": "{{isbn}}",\n  "title": "{{title}}",\n  "aisle": "{{aisle}}",\n  "author": "{{author}}"\n}'
+      },
+      underTheHood: {
+        desc: 'Newman loads data file into iteration scope and evaluates variable substitution hierarchy.',
+        steps: [
+          'Newman reads next row from books data file into pm.iterationData scope.',
+          'Request builder inspects double curly brace placeholders in JSON body.',
+          'Scope precedence stack (Data beats Environment beats Global) resolves variable values.',
+          'Resolved HTTP POST packet is dispatched across network socket to port 5050.',
+          'Server receives fully formed JSON payload without knowing it was generated from CSV.'
+        ]
+      },
+      output: {
+        status: '200 OK or 201 Created',
+        time: '12ms',
+        desc: 'Server responds with status code matching expectedStatus column for that row.',
+        body: '{\n  "Msg": "successfully added",\n  "ID": "ISBN9780134685991"\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Parameterize your assertions just like your URLs.',
+        rule: 'Always assert dynamic expected values from iterationData rather than hardcoded literals.',
+        trap: 'Hardcoding expected values in test scripts causes data driven runs to fail on every row except the first.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : ITERATION SCOPE ISOLATION',
+      title: 'Iteration Scope Isolation and Pre Request Cleanup',
+      subtitle: 'Preventing state leakage across Newman collection iteration boundaries',
+      input: {
+        method: 'SCRIPT',
+        url: 'Collection Pre Request Sandbox',
+        desc: 'Defensive pre request cleanup script unsetting shared mutable environment variables.',
+        code: 'pm.environment.unset("createdBookId");\npm.environment.unset("lastResponseStatus");'
+      },
+      underTheHood: {
+        desc: 'Collection pre request script executes before every iteration, clearing stale state.',
+        steps: [
+          'Iteration row begins execution in collection runner.',
+          'Collection level pre request script fires before request construction.',
+          'Script explicitly unsets mutable environment keys from previous iteration runs.',
+          'Row executes in a clean sandbox free from cross iteration data contamination.',
+          'Teardown requests only act on variables set during the current iteration.'
+        ]
+      },
+      output: {
+        status: 'ISOLATED EXECUTION',
+        time: '0ms',
+        desc: 'Zero variable leakage between iterations across 500 consecutive batch runs.',
+        body: '// State verified pristine: pm.environment.get("createdBookId") === undefined'
+      },
+      seniorSavior: {
+        aphorism: 'Iteration data dies per row; environment variables live forever.',
+        rule: 'Always unset mutable environment variables in collection pre request scripts.',
+        trap: 'Relying on environment variables without clearing them causes iteration 2 to delete records created in iteration 1.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : DYNAMIC STATUS MAPPING',
+      title: 'Dynamic Multi Status Assertion Mapping',
+      subtitle: 'Asserting positive creations, collisions, and bad requests from a single data driven script',
+      input: {
+        method: 'TEST',
+        url: 'Tests Tab Sandbox',
+        desc: 'Dynamic assertion converting CSV string status into integer and validating response.',
+        code: 'const expectedCode = parseInt(pm.iterationData.get("expectedStatus"), 10);\npm.test(`Status matches expected ${expectedCode}`, function () {\n    pm.expect(pm.response.code).to.equal(expectedCode);\n});'
+      },
+      underTheHood: {
+        desc: 'CSV parser treats all fields as strings; test script coerces expectedStatus to integer.',
+        steps: [
+          'Newman loads expectedStatus column value (such as string "200" or "409").',
+          'Test script calls parseInt with radix 10 to produce JavaScript number type.',
+          'pm.response.code returns actual HTTP response status as integer.',
+          'Chai evaluates strict numerical equality: 200 === 200.',
+          'Single test script validates 200 OK, 409 Conflict, and 400 Bad Request dynamically.'
+        ]
+      },
+      output: {
+        status: 'PASS',
+        time: '3ms',
+        desc: 'Test results pane displays PASS: Status matches expected 200.',
+        body: 'PASS: Status matches expected 200 | Actual: 200 === Expected: 200'
+      },
+      seniorSavior: {
+        aphorism: 'The CSV row is the test case, not the script.',
+        rule: 'Always coerce numeric CSV fields with parseInt or Number before strict Chai equality checks.',
+        trap: 'Strict Chai equality pm.expect(pm.response.code).to.equal("200") fails because integer 200 does not equal string "200".'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : DELIMITER & BOM SANITATION',
+      title: 'The Delimiter and BOM Sanitation Gate',
+      subtitle: 'Defending against UTF 8 Byte Order Marks and unescaped commas in CSV batch files',
+      input: {
+        method: 'DATA',
+        url: 'books_data.csv',
+        desc: 'CSV dataset containing commas inside quoted titles and clean UTF 8 encoding.',
+        code: 'isbn,title,aisle,expectedStatus\n9780134685991,"Eats, Shoots & Leaves",A3,200\n9780201616224,"The Mythical Man Month",B1,200'
+      },
+      underTheHood: {
+        desc: 'RFC 4180 parsing respects double quotes, and stripping BOM preserves exact header names.',
+        steps: [
+          'Preflight check strips invisible EF BB BF Byte Order Mark bytes from CSV file.',
+          'Newman reads clean header line: isbn instead of invisible backslash uFEFF isbn.',
+          'RFC 4180 parser treats comma inside double quotes as literal string character.',
+          'Column positions remain strictly intact without shifting author into aisle.',
+          'Every variable substitution maps to the exact intended JSON property.'
+        ]
+      },
+      output: {
+        status: 'PARSED CLEAN',
+        time: '2ms',
+        desc: 'Clean column extraction without NaN status crashes or undefined variable errors.',
+        body: '{\n  "isbn": "9780134685991",\n  "title": "Eats, Shoots & Leaves",\n  "aisle": "A3"\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Never open automated test CSV files in spreadsheet applications.',
+        rule: 'Wrap text fields containing commas in double quotes and save as UTF 8 without BOM.',
+        trap: 'Opening test CSVs in Excel auto converts ISBNs into date formulas and injects hidden BOM header bytes.'
+      }
+    },
+    {
       type: 'battle-scar',
-      metric: 'Silent Production Bug Outage',
-      title: 'The Silent False Positive Trap: The Danger of Assertions Without Matchers',
-      context: 'During an enterprise retail migration, thousands of automated tests ran green across CI CD pipelines. Yet, immediately after deployment, customers could not add items to their shopping cart. An engineering audit discovered the test script was written as: pm.test("Item added", function() { pm.response.json().status === "success"; }). Because the triple equal expression returned true or false without passing it to a Chai matcher or throwing an error, the Postman test sandbox recorded every test as passed green, even when the server returned an error!',
-      takeaway: 'Never write bare boolean expressions inside pm.test. Assertions must use pm.expect or pm.response.to.have matchers that explicitly throw errors on mismatch so failing contracts turn the quality gate red.'
+      metric: 'Batch Processing Catastrophe',
+      title: 'The UK Payroll Batch Catastrophe and PHE COVID 19 Truncation',
+      context: 'In March 2019, a United Kingdom outsourced payroll processor suffered a catastrophic £2.1 million failure during month end direct deposit execution. A single company name containing an unescaped comma ("Henderson, Clarke & Partners Ltd") shifted all subsequent columns in the CSV batch. The bank account numbers mapped to pay amounts, salary values mapped to tax codes, and a single validation error on row 14,208 caused the batch processor to abort and wipe all accumulated payments. Incredibly, the summary notification email stated "68,412 records processed, 0 fatal database errors" because the script caught the exception without checking batch completion truth. Similarly, in October 2020, Public Health England lost 15,841 positive COVID 19 test results because commercial lab CSV data was imported into legacy Excel XLS workbooks capped at 65,536 rows. Both disasters demonstrate the mortal danger of unescaped delimiters, spreadsheet auto conversion, and unassertive batch summaries.',
+      takeaway: 'Never trust spreadsheet applications to handle programmatic test data, and never assume batch completion means data correctness. Enforce strict RFC 4180 delimiter escaping, strip invisible BOM bytes, and assert individual row contracts dynamically.'
     },
     {
       type: 'triage',
       title: 'War Room Triage: The False Positive Green Gate Incident',
-      scenario: 'The CI pipeline runs 120 automated Postman tests and all 120 report green checkmarks. Ten minutes later, customers report that user registration is broken. When inspecting the test script for registration, you see: pm.test("Status is 200", function () { pm.response.status; }). Why did this test report green while production crashed?',
+      scenario: 'The CI pipeline runs 120 automated workbench tests and all 120 report green checkmarks. Ten minutes later, customers report that user registration is broken. When inspecting the test script for registration, you see: pm.test("Status is 200", function () { pm.response.status; }). Why did this test report green while production crashed?',
       options: [
-        'Postman ignores HTTP status codes when running inside automated pipelines.',
+        'The workbench ignores HTTP status codes when running inside automated pipelines.',
         'The statement pm.response.status accesses the status number but performs no comparison matcher or error throw, so the function exited cleanly without failing.',
         'The backend database intercepted the test runner and returned simulated success headers.',
         'The test script requires a semicolon after every bracket to trigger failures.'
@@ -351,7 +570,7 @@ export const lesson05 = {
       answerIndex: 1,
       debrief: 'A test only fails when an exception is thrown! Accessing pm.response.status without an assertion matcher like pm.response.to.have.status(200) simply evaluates a number in memory and exits cleanly. The test runner saw zero errors and falsely marked the test green.',
       traps: [
-        'Postman evaluates status codes identically across desktop and headless CLI environments.',
+        'The workbench evaluates status codes identically across desktop and headless CLI environments.',
         '',
         'Databases have no awareness of test runners versus human requests.',
         'JavaScript syntax rules do not alter test assertion execution mechanics.'
@@ -372,7 +591,7 @@ export const lesson05 = {
         {
           speaker: 'Sameer',
           role: 'Lead Architect',
-          text: 'Because accessing pm.response.status without an assertion matcher is just a bare number in memory! It never threw an AssertionError. Postman only turns red when an exception is thrown. Always use pm.response.to.have.status(200) so mismatched contracts halt the gate!',
+          text: 'Because accessing pm.response.status without an assertion matcher is just a bare number in memory! It never threw an AssertionError. The workbench only turns red when an exception is thrown. Always use pm.response.to.have.status(200) so mismatched contracts halt the gate!',
           pointer: 'Points to pm.expect and Chai matcher throwing AssertionError'
         }
       ],
@@ -397,7 +616,7 @@ export const lesson05 = {
     },
     {
       type: 'guess',
-      prompt: 'Which Postman object is the unified gateway to access request metadata, response data, and test runner assertions?',
+      prompt: 'Which workbench object is the unified gateway to access request metadata, response data, and test runner assertions?',
       options: [
         'The request object',
         'The pm object',
@@ -405,13 +624,13 @@ export const lesson05 = {
         'The chai object',
       ],
       answerIndex: 1,
-      explain: 'The pm object is the universal namespace in modern Postman. It consolidates request parameters, response data (pm.response), test creation (pm.test), and assertion logic (pm.expect).',
+      explain: 'The pm object is the universal namespace in the API testing workbench. It consolidates request parameters, response data (pm.response), test creation (pm.test), and assertion logic (pm.expect).',
     },
     {
       type: 'quiz',
       items: [
         [
-          'What is the primary difference between let and const in Postman test scripts?',
+          'What is the primary difference between let and const in workbench test scripts?',
           'Variables declared with let can be reassigned new values during iteration, whereas const variables cannot be reassigned once initialized.',
         ],
         [
@@ -423,7 +642,7 @@ export const lesson05 = {
     {
       type: 'takeaways',
       items: [
-        'Postman runs an embedded Node.js sandbox that executes your JavaScript code in Pre request and Tests scripts.',
+        'The workbench runs an embedded Node.js sandbox that executes your JavaScript code in Pre request and Tests scripts.',
         'Use const for immutable references like parsed JSON bodies, and let for mutable counters and accumulators.',
         'Automated assertions replace manual visual inspection, running in milliseconds to catch regressions instantly.',
         'The pm.test wrapper takes a description string and an executable callback function containing Chai assertions.',

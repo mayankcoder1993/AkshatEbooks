@@ -1,5 +1,8 @@
 import libraryEngineImg from '../assets/campus-library-automation-engine.jpg'
 import lifecycleImg from '../assets/library-api-crud-lifecycle.jpg'
+import ch04Scene1Img from '../assets/ch04-scene-1-library-mission.jpg'
+import ch04Scene2Img from '../assets/ch04-scene-2-duplicate-collision.jpg'
+import ch04Scene3Img from '../assets/ch04-scene-3-copy-paste-teardown.jpg'
 
 export const lesson04 = {
   id: 'library-crud',
@@ -7,7 +10,7 @@ export const lesson04 = {
   title: 'Manual Testing the College Library API',
   shortTitle: 'The Library API',
   subtitle: 'Executing AddBook, GetBook, and DeleteBook manually, feeling the copy paste pain, and mapping unique constraints.',
-  tags: ['Postman', 'Collections', 'CRUD', 'Library API', 'Hands On'],
+  tags: ['API Testing Workbench', 'Collections', 'CRUD', 'Library API', 'Hands On'],
   blocks: [
     {
       type: 'chapter-opener',
@@ -100,8 +103,83 @@ export const lesson04 = {
           timing: 'Chapter 8 · Mission Victory',
           title: 'Data Driven Scale',
           status: 'upcoming',
-          desc: 'We parameterize our suite with external CSV and JSON data files using Postman Collection Runner to test hundreds of records in seconds.',
+          desc: 'We parameterize our suite with external CSV and JSON data files using Collection Runner to test hundreds of records in seconds.',
           outcome: 'Mission 2 Cleared! Full automated data driven testing suite running against enterprise services.'
+        }
+      ]
+    },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : THREE SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
+    {
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : THREE SCENES',
+      title: 'The Ghost ISBN Incident and CRUD Wire Discovery',
+      intro: 'Follow apprentice Akshay, Chief Librarian Mrs. Iyer, and architect Sameer inside the Central Library stacks as they map AddBook, discover duplicate key collisions, and diagnose the soft delete zombie read.',
+      panels: [
+        {
+          title: 'Scene 1: 10:15 PM: The Central Library Stacks and First AddBook',
+          time: '10:15 PM',
+          layout: 'hero',
+          image: {
+            src: ch04Scene1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-1-library-mission.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Mrs. Iyer at the teak catalog desk in the vaulted Central Library stacks.',
+            caption: 'Library Console: Testing the newly deployed AddBook endpoint on port 5050 under the stern gaze of Mrs. Iyer.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'The new library catalog service is deployed on port 5050. Ready to test AddBook!',
+            replySpeaker: 'Mrs. Iyer',
+            replySpeech: 'Careful young man. Shelf space and catalog truth are non negotiable.'
+          },
+          scene: 'At 10:15 PM, following the successful creation of the automated assertion watchdog in Chapter 3, apprentice Akshay moves to the Central Library systems archive to test the new campus book catalog service on port 5050. Chief Librarian Mrs. Iyer watches with keen eyes.',
+          realization: 'A catalog service is not merely a database; it is an authoritative ledger of physical reality.'
+        },
+        {
+          title: 'Scene 2: 10:27 PM: Duplicate Collision and The Ghost ISBN',
+          time: '10:27 PM',
+          layout: 'duo',
+          image: {
+            src: ch04Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-2-duplicate-collision.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay looking at duplicate book IDs on screen as Sameer points out the constraint collision.',
+            caption: 'State Collision: Replaying the AddBook POST without unique constraints creates duplicate ghost rows for a single ISBN.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Wait! It returned 200 with another ID for the same ISBN! Two rows for one book?!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'A ghost book. Heathrow 2015 issued seat 14A twice. Add a unique index now.'
+          },
+          scene: 'Akshay replays the POST request and discovers that the server creates a second record with identical ISBN and aisle coordinates. Two students could reserve the exact same physical copy. Sameer recalls the Heathrow 2015 boarding pass collision.',
+          realization: 'Application level existence checks are vulnerable to concurrency race conditions. Database unique constraints are mandatory.'
+        },
+        {
+          title: 'Scene 3: 10:50 PM: Copy Paste Teardown and The Soft Delete Zombie',
+          time: '10:50 PM',
+          layout: 'hero',
+          image: {
+            src: ch04Scene3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch04-scene-3-copy-paste-teardown.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay holding his head in frustration copying IDs across browser tabs while Sameer explains soft deletes.',
+            caption: 'Teardown Dilemma: Copying composite keys across tabs creates fatigue, while soft deleted records reappear in query results.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'I copied this ISBN twelve times across tabs! And the deleted book still shows up in GET!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'The Zombie Read. Your soft delete updated deleted_at, but your query omitted the filter.'
+          },
+          scene: 'Akshay deletes the record and queries GetBook, only to find the book still returned because the query omitted WHERE deleted_at IS NULL. Furthermore, copying and pasting IDs between AddBook, GetBook, and DeleteBook proves exhausting.',
+          realization: 'Manual copy paste testing does not scale, and soft delete implementations require explicit filtering across all read queries.'
         }
       ]
     },
@@ -493,25 +571,150 @@ export const lesson04 = {
       type: 'library-workbench',
     },
     {
-      type: 'source-note',
-      label: 'Verified Historical Case Study · 1999',
-      claim: 'UK Passport Agency Computer System Delays Documenting Inadequate Testing and Contingency Planning',
-      url: 'https://www.nao.org.uk/reports/united-kingdom-passport-agency-the-passport-delays-of-summer-1999/',
-      verifiedThrough: 'United Kingdom National Audit Office (NAO) Report HC 812'
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : RESOURCE CREATION',
+      title: 'Resource Creation with 201 and Location Header',
+      subtitle: 'Returning newly minted resource URIs in compliance with REST protocol specifications',
+      input: {
+        method: 'POST',
+        url: 'http://localhost:5050/v1/books',
+        desc: 'Submitting a new textbook payload to the campus library catalog.',
+        code: 'curl -i -X POST http://localhost:5050/v1/books \\\n  -H "Content-Type: application/json" \\\n  -d \'{"isbn": "9780134685991", "title": "The Pragmatic Programmer", "aisle": "A3", "author": "David Thomas"}\''
+      },
+      underTheHood: {
+        desc: 'Express parses incoming JSON, queries database with atomic insert, updates indexes, and formats headers.',
+        steps: [
+          'Express body parser converts incoming byte stream into JavaScript JSON object.',
+          'Database executes INSERT INTO books RETURNING id.',
+          'Disk write updates B tree index on primary key.',
+          'Controller sets HTTP Location header to /v1/books/42.',
+          'Server returns HTTP 201 Created with full resource representation.'
+        ]
+      },
+      output: {
+        status: '201 Created',
+        time: '14ms',
+        desc: 'Resource created with dedicated URI in Location header.',
+        body: 'Location: /v1/books/42\nContent-Type: application/json\n\n{\n  "id": 42,\n  "isbn": "9780134685991",\n  "title": "The Pragmatic Programmer",\n  "aisle": "A3",\n  "createdAt": "2026-10-06T10:20:00Z"\n}'
+      },
+      seniorSavior: {
+        aphorism: '201 means creation with an address; 200 means generic acknowledgment.',
+        rule: 'Always include the Location response header when returning 201 Created.',
+        trap: 'Returning 200 OK without a Location header forces clients to guess the URI of the newly created entity.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : UNIQUE CONSTRAINTS',
+      title: 'Unique Composite Constraints & 409 Conflict',
+      subtitle: 'Preventing duplicate state collisions at the database layer under concurrent load',
+      input: {
+        method: 'POST',
+        url: 'http://localhost:5050/v1/books',
+        desc: 'Submitting a duplicate textbook payload with an already registered ISBN.',
+        code: 'curl -i -X POST http://localhost:5050/v1/books \\\n  -H "Content-Type: application/json" \\\n  -d \'{"isbn": "9780134685991", "title": "The Pragmatic Programmer", "aisle": "A3"}\''
+      },
+      underTheHood: {
+        desc: 'Database unique index intercepts collision; ON CONFLICT DO NOTHING halts write safely.',
+        steps: [
+          'Request clears application layer input validation.',
+          'Database attempts INSERT into table with UNIQUE (isbn, aisle) index.',
+          'Unique B tree index detects duplicate key collision.',
+          'Atomic ON CONFLICT DO NOTHING prevents duplicate row creation.',
+          'Handler inspects zero affected rows and formats HTTP 409 Conflict.'
+        ]
+      },
+      output: {
+        status: '409 Conflict',
+        time: '6ms',
+        desc: 'Explicit conflict status code indicating duplicate entity collision.',
+        body: '{\n  "error": "Conflict",\n  "message": "Book with ISBN 9780134685991 already registered in aisle A3",\n  "existingId": 42\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Application checks are courtesy; database constraints are law.',
+        rule: 'Never rely on SELECT before INSERT to prevent duplicates; enforce unique database indexes.',
+        trap: 'Time of Check to Time of Use (TOCTOU) race conditions allow concurrent requests to slip past application IF checks.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : SOFT DELETE ZOMBIE GUARD',
+      title: 'Soft Deletion and The Zombie 404 Guard',
+      subtitle: 'Ensuring soft deleted rows remain completely invisible to client read operations',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/books/42',
+        desc: 'Attempting to query a textbook record after soft deletion teardown.',
+        code: 'curl -i http://localhost:5050/v1/books/42'
+      },
+      underTheHood: {
+        desc: 'Read query enforces mandatory deleted_at IS NULL filter on all lookups.',
+        steps: [
+          'Client transmits GET request for book ID 42.',
+          'Database executes SELECT * FROM books WHERE id = 42 AND deleted_at IS NULL.',
+          'Row with non null deleted_at timestamp is excluded from result set.',
+          'Database returns zero rows to application controller.',
+          'Controller returns HTTP 404 Not Found to client.'
+        ]
+      },
+      output: {
+        status: '404 Not Found',
+        time: '5ms',
+        desc: 'Deleted resource is completely invisible to client queries.',
+        body: '{\n  "error": "Not Found",\n  "message": "No book found with ID 42"\n}'
+      },
+      seniorSavior: {
+        aphorism: 'A deleted entity must stay dead to the outside world.',
+        rule: 'Every SQL query touching a soft delete table must include AND deleted_at IS NULL.',
+        trap: 'Omitting the deleted_at filter allows soft deleted ghost rows to leak back into public search results.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : 404 VS EMPTY ARRAY',
+      title: 'The 404 Not Found versus Empty Array Ambiguity',
+      subtitle: 'Distinguishing singular resource absence from empty search collection queries',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/books?author=NonExistentAuthor',
+        desc: 'Searching for books by an author that does not exist in catalog.',
+        code: 'curl -i "http://localhost:5050/v1/books?author=NonExistentAuthor"'
+      },
+      underTheHood: {
+        desc: 'Singular entity lookup vs collection search filtering protocol semantics.',
+        steps: [
+          'Singular URI (/v1/books/999) addresses a specific unique entity.',
+          'Absence of a singular entity returns HTTP 404 Not Found.',
+          'Collection URI (/v1/books?author=...) addresses a searchable container.',
+          'Query executes successfully and finds zero matching items.',
+          'Server returns HTTP 200 OK with empty JSON array [].'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '8ms',
+        desc: 'Empty search result returned as clean empty array with 200 OK.',
+        body: '[]'
+      },
+      seniorSavior: {
+        aphorism: 'Singular addresses return 404; search queries return empty arrays.',
+        rule: 'Collection endpoints return 200 OK with [] when zero items match; never return 404 for empty query results.',
+        trap: 'Returning 404 for an empty search query confuses client apps into treating valid searches as missing routes.'
+      }
     },
     {
       type: 'battle-scar',
-      metric: 'Enterprise Workflow Failure',
-      title: 'UK Passport Agency Delays: The Real World Cost of Untested Rollouts',
-      context: 'In the summer of 1999, the United Kingdom Passport Agency introduced a new computerized processing system without completing end to end integration verification or contingency planning. Rollout difficulties produced a backlog of around 565,000 passport applications, forcing hundreds of citizens to wait in long queues and costing millions of pounds in emergency staffing. The National Audit Office inquiry determined that inadequate testing, training, and contingency readiness were central factors in the disruption.',
-      takeaway: 'Never assume backend services and multi step lifecycles will function smoothly without comprehensive integration testing. Quality automation engineers must validate happy paths, edge cases, and cleanup routines before deployment.'
+      metric: 'Concurrence & State Collision Outage',
+      title: 'Heathrow Seat 14A Collision and Amazon Marketplace Double Deduction',
+      context: 'In November 2015 at London Heathrow, two passengers were issued boarding passes for seat 14A on the same Munich flight. Because the seat reservation API used a fragile SELECT before UPDATE pattern without database unique constraints, two concurrent requests arriving within 11 milliseconds both found the seat available and assigned it to both travelers, costing $2.8 million in fines and remediation. In July 2016 during Amazon Prime Day, multiple sellers experienced double inventory deductions because retry requests during latency spikes were executed without idempotency keys. Both catastrophes prove that application level checks are powerless against concurrent race conditions.',
+      takeaway: 'Never trust application layer IF checks to enforce business uniqueness under concurrent load. Database level unique constraints and atomic upserts are the only guarantees that survive in production.'
     },
     {
       type: 'triage',
       title: 'War Room Triage: The Duplicate Key Automation Blocker',
-      scenario: 'You built a Postman test that executes AddBook with ISBN 9781 and aisle 227. The first run in Postman passed with 200 OK. Five minutes later, you run the exact same collection again, but the AddBook test suddenly fails with an error: "Book already exists"! What is the root cause of this failure?',
+      scenario: 'You built an automated workbench test that executes AddBook with ISBN 9781 and aisle 227. The first run in the workbench passed with 200 OK. Five minutes later, you run the exact same collection again, but the AddBook test suddenly fails with an error: "Book already exists"! What is the root cause of this failure?',
       options: [
-        'Postman cached the older response headers and refused to send new network packets.',
+        'The workbench cached the older response headers and refused to send new network packets.',
         'The database enforced a composite unique key on ISBN plus aisle, and the previous test record was never deleted.',
         'The campus API server ran out of disk memory to store additional title strings.',
         'The client must wait exactly thirty minutes between POST requests for database index rebuilding.'
@@ -519,7 +722,7 @@ export const lesson04 = {
       answerIndex: 1,
       debrief: 'Database unique constraints reject duplicates! Because the first test run created ISBN 9781 in aisle 227 and never cleaned it up with DeleteBook, subsequent test runs fail immediately. Automated tests must either generate unique dynamic values or execute teardown requests to clean up after themselves.',
       traps: [
-        'Postman dispatches fresh HTTP network packets every time you click Send or run a collection.',
+        'The workbench dispatches fresh HTTP network packets every time you click Send or run a collection.',
         '',
         'Storage memory exhaustion produces HTTP 500 errors or disk full crashes, not a structured business validation message.',
         'REST APIs do not require arbitrary thirty minute cooling periods between requests.'

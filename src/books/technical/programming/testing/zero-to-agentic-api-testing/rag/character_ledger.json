@@ -64,6 +64,46 @@
       ],
       "balloon_accent": "#059669"
     },
+    "ananya": {
+      "full_name": "Ananya Sen",
+      "age": 26,
+      "role": "Campus Frontend Engineering Lead",
+      "origin": "East Indian (Kolkata)",
+      "appearance": {
+        "hair": "Neat shoulder length dark hair tied back",
+        "eyes": "Sharp, inquisitive almond eyes",
+        "attire": "Rust orange raw silk kurta with rolled sleeves, silver bracelet",
+        "props": [
+          "Smartphone running student transit and library search interface",
+          "Wireless mechanical keyboard"
+        ]
+      },
+      "voice_profile": {
+        "tone": "Sharp, pragmatic, intolerant of flaky contracts and unhandled 500 crashes",
+        "speech_style": "Direct, demands predictable REST contracts and clean JSON payload structures",
+        "balloon_accent": "#e11d48"
+      }
+    },
+    "mrs_iyer": {
+      "full_name": "Mrs. Meenakshi Iyer",
+      "age": 58,
+      "role": "Chief Campus Librarian and Archive Guardian",
+      "origin": "South Indian (Madurai / Bangalore)",
+      "appearance": {
+        "hair": "Silver streaked hair coiled in a dignified bun",
+        "eyes": "Piercing observant eyes behind silver framed half moon reading spectacles on a lanyard",
+        "attire": "Deep amber Kanjeevaram cotton saree with thin maroon border",
+        "props": [
+          "Heavy teak clipboard with brass metal clamp",
+          "Brass key ring holding library stack master keys"
+        ]
+      },
+      "voice_profile": {
+        "tone": "Austere authority, protective of institutional order and physical truth",
+        "speech_style": "Deliberate, unhurried, demands exact catalog verification before dawn",
+        "balloon_accent": "#b45309"
+      }
+    },
     "examiner": {
       "full_name": "Chief Proctor Sharma",
       "age": 55,

@@ -151,7 +151,8 @@ const INTERACTIVE_BLOCKS = new Set([
   'workbench-screen', 'challenge-prompt', 'challenge-reveal', 'quad-card',
   'api-inspector', 'interactive-workbench', 'pedagogical-quad-card', 'code-workbench',
   'comic-workbench', 'triage', 'predict-output', 'mini-api', 'library-workbench',
-  'battle-scar', 'battle-plan', 'scenario-grid', 'structured-breakdown', 'chunked-code'
+  'battle-scar', 'battle-plan', 'scenario-grid', 'structured-breakdown', 'chunked-code',
+  'guess', 'quiz', 'callout', 'code', 'steps', 'comparison', 'takeaways'
 ])
 const PROSE_BLOCKS = new Set([
   'prose-paragraph', 'narration-box', 'exposition-narrative'
@@ -200,8 +201,11 @@ function scoreDimension1(data) {
   const proseRatio = proseCount / total
 
   // Count required block types
-  const scenePanelCount = blocks.filter(b =>
-    b.type === 'scene-panel' || b.type === 'character-scene' || b.type === 'storyboard').length
+  const scenePanelCount = blocks.reduce((acc, b) => {
+    if (b.type === 'scene-panel' || b.type === 'character-scene') return acc + 1
+    if (b.type === 'storyboard') return acc + (b.panels?.length || 1)
+    return acc
+  }, 0)
   const cliffhangerCount = blocks.filter(b =>
     b.type === 'cliffhanger-panel' || b.cliffhanger || b.type === 'cliffhanger').length
   const workbenchCount = blocks.filter(b =>

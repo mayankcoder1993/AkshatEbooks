@@ -3,6 +3,8 @@ import wireImg from '../assets/http-wire-anatomy.jpg'
 import crudImg from '../assets/restful-crud-status-guide.jpg'
 
 import ch02Scene1Img from '../assets/ch02-scene-1-transit-crisis.jpg'
+import ch02Scene2Img from '../assets/ch02-scene-2-reproduce-500-crash.jpg'
+import ch02Scene3Img from '../assets/ch02-scene-3-defensive-guard-fix.jpg'
 import ch02Scene4Img from '../assets/ch02-scene-4-dual-wire-verification.jpg'
 import ch02Terminal500Img from '../assets/illustrations/reactions/ch02-terminal-500-red-stack.jpg'
 import ch02Guard400Img from '../assets/illustrations/reactions/ch02-code-editor-400-guard.jpg'
@@ -87,16 +89,16 @@ export const lesson02 = {
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-1-transit-crisis.jpg',
             w: 1408,
             h: 768,
-            alt: 'Akshay and transit team examining frozen campus transit map showing HTTP 500 error.',
+            alt: 'Akshay, Ananya, and transit team examining frozen campus transit map showing HTTP 500 error.',
             caption: 'Transit Operations Desk: Evening rush transit monitors freeze with HTTP 500 Internal Server Error.'
           },
           dialogue: {
-            speaker: 'Akshay',
-            speech: 'Fifty shuttle routes go live in twenty minutes and apps are completely blank!',
+            speaker: 'Ananya',
+            speech: 'Fifty shuttle routes go live in twenty minutes and apps are blank! The backend is broken!',
             replySpeaker: 'Sameer',
             replySpeech: 'Stop pointing fingers. A blank app tells you nothing. Open your terminal and send the request with curl.'
           },
-          scene: 'At 08:14 PM, hours after his morning exam, student apprentice Akshay joins Sameer at the transit operations desk. Overhead map screens hang frozen with red error banners as campus shuttles vanish from student phone screens. Teams point fingers between frontend and backend.',
+          scene: 'At 08:14 PM, hours after his morning exam, student apprentice Akshay joins Sameer at the transit operations desk. Overhead map screens hang frozen with red error banners as campus shuttles vanish from student phone screens. Frontend Lead Ananya demands predictable contracts while red teamer Rohan searches for quick shortcuts.',
           realization: 'When production systems fail, finger pointing between teams begins until someone inspects the actual HTTP request.'
         },
         {
@@ -104,12 +106,41 @@ export const lesson02 = {
           time: '08:25 PM',
           layout: 'duo',
           image: {
+            src: ch02Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-2-reproduce-500-crash.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer reproducing the 500 crash in terminal with curl while Rohan watches.',
+            caption: 'Terminal Console: An omitted query parameter triggers an unhandled TypeError stack trace and HTTP 500 response.'
+          },
+          replyImage: {
             src: ch02Terminal500Img,
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-terminal-500-red-stack.jpg',
             w: 1376,
             h: 768,
-            alt: 'Akshay types at a laptop glowing red with a TypeError stack trace while Sameer observes from the background.',
-            caption: 'Terminal Console: An omitted query parameter triggers an unhandled TypeError stack trace and HTTP 500 response.'
+            alt: 'Terminal screen glowing red with unhandled TypeError stack dump.',
+            caption: 'Red Stack Trace: TypeError cannot read properties of undefined reading trim.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'TypeError! Cannot read properties of undefined reading trim! Status 500!',
+            replySpeaker: 'Rohan',
+            replySpeech: 'Just wrap it in a fallback default string! One line fix and we go home!'
+          },
+          scene: 'Akshay opens his terminal and fires curl http://localhost:5050/v1/campus/shuttle/coordinates without specifying a route name. The terminal instantly dumps a bright red unhandled stack trace: TypeError: Cannot read properties of undefined (reading trim). Rohan urges a sloppy default fallback, but Sameer stops him cold.',
+          realization: 'A 500 error is not a hardware failure; it is an uncaught application exception crashing the server process due to missing input guards.'
+        },
+        {
+          title: 'Scene 3: 08:33 PM: Installing the Defensive Input Guard',
+          time: '08:33 PM',
+          layout: 'duo',
+          image: {
+            src: ch02Scene3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch02-scene-3-defensive-guard-fix.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay editing the route controller to install perimeter validation guard.',
+            caption: 'Implementation Beat: Akshay types the fail fast validation guard before route lookup begins.'
           },
           replyImage: {
             src: ch02Guard400Img,
@@ -121,40 +152,11 @@ export const lesson02 = {
           },
           dialogue: {
             speaker: 'Akshay',
-            speech: 'TypeError! Cannot read properties of undefined reading trim! Status 500!',
+            speech: 'if (!route || route.trim() === "") return res.status(400).json({ error: "route parameter is required" });',
             replySpeaker: 'Sameer',
-            replySpeech: 'An uncaught runtime crash leaked past your handler. That is what 500 means.'
+            replySpeech: 'Never invent data for a broken client. Fail fast at the perimeter with 400 Bad Request.'
           },
-          scene: 'Akshay opens his terminal and fires curl http://localhost:5050/v1/campus/shuttle/coordinates without specifying a route name. The terminal instantly dumps a bright red unhandled stack trace: TypeError: Cannot read properties of undefined (reading trim). Sameer points out the three ways to be empty.',
-          realization: 'A 500 error is not a hardware failure; it is an uncaught application exception crashing the server process due to missing input guards.'
-        },
-        {
-          title: 'Scene 3: 08:33 PM: Installing the Defensive Input Guard',
-          time: '08:33 PM',
-          layout: 'duo',
-          image: {
-            src: ch02AkshayTypingImg,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-akshay-typing-guard.jpg',
-            w: 1376,
-            h: 768,
-            alt: 'Akshay types a defensive validation guard at a workstation in the warm engineering lab.',
-            caption: 'Implementation Beat: Akshay types the fail fast validation guard before route lookup begins.'
-          },
-          replyImage: {
-            src: ch02SameerSlateImg,
-            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch02-sameer-pointing-slate.jpg',
-            w: 1376,
-            h: 768,
-            alt: 'Sameer points to the validation logic on an illuminated diagnostic slate while Akshay reviews it.',
-            caption: 'Review Beat: Sameer confirms that the guard keeps malformed requests from reaching business logic.'
-          },
-          dialogue: {
-            speaker: 'Akshay',
-            speech: 'if (!route || route.trim() === "") return res.status(400).json({ error })...',
-            replySpeaker: 'Sameer',
-            replySpeech: 'Never invent data for a broken client. Fail fast at the front door.'
-          },
-          scene: 'Akshay opens the route controller in his editor. Sameer prevents him from substituting a default route, teaching him that client errors must fail fast with 400 Bad Request. Akshay types the perimeter check: if (!route || route.trim() === "") return res.status(400).json({ error: "route parameter is required" }).',
+          scene: 'Akshay opens the route controller in his editor. Sameer prevents Rohan from substituting a default route, teaching that client errors must fail fast with 400 Bad Request. Akshay types the perimeter check: if (!route || route.trim() === "") return res.status(400).json({ error: "route parameter is required" }).',
           realization: 'Good API design fails fast at the perimeter. Never let invalid input enter downstream business logic.'
         },
         {
@@ -175,7 +177,7 @@ export const lesson02 = {
             replySpeaker: 'Sameer',
             replySpeech: 'Dual verification complete. Always verify the negative guard and positive contract side by side.'
           },
-          scene: 'With the guard saved, Akshay tests both boundary conditions side by side in split terminal panes. An omitted route immediately yields HTTP 400 Bad Request in 4ms. A valid route query returns HTTP 200 OK with complete shuttle coordinates. The overhead transit map unfreezes as live bus locations resume streaming.',
+          scene: 'With the guard saved, Akshay tests both boundary conditions side by side in split terminal panes. An omitted route immediately yields HTTP 400 Bad Request in 4ms. A valid route query returns HTTP 200 OK with complete shuttle coordinates. Ananya confirms the mobile app unfreezes as live bus locations resume streaming.',
           realization: 'Testing a single happy path is professional negligence. Complete verification tests both the boundary guard and the contract fulfillment side by side.'
         }
       ]
@@ -273,10 +275,43 @@ export const lesson02 = {
       }
     },
     {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : MISSING PARAMETER CRASH',
+      title: 'The Omitted Query Parameter and Unhandled 500 Leak',
+      subtitle: 'Why omitting a query key causes undefined in Node.js Express and crashes the server',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/campus/shuttle/coordinates',
+        desc: 'Requesting shuttle coordinates without the required route query parameter.',
+        code: 'curl -i http://localhost:5050/v1/campus/shuttle/coordinates'
+      },
+      underTheHood: {
+        desc: 'Query string parsers only populate object keys present in the raw URI line.',
+        steps: [
+          'Client opens TCP socket and transmits GET line with empty query string.',
+          'Express builds req.query object without the route property.',
+          'Handler reads req.query.route as undefined rather than empty string.',
+          'Synchronous call to route.trim() throws an unhandled TypeError.',
+          'Express default error handler catches exception and returns HTTP 500 with stack trace.'
+        ]
+      },
+      output: {
+        status: '500 Internal Server Error',
+        time: '18ms',
+        desc: 'Unhandled runtime crash leaking internal paths and line numbers to client.',
+        body: '{\n  "statusCode": 500,\n  "error": "Internal Server Error",\n  "message": "TypeError: Cannot read properties of undefined (reading \'trim\')"\n}'
+      },
+      seniorSavior: {
+        aphorism: '400 means the client broke the contract; 500 means the server broke itself.',
+        rule: 'Never call string methods on query parameters without checking existence first.',
+        trap: 'Assuming absent parameters default to empty strings. In JavaScript, omitted keys evaluate to undefined.'
+      }
+    },
+    {
       type: 'battle-scar',
-      title: 'The Healthcare.gov Launch Catastrophe',
-      context: 'In October 2013, the United States federal health insurance exchange launched to massive public failure. Users faced frozen screens, spinning loaders, and unhandled 500 error pages. The congressional post mortem revealed that downstream identity and insurance services had unhandled null parameters and missing validation guards, causing catastrophic cascading timeouts across hundreds of interconnected servers.',
-      takeaway: 'When servers fail without defensive guards, a single missing query parameter can crash upstream gateways and lock out millions of users. Validate early, fail fast, and return meaningful 400 client error contracts.',
+      title: 'The Facebook BGP Blackout and Amazon S3 Argument Catastrophes',
+      context: 'On October 4, 2021, Facebook suffered a six hour global blackout taking down Facebook, Instagram, and WhatsApp. During routine maintenance, a command intended to evaluate backbone capacity ran with missing bounds, disconnecting internal data centers. When Facebook internal DNS servers could not reach data centers, they automatically withdrew their own BGP route advertisements from the global internet. Within ten minutes, every public resolver dropped cached Facebook domains, locking engineers out of monitoring consoles and physical data center badge readers. Similarly, in February 2017, an Amazon S3 engineer entered a debugging command with fewer arguments than required, taking down massive portions of S3 across an entire US region for hours. In both cases, hardware was healthy; systems collapsed because commands and requests lacking defensive input validation were executed without question.',
+      takeaway: 'Systems fail not because hardware is broken, but because an input that should have been rejected at the front boundary was accepted and executed without argument. Validate early, fail fast, and return meaningful 400 client error contracts.',
       metric: 'PRODUCTION ARCHITECTURE LAW'
     },
 
@@ -328,6 +363,39 @@ export const lesson02 = {
           title: 'The Fallback Route Temptation',
           detail: 'Senior Savior Trap: Inventing fallback data for malformed requests. Fail fast so clients correct their query parameters immediately.'
         }
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : PERIMETER DEFENSE',
+      title: 'The Fail Fast 400 Bad Request Perimeter Guard',
+      subtitle: 'Halting invalid input before it reaches business logic or database queries',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/campus/shuttle/coordinates?route=%20',
+        desc: 'Requesting coordinates with whitespace or empty query parameter value.',
+        code: 'curl -i "http://localhost:5050/v1/campus/shuttle/coordinates?route=%20"'
+      },
+      underTheHood: {
+        desc: 'Perimeter validation intercepts malformed requests before executing business logic.',
+        steps: [
+          'Handler reads req.query.route string.',
+          'Defensive condition checks (!route || route.trim() === "").',
+          'Guard trips on URL encoded whitespace.',
+          'Handler immediately returns HTTP 400 Bad Request with actionable JSON guidance.',
+          'Zero downstream geospatial or database lookups are triggered.'
+        ]
+      },
+      output: {
+        status: '400 Bad Request',
+        time: '4ms',
+        desc: 'Immediate perimeter rejection protecting server resources and guiding client.',
+        body: '{\n  "statusCode": 400,\n  "error": "route parameter is required",\n  "hint": "Provide a valid route identifier such as campus_loop_north"\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Check before you use, and say exactly what is missing.',
+        rule: 'Client errors must be rejected at the front door with 4xx status codes.',
+        trap: 'Inventing fallback default data for malformed requests masks client bugs in production.'
       }
     },
 
@@ -403,6 +471,38 @@ export const lesson02 = {
           title: 'Happy Path Blindness',
           detail: 'Senior Savior Trap: Testing only positive routes. Dual verification is mandatory: test the negative guard and positive contract side by side.'
         }
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : DUAL VERIFICATION',
+      title: 'The Dual Status and Body Contract Pair',
+      subtitle: 'Verifying positive fulfillment and negative perimeter guards side by side',
+      input: {
+        method: 'GET',
+        url: 'http://localhost:5050/v1/campus/shuttle/coordinates?route=campus_loop_north',
+        desc: 'Authorized query providing valid campus shuttle route identifier.',
+        code: 'curl -i "http://localhost:5050/v1/campus/shuttle/coordinates?route=campus_loop_north"'
+      },
+      underTheHood: {
+        desc: 'Authorized request clears perimeter guard and queries active bus dispatcher.',
+        steps: [
+          'Route string passes non empty perimeter validation check.',
+          'Geospatial service retrieves live GPS coordinates for shuttle bus.',
+          'Telemetry payload serialized to JSON with standard 200 OK header.',
+          'Response returns across network socket in twelve milliseconds.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '12ms',
+        desc: 'Positive contract fulfilled with complete bus coordinates and telemetry.',
+        body: '{\n  "route": "campus_loop_north",\n  "shuttleId": "BUS_104",\n  "status": "in_transit",\n  "coordinates": { "latitude": 42.3601, "longitude": -71.0942 }\n}'
+      },
+      seniorSavior: {
+        aphorism: 'Testing only the happy path is professional negligence.',
+        rule: 'Always test the negative guard and positive contract side by side.',
+        trap: 'A passing test on positive data tells you nothing about how the system handles bad input.'
       }
     },
 

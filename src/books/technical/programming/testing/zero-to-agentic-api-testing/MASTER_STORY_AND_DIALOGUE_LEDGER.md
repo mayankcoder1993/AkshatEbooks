@@ -277,17 +277,65 @@ At 10:15 PM, following the successful creation of the automated assertion watchd
 
 ---
 
-## 6. Chapters 05 Through 13 Narrative & Pedagogical Master Blueprint
+## 6. Chapter 05: The Monsoon Book Drop (Data Driven Testing with CSV and JSON Parameterization)
 
-### Chapter 05: Data Driven Testing and Collections (CSV and JSON Matrix Runs)
-* **Crisis:** The Monsoon Book Drop. Five hundred textbooks arrive in torrential rain. Manual testing takes 2 hours; gates lock in 15 minutes.
-* **Pedagogical Core:** Data driven testing using external CSV and JSON data files; parameterized URL variables (`{{isbn}}`); running collection iterations with Newman.
-* **Workbench:** Iteration Runner with variable substitution visualizer.
+### 6.1 Mission Context and Crisis
+At 11:15 PM, a sudden monsoon downpour lashes the red sandstone arches of Apex Campus. Outside the central library loading dock, two logistics trucks arrive carrying five hundred physical textbooks across engineering, mathematics, and philosophy. Chief Librarian Mrs. Iyer stands beneath the corrugated metal awning, clipboard in hand, stating the operational requirement: every single book must be cataloged, verified, and placed on active search shelves before morning classes begin at 08:00 AM. Frontend Lead Ananya warns that her new student search application will crash if even one record contains corrupt titles or missing aisle coordinates. Akshay calculates that manual entry will take twelve hours. Principal Architect Sameer steps forward under the roaring rain, pulls up a dry folding table, and introduces the data driven testing engine: parameterizing a single request template with dynamic CSV files and executing batch verification with Newman at machine speed.
 
-### Chapter 06: CI/CD Pipeline Automation with Newman
-* **Crisis:** The Midnight Production Break. A developer pushes untested route code directly to production, crashing student checkouts.
-* **Pedagogical Core:** Running Newman headless in terminal and GitHub Actions CI; failing build pipelines on assertion errors; generating HTML and JUnit test reports.
-* **Workbench:** Terminal execution window running Newman with live exit code trapping.
+### 6.2 Scene Beats Matrix (24 Narrative Beats)
+
+| Beat | Time | Setting | Shot Archetype | Speaker | Spoken Dialogue (<120 chars) | Emotion | Target Asset |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| P.01 | 11:15 PM | Library Loading Bay | Wide Establishing | None | None | Torrential Monsoon Drama | `pipeline/ch05/organized/useful/ch05_scene01_monsoon_trucks_arrival.jpg` |
+| P.02 | 11:17 PM | Wet Loading Dock | Medium Shot | Mrs. Iyer | "Five hundred textbooks in these crates. Every copy must be verified in the catalog by dawn." | Austere Authority | `pipeline/ch05/organized/useful/ch05_scene02_mrs_iyer_inspects_crates.jpg` |
+| P.03 | 11:19 PM | Dock Office Glass | Over Shoulder | Ananya | "Frontend search goes live at eight. If your catalog API returns malformed records, the app dies." | High Stakes Friction | `pipeline/ch05/organized/useful/ch05_scene03_ananya_cross_arms_warning.jpg` |
+| P.04 | 11:21 PM | Teak Dispatch Desk | Medium Two Shot | Akshay | "Five hundred manual requests will take twelve hours! Gates lock in forty minutes!" | Mounting Panic | `pipeline/ch05/organized/useful/ch05_scene04_akshay_calculates_hours.jpg` |
+| P.05 | 11:23 PM | Teak Dispatch Desk | Low Angle Hero | Sameer | "Never test bulk data by hand. We parameterize one request and let Newman drive five hundred rows." | Architect Composure | `pipeline/ch05/organized/useful/ch05_scene05_sameer_opens_newman_terminal.jpg` |
+| P.06 | 11:25 PM | Code Editor Window | Action Macro | Akshay | "Creating books_data.csv with 500 rows... ISBN, title, author, aisle, expectedStatus!" | Rapid Setup | `pipeline/ch05/organized/useful/ch05_scene06_csv_data_sheet_editor.jpg` |
+| P.07 | 11:28 PM | Terminal Console | Dutch Angle Screen | Akshay | "First run crashed on row one! Error says isbn is undefined! But the column is right there!" | Baffled Frustration | `pipeline/ch05/organized/useful/ch05_scene07_undefined_isbn_crash_screen.jpg` |
+| P.08 | 11:30 PM | Hex Editor Display | Macro Inspect | Sameer | "The invisible Byte Order Mark. Excel prepended EF BB BF. The header is actually backslash uFEFF isbn." | Forensic Mastery | `pipeline/ch05/organized/useful/ch05_scene08_hex_editor_bom_bytes.jpg` |
+| P.09 | 11:32 PM | Bash Terminal | Action Command | Akshay | "Stripped the BOM bytes! Re-running Newman against port 5050!" | Fast Recovery | `pipeline/ch05/organized/useful/ch05_scene09_sed_strip_bom_command.jpg` |
+| P.10 | 11:35 PM | Terminal Split Pane | Close Up Error | Akshay | "Row six failed! Expected status is NaN! The title column says Eats, and aisle has author text?!" | Column Confusion | `pipeline/ch05/organized/useful/ch05_scene10_column_shift_nan_error.jpg` |
+| P.11 | 11:37 PM | Warehouse Bench | Medium Two Shot | Sameer | "UK 2019 payroll disaster. Unescaped commas in company names shifted columns and wiped 68,000 salaries." | Production Gravity | `pipeline/ch05/organized/useful/ch05_scene11_sameer_uk_payroll_analogy.jpg` |
+| P.12 | 11:40 PM | CSV Data Editor | Precision Macro | Akshay | "Wrapping book titles with commas in double quotes! RFC 4180 strict parsing enabled!" | Syntax Precision | `pipeline/ch05/organized/useful/ch05_scene12_quoting_csv_fields.jpg` |
+| P.13 | 11:43 PM | Terminal Output | Dutch Angle Screen | Akshay | "Row 15 failed with invalid format! Why does ISBN 0-13-468599-1 show up as a 19th century date?!" | Spreadsheet Horror | `pipeline/ch05/organized/useful/ch05_scene13_excel_date_subtraction_error.jpg` |
+| P.14 | 11:45 PM | Teak Dispatch Desk | Close Up Mentor | Sameer | "Excel ate your leading zero and converted hyphens into subtraction. Never open test CSVs in Excel." | Senior Warning | `pipeline/ch05/organized/useful/ch05_scene14_sameer_warns_against_excel.jpg` |
+| P.15 | 11:48 PM | Split Screen IDE | Action Macro | Akshay | "Iteration two passed, but the delete test removed book 42 from iteration one! How?!" | State Leakage Shock | `pipeline/ch05/organized/useful/ch05_scene15_leaky_environment_variable.jpg` |
+| P.16 | 11:50 PM | Whiteboard Diagram | Detailed Diagram | Sameer | "Environment scope lives forever. Iteration data dies per row. You must unset variables before each run." | Scope Architecture | `pipeline/ch05/organized/useful/ch05_scene16_variable_scope_hierarchy.jpg` |
+| P.17 | 11:53 PM | Pre-Request Script | Action Coding | Akshay | "Adding pm.environment.unset('createdBookId') to the collection pre-request script!" | Defensive Isolation | `pipeline/ch05/organized/useful/ch05_scene17_pre_request_cleanup_script.jpg` |
+| P.18 | 11:55 PM | Test Script Window | Macro Assertion | Akshay | "parseInt(pm.iterationData.get('expectedStatus'), 10)... String to integer assertion match!" | Dynamic Assertion | `pipeline/ch05/organized/useful/ch05_scene18_dynamic_status_assertion.jpg` |
+| P.19 | 11:57 PM | Terminal Window | Dynamic Low Angle | Akshay | "Firing full batch! newman run library_suite.json -d books_data.csv --delay-request 10!" | The Batch Launch | `pipeline/ch05/organized/useful/ch05_scene19_firing_newman_batch_cli.jpg` |
+| P.20 | 11:58 PM | Terminal Display | Streaming Screen | None | None | Green Stream Velocity | `pipeline/ch05/organized/useful/ch05_scene20_newman_terminal_stream_green.jpg` |
+| P.21 | 12:02 AM | Terminal Summary | Close Up Metric | Sameer | "500 iterations, 1500 assertions, zero failures, 12 seconds flat. That is automated verification." | Proven Velocity | `pipeline/ch05/organized/useful/ch05_scene21_newman_summary_table_1500.jpg` |
+| P.22 | 12:05 AM | Library Catalog Screen | Medium Shot | Mrs. Iyer | "All 500 records indexed and matched to physical stacks. Good engineering, young man." | Earned Respect | `pipeline/ch05/organized/useful/ch05_scene22_mrs_iyer_nods_approval.jpg` |
+| P.23 | 12:08 AM | Mobile Screen Display | Close Up Hand | Ananya | "Search app is responding with zero lag. Clean JSON payloads across every aisle." | Cross Team Harmony | `pipeline/ch05/organized/useful/ch05_scene23_ananya_tests_mobile_app.jpg` |
+| P.24 | 12:12 AM | Loading Dock Twilight | Cliffhanger Hook | Sameer | "We can run batch tests locally. But what happens when someone pushes broken code to CI at midnight?" | CI Pipeline Hook | `pipeline/ch05/organized/useful/ch05_scene24_midnight_ci_server_alert.jpg` |
+
+### 6.3 Four Part Pedagogical Cards (Chapter 5)
+* **Card 1 (Parameterized POST with CSV Data):**
+  - *Input:* Request template with `{"isbn": "{{isbn}}", "title": "{{title}}", "aisle": "{{aisle}}"}` fed by `data.csv`.
+  - *Under the Hood:* Newman loads CSV row into Data scope, substitutes placeholders via scope precedence stack, and dispatches HTTP POST.
+  - *Output:* Server receives cleanly populated JSON payload, returning status matching row expectations.
+  - *Senior Savior:* Parameterize your assertions just like your URLs. Hardcoded expectations defeat data driven execution.
+* **Card 2 (Iteration Scope Isolation and Pre-Request Cleanup):**
+  - *Input:* Pre-request script executing `pm.environment.unset("createdBookId")`.
+  - *Under the Hood:* Collection level pre-request script sweeps mutable environment keys before row execution, preventing state from leaking across iterations.
+  - *Output:* Clean isolated execution sandbox for every single iteration row without stale cross contamination.
+  - *Senior Savior:* Local scope dies between iterations; environment scope does not. Clean up before every row.
+* **Card 3 (Dynamic Multi-Status Assertion Mapping):**
+  - *Input:* Diverse CSV dataset containing positive creations (201), duplicate collisions (409), and missing fields (400).
+  - *Under the Hood:* Test script reads `expectedStatus` column, converts string to integer with `parseInt()`, and evaluates dynamic assertion.
+  - *Output:* Single test script validates positive, conflict, and bad request rows dynamically across hundreds of iterations.
+  - *Senior Savior:* The CSV row is the test case, not the script. Change data, not code.
+* **Card 4 (The Delimiter and BOM Sanitation Gate):**
+  - *Input:* CSV data containing titles with commas (`"Eats, Shoots & Leaves"`) and UTF-8 BOM bytes (`EF BB BF`).
+  - *Under the Hood:* Preflight check strips BOM bytes to protect column keys, and RFC 4180 quotes preserve field integrity without column shifting.
+  - *Output:* Unshifted column mappings and exact key access without `NaN` assertion crashes.
+  - *Senior Savior:* Never open test CSV files in spreadsheet applications. Use plain text editors or JSON data arrays.
+
+---
+
+## 7. Chapters 06 Through 13 Narrative & Pedagogical Master Blueprint
 
 ### Chapter 07: JavaScript Array Manipulation and Data Parsing
 * **Crisis:** The Audit Budget Discrepancy. The finance auditor flags an unexplained budget deficit in book acquisitions.
