@@ -114,6 +114,24 @@
         "Iron gate keys"
       ],
       "balloon_accent": "#dc2626"
+    },
+    "logistics_worker": {
+      "full_name": "Ramu / Logistics Courier",
+      "age": 32,
+      "role": "Campus Operations Logistics Worker",
+      "appearance": {
+        "build": "Sturdy, athletic build",
+        "attire": "Dark green waterproof canvas poncho over work vest with neon reflective shoulder strip, heavy utility boots",
+        "props": [
+          "Water resistant clipboard with shipping manifest",
+          "Dripping rain poncho hood"
+        ]
+      },
+      "voice_profile": {
+        "tone": "Urgent, hurried, breathless under monsoon downpour",
+        "speech_style": "Short urgent announcements about crates arriving at the bay",
+        "balloon_accent": "#0d9488"
+      }
     }
   },
   "mentorship_rules": {
