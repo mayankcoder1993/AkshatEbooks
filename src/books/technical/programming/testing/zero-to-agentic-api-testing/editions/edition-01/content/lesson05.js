@@ -152,7 +152,7 @@ export const lesson05 = {
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch05/ch05_postman_chai_assertions.jpg',
             w: 1376,
             h: 768,
-            alt: 'Postman test execution interface showing passing assertions alongside one unexpected red failure.',
+            alt: 'API Testing Workbench test execution interface showing passing assertions alongside one unexpected red failure.',
             caption: 'First Assertion Suite: Green status assertions pass, but bookName returns undefined.'
           },
           replyImage: {
@@ -198,7 +198,7 @@ export const lesson05 = {
             replySpeaker: 'Akshay',
             replySpeech: 'Locking down the Ajv JSON schema now. Every field type and required key is strictly asserted.'
           },
-          scene: 'Frontend Lead Ananya joins Akshay at the developer station. She explains how mobile client parsing crashes when unexpected types appear. Akshay wraps the response in a formal JSON Schema validator using tv4/Ajv inside Postman.',
+          scene: 'Frontend Lead Ananya joins Akshay at the developer station. She explains how mobile client parsing crashes when unexpected types appear. Akshay wraps the response in a formal JSON Schema validator using tv4/Ajv inside the workbench.',
           realization: 'JSON Schema assertions validate structure, data types, and required properties across entire payloads in a single line.'
         },
         {
