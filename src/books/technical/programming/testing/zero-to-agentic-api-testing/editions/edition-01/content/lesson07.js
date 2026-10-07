@@ -1,5 +1,11 @@
 import chainingImg from '../assets/api-request-chaining-pipeline.jpg'
 import arrayPipelineImg from '../assets/javascript-array-pipeline-transform.jpg'
+import ch07Scene1Img from '../assets/ch07-scene-1-chaining-pipeline.jpg'
+import ch07Scene2Img from '../assets/ch07-scene-2-chaining-execution-ui.jpg'
+import warRoomWideImg from '../assets/apex-campus-crisis-war-room.jpg'
+import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 
 export const lesson07 = {
   id: 'request-chaining',
@@ -23,399 +29,589 @@ export const lesson07 = {
       missionCrisis: 'Autonomous Request Chaining and Multilevel JSON Traversal',
       missionContext: 'Real world workflows do not exist in isolation: data produced by one request must be consumed by the next. In the library catalog, AddBook generates a composite ID that must be dynamically captured and passed into GetBook and DeleteBook. Furthermore, enterprise responses contain deeply nested objects and arrays that require mathematical verification.',
       missionObjective: 'Chain AddBook, GetBook, and DeleteBook dynamically, parse nested JSON responses, and aggregate array data with JavaScript methods.',
-      targetSystems: 'Autonomous Request Chaining Pipeline · Campus Bookstore E Commerce Engine',
-      achieve: 'Build an autonomous multi request testing pipeline by capturing dynamic IDs, piping them into downstream requests, and verifying nested JSON structures and array mathematics.',
-      how: 'Chain AddBook to GetBook and DeleteBook using collection variables, assert exact catalog fields without assuming unreturned properties, and master find, filter, map, and reduce in an advanced audit lab.',
-      carry: 'An end to end chained pipeline that creates, validates, and cleans up records autonomously, ready for multi row data driven execution in Chapter 8.'
+      targetSystems: 'API Testing Workbench Request Chaining Engine · JavaScript Functional Array Pipelines · Nested JSON Deserializer',
+      difficulty: 'INTERMEDIATE',
+      estimatedTime: '30 MINUTES',
+      prerequisites: 'Chapter 06: Managing Variables Across the Five Scopes'
     },
     {
       type: 'mission-tracker',
-      badge: 'MISSION 2 PROGRESS · STEP 4 OF 5',
-      title: 'Continuing Mission 2: Assembling the Autonomous Pipeline',
-      text: 'Our AddBook request is now parameterized and unique, but we are still manually copying the generated book ID into GetBook and DeleteBook. Our next step in Mission 2 is assembling an autonomous regression pipeline: capturing the response ID automatically, passing it downstream via environment variables, navigating complex nested JSON structures, filtering and mapping arrays, and validating business calculations across multi step transactions.',
+      currentPhase: 'Phase 4: Request Chaining & Array Pipelines',
+      totalPhases: 5,
+      completedSteps: [
+        'Manual CRUD Lifecycle & Unique Constraints (Chapter 04)',
+        'Writing JavaScript Assertions and pm Object (Chapter 05)',
+        'Managing Variables Across the Five Scopes (Chapter 06)'
+      ],
+      currentStep: 'Request Chaining and Complex Nested JSON Parsing',
+      upcomingSteps: [
+        'Data Driven Testing with External Data Files (Chapter 08)'
+      ]
     },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : SIX SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
+    {
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
+      title: 'The Property Transfer Chasm and Array Pipeline Symphony',
+      intro: 'Follow apprentice Akshay, Principal Systems Architect Sameer, and Frontend Lead Ananya in the Financial Systems Annex as mouse slips cause 404 errors, nested JSON triggers null pointer crashes, and JavaScript array pipelines prove the campus budget.',
+      panels: [
+        {
+          title: 'Scene 1: 01:15 AM: Deep Midnight Financial Systems Annex and Manual Fatigue',
+          time: '01:15 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer at black granite server tables in the Financial Systems Annex.',
+            caption: 'Financial Systems Annex: Server towers hum as rain clears into cool midnight fog.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay highlighting text with his mouse trackpad between different browser tabs.',
+            caption: 'Manual Property Transfer: Copying generated IDs with a mouse trackpad creates pipeline bottlenecks.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'We have dynamic ISBNs now. But to verify GetBook, I am still highlighting IDs with my mouse to paste them!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'The manual property transfer chasm. A single human copy paste breaks pipeline autonomy.'
+          },
+          scene: 'At 01:15 AM, cold blue LED strips illuminate the Financial Systems Annex. Following the variable scope victory, Akshay hits a new bottleneck: manually copying IDs from AddBook responses to paste them into GetBook and DeleteBook URLs.',
+          realization: 'Manual property transfer between API requests creates human friction and breaks automated regression pipelines.'
+        },
+        {
+          title: 'Scene 2: 01:17 AM: The Split-Second Cursor Slip: Highlighting the Wrong ID',
+          time: '01:17 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Close up of the trackpad and monitor showing 404 Not Found due to truncated ID.',
+            caption: 'Cursor Slip Trap: Missing trailing characters on a manual copy turns valid tests red.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer gesturing calmly with cutting chai in brass holder.',
+            caption: 'Memory Extraction: Let the V8 JavaScript engine extract properties directly in memory.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: '404 Not Found! My mouse missed the last three characters on the copy! The whole test failed!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Human coordination degrades at one in the morning. Let JavaScript extract the property in memory.'
+          },
+          scene: 'Akshay tries copying LIB-99482-CS from the AddBook response. His finger slips, copying LIB-9948. When GetBook executes, the server responds with 404 Not Found, failing the verification.',
+          realization: 'Automated request chaining eliminates human trackpad errors by transferring properties directly in memory.'
+        },
+        {
+          title: 'Scene 3: 01:21 AM: Deserializing JSON and Binding Dynamic State to Collection Scope',
+          time: '01:21 AM',
+          layout: 'duo',
+          image: {
+            src: ch07Scene1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch07-scene-1-chaining-pipeline.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay writing pm.response.json() and pm.collectionVariables.set() in the Tests script tab.',
+            caption: 'Dynamic Property Binding: Storing response properties in Collection scope for downstream consumption.'
+          },
+          replyImage: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Diagram showing AddBook response ID flowing directly into GetBook query parameter.',
+            caption: 'The Automated Bridge: Upstream response body feeds downstream request parameters.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'const res = pm.response.json(); pm.collectionVariables.set("bookId", res.ID); Bound in memory!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Now reference {{bookId}} in GetBook and DeleteBook. The loop closes itself.'
+          },
+          scene: 'In the Tests tab of AddBook, Akshay parses the incoming response into an object and saves the generated ID into Collection scope. He interpolates {{bookId}} into GetBook query parameters and DeleteBook body payloads.',
+          realization: 'Deserializing JSON responses and binding extracted keys to collection variables creates resilient automated request chains.'
+        },
+        {
+          title: 'Scene 4: 01:29 AM: The 3-Step Runner Symphony: Green Cascade in 24 Milliseconds',
+          time: '01:29 AM',
+          layout: 'duo',
+          image: {
+            src: ch07Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch07-scene-2-chaining-execution-ui.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Collection runner interface displaying passing green tests across AddBook, GetBook, and DeleteBook.',
+            caption: 'Chained Symphony: Three requests execute autonomously in cascade in 24 milliseconds.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer reviewing the test summary metrics table with Akshay.',
+            caption: 'Complete Lifecycle: Create, verify, and teardown executed without human intervention.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Three requests executed in cascade: Add, Get, Delete. 24 milliseconds flat.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'The book was created, verified, and cleaned up with zero manual clicks!'
+          },
+          scene: 'Akshay launches the Collection Runner. AddBook fires, stores the ID, GetBook verifies the record, and DeleteBook cleans up the book from the database. The entire CRUD cycle completes in 24 milliseconds.',
+          realization: 'A well structured request chain automates the complete resource lifecycle while maintaining zero residual database clutter.'
+        },
+        {
+          title: 'Scene 5: 01:33 AM: The Multilevel JSON Labyrinth and Optional Chaining',
+          time: '01:33 AM',
+          layout: 'duo',
+          image: {
+            src: arrayPipelineImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/javascript-array-pipeline-transform.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Diagram showing nested JSON response hierarchy with department and book arrays.',
+            caption: 'Nested Labyrinth: Five tiers of nested objects and arrays require defensive navigation.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Terminal screen displaying TypeError: Cannot read properties of undefined.',
+            caption: 'Null Pointer Crash: Direct property access on missing parent keys crashes the V8 runner.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'TypeError: Cannot read properties of undefined! The department audit test crashed!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Defensive optional chaining. Use the Elvis operator: data?.departments?.[0]?.items.'
+          },
+          scene: 'Ananya returns with the bookstore department audit payload. When Akshay writes a test accessing deep properties directly, a missing optional key throws a TypeError that halts the entire test suite. Sameer introduces optional chaining.',
+          realization: 'Optional chaining prevents unhandled null pointer exceptions when traversing deep, evolving enterprise JSON payloads.'
+        },
+        {
+          title: 'Scene 6: 01:49 AM: Functional Array Pipelines and the 1500 Budget Proof',
+          time: '01:49 AM',
+          layout: 'duo',
+          image: {
+            src: ch07Scene1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch07-scene-1-chaining-pipeline.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Ananya verifying computed totals on the bookstore telemetry monitor.',
+            caption: 'Mathematical Verification: reduce() computes the total purchase sum matching budget 1500.'
+          },
+          replyImage: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Whiteboard showing the four array methods: find, filter, map, and reduce.',
+            caption: 'The Four Pillars: Functional array methods turn complex loops into clean assertions.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'books.reduce((acc, b) => acc + b.price, 0); Total matches 1500 exactly!',
+            replySpeaker: 'Ananya',
+            replySpeech: 'The audit discrepancy is resolved! The books, taxes, and discounts reconcile!'
+          },
+          scene: 'Akshay applies the four functional array methods: find() to locate specific titles, filter() to isolate premium volumes, map() to extract title arrays, and reduce() to calculate the total purchase sum. The assertion confirms the total matches 1500.',
+          realization: 'Functional array methods turn complex multi record assertions into clean, readable single line verification statements.'
+        }
+      ]
+    },
+
+    // =========================================================================
+    // TECHNICAL ARCHITECTURE & DEEP DIVE
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 1: The Three Stage Request Chaining Pipeline',
+      level: 2,
+      text: 'The Architecture of Autonomous Request Chaining'
     },
     {
       type: 'image',
-      layout: 'stacked',
-      badge: 'REQUEST PIPELINE',
-      title: 'Dynamic Request Chaining: Passing Identity Between Dependent Calls',
-      text: 'By storing dynamic outputs into variables, a collection can execute dozens of interdependent requests in complete harmony. Subsequent requests consume dynamic keys in their URLs, headers, or request bodies automatically, eliminating all manual copy paste intervention.',
       src: chainingImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-request-chaining-pipeline.jpg',
       w: 1408,
       h: 768,
-      alt: 'Flowchart showing request chaining pipeline: Step 1 AddBook POST creates ID, Step 2 GetBook GET queries ID, Step 3 DeleteBook POST removes ID.',
-      caption: 'The autonomous property transfer pipeline across three chained requests.',
-      points: [
-        'Step 1 (AddBook POST): Dispatches dynamic payload. Tests script extracts generated ID into collection variable book_id.',
-        'Step 2 (GetBook GET): Injects {{book_id}} into query params and asserts that the cataloged book name, ISBN, and aisle match the created record.',
-        'Step 3 (DeleteBook POST): Reads {{book_id}} in the payload body and asserts that the record is completely removed from the database.',
-      ],
+      title: 'Autonomous Request Chaining Pipeline: State Transfer across HTTP Boundaries',
+      text: 'Request chaining turns isolated HTTP calls into an automated end to end workflow. Properties extracted from upstream responses are stored in collection variables and passed into downstream request parameters.',
+      alt: 'Architecture diagram showing 3-step chained pipeline with automated property transfer.',
+      caption: 'The 3-step chained pipeline: AddBook stores book_id, GetBook reads it, DeleteBook cleans it.'
     },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 1 : CHAINED PIPELINE RUNNER
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 1 : REQUEST CHAINING RUNNER',
+      title: 'Chained 3-Step Lifecycle: AddBook -> GetBook -> DeleteBook',
+      scenario: 'Execute the AddBook request. The Tests script captures res.ID and assigns it to collectionVariables. GetBook and DeleteBook consume {{bookId}} autonomously.',
+      config: {
+        method: 'POST',
+        path: '/v1/books',
+        activeTab: 'Tests'
+      },
+      tabs: {
+        params: [],
+        headers: [
+          { key: 'Content-Type', value: 'application/json' }
+        ],
+        body: JSON.stringify({
+          name: "Designing Data-Intensive Applications",
+          isbn: "ISBN992459",
+          aisle: 88,
+          author: "Martin Kleppmann"
+        }, null, 2),
+        tests: '// Deserializing JSON response and binding to collection scope\nconst res = pm.response.json();\npm.test("Status is 200 OK", function() {\n  pm.response.to.have.status(200);\n});\n\npm.test("Book added and ID extracted", function() {\n  pm.expect(res.Msg).to.eql("successfully added");\n  pm.expect(res.ID).to.exist;\n  // Bind dynamic ID for downstream requests\n  pm.collectionVariables.set("bookId", res.ID);\n});'
+      },
+      response: {
+        status: '200 OK',
+        time: '12ms',
+        size: '401B',
+        body: JSON.stringify({
+          Msg: "successfully added",
+          ID: "ISBN992459"
+        }, null, 2)
+      },
+      notes: [
+        'pm.response.json() deserializes the raw HTTP response byte stream into a live JavaScript object.',
+        'pm.collectionVariables.set("bookId", res.ID) makes the ID available to all requests in the collection.'
+      ]
+    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 2 : ARRAY PIPELINE & REDUCE ACCUMULATOR
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 2 : JAVASCRIPT ARRAY PIPELINE',
+      title: 'Nested JSON Traversal & Functional Array Reduction',
+      scenario: 'Inspect the Department Audit response. Use find(), filter(), map(), and reduce() to validate nested book arrays and verify the total budget.',
+      config: {
+        method: 'GET',
+        path: '/v1/departments/audit',
+        activeTab: 'Tests'
+      },
+      tabs: {
+        params: [
+          { key: 'deptId', value: 'CS', desc: 'Department identifier' }
+        ],
+        headers: [
+          { key: 'Accept', value: 'application/json' }
+        ],
+        body: '',
+        tests: 'const res = pm.response.json();\n\npm.test("Validate department and books array", function() {\n  pm.expect(res.department).to.eql("Computer Science");\n  pm.expect(res.books).to.be.an("array").that.is.not.empty;\n});\n\npm.test("Target book price and keys exist", function() {\n  const target = res.books.find(b => b.price === 55);\n  pm.expect(target).to.exist;\n  pm.expect(target.title).to.include("Microservices");\n});\n\npm.test("Computed total matches budget", function() {\n  const total = res.books.reduce((acc, b) => acc + b.price, 0);\n  pm.expect(total).to.eql(1500);\n});'
+      },
+      response: {
+        status: '200 OK',
+        time: '15ms',
+        size: '578B',
+        body: JSON.stringify({
+          department: "Computer Science",
+          budget: 1500,
+          books: [
+            { id: "B1", title: "Building Microservices", price: 55, stock: 10 },
+            { id: "B2", title: "Enterprise Integration", price: 65, stock: 8 },
+            { id: "B3", title: "Clean Architecture", price: 50, stock: 14 }
+          ]
+        }, null, 2)
+      },
+      notes: [
+        'find() returns the first element matching a predicate or undefined if absent.',
+        'reduce() iterates over array elements, accumulating a single return value (e.g. total cost).'
+      ]
+    },
+
+    // =========================================================================
+    // FOUR PART PEDAGOGICAL CARDS (SENIOR SAVIOR CONTRACTS)
+    // =========================================================================
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : AUTONOMOUS PROPERTY EXTRACTION',
+      title: 'Autonomous Property Extraction and Chaining',
+      subtitle: 'Eliminating manual cut and paste through programmatic variable binding',
+      input: {
+        method: 'POST',
+        url: '{{baseUrl}}/v1/books',
+        desc: 'Request 1 creates book entity returning dynamic composite ID.',
+        code: 'pm.test("Capture ID", function() {\n  const res = pm.response.json();\n  pm.collectionVariables.set("bookId", res.ID);\n});'
+      },
+      underTheHood: {
+        desc: 'Tests script deserializes JSON in V8 sandbox and updates collection dictionary.',
+        steps: [
+          'AddBook request completes with status 200 OK.',
+          'Tests script parses JSON response body using pm.response.json().',
+          'pm.collectionVariables.set("bookId", res.ID) stores ID in Collection scope.',
+          'Downstream GetBook query parameter {{bookId}} resolves to captured ID.',
+          'Downstream DeleteBook body payload {{bookId}} resolves to same ID for teardown.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '12ms',
+        desc: 'Subsequent requests execute autonomously without human trackpad interaction.',
+        body: JSON.stringify({
+          Msg: "successfully added",
+          ID: "ISBN992459"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Never let a human finger bridge two API requests.',
+        rule: 'Always automate property extraction in test scripts. Bind dynamic keys to Collection scope.',
+        trap: 'Manually copy pasting IDs between requests prevents running test collections headlessly in CI.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : DEFENSIVE OPTIONAL CHAINING',
+      title: 'Defensive Optional Chaining and Null Safety',
+      subtitle: 'Surviving unexpected null and undefined values in deep JSON trees',
+      input: {
+        method: 'SCRIPT',
+        url: 'Tests Tab Sandbox',
+        desc: 'Deeply nested property traversal on evolving enterprise JSON payloads.',
+        code: '// Defensive traversal with the Elvis operator (?.)\nconst discount = data?.departments?.[0]?.discounts?.seasonal ?? 0;\npm.expect(discount).to.be.a("number");'
+      },
+      underTheHood: {
+        desc: 'Optional chaining evaluates properties without throwing unhandled TypeError exceptions.',
+        steps: [
+          'V8 evaluates data.departments. If undefined, halts evaluation and returns undefined.',
+          'Does not throw "Cannot read properties of undefined" unhandled exception.',
+          'Nullish coalescing operator (??) supplies default fallback value (0).',
+          'Assertion test evaluates gracefully with informative assertion failure if field is missing.',
+          'Remaining tests in the script continue executing without catastrophic crash.'
+        ]
+      },
+      output: {
+        status: 'SAFE TRAVERSAL',
+        time: '0ms',
+        desc: 'Zero unhandled runtime exceptions across complex multi tier object trees.',
+        body: JSON.stringify({
+          evaluatedValue: 0,
+          evaluationStatus: "SAFE_FALLBACK"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Dot notation assumes; optional chaining defends.',
+        rule: 'Always use optional chaining (?.) when traversing nested objects that may be absent.',
+        trap: 'Chaining dot notation through absent intermediate keys throws a TypeError that kills the whole test run.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : FUNCTIONAL ARRAY PIPELINES',
+      title: 'Functional Array Pipelines in API Testing',
+      subtitle: 'Transforming, filtering, and aggregating response arrays with modern JavaScript',
+      input: {
+        method: 'GET',
+        url: '{{baseUrl}}/v1/departments/audit',
+        desc: 'Endpoint returning department audit object containing an array of 50 book items.',
+        code: 'const books = pm.response.json().books;\nconst premium = books.filter(b => b.price >= 50);\nconst titles  = books.map(b => b.title);\nconst total   = books.reduce((acc, b) => acc + b.price, 0);'
+      },
+      underTheHood: {
+        desc: 'Functional array methods operate declaratively on collections without procedural for loops.',
+        steps: [
+          'find() scans array, returning first matching object or undefined.',
+          'filter() evaluates predicate function, returning new array of matching elements.',
+          'map() projects objects into a transformed array of values (e.g. title strings).',
+          'reduce() runs accumulator function across array, computing mathematical totals.',
+          'Single line functional expressions assert data integrity with concise readability.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '18ms',
+        desc: 'Computed total equals 1500, verifying bookstore budget reconciliation.',
+        body: JSON.stringify({
+          filteredCount: 2,
+          totalPrice: 1500,
+          verified: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Treat response arrays as data streams, not index counters.',
+        rule: 'Use find, filter, map, and reduce for array assertions instead of verbose for loops.',
+        trap: 'Writing manual for loops with index variables leads to off by one errors and brittle test code.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : SYMMETRIC AUTONOMOUS TEARDOWN',
+      title: 'Symmetric Autonomous Teardown Architecture',
+      subtitle: 'Guaranteeing zero delta residual state in shared persistent databases',
+      input: {
+        method: 'POST',
+        url: '{{baseUrl}}/v1/books/delete',
+        desc: 'Teardown request consuming {{bookId}} to purge created test entities.',
+        code: '{\n  "ID": "{{bookId}}"\n}'
+      },
+      underTheHood: {
+        desc: 'Teardown request executes at conclusion of collection run, removing transient records.',
+        steps: [
+          'AddBook creates entity with unique composite ID.',
+          'GetBook verifies entity properties in live database.',
+          'DeleteBook issues delete command referencing dynamic {{bookId}}.',
+          'Database purges row, restoring initial database state.',
+          'Database holds zero orphan records following regression suite execution.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '14ms',
+        desc: 'Server confirms book record deleted. Subsequent GET returns fallback.',
+        body: JSON.stringify({
+          msg: "book is successfully deleted"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Every test that creates state is responsible for destroying it.',
+        rule: 'Pair every stateful creation test with an automated teardown request in the collection.',
+        trap: 'Leaving test created entities in persistent databases causes disk bloat and unique key collisions.'
+      }
+    },
+
+    // =========================================================================
+    // POST DRILLS & QUIZ
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 2: Capturing and Storing the ID in AddBook',
-    },
-    {
-      type: 'paragraph',
-      text: 'In the Tests tab of AddBook, parse the response JSON and save the generated ID into a variable so downstream requests can immediately read it. We break this property transfer down into three chunks:',
+      level: 2,
+      text: 'Functional Array Methods: The Tester Arsenal'
     },
     {
       type: 'chunked-code',
-      badge: 'PROPERTY TRANSFER CHUNKS',
-      title: 'Automated Property Transfer Mechanics',
-      intro: 'Extracting data from responses and passing downstream:',
+      title: 'The Big Four Array Methods for API Testers',
+      code: `const books = [
+  { id: 1, title: "Microservices", price: 55, stock: 10 },
+  { id: 2, title: "Integration",   price: 65, stock: 0 },
+  { id: 3, title: "Clean Code",    price: 45, stock: 5 }
+];
+
+// 1. find(): Locate a specific item
+const book65 = books.find(b => b.price === 65);
+// book65 -> { id: 2, title: "Integration", price: 65, stock: 0 }
+
+// 2. filter(): Extract a subset matching criteria
+const inStock = books.filter(b => b.stock > 0);
+// inStock.length -> 2 (items 1 and 3)
+
+// 3. map(): Transform array of objects into array of primitives
+const titles = books.map(b => b.title);
+// titles -> ["Microservices", "Integration", "Clean Code"]
+
+// 4. reduce(): Accumulate a single value (sum, tally, aggregation)
+const totalInventoryValue = books.reduce((sum, b) => sum + (b.price * b.stock), 0);
+// total -> (55*10) + (65*0) + (45*5) = 550 + 225 = 775`,
       chunks: [
         {
-          label: 'Chunk 1: Parsing Incoming Payload',
-          filename: 'parse-response.js',
-          code: 'const responseData = pm.response.json();',
-          title: 'Deserializing JSON Text',
-          explanation: 'Converts the raw text into a navigable JavaScript object.',
-          keyTakeaway: 'Always deserialize before property lookups.'
+          lines: '8-10',
+          label: 'find()',
+          explanation: 'Returns the first object that satisfies the condition, or undefined if no match exists.'
         },
         {
-          label: 'Chunk 2: Extracting Generated Key',
-          filename: 'extract-property.js',
-          code: 'const generatedId = responseData.ID;\npm.expect(generatedId, "Generated ID").to.not.be.undefined;',
-          title: 'Defensive Property Extraction',
-          explanation: 'Validates that the ID key exists and holds a valid string before attempting to save.',
-          keyTakeaway: 'Defensive validation prevents saving undefined into variables.'
+          lines: '12-14',
+          label: 'filter()',
+          explanation: 'Returns a brand new array containing all elements that pass the truth test.'
         },
         {
-          label: 'Chunk 3: Persisting to Collection Tier',
-          filename: 'persist-variable.js',
-          code: 'pm.collectionVariables.set("book_id", generatedId);',
-          title: 'Binding to Shared Scope',
-          explanation: 'Stores the ID in Collection Scope so subsequent requests can interpolate {{book_id}}.',
-          keyTakeaway: 'Collection tier makes variables universally accessible to all folder requests.'
+          lines: '16-18',
+          label: 'map()',
+          explanation: 'Extracts specific attributes or calculates transformed properties for every element.'
+        },
+        {
+          lines: '20-22',
+          label: 'reduce()',
+          explanation: 'Iterates through the collection, folding all values into a single accumulator result.'
         }
       ]
     },
-    {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'When AddBook completes and GetBook executes with URL: GET /v1/books?id={{book_id}}, what value does Postman send across the network wire?',
-      options: [
-        'The exact composite ID string (such as "LIB4821227") dynamically extracted from the AddBook response',
-        'The literal placeholder text "{{book_id}}"',
-        'An empty query parameter ?id=',
-        'A null pointer exception'
-      ],
-      answerIndex: 0,
-      revealTitle: 'Dynamic Chaining Wire Confirmation',
-      explanation: 'Property transfer confirmed! Postman resolves {{book_id}} from Collection Scope, replacing the placeholder with the dynamic composite ID value (LIB4821227) before dispatching the HTTP GET request!'
-    },
-    {
-      type: 'heading',
-      text: 'Step 3: Handling JSON Arrays and Validating ID Calculation',
-    },
-    {
-      type: 'paragraph',
-      text: 'GetBook returns a JSON array. In JavaScript, access the first record using zero index bracket notation: booksList[0].book_name. Because these assertions validate different points in the lifecycle, we separate them into their respective request Tests tabs in Postman:',
-    },
-    {
-      type: 'code',
-      filename: 'addbook-tests.js',
-      lines: [
-        '// Placed in the Tests tab of AddBook (POST /v1/books)',
-        'const requestPayload = JSON.parse(pm.request.body.raw);',
-        'const expectedCompositeId = requestPayload.isbn + requestPayload.aisle;',
-        'const responsePayload = pm.response.json();',
-        '',
-        'pm.test("Backend generated ID correctly concatenates ISBN and aisle", function () {',
-        '    pm.expect(responsePayload.ID).to.eql(expectedCompositeId);',
-        '});',
-        '',
-        '// Store composite ID in collection variable for downstream requests',
-        'pm.collectionVariables.set("book_id", responsePayload.ID);',
-      ],
-    },
-    {
-      type: 'code',
-      filename: 'getbook-tests.js',
-      lines: [
-        '// Placed in the Tests tab of GetBook (GET /v1/books?id={{book_id}})',
-        'const booksList = pm.response.json();',
-        '',
-        'pm.test("GetBook returns valid array with matching catalog metadata", function () {',
-        '    pm.expect(booksList).to.be.an("array").with.lengthOf.atLeast(1);',
-        '    pm.expect(booksList[0].book_name).to.eql("Zero to Agentic API Testing");',
-        '    pm.expect(booksList[0].isbn).to.eql(pm.collectionVariables.get("ISBN"));',
-        '    pm.expect(booksList[0].aisle).to.eql("227");',
-        '});',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Contract Precision: Why Author is Omitted from GetBook',
-      paragraphs: [
-        'Notice that GetBook returns an array containing book_name, isbn, and aisle. The author field supplied during AddBook is not included in this endpoint response.',
-        'If you wrote pm.expect(booksList[0].author).to.eql("Alex Mercer"), your test would crash with an undefined failure.',
-        'Never assert fields based on wishful thinking: assert strictly against what the API contract promises.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 4: Navigating Complex Nested JSON and Array Methods',
-    },
-    {
-      type: 'paragraph',
-      text: 'Real enterprise APIs rarely return flat, simple objects. Instead, responses contain nested hierarchies with multiple layers of parent objects, metadata summaries, and arrays of detailed items. Consider the Campus Library department audit endpoint below. You can download the sample payload: [Download Department Audit Response JSON](/materials/zero-to-agentic-api-testing/lesson-07/department-audit-response.json):',
-    },
-    {
-      type: 'code',
-      filename: 'nested-department-response.json',
-      lines: [
-        '{',
-        '  "department": "Computer Science and Systems",',
-        '  "budget": {',
-        '    "total_allocated": 1500,',
-        '    "currency": "USD"',
-        '  },',
-        '  "books": [',
-        '    {',
-        '      "id": "BK101",',
-        '      "title": "Full Stack API Automation",',
-        '      "author": "Dr. Sarah Chen",',
-        '      "price": 45,',
-        '      "copies": 12,',
-        '      "tags": ["api", "testing", "javascript"]',
-        '    },',
-        '    {',
-        '      "id": "BK102",',
-        '      "title": "Postman Architecture Patterns",',
-        '      "author": "Marcus Vance",',
-        '      "price": 55,',
-        '      "copies": 8,',
-        '      "tags": ["postman", "architecture"]',
-        '    },',
-        '    {',
-        '      "id": "BK103",',
-        '      "title": "Distributed Systems Reliability",',
-        '      "author": "Elena Rostova",',
-        '      "price": 65,',
-        '      "copies": 8,',
-        '      "tags": ["cloud", "reliability"]',
-        '    }',
-        '  ]',
-        '}',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Four Essential JavaScript Array Methods for API Testers',
-      paragraphs: [
-        '• find(): Searches an array and returns the very first element matching a boolean condition.',
-        '• filter(): Scans the entire array and returns a new array containing all elements that satisfy the condition.',
-        '• map(): Transforms every element into a new representation, such as plucking a single property from an object array.',
-        '• reduce(): Iterates through an array while accumulating a running total, ideal for verifying mathematical sums.',
-      ],
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'DATA TRANSFORMATION',
-      title: 'JavaScript Array Transformation Pipeline: Filtering, Mapping, and Aggregating',
-      text: 'Modern enterprise APIs deliver deep hierarchical payloads. Understanding how find, map, filter, and reduce transform JSON arrays allows automation engineers to locate specific records, compute expected financial aggregates, and assert mathematical integrity across entire catalogs.',
-      src: arrayPipelineImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/javascript-array-pipeline-transform.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'JavaScript array transformation pipeline showing raw JSON array flowing into filter stage, map transformation stage, and reduce accumulation stage.',
-      caption: 'The JavaScript Array Transformation Pipeline: Filtering, mapping, and reducing nested API data.',
-      points: [
-        'Stage 1 (Raw JSON Array): The incoming API response delivers an array of book objects containing titles and unit prices.',
-        'Stage 2 (Filter Stage): books.filter() scans the array and extracts only items matching the condition (books priced above 30 dollars), discarding non matching records.',
-        'Stage 3 (Map Stage): filteredBooks.map() transforms each item into a formatted line item object with calculated item totals.',
-        'Stage 4 (Reduce Stage): mappedItems.reduce() accumulates each item total into a single running total, producing the final invoice sum of 126.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 5: Writing Advanced Assertions: Finding, Filtering, and Summing',
-    },
-    {
-      type: 'paragraph',
-      text: 'Here is how we use these modern JavaScript methods inside Postman test scripts to verify complete schemas, locate target records, and validate mathematical integrity. You can download the script: [Download Advanced Array Assertions Script](/materials/zero-to-agentic-api-testing/lesson-07/advanced-array-assertions.js):',
-    },
-    {
-      type: 'code',
-      filename: 'advanced-nested-json-assertions.js',
-      lines: [
-        'const responseData = pm.response.json();',
-        '',
-        '// Test 1: Assert top level object and array size',
-        'pm.test("Department audit returns valid book records", function () {',
-        '    pm.expect(responseData.department).to.eql("Computer Science and Systems");',
-        '    pm.expect(responseData.books).to.be.an("array").with.lengthOf(3);',
-        '});',
-        '',
-        '// Test 2: Locate a specific book using find() and assert all keys exist',
-        'pm.test("Locate Postman Architecture Patterns and verify its schema", function () {',
-        '    const targetBook = responseData.books.find(book => book.title === "Postman Architecture Patterns");',
-        '    pm.expect(targetBook, "Target book must exist").to.not.be.undefined;',
-        '    pm.expect(targetBook.price).to.eql(55);',
-        '    pm.expect(targetBook).to.have.all.keys("id", "title", "author", "price", "copies", "tags");',
-        '});',
-        '',
-        '// Test 3: Extract titles using map() and filter premium books',
-        'pm.test("Verify premium collection and extracted titles", function () {',
-        '    const titles = responseData.books.map(book => book.title);',
-        '    pm.expect(titles).to.include("Full Stack API Automation");',
-        '',
-        '    const premiumBooks = responseData.books.filter(book => book.price >= 50);',
-        '    pm.expect(premiumBooks.length).to.eql(2);',
-        '});',
-        '',
-        '// Test 4: Calculate mathematical sum using reduce()',
-        'pm.test("Calculated purchase total matches allocated budget", function () {',
-        '    const calculatedTotal = responseData.books.reduce(function (runningSum, book) {',
-        '        return runningSum + (book.price * book.copies);',
-        '    }, 0);',
-        '',
-        '    // (45 * 12 = 540) + (55 * 8 = 440) + (65 * 8 = 520) = 1500',
-        '    pm.expect(calculatedTotal).to.eql(responseData.budget.total_allocated);',
-        '});',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Forgetting the Initial Value in reduce()',
-      paragraphs: [
-        'When using `array.reduce()` to calculate a sum, always provide `0` as the second argument: `reduce(function(...) { ... }, 0);`.',
-        'If you omit the `0`, JavaScript sets the initial accumulator to the first object in the array rather than the number zero! Your addition will result in strange string concatenation errors like `[object Object]440520` instead of `1500`.',
-        'Always supply `0` as the starting number when accumulating mathematical totals.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 6: The Autonomous Library Lifecycle Pipeline',
-    },
-    {
-      type: 'paragraph',
-      text: 'Now let us connect our entire automated library workflow into an unbroken, autonomous sequence in Postman:',
-    },
-    {
-      type: 'steps',
-      items: [
-        '1. POST AddBook: Dispatches dynamic payload with generated ISBN. Tests script captures the created composite ID: pm.collectionVariables.set("book_id", jsonData.ID).',
-        '2. GET GetBook: Calls /v1/books?id={{book_id}}. Tests script confirms that book_name, isbn, and aisle match the created record.',
-        '3. POST DeleteBook: Dispatches /v1/books/delete with body {"ID": "{{book_id}}"}. Confirms deletion confirmation from server.',
-        '4. Advanced Side Lab (GET DepartmentAudit): Fetches the departmental inventory array and executes reduce() summation to verify fiscal budget totals.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 7: Executing the Suite with Collection Runner',
-    },
-    {
-      type: 'terminal',
-      command: 'Postman Collection Runner Execution Summary',
-      lines: [
-        '1. POST AddBook: 200 OK (180 ms) : 2 of 2 passed (Captured book_id)',
-        '2. GET GetBook: 200 OK (145 ms) : 2 of 2 passed (Verified book_id {{book_id}})',
-        '3. POST DeleteBook: 200 OK (130 ms) : 1 of 1 passed (Teardown completed)',
-        '4. GET DepartmentAudit (Side Lab): 200 OK (185 ms) : 3 of 3 passed (Nested array sum verified)',
-        'Collection Run Complete: 4 requests, 8 assertions, 0 failures (640 ms)',
-      ],
-    },
+
     {
       type: 'battle-scar',
-      metric: 'Order Processing Pipeline Failure',
-      title: 'The Silent Null ID Disaster: The Perils of Unchecked Property Transfer',
-      context: 'An online ticketing company deployed a microservice update that changed the confirmation key from id to order_id in their reservation endpoint. The downstream payment capture step in the automated test suite continued to look for data.id without defensive validation. The variable was set to undefined, and the payment API was called with: POST /v1/payments/capture?orderId=undefined. Because the payment API did not validate the parameter, thousands of transactions were recorded against a null order ID, requiring emergency database reconciliations.',
-      takeaway: 'Always validate that dynamic properties exist before saving them to collection or environment variables. Defensive checks like pm.expect(data.id).to.not.be.undefined prevent corrupted downstream request pipelines.'
+      incident: 'The Orphan Record Avalanche That Exhausted Production Disk Space',
+      context: 'An automated testing framework created 50,000 synthetic customer accounts every night to test transaction latency. However, the engineers never built an automated teardown step. Within three months, millions of phantom accounts exhausted database index storage, causing an unrecoverable production database outage.',
+      takeaway: 'Every test that creates state must be paired with an automated teardown request.'
     },
     {
       type: 'triage',
-      title: 'War Room Triage: The Mystery of the Uncaught TypeError in Array Parsing',
-      scenario: 'You are writing an assertion to verify the price of the third book in an audit response: pm.expect(data.department.courses[2].books[0].price).to.eql(45). The test runner throws a fatal error: "TypeError: Cannot read property books of undefined". What is the most likely structural defect in the response?',
+      title: 'Triage Drill: Undefined Chaining Bug',
+      scenario: 'You run a chained collection: AddBook -> GetBook. GetBook fails with 404 Not Found. When you inspect the URL in the Postman Console, it says: GET /v1/books?id={{bookId}}. The variable was not resolved.',
       options: [
-        'Postman does not support zero based array indexing.',
-        'The courses array contained only two elements, so courses[2] resolved to undefined, making .books an invalid property lookup.',
-        'The price field in JSON must always be wrapped in quotation marks.',
-        'Array methods in JavaScript cannot be executed inside the Tests tab.'
+        {
+          label: 'The server rejected the request because the variable name is invalid.',
+          correct: false,
+          explanation: 'The server never saw a variable name: it received literal text.'
+        },
+        {
+          label: 'AddBook failed to set the collection variable, so the placeholder was sent literally.',
+          correct: true,
+          explanation: 'When a variable placeholder cannot be resolved in any active scope, the workbench sends the literal string {{bookId}} across the wire, causing a 404.'
+        },
+        {
+          label: 'Double curly braces only work in request bodies, not query parameters.',
+          correct: false,
+          explanation: 'Double curly braces work in URLs, params, headers, and bodies.'
+        }
       ],
-      answerIndex: 1,
-      debrief: 'Zero based index boundary overflow! In JavaScript, array indices start at 0. Therefore, the third item is at index 2. If the courses array contains only two courses (indices 0 and 1), courses[2] evaluates to undefined, and attempting to access .books throws a fatal TypeError. Always assert array length before indexing into nested elements!',
-      traps: [
-        'JavaScript arrays are universally zero indexed across all engines.',
-        '',
-        'JSON numbers are valid without quotation marks.',
-        'The Postman Tests tab executes full modern JavaScript with complete array method support.'
-      ]
+      debrief: 'If {{variable}} appears literally in the console, the variable was never defined in any active scope before the request fired.'
     },
-    {
-      type: 'heading',
-      text: 'Step 8: Review and Practice',
-    },
-    {
-      type: 'guess',
-      prompt: 'If an API response returns an array of objects called courses, which JavaScript method finds the single course object whose title is "REST Automation"?',
-      options: [
-        'courses.find(item => item.title === "REST Automation")',
-        'courses.get("REST Automation")',
-        'courses.locate("REST Automation")',
-        'courses.filterOne("REST Automation")',
-      ],
-      answerIndex: 0,
-      explain: 'The find method evaluates each element in an array and returns the first element that satisfies the provided condition.',
-    },
+
     {
       type: 'quiz',
-      items: [
-        [
-          'What is property transfer in API test automation?',
-          'Property transfer is capturing dynamic values from an earlier API response and injecting them into downstream request parameters or payloads.',
-        ],
-        [
-          'Why must enterprise regression suites include automated teardown cleanup requests?',
-          'Automated tests run continuously in CI CD pipelines. If tests do not delete the orders and products they create, test databases accumulate thousands of orphaned records, causing database bloat and false uniqueness failures.',
-        ],
+      title: 'Knowledge Check: Array Accumulation',
+      question: 'Which JavaScript array method is best suited for summing the prices of all items in an order array to verify total invoice accuracy?',
+      options: [
+        'Array.prototype.find()',
+        'Array.prototype.map()',
+        'Array.prototype.reduce()',
+        'Array.prototype.filter()'
       ],
+      correctAnswer: 2,
+      explanation: 'reduce() iterates over an array and accumulates values into a single result (such as a sum or aggregate count).'
     },
     {
       type: 'takeaways',
-      items: [
-        'Request chaining connects isolated API calls into complete automated user journeys.',
-        'Use environment variables to transfer identifiers across sequential requests.',
-        'Use find to locate objects, filter to subset collections, and map to extract property lists.',
-        'Use reduce to compute mathematical sums across nested arrays and assert business logic.',
-        'Automated teardown steps clean up created resources, keeping test databases pure and idempotent.',
-      ],
+      title: 'Senior Savior Takeaways',
+      points: [
+        'Automate property transfer in Tests scripts: capture dynamic IDs and save them to Collection scope.',
+        'Use optional chaining (?.) to traverse multi tier enterprise JSON payloads safely without TypeError crashes.',
+        'Master the big four array methods: find() for search, filter() for subsets, map() for projections, reduce() for totals.',
+        'Enforce symmetric teardown: every request that creates state must be paired with a request that deletes it.'
+      ]
     },
     {
       type: 'victory-milestone',
-      badge: 'MISSION 2 PHASE 4 CLEARED',
-      rank: 'PRINCIPAL API TEST ARCHITECT',
-      title: 'Architectural Triumph: Deep Array Pipelines & Request Chaining Mastered',
-      summary: 'You linked disconnected HTTP requests into a living, breathing autonomous transaction pipeline. You extracted dynamic IDs, traversed multilevel nested objects without crash errors, performed high speed array transformations (find, filter, map), and mathematically verified financial balance totals using reduce. You operate at the highest echelon of API automation.',
-      powers: [
-        'Dynamic property transfer: piping tokens, session cookies, and resource IDs across multi request suites',
-        'Deep nested JSON parsing: safely traversing multilevel object trees and arrays without null reference exceptions',
-        'Functional array pipelines: wielding find, filter, and map to isolate specific records in complex payloads',
-        'Mathematical business logic verification: aggregating invoice and catalog totals dynamically using reduce',
-        'Zero footprint test execution: deploying automated teardown deletions that leave databases perfectly pristine',
-      ],
-      disastersPrevented: [
-        'Averted silent financial balance discrepancies by verifying computed cart totals against backend invoices',
-        'Stopped catastrophic test database pollution where uncleaned test orders exhaust database storage and IDs',
-        'Eliminated brittle hardcoded test suites that crash whenever upstream backend developers alter resource IDs',
-      ],
-      warRoomTakeaway: 'Isolated API checks only test plumbing. Chained request pipelines test real world user journeys and business reality. When your chained suite passes, the entire business flow is guaranteed.',
+      badge: 'Milestone 2.4 Cleared',
+      title: 'Request Chaining & Array Pipelines Mastered',
+      summary: 'You have automated dynamic property transfer across HTTP boundaries, mastered defensive optional chaining, and implemented functional array pipelines to audit complex budgets.',
+      nextStep: 'Proceed to Chapter 08 to scale from single requests to mass ingestion with Data Driven Testing.'
     },
     {
       type: 'cliffhanger',
-      title: 'Continuing Mission 2: Scaling to bulk inventory',
-      text: 'Our chained pipeline and nested assertions work cleanly for single and nested requests. But what if a shipment of 100 new books arrives in a CSV spreadsheet? In Chapter 8, we complete Mission 2: driving bulk automated execution using external CSV and JSON data files!',
-    },
-  ],
+      time: '02:15 AM',
+      location: 'Apex Logistics Data Center',
+      alert: 'MASS INGESTION CRISIS',
+      speaker: 'Akshay Sharma',
+      speech: 'University registrar just dumped 10,000 course records in an external CSV file!',
+      context: 'Akshay and Sameer head to the Logistics Data Center where testing individual requests by hand is impossible. They must drive collection iterations from external data files.',
+      nextLessonId: 'data-driven-testing'
+    }
+  ]
 }
