@@ -1,470 +1,597 @@
-import cicdGateImg from '../assets/enterprise-cicd-quality-gate.jpg'
-import newmanImg from '../assets/newman-ci-cd-pipeline.jpg'
+import newmanPipelineImg from '../assets/newman-ci-cd-pipeline.jpg'
+import enterpriseCicdImg from '../assets/enterprise-cicd-quality-gate.jpg'
+import warRoomWideImg from '../assets/apex-campus-crisis-war-room.jpg'
+import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
+import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson13 = {
-  id: 'newman-cicd-execution',
+  id: 'headless-ci-newman',
   icon: '',
-  title: 'Headless Test Execution with Newman and CI CD',
-  shortTitle: 'Newman and CI CD',
-  subtitle: 'Command line collection runs, rich HTML Extra reports, and automated pipeline integration.',
-  tags: ['Newman', 'CLI', 'CI/CD', 'Jenkins', 'Reporting', 'Monitors'],
+  title: 'Headless Test Execution with Newman and Continuous Integration',
+  shortTitle: 'Headless CI with Newman',
+  subtitle: 'Automate command line execution, build GitHub Actions quality gates, generate HTML reports, and implement agentic self healing loops.',
+  tags: ['Newman', 'CI/CD', 'GitHub Actions', 'HTML Extra', 'Quality Gate', 'Exit Codes', 'Agentic Testing'],
   blocks: [
     {
       type: 'mission-hud',
-      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
-      phase: 'Phase 5 of 5: Headless Newman & CI CD (Mission Victory)',
-      rank: 'Rank: Continuous Delivery Architect',
+      mission: 'Mission 3: Enterprise Quality Engineering & Resilience Testing',
+      phase: 'Phase 5 of 5: Continuous Integration Quality Gates & Graduation',
+      rank: 'Rank: Lead API Quality Architect',
       status: 'ACTIVE'
     },
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 3 · PHASE 4 OF 4',
-      missionTitle: 'Enterprise Resilience and CI CD Quality Gates',
-      missionCrisis: 'Continuous Quality Gate: Headless Newman Execution in CI CD',
-      missionContext: 'On the eve of campus enrollment, ten thousand students and faculty will access the university portal. Developers are deploying hotfixes continuously. We cannot rely on manual testing in a desktop app. We must construct an autonomous robot watchdog: running our test suites headlessly via Newman CLI on every code commit, generating visual HTML Extra dashboards, and gating production releases in Jenkins and GitHub Actions.',
-      missionObjective: 'Export portable collections and environments, run headless test suites with Newman, configure fail fast bail flags, and integrate CI CD pipelines.',
-      targetSystems: 'Newman CLI Runtime · Jenkins CI CD Pipeline · GitHub Actions · HTML Extra Dashboard',
-      achieve: 'Transform your desktop collection into an automated, headless deployment gate by mastering Newman CLI, HTML Extra reports, and CI CD pipeline integration.',
-      how: 'Export portable JSON collections and environments, execute command line runs with data files and fail fast bail flags, generate visual dashboards, and configure Jenkins automation.',
-      carry: 'The complete enterprise grade automated API testing pipeline running autonomously in continuous delivery pipelines, achieving full Mission 3 victory.'
+      missionBadge: 'MISSION 3 · PHASE 5 OF 5',
+      missionTitle: 'Enterprise Quality Engineering & Resilience Testing',
+      missionCrisis: 'The 07:15 AM Admissions Portal Candidate Deployment',
+      missionContext: 'At 07:15 AM in the Apex Operations Tower, arched stone windows overlook the campus quadrangle where thousands of students gather. A critical pull request arrives: PR #342 National Admissions Portal v2.0. The release window closes in 43 minutes. Manual desktop testing across thirteen chapters of suites is impossible. Sameer and Akshay decouple the suites into headless Newman running inside a continuous integration container.',
+      missionObjective: 'Execute collections headlessly with Newman CLI, build GitHub Actions CI quality gates, enforce exit code deployment rules, generate HTML Extra test reports, and resolve regressions with agentic repair loops.',
+      targetSystems: 'Newman CLI Runner · GitHub Actions Ubuntu Container · HTML Extra Reporter · Automated Deployment Quality Gate',
+      difficulty: 'ADVANCED',
+      estimatedTime: '30 MINUTES',
+      prerequisites: 'Chapter 12: SOAP WebServices and XML Parsing'
     },
     {
       type: 'mission-tracker',
-      badge: 'MISSION 3 PROGRESS · STEP 5 OF 5',
-      title: 'Completing Mission 3: Continuous Integration and Automated Gating',
-      text: 'Tomorrow morning is the first day of semester enrollment, when ten thousand students and faculty members will flood the campus library portal to register books, access digital research archives, and process inter library loans. The university engineering director calls an emergency team briefing: developers are pushing hotfixes late into the night, and we cannot have a human being sitting at a laptop clicking Postman buttons manually at two in the morning. We need an automated robot watchdog that runs our test suite automatically on every code push, generates a visual dashboard for university directors, lets us flip between the Campus QA staging server and the live UAT production cluster with a single dropdown click, and runs scheduled cloud smoke checks. In our final chapter, we build that complete continuous integration pipeline using Newman, Jenkins, GitHub Actions, and Postman Cloud Monitors.',
-      image: {
-        src: cicdGateImg,
-        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/enterprise-cicd-quality-gate.jpg',
-        w: 1408,
-        h: 768,
-        alt: 'Enterprise operations command center during midnight deployment showing CI CD deployment gate with green pass shields.',
-        caption: 'The Midnight Launch Guard: Automated test robots protecting servers during midnight updates.',
-        points: [
-          'Automated Stop Sign: Blocking broken code immediately so bad updates never reach real students.',
-          'Hands Free Testing: Running all test collections automatically in the background without opening the Postman desktop app.',
-          'Clear Visual Reports: Creating colorful web dashboards so the engineering team can see test results in one glance.',
-        ],
-      },
-    },
-    {
-      type: 'heading',
-      text: 'Step 1: The Continuous Integration Testing Flow',
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'HEADLESS CI CD PIPELINE',
-      title: 'Headless CI CD Pipeline: Automated Newman Gating on Every Git Commit',
-      text: 'Newman bridges the gap between exploratory testing in the Postman desktop app and automated deployment pipelines. In modern software organizations, automated tests execute headlessly on every git push without human intervention, generating visual HTML Extra dashboards and protecting production clusters.',
-      src: newmanImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/newman-ci-cd-pipeline.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'CI CD pipeline diagram showing Git commit triggering Jenkins, executing Newman CLI headlessly in Docker, and producing HTML Extra report.',
-      caption: 'The complete continuous integration testing pipeline powered by Newman.',
-      points: [
-        'Step 1 (Code Push): A developer merges new code into the Git repository.',
-        'Step 2 (Pipeline Trigger): The CI server (Jenkins or GitHub Actions) detects the commit and spins up a lightweight test container.',
-        'Step 3 (Headless Execution): Newman executes the exported Postman collection and environment files without a graphical interface.',
-        'Step 4 (Reporting and Gating): Newman generates an interactive HTML Extra report. If all tests pass with exit code 0, deployment proceeds; if any assertion fails, the build is blocked.',
+      currentPhase: 'Phase 5: Headless CI with Newman & Quality Gates',
+      totalPhases: 5,
+      completedSteps: [
+        'SOAP WebServices and XML Parsing (Chapter 12)'
       ],
+      currentStep: 'Headless Test Execution with Newman and Continuous Integration',
+      upcomingSteps: [
+        'Graduation: Lead API Quality Architect'
+      ]
     },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : SIX SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
     {
-      type: 'heading',
-      text: 'Step 2: Installing Node.js and Newman Globally',
-    },
-    {
-      type: 'paragraph',
-      text: 'Newman is built as a command line tool on top of Node.js. Before installing Newman, ensure Node.js is installed on your computer or build server.',
-    },
-    {
-      type: 'steps',
-      items: [
-        'Download and install Node.js from the official site: https://nodejs.org (select LTS version).',
-        'Verify your installation in your terminal by checking the versions: run `node -v` and `npm -v`.',
-        'Verify your system path environment variable so Node is accessible globally from any directory (on Mac check `echo $PATH`, on Windows check System Properties > Environment Variables).',
-        'Install Newman globally using the Node Package Manager: run `npm install -g newman`.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 3: Exporting Artifacts and The Space in Filename Bug',
-    },
-    {
-      type: 'paragraph',
-      text: 'To run our test collection outside the Postman graphical interface, we must export our collection, environment variables, and external data files as portable JSON and CSV artifacts.',
-    },
-    {
-      type: 'steps',
-      items: [
-        'Export Collection: In Postman, click the three dots beside your collection and select Export to save `Campus_Library_Collection.json`.',
-        'Export Environment: In the Environments manager, click the three dots beside your environment and export `Campus_Library_UAT.json` (using flag -e).',
-        'Export Globals: In Global Variables, click Export to save `Campus_Globals.json` (using flag -g).',
-        'Prepare CSV Data: Place your `books_data.csv` spreadsheet in the same project directory (using flag -d).',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Spaces in Exported Filenames',
-      paragraphs: [
-        'When you export files from Postman, the default filename often contains spaces (such as `Campus Library Suite.postman_collection.json`).',
-        'In terminal environments like bash or Windows PowerShell, spaces act as argument separators. The terminal treats `Campus` as one file and `Library` as another, immediately crashing with a file not found error!',
-        'Always rename exported files using underscores or clean alphanumeric names before running terminal commands: `Campus_Library_Collection.json`.',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'With all artifacts in our project folder, we run our complete collection headlessly from the command prompt:',
-    },
-    {
-      type: 'code',
-      filename: 'run-newman-cli.sh',
-      lines: [
-        '# Execute headless collection run with environment, globals, and CSV data',
-        'newman run Campus_Library_Collection.json \\',
-        '  -e Campus_Library_UAT.json \\',
-        '  -g Campus_Globals.json \\',
-        '  -d books_data.csv',
-      ],
-    },
-    {
-      type: 'terminal',
-      command: 'newman run Campus_Library_Collection.json -e Campus_Library_UAT.json -d books_data.csv',
-      lines: [
-        'Iteration 1 of 3: Processing "Learn Postman Testing"',
-        'POST https://uat-api.campuslibrary.org/v1/books [200 OK, 248B, 185ms]',
-        '  ✓ Status code is 200 OK',
-        '  ✓ Response contains successfully added message',
-        '  ✓ Backend generated ID correctly concatenates ISBN and aisle',
-        '',
-        'GET https://uat-api.campuslibrary.org/v1/books?id=LIB1048101 [200 OK, 192B, 142ms]',
-        '  ✓ GetBook response returns an array with at least one record',
-        '  ✓ Retrieved book name matches "Learn Postman Testing"',
-        '  ✓ Catalog ISBN and aisle match created coordinates',
-        '',
-        'POST https://uat-api.campuslibrary.org/v1/books/delete [200 OK, 212B, 158ms]',
-        '  ✓ Book is successfully deleted message verified',
-        '',
-        '┌─────────────────────────┬──────────┬──────────┐',
-        '│                         │ Executed │   Failed │',
-        '├─────────────────────────┼──────────┼──────────┤',
-        '│              iterations │        3 │        0 │',
-        '│                requests │        9 │        0 │',
-        '│            test-scripts │       18 │        0 │',
-        '│      prerequest-scripts │       12 │        0 │',
-        '│              assertions │       18 │        0 │',
-        '└─────────────────────────┴──────────┴──────────┘',
-        'Execution Summary: 3 iterations, 9 requests, 18 assertions, 0 failures (518 ms)',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 4: Generating Publication Grade HTML Extra Dashboards',
-    },
-    {
-      type: 'paragraph',
-      text: 'Terminal output is great for developers, but engineering directors and quality assurance managers need visual dashboards. We install the `newman-reporter-htmlextra` plugin to generate publication grade reports. We break down the Newman execution command into three key flag chunks:',
-    },
-    {
-      type: 'chunked-code',
-      badge: 'NEWMAN CLI CHUNKS',
-      title: 'Deconstructing the Headless Command',
-      intro: 'Essential CLI parameters for automated pipelines:',
-      chunks: [
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
+      title: 'The Seven Fifteen Pull Request and the Golden Exit Code',
+      intro: 'Follow apprentice Akshay, Principal Systems Architect Sameer, and Frontend Lead Ananya in the Master Operations Tower as Pull Request 342 triggers automated CI gates, exit code 1 catches a catastrophic fee rounding bug, and all thirteen test suites pass green at sunrise.',
+      panels: [
         {
-          label: 'Chunk 1: Target Files',
-          filename: 'newman-targets.sh',
-          code: 'newman run Campus_Library_Collection.json \\\n  -e Campus_Library_UAT.json \\\n  -d books_data.csv',
-          title: 'Providing Test Assets',
-          explanation: 'Specifies the exported collection JSON, the UAT environment variables file, and the CSV dataset.',
-          keyTakeaway: 'Newman loads environments and data files headlessly without GUI dialogs.'
+          title: 'Scene 1: 07:15 AM: Master Operations Tower and Candidate Deploy PR 342',
+          time: '07:15 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer in the Master Operations Tower overlooking the campus quadrangle at dawn.',
+            caption: 'Master Operations Tower: Arched stone windows overlook the campus as admissions candidate deploy PR #342 arrives.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'DevOps console displaying Pull Request 342 with 43 minutes remaining until campus gates open.',
+            caption: 'The Final Deadline: Admissions gates open at 08:00 AM; manual testing across 13 suites is impossible.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Pull Request 342: National Admissions Portal v2.0! Gates open in 43 minutes! How do we run all thirteen suites?',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Decouple the suites from the desktop. Headless Newman running inside an automated CI container.'
+          },
+          scene: 'At 07:15 AM, sunlight touches the campus quadrangle. Admissions engineers submit Pull Request #342. With 43 minutes before thousands of students access the portal, manual GUI clicking across all thirteen chapters is impossible. Sameer mandates headless CI.',
+          realization: 'Desktop GUIs cannot validate continuous delivery pipelines; automated regression suites must run headlessly in CI.'
         },
         {
-          label: 'Chunk 2: Multi Reporter Configuration',
-          filename: 'newman-reporters.sh',
-          code: '  -r cli,htmlextra \\\n  --reporter-htmlextra-export reports/dashboard.html',
-          title: 'Configuring Dashboard Output',
-          explanation: 'Generates real time colored CLI text in the terminal while compiling an interactive HTML dashboard.',
-          keyTakeaway: 'The single file dashboard can be archived directly as a CI build artifact.'
+          title: 'Scene 2: 07:21 AM: The Headless Pivot: Newman CLI in the Pipeline',
+          time: '07:21 AM',
+          layout: 'duo',
+          image: {
+            src: newmanPipelineImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/newman-ci-cd-pipeline.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Architecture visual of Newman CLI executing headless collection runs inside a container.',
+            caption: 'The Headless Pivot: Newman packages collection JSON and runs headlessly in clean cloud environments.'
+          },
+          replyImage: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Terminal showing newman run collection.json -e staging.json --bail execution.',
+            caption: 'Command Line Agility: newman run collection.json -e staging.json --bail executes in seconds.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Newman takes our exported collection and environment JSON, running headlessly on Ubuntu in seconds!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Push, runner, newman, exit code: zero ships to production, one blocks deployment immediately.'
+          },
+          scene: 'Sameer details Newman architecture: Newman executes API Testing Workbench collections natively on any command line without a GUI. Integrated into GitHub Actions, Newman evaluates test assertions and returns process exit codes.',
+          realization: 'Newman provides the headless execution engine that bridges collection design with automated CI/CD pipelines.'
         },
         {
-          label: 'Chunk 3: Failure Enforcement Policy',
-          filename: 'newman-bail.sh',
-          code: '  --bail',
-          title: 'Fast Fail Safety Gate',
-          explanation: 'Tells Newman to stop execution immediately upon the very first assertion failure, saving valuable CI compute minutes. Note that any assertion failure causes Newman to exit with code 1; the bail flag enables fast fail semantics.',
-          keyTakeaway: '--bail guarantees defective builds are blocked immediately without wasting compute.'
+          title: 'Scene 3: 07:25 AM: Building the CI Quality Gate Workflow YAML',
+          time: '07:25 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay editing .github/workflows/api-tests.yml on his laptop screen.',
+            caption: 'Workflow Definition: Configuring GitHub Actions workflow with TARGET_ENV guard and bail flags.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer pointing out shell anti-patterns like pipe true that mask build failures.',
+            caption: 'The Iron Rule: Never mask failures with pipe true in continuous integration shell scripts.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Configured .github/workflows/api-tests.yml. Added TARGET_ENV guard and --bail to fail fast on first error!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Never append pipe true in CI scripts. The exit code is the only voice the deployment pipeline obeys.'
+          },
+          scene: 'Akshay creates the GitHub Actions workflow file. He includes a TARGET_ENV guard to prevent pull requests from running against production databases, enables the --bail flag to stop on first failure, and rejects shell masking tricks.',
+          realization: 'CI quality gates must fail loudly; masking exit codes permits defective code to slip into production.'
+        },
+        {
+          title: 'Scene 4: 07:33 AM: The Red Gate: Exit Code 1 Halts Fee Rounding Defect',
+          time: '07:33 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'CI pipeline monitor flashing crimson RED on Step 4 with process exit code 1.',
+            caption: 'The Red Gate: Step 4 fails crimson red; exit code 1 aborts deployment of Pull Request #342.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer and Akshay reviewing the HTML Extra test report highlighting the fee rounding assertion failure.',
+            caption: 'Catastrophe Averted: Caught a fee calculation flaw that would have overcharged 10,000 students.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'The pipeline halted! Exit code 1! Step 4 fee calculation assertion failed: expected 500.00, received 500.50!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'The quality gate held. That 50 paise rounding error would have caused duplicate bank reversals for ten thousand students.'
+          },
+          scene: 'The CI runner launches PR #342. On Step 4, an assertion fails crimson red: a fee calculation returned 500.50 instead of 500.00. Newman exits with code 1, immediately halting the deployment and preventing duplicate banking errors.',
+          realization: 'A strict CI quality gate protects production by intercepting subtle mathematical bugs before code deploys.'
+        },
+        {
+          title: 'Scene 5: 07:45 AM: Agentic Repair Loop and Clean Staging Verification',
+          time: '07:45 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay committing the fee rounding fix to PR #342 and re-triggering the pipeline.',
+            caption: 'Targeted Fix: Correcting the decimal rounding logic and pushing clean commit to PR #342.'
+          },
+          replyImage: {
+            src: enterpriseCicdImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/enterprise-cicd-quality-gate.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Full enterprise CI/CD pipeline screen turning solid green across all build stages.',
+            caption: 'Solid Green: All 13 test suites stream past with 100% pass mark and exit code 0.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Fixed the decimal rounding branch and pushed commit! Rerunning pipeline now!',
+            replySpeaker: 'Ananya',
+            replySpeech: 'All thirteen test suites passed! Two thousand four hundred assertions green! Exit code zero!'
+          },
+          scene: 'Akshay commits the fee rounding fix. The CI runner executes the entire thirteen chapter test suite against the staging container. 2400 assertions pass green with zero failures, returning exit code 0.',
+          realization: 'Automated test suites enable rapid, fearless bug correction and verification under tight delivery deadlines.'
+        },
+        {
+          title: 'Scene 6: 07:59 AM: National Deploy Triumph and Lead API Quality Architect',
+          time: '07:59 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer handing Akshay a hot faceted glass of cutting chai in a polished brass holder.',
+            caption: 'The Architect Toast: Sameer raises a glass of cutting chai, crowning Akshay Lead API Quality Architect.'
+          },
+          replyImage: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Campus gates swinging open as sunlight floods the quadrangle and admissions portal launches.',
+            caption: 'Mission Complete: National Admissions Portal v2.0 live at 14ms latency as campus gates swing open.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'National portal live at 14ms. Gates open. Congratulations, Lead API Quality Architect Akshay Sharma.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'From raw curl to autonomous CI quality gates. We verified every byte on the wire!'
+          },
+          scene: 'At 07:59 AM, the deployment completes. The National Admissions Portal launches with 14ms response times as campus gates open. Sameer raises a cutting chai glass, crowning Akshay Lead API Quality Architect.',
+          realization: 'Mastering API quality engineering transforms apprentices into architects who safeguard mission critical digital systems.'
         }
       ]
     },
-    {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'When Newman executes in a Jenkins or GitHub Actions pipeline and an assertion fails, what exit code does Newman return to the terminal?',
-      options: [
-        'Exit code 1: Signaling non zero failure to the operating system, which instructs the CI pipeline to fail the build',
-        'Exit code 0: Because commands that finish executing always return zero',
-        'Exit code 200: Matching the HTTP status code',
-        'Exit code 500'
-      ],
-      answerIndex: 0,
-      revealTitle: 'Terminal Exit Code Confirmation',
-      explanation: 'Exit code 1 halts the pipeline! In Unix and Windows terminals, exit code 0 indicates success, while any non zero code (such as 1) signals failure. Jenkins and GitHub Actions automatically inspect this numeric code: when Newman exits with 1, the pipeline halts and blocks the deployment!'
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'What the HTML Extra Dashboard Delivers',
-      paragraphs: [
-        '• Summary Visuals: Interactive pie charts and bar graphs showing total requests, passed assertions, and failed checks.',
-        '• Granular Request Logs: Expandable cards showing exact request URLs, HTTP methods, wire headers, and request bodies for every iteration.',
-        '• Diagnostic Trace: Detailed inspection of response payloads and assertion error diffs for immediate debugging.',
-        '• Stakeholder Ready: A single portable HTML file you can email to managers or publish to CI build artifacts.',
-      ],
-    },
+
+    // =========================================================================
+    // TECHNICAL ARCHITECTURE & DEEP DIVE
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 5: Setting Up Jenkins and The Working Directory Trap',
+      level: 2,
+      text: 'The Architecture of Headless CI Quality Gates'
     },
     {
-      type: 'paragraph',
-      text: 'To automate execution without opening a terminal manually, we set up **Jenkins**, the enterprise standard continuous integration server. You can download the Jenkins build script: [Download Jenkins Build Step Script](/materials/zero-to-agentic-api-testing/lesson-13/jenkins-build-step.sh).',
+      type: 'image',
+      src: enterpriseCicdImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/enterprise-cicd-quality-gate.jpg',
+      w: 1408,
+      h: 768,
+      title: 'Enterprise CI/CD Quality Gate Pipeline & Automated Reporting',
+      text: 'Headless Newman acts as the automated arbiter of deployment safety in modern continuous delivery pipelines. Evaluating exit codes enforces zero tolerance for regressions before code reaches production.',
+      alt: 'Architecture diagram showing GitHub Actions workflow driving Newman test suite and deployment gates.',
+      caption: 'The Enterprise Quality Gate: Automated headless test verification guarding production deployments.'
+    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 1 : NEWMAN CLI HEADLESS EXECUTION
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 1 : NEWMAN HEADLESS RUNNER',
+      title: 'Newman CLI Headless Execution with Bail & HTML Extra Reporter',
+      scenario: 'Execute the full admissions collection headlessly in terminal. Generate both terminal summary and visual HTML Extra reports.',
+      config: {
+        method: 'CLI',
+        path: 'newman run collection.json -e staging.json --bail -r cli,htmlextra',
+        activeTab: 'Terminal'
+      },
+      tabs: {
+        params: [],
+        headers: [],
+        body: '',
+        tests: '# Headless Newman execution command\nnewman run ./collections/admissions_v2.json \\\n  --environment ./environments/staging.json \\\n  --reporters cli,htmlextra \\\n  --reporter-htmlextra-export ./reports/admissions_report.html \\\n  --bail'
+      },
+      response: {
+        status: 'EXIT CODE 0',
+        time: '8.4s',
+        size: '1.2MB',
+        body: JSON.stringify({
+          collection: "Admissions Portal v2.0",
+          iterations: 1,
+          requests: 48,
+          prerequestScripts: 48,
+          testScripts: 48,
+          totalAssertions: 144,
+          failedAssertions: 0,
+          exitCode: 0,
+          htmlReport: "./reports/admissions_report.html"
+        }, null, 2)
+      },
+      notes: [
+        '--bail halts collection execution immediately upon encountering the first test failure.',
+        '-r cli,htmlextra outputs human readable logs to stdout while generating interactive HTML reports.'
+      ]
+    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 2 : GITHUB ACTIONS CI WORKFLOW
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 2 : GITHUB ACTIONS WORKFLOW',
+      title: 'Automated CI Quality Gate: .github/workflows/api-tests.yml',
+      scenario: 'Inspect the GitHub Actions workflow definition. The workflow checks out code, sets up Node.js, installs Newman, verifies environment guards, and executes tests.',
+      config: {
+        method: 'YAML',
+        path: '.github/workflows/api-tests.yml',
+        activeTab: 'YAML'
+      },
+      tabs: {
+        params: [],
+        headers: [],
+        body: '',
+        tests: 'name: API Regression Quality Gate\non:\n  pull_request:\n    branches: [ main ]\n\njobs:\n  api-tests:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Setup Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: 20\n      - name: Install Newman\n        run: npm install -g newman newman-reporter-htmlextra\n      - name: Run API Tests Gate\n        run: |\n          newman run ./tests/admissions.json -e ./tests/staging.json --bail'
+      },
+      response: {
+        status: 'PIPELINE GREEN',
+        time: '24s',
+        size: '64KB',
+        body: JSON.stringify({
+          job: "api-tests",
+          status: "SUCCESS",
+          conclusion: "success",
+          stepsCompleted: 5,
+          exitCode: 0
+        }, null, 2)
+      },
+      notes: [
+        'Automated workflows trigger on every pull request targeting the main branch.',
+        'If Newman returns exit code 1, GitHub Actions marks the pull request check red, preventing merges.'
+      ]
+    },
+
+    // =========================================================================
+    // FOUR PART PEDAGOGICAL CARDS (SENIOR SAVIOR CONTRACTS)
+    // =========================================================================
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : THE EXIT CODE QUALITY GATE',
+      title: 'The Exit Code Quality Gate',
+      subtitle: 'Enforcing automated deployment rules through process exit codes',
+      input: {
+        method: 'CLI',
+        url: 'newman run collection.json -e staging.json --bail',
+        desc: 'Headless runner execution evaluating collection assertions in a container.',
+        code: 'newman run collection.json -e staging.json --bail'
+      },
+      underTheHood: {
+        desc: 'Operating system process exit codes communicate execution success or failure.',
+        steps: [
+          'Newman runs all requests and assertion blocks in the collection.',
+          'If all assertions pass, process terminates with exit code 0.',
+          'If any assertion fails, Newman terminates with exit code 1.',
+          'Continuous integration runner evaluates process exit code.',
+          'Exit code 0 allows deployment to proceed; exit code 1 aborts pipeline.'
+        ]
+      },
+      output: {
+        status: 'EXIT 0',
+        time: '8.4s',
+        desc: 'All assertions pass; exit code 0 signals automated deployment pipeline to ship.',
+        body: JSON.stringify({
+          exitCode: 0,
+          assertionsPassed: 144,
+          assertionsFailed: 0,
+          deploymentAuthorized: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'The exit code is the only voice the deployment pipeline obeys.',
+        rule: 'Never mask failures with pipe true in continuous integration shell scripts.',
+        trap: 'Appending || true to newman commands in CI, turning broken builds into false green deployments.'
+      }
     },
     {
-      type: 'steps',
-      items: [
-        'Download the generic Java package: `jenkins.war` from https://www.jenkins.io.',
-        'Start Jenkins from your command prompt on port 9090: `java -jar jenkins.war --httpPort=9090`.',
-        'Open your local browser to access the running Jenkins administrative setup dashboard on your assigned port.',
-        'Enter the initial administrator password, complete setup, and click New Item to create a Freestyle Project named "Campus Library Regression Pipeline".',
-        'In the Build section, click Add build step and select Execute shell (on Linux or Mac) or Execute Windows batch command (on Windows).',
-      ],
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : ENVIRONMENT GUARDS IN CI',
+      title: 'Environment Guards and Pipeline Workflows',
+      subtitle: 'Preventing automated pull request tests from mutating production databases',
+      input: {
+        method: 'WORKFLOW SCRIPT',
+        url: '.github/workflows/api-tests.yml',
+        desc: 'Pipeline script enforcing target environment validation before launching runner.',
+        code: 'if [ "$TARGET_ENV" == "production" ]; then\n  echo "CRITICAL: PRs forbidden against production!"\n  exit 1\nfi'
+      },
+      underTheHood: {
+        desc: 'Guard scripts inspect environment variables before executing destructive tests.',
+        steps: [
+          'Pipeline triggers on pull request creation.',
+          'Guard step evaluates TARGET_ENV variable against permitted test environments.',
+          'If TARGET_ENV points to production, pipeline aborts with exit code 1 immediately.',
+          'Permitted staging or ephemeral environment variables are injected.',
+          'Protects live customer data from test cleanup sweeps and state corruption.'
+        ]
+      },
+      output: {
+        status: 'GUARD VERIFIED',
+        time: '0ms',
+        desc: 'Staging environment confirmed; regression suite executes safely.',
+        body: JSON.stringify({
+          targetEnv: "staging",
+          guardCheck: "PASSED",
+          safeToExecute: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Guard the target environment before trusting the test suite.',
+        rule: 'Never allow pull request tests to execute against production databases.',
+        trap: 'Pointing CI runners at production environments where test teardowns purge real customer data.'
+      }
     },
     {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: The Jenkins Working Directory Trap',
-      paragraphs: [
-        'When Jenkins runs a job, it executes from its own internal workspace directory (such as `/var/jenkins_home` or your user profile folder), where your exported collection files do not exist.',
-        'If you simply paste `newman run Campus_Library_Collection.json`, Jenkins immediately aborts with an error saying the file cannot be found!',
-        'How to fix: In your Jenkins build step, always navigate to your project folder first using the cd command before running Newman:',
-      ],
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : FLAKY TEST TRIAGE & RERUN LAW',
+      title: 'Flaky Test Triage and the Rerun Law',
+      subtitle: 'Eliminating false confidence by quarantining nondeterministic tests',
+      input: {
+        method: 'TRIAGE PROTOCOL',
+        url: 'Automated test suite with intermittent failures',
+        desc: 'A test fails 2 out of 90 runs due to network jitter or timing issues.',
+        code: '// Flaky test anti-pattern: clicking "Re-run failed jobs" until it passes green'
+      },
+      underTheHood: {
+        desc: 'Nondeterministic tests erode team confidence in automated quality gates.',
+        steps: [
+          'Intermittent timing issues cause test to fail on random CI executions.',
+          'Engineers click "Rerun" until lucky timing yields a passing run.',
+          'True regression defects get dismissed as "just another flaky test".',
+          'Rerun Law mandates: quarantine flaky tests immediately into separate suites.',
+          'Root causes (race conditions, unmocked delays) are diagnosed and resolved.'
+        ]
+      },
+      output: {
+        status: 'DETERMINISTIC',
+        time: '12ms',
+        desc: 'Flaky tests quarantined and fixed; main CI gate maintains 100% reliability.',
+        body: JSON.stringify({
+          flakyTestsInMain: 0,
+          reliabilityRate: "100%",
+          confidenceRestored: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'The quality gate does not accept probably nothing.',
+        rule: 'Rerunning until green is hunting for luck and calling it confidence.',
+        trap: 'Clicking rerun on failed CI jobs without investigating root causes, allowing bugs into production.'
+      }
     },
     {
-      type: 'code',
-      filename: 'jenkins-build-step.sh',
-      lines: [
-        '# Step 1: Navigate to the directory where exported artifacts are stored',
-        'cd /home/user/postman_execution',
-        '',
-        '# Step 2: Run Newman with environment and HTML Extra reporter',
-        'newman run Campus_Library_Collection.json \\',
-        '  -e Campus_Library_UAT.json \\',
-        '  -d books_data.csv \\',
-        '  -r cli,htmlextra \\',
-        '  --reporter-htmlextra-export reports/build_report.html \\',
-        '  --bail',
-      ],
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : AGENTIC SELF-HEALING REPAIR LOOP',
+      title: 'The Agentic Self-Healing Repair Loop',
+      subtitle: 'Autonomous diagnosis and defect isolation with human-in-the-loop signoff',
+      input: {
+        method: 'AGENTIC LOOP',
+        url: 'Newman HTML Extra failure telemetry report',
+        desc: 'Automated failure report indicating fee rounding failure on line 42.',
+        code: 'pm.test("Fee rounded to two decimals", function() {\n  pm.expect(res.fee).to.eql(500.00);\n});'
+      },
+      underTheHood: {
+        desc: 'Automated agents parse test failure telemetry to isolate defective code branches.',
+        steps: [
+          'Newman generates structured JSON failure report on exit code 1.',
+          'Agentic repair tool ingests report, request body, and backend stack trace.',
+          'Identifies root cause: Math.round missing division step in fee calculator.',
+          'Generates targeted code correction and proposes pull request patch.',
+          'Human architect reviews patch, runs companion test, and approves deployment.'
+        ]
+      },
+      output: {
+        status: 'REPAIRED & VERIFIED',
+        time: '15m',
+        desc: 'Defect isolated, patched, and verified green across 13 suites in CI.',
+        body: JSON.stringify({
+          defectType: "ROUNDING_PRECISION_ERROR",
+          repairedFile: "src/billing/feeCalculator.js",
+          humanApproved: true,
+          retestExitCode: 0
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Automate the defect hunt, never the deployment blame.',
+        rule: 'The self healing loop concludes with human review and green gate verification.',
+        trap: 'Permitting automated agents to deploy unverified code directly to production without human signoff.'
+      }
     },
+
+    // =========================================================================
+    // POST DRILLS & QUIZ
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 6: Parameterized Jenkins Builds: Dynamic Environment Switching',
+      level: 2,
+      text: 'CI Exit Code Routing'
     },
     {
-      type: 'paragraph',
-      text: 'Here is the ultimate enterprise automation requirement: our QA engineers test on the **QA staging cluster** in the morning, but before the midnight release, they must validate the **UAT production mirror**. We do not want to create duplicate Jenkins jobs or edit shell scripts by hand. We make our Jenkins job dynamic using a **Choice Parameter**.',
+      type: 'chunked-code',
+      title: 'Evaluating Newman Exit Codes in Shell Scripts',
+      code: `#!/bin/bash
+# Run Newman with bail flag
+newman run ./collections/admissions.json -e ./environments/staging.json --bail
+
+# Capture exit code immediately
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -eq 0 ]; then
+  echo "All assertions passed cleanly. Proceeding to production deployment."
+  ./deploy_to_production.sh
+else
+  echo "CRITICAL: Newman tests failed with exit code $EXIT_CODE. Halting deployment!"
+  exit 1
+fi`,
+      chunks: [
+        {
+          lines: '3-6',
+          label: 'Capturing Exit Status',
+          explanation: '$? captures the exit code of the most recently executed command.'
+        },
+        {
+          lines: '8-14',
+          label: 'Deployment Gating',
+          explanation: 'Only exit code 0 triggers the deployment script; any other code aborts the pipeline.'
+        }
+      ]
     },
-    {
-      type: 'steps',
-      items: [
-        'In your Jenkins job configuration, check the box: This project is parameterized.',
-        'Click Add Parameter and select Choice Parameter.',
-        'Set the Parameter Name to: ENV',
-        'In the Choices box, enter two options on separate lines: QA and UAT.',
-        'Ensure your exported environment files follow a uniform naming convention: `QA.postman_environment.json` and `UAT.postman_environment.json`.',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'Now, update the Jenkins build script to reference the parameter dynamically using `${ENV}`. You can download the parameterized script: [Download Parameterized Jenkins Build Script](/materials/zero-to-agentic-api-testing/lesson-13/parameterized-jenkins-build.sh):',
-    },
-    {
-      type: 'code',
-      filename: 'parameterized-jenkins-build.sh',
-      lines: [
-        '# Navigate to project folder',
-        'cd /home/user/postman_execution',
-        '',
-        '# Interpolate the selected Jenkins environment choice dynamically',
-        'newman run Campus_Library_Collection.json \\',
-        '  -e "${ENV}.postman_environment.json" \\',
-        '  -d books_data.csv \\',
-        '  -r cli,htmlextra \\',
-        '  --reporter-htmlextra-export "reports/${ENV}_report.html" \\',
-        '  --bail',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'When you click **Build with Parameters** in Jenkins, a dropdown appears. Selecting QA runs your entire test suite against `https://qa-api.campuslibrary.org`. Selecting UAT runs against `https://uat-api.campuslibrary.org`. One single automated job services your entire enterprise testing lifecycle!',
-    },
-    {
-      type: 'heading',
-      text: 'Step 7: Cloud CI CD Pipeline: GitHub Actions',
-    },
-    {
-      type: 'paragraph',
-      text: 'For modern cloud engineering teams that host repositories on GitHub, you can execute this identical pipeline automatically on every git commit without hosting a local Jenkins server. You can download the ready to use GitHub workflow: [Download GitHub Actions Workflow](/materials/zero-to-agentic-api-testing/lesson-13/api-tests-workflow.yml):',
-    },
-    {
-      type: 'code',
-      filename: 'api-tests-workflow.yml',
-      lines: [
-        'name: Campus Library API Regression Pipeline',
-        'on: [push, pull_request]',
-        '',
-        'jobs:',
-        '  api-regression:',
-        '    runs-on: ubuntu-latest',
-        '    steps:',
-        '      - name: Checkout Repository Code',
-        '        uses: actions/checkout@v4',
-        '      - name: Setup Node.js Environment',
-        '        uses: actions/setup-node@v4',
-        '        with:',
-        '          node-version: 20',
-        '      - name: Install Newman and HTML Extra Reporter',
-        '        run: npm install -g newman newman-reporter-htmlextra',
-        '      - name: Execute Headless Test Suite',
-        '        run: |',
-        '          newman run course-materials/zero-to-agentic-api-testing/Zero-to-Agentic-API-Testing.postman_collection.json \\',
-        '            -e course-materials/zero-to-agentic-api-testing/Campus-Library-UAT.postman_environment.json \\',
-        '            -d course-materials/zero-to-agentic-api-testing/lesson-08/books_data.csv \\',
-        '            -r cli,htmlextra \\',
-        '            --reporter-htmlextra-export build/regression_report.html \\',
-        '            --bail',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 8: Scheduled Cloud Watchdogs: Postman Monitors',
-    },
-    {
-      type: 'paragraph',
-      text: 'While Jenkins and GitHub Actions run tests when code changes occur, what if no code was deployed during the night, but an external database server went down? To ensure system health without keeping your laptop awake, Postman provides **Monitors**.',
-    },
-    {
-      type: 'paragraph',
-      text: 'A Postman Monitor runs your collection periodically on Postman cloud infrastructure according to a schedule you define:',
-    },
-    {
-      type: 'steps',
-      items: [
-        '1. In Postman, navigate to the Monitors tab on the left sidebar and click Create a Monitor.',
-        '2. Assign a monitor name such as "Campus Library Daily Smoke Check".',
-        '3. Select the collection to execute and the target environment (`Campus_Library_UAT`).',
-        '4. Set the timer schedule: for example, every weekday at 7:00 AM. Postman cloud servers will execute the collection so results are ready before engineers arrive at 9:00 AM.',
-        '5. Configure email alerts: enter team email addresses to receive instant notifications if any assertion fails, with automatic retry on transient network errors.',
-        '6. Inspecting History and Restoring Items: If an engineer accidentally deletes a collection, navigate to the workspace Trash to restore it immediately.',
-      ],
-    },
+
     {
       type: 'battle-scar',
-      metric: 'Four Million Dollar Pipeline Bypass',
-      title: 'The Bypassed CI Gate Disaster: The Cost of Disabling Newman in the Merge Pipeline',
-      context: 'Under intense pressure to meet a strict quarterly launch deadline, an engineering squad commented out the Newman collection execution step in their GitHub Actions workflow file to expedite merging. A developer subsequently merged a pull request that unintentionally inverted financial debit and credit transaction signs. Because the Newman automated regression check had been disabled, the pull request merged green without firing assertions. Within ninety minutes of deployment, the production ledger accumulated over four million dollars in erroneous balances.',
-      takeaway: 'Never bypass or disable automated CI quality gates. Treat Newman command line regression tests as mandatory blocking status checks on every pull request and automated build.'
+      incident: 'The Masked Exit Code That Shipped An Empty Database Migration',
+      context: 'A fintech engineering team configured their CI pipeline with: newman run suite.json || true. The || true trick was added to prevent test failures from stopping artifact builds. When a broken database migration wiped customer transaction histories on staging, the test suite failed 100% of assertions. However, because the exit code was masked, the CD pipeline automatically deployed the catastrophic migration to production.',
+      takeaway: 'Never mask exit codes in continuous delivery pipelines. Exit codes are the only defense against shipping broken code.'
     },
     {
       type: 'triage',
-      title: 'War Room Triage: The Non Zero Exit Code CI Blocker',
-      scenario: 'You configure Newman in a Jenkins pipeline: newman run LibraryTests.json -e StagingEnv.json. Two assertions fail during the test execution, yet Jenkins marks the build step as SUCCESS and deploys the defective build straight to staging. Why did Jenkins fail to block the deployment?',
+      title: 'Triage Drill: The Masked CI Pipeline',
+      scenario: 'You notice that a pull request with failing API assertions was merged and deployed to production. In the CI configuration file, you find: newman run ./test.json || exit 0.',
       options: [
-        'Newman does not generate exit codes on assertion failures.',
-        'The build script appended "|| true" or suppressed the non zero exit code, preventing Jenkins from detecting that Newman returned exit code 1 on assertion failures.',
-        'Jenkins only inspects console colors, not numeric exit codes.',
-        'The Newman collection must be written in Python to fail a Jenkins build.'
+        {
+          label: 'The developer used || exit 0 to ensure failed tests never block the deployment pipeline.',
+          correct: true,
+          explanation: '|| exit 0 forces the shell to return exit code 0 regardless of Newman failure, completely disabling the CI quality gate.'
+        },
+        {
+          label: 'Newman does not support running on Ubuntu containers.',
+          correct: false,
+          explanation: 'Newman runs flawlessly on Ubuntu, macOS, and Windows containers.'
+        },
+        {
+          label: 'The tests failed because the HTML Extra reporter was missing.',
+          correct: false,
+          explanation: 'Reporters affect output formatting, not test pass/fail semantics.'
+        }
       ],
-      answerIndex: 1,
-      debrief: 'Exit code integrity controls CI pipelines! In Unix and Windows terminals, a command indicates failure by returning a non zero exit code (such as 1). Newman automatically returns exit code 1 whenever any test assertion fails. If a shell script appends "|| true", the shell overrides the exit code to 0, deceiving Jenkins into treating a failed run as successful. Remove any exit code suppression or use the --bail flag to guarantee immediate failure!',
-      traps: [
-        'Newman strictly adheres to standard terminal exit code conventions.',
-        '',
-        'Jenkins status decisions rely entirely on the process exit code, never console color formatting.',
-        'Newman runs natively on Node.js and integrates seamlessly with all CI engines.'
-      ]
+      debrief: 'Using || exit 0 or || true in CI scripts destroys the quality gate. Remove the override so Newman exit code 1 stops the build.'
     },
-    {
-      type: 'mission-accomplished',
-      title: 'Mission 3 Accomplished: Autonomous Production Quality Gate!',
-      text: 'Our entire campus library test suite now runs headlessly on every code commit in continuous integration pipelines, and runs scheduled smoke checks in the cloud. Any regression is detected and blocked before reaching students and faculty. You have mastered API testing from first principles to enterprise automation!',
-    },
-    {
-      type: 'heading',
-      text: 'Step 9: Review and Practice',
-    },
-    {
-      type: 'guess',
-      prompt: 'What exit code does Newman return to the terminal when all assertions in a collection pass successfully?',
-      options: [
-        'Exit code 1',
-        'Exit code 0',
-        'Exit code 200',
-        'Exit code 255',
-      ],
-      answerIndex: 1,
-      explain: 'In Unix and Windows command environments, an exit code of 0 indicates complete success. Any non zero exit code (such as 1) indicates failure, which signals CI pipelines to mark the build as failed.',
-    },
+
     {
       type: 'quiz',
-      items: [
-        [
-          'Why do CI build servers run tests headlessly rather than opening the Postman desktop window?',
-          'CI servers run on minimal Linux servers without screens. A headless command line tool consumes minimal memory, starts in milliseconds, and uses exit codes to control deployment pipelines.',
-        ],
-        [
-          'What is the primary difference between a Jenkins pipeline build and a Postman Monitor?',
-          'A Jenkins pipeline typically triggers on event driven actions (such as a git push or pull request merge). A Postman Monitor runs on a recurring time schedule in the cloud (such as daily at 7:00 AM) to verify ongoing system health.',
-        ],
+      title: 'Knowledge Check: Newman Exit Codes',
+      question: 'What process exit code does Newman return to the operating system when at least one assertion in a collection fails?',
+      options: [
+        '0',
+        '1',
+        '200',
+        '-1'
       ],
+      correctAnswer: 1,
+      explanation: 'In Unix standard conventions, exit code 0 indicates success. Newman returns exit code 1 when one or more assertions fail.'
     },
     {
       type: 'takeaways',
-      items: [
-        'Newman runs Postman collections headlessly from command prompts, Docker containers, and CI servers.',
-        'Export collection, environment (-e), global (-g), and CSV data (-d) files into a single project folder without spaces in filenames.',
-        'The htmlextra reporter creates publication grade interactive dashboards for stakeholders and QA leads.',
-        'In Jenkins, always navigate to your project folder using cd before running Newman commands.',
-        'Use Jenkins Choice Parameters to switch target test environments dynamically with a single dropdown selection.',
-        'Postman Monitors provide scheduled cloud watchdogs running health checks without requiring local machines.',
-      ],
+      title: 'Senior Savior Takeaways',
+      points: [
+        'Newman runs collections headlessly in CLI and CI containers without a desktop interface.',
+        'The exit code is the only voice the deployment pipeline obeys: 0 ships, 1 halts.',
+        'Never mask failures with || true in CI scripts; let failures fail loudly.',
+        'Quarantine flaky tests immediately; rerunning until green is hunting for luck and calling it confidence.'
+      ]
     },
     {
       type: 'victory-milestone',
-      badge: '★ FINAL CAPSTONE CONQUERED · CI CD DEFENDER',
-      rank: 'CHIEF API AUTOMATION & QUALITY ARCHITECT',
-      title: 'Ultimate Enterprise Capstone: Autonomous CI CD Quality Gate Deployed',
-      summary: 'You have conquered the entire Zero to Agentic API Testing journey! You took full command of the testing pyramid, automated multi tier campus services, secured microservices with OAuth 2.0, bridged legacy SOAP XML WebServices, and engineered an autonomous continuous integration pipeline powered by Newman, Jenkins, GitHub Actions, and HTML Extra reporting. You stand at the pinnacle of modern software quality engineering.',
-      powers: [
-        'Orchestrating zero click headless test execution across containerized CI CD pipelines via Newman CLI',
-        'Automating strict quality gates with the fail fast bail flag to block breaking commits before deployment',
-        'Generating publication grade interactive HTML Extra dashboards with visual charts and granular wire traces',
-        'Engineering parameterized Jenkins pipelines with dynamic Choice Parameters for instant QA and UAT switching',
-        'Deploying round the clock scheduled cloud watchdogs and automated alerts using Postman Monitors',
-      ],
-      disastersPrevented: [
-        'Averted catastrophic midnight production outages by intercepting breaking backend commits in the pipeline',
-        'Eliminated hundreds of hours of manual release signoff delays, enabling true continuous delivery at enterprise scale',
-        'Protected live production environments by establishing rigorous automated UAT gating before customer release',
-      ],
-      warRoomTakeaway: 'You are no longer someone who merely checks if an application works. You are the architect who builds the autonomous shields that guarantee software never fails in production. You command the wire, the contract, the assertion, and the pipeline.',
+      badge: 'All 13 Chapters Cleared',
+      title: 'Graduation: Lead API Quality Architect',
+      summary: 'You have mastered the complete journey from raw HTTP wire bytes to autonomous CI/CD quality gates, OAuth 2.0 PKCE security, SOAP mainframes, and agentic testing.',
+      nextStep: 'Congratulations! You are officially certified as a Lead API Quality Architect.'
     },
     {
       type: 'cliffhanger',
-      title: 'From Ground Zero to Production Mastery',
-      text: 'Congratulations! You have completed all three missions: from auditing the live REST wire and mastering API fundamentals to automating the college library at scale, and hardening enterprise pipelines in CI CD. You are ready to test and automate any API in the world!',
-    },
-  ],
+      time: '08:00 AM',
+      location: 'Apex Institute Great Hall Gates',
+      alert: 'SYSTEMS ALL GREEN',
+      speaker: 'Sameer Krishnamurthy',
+      speech: 'The gates are open. The admissions portal is live. Splendid work, Lead API Quality Architect.',
+      context: 'Sunlight floods the Great Hall as thousands of students stream through the gates. The National Admissions Portal v2.0 serves requests with sub 15 millisecond response times and zero failures. Your transformation is complete!',
+      nextLessonId: 'journey-complete'
+    }
+  ]
 }
