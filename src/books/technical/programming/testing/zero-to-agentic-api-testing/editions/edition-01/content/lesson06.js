@@ -1,4 +1,10 @@
 import scopesImg from '../assets/postman-variable-scopes-hierarchy.jpg'
+import ch06Scene1Img from '../assets/ch06-scene-1-scopes-hierarchy.jpg'
+import ch06Scene2Img from '../assets/ch06-scene-2-prerequest-dynamic-isbn.jpg'
+import warRoomWideImg from '../assets/apex-campus-crisis-war-room.jpg'
+import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 
 export const lesson06 = {
   id: 'variables-and-scopes',
@@ -11,7 +17,7 @@ export const lesson06 = {
     {
       type: 'mission-hud',
       mission: 'Mission 2: Automating Student and Campus Services at Scale',
-      phase: 'Phase 3 of 5: Variable Scopes & Environments',
+      phase: 'Phase 3 of 5: Variable Scopes and Environments',
       rank: 'Rank: Senior Automation Engineer',
       status: 'ACTIVE'
     },
@@ -22,409 +28,638 @@ export const lesson06 = {
       missionCrisis: 'Dynamic Environment Isolation and Unique State Generation',
       missionContext: 'Hardcoded test data causes severe test flakiness. If your test suite uses a hardcoded ISBN, running the suite a second time triggers a duplicate book collision error and fails the test. Furthermore, running tests against production instead of staging by mistake can corrupt live data. We must master the five variable scopes, switch environments dynamically, and generate collision free unique IDs.',
       missionObjective: 'Implement the 5 variable scopes, configure QA vs UAT environments, and generate dynamic unique ISBNs in Pre request scripts.',
-      targetSystems: 'Postman Variable Scopes Hierarchy · Dynamic Environment Switching · Pre request Script Engine',
-      achieve: 'Eliminate hardcoded URLs and duplicate key collisions by mastering the five variable tiers, dynamic environment switching, and collision safe dynamic generation.',
-      how: 'Map variable precedence from Local to Global, safeguard secrets using Initial versus Current values, generate unique runtime ISBNs in Pre request scripts, and analyze collision mathematics.',
-      carry: 'A parameterized environment and dynamically generated variable keys that seamlessly feed the downstream request chaining pipeline in Chapter 7.'
+      targetSystems: 'API Testing Workbench Variable Scopes Hierarchy · Dynamic Environment Switching · Pre request Script Engine',
+      difficulty: 'INTERMEDIATE',
+      estimatedTime: '25 MINUTES',
+      prerequisites: 'Chapter 05: Writing JavaScript Assertions and the pm Object'
     },
     {
       type: 'mission-tracker',
-      badge: 'MISSION 2 PROGRESS · STEP 3 OF 5',
-      title: 'Continuing Mission 2: Eliminating Hardcoded URLs and Collision Errors',
-      text: 'Our assertions in Chapter 5 run fast, but our collection still has hardcoded server URLs and hardcoded ISBN values that cause duplicate collision errors on every second run. Our next step in Mission 2 is parameterizing our test suite: learning the five variable scopes, switching environments with one click, and generating dynamic unique ISBNs in Pre request scripts.',
+      currentPhase: 'Phase 3: Scopes & Environments',
+      totalPhases: 5,
+      completedSteps: [
+        'Manual CRUD Lifecycle & Unique Constraints (Chapter 04)',
+        'Writing JavaScript Assertions and pm Object (Chapter 05)'
+      ],
+      currentStep: 'Managing Variables Across the Five Scopes',
+      upcomingSteps: [
+        'Request Chaining and Complex Nested JSON Parsing (Chapter 07)',
+        'Data Driven Testing with External Data Files (Chapter 08)'
+      ]
     },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : SIX SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
+    {
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
+      title: 'The Hardcoded URL Ambush and Variable Scope Hierarchy',
+      intro: 'Follow apprentice Akshay, Principal Systems Architect Sameer, and Frontend Lead Ananya in the midnight Architecture Lab as hardcoded localhost URLs trigger ECONNREFUSED errors, duplicate static ISBNs crash staging, and the five variable scopes save the pipeline.',
+      panels: [
+        {
+          title: 'Scene 1: 12:15 AM: Midnight Architecture War Room and the ECONNREFUSED Ambush',
+          time: '12:15 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer at the dark teak desk in the ancient red sandstone systems architecture laboratory.',
+            caption: 'Architecture War Room: Rain streaks high arched windows as seventy test tabs crash red.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay leaning over his silver laptop in frustration as connection refused errors flood the screen.',
+            caption: 'Connection Refused: Hardcoding localhost 5050 across seventy requests prevents switching to QA staging.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'ECONNREFUSED on every call! I hardcoded localhost 5050 in seventy different tabs!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Hardcoding URLs is tattooing an address on your arm. Store it in a scope.'
+          },
+          scene: 'At 12:15 AM, rain patters against the ancient red sandstone arches of the Systems Architecture Lab. Akshay attempts pointing his collection to QA staging, but every request fails with connect ECONNREFUSED 127.0.0.1:5050 because the local address was copy pasted across seventy tabs.',
+          realization: 'Hardcoding hostnames, ports, and environment paths inside individual request tabs creates fragile, immovable test suites.'
+        },
+        {
+          title: 'Scene 2: 12:21 AM: Sameer Points to the Noticeboard Analogy and the Five Scopes',
+          time: '12:21 AM',
+          layout: 'duo',
+          image: {
+            src: ch06Scene1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch06-scene-1-scopes-hierarchy.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Sameer gesturing toward the tiered wooden noticeboard on the sandstone pillar explaining the five scopes.',
+            caption: 'The Noticeboard Analogy: Five tiers of variable scope from narrowest Local to broadest Global.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay studying the precedence ladder diagram on the glass whiteboard.',
+            caption: 'The Precedence Ladder: Narrowest active scope overrides broader scopes whenever names collide.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Five scopes: Global, Collection, Environment, Data, Local. Narrowest wins.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'So if a variable exists in both Environment and Global, Environment overrides?'
+          },
+          scene: 'Sameer walks to the tiered noticeboard on the pillar. He explains that hardcoding addresses is like tattooing a phone number on your skin instead of keeping an address book. He diagrams the five variable tiers from Local out to Global.',
+          realization: 'The runtime resolves variables by climbing from narrowest scope outward. Closer scopes always take precedence.'
+        },
+        {
+          title: 'Scene 3: 12:29 AM: Initial Value vs Current Value: The Cloud Leak Danger',
+          time: '12:29 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Close up of the environment modal showing Initial Value and Current Value columns.',
+            caption: 'The Vault Boundary: Initial Value syncs to cloud backups, Current Value stays strictly in local memory.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer cautioning Akshay with cutting chai in brass holder.',
+            caption: 'Secret Hygiene: Never paste production tokens or passwords into Initial Values.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Notice two columns: Initial and Current. Initial syncs to cloud; Current stays local.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'So keeping Initial blank ensures our shared exports ship with zero secrets?'
+          },
+          scene: 'Akshay creates QA, UAT, and Prod environments. Sameer points to the subtle column headers in the workbench modal. He reveals that shared collection exports and team cloud syncs serialize only Initial Values. Current Values never leave local memory.',
+          realization: 'Keeping secrets in Current Value only prevents catastrophic token and credential leaks during team exports.'
+        },
+        {
+          title: 'Scene 4: 12:31 AM: Ananya Rushes In: Staging Collision Alert and the Static ISBN Trap',
+          time: '12:31 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Ananya entering the doorway with her diagnostic tablet displaying staging error spikes.',
+            caption: 'Staging Collision: A duplicate book ID triggers 409 Conflict across shared test pipelines.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay looking at the duplicate key collision stack trace on the terminal.',
+            caption: 'Static Data Death: Static test data works exactly once, then fails on every subsequent run.'
+          },
+          dialogue: {
+            speaker: 'Ananya',
+            speech: 'Staging catalog just crashed! Someone re-ran a test with a hardcoded static ISBN!',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Duplicate book collision error! Static test data works once, then fails forever!'
+          },
+          scene: 'Ananya rushes into the architecture lab with her tablet. A colleague re-ran an automated suite using a static book ISBN. The database rejected the second write with 409 Conflict, halting the staging verification pipeline.',
+          realization: 'Automated test suites must generate fresh, collision free unique state at runtime rather than relying on static fixtures.'
+        },
+        {
+          title: 'Scene 5: 12:37 AM: Pre-Request Scripts and Dynamic Timestamped State',
+          time: '12:37 AM',
+          layout: 'duo',
+          image: {
+            src: ch06Scene2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/ch06-scene-2-prerequest-dynamic-isbn.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay coding a dynamic timestamp key generator in the Pre request Script tab.',
+            caption: 'Dynamic Generation: Using Date.now() and Math.random() in Pre request scripts.'
+          },
+          replyImage: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Terminal output showing dynamic ISBNs resolving cleanly before HTTP dispatch.',
+            caption: 'Zero Collisions: Each request receives a fresh, timestamped primary key.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'const dynamicIsbn = "ISBN" + Date.now(); Generating timestamped keys!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Set it in Environment scope, not Global. Teardown sweeps it when finished.'
+          },
+          scene: 'Sameer directs Akshay to the Pre-request Script tab: the execution sandbox that fires before the HTTP packet leaves the network adapter. Akshay computes a dynamic timestamp key and assigns it to environment scope.',
+          realization: 'Pre request scripts prepare dynamic runtime context, ensuring each test iteration generates collision free identifiers.'
+        },
+        {
+          title: 'Scene 6: 12:55 AM: Zero Collision Proof and The Chained Pipeline Horizon',
+          time: '12:55 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Ananya, Akshay, and Sameer reviewing passing test dashboards in the midnight lab.',
+            caption: 'Staging Restored: Ten concurrent test runs complete with zero collision failures.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer pointing toward the next architectural milestone on the whiteboard.',
+            caption: 'The Next Gate: Request chaining and nested JSON parsing await in Chapter 07.'
+          },
+          dialogue: {
+            speaker: 'Ananya',
+            speech: 'Ten concurrent test runs and zero collision errors! Dynamic state holds!',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Variables are solved. But I am still manually copying created IDs into GetBook!'
+          },
+          scene: 'Ananya triggers ten parallel pipeline runs against staging. All ten complete green without a single duplicate key collision. Akshay celebrates, but notes that he is still manually copying response IDs between requests.',
+          realization: 'Scoping isolates environments and eliminates collisions, setting the stage for dynamic request chaining.'
+        }
+      ]
+    },
+
+    // =========================================================================
+    // TECHNICAL ARCHITECTURE & DEEP DIVE
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 1: The Five Variable Scopes Hierarchy',
+      level: 2,
+      text: 'The Variable Scopes Ladder and Resolution Precedence'
     },
     {
       type: 'image',
-      layout: 'stacked',
-      badge: 'SCOPE ARCHITECTURE',
-      title: 'Postman Variable Scopes Hierarchy: Precedence and Scope Boundaries',
-      text: 'Imagine your college campus. You have your personal student ID card in your pocket (Local Scope), your class attendance register (Data Scope), your college campus WiFi settings (Environment Scope), your department syllabus (Collection Scope), and universal constants (Global Scope). Postman organizes variables across these five tiers with strict precedence rules: narrower scopes override broader scopes whenever variable names match.',
       src: scopesImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-variable-scopes-hierarchy.jpg',
       w: 1408,
       h: 768,
-      alt: 'Infographic showing the 5 Postman variable scopes ladder with precedence arrows from Local down to Global.',
-      caption: 'The five variable scopes in Postman and their order of precedence.',
-      points: [
-        'Local Scope (Highest Priority): Temporary variables declared inside a single request script.',
-        'Data Scope: Values supplied by external data files (such as CSV or JSON) during iterations.',
-        'Environment Scope: Key value pairs tied to a specific deployment stage (QA, UAT, Production).',
-        'Collection Scope: Variables shared across all requests inside one specific collection folder.',
-        'Global Scope (Lowest Priority): Universal constants accessible across all collections and environments.',
-      ],
+      title: 'API Testing Workbench Variable Scopes Hierarchy: Precedence and Scope Boundaries',
+      text: 'Variables provide reusable values across requests and scripts. The workbench provides five distinct scope layers, each with a different lifespan and visibility boundary.',
+      alt: 'Infographic showing the 5 variable scopes ladder with precedence and lifecycle boundaries.',
+      caption: 'The five variable scopes in the API Testing Workbench and their order of precedence.'
     },
     {
       type: 'structured-breakdown',
-      badge: 'VARIABLE PRECEDENCE ARCHITECTURE',
-      title: 'The Five Postman Variable Tiers Explained',
-      intro: 'When multiple variables share the exact same key name, Postman resolves conflicts by choosing the narrowest scope. Here is the operational role of each tier:',
-      categories: [
+      title: 'The Five Variable Tiers Explained',
+      intro: 'When multiple variables share the exact same key name, the workbench resolves the collision using strict precedence, starting from the narrowest scope and falling back to broader scopes.',
+      items: [
         {
-          category: 'Scope 1: Local',
-          subCategory: 'Sandbox Execution Scope',
-          title: 'Temporary In Script Variables',
-          explanation: 'Exists exclusively while the active script is executing. Overrides every other scope in Postman.',
-          points: [
-            'pm.variables.set("tempId", 101): Scoped strictly to the immediate request run.',
-            'Disappears from memory as soon as the request completes.',
-          ]
+          label: '1. Local Scope (Narrowest)',
+          badge: 'NARROWEST / TEMPORARY',
+          explanation: 'Exists exclusively while the active script is executing. Overrides all other scopes. Created in code with standard let and const declarations or pm.variables.set(). Destroyed the instant the script finishes.'
         },
         {
-          category: 'Scope 2: Data',
-          subCategory: 'Data Driven Testing',
-          title: 'External Dataset Row Variables',
-          explanation: 'Supplied by external CSV or JSON test data files during automated Collection Runner runs.',
-          points: [
-            'pm.iterationData.get("isbn"): Reads the specific value from the current dataset row.',
-            'Each iteration pulls fresh data automatically.',
-          ]
+          label: '2. Data Scope (Batch Driven)',
+          badge: 'ITERATION ONLY',
+          explanation: 'Values loaded from external CSV or JSON data files during collection runs. Active only for the single execution row. Overrides Environment, Collection, and Global variables.'
         },
         {
-          category: 'Scope 3: Environment',
-          subCategory: 'Deployment Target Scope',
-          title: 'Infrastructure Stage Configuration',
-          explanation: 'Configures target hostnames and ports for specific deployment stages like Local, QA, and UAT.',
-          points: [
-            'pm.environment.set("base_url", "..."): Switched instantly with the environment dropdown.',
-            'Initial values sync to team cloud; current values stay local to your machine.',
-          ]
+          label: '3. Environment Scope (Context Driven)',
+          badge: 'HIGHLY RECOMMENDED',
+          explanation: 'Tied to a specific server context (Local Mock, QA Staging, UAT, Production). Allows switching the entire collection from localhost:5050 to staging with a single dropdown selection.'
         },
         {
-          category: 'Scope 4: Collection',
-          subCategory: 'Shared Suite Scope',
-          title: 'Test Suite Level Variables',
-          explanation: 'Variables shared across every folder and request inside one specific Postman collection.',
-          points: [
-            'pm.collectionVariables.set("suiteToken", "..."): Accessible by all requests in the collection.',
-            'Ideal for generated IDs passed between consecutive steps.',
-          ]
+          label: '4. Collection Scope (Suite Portable)',
+          badge: 'PORTABLE DEFAULTS',
+          explanation: 'Variables shared across every folder and request inside one specific collection. Stored directly inside the collection JSON definition. Exports with the collection across teams.'
         },
         {
-          category: 'Scope 5: Global',
-          subCategory: 'Universal Workspace Scope',
-          title: 'Workspace Wide Constants',
-          explanation: 'Universal settings accessible across all collections and environments within the workspace.',
-          points: [
-            'pm.globals.set("companyDomain", "..."): Lowest precedence in the hierarchy.',
-            'Easily overridden by environment or collection variables with the same name.',
-          ]
+          label: '5. Global Scope (Broadest)',
+          badge: 'WORKSPACE WIDE',
+          explanation: 'Available across all collections and requests in the active workspace. Useful for universal helper functions or global API keys, but prone to naming collisions and unintended side effects.'
         }
       ]
     },
-    {
-      type: 'heading',
-      text: 'Step 2: Switching Environments with Double Curly Braces',
-    },
-    {
-      type: 'paragraph',
-      text: 'Referencing any variable inside a URL, query parameter, header, or JSON body requires wrapping the variable name in **double curly braces**: `{{variable_name}}`. You can import the pre configured QA environment directly: [Download Campus Library QA Environment](/materials/zero-to-agentic-api-testing/Campus-Library-QA.postman_environment.json) or [Raw GitHub File](https://raw.githubusercontent.com/mayankcoder1993/AkshatEbooks/arena/01a0bfe5-akshatebooks/course-materials/zero-to-agentic-api-testing/Campus-Library-QA.postman_environment.json).',
-    },
-    {
-      type: 'comparison',
-      title: 'Environment Configuration for Library API Targets',
-      columns: ['Environment Name', 'Variable Key', 'Resolved Base URL Value', 'Purpose'],
-      rows: [
-        ['QA Environment', '`base_url`', '`https://qa-api.campuslibrary.org`', 'Fast internal server cluster used for testing new features.'],
-        ['UAT Environment', '`base_url`', '`https://uat-api.campuslibrary.org`', 'User Acceptance Testing mirror simulating live traffic.'],
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Initial Value vs Current Value Security Mechanics',
-      paragraphs: [
-        '• Initial Value: Synced to Postman cloud servers and included in team exports. Use this for templates, never real passwords.',
-        '• Current Value: Kept strictly in local session memory. Scripts update it dynamically at runtime without leaking secrets.',
-      ],
-    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 1 : ENVIRONMENT SWITCHER
+    // =========================================================================
     {
       type: 'comic-workbench',
-      badge: 'API TESTING WORKBENCH · ENVIRONMENT ISOLATION',
-      title: 'Akshay Switches Environments with Double Curly Braces',
-      appType: 'api-workbench',
-      dialogue: [
-        {
-          speaker: 'Akshay',
-          role: 'Junior Learner',
-          text: 'Sameer! I switched the environment dropdown to QA Environment, and Postman automatically replaced {{base_url}} with https://qa-api.campuslibrary.org! We did not have to edit the URL manually at all!',
-          pointer: 'Points to {{base_url}} resolving to QA endpoint'
-        },
-        {
-          speaker: 'Sameer',
-          role: 'Lead Architect',
-          text: 'Exactly, Akshay! That is environment portability. By using double curly braces, your single collection can test Local on port 5050, QA on staging, and UAT before production without changing a single line of test code!',
-          pointer: 'Points to environment dropdown selector'
-        }
-      ],
-      workbench: {
-        method: 'GET',
-        url: '{{base_url}}/v1/campus/shuttle/coordinates?route=campus_loop_north',
-        headers: 'Accept: application/json',
-        responseStatus: '200 OK',
-        responseTime: '32 ms',
-        responseBody: '{\n  "route": "campus_loop_north",\n  "shuttleId": "BUS_104",\n  "status": "in_transit",\n  "coordinates": {\n    "latitude": 42.3601,\n    "longitude": -71.0942\n  }\n}'
+      badge: 'INTERACTIVE WORKBENCH 1 : ENVIRONMENT SWITCHER',
+      title: 'Dynamic Base URL Resolution via Active Environment',
+      scenario: 'Akshay replaces seventy hardcoded localhost addresses with {{baseUrl}}. Switch environments to see the target host update instantaneously.',
+      config: {
+        method: 'POST',
+        path: '/v1/books',
+        activeTab: 'Params'
       },
-      breakdown: {
-        input: 'GET {{base_url}}/v1/campus/shuttle/coordinates executed with QA Environment active.',
-        explanation: 'Postman intercepts outgoing packet, checks active Environment scope for base_url, and interpolates target host.',
-        output: '200 OK received from QA target server without hardcoding URLs.',
-        trapAndFix: 'Storing sensitive API keys in the Initial Value column exposes secrets in team cloud sync. Always place secrets in Current Value.'
+      tabs: {
+        params: [
+          { key: 'category', value: 'engineering', desc: 'Book genre filter' },
+          { key: 'limit', value: '25', desc: 'Page size limit' }
+        ],
+        headers: [
+          { key: 'Content-Type', value: 'application/json' },
+          { key: 'X-Environment-Target', value: '{{envName}}' }
+        ],
+        body: JSON.stringify({
+          name: "Distributed Systems Reliability",
+          isbn: "{{uniqueIsbn}}",
+          aisle: 42,
+          author: "Dr. Aris Thorne"
+        }, null, 2),
+        tests: '// Assert baseUrl resolved to valid target\npm.test("Environment baseUrl resolved", function() {\n  pm.expect(pm.environment.get("baseUrl")).to.be.a("string");\n  pm.expect(pm.response.code).to.be.oneOf([200, 201]);\n});'
+      },
+      response: {
+        status: '200 OK',
+        time: '14ms',
+        size: '412B',
+        body: JSON.stringify({
+          Msg: "successfully added",
+          ID: "ISBN1728293847291",
+          targetHost: "http://localhost:5050"
+        }, null, 2)
+      },
+      notes: [
+        'Notice how double curly braces {{baseUrl}} decouple the request from hardcoded machine hostnames.',
+        'Initial Value vs Current Value: Keep secrets in Current Value only to prevent accidental cloud leaks.'
+      ]
+    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 2 : PRE REQUEST SCRIPT EXECUTION
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 2 : PRE REQUEST RUNNER',
+      title: 'Dynamic Timestamp Key Generation in Pre-request Script',
+      scenario: 'Akshay writes a Pre-request script to generate collision free ISBNs before the HTTP request serializes.',
+      config: {
+        method: 'POST',
+        path: '/v1/books',
+        activeTab: 'Pre-request'
+      },
+      tabs: {
+        params: [],
+        headers: [
+          { key: 'Content-Type', value: 'application/json' }
+        ],
+        body: JSON.stringify({
+          name: "Cloud Native API Architecture",
+          isbn: "{{uniqueIsbn}}",
+          aisle: 12,
+          author: "Maya Lin"
+        }, null, 2),
+        prerequest: '// Generate dynamic timestamped primary key\nconst timestamp = Date.now();\nconst randomSuffix = Math.floor(Math.random() * 10000);\nconst generatedIsbn = "ISBN" + timestamp + randomSuffix;\n\n// Store in active Environment scope\npm.environment.set("uniqueIsbn", generatedIsbn);\nconsole.log("Pre-request generated ISBN:", generatedIsbn);',
+        tests: 'pm.test("Status is 200 OK", function() {\n  pm.response.to.have.status(200);\n});\n\npm.test("Generated ID matches payload", function() {\n  const res = pm.response.json();\n  pm.expect(res.ID).to.eql(pm.environment.get("uniqueIsbn"));\n});'
+      },
+      response: {
+        status: '200 OK',
+        time: '18ms',
+        size: '398B',
+        body: JSON.stringify({
+          Msg: "successfully added",
+          ID: "ISBN1728293859102"
+        }, null, 2)
+      },
+      notes: [
+        'Pre request scripts execute inside the V8 sandbox before the HTTP request leaves the adapter.',
+        'Dynamic state ensures that re running test suites thousands of times never causes duplicate key collisions.'
+      ]
+    },
+
+    // =========================================================================
+    // FOUR PART PEDAGOGICAL CARDS (SENIOR SAVIOR CONTRACTS)
+    // =========================================================================
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : PRECEDENCE RESOLUTION',
+      title: 'The Precedence Stack and Double Curly Braces',
+      subtitle: 'Eliminating hardcoded machine dependencies using dynamic scope interpolation',
+      input: {
+        method: 'GET',
+        url: '{{baseUrl}}/v1/books',
+        desc: 'Request URL parameterized with double curly brace variable notation.',
+        code: 'baseUrl in Global: http://localhost:5050\nbaseUrl in Environment: https://qa.apex.edu\nRequest evaluates: {{baseUrl}}/v1/books'
+      },
+      underTheHood: {
+        desc: 'Runtime resolves variable names by climbing the scope ladder from narrowest to broadest.',
+        steps: [
+          'Request builder encounters {{baseUrl}} placeholder in URL.',
+          'Engine checks Local scope (not present), then Data scope (not present).',
+          'Engine checks active Environment scope (finds https://qa.apex.edu).',
+          'Engine halts search: Environment value overrides broader Collection and Global values.',
+          'Final URL serialized to https://qa.apex.edu/v1/books and dispatched.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '22ms',
+        desc: 'Request routes cleanly to target server without modifying request templates.',
+        body: JSON.stringify({
+          environment: "qa-staging",
+          activeNodes: 4,
+          status: "HEALTHY"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Hardcoding hosts is tattooing an address on your skin.',
+        rule: 'Never hardcode server hostnames or port numbers in request tabs. Use double curly braces everywhere.',
+        trap: 'Hardcoding localhost in request tabs prevents collections from executing in QA, staging, or CI pipelines.'
       }
     },
     {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : VAULT STORAGE DISCIPLINE',
+      title: 'Initial versus Current Value Security Vault',
+      subtitle: 'Guarding sensitive tokens against cloud synchronization leaks',
+      input: {
+        method: 'CONFIG',
+        url: 'Environment Settings Modal',
+        desc: 'Environment variable declaration with sensitive JWT bearer token.',
+        code: 'Variable: apiSecretToken\nInitial Value: [LEAVE COMPLETELY BLANK]\nCurrent Value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'
+      },
+      underTheHood: {
+        desc: 'Cloud synchronization and team exports serialize only Initial Values.',
+        steps: [
+          'User configures environment variable for API secret or token.',
+          'Initial Value is stored in the workspace database and synced to team cloud repositories.',
+          'Current Value is restricted strictly to local machine memory and active session storage.',
+          'Exporting the environment exports only the blank Initial Value.',
+          'Team members receive clean templates requiring their own local credentials.'
+        ]
+      },
+      output: {
+        status: 'VAULT SECURE',
+        time: '0ms',
+        desc: 'Zero secrets leaked in Git commits or exported collection files.',
+        body: JSON.stringify({
+          exportedVariables: [
+            { key: "apiSecretToken", value: "" }
+          ]
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Initial syncs to the cloud; Current stays in the vault.',
+        rule: 'Always leave Initial Value blank for secrets, passwords, and private tokens. Populate Current Value only.',
+        trap: 'Pasting production API keys into Initial Values leaks private credentials across shared team repositories.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : DYNAMIC RUNTIME STATE',
+      title: 'Collision Free State with Pre-Request Scripts',
+      subtitle: 'Generating dynamic primary keys to guarantee repeatable regression runs',
+      input: {
+        method: 'SCRIPT',
+        url: 'Pre-request Script Tab',
+        desc: 'Script executed in V8 sandbox before request packet serialization.',
+        code: 'const uniqueIsbn = "ISBN" + Date.now() + Math.floor(Math.random() * 1000);\npm.environment.set("uniqueIsbn", uniqueIsbn);'
+      },
+      underTheHood: {
+        desc: 'Pre-request script computes fresh timestamped entropy and stores it in active scope.',
+        steps: [
+          'Pre-request script triggers prior to HTTP payload assembly.',
+          'V8 executes Date.now(), capturing millisecond precision epoch time.',
+          'Random suffix is appended to eliminate concurrent sub millisecond collisions.',
+          'pm.environment.set() binds the key into Environment scope.',
+          'Request payload {{uniqueIsbn}} placeholder resolves to fresh dynamic string.'
+        ]
+      },
+      output: {
+        status: '200 OK / 201 Created',
+        time: '16ms',
+        desc: 'Server accepts unique book record without database unique constraint violations.',
+        body: JSON.stringify({
+          Msg: "successfully added",
+          ID: "ISBN1728293864019"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Static fixtures work once; dynamic state works forever.',
+        rule: 'Always generate transient primary keys dynamically in Pre-request scripts using timestamps.',
+        trap: 'Hardcoding static primary keys causes automated pipelines to fail with 409 Conflict on every subsequent run.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : SCOPE TEARDOWN HYGIENE',
+      title: 'Scope Hygiene and Teardown Unsetting',
+      subtitle: 'Preventing cross test state pollution by cleaning mutable variables',
+      input: {
+        method: 'SCRIPT',
+        url: 'Tests Script Tab',
+        desc: 'Post execution cleanup script executed after test assertions complete.',
+        code: 'pm.test("Cleanup temporary state", function() {\n  pm.environment.unset("uniqueIsbn");\n  pm.environment.unset("lastCreatedId");\n});'
+      },
+      underTheHood: {
+        desc: 'Explicit teardown removes transient state from persistent environment storage.',
+        steps: [
+          'Request completes and assertion tests evaluate.',
+          'Tests script executes pm.environment.unset() for all transient keys.',
+          'Active Environment dictionary removes keys, leaving only permanent base configuration.',
+          'Subsequent requests in other collections encounter clean, unpolluted scope.',
+          'Environment export remains pristine without stale execution debris.'
+        ]
+      },
+      output: {
+        status: 'CLEAN SANDBOX',
+        time: '0ms',
+        desc: 'Environment scope holds zero orphaned keys following suite execution.',
+        body: JSON.stringify({
+          activeEnvironmentKeys: ["baseUrl", "envName"]
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'The environment is an address book, not a junkyard.',
+        rule: 'Unset transient execution variables upon test completion to avoid cross suite pollution.',
+        trap: 'Leaving dynamic IDs in environment scope causes downstream collections to inherit stale state unintentionally.'
+      }
+    },
+
+    // =========================================================================
+    // POST PRECEDENCE & RESOLUTION DRILLS
+    // =========================================================================
+    {
+      type: 'comparison',
+      title: 'Initial Value vs Current Value: The Safety Matrix',
+      columns: ['Feature', 'Initial Value', 'Current Value'],
+      rows: [
+        ['Persistence', 'Saved to active collection / environment file', 'Stored exclusively in local memory'],
+        ['Cloud Sync', 'Synced to team cloud workspaces automatically', 'Never leaves the local client machine'],
+        ['Team Sharing', 'Visible to all teammates with workspace access', 'Strictly private to the individual user'],
+        ['Recommended Use', 'Generic templates (e.g. localhost:5050)', 'Live credentials, passwords, session tokens'],
+        ['Security Risk', 'High (accidental leaks in Git or cloud)', 'Zero (never synced, never exported)']
+      ]
+    },
+    {
+      type: 'callout',
+      title: 'The Golden Rule of Environment Security',
+      kind: 'warning',
+      text: 'Whenever you add a secret token, API key, or database password to an Environment, immediately clear the Initial Value column. Only populate the Current Value column. When you export the environment to share with colleagues or commit to Git, the exported file will contain an empty string, keeping your infrastructure safe.'
+    },
+
+    {
       type: 'heading',
-      text: 'Step 3: Generating Unique ISBNs in Pre request Scripts',
+      level: 2,
+      text: 'Programmatic Scope Manipulation with the pm Object'
     },
     {
       type: 'paragraph',
-      text: 'To avoid the duplicate book already exists bug we uncovered in Chapter 4, we write a Pre request script to generate a unique random ISBN on every single run:',
+      text: 'While the graphical interface lets you inspect variables, automated pipelines require programmatic manipulation. The API Testing Workbench provides a clean, unified API under the pm object to read, write, and unset variables across any scope.'
     },
     {
       type: 'chunked-code',
-      badge: 'PRE REQUEST SCRIPT CHUNKS',
-      title: 'Dynamic ISBN Generation Script',
-      intro: 'Executed before the HTTP request leaves the computer:',
+      title: 'Programmatic Scope API Cheat Sheet',
+      code: `// 1. Reading variables across scopes
+const localVal = pm.variables.get("key");       // Resolves using precedence ladder
+const envVal   = pm.environment.get("key");     // Explicitly from active Environment
+const collVal  = pm.collectionVariables.get("key"); // Explicitly from Collection
+const globVal  = pm.globals.get("key");         // Explicitly from Global scope
+
+// 2. Writing variables to specific scopes
+pm.environment.set("bookId", "LIB9938");        // Bound to active Environment
+pm.collectionVariables.set("retryLimit", 3);    // Bound to active Collection
+pm.globals.set("apiVersion", "v1");             // Workspace wide (use sparingly)
+
+// 3. Cleaning up variables (Scope Hygiene)
+pm.environment.unset("bookId");                 // Removes key from active Environment
+pm.globals.unset("tempToken");                  // Removes key from Global scope
+pm.environment.clear();                         // Wipes all keys from Environment (Careful!)`,
       chunks: [
         {
-          label: 'Chunk 1: Fetching Base Prefix',
-          filename: 'prefix-lookup.js',
-          code: 'const companyCode = pm.globals.get("company_code") || "LIB";',
-          title: 'Reading Global Scope',
-          explanation: 'Reads the shared company code prefix from Global Scope, defaulting to LIB if unset.',
-          keyTakeaway: 'Global variables provide universal defaults across collections.'
+          lines: '1-6',
+          label: 'Reading Values',
+          explanation: 'pm.variables.get() respects the full precedence ladder. Explicit calls like pm.environment.get() read only from that specific tier.'
         },
         {
-          label: 'Chunk 2: Random Number Generation',
-          filename: 'random-generator.js',
-          code: 'const randomDigits = Math.floor(1000 + Math.random() * 9000);\nconst uniqueISBN = companyCode + randomDigits;',
-          title: 'Generating Non Colliding Key',
-          explanation: 'Produces a random four digit number (e.g. 4821) and appends it to form LIB4821.',
-          keyTakeaway: 'Combining random values with timestamps reduces collisions, but teardown remains essential.'
+          lines: '8-12',
+          label: 'Setting Values',
+          explanation: 'Write variables to the narrowest possible scope. Avoid pm.globals.set() for request specific data.'
         },
         {
-          label: 'Chunk 3: Saving to Collection Variable',
-          filename: 'save-variable.js',
-          code: 'pm.collectionVariables.set("ISBN", uniqueISBN);',
-          title: 'Binding to Collection Tier',
-          explanation: 'Saves the fresh key so the request body placeholder {{ISBN}} can interpolate it at runtime.',
-          keyTakeaway: 'Collection tier keeps generated data accessible to all downstream requests.'
+          lines: '14-17',
+          label: 'Teardown Unsetting',
+          explanation: 'Always unset temporary identifiers in Tests scripts to leave the environment clean for subsequent runs.'
         }
       ]
     },
-    {
-      type: 'comic-workbench',
-      badge: 'API TESTING WORKBENCH · PRE REQUEST DYNAMIC GENERATION',
-      title: 'Akshay Generates Dynamic ISBNs Before Dispatch',
-      appType: 'api-workbench',
-      dialogue: [
-        {
-          speaker: 'Akshay',
-          role: 'Junior Learner',
-          text: 'Look Sameer! In the Pre request Script tab, I generated uniqueISBN = "LIB" + Math.floor(1000 + Math.random() * 9000). Postman generated LIB8421 and injected it into {{ISBN}} in the request body!',
-          pointer: 'Points to Pre request script generating LIB8421'
-        },
-        {
-          speaker: 'Sameer',
-          role: 'Lead Architect',
-          text: 'Brilliant, Akshay! The Pre request Script runs before the HTTP request leaves your machine. This guarantees that every test execution sends a pristine, non colliding book record without manual typing!',
-          pointer: 'Points to payload body resolving {{ISBN}} to LIB8421'
-        }
-      ],
-      workbench: {
-        method: 'POST',
-        url: '{{base_url}}/v1/books',
-        headers: 'Content-Type: application/json',
-        body: '{\n  "name": "Zero to Agentic API Testing",\n  "isbn": "{{ISBN}}",\n  "aisle": "304",\n  "author": "Alex Mercer"\n}',
-        responseStatus: '200 OK',
-        responseTime: '155 ms',
-        responseBody: '{\n  "Msg": "successfully added",\n  "ID": "LIB8421304"\n}'
-      },
-      breakdown: {
-        input: 'Pre request script sets ISBN collection variable; body interpolates {{ISBN}}.',
-        explanation: 'Script runs pre flight, saves generated ISBN to Collection scope, and body builder substitutes dynamic token.',
-        output: '200 OK confirming book added with dynamic composite ID: LIB8421304.',
-        trapAndFix: 'Mismatched casing between pm.collectionVariables.set("ISBN", ...) and {{isbn}} causes Postman to transmit empty or literal text.'
-      }
-    },
-    {
-      type: 'source-note',
-      label: 'Verified Mathematical Proof · Probability and Collision Theory',
-      claim: 'The Birthday Problem Mathematical Analysis Demonstrating 50 Percent Collision Probability After Square Root of Sample Size Iterations',
-      url: 'https://csrc.nist.gov/publications/detail/sp/800-90a/rev-1/final',
-      verifiedThrough: 'National Institute of Standards and Technology (NIST) Special Publication 800-90A Recommendation for Random Number Generation'
-    },
-    {
-      type: 'callout',
-      variant: 'warning',
-      title: 'The Birthday Paradox: Why Naive Random Numbers Collide in CI CD',
-      paragraphs: [
-        'Why not simply generate a random 4 digit integer between 1000 and 9999? Consider the mathematics of the Birthday Paradox.',
-        'With only 9,000 possible 4 digit values, probability theory dictates that after just 112 test executions, there is a 50 percent chance that two runs generate the exact same number! In an automated continuous integration pipeline running 20 builds daily, collisions will inevitably cause false negative test failures within days.',
-        'To achieve collision resistance, combine multiple entropy sources: a timestamp like Date.now(), or Postman built in dynamic variables like {{$randomISBN}} and {{$randomInt}}.',
-        'Crucial Automation Law: Even with collision resistant generation, automated teardown via DeleteBook is mandatory. Relying on randomness alone leaves orphaned records that bloat database indexes and corrupt catalog counts over time.',
-      ],
-    },
-    {
-      type: 'terminal',
-      command: 'Local Pre Request Execution Output (Postman Console)',
-      lines: [
-        '[Pre request Script] Generating unique book identity...',
-        '[Global Scope] Read company_code: LIB',
-        '[Random Generator] Produced entropy digits: 8421',
-        '[Collection Scope] Set ISBN: LIB8421',
-        '[Network Wire] Outgoing POST payload body: { "isbn": "LIB8421", "aisle": "304" }',
-      ],
-    },
-    {
-      type: 'comic-workbench',
-      badge: 'API TESTING WORKBENCH · BIRTHDAY COLLISION MATH',
-      title: 'Sameer Explains Why Randomness Still Demands Teardown',
-      appType: 'api-workbench',
-      dialogue: [
-        {
-          speaker: 'Akshay',
-          role: 'Junior Learner',
-          text: 'Sameer, if we generate random 4 digit numbers, we will never hit a collision, right? Why do we still need DeleteBook teardown?!',
-          pointer: 'Points to random number generator in Pre request script'
-        },
-        {
-          speaker: 'Sameer',
-          role: 'Lead Architect',
-          text: 'Beware the Birthday Paradox, Akshay! With 9,000 possible 4 digit numbers, there is a 50 percent chance of collision after just 112 runs! In continuous integration, tests will randomly fail unless you clean up. Automated teardown via DeleteBook is non negotiable!',
-          pointer: 'Points to 50 percent collision probability at 112 runs'
-        }
-      ],
-      workbench: {
-        method: 'POST',
-        url: '{{base_url}}/v1/books/delete',
-        headers: 'Content-Type: application/json',
-        body: '{\n  "ID": "LIB8421304"\n}',
-        responseStatus: '200 OK',
-        responseTime: '125 ms',
-        responseBody: '{\n  "msg": "book is successfully deleted"\n}'
-      },
-      breakdown: {
-        input: 'DeleteBook request dispatched with dynamic composite ID LIB8421304.',
-        explanation: 'Purging the newly created record returns database to pristine state, eliminating collision risk for future runs.',
-        output: '200 OK confirming record purged from database table.',
-        trapAndFix: 'Relying purely on random generation without teardown pollutes databases and guarantees CI failure as iterations scale.'
-      }
-    },
-    {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'If uniqueISBN generates "LIB7824" and the request payload is { "isbn": "{{ISBN}}" }, what raw text does Postman transmit over the wire?',
-      options: [
-        'The literal string { "isbn": "{{ISBN}}" } with curly braces',
-        'The interpolated value { "isbn": "LIB7824" } with curly braces replaced by the variable value',
-        'An empty string { "isbn": "" } because variables require quotes',
-        'A syntax error because Postman does not support curly braces in JSON'
-      ],
-      answerIndex: 1,
-      revealTitle: 'Wire Interpolation Confirmation',
-      explanation: 'Postman resolves the variable! Before sending the network packet, Postman replaces {{ISBN}} with the current runtime value "LIB7824", transmitting clean JSON to the server.'
-    },
-    {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Mismatched Variable Casing and Typo Bugs',
-      paragraphs: [
-        'JavaScript variable keys in Postman are strictly case sensitive.',
-        'If your Pre request script writes `pm.collectionVariables.set("ISBN", ...)` in capital letters, but your JSON payload body looks for `{{isbn}}` in lowercase, Postman will NOT find the variable and will send an empty string or the literal text "{{isbn}}" to the server!',
-        'Always ensure exact matching casing between the variable key saved in your script and the placeholder wrapped in double curly braces.',
-      ],
-    },
+
     {
       type: 'battle-scar',
-      metric: 'Environment Misconfiguration Outage',
-      title: 'The Production Database Overwrite Outage: The Danger of Ambiguous Variable Scopes',
-      context: 'An engineering team ran an automated load test suite intended for the staging cluster. However, the collection contained a global variable baseUrl set to the production cluster, while the staging environment variable had a subtle spelling mismatch (base_url vs baseUrl). Because of the variable precedence hierarchy and naming discrepancy, Postman defaulted to the global production URL. Within minutes, the automated test inserted fifty thousand fictitious student test accounts directly into the live production database!',
-      takeaway: 'Never define production server hostnames in global variables. Always isolate target server environments strictly and verify variable resolution in the Postman Console before triggering automated test runs.'
+      incident: 'The Global Token Collision That Wiped Staging Data',
+      context: 'An engineering team ran an automated load test suite intended for the local mock server. However, an engineer used pm.globals.set("baseUrl", "http://localhost:5050") inside a Pre-request script. Meanwhile, a CI pipeline running against staging read the contaminated global variable, switching its target mid run and corrupting staging database records.',
+      takeaway: 'Never define hostnames in global variables. Always use Environment scopes with strict workspace isolation.'
     },
     {
       type: 'triage',
-      title: 'War Room Triage: The Mystery of the Overridden Variable',
-      scenario: 'You select the "QA Environment" in Postman where timeout is set to 5000 milliseconds. But when you click Send, your test script fails after only 100 milliseconds with a timeout exception. When inspecting your collection, you discover a script with: pm.variables.set("timeout", 100). Why did Postman ignore your 5000 millisecond environment setting?',
+      title: 'Triage Drill: Scope Shadowing Incident',
+      scenario: 'You select the "QA Environment" in the workbench where timeout is set to 5000. However, in your Collection Settings, timeout is set to 10000. When you execute requests, they time out after exactly 5000ms. A junior developer claims the workbench is broken.',
       options: [
-        'Postman environments do not work when running single requests manually.',
-        'Local script scope variables created via pm.variables.set have higher precedence than environment variables and override them during execution.',
-        'The QA server database rejected the timeout header because it was too large.',
-        'Environment variables only apply to request URLs, not to script logic.'
+        {
+          label: 'The workbench has a bug and ignores collection variables.',
+          correct: false,
+          explanation: 'The workbench is functioning exactly as designed.'
+        },
+        {
+          label: 'Environment scope outranks Collection scope in the precedence ladder.',
+          correct: true,
+          explanation: 'Environment scope has higher precedence than Collection scope. The Environment value of 5000ms overrides the Collection value of 10000ms.'
+        },
+        {
+          label: 'Timeout variables only work when defined in Global scope.',
+          correct: false,
+          explanation: 'Variables can be defined in any scope, and precedence determines which value wins.'
+        }
       ],
-      answerIndex: 1,
-      debrief: 'Local scope overrides environment scope! The Postman variable hierarchy prioritizes Local variables above Data, Environment, Collection, and Global tiers. The in script variable took precedence, causing the early timeout.',
-      traps: [
-        'Environments apply to both manual single requests and automated collection runs.',
-        '',
-        'Backend servers have no control over Postman internal client side timeout variables.',
-        'Environment variables are accessible across URLs, headers, bodies, and test scripts.'
-      ]
+      debrief: 'The precedence hierarchy is: Local > Data > Environment > Collection > Global. Because Environment outranks Collection, the QA Environment value wins.'
     },
-    {
-      type: 'heading',
-      text: 'Step 4: Review and Practice',
-    },
-    {
-      type: 'guess',
-      prompt: 'If a variable with the exact same name is defined in both Collection scope and Local script scope, which value takes precedence?',
-      options: [
-        'Collection scope value',
-        'Local script scope value',
-        'Postman throws a duplicate variable error',
-        'Global scope value',
-      ],
-      answerIndex: 1,
-      explain: 'Local scope has the highest priority of all five scopes. A local variable defined inside a script will always override collection, environment, and global variables with the same name.',
-    },
+
     {
       type: 'quiz',
-      items: [
-        [
-          'What are the five variable scopes in order from highest precedence to lowest precedence?',
-          'Local (highest) > Data > Environment > Collection > Global (lowest).',
-        ],
-        [
-          'Why must dynamic ISBN generation logic be placed in the Pre request Script tab instead of the Tests tab?',
-          'The Pre request Script tab executes before the request payload is constructed. The Tests tab executes only after the response has already returned from the server.',
-        ],
+      title: 'Knowledge Check: Variable Scopes & Security',
+      question: 'Which variable scope is best suited for an authentication token that should be shared across all folders in a single collection, but must never leak into other collections?',
+      options: [
+        'Global Scope',
+        'Collection Scope',
+        'Data Scope',
+        'Local Scope'
       ],
+      correctAnswer: 1,
+      explanation: 'Collection Scope provides self contained variables that are shared across all requests in that collection, but are completely isolated from other collections in the workspace.'
     },
     {
       type: 'takeaways',
-      items: [
-        'Variables eliminate hardcoded server URLs and prevent duplicate data collisions.',
-        'Postman supports five scopes: Local, Data, Environment, Collection, and Global.',
-        'Use double curly braces {{variable_name}} to reference variables anywhere in requests.',
-        'Initial values sync to the cloud; Current values stay local for secure runtime execution.',
-      ],
+      title: 'Senior Savior Takeaways',
+      points: [
+        'Precedence hierarchy: Local outranks Data, Data outranks Environment, Environment outranks Collection, Collection outranks Global.',
+        'Always leave Initial Value blank for sensitive credentials. Use Current Value for session memory.',
+        'Use Pre request scripts to generate dynamic timestamps (Date.now()) to guarantee collision free regression runs.',
+        'Practice scope hygiene: explicitly unset transient environment variables in Tests scripts after verification.'
+      ]
     },
     {
       type: 'victory-milestone',
-      badge: 'MISSION 2 PHASE 3 CLEARED',
-      rank: 'ENTERPRISE TEST DATA ARCHITECT',
-      title: 'Architectural Triumph: Multi Scope Hierarchy & Dynamic Data Engine Deployed',
-      summary: 'You shattered hardcoded server URLs and eliminated duplicate database constraint collisions forever. By mastering the 5 variable scopes, scope precedence rules, and runtime Pre request scripting, your test suites now adapt seamlessly across QA, UAT, and Staging without a single manual edit.',
-      powers: [
-        'Navigating the 5 variable scopes hierarchy: Local, Data, Environment, Collection, and Global with zero conflict ambiguity',
-        'Parameterizing network calls using double curly brace syntax {{base_url}} across URLs, headers, and payloads',
-        'Generating dynamic unique primary keys at runtime using Pre request scripts and Postman dynamic tokens',
-        'Guarding enterprise credentials using Initial Value vs Current Value memory isolation',
-      ],
-      disastersPrevented: [
-        'Averted catastrophic accidental execution of destructive test scripts against live Production databases',
-        'Blocked confidential API keys and client secrets from leaking to public GitHub repositories via team exports',
-        'Eliminated duplicate ISBN collision failures that halt automated regression test runs in CI pipelines',
-      ],
-      warRoomTakeaway: 'Hardcoded test data is a ticking time bomb. The moment your tests generate their own unique identities and dynamically resolve their target environment, they become truly portable and unstoppable.',
+      badge: 'Milestone 2.3 Cleared',
+      title: 'Variable Scopes & Dynamic Environments Mastered',
+      summary: 'You have eliminated hardcoded URLs with double curly braces, mastered the five scope tiers, safeguarded secrets with Current Values, and implemented collision free dynamic key generation.',
+      nextStep: 'Proceed to Chapter 07 to chain AddBook, GetBook, and DeleteBook requests dynamically and parse complex nested JSON arrays.'
     },
     {
       type: 'cliffhanger',
-      title: 'Continuing Mission 2: Assembling the autonomous pipeline',
-      text: 'We now generate dynamic ISBNs and switch between QA and UAT seamlessly. But when AddBook creates a book ID, we still need to pass it to GetBook and DeleteBook. In Chapter 7, we advance Mission 2: automatically piping response data downstream with Request Chaining!',
-    },
-  ],
+      time: '01:05 AM',
+      location: 'Apex Financial Systems Annex',
+      alert: 'BUDGET DISCREPANCY DETECTED',
+      speaker: 'Ananya Sen',
+      speech: 'Finance auditor just flagged a ₹50,000 discrepancy in nested bookstore purchase orders!',
+      context: 'Akshay and Sameer head to the Financial Systems Annex where complex nested JSON responses require multi level property traversal and functional array calculations.',
+      nextLessonId: 'request-chaining'
+    }
+  ]
 }
