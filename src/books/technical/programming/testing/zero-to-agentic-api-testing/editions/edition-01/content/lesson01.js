@@ -734,6 +734,155 @@ TOTAL ASSET OVERHEAD:        3838 KB   (Actual data: 120 bytes)`
     },
 
     // =========================================================================
+    // STEP BY STEP PROGRAM CREATION: BLUEPRINT, FLOW, CHUNKED CODE, AND TERMINAL
+    // =========================================================================
+    {
+      type: 'blueprint',
+      purpose: 'Building an authentic Node.js Express server on port 3000 to process Admit Card requests from first principles.',
+      input: 'HTTP POST request with JSON payload containing studentId, exam, hall, and candidate name.',
+      processing: 'TCP stream packet buffering, express.json middleware deserialization, in memory routing, and status code assignment.',
+      output: 'HTTP 201 Created status, Location response header, and saved JSON record in 4 milliseconds.',
+      files: ['server.js', 'package.json']
+    },
+    {
+      type: 'flow',
+      inputLabel: 'POST /api/admit-card',
+      inputDetail: 'Client sends raw JSON payload over TCP socket connection',
+      processLabel: 'express.json() Buffer and Parse',
+      processDetail: 'Node buffers TCP stream chunks into req.body JavaScript object',
+      outputLabel: '201 Created + JSON',
+      outputDetail: 'Server emits Location header and saved record in 4ms'
+    },
+    {
+      type: 'chunked-code',
+      badge: 'STEP BY STEP CODE CONSTRUCTION',
+      title: 'Building server.js in Four Architectural Chunks',
+      intro: 'An Express API server is not magic: it is a structured pipeline that converts raw incoming network bytes into structured responses. Let us inspect each layer step by step.',
+      chunks: [
+        {
+          label: 'Application Initialization',
+          filename: 'server.js',
+          badge: 'CHUNK 1 : FACTORY',
+          code: [
+            "const express = require('express');",
+            "const app = express();",
+            "const PORT = 3000;"
+          ],
+          title: 'Importing the Framework and Creating the App Instance',
+          explanation: 'Calling express() instantiates an application object containing an in memory routing table and middleware dispatch queue. PORT 3000 designates the local TCP socket gateway where the operating system will direct incoming HTTP packets.',
+          keyTakeaway: 'The app instance is the central dispatcher that routes network traffic to specific handler functions.'
+        },
+        {
+          label: 'The Under the Hood Shield',
+          filename: 'server.js',
+          badge: 'CHUNK 2 : MIDDLEWARE',
+          code: [
+            "// In memory catalog store for issued admit cards",
+            "const admitCards = new Map();",
+            "",
+            "// MANDATORY: Buffer TCP packet stream before route handlers execute",
+            "app.use(express.json());"
+          ],
+          title: 'Mounting express.json Body Parsing Middleware',
+          explanation: 'Network requests arrive as fragmented TCP stream buffers. Node.js does not buffer the entire request payload by default. Without express.json(), req.body remains undefined because the stream chunks were never assembled. Mounting express.json() intercepts every packet, buffers the chunks, executes JSON.parse(), and populates req.body before route handlers execute.',
+          keyTakeaway: 'Always mount body parsing middleware before declaring route handlers.'
+        },
+        {
+          label: 'Entity Creation Route',
+          filename: 'server.js',
+          badge: 'CHUNK 3 : HANDLER',
+          code: [
+            "app.post('/api/admit-card', (req, res) => {",
+            "  const student = req.body;",
+            "  const id = student.studentId || 'APX-9942';",
+            "  const card = { ...student, studentId: id, issuedAt: new Date().toISOString() };",
+            "  admitCards.set(id, card);",
+            "",
+            "  res.status(201)",
+            "     .location(`/api/admit-card/${id}`)",
+            "     .json({ status: 'success', admitCardId: id, card });",
+            "});"
+          ],
+          title: 'Reading req.body and Emitting 201 Created',
+          explanation: 'The POST handler reads the assembled req.body object, generates or validates the record ID, writes the record to the in memory store, and returns HTTP 201 Created. Notice the Location header pointing to the newly minted entity URL.',
+          keyTakeaway: 'Entity creation requires HTTP 201 Created and should provide a Location header pointing to the new resource.'
+        },
+        {
+          label: 'Network Socket Listener',
+          filename: 'server.js',
+          badge: 'CHUNK 4 : LISTENER',
+          code: [
+            "app.listen(PORT, '0.0.0.0', () => {",
+            "  console.log(`[ADMIT-CARD-API] Server live on http://0.0.0.0:${PORT}`);",
+            "});"
+          ],
+          title: 'Binding the Port and Starting the Event Loop',
+          explanation: 'The listen() function instructs the operating system to bind port 3000 to our Node.js process. The event loop transitions into an active listening state, waiting for incoming TCP handshakes from browsers or API workbenches.',
+          keyTakeaway: 'A server only begins accepting traffic once its TCP socket listener successfully binds to its designated port.'
+        }
+      ]
+    },
+    {
+      type: 'code',
+      language: 'javascript',
+      filename: 'server.js (Complete Unified Script)',
+      code: `const express = require('express');
+const app = express();
+const PORT = 3000;
+
+// In memory data store
+const admitCards = new Map();
+
+// 1. Mount JSON body parsing middleware
+app.use(express.json());
+
+// 2. Resource creation route
+app.post('/api/admit-card', (req, res) => {
+  const student = req.body;
+  const id = student.studentId || 'APX-9942';
+  const card = { ...student, studentId: id, issuedAt: new Date().toISOString() };
+  admitCards.set(id, card);
+
+  res.status(201)
+     .location(\`/api/admit-card/\${id}\`)
+     .json({ status: 'success', admitCardId: id, card });
+});
+
+// 3. Resource inspection route
+app.get('/api/admit-card/:id', (req, res) => {
+  const card = admitCards.get(req.params.id);
+  if (!card) return res.status(404).json({ error: 'Admit Card Not Found' });
+  res.json(card);
+});
+
+// 4. Start TCP listener
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(\`[ADMIT-CARD-API] Server live on http://0.0.0.0:\${PORT}\`);
+});`
+    },
+    {
+      type: 'terminal',
+      command: 'node server.js',
+      lines: [
+        '[ADMIT-CARD-API] Initializing Express v4.18...',
+        '[ADMIT-CARD-API] Mounting express.json() stream parser... OK',
+        '[ADMIT-CARD-API] Registering POST /api/admit-card... OK',
+        '[ADMIT-CARD-API] Registering GET /api/admit-card/:id... OK',
+        '[ADMIT-CARD-API] Server live on http://0.0.0.0:3000',
+        '',
+        '$ curl -i -X POST http://localhost:3000/api/admit-card \\',
+        '       -H "Content-Type: application/json" \\',
+        '       -d \'{"studentId":"APX-9942","studentName":"Akshay Sharma","exam":"CS101"}\'',
+        '',
+        'HTTP/1.1 201 Created',
+        'Content-Type: application/json',
+        'Location: /api/admit-card/APX-9942',
+        '',
+        '{"status":"success","admitCardId":"APX-9942","card":{"studentId":"APX-9942","exam":"CS101"}}'
+      ]
+    },
+
+    // =========================================================================
     // CODE INTERFACE 2: THE PROGRESSIVE SERVER IDE & BYTE STREAM PARSER
     // =========================================================================
     {

@@ -35,6 +35,114 @@ function readBody(req) {
   });
 }
 
+
+// Admit Card Store for Chapter 1
+const admitCards = new Map();
+admitCards.set('APX-9942', {
+  studentId: 'APX-9942',
+  studentName: 'Akshay Sharma',
+  exam: 'CS101 Foundations of Computer Systems',
+  hall: 'Hall 3, Colonnade East',
+  desk: 'Desk 14',
+  issuedAt: '2026-10-07T08:30:00.000Z',
+  status: 'VERIFIED'
+});
+
+function handleAdmitCardRoutes(req, res, pathname, method) {
+  // CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
+  if (method === 'OPTIONS') {
+    res.writeHead(200);
+    res.end();
+    return true;
+  }
+
+  // GET /api/admit-card/:id
+  if (pathname.startsWith('/api/admit-card/') && method === 'GET') {
+    const id = pathname.split('/').pop();
+    const card = admitCards.get(id);
+    if (!card) {
+      res.writeHead(404, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Admit Card Not Found', id }));
+      return true;
+    }
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify(card));
+    return true;
+  }
+
+  // POST /api/admit-card
+  if (pathname === '/api/admit-card' && method === 'POST') {
+    readBody(req).then(raw => {
+      let data = {};
+      try { data = JSON.parse(raw); } catch {}
+      const id = data.studentId || 'APX-' + Math.floor(1000 + Math.random() * 9000);
+      const newCard = {
+        studentId: id,
+        studentName: data.studentName || 'Student Candidate',
+        exam: data.exam || 'CS101 Foundations of Computer Systems',
+        hall: data.hall || 'Hall 3, Colonnade East',
+        desk: data.desk || 'Desk 14',
+        issuedAt: new Date().toISOString(),
+        status: 'ISSUED'
+      };
+      admitCards.set(id, newCard);
+      res.writeHead(201, {
+        'Content-Type': 'application/json',
+        'Location': `/api/admit-card/${id}`
+      });
+      res.end(JSON.stringify({
+        status: 'success',
+        admitCardId: id,
+        card: newCard
+      }));
+    });
+    return true;
+  }
+
+  // PUT /api/admit-card/:id (Total Replacement)
+  if (pathname.startsWith('/api/admit-card/') && method === 'PUT') {
+    const id = pathname.split('/').pop();
+    readBody(req).then(raw => {
+      let data = {};
+      try { data = JSON.parse(raw); } catch {}
+      admitCards.set(id, { studentId: id, ...data, updatedAt: new Date().toISOString() });
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ status: 'replaced', card: admitCards.get(id) }));
+    });
+    return true;
+  }
+
+  // PATCH /api/admit-card/:id (Partial Delta)
+  if (pathname.startsWith('/api/admit-card/') && method === 'PATCH') {
+    const id = pathname.split('/').pop();
+    readBody(req).then(raw => {
+      let data = {};
+      try { data = JSON.parse(raw); } catch {}
+      const existing = admitCards.get(id) || { studentId: id };
+      const updated = { ...existing, ...data, patchedAt: new Date().toISOString() };
+      admitCards.set(id, updated);
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ status: 'patched', card: updated }));
+    });
+    return true;
+  }
+
+  // DELETE /api/admit-card/:id
+  if (pathname.startsWith('/api/admit-card/') && method === 'DELETE') {
+    const id = pathname.split('/').pop();
+    admitCards.delete(id);
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ status: 'decommissioned', id }));
+    return true;
+  }
+
+  return false;
+}
+
 const server = http.createServer(async (req, res) => {
   const parsed = parseUrl(req.url, true);
   const pathname = parsed.pathname;
@@ -48,6 +156,12 @@ const server = http.createServer(async (req, res) => {
   if (method === 'OPTIONS') {
     res.writeHead(200);
     return res.end();
+  }
+
+
+  // Check Chapter 1 Admit Card routes
+  if (pathname.startsWith('/api/admit-card')) {
+    if (handleAdmitCardRoutes(req, res, pathname, method)) return;
   }
 
   // 1. Health check
@@ -629,4 +743,18 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`Mock API Test Server running on http://0.0.0.0:${PORT}`);
+});
+
+
+const admitServer = http.createServer((req, res) => {
+  const parsed = parseUrl(req.url, true);
+  const handled = handleAdmitCardRoutes(req, res, parsed.pathname, req.method);
+  if (!handled) {
+    res.writeHead(404, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Port 3000 Route Not Found', path: parsed.pathname }));
+  }
+});
+
+admitServer.listen(3000, '0.0.0.0', () => {
+  console.log(`Admit Card Service (Chapter 1) running on http://0.0.0.0:3000`);
 });
