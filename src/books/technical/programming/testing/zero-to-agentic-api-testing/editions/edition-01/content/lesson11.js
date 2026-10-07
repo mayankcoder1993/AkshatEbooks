@@ -1,420 +1,587 @@
-import oauth2Img from '../assets/oauth2-handshake-flow.jpg'
+import oauthFlowImg from '../assets/oauth2-handshake-flow.jpg'
+import warRoomWideImg from '../assets/apex-campus-crisis-war-room.jpg'
+import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
+import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson11 = {
-  id: 'oauth-token-auth',
+  id: 'oauth2-authentication',
   icon: '',
   title: 'OAuth 2.0 and Modern Token Authentication',
-  shortTitle: 'OAuth 2.0 and Auth',
-  subtitle: 'The four roles, Authorization Code grant handshake, automated token exchange scripts, global variables, and Bearer token chaining.',
-  tags: ['OAuth 2.0', 'Security', 'Bearer Tokens', 'Authentication', 'Handshake'],
+  shortTitle: 'OAuth 2.0 Authentication',
+  subtitle: 'Master authorization flows, token lifecycles, PKCE handshakes, and securing API test collections.',
+  tags: ['OAuth 2.0', 'Tokens', 'Authentication', 'Authorization', 'PKCE', 'IDOR', 'Security'],
   blocks: [
     {
       type: 'mission-hud',
-      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
-      phase: 'Phase 3 of 5: OAuth 2.0 Security Protocols',
-      rank: 'Rank: Enterprise Identity Architect',
+      mission: 'Mission 3: Enterprise Quality Engineering & Resilience Testing',
+      phase: 'Phase 3 of 5: Modern Token Authentication & IDOR Defense',
+      rank: 'Rank: Security & Identity Gateway Architect',
       status: 'ACTIVE'
     },
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 3 · PHASE 2 OF 4',
-      missionTitle: 'Enterprise Resilience and CI CD Quality Gates',
-      missionCrisis: 'Securing the Gateway: OAuth 2.0 and Modern Token Authorization',
-      missionContext: 'Enterprise campus systems handle sensitive student records and financial transactions. Simple API keys or basic auth credentials are unacceptable in modern architecture. Microservices enforce OAuth 2.0 token based authorization. We must master the four roles, execute the two step Authorization Code grant, automate token exchange scripts, and chain Bearer tokens into secured requests.',
-      missionObjective: 'Deconstruct the OAuth 2.0 handshake, automate token retrieval in pre request scripts, and test token expiration.',
-      targetSystems: 'OAuth 2.0 Authorization Server · Bearer Token Gateway · Secured Student Endpoints',
-      achieve: 'Master modern enterprise API security by deconstructing OAuth 2.0 grant types, automating token handshakes in test suites, and chaining Bearer tokens into protected requests.',
-      how: 'Contrast interactive Authorization Code flows with machine to machine Client Credentials for CI CD, execute live token exchange requests, extract tokens into global variables, and validate 401 unauthorized boundaries.',
-      carry: 'Automated token acquisition patterns and authenticated collection runs that safeguard enterprise endpoints, carrying forward into XML web services in Chapter 12.'
+      missionBadge: 'MISSION 3 · PHASE 3 OF 5',
+      missionTitle: 'Enterprise Quality Engineering & Resilience Testing',
+      missionCrisis: 'The Campus IDOR Breach and Medical Record Exposure',
+      missionContext: 'At 05:15 AM in the Apex Central Security Vault and Identity Gateway, monitors highlight an alarming breach: altering a query parameter from studentId 101 to 104 exposes another student private medical file. The API trusted an unverified URL parameter without enforcing token authorization. Sameer explains identity versus permission using the Hotel Keycard Analogy. Akshay configures OAuth 2.0 with PKCE and pre request token automation.',
+      missionObjective: 'Implement modern token security with OAuth 2.0, understand authorization grants and PKCE, automate Bearer token refresh in pre request scripts, prevent IDOR vulnerabilities, and enforce Current Only vault hygiene.',
+      targetSystems: 'API Testing Workbench Identity Engine · OAuth 2.0 Authorization Server · JWT Cryptographic Verifier · Express RBAC Gateway',
+      difficulty: 'INTERMEDIATE',
+      estimatedTime: '30 MINUTES',
+      prerequisites: 'Chapter 10: Mock Servers and JSON Schema Contracts'
     },
     {
       type: 'mission-tracker',
-      badge: 'MISSION 3 PROGRESS · STEP 3 OF 5',
-      title: 'Continuing Mission 3: Mastering Enterprise Token Security',
-      text: 'Having simulated microservices with mock servers and schema contracts, we encounter enterprise security gateways. High value APIs never accept raw username and password credentials directly in request bodies. Instead, modern microservices enforce OAuth 2.0 token based authorization. Across this chapter, we master the industry standard protocol: dissecting the four roles, executing the Authorization Code grant handshake, inspecting the mandatory parameters for both authorization code and access token requests, automating token retrieval in test scripts, and chaining Bearer tokens into secured requests.',
-    },
-    {
-      type: 'heading',
-      text: 'Step 1: Why Modern APIs Rely on OAuth 2.0',
-    },
-    {
-      type: 'paragraph',
-      text: 'Imagine checking into a hotel or your college dorm hostel. The receptionist does not hand you the master brass key that opens every door on campus. Instead, they issue a plastic keycard that only unlocks your specific room and automatically expires at checkout time.',
-    },
-    {
-      type: 'paragraph',
-      text: 'This is the core purpose of **OAuth 2.0**. It is an open authorization standard that lets applications access protected user resources without ever seeing or storing the user private account password.',
-    },
-    {
-      type: 'paragraph',
-      text: 'In our campus library automation project, faculty members and researchers access a restricted digital archive containing rare manuscripts and sensitive academic data. The university cannot allow catalog apps or student portals to store raw campus passwords. If a third party app suffers a security breach, every user credentials would be compromised. Instead, the campus identity provider authenticates the user on a dedicated login screen and issues a temporary digital keycard: a Bearer access token valid for one hour with strictly scoped read permissions.',
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Authentication vs Authorization: The Crucial Distinction',
-      paragraphs: [
-        '• Authentication (AuthN): Answers the question: "Who are you?" Proving identity by providing credentials such as a username, password, or biometric face scan.',
-        '• Authorization (AuthZ): Answers the question: "What permissions do you have?" Granting access to specific resources, such as reading an order history or editing profile pictures.',
-        '• OAuth 2.0 is strictly an authorization framework designed to grant scoped permissions through digital access tokens.',
+      currentPhase: 'Phase 3: OAuth 2.0 Token Authentication',
+      totalPhases: 5,
+      completedSteps: [
+        'Mock Servers and JSON Schema Contracts (Chapter 10)'
       ],
+      currentStep: 'OAuth 2.0 and Modern Token Authentication',
+      upcomingSteps: [
+        'SOAP WebServices and XML Parsing (Chapter 12)'
+      ]
     },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : SIX SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
     {
-      type: 'heading',
-      text: 'Step 2: The Four Roles in the OAuth 2.0 Architecture',
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'SECURITY ARCHITECTURE',
-      title: 'OAuth 2.0 Security Architecture: The Four Party Token Handshake',
-      text: 'OAuth 2.0 delegates authority across four distinct participants: the Resource Owner (the student), the Client Application (our web or mobile interface), the Authorization Server (campus identity login), and the Resource Server (the protected library microservice). Access tokens expire automatically, protecting university resources without exposing student credentials.',
-      src: oauth2Img,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/oauth2-handshake-flow.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'OAuth 2.0 architecture diagram illustrating Client Application, Resource Owner User, Authorization Server, and Resource Server with four step token exchange.',
-      caption: 'The four participants and handshake flow of the OAuth 2.0 Authorization Code grant.',
-      points: [
-        'Step 1 (Authorization Request): The user logs in at the Authorization Server and consents to permissions requested by the Client Application.',
-        'Step 2 (Authorization Code Issuance): The Authorization Server validates the user and redirects back to the client callback URL with a temporary authorization code.',
-        'Step 3 (Access Token Retrieval): The client application submits a secure backend POST request exchanging the code and client secret for an access token.',
-        'Step 4 (Bearer Token API Call): The client injects the access token into the Authorization header to retrieve protected student data from the Resource Server.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 3: The Detailed OAuth 2.0 Contract Specification',
-    },
-    {
-      type: 'paragraph',
-      text: 'In enterprise testing, QA engineers must know the exact contract parameters required by identity servers. The Authorization Code grant relies on two distinct HTTP requests:',
-    },
-    {
-      type: 'comparison',
-      title: 'OAuth 2.0 Two Step Handshake Contract',
-      columns: ['Contract Field', 'Request 1: Get Authorization Code', 'Request 2: Get Access Token'],
-      rows: [
-        ['HTTP Method', 'GET (User Browser Redirect)', 'POST (Direct Client to Server Call)'],
-        ['Target Endpoint', 'Authorization Server URL (`https://auth.campuslibrary.org/oauth/authorize`)', 'Access Token URL (`https://auth.campuslibrary.org/oauth/token`)'],
-        ['Mandatory Parameters', '`client_id`, `redirect_uri`, `response_type=code`, `scope`, `state`', '`grant_type=authorization_code`, `code`, `client_id`, `client_secret`, `redirect_uri`'],
-        ['Transport Location', 'URL Query Parameters', 'Request Body (x www form urlencoded or JSON)'],
-        ['Returned Output', 'One time temporary `code` in callback URL query string', 'JSON payload containing `access_token`, `token_type`, and `expires_in`'],
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 4: Request 1: Fetching the Temporary Authorization Code',
-    },
-    {
-      type: 'paragraph',
-      text: 'The first request sends the user browser to the campus identity provider. Notice the query parameters appended to the URL:',
-    },
-    {
-      type: 'code',
-      filename: 'get-authorization-code.txt',
-      lines: [
-        'GET https://auth.campuslibrary.org/oauth/authorize?',
-        '  response_type=code&',
-        '  client_id=campus-library-web-client&',
-        '  redirect_uri=https://campus.university.edu/oauth/callback&',
-        '  scope=read:catalog%20write:loans&',
-        '  state=xyzSecurityString789 HTTP/1.1',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Why Each Query Parameter Matters',
-      paragraphs: [
-        '• response_type=code: Informs the authorization server that the client wants a temporary authorization code, not a raw token.',
-        '• client_id: The public alphanumeric identifier assigned to our application.',
-        '• redirect_uri: The pre registered callback address where the authorization server delivers the code. If this URL differs by even one character from the server whitelist, the server aborts the request.',
-        '• scope: Defines the permission boundaries requested (such as reading catalog books and borrowing records).',
-        '• state: A random cryptographic string returned back to verify that the response corresponds to our original request, preventing CSRF attacks.',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'When the student or faculty member logs in and approves consent, the authorization server redirects the browser back to our callback URL with the temporary code in the query string:',
-    },
-    {
-      type: 'terminal',
-      command: 'Browser Redirect to Callback URL',
-      lines: [
-        'HTTP/1.1 302 Found',
-        'Location: https://campus.university.edu/oauth/callback?code=authcode_89712a4f&state=xyzSecurityString789',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 5: Request 2: Exchanging Code for the Access Token',
-    },
-    {
-      type: 'paragraph',
-      text: 'Now our client backend (or Postman collection) takes that temporary code and exchanges it for the actual Bearer token via HTTP POST. We break down the mandatory parameters into three chunks:',
-    },
-    {
-      type: 'chunked-code',
-      badge: 'TOKEN EXCHANGE CHUNKS',
-      title: 'OAuth 2.0 Token Exchange Parameters',
-      intro: 'Mandatory form parameters sent to the authorization endpoint:',
-      chunks: [
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
+      title: 'The Identity Chasm and the Hotel Keycard Handshake',
+      intro: 'Follow apprentice Akshay and Principal Systems Architect Sameer in the Security Operations Vault as an IDOR flaw exposes campus medical records, the Hotel Keycard analogy clarifies authorization, and automated PKCE handshakes seal the identity gateway.',
+      panels: [
         {
-          label: 'Chunk 1: Grant Type and Code',
-          filename: 'exchange-core.http',
-          code: 'POST /oauth/token HTTP/1.1\nHost: auth.campuslibrary.org\nContent-Type: application/x-www-form-urlencoded\n\ngrant_type=authorization_code\n&code=authcode_89712a4f',
-          title: 'Declaring the Handshake Protocol',
-          explanation: 'Tells the auth server we are exchanging a temporary code for an access token.',
-          keyTakeaway: 'The authorization code is single use and expires within minutes.'
+          title: 'Scene 1: 05:15 AM: Security Operations Vault and the Campus IDOR Breach',
+          time: '05:15 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer in the Security Operations Vault with cold blue fiber optic lines.',
+            caption: 'Security Operations Vault: Cold blue monitors detect an Insecure Direct Object Reference breach.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Security audit screen showing studentId 101 reading confidential medical file 104.',
+            caption: 'The IDOR Flaw: Changing a URL parameter returned another student private record.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'The audit log shows studentId 101 reading file 104. Confidential medical records exposed.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'The API trusted the query parameter in the URL! It never checked caller permissions!'
+          },
+          scene: 'At 05:15 AM, security monitors reveal a critical vulnerability: altering a query parameter from studentId 101 to 104 returned another student private medical file. The API relied on client supplied query strings rather than cryptographic claims.',
+          realization: 'Trusting client supplied identifiers without server side authorization token verification causes severe IDOR vulnerabilities.'
         },
         {
-          label: 'Chunk 2: Client Authentication',
-          filename: 'client-credentials.http',
-          code: '&client_id=campus-library-web-client\n&client_secret=secureUniversitySecretKey_98765',
-          title: 'Proving Application Identity',
-          explanation: 'The client secret proves that the application exchanging the code is the legitimate registered client.',
-          keyTakeaway: 'client_id is public; client_secret must never be shared in browser client code.'
+          title: 'Scene 2: 05:21 AM: The Hotel Keycard Analogy: Identity vs Permissions',
+          time: '05:21 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer sketching the hotel front desk and NFC keycard analogy on the whiteboard.',
+            caption: 'The Hotel Analogy: At check-in you show your passport; the lock only sees a scoped NFC keycard.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Diagram showing Identity (Passport) vs Authorization (Keycard) with specific room permissions.',
+            caption: 'Decoupled Security: Room locks verify temporary token scopes, never raw user credentials.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'At a hotel you show your passport at the desk. The room lock never touches your passport. It reads a keycard.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'The keycard is a scoped token! It only opens Room 302 and expires tomorrow morning!'
+          },
+          scene: 'Sameer explains OAuth 2.0 with the Hotel Keycard Analogy: authentication happens at the authorization server (front desk), which issues a scoped, short lived access token (keycard). Resource servers (room locks) verify token scopes without handling credentials.',
+          realization: 'Authentication verifies identity once; authorization tokens convey scoped, temporary access permissions across services.'
         },
         {
-          label: 'Chunk 3: Redirect URI Matching',
-          filename: 'redirect-check.http',
-          code: '&redirect_uri=https://campus.university.edu/oauth/callback',
-          title: 'Strict Callback Verification',
-          explanation: 'The server verifies that this redirect URI matches the one sent in the initial code request byte for byte.',
-          keyTakeaway: 'Mismatching redirect URIs abort the handshake immediately for security.'
+          title: 'Scene 3: 05:27 AM: The Four Roles and the PKCE Handshake',
+          time: '05:27 AM',
+          layout: 'duo',
+          image: {
+            src: oauthFlowImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/oauth2-handshake-flow.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Architecture visual of OAuth 2.0 handshake showing client, authorization server, and PKCE exchange.',
+            caption: 'Cryptographic Binding: PKCE code challenge and verifier prevent authorization code interception.'
+          },
+          replyImage: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Code editor showing SHA-256 hashed code challenge sent across the initial browser redirect.',
+            caption: 'Public Client Protection: Never store client secrets in mobile apps or single-page apps.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Four roles: resource owner, client, auth server, resource server. With PKCE, intercepted codes are useless.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Because the attacker does not have the SHA 256 code verifier! The exchange is cryptographically locked!'
+          },
+          scene: 'Sameer outlines the four OAuth 2.0 roles and the Authorization Code flow with PKCE (Proof Key for Code Exchange). A cryptographic code verifier ensures that even if an authorization code is intercepted in the browser redirect, it cannot be redeemed.',
+          realization: 'PKCE binds authorization codes cryptographically, preventing interception attacks on mobile and single page apps.'
+        },
+        {
+          title: 'Scene 4: 05:35 AM: Automated Token Acquisition in Pre-Request Scripts',
+          time: '05:35 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay writing pm.sendRequest() in collection pre-request script to automate token acquisition.',
+            caption: 'Dynamic Token Lifecycle: Automatically requesting a fresh token when the current token expires.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Console showing token refresh firing autonomously before the book request executes.',
+            caption: 'Zero Human Intervention: Test suites acquire and rotate access tokens autonomously in memory.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'If token is expired, pm.sendRequest fetches a fresh JWT and saves it to environment! Zero manual logins!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'A test suite that requires manual token copy paste is not automated. Now chain it downstream.'
+          },
+          scene: 'Akshay writes an automated token refresh in the Collection Pre-request script. The script checks token expiration timestamps against Date.now(); if expired, it fires pm.sendRequest() using Client Credentials grant and stores the fresh token.',
+          realization: 'Automating token acquisition in pre request scripts eliminates manual login steps and keeps test suites headless.'
+        },
+        {
+          title: 'Scene 5: 05:43 AM: The Current-Only Vault Pattern: Preventing Git Secret Leaks',
+          time: '05:43 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Comparison screen of Initial Value vs Current Value in the workbench environment editor.',
+            caption: 'Vault Hygiene: Initial Value is synced and exported; Current Value remains private in memory.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Terminal showing clean git diff with zero client secret or token strings.',
+            caption: 'Safe Collaboration: Shared collection exports contain zero live production secrets.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Never put real tokens in Initial Values. Initial Values export to Git. Keep secrets in Current Values only.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Current Value only! The exported collection JSON has blank secrets! No tokens will leak to GitHub!'
+          },
+          scene: 'Sameer enforces the Current-Only Vault Pattern. The API Testing Workbench exports Initial Values to shared JSON files while keeping Current Values in local memory. By leaving Initial Values blank, secrets never leak into version control.',
+          realization: 'Store secrets exclusively in Current Values to prevent leaking credentials when sharing collection exports.'
+        },
+        {
+          title: 'Scene 6: 05:53 AM: 401 Unauthorized vs 403 Forbidden Semantics',
+          time: '05:53 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Terminal showing status code assertions verifying 401 on missing token and 403 on IDOR attempt.',
+            caption: 'Precise Semantics: 401 means unauthenticated (missing keycard); 403 means forbidden (wrong room).'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay and Sameer witnessing green security audit checks across the campus portal.',
+            caption: 'Security Gateway Sealed: IDOR attacks cleanly blocked with 403 Forbidden responses.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Missing token returns 401! Attempting to access student 104 with student 101 token returns 403 Forbidden!',
+            replySpeaker: 'Sameer',
+            replySpeech: '401 is no keycard. 403 is trying to open the wrong door. The IDOR hole is closed permanently.'
+          },
+          scene: 'Akshay writes precise assertions verifying HTTP status semantics: 401 Unauthorized when no token is presented, and 403 Forbidden when a valid token attempts to read another user record. The campus IDOR flaw is permanently resolved.',
+          realization: '401 represents missing or invalid credentials; 403 represents valid credentials lacking permission for the requested entity.'
         }
       ]
     },
-    {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'When the client submits these verified parameters to the authorization server, what response structure will come back?',
-      options: [
-        '200 OK with JSON object containing access_token, token_type: "Bearer", and expires_in: 3600',
-        '302 Redirect asking the user to re enter their password again',
-        '404 Not Found because access tokens are only generated in Python',
-        '500 Server Error because tokens cannot be serialized in JSON'
-      ],
-      answerIndex: 0,
-      revealTitle: 'Token Exchange Confirmation',
-      explanation: 'Access token granted! The authorization server verifies the code and secret, then delivers a 200 OK response with a Bearer access token valid for one hour (3600 seconds)!'
-    },
-    {
-      type: 'terminal',
-      command: 'JSON Token Response from Authorization Server',
-      lines: [
-        'Status: 200 OK | Time: 195 ms',
-        'Content-Type: application/json; charset=utf-8',
-        '',
-        '{',
-        '  "access_token": "campus_bearer_token_9918273645",',
-        '  "token_type": "Bearer",',
-        '  "expires_in": 3600,',
-        '  "scope": "read:catalog write:loans"',
-        '}',
-      ],
-    },
-    {
-      type: 'api-inspector',
-      title: 'Live Interactive Wire Inspector: OAuth 2.0 Token Exchange',
-      method: 'POST',
-      url: 'https://auth.campuslibrary.org/oauth/token',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      requestBody: 'grant_type=authorization_code&code=authcode_89712a4f&client_id=campus-library-web-client&client_secret=secureUniversitySecretKey_98765&redirect_uri=https://campus.university.edu/oauth/callback',
-      status: '200 OK',
-      time: '195 ms',
-      size: '342 B',
-      responseBody: {
-        access_token: 'campus_bearer_token_9918273645',
-        token_type: 'Bearer',
-        expires_in: 3600,
-        scope: 'read:catalog write:loans'
-      },
-      assertions: [
-        'Authorization server status is 200 OK',
-        'Response contains access_token attribute',
-        'Token type attribute equals Bearer',
-        'Token lifetime exceeds zero seconds'
-      ]
-    },
+
+    // =========================================================================
+    // TECHNICAL ARCHITECTURE & DEEP DIVE
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 6: Automating Token Workflows and CI CD Grant Types',
+      level: 2,
+      text: 'The Architecture of Modern OAuth 2.0 Token Authentication'
     },
     {
-      type: 'callout',
-      variant: 'note',
-      title: 'Architectural Choice: Authorization Code vs Client Credentials in CI CD',
-      paragraphs: [
-        'Why can you not easily run an Authorization Code flow inside a headless continuous integration build server?',
-        '• Authorization Code Grant requires an interactive web browser where a human student logs in and clicks Allow. In unattended Jenkins, GitHub Actions, or GitLab CI pipelines, there is no browser and no human user to solve two factor authentication prompts!',
-        '• Client Credentials Grant is designed specifically for machine to machine automation. The automated test runner dispatches a direct backend call with grant_type=client_credentials, client_id, and client_secret to POST /oauth/token, receiving an automated service token in milliseconds without user interaction.',
-        'When testing public user journeys, Postman handles Authorization Code. When testing automated background microservice integrations in CI CD, configure the Client Credentials grant.',
-      ],
+      type: 'image',
+      src: oauthFlowImg,
+      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/oauth2-handshake-flow.jpg',
+      w: 1408,
+      h: 768,
+      title: 'OAuth 2.0 Authorization Flow & Cryptographic Token Architecture',
+      text: 'OAuth 2.0 separates identity authentication from resource authorization. Clients acquire short lived Bearer tokens with specific scopes, preventing credential sharing and enabling fine grained access control.',
+      alt: 'Architecture diagram showing the four OAuth 2.0 roles and token exchange workflow.',
+      caption: 'The OAuth 2.0 Protocol: Scoped authorization without exposing user passwords to third parties.'
+    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 1 : DYNAMIC TOKEN ACQUISITION
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 1 : PRE-REQUEST TOKEN REFRESH',
+      title: 'Automated OAuth 2.0 Token Acquisition in Pre-Request Script',
+      scenario: 'Check token validity in the Pre-request script. If expired, dispatch pm.sendRequest() to acquire a fresh JWT and store it in environment scope.',
+      config: {
+        method: 'POST',
+        path: '/oauth/token',
+        activeTab: 'Pre-request'
+      },
+      tabs: {
+        params: [],
+        headers: [
+          { key: 'Content-Type', value: 'application/x-www-form-urlencoded' }
+        ],
+        body: 'grant_type=client_credentials&client_id={{clientId}}&client_secret={{clientSecret}}',
+        tests: '// Dynamic Token Acquisition Pre-request Hook\nconst expiry = pm.environment.get("tokenExpiry");\n\nif (!expiry || Date.now() > expiry) {\n  pm.sendRequest({\n    url: pm.environment.get("authServerUrl") + "/oauth/token",\n    method: "POST",\n    header: { "Content-Type": "application/x-www-form-urlencoded" },\n    body: {\n      mode: "urlencoded",\n      urlencoded: [\n        { key: "grant_type", value: "client_credentials" },\n        { key: "client_id", value: pm.environment.get("clientId") },\n        { key: "client_secret", value: pm.environment.get("clientSecret") }\n      ]\n    }\n  }, function(err, res) {\n    const json = res.json();\n    pm.environment.set("accessToken", json.access_token);\n    pm.environment.set("tokenExpiry", Date.now() + (json.expires_in * 1000));\n  });\n}'
+      },
+      response: {
+        status: '200 OK',
+        time: '32ms',
+        size: '480B',
+        body: JSON.stringify({
+          access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMDEiLCJzY29wZSI6InJlYWQ6cHJvZmlsZSJ9",
+          token_type: "Bearer",
+          expires_in: 3600,
+          scope: "read:profile"
+        }, null, 2)
+      },
+      notes: [
+        'Pre-request scripts can issue independent HTTP requests using pm.sendRequest().',
+        'Dynamic token caching prevents redundant login roundtrips while keeping tokens fresh.'
+      ]
+    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 2 : IDOR PREVENTION & RBAC CLAIM CHECK
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 2 : IDOR DEFENSE & RBAC GATEWAY',
+      title: 'Asserting IDOR Rejection: 403 Forbidden on Unowned Resources',
+      scenario: 'Attempt to access student 104 profile with a token issued for student 101. Assert that the server checks claims and rejects with 403 Forbidden.',
+      config: {
+        method: 'GET',
+        path: '/v1/students/104/medical',
+        activeTab: 'Tests'
+      },
+      tabs: {
+        params: [],
+        headers: [
+          { key: 'Authorization', value: 'Bearer {{student101Token}}' },
+          { key: 'Accept', value: 'application/json' }
+        ],
+        body: '',
+        tests: '// Asserting IDOR prevention\npm.test("Status is 403 Forbidden for unowned resource", function() {\n  pm.response.to.have.status(403);\n});\n\npm.test("Error message specifies access denial", function() {\n  const res = pm.response.json();\n  pm.expect(res.error).to.eql("INSUFFICIENT_RESOURCE_PERMISSIONS");\n});'
+      },
+      response: {
+        status: '403 Forbidden',
+        time: '12ms',
+        size: '264B',
+        body: JSON.stringify({
+          error: "INSUFFICIENT_RESOURCE_PERMISSIONS",
+          message: "You are not authorized to view health records for studentId 104.",
+          timestamp: "2026-10-07T05:53:00.000Z"
+        }, null, 2)
+      },
+      notes: [
+        '403 Forbidden indicates that authentication succeeded, but the caller lacks permission.',
+        'Servers must check that the token subject matches the requested entity identifier.'
+      ]
+    },
+
+    // =========================================================================
+    // FOUR PART PEDAGOGICAL CARDS (SENIOR SAVIOR CONTRACTS)
+    // =========================================================================
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : AUTHENTICATION VS AUTHORIZATION',
+      title: 'Authentication versus Authorization and OAuth Roles',
+      subtitle: 'Enforcing resource permissions based on token claims rather than URL parameters',
+      input: {
+        method: 'GET',
+        url: '{{baseUrl}}/v1/students/104/medical',
+        desc: 'Request carrying Bearer token issued for student 101 attempting to read student 104 file.',
+        code: 'GET /v1/students/104/medical\nAuthorization: Bearer [TOKEN_FOR_STUDENT_101]'
+      },
+      underTheHood: {
+        desc: 'Resource server extracts subject claim from JWT and compares with requested entity.',
+        steps: [
+          'Resource server verifies cryptographic signature of the Bearer token.',
+          'Extracts token subject claim (sub: "101") and granted scopes.',
+          'Compares token subject with target resource identifier in path (studentId: "104").',
+          'Detects identity mismatch without administrator override scope.',
+          'Rejects request immediately with HTTP 403 Forbidden.'
+        ]
+      },
+      output: {
+        status: '403 FORBIDDEN',
+        time: '12ms',
+        desc: 'Unauthorized cross user data access intercepted and blocked at the gateway.',
+        body: JSON.stringify({
+          error: "INSUFFICIENT_RESOURCE_PERMISSIONS",
+          accessGranted: false
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Never let a query parameter claim an identity.',
+        rule: 'Tokens assert identity; URL parameters only request filters.',
+        trap: 'Trusting URL parameters like ?userId=104 without verifying that the caller token owns that resource.'
+      }
     },
     {
-      type: 'paragraph',
-      text: 'When executing test collections automatedly in CI CD pipelines, we configure an unattended Client Credentials token exchange request as the very first step in our collection. We submit the pre configured client credentials with strictly scoped read permissions: `scope=read:catalog`. In its Tests script, we extract the access token and save it into Collection Scope so subsequent requests in this collection inherit it without leaking secrets across global workspaces. You can download the script: [Download Capture Bearer Token Script](/materials/zero-to-agentic-api-testing/lesson-11/capture-bearer-token.js):',
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : PKCE CRYPTOGRAPHIC HANDSHAKE',
+      title: 'The Authorization Code Handshake with PKCE',
+      subtitle: 'Securing public clients without storing secrets in client bundles',
+      input: {
+        method: 'PKCE FLOW',
+        url: 'Authorization Code Grant with Code Challenge and Verifier',
+        desc: 'Client initiates OAuth handshake with SHA-256 hashed code challenge.',
+        code: '// Code verifier: high-entropy cryptographic random string\n// Code challenge: BASE64URL(SHA256(code_verifier))'
+      },
+      underTheHood: {
+        desc: 'PKCE cryptographically binds authorization code issuance to token redemption.',
+        steps: [
+          'Client generates random code_verifier and computes SHA-256 code_challenge.',
+          'Sends code_challenge to auth server during login redirect.',
+          'Auth server issues authorization code upon successful user authentication.',
+          'Client redeems authorization code by sending raw code_verifier in POST body.',
+          'Auth server hashes verifier and confirms it matches initial challenge before issuing tokens.'
+        ]
+      },
+      output: {
+        status: 'TOKENS ISSUED',
+        time: '45ms',
+        desc: 'Tokens securely issued to public client; intercepted authorization codes are useless.',
+        body: JSON.stringify({
+          access_token: "eyJhbGciOi...",
+          refresh_token: "r_99214...",
+          token_type: "Bearer"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Always use PKCE for mobile and single page applications.',
+        rule: 'Never store static client secrets in public frontend or mobile application bundles.',
+        trap: 'Hardcoding client_secret strings into React Native or web apps where reverse engineering exposes them.'
+      }
     },
     {
-      type: 'code',
-      filename: 'unattended-token-request.http',
-      lines: [
-        'POST /oauth/token HTTP/1.1',
-        'Host: auth.campuslibrary.org',
-        'Content-Type: application/x-www-form-urlencoded',
-        '',
-        'grant_type=client_credentials',
-        '&client_id={{client_id}}',
-        '&client_secret={{client_secret}}',
-        '&scope=read:catalog write:loans',
-      ],
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : PRE-REQUEST TOKEN AUTOMATION',
+      title: 'Automated Token Chaining in Pre-Request Scripts',
+      subtitle: 'Eliminating manual login workflows in automated test suites',
+      input: {
+        method: 'PRE-REQUEST HOOK',
+        url: 'Collection Pre-request Script with pm.sendRequest()',
+        desc: 'Pre-request hook inspecting token expiration before dispatching test requests.',
+        code: 'if (!token || Date.now() > expiry) {\n  pm.sendRequest(authPayload, (err, res) => {\n    pm.environment.set("accessToken", res.json().access_token);\n  });\n}'
+      },
+      underTheHood: {
+        desc: 'Test runner checks cached token expiry and performs autonomous renewal.',
+        steps: [
+          'Pre-request script evaluates tokenExpiry timestamp stored in environment.',
+          'If token is missing or expired, script fires synchronous pm.sendRequest().',
+          'Authorization server validates client credentials and returns fresh JWT.',
+          'Script saves token and new expiry timestamp to environment scope.',
+          'Main request executes automatically using {{accessToken}} in Authorization header.'
+        ]
+      },
+      output: {
+        status: 'AUTONOMOUS REFRESH',
+        time: '32ms',
+        desc: 'Test suite executes seamlessly without human intervention or expired token failures.',
+        body: JSON.stringify({
+          tokenRefreshed: true,
+          expiresInSeconds: 3600
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'A test suite that requires manual token copy paste is not automated.',
+        rule: 'Handle token lifecycles dynamically in pre request scripts.',
+        trap: 'Manually pasting JWTs into collection headers, causing CI runs to fail when tokens expire.'
+      }
     },
     {
-      type: 'code',
-      filename: 'capture-bearer-token.js',
-      lines: [
-        '// Step 1: Parse the JSON response from the auth server',
-        'const responseData = pm.response.json();',
-        '',
-        '// Step 2: Validate token properties',
-        'pm.test("Token response returns 200 OK and valid Bearer", function () {',
-        '    pm.response.to.have.status(200);',
-        '    pm.expect(responseData).to.have.property("access_token");',
-        '    pm.expect(responseData.token_type).to.eql("Bearer");',
-        '    pm.expect(responseData.expires_in).to.be.above(0);',
-        '});',
-        '',
-        '// Step 3: Save Bearer token to Collection Scope (Least Privilege principle)',
-        'pm.collectionVariables.set("access_token", responseData.access_token);',
-      ],
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : THE CURRENT-ONLY VAULT PATTERN',
+      title: 'The Current-Only Vault Pattern',
+      subtitle: 'Preventing secret token leakage in shared collection exports and Git',
+      input: {
+        method: 'ENVIRONMENT SETTINGS',
+        url: 'Initial Value vs Current Value in Environment Editor',
+        desc: 'Separating shared metadata templates from local private execution secrets.',
+        code: '// Initial Value: BLANK or dummy placeholder\n// Current Value: live private secret in local session memory'
+      },
+      underTheHood: {
+        desc: 'Export and cloud sync algorithms only serialize the Initial Value column.',
+        steps: [
+          'Initial Values are shared across team workspaces and exported to collection JSON files.',
+          'Current Values remain strictly in local session memory on the engineer workstation.',
+          'Leaving Initial Values blank guarantees exported JSON files contain no live credentials.',
+          'CI runners inject live secrets via environment variables or CLI flags at runtime.',
+          'Git repositories remain completely free of committed API keys and passwords.'
+        ]
+      },
+      output: {
+        status: 'ZERO LEAKAGE',
+        time: '0ms',
+        desc: 'Exported environment JSON contains zero secret tokens, safe for version control.',
+        body: JSON.stringify({
+          key: "clientSecret",
+          initialValue: "",
+          currentValue: "[REDACTED_LOCAL_MEMORY]"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Never put real secrets in Initial Values.',
+        rule: 'Keep secrets in Current Values only, and audit exported JSON files before committing.',
+        trap: 'Pasting production API keys into Initial Values where team synchronization leaks them to Git.'
+      }
+    },
+
+    // =========================================================================
+    // POST DRILLS & QUIZ
+    // =========================================================================
+    {
+      type: 'heading',
+      level: 2,
+      text: 'HTTP Authorization Semantics: 401 vs 403'
     },
     {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Security Best Practice: Scoped Storage and Secret Hygiene',
-      paragraphs: [
-        'Never store sensitive access tokens in Global Scope where any collection in your workspace could read them.',
-        'Always store tokens in Collection Scope (pm.collectionVariables) or ephemeral Environment memory (Current Value only).',
-        'Keep Initial Value empty for all client secrets so credentials are never exported or synced to shared version control repositories.',
-      ],
+      type: 'chunked-code',
+      title: 'Differentiating Authentication from Authorization Failures',
+      code: `const status = pm.response.code;
+
+if (status === 401) {
+  // 401 Unauthorized: The caller is anonymous or credentials are invalid
+  // Action: Prompt user to log in or refresh expired Bearer token
+  console.log("Unauthenticated: Missing or expired token.");
+} else if (status === 403) {
+  // 403 Forbidden: The caller is authenticated, but lacks permission
+  // Action: Do NOT retry login; user does not have permission for this resource
+  console.log("Forbidden: Authenticated caller lacks necessary scope.");
+}`,
+      chunks: [
+        {
+          lines: '1-6',
+          label: '401 Unauthorized',
+          explanation: 'Indicates missing, expired, or cryptographically invalid credentials. Re-authenticating may resolve.'
+        },
+        {
+          lines: '7-12',
+          label: '403 Forbidden',
+          explanation: 'Identity is confirmed, but caller is not allowed to perform the requested operation. Logging in again will not help.'
+        }
+      ]
     },
-    {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Forgetting the Space After Bearer',
-      paragraphs: [
-        'When attaching a Bearer token manually in request headers, many freshers type `Authorization: Bearercampus_bearer_token_...` without a space.',
-        'Because the HTTP specification defines `Bearer` as the authentication scheme followed by a single space, the resource server will fail to parse the header and return 401 Unauthorized!',
-        'Always ensure a single space follows the word Bearer: `Authorization: Bearer {{access_token}}`.',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'In downstream requests, we configure the Authorization tab to Bearer Token and insert `{{access_token}}`. Alternatively, set the Authorization header directly: `Authorization: Bearer {{access_token}}`. Postman resolves the global variable at runtime, authenticating every call cleanly without manual intervention.',
-    },
-    {
-      type: 'callout',
-      variant: 'note',
-      title: 'Testing Token Expiry and 401 Unauthorized Handling',
-      paragraphs: [
-        'Access tokens have a finite lifetime, typically 3600 seconds (one hour).',
-        'When an access token expires or is omitted, the resource server immediately rejects requests with HTTP 401 Unauthorized.',
-        'In automated regression suites, always include a negative test asserting that requests with invalid or expired tokens return 401 and an appropriate WWW Authenticate challenge header.',
-      ],
-    },
+
     {
       type: 'battle-scar',
-      metric: 'Cascading Deployment Blackout',
-      title: 'The Hardcoded Token Outage: When an Expired Secret Paralyzed Deployments',
-      context: 'An ecommerce engineering squad automated warehouse fulfillment verification by hardcoding a long lived OAuth 2.0 Bearer access token into Postman collection variables. The token had a sixty day expiration lifespan. On the eve of a major holiday sales promotion, the token silently expired at midnight. Hundreds of automated test jobs failed simultaneously across continuous deployment pipelines, triggering false P1 alerts and blocking release deployments during peak revenue hours.',
-      takeaway: 'Never hardcode static Bearer tokens in long lived test suites. Always automate the OAuth 2.0 token handshake in an initial authorization request or Pre request script that dynamically acquires fresh tokens before protected requests execute.'
+      incident: 'The 2018 Pan-European Healthcare IDOR Data Breach',
+      context: 'A health insurance portal allowed patients to view lab results via GET /api/v1/lab_results?id=98234. An automated test script was created to test performance using sequential IDs. The engineers discovered that any authenticated patient could view any other patient blood tests simply by incrementing the query parameter ID. The vulnerability led to a $14M regulatory fine.',
+      takeaway: 'Never rely on query parameters for access control. Always authorize requests by checking that token claims own the requested entity.'
     },
     {
       type: 'triage',
-      title: 'War Room Triage: The Disappearing State Parameter Vulnerability',
-      scenario: 'During a security audit of your OAuth 2.0 authorization code flow, an automated penetration tool flags a critical vulnerability: "Cross Site Request Forgery detected on OAuth callback handler". The audit report reveals that your initial GET authorization redirect URL omitted the state parameter. Why is the state parameter mandatory in production OAuth handshakes?',
+      title: 'Triage Drill: 401 vs 403 Confusion',
+      scenario: 'You send a GET request to /v1/admin/users carrying a valid student Bearer token. The server returns 403 Forbidden. Your junior teammate says: "The token expired, let me copy a new one from the browser."',
       options: [
-        'The state parameter encrypts user passwords using RSA 4096.',
-        'The state parameter acts as a cryptographic anti CSRF nonce verifying that the authorization callback response belongs to the exact session that initiated the login request.',
-        'The state parameter specifies the geographic server location of the API gateway.',
-        'The state parameter forces the authorization server to issue a permanent token that never expires.'
+        {
+          label: 'The teammate is correct: 403 means the token is expired.',
+          correct: false,
+          explanation: 'Expired tokens return 401 Unauthorized, not 403 Forbidden.'
+        },
+        {
+          label: 'The teammate is incorrect: the token is valid, but student tokens lack admin privileges.',
+          correct: true,
+          explanation: '403 Forbidden means the identity is verified, but the role or scope is insufficient for the requested resource.'
+        },
+        {
+          label: 'The endpoint requires HTTP POST instead of GET.',
+          correct: false,
+          explanation: 'Method mismatch returns 405 Method Not Allowed.'
+        }
       ],
-      answerIndex: 1,
-      debrief: 'Anti CSRF cryptographic binding! The state parameter is an unguessable random token generated by the client and sent in the authorization request. When the authorization server returns the code, it reflects back the identical state parameter. The client verifies that this returned state matches the stored session value, preventing attackers from injecting their own authorization codes into an unsuspecting user session!',
-      traps: [
-        'Passwords are never sent in authorization code URLs.',
-        '',
-        'Server geographic routing is handled by DNS and load balancers.',
-        'Token lifespan is governed by expires_in, not the state parameter.'
-      ]
+      debrief: '401 means the server does not know who you are. 403 means the server knows who you are, but says you cannot enter.'
     },
-    {
-      type: 'heading',
-      text: 'Step 7: Review and Practice',
-    },
-    {
-      type: 'guess',
-      prompt: 'In the OAuth 2.0 Authorization Code grant, what are the mandatory parameters required in the token exchange POST request?',
-      options: [
-        'Only username and password',
-        'grant_type, code, client_id, client_secret, and redirect_uri',
-        'Only client_id and API key',
-        'Only scope and state',
-      ],
-      answerIndex: 1,
-      explain: 'To exchange an authorization code for an access token, the client must send grant_type=authorization_code along with the temporary code, client_id, client_secret, and the matching redirect_uri.',
-    },
+
     {
       type: 'quiz',
-      items: [
-        [
-          'What is the difference between client_id and client_secret in OAuth 2.0?',
-          'client_id is a public identifier assigned to the application, visible in URLs. client_secret is a confidential password known only to the client and authorization server, used to authenticate the token exchange.',
-        ],
-        [
-          'Why do automated CI CD suites store the retrieved token in a global or environment variable?',
-          'Automated runners cannot open interactive login prompts. By running a token exchange request first and saving the access token in a global variable, all downstream requests can automatically read the token and authenticate.',
-        ],
+      title: 'Knowledge Check: Protecting Secrets in Exported Collections',
+      question: 'Which environment variable column should hold sensitive credentials to prevent them from being exported in collection JSON files?',
+      options: [
+        'Initial Value',
+        'Current Value',
+        'Global Value',
+        'Persisted Value'
       ],
+      correctAnswer: 1,
+      explanation: 'Current Values remain strictly in local memory and are never exported to shared JSON files or synchronized to team workspaces.'
     },
     {
       type: 'takeaways',
-      items: [
-        'OAuth 2.0 decouples authentication from authorization, allowing users to grant scoped access without revealing passwords.',
-        'The Authorization Code grant uses two steps: fetching a temporary code via GET, and exchanging the code for an access token via POST.',
-        'Mandatory parameters for token exchange include grant_type, code, client_id, client_secret, and redirect_uri.',
-        'Bearer tokens are stored in global or environment variables and injected into the Authorization header.',
-        'Token lifetimes require test suites to validate both valid authorization and 401 expiration handling.',
-      ],
+      title: 'Senior Savior Takeaways',
+      points: [
+        'Tokens assert identity; URL parameters only request filters. Prevent IDOR by verifying claims.',
+        'Use PKCE for public clients to prevent authorization code interception without client secrets.',
+        'Automate token acquisition in pre-request scripts using pm.sendRequest() to keep suites autonomous.',
+        'Follow the Current-Only Vault pattern: never put live credentials in Initial Values.'
+      ]
     },
     {
       type: 'victory-milestone',
-      badge: 'MISSION 3 PHASE 3 CLEARED',
-      rank: 'ENTERPRISE SECURITY AUTOMATION ARCHITECT',
-      title: 'Architectural Triumph: Enterprise OAuth 2.0 Token Vault Deployed',
-      summary: 'You dismantled the most misunderstood protocol in modern web engineering: OAuth 2.0. You mapped the 4 roles, mastered the two step Authorization Code grant, automated the token exchange POST request, chained Bearer tokens into secured headers, and verified 401 expiration challenges with absolute precision.',
-      powers: [
-        'Dissecting the four OAuth 2.0 roles: Resource Owner, Client, Authorization Server, and Resource Server',
-        'Executing the full Authorization Code grant handshake: exchanging temporary auth codes for scoped Bearer tokens',
-        'Automating token extraction in Tests scripts and injecting dynamic Bearer tokens into downstream request headers',
-        'Auditing token expiration boundaries and asserting 401 Unauthorized WWW Authenticate challenges',
-        'Defending enterprise secrets by enforcing client_secret confidentiality rules across test suites',
-      ],
-      disastersPrevented: [
-        'Averted catastrophic enterprise credential theft by replacing static user passwords with scoped, short lived tokens',
-        'Stopped broken authentication logic that leaves protected APIs wide open to unauthorized third party access',
-        'Eliminated fragile manual token copy paste that causes automated CI CD pipeline runs to fail mid execution',
-      ],
-      warRoomTakeaway: 'Security is not an afterthought added at deployment. When your automated test suites validate token issuance, header injection, scope enforcement, and 401 expirations, your enterprise endpoints are fortified against unauthorized intrusion.',
+      badge: 'Milestone 3.3 Cleared',
+      title: 'OAuth 2.0 & Token Security Mastered',
+      summary: 'You have eliminated IDOR vulnerabilities, automated dynamic Bearer token acquisition with PKCE, clarified 401 vs 403 semantics, and safeguarded credentials with the Current-Only vault pattern.',
+      nextStep: 'Proceed to Chapter 12 to tackle legacy enterprise protocols with SOAP WebServices and XML Parsing.'
     },
     {
       type: 'cliffhanger',
-      title: 'Continuing Mission 3: Testing Legacy Protocols and XML Envelopes',
-      text: 'While REST and OAuth 2.0 dominate modern web services, enterprise banking, government, and legacy systems still rely heavily on SOAP and XML. In Chapter 12, we explore SOAP WebServices: sending XML envelopes, asserting WSDL contracts, and parsing XML responses into JavaScript objects with xml2Json!',
-    },
-  ],
+      time: '06:00 AM',
+      location: 'Apex State Treasury Mainframe Cloisters',
+      alert: 'LEGACY CLEARINGHOUSE COLLAPSE',
+      speaker: 'Akshay Sharma',
+      speech: 'State Treasury frozen! Thirty million rupees in student scholarships stuck in a legacy SOAP mainframe!',
+      context: 'Akshay and Sameer enter the Dravidian sandstone cloisters housing the legacy mainframe. The modern JSON API cannot speak to the 2004 SOAP XML clearinghouse. Chapter 12 SOAP WebServices and XML Parsing begins!',
+      nextLessonId: 'soap-webservices-and-xml'
+    }
+  ]
 }
