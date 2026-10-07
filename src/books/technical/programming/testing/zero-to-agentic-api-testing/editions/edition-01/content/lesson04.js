@@ -262,7 +262,7 @@ export const lesson04 = {
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/ch04/ch04_akshay_notes_friction.jpg',
             w: 1376,
             h: 768,
-            alt: 'Akshay noting down IDs in his spiral notebook surrounded by Postman tabs.',
+            alt: 'Akshay noting down IDs in his spiral notebook surrounded by workbench tabs.',
             caption: 'Developer Friction: Manually copying generated IDs across tabs wastes sprint hours.'
           },
           dialogue: {

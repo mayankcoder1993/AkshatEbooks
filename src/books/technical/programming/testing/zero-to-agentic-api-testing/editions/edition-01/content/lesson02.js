@@ -597,6 +597,41 @@ export const lesson02 = {
     // TOPIC 8: VICTORY AND CLIFFHANGER
     // =========================================================================
     {
+      type: 'guess',
+      prompt: 'What architectural danger arises when an API returns HTTP 200 OK with a body containing {"status": "error", "message": "Failed"}?',
+      options: [
+        'The client connection will immediately terminate due to socket errors',
+        'Automated monitoring, API gateways, and client circuit breakers treat 200 as successful, blinding operations teams to silent failures',
+        'The JSON body cannot be parsed by standard client libraries',
+        'HTTP proxies will automatically convert the response to HTTP 500',
+      ],
+      answerIndex: 1,
+      explain: 'Returning HTTP 200 for failures violates HTTP semantic standards. Infrastructure layers like API gateways, load balancers, and monitoring tools rely strictly on the status code to detect outages.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'What architectural danger arises when an API returns HTTP 200 OK with a body containing {"status": "error", "message": "Failed"}?',
+          'Infrastructure layers such as gateways, proxies, and monitoring systems rely on HTTP status codes. A polite 200 blinds automated alerting and prevents client circuit breakers from catching failures.',
+        ],
+        [
+          'What is the difference between a 400 Bad Request and a 500 Internal Server Error?',
+          'A 400 Bad Request indicates client error where input validation rejected malformed data, whereas a 500 Internal Server Error represents an unhandled exception or crash inside server code.',
+        ]
+      ],
+    },
+    {
+      type: 'takeaways',
+      title: 'Senior Savior Takeaways',
+      items: [
+        'Status codes provide an immediate semantic summary of request outcomes without inspecting payload bodies.',
+        'Always reject malformed client inputs with 400 Bad Request before database queries execute.',
+        'Never return polite 200 OK responses for failed operations; preserve semantic honesty across the wire.',
+        'Use 409 Conflict when an operation clashes with existing server state, such as duplicate identifier registration.'
+      ]
+    },
+    {
       type: 'victory-milestone',
       title: 'Phase 2 Complete: Manual Wire Auditing and Status Codes Mastered',
       summary: 'Akshay successfully diagnosed the campus shuttle 500 crash by hand, categorized parameter empty states, installed a fail fast validation guard, and mastered the five HTTP status code families.',

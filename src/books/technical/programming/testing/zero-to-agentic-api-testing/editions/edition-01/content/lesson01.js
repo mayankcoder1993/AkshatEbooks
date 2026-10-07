@@ -1557,6 +1557,41 @@ app.listen(PORT, () => console.log('Admit Card service active on port 3000'));`
     // TOPIC 5: PROTOCOL SHOWDOWN & VICTORY MILESTONE
     // =========================================================================
     {
+      type: 'guess',
+      prompt: 'Why does req.body evaluate to undefined inside an Express route handler when sending a JSON POST payload without middleware?',
+      options: [
+        'The HTTP request body is sent over an encrypted channel that Express cannot read',
+        'Node streams TCP packets in chunks, so req.body remains unparsed until express.json middleware buffers and deserializes the byte stream',
+        'Express only supports URL query parameters and rejects JSON payloads by specification',
+        'The client browser failed to set the Content Length header correctly',
+      ],
+      answerIndex: 1,
+      explain: 'Node.js processes incoming network requests as streaming TCP byte chunks. Without express.json middleware, the chunks are never assembled or parsed into a JavaScript object, leaving req.body undefined.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'Why does req.body evaluate to undefined inside an Express route handler when sending a JSON POST payload without middleware?',
+          'Node.js processes incoming network requests as streaming TCP byte chunks. Without express.json middleware, the chunks are never assembled or parsed into a JavaScript object, leaving req.body undefined.',
+        ],
+        [
+          'What is the fundamental difference between an API and a Web Service according to system architecture standards?',
+          'All web services are APIs operating over network protocols like HTTP, but not all APIs are web services because local software libraries and SDKs run in memory without network communication.',
+        ]
+      ],
+    },
+    {
+      type: 'takeaways',
+      title: 'Senior Savior Takeaways',
+      items: [
+        'An API is a contract between two software systems, decoupling user interfaces from core data logic.',
+        'Network payloads travel as streaming TCP byte packets that require proper server side parsing middleware.',
+        'JSON data endpoints consume a fraction of the network bandwidth required by full HTML web pages.',
+        'Always verify network traffic in developer tools before assuming a frontend rendering bug.'
+      ]
+    },
+    {
       type: 'victory-milestone',
       badge: '⚡ ARCHITECTURAL TRIUMPH UNLOCKED',
       rank: 'APPRENTICE API ENGINEER',

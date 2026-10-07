@@ -552,7 +552,7 @@ const totalInventoryValue = books.reduce((sum, b) => sum + (b.price * b.stock), 
     {
       type: 'triage',
       title: 'Triage Drill: Undefined Chaining Bug',
-      scenario: 'You run a chained collection: AddBook -> GetBook. GetBook fails with 404 Not Found. When you inspect the URL in the Postman Console, it says: GET /v1/books?id={{bookId}}. The variable was not resolved.',
+      scenario: 'You run a chained collection: AddBook -> GetBook. GetBook fails with 404 Not Found. When you inspect the URL in the Workbench Console, it says: GET /v1/books?id={{bookId}}. The variable was not resolved.',
       options: [
         {
           label: 'The server rejected the request because the variable name is invalid.',

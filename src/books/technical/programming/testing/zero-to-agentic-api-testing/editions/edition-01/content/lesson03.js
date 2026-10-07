@@ -181,7 +181,7 @@ export const lesson03 = {
           promptMeta: {
             title: 'Chai BDD Assertion Sandbox',
             aspectRatio: '16:9',
-            positivePrompt: 'Madhubani Mithila folk art illustration. Split workbench visualization showing the Postman Tests sandbox tab where JavaScript assertions execute. Akshay writing pm.response.to.have.status(200). Code elements glowing in clean ink outline. Sameer nodding with approval. Pure white background #FFFFFF, rich traditional earth colors.',
+            positivePrompt: 'Madhubani Mithila folk art illustration. Split workbench visualization showing the API Testing Workbench Tests sandbox tab where JavaScript assertions execute. Akshay writing pm.response.to.have.status(200). Code elements glowing in clean ink outline. Sameer nodding with approval. Pure white background #FFFFFF, rich traditional earth colors.',
             negativePrompt: 'Photorealistic, 3D, CGI, Western comic, manga, dark background, gradients.',
             targetAsset: 'assets/ch03-scene-2-assertion-sandbox.jpg'
           },
@@ -241,7 +241,7 @@ export const lesson03 = {
             file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/illustrations/reactions/ch03-postman-test-failure.jpg',
             w: 1376,
             h: 768,
-            alt: 'Postman workbench interface highlighting red assertion failure.',
+            alt: 'API Testing Workbench interface highlighting red assertion failure.',
             caption: 'The Red Proof: AssertionError expected 500 to equal 400 catches the unhandled crash.'
           },
           replyImage: {
@@ -367,7 +367,7 @@ export const lesson03 = {
           'Sandbox executes the callback function inside pm.test wrapper.',
           'console.log statement prints 401 to developer console.',
           'Function reaches closing brace without throwing any exception.',
-          'Postman test runner marks test as GREEN PASSED because zero errors were thrown.'
+          'The test runner marks test as GREEN PASSED because zero errors were thrown.'
         ]
       },
       output: {
@@ -729,6 +729,41 @@ export const lesson03 = {
         output: '4 requests executed, 10 assertions verified, 0 failures, 86 milliseconds total duration.',
         trapAndFix: 'Senior Savior Trap: Assuming a simple 4 request runner suite can handle complex multi step workflows without dynamic variables. Golden Rule: A collection runner is only as powerful as its data chaining; static collections break when IDs change.'
       }
+    },
+    {
+      type: 'guess',
+      prompt: 'Why does a test containing only console.log statements pass with a green checkmark even when the API returns HTTP 500 Server Crash?',
+      options: [
+        'The workbench defaults to passing when no assertion failures are thrown during callback execution',
+        'The console.log statement automatically suppresses server error codes',
+        'The test sandbox only inspects HTTP status when explicitly instructed via configuration flags',
+        'The mock server translates all 500 crashes into warning notices',
+      ],
+      answerIndex: 0,
+      explain: 'The test sandbox evaluates tests based on uncaught exceptions. If an assertion library like Chai is not invoked with pm.expect or pm.response, the callback finishes cleanly, causing a deceptive green pass.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'Why does a test containing only console.log statements pass with a green checkmark even when the API returns HTTP 500 Server Crash?',
+          'The workbench test runner considers a test successful if its callback completes without throwing an AssertionError. Without explicit pm.expect or status checks, zero exceptions occur, resulting in a false positive pass.',
+        ],
+        [
+          'Why should automated API testing form the broad middle tier of the testing pyramid instead of relying exclusively on end to end UI tests?',
+          'API tests execute orders of magnitude faster than browser UI tests, run reliably without frontend timing flakes, and isolate business logic directly at the service boundary.',
+        ]
+      ],
+    },
+    {
+      type: 'takeaways',
+      title: 'Senior Savior Takeaways',
+      items: [
+        'Every automated test must include explicit assertions that throw errors on unexpected data.',
+        'Always practice red green testing by observing an assertion fail before trusting its pass result.',
+        'API layer tests provide rapid feedback with deterministic execution compared to brittle browser UI tests.',
+        'Validate both HTTP status headers and response body properties to prevent semantic deception.'
+      ]
     },
     {
       type: 'victory-milestone',

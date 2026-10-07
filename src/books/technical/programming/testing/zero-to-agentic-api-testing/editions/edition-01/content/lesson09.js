@@ -41,7 +41,7 @@ export const lesson09 = {
       ],
       currentStep: 'Advanced Error Handling and Resilience Testing',
       upcomingSteps: [
-        'Postman Mock Servers and JSON Schema Contracts (Chapter 10)'
+        'Mock Servers and JSON Schema Contracts (Chapter 10)'
       ]
     },
 
