@@ -27,7 +27,7 @@
   - `ch02-code-editor-400-guard.jpg` (Editor showing if-statement guard)
   - `ch02-developers-arguing.jpg` (Frontend vs backend triage)
   - `ch02-men-celebrating.jpg` (Transit restored celebration)
-- **Generation Directive:** Generate the dedicated Clean Application Interface screens and remaining narrative transition beats below.
+- **Generation Directive:** Generate the dedicated Clean Application Interface screens and narrative transition beats below with full micro-expression and optical depth details.
 
 ### Chapter 03: Automating the Wire Check: Postman and Chai Assertions
 - **Production Status:** **PARTIAL (6 Reaction Assets Active)**
@@ -38,7 +38,7 @@
   - `ch03-two-men-drinking-chai.jpg` (Morning chai review)
   - `ch03-dashboard-automated-results.jpg` (Collection runner overview)
   - `ch03-newman-terminal-exec.jpg` (CLI runner execution)
-- **Generation Directive:** Generate the dedicated Clean Application Interface screens and remaining narrative transition beats below.
+- **Generation Directive:** Generate the dedicated Clean Application Interface screens and narrative transition beats below with full micro-expression and optical depth details.
 
 ---
 
@@ -63,7 +63,7 @@ app.get('/shuttle', (req, res) => {
   - **3. OUTPUT:** HTTP Status `500 Internal Server Error` (crimson badge `#EF4444`). Response time: `2ms`. Response payload: Raw HTML stack trace leaking Express server directory paths.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of a modern dark mode API testing client and terminal window side by side. Left pane displays request builder showing GET request to localhost port 5050 slash shuttle with an empty route query parameter. Right pane displays developer terminal showing bold red JavaScript runtime error: TypeError Cannot read properties of undefined reading trim, followed by call stack lines. Above the terminal, an unmistakable crimson status pill displays 500 Internal Server Error. Crisp monospace typography, dark slate background (#0F172A), sharp syntax colors, clean software workbench capture, zero decorative frames, zero cartoon art. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of an authentic dark-mode developer workbench split into two clean technical panes. On the left side, a modern API request builder displays an active GET request targeting http://localhost:5050/shuttle?route= with an empty string value in the query parameters table. On the right side, an integrated dark developer terminal (#0F172A) displays an unhandled JavaScript runtime exception in vibrant crimson red text: TypeError: Cannot read properties of undefined (reading 'trim'), followed by three indented lines of Node.js call stack references pointing to RouteLocatorService.js. Directly above the terminal pane, an unmistakable clinical red status badge displays 500 Internal Server Error alongside a 2ms latency counter. Crisp JetBrains Mono code typography, syntax highlighting in cyan, yellow, and amber against deep slate backgrounds, clinical software workbench capture, strictly borderless, zero decorative frames, zero cartoon art, 8k publication quality. --ar 16:9
 ```
 
 #### Chunk 2: Installing the Defensive Guard and Returning 400 Bad Request
@@ -83,7 +83,7 @@ if (!req.query.route || !req.query.route.trim()) {
   - **3. OUTPUT:** HTTP Status `400 Bad Request` (amber badge `#F59E0B`). Latency: `4ms`. Structured JSON response: `{ "status": "error", "code": "ERR_MISSING_ROUTE", "message": "Query parameter route is required" }`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of a modern dark mode API workbench displaying an authentic defensive validation response. Top request bar displays GET slash shuttle. Lower response viewer displays a formatted JSON response with amber and green syntax highlighting: status is error, code is ERR_MISSING_ROUTE, message explains that query parameter route is required. Top right response header shows an amber status badge reading 400 Bad Request with 4ms response latency. Clean dark mode developer interface, crisp monospace fonts, clinical UI capture, zero decorative margins. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of a modern dark-mode API testing workbench capturing an authentic defensive validation response. The top horizontal request bar displays GET /shuttle with Send button in emerald green. In the upper-right corner of the response header, an unmistakable amber status pill displays 400 Bad Request alongside a 4ms latency badge and 240B payload size. The main lower response viewer displays a beautifully formatted, indented JSON payload with crisp syntax highlighting: keys status, code, and message in soft cyan, with string values highlighted in warm amber explaining that query parameter route is required (e.g. NorthCampus, SouthCampus). Dark slate theme (#1E293B), sharp monospace typography, clean clinical software interface, strictly borderless, zero decorative margins, 8k resolution. --ar 16:9
 ```
 
 #### Consolidated Program: Complete Route Handler Flow (End to End)
@@ -93,7 +93,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of a modern dark mode API w
   - **Output:** HTTP `200 OK` (emerald `#10B981`) with valid coordinates array `[{ "id": "BUS-42", "lat": 26.8467, "lng": 80.9462 }]`.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of an integrated API testing workbench showing complete end-to-end success. Upper request pane shows GET slash shuttle query route equals NorthCampus. Lower response pane shows an emerald green status badge reading 200 OK with 18ms latency, displaying a clean JSON array of GPS coordinates with shuttle ID and latitude longitude pairs. Left sidebar shows clean collection structure. Dark slate IDE aesthetics (#0F172A), sharp syntax highlighting in cyan, yellow, and emerald, authentic developer workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of a comprehensive API testing suite workbench showing complete end-to-end operational success. The left sidebar displays an organized collection tree with green checkmarks beside Shuttle_Status and Route_Locator requests. The main upper window displays a successful GET request to http://localhost:5050/shuttle?route=NorthCampus. In the response header, a brilliant emerald-green status badge displays 200 OK alongside an 18ms latency meter. The response body viewer displays an authentic JSON payload containing an array of active shuttle objects, each with shuttleId BUS-42, currentStop NorthGate, and coordinates with latitude 26.8467 and longitude 80.9462. Deep slate IDE aesthetic (#0F172A), sharp syntax colors in cyan, yellow, and emerald green, clinical software capture, strictly borderless, zero cartoon elements. --ar 16:9
 ```
 
 ---
@@ -113,7 +113,7 @@ pm.test("Status code is 200", function () {
   - **3. OUTPUT:** Deceptive green test result pill: `PASS Status code is 200`, even though the transit bus has zero GPS coordinates and is physically lost!
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman workbench Tests tab and test results pane. Upper editor pane shows JavaScript snippet: pm.test status code is 200 checking pm.response to have status 200. Lower test results pane shows a bright green badge reading PASS Status code is 200. However, in the adjacent response payload viewer, the JSON coordinates array is visibly empty with empty brackets. Dark theme developer workbench, high contrast code editor, zero decorative borders. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman workbench Tests tab and test results drawer displayed side-by-side. The upper JavaScript code editor displays a concise Chai assertion: pm.test("Status code is 200", function () { pm.response.to.have.status(200); }); with syntax highlighting in yellow, cyan, and white. In the lower test results drawer, a vibrant emerald-green pill proudly displays PASS Status code is 200 (1/1). However, in the adjacent JSON response payload viewer, the coordinates array is visibly empty with opening and closing square brackets [] containing zero items. Dark theme developer workbench (#1E293B), high contrast code typography, clinical developer interface, strictly borderless, zero decorative borders. --ar 16:9
 ```
 
 #### Chunk 2: The Deep Payload Assertion (Catching the Empty Array)
@@ -131,7 +131,7 @@ pm.test("Coordinates array is populated", function () {
   - **3. OUTPUT:** Bold crimson failure pill (`#EF4444`): `FAIL Coordinates array is populated | AssertionError: expected 0 to be above 0`. The silent defect is exposed.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic developer screen capture of Postman test results failure. Upper code editor shows JavaScript assertion checking coordinates array length to be above 0. Lower results drawer shows a bold crimson red assertion failure banner: FAIL Coordinates array is populated with error explanation expected 0 to be above 0. Clinical dark slate developer interface, sharp typography, photorealistic software workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic developer screen capture of Postman test results drawer catching a silent data corruption defect. In the upper code editor, JavaScript Chai assertions parse response JSON and assert that coordinates is an array and coordinates.length is above 0. In the lower test results drawer, an unmistakable bold crimson red failure badge (#EF4444) displays FAIL Coordinates array is populated, accompanied by clinical diagnostic error text: AssertionError: expected 0 to be above 0. Adjacent response viewer highlights the empty coordinates array in soft red warning overlay. Clinical dark slate developer interface (#0F172A), sharp typography, photorealistic software workbench capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: The Dual Assertion Suite (Negative Guard and Positive Contract)
@@ -141,7 +141,7 @@ Full bleed 16:9 widescreen photorealistic developer screen capture of Postman te
   - **Output:** Postman Test Runner Summary: `2/2 Requests Passed, 4/4 Assertions Green, 0 Failures`.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner execution report. Summary card shows 2 of 2 requests completed, 4 of 4 tests passed, zero failures. Test execution log displays both requests: first request showing green checkmark for 400 Bad Request defensive guard, second request showing green checkmark for 200 OK and populated coordinates array. Dark mode dashboard interface, emerald green progress bars, sharp typography, professional API testing suite view. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner execution report summary dashboard. The top summary header displays: 2 of 2 Requests Completed, 4 of 4 Tests Passed, 0 Failed, Total Duration 32ms. The detailed run log displays two sequential request rows: Row 1 Shuttle_Missing_Param displays green checkmark for status 400 Bad Request and validated error code ERR_MISSING_ROUTE; Row 2 Shuttle_Valid_Route displays green checkmarks for status 200 OK, Content-Type JSON, and Coordinates array populated with 3 items. Modern dark-mode testing dashboard (#0F172A), emerald green progress indicators, sharp monospace fonts, professional API automation report. --ar 16:9
 ```
 
 ---
@@ -151,35 +151,56 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runne
 ### Chapter 02: Narrative Graphic Novel Beats (Heritage Sandstone and Modern Gadgets)
 
 #### Beat 01: The Campus Dispatch War Room Panic (08:14 PM)
-- **Scene Setting:** Apex Institute Campus Transit Control Center inside an ancient red sandstone colonnade. Large wall-mounted monitors flicker with frozen bus routes. Rain pelts against stone jali lattice screens.
-- **Action:** Transit operators in blue shirts gesture with panic at frozen GPS maps. Akshay Sharma (24, clean forehead, white kurta with rolled sleeves) stands beside his silver laptop, eyes wide with analytical alertness.
+- **Asset Filename:** `ch02_scene01_dispatch_room_panic.jpg`
+- **Camera & Lens:** 24mm Extreme Wide Establishing Shot, low-angle perspective emphasizing soaring 300-year-old carved Indian red sandstone arches.
+- **Lighting & Color:** Cold electric-blue rain flashes outside carved jali screens contrasting with warm 2700K brass task lamps and stark amber emergency warning alerts on wall-mounted LED route monitors.
+- **Characters & Action:** 
+  - Transit operators in blue collared uniforms gesture with rising panic toward frozen GPS bus maps.
+  - Apprentice Akshay Sharma (24, clean forehead with ZERO religious markings, crisp white handloom cotton kurta with sleeves neatly rolled up to mid-forearm, dark-blue denims) stands beside his matte-silver laptop on a heavy teak desk. His brow is deeply furrowed, eyes wide with analytical alertness, teeth slightly set in suspense as he watches the system lock up.
+- **Headroom Geometry:** Top 30% clean negative space formed by vaulted sandstone arches in deep atmospheric shadow for glassmorphism dialogue balloons.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot of campus transit dispatch room inside ancient Indian red sandstone hall. Wall mounted displays show frozen GPS route maps with red warning triangles. Transit operators in blue shirts wave hands in alarm. Young Indian engineer Akshay Sharma (24, clean forehead with zero markings, crisp white cotton kurta with rolled sleeves) stares at his matte silver laptop on a wooden desk with intense focus. High vaulted stone arches in upper 28% create clean negative space. Ambient dramatic lighting, cinematic digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 24mm wide establishing shot inside the ancient red sandstone transit dispatch hall of Apex Institute at 08:14 PM. High vaulted sandstone ceiling arches and Dravidian lotus pillars integrated with modern wall-mounted monitors showing frozen GPS transit maps with glowing amber warning icons. Outside carved stone jali lattice screens, torrential rain pours into the dark courtyard. In the foreground, 24-year-old Indian apprentice engineer Akshay Sharma (clean forehead with zero religious markings, crisp white cotton kurta with sleeves rolled to mid-forearm, dark jeans) stands at a heavy teak desk beside his open matte-silver laptop, staring at the screens with wide analytical eyes and intense suspense. In the background, two dispatchers in blue shirts gesture with panic. Top 30% vaulted sandstone ceiling in clean atmospheric negative space. Warm brass desk lamps contrasting with cold monitor glows, expressive graphic realism, crisp ink double contours, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Beat 02: Sameer Arrives with Cutting Chai (08:22 PM)
-- **Scene Setting:** Dispatch room entrance. Architect Sameer Krishnamurthy enters calmly through a carved archway.
-- **Action:** Sameer (40, peacock indigo raw-silk kurta, round brass spectacles, salt-and-pepper beard) holds a faceted cutting chai glass in an ornate brass holder. He looks serenely at the frantic commotion, completely unruffled.
+- **Asset Filename:** `ch02_scene02_sameer_enters_dispatch.jpg`
+- **Camera & Lens:** 50mm Medium Shot, eye-level framing focused on the sandstone entrance portal.
+- **Lighting & Color:** Warm golden backlight streaming from the hallway sconces, casting a soft halo along Sameer's shoulders while the foreground remains in moody indigo and slate.
+- **Characters & Action:** 
+  - Principal Systems Architect Sameer Krishnamurthy (40, dignified poise, neatly trimmed salt-and-pepper beard, silver hair streaks at temples, thin round brass wireframe spectacles) steps serenely across the carved stone threshold.
+  - He wears an elegant peacock-indigo raw-silk kurta with gold embroidery on the stiff mandarin collar, cream trousers.
+  - In his right hand, he holds a traditional faceted cutting chai glass resting inside an ornate raw brass wire holder, steam curling upward. His posture radiates calm, stoic authority in stark contrast to the frantic room.
+- **Headroom Geometry:** Top 28% clean negative space inside the upper stone archway.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium wide shot of systems architect Sameer Krishnamurthy (40, peacock indigo raw silk kurta with gold collar embroidery, round brass wireframe spectacles, salt and pepper beard) stepping serenely through a carved sandstone doorway into a chaotic server room. He holds a traditional faceted cutting chai glass in a raw brass wire holder. Dignified calm authority, soft golden backlight. Top 28% vaulted ceiling arches form uncluttered negative headroom. Cinematic digital concept art, 8k publication quality. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 50mm medium shot at the sandstone archway entrance of the transit control room at 08:22 PM. 40-year-old South Indian Principal Systems Architect Sameer Krishnamurthy steps serenely into the room with absolute poise and composure. He has a neatly trimmed salt-and-pepper beard, distinguished silver streaks at his temples, and calm observant dark eyes behind thin round brass wireframe spectacles. Wearing a tailored peacock-indigo raw-silk kurta with gold embroidered mandarin collar and cream cotton trousers. In his right hand, he holds a steaming faceted cutting chai glass resting inside an ornate raw brass wire holder. Warm amber golden light spills from behind him, illuminating the carved stone archway. Top 28% clean vaulted stone ceiling in uncluttered negative headroom. Cinematic graphic realism, crisp ink linework, rich gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Beat 03: Forensic Terminal Inspection (08:29 PM)
-- **Scene Setting:** Teak dispatch workbench. Akshay and Sameer leaning over Akshay's laptop.
-- **Action:** Akshay points at a crimson Node.js stack trace on his screen. Sameer leans over, his hand cradling his chai glass, using his other index finger to point directly at the unhandled `trim()` invocation on line 14.
+- **Asset Filename:** `ch02_scene03_forensic_stack_trace_inspection.jpg`
+- **Camera & Lens:** 70mm Over-the-Shoulder Medium Shot, looking past Sameer's shoulder onto Akshay's laptop display.
+- **Lighting & Color:** Deep crimson-red glow reflected from the terminal error onto Akshay's face, clashing with the warm pool of light from a brass gooseneck lamp on the teak desk.
+- **Characters & Action:** 
+  - Akshay hunches over his silver laptop, eyes dilated with shock as he inspects an unhandled TypeError.
+  - Sameer stands tall beside him, hands holding his chai glass in its brass holder, using a slender index finger to point precisely at line 14 of the route handler on the screen. Sameer's expression is teacherly and calm, with a slight knowing smile.
+- **Headroom Geometry:** Top 28% clean negative space formed by shadowed sandstone wall and high transom arch.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 over the shoulder shot looking at a sleek developer laptop on a polished teak desk. Screen displays a dark terminal with an uncaught JavaScript error highlighted in red. Systems architect Sameer in peacock indigo kurta points a slender finger at the screen without touching the keyboard. Young engineer Akshay in white kurta listens with intense concentration. Warm brass desk lamp illumination, dark sandstone arches in upper 28% negative space. Cinematic digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 70mm over-the-shoulder medium shot looking past architect Sameer's shoulder onto a matte-silver laptop resting on a massive teak dispatch desk. The laptop screen displays a dark terminal with an uncaught JavaScript error highlighted in bold crimson red: TypeError: Cannot read properties of undefined (reading 'trim'). Mentor Sameer in his peacock-indigo kurta points a calm slender finger toward the route handler code without touching the keyboard, his face showing serene Socratic guidance. Seated apprentice Akshay in his white cotton kurta leans forward in intense concentration, jaw clenched and eyes wide with forensic revelation as the red screen glow illuminates his features. Warm brass gooseneck task lamp pools golden light on the desk. Top 28% clean shadowy sandstone archway in negative space for speech balloons. Expressive graphic novel realism, sharp ink double outlines, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Beat 04: Restoring the Wire and Shared Relief (08:45 PM)
-- **Scene Setting:** Dispatch control center. Wall monitors illuminate with moving green transit bus icons.
-- **Action:** Akshay sits back in his chair with deep relief, hands resting on his mechanical keyboard. Sameer takes a reflective sip from his cutting chai glass, nodding with quiet pride. Dispatchers cheer in the blurred background.
+- **Asset Filename:** `ch02_scene04_restoring_the_wire_relief.jpg`
+- **Camera & Lens:** 35mm Medium Two-Shot, slightly low-angle capturing both engineers in triumphant resolution.
+- **Lighting & Color:** The dispatch room's wall screens glow with soft emerald-green bus icons and clean GPS route paths, washing the room in reassuring green and warm amber tones.
+- **Characters & Action:** 
+  - Akshay leans back in his oak chair with immense physical relief, exhaling deeply with a joyful smile, hands resting lightly beside his mechanical keyboard.
+  - Sameer takes a reflective sip from his cutting chai glass, nodding with quiet pride and mentorship warmth. In the blurred background, transit dispatchers smile and give thumbs up.
+- **Headroom Geometry:** Top 30% clean vaulted sandstone ceiling with hanging pendant lamps in soft negative space.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot of young engineer Akshay in white kurta leaning back from his silver laptop with an expression of triumphant relief, beside mentor Sameer in peacock indigo kurta sipping cutting chai with serene satisfaction. Background dispatch monitors show moving green bus icons across map. Upper 28% carved red sandstone arches in soft ambient shadow. Warm cinematic lighting, expressive character faces, 8k graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 35mm medium two-shot in the transit dispatch center at 08:45 PM. Wall-mounted monitors in the background glow with moving green bus icons and restored GPS routes. Young engineer Akshay Sharma in his white kurta leans back in his desk chair with an expression of profound, smiling relief, shoulders relaxed and hands resting beside his silver laptop keyboard. Beside him, senior mentor Sameer in his peacock-indigo raw-silk kurta and brass spectacles takes a quiet, reflective sip from his cutting chai glass, nodding with dignified satisfaction and mentorly pride. Warm amber desk lamps mingle with soft emerald screen reflections. Carved red sandstone pillars frame the background. Top 30% clean vaulted ceiling in ambient shadow for dialogue cards. High emotional resonance, crisp ink contour lines, rich watercolor wash textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 ---
@@ -187,33 +208,56 @@ Full bleed 16:9 medium shot of young engineer Akshay in white kurta leaning back
 ### Chapter 03: Narrative Graphic Novel Beats (Postman Automation and Chai Assertions)
 
 #### Beat 01: Morning Reflection in the Sandstone Courtyard (09:15 AM)
-- **Scene Setting:** Open air stone courtyard outside the Computer Center. Sunlight washes over 300-year-old carved sandstone pillars.
-- **Action:** Akshay and Sameer sit at a stone octagonal table. Akshay opens his silver laptop (distinct scratch visible on lid). Sameer pours hot ginger chai into two cutting glasses from a brass kettle.
+- **Asset Filename:** `ch03_scene01_morning_courtyard_chai.jpg`
+- **Camera & Lens:** 28mm Wide Cinematic Shot, capturing an open-air heritage stone portico overlooking lush campus gardens.
+- **Lighting & Color:** Crisp 5000K morning sunlight washing across honey-beige and red sandstone pillars, casting long diagonal geometric shadows through stone jali screens.
+- **Characters & Action:** 
+  - Akshay and Sameer sit at an octagonal carved stone table.
+  - Akshay opens his silver laptop (distinct horizontal scratch catching the morning sun on the top-left lid edge), ready to begin automation.
+  - Sameer pours steaming ginger chai from an antique brass kettle into two faceted cutting glasses. His demeanor is peaceful and philosophical.
+- **Headroom Geometry:** Top 30% clean morning sky and sandstone cornice in uncluttered negative headroom.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot of sunlit heritage stone courtyard with carved sandstone pillars and arched verandas. Young engineer Akshay in white kurta with rolled sleeves sets silver laptop on an octagonal stone table. Architect Sameer in peacock indigo kurta pours tea from a traditional brass kettle into two cutting chai glasses. Morning sunlight streaming through stone jali screens. Upper 28% open sky and sandstone cornice provide clean negative space. Cinematic digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 28mm wide cinematic shot in an open-air carved sandstone veranda of Apex Institute at 09:15 AM. Bright morning sunlight streams through geometric stone jali lattice screens, casting crisp architectural patterns across polished stone flagstones and Dravidian pillars. Apprentice Akshay Sharma in his crisp white cotton kurta sits at an octagonal sandstone table, opening his matte-silver laptop whose lid shows a distinct horizontal scratch catching the sunlight. Senior architect Sameer in his peacock-indigo raw-silk kurta and round brass wireframe spectacles pours steaming ginger chai from a traditional brass kettle into two faceted cutting glasses with calm graceful poise. Beyond the stone balustrade, green campus trees sway in the morning breeze. Top 30% clean sky and sandstone portico cornice in negative space for speech balloons. Luminous natural lighting, bold ink outlines, rich gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Beat 02: The Green Test Lie Discovery (09:35 AM)
-- **Scene Setting:** Courtyard table under the stone veranda. Screen shows Postman with a green test pass.
-- **Action:** Akshay leans in close to the screen, furrowing his brow in suspicion. He points out that the test passed green, yet the JSON response body below it has an empty array `[]`. Sameer watches with a knowing smile.
+- **Asset Filename:** `ch03_scene02_green_test_lie_discovery.jpg`
+- **Camera & Lens:** 85mm Macro Close-Up with Shallow Depth of Field, focusing sharply on Akshay's face and laptop screen.
+- **Lighting & Color:** Emerald-green screen reflection illuminating Akshay's eyes and brow, contrasted with warm sunlight on his white kurta.
+- **Characters & Action:** 
+  - Akshay leans in uncomfortably close to the screen, his eyebrows heavily knitted in deep suspicion.
+  - His index finger points directly at an empty JSON array `[]` in the response payload viewer, while the test result pill above it glows proudly green with `PASS Status 200`.
+  - In the soft-focus background, Sameer watches with an amused, knowing smile over his cutting chai glass.
+- **Headroom Geometry:** Top 28% clean negative space formed by warm sandstone wall in soft focus.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 close up shot of young Indian engineer Akshay examining laptop screen with furrowed brow and intense suspicion. The screen reflects green light onto his face from a passing test badge, but his finger points at an empty bracket in the JSON response. Next to him, architect Sameer smiles subtly over his cutting chai glass. Upper 28% warm sandstone wall in soft shadow. Cinematic digital storytelling, expressive character acting. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 85mm close-up shot focused on apprentice Akshay Sharma inspecting his laptop screen with intense suspicion and furrowed brow at 09:35 AM. The laptop screen casts an emerald-green glow onto his face from a passing test badge, but his finger points with diagnostic disbelief at an empty JSON array [] displayed in the response body. His lips are parted in skeptical realization that the test is lying. In the soft-focus background across the stone table, systems architect Sameer in his peacock-indigo kurta smiles knowingly over his cutting chai glass. Polished stone table surface reflecting morning light. Top 28% warm out-of-focus sandstone archway in clean negative headroom. Expressive character acting, crisp ink contours, subtle watercolor shading, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Beat 03: Constructing the Length Expectation (09:50 AM)
-- **Scene Setting:** Shaded library portico. Akshay typing fast on his mechanical keyboard.
-- **Action:** Akshay's fingers fly across the keys as he drafts the Chai assertion `pm.expect(coordinates.length).to.be.above(0)`. Sunlight catches the silver scratch on his laptop lid. Sameer nods with approval from across the table.
+- **Asset Filename:** `ch03_scene03_crafting_chai_assertion.jpg`
+- **Camera & Lens:** 50mm Medium Dynamic Shot, eye-level framing capturing swift coding action.
+- **Lighting & Color:** Direct sunlight glinting off mechanical keyboard keycaps and the silver laptop lid edge, warm ambient courtyard lighting.
+- **Characters & Action:** 
+  - Akshay types decisively across his keyboard, fingers in fluid motion, his facial expression transformed from confusion into fierce analytical clarity.
+  - He authors the deep Chai assertion enforcing `pm.expect(coordinates.length).to.be.above(0)`.
+  - Sameer nods from across the table, his arms folded across his chest in deep mentorship approval.
+- **Headroom Geometry:** Top 28% vaulted stone portico ceiling in soft ambient negative space.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 dynamic medium shot of young engineer Akshay typing decisively on his silver laptop keyboard, hands in motion, eyes glowing with clarity. Laptop lid shows distinct horizontal scratch on top left corner. Across the teak table, architect Sameer in peacock indigo kurta nods in quiet affirmation. Upper 28% vaulted stone portico ceiling in ambient negative space. High contrast dramatic lighting, 8k graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 50mm dynamic medium shot at the sandstone veranda table at 09:50 AM. Apprentice Akshay Sharma types decisively on his silver laptop keyboard, hands moving with rapid rhythm and purposeful energy. His eyes glow with sharp intellectual clarity and confidence, his white kurta sleeves neatly rolled up to mid-forearm. Across the stone table, mentor Sameer Krishnamurthy in his peacock-indigo raw-silk kurta watches with folded arms, offering a subtle, approving nod of satisfaction. Steaming glasses of cutting chai sit on brass coasters between them. Carved Dravidian stone pillars and sunlit garden foliage frame the scene. Top 28% clean vaulted ceiling in ambient shadow for dialogue cards. High energy and precision, crisp ink linework, rich gouache washes, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Beat 04: The Newman Headless Terminal Triumph (10:15 AM)
-- **Scene Setting:** Computer Center lab. Terminal running Newman automated suite.
-- **Action:** Terminal screen renders Newman's clean ASCII table with 100% green checkmarks. Akshay clenches his fist in quiet celebration. Sameer raises his cutting chai glass in a toast of accomplishment.
+- **Asset Filename:** `ch03_scene04_newman_terminal_triumph.jpg`
+- **Camera & Lens:** 35mm Medium Shot, triumphant celebration framing.
+- **Lighting & Color:** Vibrant emerald-green reflections from the terminal summary table washing over the stone table, warm morning sun streaming from the veranda side.
+- **Characters & Action:** 
+  - Akshay raises a clenched fist in quiet, ecstatic triumph beside his laptop as Newman completes with 100% assertions green.
+  - Sameer raises his traditional cutting chai glass in an elegant salute of congratulations, acknowledging Akshay's first automated regression suite.
+- **Headroom Geometry:** Top 30% clean sandstone archway and morning sky in negative headroom.
 - **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot of apprentice Akshay and mentor Sameer celebrating in heritage computer lab. Laptop screen displays terminal running automated CLI test runner with clean emerald checkmark summary table. Akshay raises clenched fist in quiet triumph, while Sameer in peacock indigo kurta raises his brass chai holder in a toast. Soft golden sunlight filtering through sandstone jali lattice. Upper 28% clean vaulted ceiling. 8k publication quality graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 35mm medium shot of celebration at the heritage sandstone veranda table at 10:15 AM. On the laptop screen, a dark CLI terminal displays an automated Newman test execution report with rows of bright emerald checkmarks and zero failures. Apprentice Akshay Sharma raises a clenched fist in ecstatic triumph, smiling broadly with profound pride and accomplishment. Across the table, Principal Architect Sameer Krishnamurthy raises his faceted cutting chai glass in an elegant toast of congratulations, his eyes twinkling behind round brass wireframe spectacles. Morning sunlight washes over the carved red sandstone colonnade. Top 30% vaulted stone ceiling and open sky in clean negative space for speech balloons. Joyful triumphant atmosphere, crisp ink double outlines, rich watercolor textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```

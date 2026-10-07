@@ -6,7 +6,7 @@
 **Mission Scope:** Mission 2 · Automating Student and Campus Services at Scale (Part A)  
 **Chapters Covered:** Chapter 04 and Chapter 05  
 **Target Engine:** Google Flow AI / Midjourney v6 / Stable Diffusion XL  
-**Deliverables:** Production Gap Audit, Clean Application Interface Screens (Chunked Input, Processing, Output), and Narrative Transition Prompts.
+**Deliverables:** Production Gap Audit, Clean Application Interface Screens (Chunked Input, Processing, Output), and Technical Blueprints.
 
 ---
 
@@ -67,7 +67,7 @@
   - **3. OUTPUT:** HTTP Status `201 Created` (emerald badge `#059669`). Latency: `24ms`. Header `Location: /v1/books/BK-9021`. Response body returns persisted book record with generated ID.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of a modern dark mode API testing workbench. Upper request bar shows POST request to http://api.apex.edu/v1/books. Middle pane shows structured JSON request body highlighted in emerald and yellow with ISBN, title, author, and copies. Lower response pane shows an emerald status pill reading 201 Created with 24ms latency badge and Location header pointing to generated book ID. Clean dark slate background (#0F172A), sharp monospace code typography, clinical developer interface, zero decorative frames, zero cartoon art. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of a modern dark-mode API testing workbench capturing an authentic POST resource creation request. The top horizontal request bar displays an emerald-green POST method badge targeting http://api.apex.edu/v1/books alongside a blue Send button. The Body tab displays formatted JSON payload in JetBrains Mono font with syntax highlighting: keys isbn, title, author, department, and copies highlighted in soft cyan and yellow against dark slate (#0F172A). In the lower response pane, a prominent emerald status pill displays 201 Created alongside a 24ms latency counter and Location header showing /v1/books/BK-9021. The response JSON reflects the newly persisted book object with unique ID. Clinical software workbench capture, strictly borderless, zero decorative frames, zero cartoon art, 8k publication quality. --ar 16:9
 ```
 
 #### Chunk 2: The Concurrent Collision and 409 Conflict Response
@@ -90,7 +90,7 @@ if (err.code === '23505') {
   - **3. OUTPUT:** HTTP Status `409 Conflict` (amber badge `#F59E0B`). Latency: `8ms`. Structured error payload: `{ "status": "error", "code": "ERR_DUPLICATE_ISBN", "message": "A book with this ISBN is already registered" }`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of an API testing workbench displaying an honest concurrency conflict response. Upper request bar shows POST /v1/books. Lower response viewer displays a formatted JSON error payload: status is error, code is ERR_DUPLICATE_ISBN, message states book already registered. Top right response header displays a prominent amber status badge reading 409 Conflict with 8ms response time. Crisp dark mode developer interface, clean monospace syntax, clinical UI capture, zero decorative margins. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of an API testing workbench capturing an honest database concurrency conflict response. The request bar shows an identical POST request targeting /v1/books. In the upper-right corner of the response header, a prominent amber status badge displays 409 Conflict alongside an 8ms latency badge and 198B payload size. The lower response viewer displays a formatted JSON error payload with crisp syntax highlighting: keys status, code, and message with amber string value ERR_DUPLICATE_ISBN explaining that a book with this ISBN is already registered in the library catalog. Dark slate IDE aesthetics (#1E293B), sharp monospace typography, clinical software workbench capture, strictly borderless, zero decorative margins, 8k resolution. --ar 16:9
 ```
 
 #### Consolidated Program: Complete CRUD Verification Flow
@@ -100,7 +100,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of an API testing workbench
   - **Output:** Collection runner report: `5/5 Requests Passed, 10/10 Assertions Green`. Complete lifecycle verified.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of an integrated API testing collection runner report. Left sidebar displays a clean tree of five chained requests: AddBook POST, GetBook GET, UpdateBook PUT, DeleteBook DELETE, and VerifyCleanup GET. Central dashboard shows five green progress checkmarks with HTTP status pills: 201 Created, 200 OK, 200 OK, 200 OK, and 404 Not Found. Dark slate IDE aesthetics (#0F172A), sharp status colors, authentic developer workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner execution report capturing a complete five-stage CRUD lifecycle audit. The left sidebar displays the chained request tree: 1_AddBook_POST (201 Created), 2_GetBook_GET (200 OK), 3_UpdateBook_PUT (200 OK), 4_DeleteBook_DELETE (204 No Content), and 5_VerifyCleanup_GET (404 Not Found). The central execution dashboard shows five green progress checkmarks with individual latency badges under 25ms. The top summary banner displays 5 of 5 Requests Passed, 10 of 10 Assertions Green, 0 Failures. Modern dark-mode IDE (#0F172A), sharp status colors, authentic developer workbench capture, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -122,7 +122,7 @@ pm.test("Status is 201 and Content-Type is JSON", function () {
   - **3. OUTPUT:** Green test assertion banner: `PASS Status is 201 and Content-Type is JSON`.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman workbench Tests tab and test results drawer. Upper code editor shows clean JavaScript Chai assertions validating HTTP 201 status and Content-Type header inclusion. Lower test results pane displays a bright emerald badge reading PASS Status is 201 and Content-Type is JSON. High contrast dark mode code editor (#1E293B), sharp syntax highlighting in yellow, cyan, and green, zero decorative borders. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman workbench Tests tab and test results drawer. The upper JavaScript code editor displays clean Chai assertions validating HTTP 201 status and Content-Type header inclusion with syntax highlighting in yellow, cyan, and white. In the lower test results drawer, a bright emerald-green pill displays PASS Status is 201 and Content-Type is JSON (2/2). In the adjacent response header inspection drawer, Content-Type application/json; charset=utf-8 is highlighted in soft cyan. High contrast dark-mode code editor (#1E293B), sharp monospace typography, clinical developer interface, strictly borderless, zero decorative frames. --ar 16:9
 ```
 
 #### Chunk 2: The Response Latency Budget Guard under 1200ms
@@ -138,7 +138,7 @@ pm.test("Response time is within budget (< 1200ms)", function () {
   - **3. OUTPUT:** Emerald test assertion pill: `PASS Response time is within budget (< 1200ms) | Actual: 184ms`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic developer screen capture of Postman test results latency audit. Upper code editor displays JavaScript assertion: pm.expect responseTime to be below 1200. Lower results pane shows an emerald test banner: PASS Response time is within budget (< 1200ms) alongside a small circular telemetry gauge showing actual latency of 184ms. Dark slate developer interface (#0F172A), clinical typography, authentic software workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic developer screen capture of Postman test results latency audit drawer. The upper code editor displays JavaScript assertion: pm.expect(pm.response.responseTime).to.be.below(1200); with syntax highlighting. In the lower results pane, a vibrant emerald test banner displays PASS Response time is within budget (< 1200ms) alongside a circular telemetry gauge showing actual round-trip latency of 184ms and response size of 1.4KB. Dark slate developer interface (#0F172A), sharp clinical typography, authentic software workbench capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: Complete Ajv JSON Schema and Assertion Suite
@@ -148,7 +148,7 @@ Full bleed 16:9 widescreen photorealistic developer screen capture of Postman te
   - **Output:** Comprehensive test summary drawer showing all 4 assertions green: Status 201, JSON Header, Latency 184ms, and Schema Valid.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman test execution report showing complete test governance. Upper editor shows Ajv JSON schema validation script defining mandatory field contracts. Lower test results drawer displays four consecutive emerald checkmarks: PASS Status is 201, PASS Content-Type is JSON, PASS Response time under 1200ms, and PASS Schema matches contract. Modern dark mode IDE, sharp syntax colors, clinical developer workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman test execution report capturing total contract governance. The upper editor shows an Ajv JSON schema validation script defining mandatory properties and data types for library records. The lower test results drawer displays four consecutive emerald checkmarks: PASS Status is 201 Created, PASS Content-Type is application/json, PASS Response time is 184ms (< 1200ms), and PASS Schema matches catalog contract. Deep slate IDE aesthetics (#0F172A), sharp status colors, clinical developer workbench capture, strictly borderless, 8k publication resolution. --ar 16:9
 ```
 
 ---

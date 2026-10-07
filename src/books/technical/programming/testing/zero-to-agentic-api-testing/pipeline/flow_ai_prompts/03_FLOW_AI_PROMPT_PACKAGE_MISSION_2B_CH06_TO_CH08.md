@@ -38,7 +38,7 @@ pm.variables.set("newIsbn", dynamicIsbn);
   - **3. OUTPUT:** Postman Console log: `[Pre-request] Generated newIsbn: 978-0-482194-8104`. Request body automatically resolves `{{newIsbn}}`.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Pre-request Script tab. Editor pane shows syntax-highlighted JavaScript generating a dynamic ISBN using Math.random and Date.now, then assigning it to pm.variables. Lower console drawer displays developer log output showing the generated 13-digit ISBN string in bright cyan. Clean dark slate background (#0F172A), sharp monospace code fonts, clinical developer UI, zero decorative frames, zero cartoon art. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman workbench Pre-request Script tab and developer console drawer. The upper code editor pane displays syntax-highlighted JavaScript in vibrant cyan, yellow, and white generating a dynamic 13-digit ISBN string using Math.floor, Math.random, and Date.now, then binding the value to pm.variables.set("newIsbn", dynamicIsbn). In the lower developer console drawer, an authentic log message in bright cyan typography reads [Pre-request] Generated newIsbn: 978-0-482194-8104 alongside execution timestamp. In the adjacent request body tab, raw JSON displays the parameter {{newIsbn}} ready for dispatch. Dark slate background (#0F172A), sharp JetBrains Mono code fonts, clinical developer UI, strictly borderless, zero decorative frames, zero cartoon art, 8k publication quality. --ar 16:9
 ```
 
 #### Chunk 2: Environment Variable Switching (QA vs UAT)
@@ -55,7 +55,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman Pre-request Scri
   - **3. OUTPUT:** Live HTTP Request dispatched to `http://qa-api.apex.edu/v1/books`. Environment badge in upper right glows amber for QA environment.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman environment manager and request bar. Top right environment pill displays Apex-Library-QA in amber. Request bar shows parameterized URL: double curly braces baseUrl slash books resolving to http://qa-api.apex.edu/v1/books in hover tooltip. Lower pane displays environment key-value grid showing baseUrl and authToken variables. Crisp dark mode developer interface, clean monospace typography, clinical software workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman environment variable manager and request bar. In the upper-right corner, an active environment pill glows in warm amber reading Apex-Library-QA. The central horizontal request URL bar displays the parameterized target: {{baseUrl}}/books, with a hover tooltip displaying the resolved runtime endpoint: http://qa-api.apex.edu/v1/books. Below the request bar, the environment variable grid displays two clear rows: baseUrl mapping to the QA URL with an initial and current value, and authToken mapping to a Bearer token. Dark slate theme (#1E293B), sharp monospace typography, clinical software workbench capture, strictly borderless, zero decorative margins, 8k resolution. --ar 16:9
 ```
 
 #### Consolidated Program: Variable Scope Precedence Hierarchy
@@ -65,7 +65,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman environment mana
   - **Output:** Scope resolution inspector showing winning value with active green checkmark and overridden values struck through in faint grey.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of a developer variable scope resolution diagnostic tool. Diagram displays five layered tiers: Local, Data, Environment, Collection, and Global. Narrowest tier is highlighted with an emerald badge showing active winning value, while broader tiers show overridden values in subtle muted slate. Clean dark slate IDE aesthetics (#0F172A), high contrast typography, authentic software architecture visualization. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of a developer variable scope resolution diagnostic tool and inspector. The central pane displays a vertical ladder of five distinct scopes: Local, Data, Environment, Collection, and Global. The innermost Local scope is highlighted with a luminous emerald-green badge showing the winning resolved variable value, while the broader tiers display their overridden conflicting values in muted slate grey with faint strikethroughs. Next to each tier, technical resolution badges show lookup latency and memory allocation. Deep slate IDE aesthetics (#0F172A), sharp status colors, authentic developer architecture visualization, strictly borderless, zero cartoon art. --ar 16:9
 ```
 
 ---
@@ -85,7 +85,7 @@ pm.environment.set("activeBookId", responseData.id);
   - **3. OUTPUT:** Postman environment storage immediately updates `activeBookId = BK-2026-9041`. Variable becomes available to all downstream requests in the collection.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Tests tab and live environment variable drawer side by side. Left editor pane displays JavaScript code deserializing response JSON and calling pm.environment.set for activeBookId. Right environment viewer shows activeBookId instantly populated with value BK-2026-9041 highlighted in emerald green. Clean dark slate interface (#0F172A), sharp code syntax, clinical developer workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman workbench Tests tab and live environment variable quick-look drawer side-by-side. The left code editor displays clean JavaScript: const responseData = pm.response.json(); pm.expect(responseData.id).to.be.a('string'); pm.environment.set("activeBookId", responseData.id); with crisp syntax highlighting in yellow, cyan, and white. The right slide-out environment panel displays activeBookId dynamically populated with string value BK-2026-9041, glowing with an active emerald-green update indicator. Dark theme developer interface (#0F172A), sharp code fonts, clinical developer workbench capture, strictly borderless, 8k quality. --ar 16:9
 ```
 
 #### Chunk 2: Downstream Request Parameterization and Array Aggregation
@@ -103,7 +103,7 @@ pm.expect(totalCost).to.equal(1450.00);
   - **3. OUTPUT:** Test assertion passes: `PASS Total cost calculated accurately | Expected: 1450.00 | Actual: 1450.00`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic developer screen capture of Postman test results showing functional array processing. Upper editor pane displays JavaScript assertions using filter and reduce to calculate total cost from nested JSON items array. Lower results pane shows an emerald test banner: PASS Total cost calculated accurately with expected and actual values matching at 1450.00. Dark mode developer IDE, clinical typography, authentic software workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman request builder and test results drawer showing functional array aggregation. The upper request bar displays GET /catalog/orders/{{activeBookId}}/summary, resolving dynamic book ID in the URL. In the Tests tab, JavaScript code uses filter and reduce methods to compute total cost from an items array. In the lower test results drawer, an emerald test banner displays PASS Total cost calculated accurately with expected and actual values perfectly matching at 1450.00. High contrast dark-mode IDE (#1E293B), sharp typography, clinical software workbench capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: End-to-End Three-Stage Chained Workflow
@@ -113,7 +113,7 @@ Full bleed 16:9 widescreen photorealistic developer screen capture of Postman te
   - **Output:** Collection runner log showing 3 chained requests executing in perfect sequence with 100% assertions green and zero hardcoded manual IDs.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner log displaying an automated three-stage chained workflow. Visual log displays Request 1 AddBook POST with green 201 Created and variable export badge, followed by Request 2 GetBook GET using dynamic bookId parameter with green 200 OK, followed by Request 3 DeleteBook DELETE with green 204 No Content. Dark theme interface, clean connector lines, professional API automation report. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner execution log capturing an automated three-stage chained workflow. The execution table displays three sequential request steps: Step 1 AddBook POST displays green 201 Created and variable export icon for activeBookId; Step 2 GetBook GET displays green 200 OK consuming {{activeBookId}} with validated payload; Step 3 DeleteBook DELETE displays green 204 No Content confirming database cleanup. Summary bar shows 3/3 Requests Passed, 9/9 Assertions Green, 0 Failures. Dark slate interface (#0F172A), sharp status colors, professional API automation report, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -134,7 +134,7 @@ isbn,title,author,copies,expectedStatus
   - **3. OUTPUT:** Postman Data Preview modal displays 3 rows with perfectly aligned columns: `isbn`, `title`, `author`, `copies`, `expectedStatus`.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner Data File Preview modal. Table displays three rows of test data with column headers: isbn, title, author, copies, expectedStatus. Rows contain book records with book titles containing commas preserved cleanly inside RFC 4180 double quotes, with zero column misalignment. Dark theme modal dialog, clean tabular grid, crisp monospace typography, authentic developer workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner Data File Preview modal window. The dialog box displays a clean five-column data grid with headers: isbn, title, author, copies, expectedStatus. The table rows display book records where titles containing commas, such as "Effective Java, 3rd Edition", remain perfectly preserved inside RFC 4180 double quotes without shifting adjacent author or copies columns into wrong cells. Monospace typography in soft cyan and white, dark theme modal styling (#1E293B), clinical software workbench capture, strictly borderless, zero decorative frames. --ar 16:9
 ```
 
 #### Chunk 2: Iteration Data Binding and Dynamic Assertion
@@ -151,7 +151,7 @@ pm.test("Matches dataset status " + expected, function () {
   - **3. OUTPUT:** Dynamic test name generated and passed: `PASS Matches dataset status 400`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman test editor and runner execution during iteration data binding. Upper editor shows JavaScript code using pm.iterationData.get to dynamically assert response status based on external file. Lower drawer shows execution log for Iteration 3 of 50 with dynamic test label: PASS Matches dataset status 400. Dark slate background (#0F172A), sharp status colors, clinical software interface. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman test results drawer during data-driven iteration execution. The upper code editor displays JavaScript using pm.iterationData.get("expectedStatus") to dynamically parameterize assertion logic. The lower execution log drawer highlights Iteration 3 of 50, showing an active green assertion pill reading PASS Matches dataset status 400 alongside response time of 12ms. Adjacent test console displays iteration data binding variables. Dark slate background (#0F172A), sharp status colors, clinical software workbench capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: 50-Iteration Collection Runner Execution Dashboard
@@ -161,7 +161,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman test editor and 
   - **Output:** Collection runner summary dashboard: `50 Iterations Completed, 150 Tests Run, 150 Passed, 0 Failed, Total Time: 1420ms`.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner summary dashboard after massive data-driven test execution. Top summary metrics show: 50 Iterations, 150 Tests Run, 150 Passed, 0 Failed, Total Duration 1.42s. Lower panel shows full scrolling grid of iterations with green checkmarks and response times under 30ms. Dark slate interface (#0F172A), emerald green summary cards, crisp typography, authentic API testing suite capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner summary dashboard after massive data-driven test execution across 50 records. The top executive summary bar displays prominent metrics: 50 Iterations Completed, 150 Tests Run, 150 Passed, 0 Failed, Total Duration 1.42s. Below the summary, a scrolling data grid lists all 50 iterations with vibrant emerald-green checkmarks, HTTP status pills (201 Created and 400 Bad Request), and individual response latencies under 30ms. Deep slate IDE aesthetics (#0F172A), crisp typography, professional API testing suite capture, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -171,35 +171,55 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runne
 ### Chapter 06: Variable Scopes Narrative Storyboards
 
 #### Scene 01: The Hardcoded URL Dead End (08:30 PM)
-- **Setting:** Heritage Library Computing Annex. Red sandstone arches, carved jali screens. Rain outside.
-- **Action:** Akshay Sharma (24, clean forehead, white kurta with rolled sleeves) stares at his silver laptop in frustration, pointing at hardcoded `http://localhost:5050` scattered across 18 requests. Architect Sameer Krishnamurthy (40, peacock indigo kurta, round brass spectacles) stands calmly holding his cutting chai glass.
-- **Prompt:**
+- **Asset Filename:** `ch06_scene01_hardcoded_url_frustration.jpg`
+- **Camera & Lens:** 35mm Medium Wide Shot, eye-level framing in the heritage Library Computing Annex.
+- **Lighting & Color:** Warm 2700K brass task lamps pooling light on polished Burmese teak tables, contrasting against cool blue-grey rain pouring outside carved stone jali lattice screens.
+- **Characters & Action:** 
+  - Apprentice Akshay Sharma (24, clean forehead with zero religious markings, crisp white handloom cotton kurta with sleeves neatly rolled to mid-forearm, dark jeans) slumps slightly in his oak chair in front of his silver laptop. His brow is furrowed in exhaustion and frustration, pointing with an irritated gesture at hardcoded `http://localhost:5050` URLs copied across eighteen different Postman requests.
+  - Senior Architect Sameer Krishnamurthy (40, dignified poise, neatly trimmed salt-and-pepper beard, silver hair streaks at temples, thin round brass wireframe spectacles) stands calmly beside the desk, holding his faceted cutting chai glass inside an ornate raw brass wire holder. Sameer watches with serene, Socratic amusement.
+- **Headroom Geometry:** Top 30% clean vaulted red sandstone ceiling arches in soft atmospheric shadow.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium wide shot of heritage computer lab with carved Indian red sandstone arches and high teak tables. Young engineer Akshay Sharma (24, clean forehead with zero markings, crisp white cotton kurta with rolled sleeves) sits at matte silver laptop with furrowed brow and frustrated expression, pointing at screen. Beside him, systems architect Sameer Krishnamurthy (40, peacock indigo raw silk kurta with gold collar, round brass wireframe glasses) stands calmly holding a faceted cutting chai glass in a brass holder. Warm brass desk lamp light, cool terminal reflections. Top 28% vaulted stone ceiling in soft shadow. Cinematic digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 35mm medium wide shot inside the heritage Library Computing Annex of Apex Institute at 08:30 PM. Massive 300-year-old carved Indian red sandstone arches and Dravidian pillars frame high teak tables. Outside carved geometric jali stone lattice screens, dark evening rain pours down. Young apprentice software engineer Akshay Sharma (24, clean natural forehead with zero markings, crisp white cotton kurta with sleeves rolled to mid-forearm, dark blue denims) sits at his matte-silver laptop with a deeply furrowed brow and posture of frustrated exhaustion, pointing his pen at the screen where hardcoded URLs are repeated across multiple requests. Standing calmly beside him, systems architect Sameer Krishnamurthy (40, peacock-indigo raw-silk kurta with gold collar embroidery, round brass wireframe spectacles, salt-and-pepper beard) holds a steaming faceted cutting chai glass in an ornate raw brass wire holder, smiling with stoic teacherly amusement. Warm brass gooseneck lamp light pooling on the desk, contrasting with cool terminal reflections. Top 30% vaulted sandstone ceiling in clean negative space for speech balloons. Expressive graphic realism, crisp double ink contours, rich gouache washes, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: Demonstrating the Scope Ladder on the Teak Blackboard (08:55 PM)
-- **Setting:** Library Annex lecture portico. Massive chalkboard framed in Burmese teak.
-- **Action:** Sameer draws the five concentric circles of variable scope with yellow chalk: Global, Collection, Environment, Data, Local. Akshay watches with eager realization, notebook open.
-- **Prompt:**
+- **Asset Filename:** `ch06_scene02_scope_ladder_chalkboard.jpg`
+- **Camera & Lens:** 50mm Medium Shot, eye-level framing capturing architectural instruction.
+- **Lighting & Color:** Warm golden light from hanging brass chandeliers illuminating the chalkboard surface, soft shadows filling the stone hall.
+- **Characters & Action:** 
+  - Architect Sameer stands beside a grand floor-to-ceiling chalkboard framed in dark Burmese teakwood. With a stick of yellow chalk, he draws five concentric circles representing the variable scope ladder: Global, Collection, Environment, Data, and Local. His posture is tall, authoritative, and dignified.
+  - Seated nearby, apprentice Akshay leans forward eagerly with open notebook and brass rollerball pen in hand, his face illuminated with sudden clarity and understanding as the hierarchy falls into place.
+- **Headroom Geometry:** Top 28% clean stone archway and upper chalkboard in negative headroom.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot of architect Sameer standing beside a large chalkboard framed in polished teakwood, drawing five concentric variable scope rings with yellow chalk. Young engineer Akshay in white kurta leans forward attentively with pen in hand, eyes wide with understanding. Ambient warm lighting from hanging brass lamps, carved sandstone pillars in background. Top 28% stone archway in clean negative headroom. 8k publication quality digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 50mm medium shot in the Library lecture portico at 08:55 PM. Systems architect Sameer Krishnamurthy stands before a massive chalkboard framed in dark Burmese teakwood. Dressed in his peacock-indigo raw-silk kurta with gold mandarin collar and round brass spectacles, he draws five concentric circular scope rings with yellow chalk, illustrating Local, Data, Environment, Collection, and Global tiers. His posture is commanding yet serene. Seated at a wooden desk nearby, apprentice engineer Akshay Sharma in his white handloom cotton kurta leans forward with sharp analytical alertness, pen poised above his graph paper notebook, eyes glowing with sudden comprehension. Carved sandstone archways and warm brass pendant lighting surround them. Top 28% clean stone ceiling in ambient shadow for dialogue balloons. Expressive character acting, sharp ink linework, rich watercolor shading, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 03: Generating the Dynamic Unique ISBN (09:20 PM)
-- **Setting:** Akshay's workstation. Screen shows Pre-request Script tab.
-- **Action:** Akshay smiles with relief as he types `Date.now()` into Postman's Pre-request editor. The horizontal scratch on his silver laptop lid catches the golden lamp glow.
-- **Prompt:**
+- **Asset Filename:** `ch06_scene03_dynamic_isbn_eureka.jpg`
+- **Camera & Lens:** 85mm Macro Close-Up with Shallow Depth of Field, focused on Akshay's face, hands, and laptop.
+- **Lighting & Color:** Amber lamp light illuminating Akshay's white kurta sleeves, screen reflection casting cool cyan light across his expressive features.
+- **Characters & Action:** 
+  - Akshay types with rapid confidence on his mechanical keyboard. His expression is radiant with the thrill of discovery, lips parted in a eureka smile.
+  - The matte-silver laptop lid displays its distinct horizontal scratch on the top-left corner under the warm desk lamp. On screen, he scripts `Date.now()` inside the Pre-request Script tab to generate collision-free ISBNs.
+- **Headroom Geometry:** Top 28% warm sandstone wall in soft shadow providing clean negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 close up shot of young Indian engineer Akshay typing with swift confidence on his silver laptop. Expression of triumphant eureka on his face as he glances at the screen. Polished teak desk, brass task lamp pooling warm golden light on his white handloom kurta. Distinct horizontal scratch on top left corner of laptop lid. Top 28% warm sandstone wall in soft shadow. Cinematic digital concept art, expressive character acting. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 85mm close-up shot focused on apprentice Akshay Sharma at his teak desk at 09:20 PM. His face is lit with triumphant intellectual joy and sudden realization, eyes sparkling and lips parted in a confident eureka smile as his hands type decisively across his mechanical keyboard. His white handloom cotton kurta sleeves are neatly rolled up to mid-forearm, catching warm golden light from a brass task lamp. Beside his keyboard, his matte-silver laptop lid shows a distinct horizontal scratch on the top-left edge. In the soft-focus background, carved sandstone jali screens reflect rainy night shadows. Top 28% clean warm sandstone wall in negative headroom for speech cards. High emotional intensity, crisp ink double contours, subtle watercolor textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 04: The Dual Environment Switching Triumph (09:45 PM)
-- **Setting:** Library Annex. Sameer and Akshay reviewing the active QA and UAT environments.
-- **Action:** Akshay clicks the environment dropdown; the entire suite targets UAT seamlessly. Sameer nods with quiet pride, taking a sip from his cutting chai glass.
-- **Prompt:**
+- **Asset Filename:** `ch06_scene04_environment_switching_triumph.jpg`
+- **Camera & Lens:** 35mm Medium Two-Shot, slightly low-angle capturing shared victory.
+- **Lighting & Color:** Amber desk lamp glow mingling with the screen's emerald indicator lights, dark rainy courtyard visible through arches.
+- **Characters & Action:** 
+  - Akshay clicks the environment dropdown, watching Postman seamlessly reroute the entire collection from QA to UAT with zero broken links. He sits back in his chair with a confident, joyful grin.
+  - Sameer stands beside him, taking a slow sip from his cutting chai glass, nodding with deep, quiet pride.
+- **Headroom Geometry:** Top 30% clean vaulted sandstone ceiling with ambient shadow for dialogue balloons.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot of apprentice Akshay and mentor Sameer at teak workstation in heritage sandstone hall. Laptop screen displays environment dropdown switching cleanly from QA to UAT. Akshay sits back with a confident smile, while Sameer in peacock indigo kurta nods with quiet satisfaction over his cutting chai glass. High contrast cinematic lighting, carved stone jali lattice in background. Top 28% vaulted sandstone ceiling. 8k graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 35mm medium two-shot in the heritage library hall at 09:45 PM. Young engineer Akshay Sharma sits back in his desk chair with a broad triumphant grin, arms relaxed and posture full of newfound confidence as his silver laptop displays clean environment switching between QA and UAT. Beside him, mentor Sameer Krishnamurthy in his peacock-indigo raw-silk kurta and brass spectacles takes a peaceful sip from his faceted cutting chai glass, nodding with profound mentorship satisfaction. Teakwood workstation illuminated by warm brass task lamps, framed by ancient red sandstone pillars and arches. Top 30% vaulted stone ceiling in uncluttered negative space for dialogue cards. Cinematic lighting, bold ink outlines, rich gouache wash textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 ---
@@ -207,35 +227,56 @@ Full bleed 16:9 medium shot of apprentice Akshay and mentor Sameer at teak works
 ### Chapter 07: Request Chaining and Nested JSON Narrative Storyboards
 
 #### Scene 01: The Manual Copy-Paste Chasm (10:10 PM)
-- **Setting:** Rare Manuscript Stacks. High teak book stacks stretching into darkness.
-- **Action:** Akshay frantically highlights an ID string in Postman's response window with his mouse, rushing to paste it into the URL bar of the next request. Chief Librarian Mrs. Meenakshi Iyer (58, amber Kanjeevaram saree, half-moon glasses) watches sternly with her teak clipboard.
-- **Prompt:**
+- **Asset Filename:** `ch07_scene01_copy_paste_fatigue.jpg`
+- **Camera & Lens:** 28mm Wide Shot inside the Rare Manuscript Stacks.
+- **Lighting & Color:** Moody, atmospheric lighting with tall Burmese teak book stacks casting long vertical shadows into vaulted stone arches. Warm pool of lamp light on the catalog desk.
+- **Characters & Action:** 
+  - Akshay hunches over his laptop with tense, hurried body language, desperately trying to select and copy a generated book ID string from a JSON response to paste into the next URL bar.
+  - Chief Librarian Mrs. Meenakshi Iyer (58, stately dignified posture, deep amber Kanjeevaram cotton saree with maroon border, silver-framed half-moon reading glasses on cord) stands nearby holding her heavy Burmese teak clipboard with brass clamp, watching with austere skepticism.
+- **Headroom Geometry:** Top 30% towering dark book stacks and stone ceiling arches in clean negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium wide shot inside ancient library archives with towering teak book stacks. Young engineer Akshay in white kurta hunches over laptop with tense body language, hurriedly trying to copy and paste text with mouse. Chief librarian Mrs. Meenakshi Iyer (58, deep amber Kanjeevaram saree with maroon border, silver half moon reading glasses on cord) stands nearby holding a heavy teak clipboard with brass clamp, watching with severe skepticism. Warm brass task lamp, deep shadowy aisles. Top 28% vaulted stone arches. Cinematic digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 28mm wide shot inside the ancient Rare Manuscript Stacks of Apex Institute Central Library at 10:10 PM. Towering Burmese teak book stacks rise into soaring vaulted red sandstone arches. Dust motes dance in warm beams from brass desk lamps. At a heavy wooden catalog desk, 24-year-old apprentice Akshay Sharma in his white cotton kurta hunches over his silver laptop with tense, exhausted posture, hastily trying to highlight and copy a text ID string with his mouse. Standing beside the desk with austere institutional authority, 58-year-old Chief Librarian Mrs. Meenakshi Iyer (wearing a deep amber Kanjeevaram cotton saree with maroon border, silver half-moon reading glasses hanging on a black cord) holds a heavy teak clipboard with brass clamp, observing his clumsy manual clicking with stern skepticism. Top 30% towering book stacks and vaulted stone ceiling in dramatic negative space. Expressive graphic realism, crisp ink double contours, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: Sameer Intervenes at the Keyboard (10:30 PM)
-- **Setting:** Manuscript Stacks desk. Sameer points at the Tests tab without touching the keys.
-- **Action:** Sameer speaks with calm precision, pointing his finger at the line where `pm.environment.set` belongs. Akshay's hands hover above the mechanical keyboard as he grasps the concept of programmatic property transfer.
-- **Prompt:**
+- **Asset Filename:** `ch07_scene02_sameer_guides_chaining.jpg`
+- **Camera & Lens:** 50mm Over-the-Shoulder Medium Shot, looking past Sameer's shoulder onto Akshay's mechanical keyboard and screen.
+- **Lighting & Color:** Cold blue screen glow illuminating Akshay's upturned face, contrasting with warm amber light from a brass chandelier overhead.
+- **Characters & Action:** 
+  - Sameer points a slender finger directly at the Tests tab on the screen without touching the keyboard. His voice is calm and deliberate, explaining programmatic variable export.
+  - Akshay's fingers hover motionless above his white mechanical keycaps, his eyes wide with intense analytical revelation as the concept of dynamic request chaining connects.
+- **Headroom Geometry:** Top 28% clean vaulted ceiling and stone jali transom in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 over the shoulder shot looking at laptop screen in library stacks. Architect Sameer in peacock indigo kurta points a slender finger toward the code editor without touching the keys. Apprentice Akshay in white kurta pauses his fingers over the mechanical keyboard, his face illuminated by the blue screen glow with sudden realization. Warm brass lamp glow contrasting with cool screen light. Top 28% clean vaulted ceiling. 8k graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 50mm over-the-shoulder medium shot in the library archives at 10:30 PM, looking past architect Sameer's shoulder toward apprentice Akshay. Sameer in his peacock-indigo raw-silk kurta extends a slender, authoritative finger toward the Tests tab on the laptop display, guiding the student without ever touching the keyboard. Seated apprentice Akshay in his white cotton kurta freezes his fingers above his mechanical keyboard, his face illuminated in cool blue screen light, eyes dilated with sudden forensic epiphany as he realizes manual copying can be replaced by code. In the background, Mrs. Iyer holds her teak clipboard, listening attentively. Top 28% carved red sandstone arches in soft shadow for speech balloons. Cinematic graphic novel realism, crisp ink contours, rich gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 03: Parsing the Nested Bookstore Array (10:55 PM)
-- **Setting:** Workstation in library portico. Screen displays complex nested JSON with order arrays.
-- **Action:** Akshay constructs a `.reduce()` function to sum item totals. Ananya Sen (26, rust orange khadi kurti, high ponytail, silver bangle) enters with her diagnostic tablet, nodding approvingly as she inspects the clean aggregation logic.
-- **Prompt:**
+- **Asset Filename:** `ch07_scene03_ananya_inspects_aggregation.jpg`
+- **Camera & Lens:** 35mm Medium Three-Shot, eye-level framing capturing team collaboration.
+- **Lighting & Color:** Warm 2700K brass task lamps illuminating the polished desk, contrasting with the vibrant cyan and green code colors on laptop and mobile screens.
+- **Characters & Action:** 
+  - Akshay types out a JavaScript `.reduce()` function to sum nested order items.
+  - Frontend Engineering Lead Ananya Sen (26, athletic agile posture, dark hair in sleek high ponytail, rust-orange khadi kurti, silver bangle on right wrist) stands beside the desk holding her diagnostic smartphone, leaning in with keen approval as the nested JSON parses correctly.
+  - Sameer observes from the background with calm mentorship poise.
+- **Headroom Geometry:** Top 28% clean stone archway in negative space for dialogue cards.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot of young engineer Akshay typing on silver laptop while frontend engineering lead Ananya Sen (26, rust orange khadi kurti, dark hair in sleek high ponytail, silver bangle on right wrist) stands beside the desk holding a diagnostic tablet, nodding in approval. Screen displays JavaScript array reduction logic. Warm amber lighting from brass sconces, carved sandstone pillars in background. Top 28% vaulted stone arches in soft shadow. Cinematic digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 35mm medium three-shot at a polished teak desk in the library portico at 10:55 PM. Apprentice Akshay Sharma in his white cotton kurta types focused code on his silver laptop, displaying JavaScript array reduction logic. Standing beside him, 26-year-old Frontend Engineering Lead Ananya Sen (wearing a rust-orange khadi raw-silk kurti, dark hair tied in a sleek high ponytail, silver bangle on her right wrist) holds a diagnostic smartphone displaying app wireframes, leaning forward with sharp approving focus and a smile of relief. In the background, senior mentor Sameer in his peacock-indigo kurta watches with folded arms and serene authority. Warm brass lamps pool light on the table, framed by carved red sandstone pillars. Top 28% vaulted ceiling in clean negative space for speech balloons. Energetic collaborative staging, crisp double ink contours, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 04: The Autonomous Chained Pipeline Closes (11:20 PM)
-- **Setting:** Library Annex. Collection runner executes AddBook, GetBook, and DeleteBook in automatic succession.
-- **Action:** The team (Akshay, Sameer, Ananya) watches the collection runner complete with zero manual mouse clicks. Mrs. Iyer lowers her half-moon glasses and inspects the screen, offering a rare, dignified nod of respect.
-- **Prompt:**
+- **Asset Filename:** `ch07_scene04_chained_pipeline_triumph.jpg`
+- **Camera & Lens:** 28mm Wide Group Shot, triumphant resolution framing.
+- **Lighting & Color:** Full emerald-green glow reflecting from the laptop screen across all four characters' faces, warm indoor chandeliers filling the hall.
+- **Characters & Action:** 
+  - Collection runner finishes executing AddBook, GetBook, and DeleteBook in automatic sequence with zero manual mouse clicks.
+  - Akshay raises both hands in pure joy. Ananya smiles broadly, clapping her hands. Sameer raises his cutting chai glass. Chief Librarian Mrs. Iyer lowers her half-moon reading glasses and offers a rare, dignified nod of profound respect.
+- **Headroom Geometry:** Top 30% vaulted sandstone arches in ambient shadow for dialogue cards.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot of heritage library lab. Young engineer Akshay, mentor Sameer, and frontend lead Ananya gather around laptop as collection runner finishes with solid green checkmarks. Chief librarian Mrs. Iyer in amber saree lowers her half moon glasses and nods in rare approval while holding her teak clipboard. Warm ambient light, carved sandstone colonnade. Top 28% vaulted ceiling in ambient shadow. 8k publication quality digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 28mm wide group shot in the grand sandstone library hall at 11:20 PM. Around a massive teak desk, apprentice Akshay Sharma raises both hands in exuberant relief beside his open silver laptop, whose screen displays solid emerald checkmarks from an automated chained collection run. Frontend lead Ananya Sen in her rust-orange kurti claps her hands in delighted triumph. Principal architect Sameer in his peacock-indigo kurta raises his cutting chai glass in salute. Chief Librarian Mrs. Meenakshi Iyer in her amber Kanjeevaram saree lowers her half-moon reading glasses with a rare, dignified smile of deep approval, holding her Burmese teak clipboard to her chest. Warm ambient chandeliers illuminate ancient red sandstone colonnades. Top 30% clean vaulted stone ceiling in negative space for speech cards. Triumphant collective harmony, crisp ink outlines, rich gouache wash textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 ---
@@ -243,33 +284,54 @@ Full bleed 16:9 wide shot of heritage library lab. Young engineer Akshay, mentor
 ### Chapter 08: Data-Driven Testing Narrative Storyboards
 
 #### Scene 01: The Midnight Monsoon Book Crate Influx (11:45 PM)
-- **Setting:** Library Loading Portico. Torrential monsoon rain pouring outside the carved stone eaves.
-- **Action:** Campus logistics lead Ramu (32, dark-green waterproof hooded poncho with neon yellow stripes, wet utility boots) wheels a heavy hand truck loaded with three crates of hundreds of new books. Mrs. Iyer checks the delivery manifest with concern.
-- **Prompt:**
+- **Asset Filename:** `ch08_scene01_monsoon_crate_arrival.jpg`
+- **Camera & Lens:** 24mm Extreme Wide Establishing Shot, capturing the sheltered library loading dock during a ferocious monsoon downpour.
+- **Lighting & Color:** Harsh industrial halogen floodlights contrasting with warm interior amber light spilling from dispatch doors. Cold blue lightning flashes across rain-lashed courtyards.
+- **Characters & Action:** 
+  - Campus Logistics Lead Ramu (32, sturdy muscular build, wearing a dark-green waterproof hooded canvas poncho with reflective neon-yellow shoulder stripes, dripping wet utility boots) wheels a heavy steel hand truck loaded with three strapped plastic crates containing hundreds of new books onto the stone dock.
+  - Mrs. Iyer stands on the dock with her teak clipboard, shielding delivery papers from windblown rain, looking with urgent concern at the mountain of uncataloged books.
+- **Headroom Geometry:** Top 30% dark rain-swept sky and corrugated dock awning in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot of heritage library loading portico during heavy midnight monsoon rain. Rain sheets down outside carved sandstone arches. Logistics lead Ramu (32, dark green waterproof hooded canvas poncho with reflective neon stripes, utility boots) pushes a heavy hand truck carrying crates of books onto the covered stone terrace. Chief librarian Mrs. Iyer in amber saree examines delivery papers under a hanging lantern. Top 28% vaulted stone portico ceiling in clean negative space. Dramatic stormy atmosphere, cinematic digital art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 24mm extreme wide establishing shot of the central library loading dock during a torrential midnight monsoon storm at 11:45 PM. Heavy sheets of rain cascade from a corrugated metal awning onto glistening wet stone flagstones. Outside carved red sandstone archways, storm winds whip through trees under electric-blue lightning. Under the sheltered loading bay, 32-year-old campus logistics lead Ramu (sturdy muscular build, wearing a dark-green waterproof hooded canvas poncho with reflective neon-yellow stripes and heavy rubber boots) pushes a steel hand truck stacked with plastic book crates. Chief Librarian Mrs. Meenakshi Iyer in her amber Kanjeevaram saree stands beside him, holding her teak clipboard firmly against the wind, inspecting delivery manifests with urgent institutional gravity. Harsh halogen floodlights mix with warm interior amber spill. Top 30% stormy negative space for speech balloons. Dramatic atmospheric tension, bold ink double outlines, rich watercolor gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: The CSV Catalog File Inspection (12:10 AM)
-- **Setting:** Library Annex workstation. Akshay and Ananya inspect the catalog spreadsheet.
-- **Action:** Ananya leans over the desk pointing at book titles that contain commas in the CSV file. Akshay realizes that naive comma splitting will corrupt the author and ISBN columns unless strict RFC 4180 double-quoting is enforced.
-- **Prompt:**
+- **Asset Filename:** `ch08_scene02_csv_comma_trap_inspection.jpg`
+- **Camera & Lens:** 50mm Medium Close-Up, capturing intense analytical focus.
+- **Lighting & Color:** Desk lamp pooling warm 2700K light on the open laptop, cold screen light reflecting on Akshay and Ananya.
+- **Characters & Action:** 
+  - Ananya leans over the desk, pointing urgently at a CSV row on the screen where book titles contain commas.
+  - Akshay stares at the data grid with wide, alarmed eyes as he realizes that naive comma splitting will corrupt author and ISBN columns unless strict RFC 4180 double-quoting is enforced.
+- **Headroom Geometry:** Top 28% warm sandstone wall in soft negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium close up of young engineer Akshay and frontend lead Ananya Sen leaning over laptop screen. Ananya in rust orange kurti points urgently at a spreadsheet row on the display. Akshay in white kurta widens his eyes with sudden awareness of data formatting traps. Reflected cool screen light, warm brass desk lamp. Carved sandstone lattice screen in background. Top 28% vaulted ceiling in ambient negative space. 8k graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 50mm medium close-up shot at the teak dispatch desk at 12:10 AM. Frontend lead Ananya Sen in her rust-orange kurti leans over the desk, pointing an urgent finger at a spreadsheet display on the laptop screen. Beside her, apprentice engineer Akshay Sharma in his white handloom cotton kurta grips his forehead with one hand, eyes wide with analytical alarm as he realizes that unquoted commas in book titles will corrupt the entire database column mapping. Warm brass desk lamp light illuminates their tense, focused faces against carved red sandstone pillars in the background. Top 28% clean sandstone wall in soft shadow for dialogue cards. High forensic suspense, crisp ink double contours, subtle watercolor shading, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 03: Loading the Dataset into Collection Runner (12:35 AM)
-- **Setting:** Workstation in library hall. Postman Collection Runner data preview open.
-- **Action:** Akshay selects the CSV file in Postman's runner; the iteration counter displays 50 iterations. Sameer sips his cutting chai, watching calmly as Akshay sets the execution delay to 10ms.
-- **Prompt:**
+- **Asset Filename:** `ch08_scene03_launching_collection_runner.jpg`
+- **Camera & Lens:** 50mm Over-the-Shoulder Medium Shot, looking past Akshay's shoulder onto Postman's runner preview.
+- **Lighting & Color:** Warm amber lighting from hanging chandeliers, cool terminal screen displaying 50 iterations ready to launch.
+- **Characters & Action:** 
+  - Akshay rests his hand steadily on his mouse, hovering over the Run button in Postman Collection Runner, taking a deep breath of focus.
+  - Sameer stands tall beside him, holding his steaming cutting chai glass in its brass wire holder, exuding absolute calm and confidence.
+- **Headroom Geometry:** Top 28% clean vaulted ceiling in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 over the shoulder shot of laptop screen displaying Postman Collection Runner with data preview window showing 50 iterations loaded from CSV file. Young engineer Akshay in white kurta has hand on mouse ready to launch. Architect Sameer in peacock indigo kurta stands beside him holding cutting chai glass in brass holder with serene confidence. Polished teak desk, warm sandstone archways. Top 28% clean negative headroom. Cinematic digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 50mm over-the-shoulder medium shot at the teak workstation at 12:35 AM. Apprentice Akshay Sharma in his white cotton kurta holds his computer mouse with steady fingers, positioned over the blue Run button on Postman Collection Runner, which displays a 50-row CSV data preview. His face shows intense, resolute concentration. Standing beside him, senior architect Sameer Krishnamurthy in his peacock-indigo raw-silk kurta and brass wireframe spectacles holds his steaming faceted cutting chai glass, projecting serene calm and unflappable confidence. Carved sandstone arches and teak book stacks recede into soft background shadow. Top 28% vaulted ceiling in clean negative headroom for speech balloons. Cinematic staging, sharp ink linework, rich gouache washes, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 04: The 50-Record Batch Triumph at Dawn (01:10 AM)
-- **Setting:** Library Portico. Distant storm clouds parting as early dawn light filters through stone jali screens.
-- **Action:** The collection runner summary bar turns solid emerald green: 50 iterations passed, 150 assertions verified, zero errors. Akshay raises both hands in exhaustion and triumph. Ramu, Mrs. Iyer, Ananya, and Sameer all share in the victory.
-- **Prompt:**
+- **Asset Filename:** `ch08_scene04_dawn_batch_celebration.jpg`
+- **Camera & Lens:** 28mm Wide Cinematic Group Shot, capturing dawn's arrival.
+- **Lighting & Color:** Cool blue-grey and soft golden-rose morning dawn light filtering through carved stone jali lattice screens, mingling with indoor brass lamps.
+- **Characters & Action:** 
+  - Collection runner summary bar turns solid emerald green: 50 iterations passed, 150 assertions verified, zero errors.
+  - Akshay raises both arms in ecstatic relief and exhaustion.
+  - Ramu, Mrs. Iyer, Ananya, and Sameer surround the desk with joyful smiles, sharing the triumph of an automated library catalog verified before dawn.
+- **Headroom Geometry:** Top 30% clean morning sky visible through high stone archways in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot of heritage library hall at first light of dawn. Cool blue morning light filtering through carved sandstone jali screens mingling with warm indoor brass lamps. Young engineer Akshay raises both hands in triumphant relief beside his silver laptop. Team members Sameer, Ananya, logistics lead Ramu, and librarian Mrs. Iyer stand united around the desk, smiling with shared accomplishment as screen displays solid green test results. Top 28% vaulted stone ceiling in soft dawn shadow. 8k publication quality digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 28mm wide cinematic group shot inside the heritage library hall at first light of dawn at 01:10 AM. Cool pale-blue and golden-rose dawn light filters through geometric stone jali lattice screens, illuminating ancient red sandstone pillars and mixing with warm indoor lamps. At the central teak desk, apprentice Akshay Sharma raises both arms in joyful exhaustion and triumph beside his silver laptop, which glows with solid emerald test results across 50 iterations. Around him, the complete team celebrates: logistics lead Ramu in his rain poncho wipes his brow with a relieved smile, Chief Librarian Mrs. Iyer in her amber saree claps softly with deep maternal approval, frontend lead Ananya Sen in her rust-orange kurti beams with delight, and mentor Sameer in his peacock-indigo kurta raises his cutting chai glass in ultimate salute. Top 30% vaulted ceiling and dawn sky in clean negative space for speech balloons. Inspiring emotional resolution, bold ink double contours, rich watercolor washes, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```

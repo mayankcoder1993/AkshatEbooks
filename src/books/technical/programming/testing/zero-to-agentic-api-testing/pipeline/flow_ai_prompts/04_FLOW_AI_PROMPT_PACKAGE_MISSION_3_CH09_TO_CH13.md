@@ -40,7 +40,7 @@ pm.test("Server rejects invalid request with " + expectedNegativeStatus, functio
   - **3. OUTPUT:** Test assertion passes: `PASS Server rejects invalid request with 429 Too Many Requests`.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman workbench displaying a rate limiting resilience test. Upper request pane shows POST request hitting rapid fire loop. Lower response pane shows an amber status badge reading 429 Too Many Requests with Retry-After header of 30 seconds. Adjacent test drawer shows green passing assertion verifying honest rejection of client abuse. Clean dark slate background (#0F172A), sharp status colors, clinical software workbench capture, zero decorative frames, zero cartoon art. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman workbench displaying a rate limiting resilience test under load. In the upper request pane, a rapid-fire loop dispatches POST requests to the catalog endpoint. The lower response pane displays a prominent amber status pill reading 429 Too Many Requests with response latency of 6ms, accompanied by a Retry-After response header set to 30 seconds. In the adjacent test results drawer, a vibrant emerald-green assertion banner displays PASS Server rejects invalid request with 429 Too Many Requests. Deep slate background (#0F172A), sharp monospace code typography, clinical software workbench capture, strictly borderless, zero decorative frames, zero cartoon art, 8k publication quality. --ar 16:9
 ```
 
 #### Chunk 2: Defensive Safe JSON Parsing with Try-Catch Blocks
@@ -61,7 +61,7 @@ try {
   - **3. OUTPUT:** Postman Console displays clear custom failure message instead of unhandled script crash: `FAIL Server returned non-JSON payload or HTML crash dump`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Tests tab code editor and console output. Code editor displays clean JavaScript try-catch defensive parsing wrapper around pm.response.json. Console drawer below displays a clean diagnostic log entry catching an unexpected HTML payload without blowing up the test runner thread. High contrast dark mode code editor (#1E293B), sharp syntax highlighting in yellow, cyan, and red, clinical developer UI. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Tests tab code editor and developer console drawer side-by-side. The code editor displays clean JavaScript try-catch defensive parsing wrapping pm.response.json() in sharp cyan, yellow, and red syntax highlighting. The lower console drawer displays an authentic diagnostic error log in crimson text: [Error Handler] Caught unexpected HTML gateway response: 502 Bad Gateway. Below it, an explicit assertion failure displays FAIL Server returned non-JSON payload or HTML crash dump without terminating the suite execution thread. High contrast dark-mode IDE (#1E293B), clinical typography, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: Complete Production Resilience Test Suite
@@ -71,7 +71,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman Tests tab code e
   - **Output:** Collection runner summary showing 5/5 defensive checks passed with zero server error leaks.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner resilience report. Summary panel shows five consecutive requests: Test 401 Unauthorized, Test 403 Forbidden, Test 404 Not Found, Test 429 Rate Limited, and Test 400 Malformed Payload. All five requests show green checkmarks indicating the API defended itself gracefully. Dark slate IDE interface (#0F172A), sharp amber and emerald badges, professional API testing dashboard. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Collection Runner resilience report summary dashboard. The execution summary shows five consecutive negative test cases: Test 1 401_Unauthorized, Test 2 403_Forbidden, Test 3 404_NotFound, Test 4 429_RateLimited, and Test 5 400_MalformedBody. All five requests display vibrant green checkmarks confirming that the server defended its contracts gracefully without a single 500 server crash. Dark slate IDE aesthetics (#0F172A), sharp status colors in amber and emerald, clinical quality engineering report capture, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -102,7 +102,7 @@ pm.test("Schema contract passes", function () {
   - **3. OUTPUT:** Test assertion passes: `PASS Schema contract passes | 0 validation errors`.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Tests editor and schema validation report. Upper editor pane displays JavaScript code using Ajv schema validator to enforce object properties and regex pattern matching. Lower results drawer displays an emerald green assertion banner: PASS Schema contract passes with zero validation errors. Modern dark mode IDE, sharp syntax highlighting in yellow, cyan, and emerald, clinical software capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman workbench Tests tab and schema validation report drawer. The upper code editor displays JavaScript using the Ajv schema validation library to enforce mandatory properties (bookId, isbn, title, availability) and regex pattern matching on ID formats. In the lower test results drawer, a brilliant emerald-green assertion banner displays PASS Schema contract passes (0 validation errors). Adjacent JSON response payload viewer displays verified book object with matching property highlights in soft cyan. Modern dark-mode IDE (#0F172A), sharp syntax colors, clinical developer workbench capture, strictly borderless. --ar 16:9
 ```
 
 #### Chunk 2: Postman Mock Server Creation and Example Matching
@@ -117,7 +117,7 @@ Matching Rule: GET /v1/catalog?department=CS -> Returns Example "CS_Books_Sample
   - **3. OUTPUT:** Mock server returns simulated 200 OK response with realistic mock JSON payload within 12ms. Frontend development is completely unblocked.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Mock Server management screen. Top banner displays cloud mock server URL ending in mock.pstmn.io. Center pane shows request matching rules routing GET /catalog to saved example response. Bottom response window shows simulated JSON payload returned in 12ms with emerald 200 OK badge. Crisp dark slate developer interface, clean typography, clinical API tool capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Mock Server management screen and live testing view. Top header displays cloud mock endpoint URL: https://apex-library.mock.pstmn.io/v1/books with an active green status pill reading Mock Server Active. The middle matching rule table displays route mapping: GET /v1/books matching saved example Catalog_CS_Sample. The lower response viewer displays the simulated JSON payload returned in 14ms with an emerald 200 OK badge. Crisp dark slate developer interface (#1E293B), clean monospace typography, clinical API tool capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: Contract-First Frontend and Backend Synchronization
@@ -127,7 +127,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman Mock Server mana
   - **Output:** Live deployment where frontend and backend connect seamlessly on day one with zero breaking contract mismatches.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of an API contract synchronization architecture screen. Left pane shows Postman Mock Server serving mock payloads to mobile client. Right pane shows automated schema test suite verifying live backend response against identical Ajv schema definition. Both sides display emerald green contract compliance badges. Clean dark slate background (#0F172A), sharp status colors, authentic developer architecture visualization. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of an API contract synchronization architecture screen split into dual panes. Left pane shows Postman Mock Server returning mocked JSON catalog payloads to a simulated mobile app client with emerald 200 OK badges. Right pane shows automated Ajv contract test suite validating live Express server responses against identical schema specifications with 100% test pass rates. Deep slate IDE background (#0F172A), sharp status colors, authentic developer architecture visualization, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -152,7 +152,7 @@ const requestBody = {
   - **3. OUTPUT:** HTTP Status `200 OK`. Response body returns `{ "access_token": "eyJhbGciOi...", "token_type": "Bearer", "expires_in": 3600 }`.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman request builder for OAuth 2.0 token exchange. Top request bar shows POST to oauth v2 slash token. Request body shows x-www-form-urlencoded parameters: grant_type, code, client_id, and client_secret. Lower response pane shows an emerald 200 OK status badge with JSON payload containing JWT access_token string highlighted in bright cyan. Dark theme developer workbench, crisp typography, clinical UI capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman request builder executing an OAuth 2.0 token exchange. Top request bar displays POST targeting https://auth.apex.edu/oauth/v2/token. The request body tab displays x-www-form-urlencoded parameters: grant_type set to authorization_code, code bound to environment variable, along with client_id and client_secret. Lower response pane displays an emerald 200 OK badge alongside an authentic JSON payload containing a cryptographic JWT access_token string highlighted in bright cyan with expires_in: 3600 and token_type: Bearer. Dark theme developer workbench, crisp typography, clinical UI capture, strictly borderless. --ar 16:9
 ```
 
 #### Chunk 2: Storing Bearer Token in Environment for Downstream Authorization
@@ -169,7 +169,7 @@ pm.environment.set("bearerToken", tokenData.access_token);
   - **3. OUTPUT:** Downstream protected resource request (`GET /v1/student/records`) succeeds with `200 OK` instead of `401 Unauthorized`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Authorization tab configured with Bearer Token. Header displays Authorization type set to Bearer Token with token field bound to double curly braces bearerToken. Adjacent request preview shows green 200 OK response from protected resource endpoint. Dark slate IDE aesthetics (#0F172A), sharp status indicators, clinical software workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Authorization tab configured for automated collection-level Bearer token inheritance. The type selector shows Bearer Token active. The Token input field displays parameter binding {{bearerToken}} with green checkmark indicating successful environment resolution. Below it, an active request targeting /v1/student/profile displays an emerald 200 OK status badge with returned student records. Dark slate IDE aesthetics (#0F172A), sharp status indicators, clinical software workbench capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: Complete OAuth 2.0 Lifecycle Handshake
@@ -179,7 +179,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman Authorization ta
   - **Output:** Fully automated Postman collection running authenticated API requests with dynamic token refresh and zero manual copy-paste of keys.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of an automated OAuth 2.0 collection execution log. Timeline displays four automated stages: Auth Code Dispatch (200 OK), Token Exchange POST (200 OK), Protected Student API GET (200 OK with Bearer header), and Token Refresh Workflow (200 OK). Dark theme interface, clean status pills in emerald and cyan, authentic developer API security report. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of an automated OAuth 2.0 collection runner report dashboard. The execution sequence displays four sequential requests: 1_Get_Auth_Code (200 OK), 2_Exchange_Token (200 OK with Bearer token exported), 3_Access_Protected_Resource (200 OK with authenticated user profile payload), and 4_Trigger_Token_Refresh (200 OK with new token lifecycle). Summary metrics display 4/4 Requests Passed, 12/12 Assertions Green. Dark theme interface, clean status pills in emerald and cyan, authentic developer API security report, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -206,7 +206,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of an automated OAuth 2.0 c
   - **3. OUTPUT:** HTTP Status `200 OK`. Response body returns SOAP XML Envelope containing `<PaymentStatus>SUCCESS</PaymentStatus>` and `<TransactionRef>TX-2026-8819</TransactionRef>`.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman request builder executing a legacy SOAP WebService request. Request body tab displays raw XML with strict SOAP Envelope and Body tags formatted with clean syntax highlighting in cyan and yellow. Lower response viewer shows returned XML SOAP envelope with emerald 200 OK badge and transaction reference number. Dark slate background (#0F172A), crisp monospace XML code, clinical developer UI. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman request builder executing a legacy SOAP WebService request. The request header shows Content-Type set to text/xml; charset=utf-8. The Body pane displays formatted XML code featuring strict soap:Envelope and soap:Body tags with syntax highlighting in cyan, yellow, and white enclosing ProcessTuitionPayment elements. The lower response viewer displays an emerald 200 OK badge and returned XML SOAP envelope containing PaymentStatus SUCCESS and TransactionRef TX-2026-8819. Dark slate background (#0F172A), crisp monospace XML code, clinical developer UI, strictly borderless. --ar 16:9
 ```
 
 #### Chunk 2: Converting XML to JSON and Namespace Assertion
@@ -224,7 +224,7 @@ pm.test("Payment status is SUCCESS", function () {
   - **3. OUTPUT:** Test assertion passes: `PASS Payment status is SUCCESS`.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of Postman Tests tab code editor showing xml2Json utility parsing XML response into JavaScript object. Editor shows bracket notation accessing soap Envelope and Body namespaces. Lower results pane displays an emerald test banner: PASS Payment status is SUCCESS. Dark mode developer IDE, sharp syntax colors, clinical software workbench capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of Postman Tests tab code editor showing xml2Json utility parsing XML response into a traversal JavaScript object. The code editor displays bracket notation accessing soap:Envelope and soap:Body namespaces. In the lower test results drawer, a vibrant emerald-green assertion banner displays PASS Payment status is SUCCESS alongside PASS Transaction reference format valid. Dark mode developer IDE (#1E293B), sharp syntax colors, clinical software workbench capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: Legacy SOAP vs Modern REST Interoperability Pipeline
@@ -234,7 +234,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of Postman Tests tab code e
   - **Output:** Collection runner dashboard confirming 100% interoperability between modern microservices and legacy billing systems.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of an integrated hybrid API test report. Left pane displays collection structure containing modern REST JSON endpoints alongside legacy SOAP XML endpoints. Right summary dashboard shows green checkmarks across both protocols with response latency comparison metrics. Dark slate IDE aesthetics (#0F172A), sharp status colors, authentic enterprise software capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of an integrated hybrid API test report dashboard. Left sidebar displays a mixed collection hierarchy containing both modern REST JSON endpoints and legacy SOAP XML endpoints. Right summary dashboard displays green checkmarks across both protocols, showing latency comparisons and successful data bridge transactions between REST student registration and SOAP tuition clearing. Dark slate IDE aesthetics (#0F172A), sharp status colors, authentic enterprise software capture, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -256,7 +256,7 @@ newman run apex_library_tests.json \
   - **3. OUTPUT:** Terminal prints a clean ASCII test execution grid with total assertions, execution duration, and zero failures; exports standalone HTML report.
 - **Flow AI Prompt (Chunk 1 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of a developer terminal running Newman CLI headless test runner. Terminal shows colorful command line output: ASCII table summarizing executed iterations, requests, prerequest scripts, and assertions with 100% green checkmarks. Bottom lines show export of interactive HTML report with zero failures. Dark slate terminal background (#0A0F1D), bright cyan and emerald text colors, clean monospace font, clinical software capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of a developer terminal running Newman CLI headless test runner. Terminal shows vibrant command-line output: an ASCII table summarizing executed iterations (1), requests (64), prerequest scripts (64), and assertions (192) with 100% green checkmarks and zero failures. Bottom lines display successful export of interactive HTML report to ./reports/quality_gate.html with execution time 4.2 seconds. Dark slate terminal background (#0A0F1D), bright cyan and emerald text colors, clean monospace font, clinical software capture, strictly borderless. --ar 16:9
 ```
 
 #### Chunk 2: GitHub Actions Automated CI/CD Quality Gate Workflow
@@ -280,7 +280,7 @@ jobs:
   - **3. OUTPUT:** GitHub Actions pipeline passes with green checkmark: `API Regression Quality Gate / test (pull_request) - Passed in 42s`. Deployment to production is unlocked.
 - **Flow AI Prompt (Chunk 2 Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of a modern CI/CD pipeline dashboard. Screen shows GitHub Actions build interface with an active green checkmark and title: API Regression Quality Gate Passed. Expanded build step shows Newman CLI executing headless collection run in 42 seconds with zero test failures. Dark mode developer interface, crisp status badges in emerald and slate, clinical software capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of a modern CI/CD pipeline dashboard in GitHub Actions. The central view displays an active build pipeline with a prominent green checkmark and title: API Regression Quality Gate Passed. An expanded log drawer shows the Run Newman Test Suite step executing headlessly in 42 seconds with zero failed assertions, unlocking the downstream Deploy to Production stage. Dark mode developer interface, crisp status badges in emerald green and slate grey, clinical software engineering capture, strictly borderless. --ar 16:9
 ```
 
 #### Consolidated Program: Interactive Newman HTML Extra Dashboard
@@ -290,7 +290,7 @@ Full bleed 16:9 widescreen photorealistic screenshot of a modern CI/CD pipeline 
   - **Output:** Professional, publishable executive quality report: `Total Requests: 64, Total Assertions: 192, Passed: 192, Failed: 0, Skipped: 0`.
 - **Flow AI Prompt (Consolidated Program Interface):**
 ```text
-Full bleed 16:9 widescreen photorealistic screenshot of an interactive Newman HTML Extra test report dashboard. Top dashboard displays vibrant donut charts showing 100% green test success rate, total duration 8.4s, and 192 passed assertions. Lower sections display expandable accordion rows for requests with HTTP status pills, response time meters, and payload viewers. Clean modern dark mode dashboard (#0F172A), emerald and cyan data visualization, clinical quality engineering report capture. --ar 16:9
+Full-bleed 16:9 widescreen photorealistic screenshot of an interactive Newman HTML Extra test report dashboard in a browser window. The top dashboard displays vibrant circular donut charts indicating 100% test success rate, total duration 8.4s, and 192 passed assertions with zero failures. Below the summary, an expandable accordion view lists executed requests with method badges (POST in emerald, GET in blue, DELETE in crimson), latency gauges, and collapsible JSON payload drawers. Modern dark-mode dashboard theme (#0F172A), vibrant cyan and emerald data visualization, clinical quality engineering report capture, strictly borderless. --ar 16:9
 ```
 
 ---
@@ -300,19 +300,29 @@ Full bleed 16:9 widescreen photorealistic screenshot of an interactive Newman HT
 ### Chapter 09: Resilience and Error Handling Narrative Storyboards
 
 #### Scene 01: The Midnight Network Lightning Surge (01:30 AM)
-- **Setting:** Campus Server Vault inside ancient subterranean red sandstone foundation. High stone vaults, glowing server racks.
-- **Action:** Distant thunder shakes the foundation; monitor displays sudden 500 error spikes as mock third-party services timeout. Akshay Sharma (24, clean forehead, white kurta with rolled sleeves) grips the edge of the desk. Architect Sameer Krishnamurthy (40, peacock indigo kurta, round brass spectacles) watches with steady calm.
-- **Prompt:**
+- **Asset Filename:** `ch09_scene01_server_vault_lightning_surge.jpg`
+- **Camera & Lens:** 24mm Extreme Wide Establishing Shot inside the ancient subterranean Server Vault of Apex Institute.
+- **Lighting & Color:** Electric-blue lightning flashes through high sandstone lattice grilles, casting stark dynamic shadows across rows of glowing black server racks. Harsh crimson alert lights flash along the terminal consoles.
+- **Characters & Action:** 
+  - Apprentice Akshay Sharma (24, clean forehead with zero markings, crisp white cotton kurta with rolled sleeves, dark jeans) grips the edge of a heavy teak server desk, his face tense with suspense as monitors flicker with timeout warnings and error spikes.
+  - Principal Systems Architect Sameer Krishnamurthy (40, peacock-indigo raw-silk kurta with gold collar, round brass spectacles, salt-and-pepper beard) stands tall beside him holding his traditional brass cutting chai holder with unshakable composure, calmly analyzing the surge.
+- **Headroom Geometry:** Top 30% clean subterranean vaulted sandstone ceiling arches in dramatic shadow for dialogue cards.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot inside ancient subterranean campus server vault with carved Indian red sandstone arches and rows of glowing black server cabinets. Distant lightning flash illuminates stone lattice windows. Young engineer Akshay Sharma in white kurta grips teak desk with tense expression as terminal displays crimson error alerts. Next to him, systems architect Sameer in peacock indigo kurta stands serene, holding a brass cutting chai holder. Top 28% vaulted stone arches in dramatic ambient shadow. Cinematic digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 24mm extreme wide establishing shot inside the ancient subterranean Server Vault of Apex Institute at 01:30 AM. Soaring 300-year-old carved Indian red sandstone arches and massive stone pillars house rows of modern black enterprise server racks glowing with pulsing amber and blue LED indicators. Distant electric-blue lightning flashes through high stone jali lattice windows, casting dramatic long shadows. At a central teak monitoring desk, 24-year-old apprentice software engineer Akshay Sharma in his white cotton kurta grips the table with tense body language, staring with wide analytical alarm as terminal monitors flicker with crimson timeout warnings. Beside him, 40-year-old systems architect Sameer Krishnamurthy in his peacock-indigo raw-silk kurta and round brass wireframe spectacles stands tall and completely serene, holding his steaming faceted cutting chai glass in an ornate raw brass wire holder. Top 30% vaulted sandstone ceiling in deep atmospheric shadow for speech balloons. Cinematic high-contrast lighting, bold double ink contours, rich gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: Demonstrating the Safe Parsing Shield (01:55 AM)
-- **Setting:** Server Vault desk. Sameer explains try-catch encapsulation.
-- **Action:** Sameer points to the screen where unhandled JSON parsing threw a fatal error. Akshay rapidly types a defensive try-catch block, nodding with deep clarity.
-- **Prompt:**
+- **Asset Filename:** `ch09_scene02_safe_parsing_shield.jpg`
+- **Camera & Lens:** 50mm Medium Close-Up, eye-level framing capturing forensic engineering teamwork.
+- **Lighting & Color:** Warm 2700K brass task lamp pooling on the desk, contrasting with cool cyan code glow washing across Akshay's focused face.
+- **Characters & Action:** 
+  - Sameer leans forward slightly, pointing a calm slender finger toward the code editor, guiding Akshay to wrap JSON parsing in a defensive `try/catch` block.
+  - Akshay's fingers fly across his mechanical keyboard, teeth set in determined concentration as he builds the error-handling shield to prevent stack trace leaks.
+- **Headroom Geometry:** Top 28% warm sandstone archway in soft negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium close up of young engineer Akshay typing with urgent speed on his silver laptop in server vault. Mentor Sameer points a calm finger toward the code editor, guiding the insertion of defensive error handling. Blue terminal light and warm lamp light wash over Akshay's expressive face. Distinct horizontal scratch on laptop lid. Top 28% carved red sandstone arches in soft shadow. 8k publication quality digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 50mm medium close-up shot at the server desk at 01:55 AM. Apprentice engineer Akshay Sharma in his white handloom cotton kurta types with rapid, purposeful intensity across his mechanical keyboard, his facial expression shifting from tension into fierce analytical determination as he constructs defensive try-catch wrappers around response parsing. Beside him, senior mentor Sameer Krishnamurthy in his peacock-indigo raw-silk kurta points an authoritative slender finger toward the code editor without touching the keys, speaking with calm Socratic precision. Warm brass task lamp light pools on the desk, contrasting with cyan code reflections on their expressive faces. The laptop lid displays its distinct horizontal scratch on the top-left corner. Top 28% carved red sandstone arches in clean negative headroom for dialogue balloons. Expressive graphic novel realism, sharp ink double outlines, rich watercolor washes, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 ---
@@ -320,19 +330,29 @@ Full bleed 16:9 medium close up of young engineer Akshay typing with urgent spee
 ### Chapter 10: Mock Servers and Contracts Narrative Storyboards
 
 #### Scene 01: The Sprint Planning Impasse (09:30 AM)
-- **Setting:** High-ceilinged conference room in heritage sandstone pavilion. Large glass whiteboard.
-- **Action:** Frontend lead Ananya Sen (26, rust orange kurti, sleek high ponytail, silver bangle) stands at the whiteboard with marker in hand, frustrated that her mobile UI team is blocked waiting for backend endpoints. Akshay listens with analytical intensity.
-- **Prompt:**
+- **Asset Filename:** `ch10_scene01_sprint_planning_impasse.jpg`
+- **Camera & Lens:** 35mm Medium Shot in the sunlit Heritage Conference Pavilion.
+- **Lighting & Color:** Bright 5000K morning sunlight streaming through stone colonnades, illuminating a large glass whiteboard covered in mobile UI architectural wireframes.
+- **Characters & Action:** 
+  - Frontend Engineering Lead Ananya Sen (26, athletic agile posture, dark hair in sleek high ponytail, rust-orange khadi kurti, silver bangle on right wrist) stands at the glass whiteboard with marker in hand, gesturing with pragmatic urgency. She explains that her mobile engineering team is blocked waiting for unbuilt backend APIs.
+  - Seated across the teak conference table, Akshay listens with analytical intensity, his laptop open ready to offer an architectural solution.
+- **Headroom Geometry:** Top 28% clean vaulted ceiling and morning sunlight in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot in sunlit heritage conference hall with carved sandstone pillars and arched verandas. Frontend engineering lead Ananya Sen (26, rust orange khadi kurti, dark hair in sleek high ponytail, silver bangle on right wrist) gestures emphatically toward a glass whiteboard with architectural diagrams. Across the teak table, apprentice Akshay in white kurta listens attentively with laptop open. Morning sunlight streaming through stone jali screens. Top 28% clean vaulted ceiling. Cinematic digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 35mm medium shot in the sunlit Heritage Conference Pavilion of Apex Institute at 09:30 AM. Carved red sandstone colonnades and Dravidian pillars open toward lush green gardens. Standing beside a large floor-to-ceiling glass whiteboard covered in blue dry-erase wireframe diagrams, 26-year-old Frontend Engineering Lead Ananya Sen (wearing a rust-orange khadi kurti with rolled sleeves, dark hair tied in a sleek high ponytail, silver bangle on her right wrist) gestures emphatically with a dry-erase marker, her expression sharp, determined, and impatient as she explains that frontend mobile developers are blocked. Seated across the teak table, apprentice Akshay Sharma in his crisp white cotton kurta leans forward with intense intellectual curiosity, laptop open, ready to solve the bottleneck. Top 28% vaulted ceiling and airy morning light in clean negative space for speech cards. Crisp double ink contours, vibrant watercolor gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: Launching the Postman Mock Server (10:15 AM)
-- **Setting:** Conference pavilion desk. Akshay configures cloud mock server.
-- **Action:** Akshay shows Ananya the mock server URL in Postman. Ananya tests the mock URL on her diagnostic smartphone; realistic book data loads instantly. Her face lights up with relief and excitement.
-- **Prompt:**
+- **Asset Filename:** `ch10_scene02_mock_server_unblocks_frontend.jpg`
+- **Camera & Lens:** 50mm Medium Close-Up, capturing sudden collaborative delight.
+- **Lighting & Color:** Warm natural morning light mixing with the glow of Ananya's diagnostic smartphone.
+- **Characters & Action:** 
+  - Akshay turns his silver laptop toward Ananya, pointing at an active Postman Mock Server URL.
+  - Ananya tests the mock endpoint on her smartphone; the mobile app wireframe renders live book catalog data instantly. Her face lights up with sudden delight and relief, exchanging an enthusiastic high-five gesture with Akshay.
+- **Headroom Geometry:** Top 28% clean warm sandstone wall in soft negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium close up of young engineer Akshay and frontend lead Ananya beside laptop desk. Akshay in white kurta points at screen displaying active mock server URL. Ananya in rust orange kurti holds diagnostic smartphone which illuminates with rendered UI data, her face beaming with sudden delight and relief. Warm brass desk lamp glow, carved stone background. Top 28% clean negative headroom. 8k digital concept art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 50mm medium close-up shot at the conference table at 10:15 AM. Apprentice engineer Akshay Sharma in his white cotton kurta smiles with proud accomplishment, turning his silver laptop toward frontend lead Ananya Sen. Ananya holds her diagnostic smartphone, which illuminates her face as realistic mock catalog data renders across the mobile UI without a live backend. Her expression transforms into ecstatic relief and delight, eyes sparkling as she laughs with spontaneous approval. In the background, architect Sameer observes from the stone portico with a dignified, satisfied smile over his cutting chai glass. Warm morning sunlight filters through sandstone jali lattice screens. Top 28% clean stone archway in negative headroom for dialogue balloons. Dynamic human connection, sharp ink linework, rich gouache wash textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 ---
@@ -340,19 +360,29 @@ Full bleed 16:9 medium close up of young engineer Akshay and frontend lead Anany
 ### Chapter 11: OAuth 2.0 Security Narrative Storyboards
 
 #### Scene 01: The Hotel Keycard Lesson in the Portico (02:00 PM)
-- **Setting:** Shaded stone portico overlooking campus gardens. Carved sandstone pillars.
-- **Action:** Sameer places a plastic hotel keycard on the stone table beside two cutting chai glasses. He explains how the keycard grants temporary, scoped room access without ever giving away the master desk key. Akshay leans forward, fascinated.
-- **Prompt:**
+- **Asset Filename:** `ch11_scene01_hotel_keycard_analogy.jpg`
+- **Camera & Lens:** 50mm Medium Shot in the shaded heritage stone portico overlooking campus fountains.
+- **Lighting & Color:** Rich golden afternoon sunlight illuminating green gardens outside, while the stone veranda remains in cool, dignified amber shade.
+- **Characters & Action:** 
+  - Architect Sameer places a plastic electronic hotel keycard on the carved stone table between two glasses of cutting chai. He gestures with pedagogical mastery, using the keycard to explain scoped, temporary Bearer token authorization versus handing over raw passwords.
+  - Akshay leans forward across the table with pen in hand, his face alive with fascination as the OAuth 2.0 mental model clicks into place.
+- **Headroom Geometry:** Top 30% clean carved sandstone archway and garden canopy in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot in shaded heritage stone portico with carved sandstone pillars and garden backdrop. Systems architect Sameer in peacock indigo kurta places a magnetic electronic card on an octagonal stone table beside two cutting chai glasses, using it as an analogy. Apprentice Akshay in white kurta leans in with eager, fascinated expression, holding a pen. Bright afternoon sunlight outside stone veranda. Top 28% carved stone archways in clean negative space. Cinematic digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 50mm medium shot in the shaded sandstone portico of Apex Institute at 02:00 PM. Golden afternoon sunlight washes over distant garden fountains visible through Dravidian stone arches. Senior architect Sameer Krishnamurthy in his peacock-indigo raw-silk kurta and round brass wireframe spectacles places a sleek electronic magnetic keycard onto the polished stone table beside two steaming glasses of cutting chai. He gestures with elegant teacherly authority, explaining the principles of delegated access. Seated opposite him, apprentice Akshay Sharma in his white handloom cotton kurta leans forward with eager intensity, pen hovering over his notebook, eyes wide with deep intellectual fascination. Carved stone pillars and hanging brass lanterns frame the serene scene. Top 30% vaulted sandstone ceiling in clean negative space for speech balloons. Cinematic lighting, sharp double ink contours, rich watercolor shading, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: The Automated Bearer Token Flow (03:15 PM)
-- **Setting:** Portico workstation. Laptop screen displays OAuth 2.0 handshake.
-- **Action:** Akshay executes the token exchange request; the JWT string populates into the environment variable automatically. Sameer sips his tea with quiet satisfaction.
-- **Prompt:**
+- **Asset Filename:** `ch11_scene02_automated_token_handshake.jpg`
+- **Camera & Lens:** 50mm Medium Close-Up, capturing technical triumph.
+- **Lighting & Color:** Warm afternoon sun glinting off the laptop lid's scratch, screen glowing with emerald green authorization success badges.
+- **Characters & Action:** 
+  - Akshay leans back in his chair with a confident smile, watching Postman automatically exchange authorization codes for JWT Bearer tokens and inject them into downstream student API headers.
+  - Sameer nods in affirmation from across the table, taking a slow sip from his cutting chai glass.
+- **Headroom Geometry:** Top 28% warm sandstone wall in soft negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 close up shot of young Indian engineer Akshay sitting back with a triumphant smile as his silver laptop displays a successful OAuth 2.0 token handshake with emerald green status pills. Mentor Sameer nods in affirmation from across the table holding his brass cutting chai glass. High contrast warm afternoon lighting, carved sandstone lattice in background. Top 28% vaulted ceiling in ambient shadow. 8k graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 50mm medium close-up shot at the portico stone table at 03:15 PM. Apprentice Akshay Sharma sits back with a broad, confident smile of accomplishment, hands resting lightly beside his silver laptop keyboard as the screen displays a successful OAuth 2.0 token handshake with emerald-green status pills. The silver laptop lid shows its distinct horizontal scratch catching golden afternoon light. Across the table, Principal Architect Sameer Krishnamurthy nods in dignified affirmation, holding his faceted cutting chai glass in its brass wire holder with quiet pride. Carved red sandstone arches and leafy garden foliage in the background. Top 28% clean stone archway in negative headroom for speech cards. Expressive character acting, crisp ink double outlines, rich gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 ---
@@ -360,19 +390,30 @@ Full bleed 16:9 close up shot of young Indian engineer Akshay sitting back with 
 ### Chapter 12: SOAP and Legacy Systems Narrative Storyboards
 
 #### Scene 01: The Legacy Payment Gateway Terminal (04:30 PM)
-- **Setting:** Campus Financial Operations Archive. Dark wood cabinets, heavy iron safe, red sandstone arches.
-- **Action:** Chief Librarian Mrs. Iyer and Akshay stand beside an old CRT terminal connected to the campus tuition billing server. The screen displays dense XML SOAP envelopes with WSDL tags. Akshay rubs his temples at the verbosity of XML.
-- **Prompt:**
+- **Asset Filename:** `ch12_scene01_legacy_soap_terminal.jpg`
+- **Camera & Lens:** 28mm Wide Shot inside the Campus Financial Operations Archive.
+- **Lighting & Color:** Atmospheric late-afternoon amber light mingling with the green phosphor glow of an old CRT terminal resting among massive dark-wood ledger cabinets and iron safes.
+- **Characters & Action:** 
+  - Chief Librarian Mrs. Iyer (58, deep amber Kanjeevaram cotton saree with maroon border, silver-framed half-moon glasses) stands beside an antique billing workstation, holding her Burmese teak clipboard.
+  - Akshay stands beside her in his white kurta, rubbing his temples in slight bewilderment at the verbose XML SOAP envelopes and complex WSDL schema definitions on the green terminal screen.
+- **Headroom Geometry:** Top 30% dark wooden archive cabinets and vaulted sandstone ceiling in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot inside heritage financial archives with dark teak record cabinets and red sandstone arches. Chief librarian Mrs. Meenakshi Iyer in amber Kanjeevaram saree and half moon reading glasses stands beside apprentice Akshay in white kurta, reviewing an old terminal displaying verbose XML SOAP envelopes. Akshay looks slightly overwhelmed by the complex XML structure. Warm amber lamp light, shadowy archive aisles. Top 28% vaulted ceiling in clean negative space. Cinematic digital art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 28mm wide shot inside the ancient Campus Financial Operations Archive at 04:30 PM. Towering Burmese teak ledger cabinets, heavy iron safes, and vaulted red sandstone arches create an austere institutional setting. At an antique wooden desk, an old enterprise terminal displays dense, verbose XML SOAP envelopes with nested headers and body tags. Standing beside the desk with stately authority, 58-year-old Chief Librarian Mrs. Meenakshi Iyer (in her deep amber Kanjeevaram cotton saree with maroon border, half-moon reading glasses on a black cord) holds her teak clipboard with brass clamp, observing the screen with uncompromising dignity. Beside her, apprentice software engineer Akshay Sharma in his white cotton kurta rubs his temples with one hand, looking overwhelmed yet intrigued by the archaic complexity of SOAP contracts. Warm amber task lamp pooling on yellowed paper ledgers. Top 30% towering wood cabinets and vaulted ceiling in clean negative space. Dramatic historical contrast, crisp double ink linework, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: Taming the XML Envelope with xml2Json (05:15 PM)
-- **Setting:** Financial Archive workstation. Screen shows Postman Tests tab.
-- **Action:** Akshay writes `xml2Json()` in Postman's editor, converting the dense SOAP XML into a clean JavaScript object. Sameer points out the bracket notation for XML namespaces. Mrs. Iyer watches with impressed dignity.
-- **Prompt:**
+- **Asset Filename:** `ch12_scene02_xml2json_conversion_triumph.jpg`
+- **Camera & Lens:** 35mm Medium Three-Shot, eye-level framing capturing cross-generational technical harmony.
+- **Lighting & Color:** Warm golden twilight washing through sandstone windows, mixing with cool laptop screen glow.
+- **Characters & Action:** 
+  - Akshay types out `xml2Json()` inside Postman's Tests tab, converting the dense SOAP XML envelope into an accessible JavaScript object with bracket notation.
+  - Sameer points out the namespace resolution with calm satisfaction.
+  - Mrs. Iyer lowers her half-moon glasses and inspects the screen, nodding with profound respect as the legacy campus payment clears automatically.
+- **Headroom Geometry:** Top 28% clean stone archway in negative space for dialogue cards.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot of apprentice Akshay typing on silver laptop while mentor Sameer and librarian Mrs. Iyer observe in financial archives. Screen displays JavaScript code parsing SOAP XML namespaces into clean objects. Mrs. Iyer in amber saree lowers her spectacles with respect, while Sameer in peacock indigo kurta smiles serenely. Warm brass task lamp pooling on polished teak table. Top 28% vaulted stone ceiling. 8k graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 35mm medium three-shot in the financial archives at 05:15 PM. At the polished teak desk, apprentice Akshay Sharma in his white cotton kurta types purposefully on his silver laptop, demonstrating how xml2Json converts dense SOAP XML envelopes into clean JavaScript objects. Senior architect Sameer in his peacock-indigo raw-silk kurta leans in with teacherly pride, pointing out namespace syntax. Chief Librarian Mrs. Meenakshi Iyer in her amber Kanjeevaram saree lowers her half-moon reading glasses with a look of deep, dignified respect as the screen confirms automated tuition payment processing. Golden twilight filters through high arched windows, illuminating ancient red sandstone pillars. Top 28% vaulted ceiling in clean negative headroom for speech balloons. Warm harmonious atmosphere, sharp ink contours, rich gouache wash textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 ---
@@ -380,33 +421,54 @@ Full bleed 16:9 medium shot of apprentice Akshay typing on silver laptop while m
 ### Chapter 13: Capstone CI/CD Automation and Newman Narrative Storyboards
 
 #### Scene 01: Exporting the Master Pipeline Artifacts (06:00 PM)
-- **Setting:** Main Computer Center Auditorium. Tiered red sandstone benches, large presentation displays.
-- **Action:** Akshay exports the complete 13-chapter collection and environment JSON files into the repository root. Ananya and Ramu watch from nearby desks as the final pipeline takes shape.
-- **Prompt:**
+- **Asset Filename:** `ch13_scene01_exporting_master_collection.jpg`
+- **Camera & Lens:** 35mm Medium Wide Shot in the grand Computer Center Auditorium.
+- **Lighting & Color:** Deep twilight indigo sky outside vaulted arches, contrasting with warm interior chandeliers and glowing multi-monitor workstations.
+- **Characters & Action:** 
+  - Akshay sits at his silver laptop, dragging exported Postman collection and environment JSON files into the repository root. His posture is composed, disciplined, and mature.
+  - In the background, Ananya Sen and logistics lead Ramu observe attentively from adjacent tiered desks as the capstone pipeline comes together.
+- **Headroom Geometry:** Top 30% clean tiered sandstone auditorium ceiling in negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium wide shot in heritage computer auditorium with carved sandstone tiered benches and teak desks. Young engineer Akshay in white kurta sits at silver laptop, dragging exported Postman JSON collection files into a terminal window. Frontend lead Ananya and logistics lead Ramu watch attentively from adjacent workstations. Warm twilight glow filtering through high stone archways. Top 28% vaulted sandstone auditorium ceiling in clean negative space. Cinematic digital illustration. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 35mm medium wide shot in the grand Computer Center Auditorium of Apex Institute at 06:00 PM. Tiered carved red sandstone benches, Dravidian pillars, and massive teak desks house modern computing equipment. Deep indigo twilight sky is visible through high arched windows. At a central desk, 24-year-old software engineer Akshay Sharma in his crisp white cotton kurta sits with calm, professional poise, exporting Postman collection and environment JSON files into a terminal window on his silver laptop. Seated at adjacent desks, frontend lead Ananya Sen in her rust-orange kurti and logistics lead Ramu in his utility vest watch with eager anticipation. Warm pendant chandeliers illuminate the historic auditorium. Top 30% soaring vaulted sandstone ceiling in clean negative space for speech balloons. Dignified professional atmosphere, crisp double ink contours, rich gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 02: The Headless Newman Terminal Execution (06:45 PM)
-- **Setting:** Main Computer Center. Giant central projection screen displays black terminal running Newman.
-- **Action:** Newman CLI runs headlessly at blazing speed across 64 requests, printing green ASCII checkmarks across the projection screen. The entire team gathers in anticipation.
-- **Prompt:**
+- **Asset Filename:** `ch13_scene02_newman_headless_projection.jpg`
+- **Camera & Lens:** 24mm Wide Shot, dramatic projection room framing.
+- **Lighting & Color:** High-contrast dramatic lighting with a giant central auditorium projection screen casting vibrant green and cyan terminal glow across the entire team in the darkened hall.
+- **Characters & Action:** 
+  - The massive projection screen displays black terminal output running Newman CLI headlessly across 64 requests, printing emerald ASCII tables and timing metrics at lightning speed.
+  - Akshay, Sameer, Ananya, Mrs. Iyer, and Ramu stand side-by-side in the foreground, watching the automated regression suite execute with breathless anticipation.
+- **Headroom Geometry:** Top 30% clean dark auditorium ceiling in negative headroom.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide shot of heritage computer hall. Large wall projection displays black terminal running Newman CLI at high speed, displaying rows of bright emerald checkmarks and timing metrics. Young engineer Akshay, architect Sameer, frontend lead Ananya, librarian Mrs. Iyer, and logistics lead Ramu stand together in the foreground watching the terminal with intense focus. High contrast dramatic lighting, carved sandstone pillars. Top 28% vaulted arches in clean negative headroom. 8k publication quality digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frames, no borders. 24mm wide shot inside the darkened Computer Center Auditorium at 06:45 PM. A massive central wall projection screen illuminates the room in electric emerald and cyan light, displaying a fast-scrolling black terminal running Newman CLI headlessly across 64 API test requests with rows of bright green checkmarks. In the foreground, standing shoulder-to-shoulder with rapt attention, are apprentice Akshay in his white kurta, architect Sameer in his peacock-indigo raw-silk kurta holding his cutting chai glass, frontend lead Ananya in her rust-orange kurti, Chief Librarian Mrs. Iyer in her amber saree holding her teak clipboard, and logistics lead Ramu in his rain poncho. Ancient red sandstone pillars flank the auditorium. Top 30% vaulted ceiling in clean shadowy negative space for speech balloons. Epic cinematic anticipation, bold double ink outlines, rich gouache washes, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 03: The CI/CD Pipeline Green Quality Gate (07:15 PM)
-- **Setting:** Main Computer Center. GitHub Actions pipeline completes with a solid green badge.
-- **Action:** Akshay hits enter on his keyboard; the CI/CD pipeline triggers, tests, passes, and unlocks production deployment. Akshay and Ananya exchange a high five. Sameer raises his cutting chai glass in ultimate salute. Mrs. Iyer nods with profound satisfaction.
-- **Prompt:**
+- **Asset Filename:** `ch13_scene03_cicd_pipeline_celebration.jpg`
+- **Camera & Lens:** 35mm Medium Group Shot, capturing shared climactic victory.
+- **Lighting & Color:** Radiant emerald-green screen glow from the GitHub Actions dashboard washing over the team, warm ambient lanterns illuminating the sandstone hall.
+- **Characters & Action:** 
+  - The CI/CD quality gate passes with 100% green checkmarks, automatically unlocking production deployment.
+  - Akshay and Ananya exchange a jubilant high-five.
+  - Sameer raises his brass cutting chai holder in ultimate salute. Mrs. Iyer claps with serene pride, and Ramu cheers with a broad grin.
+- **Headroom Geometry:** Top 30% vaulted sandstone ceiling in ambient shadow for dialogue cards.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 medium shot of engineering team celebrating in heritage computer auditorium. Laptop screen displays GitHub Actions dashboard glowing with a solid emerald green quality gate checkmark. Young engineer Akshay in white kurta and frontend lead Ananya in rust orange kurti celebrate with triumphant smiles. Systems architect Sameer in peacock indigo kurta raises his brass cutting chai holder in salute. Warm cinematic lighting, carved stone jali screens. Top 28% vaulted sandstone ceiling. 8k publication quality digital graphic novel art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic graphic novel illustration, strictly borderless, no frame, no margin. 35mm medium group shot in the Computer Center Auditorium at 07:15 PM. On the central desk monitor, a modern GitHub Actions CI/CD dashboard glows with a solid emerald-green checkmark reading Quality Gate Passed, unlocking automated production deployment. Young software engineer Akshay Sharma in his white cotton kurta and frontend lead Ananya Sen in her rust-orange kurti celebrate with a triumphant, smiling high-five. Systems architect Sameer Krishnamurthy in his peacock-indigo raw-silk kurta and brass spectacles raises his cutting chai glass in ultimate mentorship salute. Chief Librarian Mrs. Meenakshi Iyer in her amber saree claps with profound institutional pride, while logistics lead Ramu beams with a broad victorious grin. Warm chandelier light fills the carved red sandstone hall. Top 30% vaulted ceiling in clean negative space for speech cards. Pure climactic triumph, crisp double ink contours, vibrant watercolor textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
 
 #### Scene 04: Standing at the Sandstone Colonnade at Twilight (07:45 PM)
-- **Setting:** Grand sandstone colonnade overlooking the Apex Institute campus at dusk. Deep indigo evening sky with emerging stars.
-- **Action:** Akshay stands at the edge of the carved balustrade looking out over the illuminated campus, silver laptop tucked under his arm. Sameer stands beside him, gazing quietly into the distance. The transformation from anxious beginner to disciplined automation architect is complete.
-- **Prompt:**
+- **Asset Filename:** `ch13_scene04_colonnade_twilight_epilogue.jpg`
+- **Camera & Lens:** 28mm Wide Cinematic Hero Shot along the grand carved sandstone colonnade.
+- **Lighting & Color:** Deep indigo and sapphire evening sky with the first silver evening stars shining through carved stone arches. Warm golden light from antique brass lanterns illuminating ancient stone balustrades.
+- **Characters & Action:** 
+  - Akshay Sharma stands at the edge of the carved stone balustrade, looking out over the illuminated university campus below. He holds his silver laptop securely under his arm, his posture composed, tranquil, and brimming with quiet mastery.
+  - Senior Architect Sameer Krishnamurthy stands beside him along the stone colonnade, holding his cutting chai glass, gazing serenely into the twilight. The transition from anxious beginner to disciplined automation architect is complete.
+- **Headroom Geometry:** Top 30% open indigo evening sky and carved stone cornice in serene negative space.
+- **Flow AI Prompt:**
 ```text
-Full bleed 16:9 wide cinematic concluding shot of apprentice Akshay Sharma (24, clean forehead, white handloom kurta with rolled sleeves) standing beside mentor Sameer Krishnamurthy (40, peacock indigo raw silk kurta, brass spectacles, cutting chai glass) along a grand carved red sandstone colonnade at dusk. Deep indigo twilight sky with first evening stars visible through carved arches. Akshay holds his silver laptop under his arm with quiet confidence and poise. Warm lantern light illuminating ancient stone balustrade. Top 28% open twilight sky and stone cornice in serene negative headroom. 8k masterwork digital concept art. --ar 16:9
+Full-bleed 16:9 widescreen cinematic hero illustration, strictly borderless, no frames, no borders. 28mm wide cinematic concluding shot along the grand carved red sandstone colonnade of Apex Institute at 07:45 PM. A breathtaking deep indigo and sapphire twilight sky with the first glittering silver evening stars stretches beyond soaring Dravidian stone arches and carved balustrades. Standing at the stone parapet overlooking the illuminated campus below, 24-year-old software engineer Akshay Sharma (clean natural forehead with zero markings, crisp white handloom cotton kurta with sleeves rolled to mid-forearm, dark denims) holds his matte-silver laptop under his arm with quiet confidence, calm maturity, and reflective mastery. Standing beside him, senior systems architect Sameer Krishnamurthy (in his elegant peacock-indigo raw-silk kurta, round brass wireframe spectacles, salt-and-pepper beard) holds his traditional faceted cutting chai glass, looking out over the evening horizon with stoic, peaceful fulfillment. Warm golden light from hanging brass lanterns illuminates the ancient carved sandstone pillars and stone floor. Top 30% open twilight sky and stone archways in serene negative space for final narrative reflections. Masterwork graphic novel concept art, crisp double ink contours, rich dimensional watercolor gouache textures, zero text, zero speech bubbles, 8k publication quality. --ar 16:9
 ```
