@@ -1,374 +1,597 @@
-import cicdGateImg from '../assets/enterprise-cicd-quality-gate.jpg'
 import resilienceImg from '../assets/api-resilience-error-handling.jpg'
+import warRoomWideImg from '../assets/apex-campus-crisis-war-room.jpg'
+import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
+import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson09 = {
-  id: 'error-handling-resilience',
+  id: 'advanced-error-handling',
   icon: '',
   title: 'Advanced Error Handling and Resilience Testing',
-  shortTitle: 'Error Handling',
-  subtitle: 'Negative testing matrix, safe JSON parsing, preventing secret leaks, and self healing workflow loops.',
-  tags: ['Error Handling', 'Negative Testing', 'Try Catch', 'Resilience', 'Workflow Control'],
+  shortTitle: 'Error Handling and Resilience',
+  subtitle: 'Harden test suites against production unpredictability, negative matrices, and self healing retry loops.',
+  tags: ['Error Handling', 'Negative Testing', 'Resilience', 'Retry Loop', 'Log Sanitization', 'Try Catch'],
   blocks: [
     {
       type: 'mission-hud',
-      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
-      phase: 'Phase 1 of 5: Negative Testing & Safe Parsing',
-      rank: 'Rank: Resilience Systems Engineer',
+      mission: 'Mission 3: Enterprise Quality Engineering & Resilience Testing',
+      phase: 'Phase 1 of 5: Negative Matrix & Self Healing Loops',
+      rank: 'Rank: Resilience Systems Architect',
       status: 'ACTIVE'
     },
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 2 · PHASE 6 OF 6',
-      missionTitle: 'Automating Student and Campus Services at Scale',
-      missionCrisis: 'Production Hardening: Error Handling and Self Healing Resilience',
-      missionContext: 'In production, network glitches, temporary service outages, and duplicate records will occur. Brittle test suites fail completely on the first unexpected error. Enterprise test suites must be resilient: handling negative response codes defensively, safe parsing JSON payloads, and executing self healing cleanup loops to recover gracefully.',
-      missionObjective: 'Implement defensive try catch parsing, validate negative error codes, and engineer self healing cleanup loops.',
-      targetSystems: 'Resilience Engineering Layer · Defensive Scripting Sandbox · Teardown Loop',
-      achieve: 'Harden test suites against real world production instability by constructing negative test matrices, implementing defensive parsing, and writing bounded self healing workflows.',
-      how: 'Test boundary and error status codes, safeguard JSON deserialization against HTML gateway crashes with try catch, verify data leak shields, and control execution flow safely.',
-      carry: 'Defensive parsing and bounded retry mechanics that prepare your test suites for mock simulation in Chapter 10 and OAuth 2.0 flows in Chapter 11.'
+      missionBadge: 'MISSION 3 · PHASE 1 OF 5',
+      missionTitle: 'Enterprise Quality Engineering & Resilience Testing',
+      missionCrisis: 'The Flash Sale Ticket Inventory Underflow Emergency',
+      missionContext: 'At 03:15 AM in the Apex Campus Ticketing and Commerce Control Center, amber warning beacons sweep across server racks as student traffic spikes to 12,000 requests per second. The live inventory counter drops to -42: the database has oversold venue capacity. Existing tests all returned green 200 OK because they only tested happy paths. Upstream gateways drop into 502 HTML errors, crashing parsers.',
+      missionObjective: 'Construct the comprehensive Negative Testing Matrix across six HTTP status codes, implement defensive try catch JSON parsing, sanitize sensitive log credentials, and build bounded self healing retry loops.',
+      targetSystems: 'API Testing Workbench Resilience Engine · Express Error Middleware · V8 Try Catch Parser · Exponential Backoff Runner',
+      difficulty: 'INTERMEDIATE',
+      estimatedTime: '30 MINUTES',
+      prerequisites: 'Chapter 08: Data Driven Testing with External Data Files'
     },
     {
-      type: 'mission',
-      title: 'Mission 3: Hardening for Enterprise Production and CI CD',
-      text: 'Our library automation runs smoothly on happy paths. But real world production systems operate in an unpredictable environment: users submit blank forms, network connections drop, authentication tokens expire, and duplicate records collide in the database. If an API returns a generic 500 error instead of a helpful 400 Bad Request, or leaks database passwords in a crash stack trace, the application is fragile and insecure. As Lead Quality Architect, your mission is to harden our test suite to ensure systems fail safely and withstand hostile production edge cases.',
-      image: {
-        src: cicdGateImg,
-        file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/enterprise-cicd-quality-gate.jpg',
-        w: 1408,
-        h: 768,
-        alt: 'Enterprise operations command center during midnight deployment showing CI CD deployment gate with green pass shields.',
-        caption: 'The Midnight Operations Center: Protecting campus services with automated safety checks.',
-        points: [
-          'Stress Testing: Checking what happens when users enter bad data or lose their internet connection.',
-          'Hands Free Automation: Running all checks automatically in the background without needing a person to click buttons.',
-          'Safety Shield: Catching password leaks and server crashes before real students ever see them.',
-        ],
-      },
-      weKnow: [
-        'Bugs overwhelmingly hide in negative scenarios and edge cases rather than happy paths.',
-        'Calling pm.response.json() directly will crash your test script if the server returns an HTML error page.',
-        'APIs must return standard 4xx error codes with structured messages without leaking sensitive backend details.',
+      type: 'mission-tracker',
+      currentPhase: 'Phase 1: Negative Matrix & Self Healing Loops',
+      totalPhases: 5,
+      completedSteps: [
+        'Data Driven Testing with External Data Files (Chapter 08)'
       ],
-      weNeed: [
-        'A comprehensive Negative Testing Matrix covering 400, 401, 403, 404, 409, 429, and 500.',
-        'A defensive try catch pattern that safely inspects responses without crashing the test runner.',
-        'A security assertion ensuring that crash responses never expose passwords, tokens, or SQL stack traces.',
-        'A self healing retry workflow using collection flags and postman.setNextRequest to resolve duplicate collisions.',
-      ],
+      currentStep: 'Advanced Error Handling and Resilience Testing',
+      upcomingSteps: [
+        'Postman Mock Servers and JSON Schema Contracts (Chapter 10)'
+      ]
     },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : SIX SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
     {
-      type: 'battle-plan',
-      badge: 'TACTICAL MISSION ROADMAP',
-      title: 'How We Will Approach Mission 3: The 5 Phase Battle Plan',
-      intro: 'Hardening an API ecosystem for production continuous integration requires systematic resilience verification across five structured phases:',
-      phases: [
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
+      title: 'The Negative Forty Two Crash and the Self Healing Wire',
+      intro: 'Follow apprentice Akshay, Principal Systems Architect Sameer, and Frontend Lead Ananya in the Ticketing War Room as flash sale traffic breaches inventory, raw HTML 502 errors crash test scripts, and the Negative Testing Matrix restores production sanity.',
+      panels: [
         {
-          phase: 'Phase 1',
-          timing: 'Chapter 9 · Right Now',
-          title: 'Resilience and Safe Parsing',
-          status: 'active',
-          desc: 'We construct a negative testing matrix, implement try catch wrappers against non JSON 500 error pages, and build self healing recovery workflows.',
-          outcome: 'Zero unhandled test crashes; your automated suites withstand HTML failure pages gracefully.'
+          title: 'Scene 1: 03:15 AM: Ticketing War Room and the Negative Forty Two Crisis',
+          time: '03:15 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Akshay and Sameer in the Ticketing War Room as amber alarms illuminate massive traffic spikes.',
+            caption: 'Ticketing War Room: Amber beacons sweep server racks as 12,000 students hit the ticketing gateway.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Live inventory counter flashing Remaining Passes: -42 in bold red numerals.',
+            caption: 'Inventory Underflow: Venue capacity oversold by 42 passes due to unasserted race conditions.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'The sale is sixty seconds old! Inventory counter is negative forty two! How did all ten tests pass green?',
+            replySpeaker: 'Sameer',
+            replySpeech: 'You tested the happy path. Stress, malice, and concurrency walked free without a single assertion.'
+          },
+          scene: 'At 03:15 AM, twelve thousand students click buy simultaneously for the campus cultural festival pass. The inventory count plunges past zero to negative forty two. Akshay is baffled because all ten automated tests passed green.',
+          realization: 'Testing only happy paths creates a false sense of security while critical race conditions breach production.'
         },
         {
-          phase: 'Phase 2',
-          timing: 'Chapter 10 · Next Step',
-          title: 'Mock Servers and Schema Contracts',
-          status: 'upcoming',
-          desc: 'We decouple frontend and backend teams by simulating endpoints with Postman Mock Servers and validating contracts with JSON Schema.',
-          outcome: 'Parallel agile team development without waiting for backend microservices to be coded.'
+          title: 'Scene 2: 03:23 AM: The Negative Testing Matrix: Six Refusal Codes',
+          time: '03:23 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer sketching the six refusal codes on the glass whiteboard.',
+            caption: 'The Negative Testing Matrix: 400 malformed, 401 unauthorized, 403 forbidden, 404 not found, 429 throttled, 500 error.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay verifying status code assertions against the whiteboard matrix.',
+            caption: 'First Principles: Every refusal code must owe the test suite a distinct passing assertion.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Six refusals: 400, 401, 403, 404, 429, 500. Each one owes us an assertion before this night ends.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Zero tickets ordered returned 200 OK! It never validated quantity! Testing 400 Bad Request now!'
+          },
+          scene: 'Sameer outlines the Negative Testing Matrix on the glass whiteboard. When Akshay tests ordering zero tickets, the server returns 200 OK and deducts nothing. Akshay immediately writes an assertion verifying 400 Bad Request.',
+          realization: 'A resilient test suite must assert every refusal code an API can return to guard against business logic flaws.'
         },
         {
-          phase: 'Phase 3',
-          timing: 'Chapter 11 · Identity Protocols',
-          title: 'OAuth 2.0 Token Handshake',
-          status: 'upcoming',
-          desc: 'We automate two legged and three legged OAuth 2.0 token handshakes, capturing Bearer access tokens dynamically for enterprise calls.',
-          outcome: 'Secure zero trust API authorization automated seamlessly across test pipelines.'
+          title: 'Scene 3: 03:29 AM: Gateway Failure and the 502 HTML SyntaxError Crash',
+          time: '03:29 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Terminal screen showing unhandled SyntaxError: Unexpected token < in JSON at position 0.',
+            caption: 'Parser Catastrophe: Unhandled JSON parse crash when upstream gateway responds with raw HTML.'
+          },
+          replyImage: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Ananya pointing to upstream payment gateway dropping socket connection.',
+            caption: 'Upstream Gateway Drop: Nginx and edge proxies return HTML error pages on gateway failure.'
+          },
+          dialogue: {
+            speaker: 'Ananya',
+            speech: 'Payment gateway dropped connection! Server returned 502 Bad Gateway with raw HTML text!',
+            replySpeaker: 'Akshay',
+            replySpeech: 'SyntaxError: Unexpected token less than in JSON! The entire test suite crashed on line 3!'
+          },
+          scene: 'An upstream payment gateway drops connection. The proxy returns a 502 Bad Gateway with raw HTML text. Akshay’s test script calls pm.response.json() directly, throwing an unhandled SyntaxError that halts the entire test suite.',
+          realization: 'Never assume response bodies are JSON; wrap deserialization in defensive try catch blocks to survive edge failures.'
         },
         {
-          phase: 'Phase 4',
-          timing: 'Chapter 12 · Legacy Integration',
-          title: 'SOAP WebServices and XML',
-          status: 'upcoming',
-          desc: 'We master legacy enterprise protocols by crafting SOAP 1.2 XML envelopes and converting raw XML payloads into clean JavaScript objects.',
-          outcome: 'Full capability to test banking, government, and enterprise legacy systems.'
+          title: 'Scene 4: 03:35 AM: Defensive Try Catch Parsing: Surviving Non JSON Payloads',
+          time: '03:35 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay implementing try catch block wrapping pm.response.json in the Tests editor.',
+            caption: 'Defensive Deserialization: Gracefully catching non-JSON payloads without terminating test execution.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer pointing to clean execution trace continuing past 502 response.',
+            caption: 'Resilient Runner: Test suite verifies 502 status code while preserving suite execution continuity.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Wrap JSON parsing in try catch. When proxies serve HTML, capture the status without killing the runner.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'try { res = pm.response.json(); } catch { res = null; } The 502 status asserted cleanly!'
+          },
+          scene: 'Akshay wraps the deserialization in a defensive try catch block. If JSON parsing fails, the script falls back to null and inspects status codes and raw text. The test suite asserts the 502 status gracefully.',
+          realization: 'Defensive parsing protects test runners from abrupt failure when edge proxies return HTML error pages.'
         },
         {
-          phase: 'Phase 5',
-          timing: 'Chapter 13 · Mission Victory',
-          title: 'Headless Newman and CI CD',
-          status: 'upcoming',
-          desc: 'We execute collections in terminal pipelines using Newman, publish HTML dashboards, and configure automated GitHub Actions quality gates.',
-          outcome: 'Mission 3 Cleared! Autonomous enterprise quality gate guarding production deployments.'
+          title: 'Scene 5: 03:41 AM: CI Credential Leak and the Console Log Sanitizer',
+          time: '03:41 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Console log output showing Authorization Bearer token and database password printed in plain text.',
+            caption: 'Credential Hazard: Printing raw request headers exposes sensitive tokens in cloud CI build logs.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay creating a log sanitizer utility masking sensitive keys with asterisks.',
+            caption: 'Sanitized Output: Redacting secrets at the source protects automated pipelines from security leaks.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Your console log printed the raw admin bearer token. CI build logs are archived in cloud runners.',
+            replySpeaker: 'Akshay',
+            replySpeech: 'Sanitizing now! Masking Authorization and password keys before any string touches the console!'
+          },
+          scene: 'While debugging, Akshay leaves console.log(pm.request.headers) active. Sameer spots the database bearer token displayed in plain text. Akshay builds a sanitizer utility that redacts Authorization and password fields before printing.',
+          realization: 'Assume every console log line is public; redact sensitive headers and secrets at the source.'
+        },
+        {
+          title: 'Scene 6: 03:51 AM: The Bounded Self Healing Retry Loop and 409 Atomic Lock',
+          time: '03:51 AM',
+          layout: 'duo',
+          image: {
+            src: resilienceImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-resilience-error-handling.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Architecture visual of retry taxonomy, exponential backoff, and atomic concurrency locks.',
+            caption: 'Resilience Architecture: Bounded exponential retry absorbs blips; atomic lock returns 409 Conflict.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay, Sameer, and Ananya watching the ticketing system recover under atomic locks.',
+            caption: 'Production Stabilized: Negative matrix verified, rate limits asserted, zero inventory underflow.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'The flaky gateway retried on 503 and recovered! And oversold tickets now cleanly reject with 409 Conflict!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Bounded retry for availability; atomic lock for correctness. The ticketing engine is hardened.'
+          },
+          scene: 'Akshay implements a bounded retry loop for flaky 503 gateway blips capped at 3 attempts with exponential backoff. Concurrently, Ananya adds atomic database locks that cleanly return 409 Conflict when passes sell out. Production stabilizes.',
+          realization: 'Bounded retries absorb transient network blips while atomic locks preserve state consistency under load.'
         }
       ]
     },
+
+    // =========================================================================
+    // TECHNICAL ARCHITECTURE & DEEP DIVE
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 1: The Production Negative Testing Matrix',
+      level: 2,
+      text: 'The Architecture of API Resilience and Error Handling'
     },
     {
       type: 'image',
-      layout: 'stacked',
-      badge: 'RESILIENCE MATRIX',
-      title: 'Defensive API Testing: The Negative and Edge Case Resilience Matrix',
-      text: 'Professional API test architects design negative and edge case suites to prove that systems fail safely. The Production Negative Testing Matrix categorizes critical defense vectors: invalid inputs, boundary violations, authentication denial, and graceful error responses.',
       src: resilienceImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/api-resilience-error-handling.jpg',
       w: 1408,
       h: 768,
-      alt: 'Negative testing matrix showing 400 Bad Request, 401 Unauthorized, 404 Not Found, 429 Rate Limit, and 500 Server Error cards with try catch workflow.',
-      caption: 'The core error testing matrix and defensive assertion architecture.',
-      points: [
-        'Client Validation Errors (400 or 422): Missing required fields, wrong data types, or out of range values.',
-        'Security Errors (401 and 403): Missing or expired authentication tokens (401), or insufficient user permissions (403).',
-        'State Conflicts (404 and 409): Querying missing resource IDs (404), or duplicate records colliding in the database (409).',
-        'Throughput & Resilience (429 and 500): Rate limit throttling (429), and catching unhandled server exceptions (500).',
-      ],
+      title: 'API Resilience Architecture: Error Classification, Safe Parsing, and Retry Loops',
+      text: 'Enterprise API resilience requires classifying errors into transient vs permanent, defending against malformed payloads, asserting rate limit throttling, and sanitizing diagnostic telemetry.',
+      alt: 'Architecture diagram showing the Negative Testing Matrix and self-healing retry pipeline.',
+      caption: 'The Resilience Matrix: Classifying client errors, gateway blips, and server faults.'
     },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 1 : NEGATIVE TESTING MATRIX VALIDATOR
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 1 : NEGATIVE MATRIX VALIDATOR',
+      title: 'Asserting Refusal Contracts: 400 Bad Request & 429 Throttle',
+      scenario: 'Send a malformed ticketing payload ordering zero tickets. Assert the server rejects with 400 Bad Request and validates the error message contract.',
+      config: {
+        method: 'POST',
+        path: '/v1/tickets/purchase',
+        activeTab: 'Tests'
+      },
+      tabs: {
+        params: [],
+        headers: [
+          { key: 'Content-Type', value: 'application/json' },
+          { key: 'Authorization', value: 'Bearer test-student-token' }
+        ],
+        body: JSON.stringify({
+          eventId: "EVT-SPRING-FEST-2026",
+          quantity: 0
+        }, null, 2),
+        tests: '// Asserting negative refusal contract\npm.test("Status is 400 Bad Request", function() {\n  pm.response.to.have.status(400);\n});\n\npm.test("Error payload contains structured message", function() {\n  const res = pm.response.json();\n  pm.expect(res.error).to.eql("INVALID_QUANTITY");\n  pm.expect(res.message).to.include("Quantity must be at least 1");\n});'
+      },
+      response: {
+        status: '400 Bad Request',
+        time: '14ms',
+        size: '286B',
+        body: JSON.stringify({
+          error: "INVALID_QUANTITY",
+          message: "Quantity must be at least 1",
+          timestamp: "2026-10-07T03:25:00.000Z"
+        }, null, 2)
+      },
+      notes: [
+        'Negative testing verifies that invalid input is intercepted by input guards before reaching the database.',
+        'Structured error bodies ensure frontend clients can present actionable feedback to users.'
+      ]
+    },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 2 : DEFENSIVE PARSER & BOUNDED RETRY
+    // =========================================================================
+    {
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 2 : DEFENSIVE PARSER & RETRY',
+      title: 'Defensive Deserialization & Bounded Retry Controller',
+      scenario: 'Execute request against an upstream gateway that returns 502 with HTML text. Safely parse the response with try catch and trigger self healing retry if transient.',
+      config: {
+        method: 'POST',
+        path: '/v1/payments/process',
+        activeTab: 'Tests'
+      },
+      tabs: {
+        params: [],
+        headers: [
+          { key: 'Content-Type', value: 'application/json' }
+        ],
+        body: JSON.stringify({
+          orderId: "ORD-9912",
+          amount: 500
+        }, null, 2),
+        tests: '// Defensive JSON parsing\nlet res = null;\ntry {\n  res = pm.response.json();\n} catch (e) {\n  console.warn("Non-JSON payload received. Raw response:", pm.response.text());\n}\n\n// Transient status inspection\nif (pm.response.code === 502 || pm.response.code === 503) {\n  const currentRetry = pm.collectionVariables.get("retryCount") || 0;\n  if (currentRetry < 3) {\n    pm.collectionVariables.set("retryCount", currentRetry + 1);\n    console.log(`Retrying request, attempt ${currentRetry + 1}...`);\n  }\n}'
+      },
+      response: {
+        status: '502 Bad Gateway',
+        time: '45ms',
+        size: '180B',
+        body: "<html><body><h1>502 Bad Gateway</h1><p>Upstream payment socket timed out.</p></body></html>"
+      },
+      notes: [
+        'Defensive try catch prevents unexpected non-JSON payloads from crashing the test runner.',
+        'Retry logic is strictly bounded to transient status codes (502, 503, 504) and never applied to 4xx client errors.'
+      ]
+    },
+
+    // =========================================================================
+    // FOUR PART PEDAGOGICAL CARDS (SENIOR SAVIOR CONTRACTS)
+    // =========================================================================
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : THE NEGATIVE TESTING MATRIX',
+      title: 'The Negative Testing Matrix',
+      subtitle: 'Asserting structured refusal contracts across six core HTTP codes',
+      input: {
+        method: 'POST',
+        url: '{{baseUrl}}/v1/tickets/purchase',
+        desc: 'Deliberate fault injection covering client and server refusal boundaries.',
+        code: '// Testing bad request\npm.test("Status 400 Bad Request", () => pm.response.to.have.status(400));\n// Testing rate limit\npm.test("Status 429 Throttle", () => pm.response.to.have.status(429));'
+      },
+      underTheHood: {
+        desc: 'Server validation pipeline evaluates syntax guards, auth tokens, and concurrency locks.',
+        steps: [
+          '400 Bad Request: Syntax and schema validation guards reject malformed fields.',
+          '401 Unauthorized: Auth middleware rejects missing or expired bearer tokens.',
+          '403 Forbidden: RBAC middleware rejects valid tokens lacking resource privileges.',
+          '404 Not Found: Resource lookup fails to locate target entity in database.',
+          '429 Too Many Requests: Token bucket rate limiter throttles traffic spike.',
+          '500 Server Error: Unhandled server exceptions trigger error middleware.'
+        ]
+      },
+      output: {
+        status: 'REFUSAL ASSERTED',
+        time: '14ms',
+        desc: 'Six distinct assertions verify appropriate HTTP status codes and structured bodies.',
+        body: JSON.stringify({
+          status: 400,
+          error: "INVALID_QUANTITY",
+          contractVerified: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'A test suite that only verifies 200 OK is a placebo.',
+        rule: 'Assert every refusal code your API can return. Guard against invalid state transitions.',
+        trap: 'Assuming that passing tests mean working software when error paths are never exercised.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : DEFENSIVE RESPONSE PARSING',
+      title: 'Defensive Response Parsing and Non JSON Fallbacks',
+      subtitle: 'Surviving unexpected HTML error pages from edge proxies and gateways',
+      input: {
+        method: 'GATEWAY ERROR',
+        url: '502 Bad Gateway with raw HTML text: <html><body>Bad Gateway</body></html>',
+        desc: 'Proxy error page dispatched when upstream microservice fails to reply.',
+        code: 'let res = null;\ntry {\n  res = pm.response.json();\n} catch (e) {\n  res = null;\n}'
+      },
+      underTheHood: {
+        desc: 'Unhandled pm.response.json() throws SyntaxError that kills the V8 runner.',
+        steps: [
+          'Upstream microservice drops socket connection under heavy load.',
+          'Reverse proxy (Nginx, Envoy) generates fallback 502 HTML error page.',
+          'Direct call to pm.response.json() throws "Unexpected token < in JSON".',
+          'V8 execution engine aborts test script execution abruptly.',
+          'Wrapping in try catch isolates parse failure, allowing status assertion to evaluate.'
+        ]
+      },
+      output: {
+        status: 'GRACEFUL EVALUATION',
+        time: '2ms',
+        desc: 'Test runner evaluates 502 assertion cleanly without crashing test suite.',
+        body: JSON.stringify({
+          rawText: "<html><body>Bad Gateway</body></html>",
+          parsedJson: null,
+          handledSafely: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Never assume response bodies are JSON.',
+        rule: 'Always wrap JSON deserialization in try catch blocks when handling unknown or error responses.',
+        trap: 'Allowing unhandled SyntaxError exceptions to halt an entire automated test run.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : RETRY TAXONOMY & BOUNDED HEALING',
+      title: 'Retry Taxonomy and Bounded Self Healing',
+      subtitle: 'Absorbing transient network blips without compounding permanent failures',
+      input: {
+        method: 'RETRY CONTROLLER',
+        url: 'Tests Tab with postman.setNextRequest() loop',
+        desc: 'Automated retry loop with exponential backoff capped at 3 attempts.',
+        code: 'if (pm.response.code >= 502 && retryCount < 3) {\n  pm.collectionVariables.set("retryCount", retryCount + 1);\n  postman.setNextRequest(pm.info.requestName);\n}'
+      },
+      underTheHood: {
+        desc: 'Classifying errors into transient vs permanent before retrying execution.',
+        steps: [
+          'Transient errors (502, 503, 504, socket timeout) represent infrastructure blips.',
+          'Permanent errors (400, 401, 403, 404, 409) represent semantic contract rejections.',
+          'Controller only retries transient statuses, never semantic contract failures.',
+          'Backoff delay increases exponentially to avoid overwhelming reviving servers.',
+          'Caps strictly at 3 attempts; unrecovered failures report red to CI pipeline.'
+        ]
+      },
+      output: {
+        status: 'BOUNDED RETRY',
+        time: '250ms',
+        desc: 'Transient blip absorbed on attempt 2; permanent failure logged after attempt 3.',
+        body: JSON.stringify({
+          attempt: 2,
+          recovered: true,
+          status: "200 OK"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Retries exist for availability, never for correctness.',
+        rule: 'Only retry transient gateway blips. Never retry 4xx semantic rejections.',
+        trap: 'Retrying 400 Bad Request or 409 Conflict in a loop, hammering an already stressed backend.'
+      }
+    },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : CONSOLE LOG CREDENTIAL SANITIZER',
+      title: 'Console Log Credential Sanitizer',
+      subtitle: 'Preventing secret exposure in persistent cloud CI build logs',
+      input: {
+        method: 'SANITIZER HOOK',
+        url: 'Diagnostic console logging utility',
+        desc: 'Scrubbing Authorization headers and passwords before printing to console.',
+        code: 'function sanitize(obj) {\n  const clone = { ...obj };\n  if (clone.Authorization) clone.Authorization = "Bearer [REDACTED]";\n  if (clone.password) clone.password = "********";\n  return clone;\n}'
+      },
+      underTheHood: {
+        desc: 'Build runners archive console stdout in persistent cloud logs accessible to teams.',
+        steps: [
+          'Engineer logs raw request headers to debug authentication failure.',
+          'Console output captures raw admin bearer token or API key in plain text.',
+          'Continuous integration runner publishes test log to permanent build archive.',
+          'Exposed tokens become accessible to unauthorized parties, violating security policy.',
+          'Sanitizer masks sensitive keys with asterisks while preserving payload structure.'
+        ]
+      },
+      output: {
+        status: 'SANITIZED LOG',
+        time: '0ms',
+        desc: 'Secrets redacted at source; diagnostic structure preserved without risk.',
+        body: JSON.stringify({
+          Authorization: "Bearer [REDACTED]",
+          Accept: "application/json",
+          logSafe: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Assume every console log line is public.',
+        rule: 'Redact credentials at the source before printing to console or test logs.',
+        trap: 'Printing raw authorization headers in console logs that get archived in cloud CI systems.'
+      }
+    },
+
+    // =========================================================================
+    // POST DRILLS & QUIZ
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 2: Defensive Scripting: Safe Parsing with Try Catch',
-    },
-    {
-      type: 'paragraph',
-      text: 'When servers crash or time out, gateways like Nginx or cloud load balancers return raw HTML error pages rather than JSON. Attempting to parse HTML as JSON throws a fatal SyntaxError unless guarded by a defensive try catch block. We chunk this defensive pattern into three architectural layers:',
+      level: 2,
+      text: 'Error Code Classification Matrix'
     },
     {
       type: 'chunked-code',
-      badge: 'DEFENSIVE SCRIPT CHUNKS',
-      title: 'Resilient Error Parsing Architecture',
-      intro: 'Guards against fatal crashes on HTML server pages:',
+      title: 'HTTP Status Code Diagnostic Routing',
+      code: `const statusCode = pm.response.code;
+
+if (statusCode === 200 || statusCode === 201) {
+  // Happy Path: Resource created or verified
+  console.log("Success contract verified.");
+} else if (statusCode >= 400 && statusCode < 500) {
+  // Client Error: Permanent semantic rejection (DO NOT RETRY)
+  console.warn("Client contract rejection:", statusCode);
+} else if (statusCode >= 500) {
+  // Server/Gateway Error: Potential transient blip (ELIGIBLE FOR RETRY)
+  console.error("Infrastructure fault detected:", statusCode);
+}`,
       chunks: [
         {
-          label: 'Chunk 1: Guarded Parsing',
-          filename: 'try-catch-guard.js',
-          code: 'let parsedBody = null;\ntry {\n    parsedBody = pm.response.json();\n} catch (exception) {\n    console.warn("Non JSON response: " + exception.message);\n    parsedBody = null;\n}',
-          title: 'Guarding Against Crash Pages',
-          explanation: 'Wraps the parser in a try catch block. If the server returns HTML, the exception is caught safely without aborting the runner.',
-          keyTakeaway: 'Always catch parsing errors when testing failure endpoints.'
+          lines: '1-6',
+          label: '2xx Success',
+          explanation: 'Resource state transitioned successfully per business contract.'
         },
         {
-          label: 'Chunk 2: Format Contract Assertion',
-          filename: 'format-assertion.js',
-          code: 'pm.test("Response arrives in valid JSON format", function () {\n    pm.expect(parsedBody, "Parsed JSON body").to.not.equal(null);\n});',
-          title: 'Asserting Content Type Compliance',
-          explanation: 'Formally reports a failed test if the response was not valid JSON, giving clear error logs in the test report.',
-          keyTakeaway: 'Report formatting failures as structured test failures rather than unhandled script crashes.'
+          lines: '7-9',
+          label: '4xx Semantic Rejection',
+          explanation: 'Client submitted malformed, unauthorized, or conflicting payload. Never retry.'
         },
         {
-          label: 'Chunk 3: Security Leak Scanner',
-          filename: 'security-scan.js',
-          code: 'pm.test("Response does not leak database secrets", function () {\n    const rawText = pm.response.text();\n    pm.expect(rawText).to.not.match(/password|SQLException|stack trace/i);\n});',
-          title: 'Preventing Credential Leaks',
-          explanation: 'Scans raw response text to ensure backend database table names, SQL queries, or passwords never reach clients.',
-          keyTakeaway: 'Automated security assertions prevent dangerous internal leaks to third parties.'
+          lines: '10-13',
+          label: '5xx Infrastructure Blip',
+          explanation: 'Server or upstream gateway crashed or timed out. Eligible for bounded retry.'
         }
       ]
     },
-    {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'If an upstream server crashes and returns an HTML page starting with <!DOCTYPE html>, what will happen if your script calls pm.response.json() without a try catch wrapper?',
-      options: [
-        'Postman throws a fatal JSONError SyntaxError and crashes the test execution',
-        'Postman automatically translates the HTML into a JSON object',
-        'Postman returns undefined and continues running smoothly',
-        'Postman reboots the remote server'
-      ],
-      answerIndex: 0,
-      revealTitle: 'Unguarded JSON Parsing Crash Confirmation',
-      explanation: 'Fatal JSONError halts execution! The JavaScript JSON parser expects braces { } or brackets [ ]. When it encounters the HTML tag <, it throws an unhandled SyntaxError that halts the remaining tests in that request. A try catch block prevents this crash!'
-    },
-    {
-      type: 'heading',
-      text: 'Step 3: Beware of Soft Errors (Status 200 with Error Content)',
-    },
-    {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Believing Status 200 Always Means Success',
-      paragraphs: [
-        'A soft error occurs when a developer configures an endpoint to return HTTP 200 OK, but the JSON payload body says: `{"status": "failed", "message": "Record not found"}`.',
-        'If your automated test only asserts `pm.response.to.have.status(200)`, your test suite will report GREEN PASS even though the business transaction completely failed!',
-        'Always combine status code assertions with body message assertions to protect against deceptive soft errors.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 4: Self Healing Workflows: Handling Duplicate Collisions',
-    },
-    {
-      type: 'paragraph',
-      text: 'What happens if a test run is aborted midway, leaving a book record stuck in the database? On the next run, AddBook fails with {"msg": "Book already exists"}. We write an intelligent, bounded self healing script using collection variables and `postman.setNextRequest`:',
-    },
-    {
-      type: 'code',
-      filename: 'addbook-self-healing.js',
-      lines: [
-        '// Placed in Tests tab of AddBook (POST /v1/books)',
-        'let responseJson = {};',
-        'try {',
-        '    responseJson = pm.response.json();',
-        '} catch (err) {',
-        '    responseJson = {};',
-        '}',
-        '',
-        'const maxRetries = 2;',
-        'let retryCount = Number(pm.collectionVariables.get("retry_count") || 0);',
-        '',
-        '// Exact match on canonical duplicate error contract',
-        'if (responseJson.msg === "Book already exists") {',
-        '    if (retryCount < maxRetries) {',
-        '        retryCount += 1;',
-        '        pm.collectionVariables.set("retry_count", retryCount);',
-        '',
-        '        // Compute the colliding composite ID so DeleteBook can purge it',
-        '        const targetId = pm.collectionVariables.get("ISBN") + "227";',
-        '        pm.collectionVariables.set("book_id", targetId);',
-        '        console.log("Collision detected! Attempt " + retryCount + " of " + maxRetries + ". Triggering DeleteBook cleanup for " + targetId);',
-        '        postman.setNextRequest("Delete Book");',
-        '    } else {',
-        '        pm.collectionVariables.set("retry_count", 0);',
-        '        postman.setNextRequest(null);',
-        '        pm.expect.fail("Max retries exceeded: duplicate record persistent after cleanup attempts");',
-        '    }',
-        '} else {',
-        '    pm.collectionVariables.set("retry_count", 0);',
-        '    pm.test("Book added successfully", function () {',
-        '        pm.response.to.have.status(200);',
-        '        pm.expect(responseJson.Msg).to.eql("successfully added");',
-        '    });',
-        '}',
-      ],
-    },
-    {
-      type: 'code',
-      filename: 'deletebook-return-flow.js',
-      lines: [
-        '// Placed in Tests tab of DeleteBook (POST /v1/books/delete)',
-        'pm.test("Cleanup request succeeds", function () {',
-        '    pm.response.to.have.status(200);',
-        '});',
-        '',
-        '// If invoked by self healing recovery, route back to AddBook',
-        'const activeRetries = Number(pm.collectionVariables.get("retry_count") || 0);',
-        'if (activeRetries > 0) {',
-        '    console.log("Cleanup complete. Returning flow to AddBook for re addition...");',
-        '    postman.setNextRequest("Add Book");',
-        '}',
-      ],
-    },
-    {
-      type: 'terminal',
-      command: 'Self Healing Workflow Terminal Log',
-      lines: [
-        '[AddBook]: 200 OK -> msg: "Book already exists" (Collision detected! Triggering DeleteBook for LIB9821227)',
-        '[DeleteBook]: 200 OK -> msg: "book is successfully deleted" (Cleanup complete. Returning flow to AddBook)',
-        '[AddBook]: 200 OK -> Msg: "successfully added", ID: "LIB9821227" (Self healing succeeded!)',
-        'Workflow Completed: 3 total requests, 1 recovery loop, 0 test failures.',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'warning',
-      title: 'The Bounded Loop Rule: Preventing Infinite CI CD Hangs',
-      paragraphs: [
-        'Never call postman.setNextRequest without a bounded counter like retryCount.',
-        'If an automated script loops unconditionally on an unexpected database state, Postman or Newman will ping the server endlessly until the CI build times out after an hour.',
-        'Always establish a hard ceiling (such as 2 or 3 retries) and explicitly call postman.setNextRequest(null) or pm.expect.fail() when the ceiling is reached.',
-      ],
-    },
+
     {
       type: 'battle-scar',
-      metric: 'Critical Credential Leak Outage',
-      title: 'The Database Stack Trace Leak: When an Uncaught 500 Exposed Root Credentials',
-      context: 'A financial payment processing platform deployed a microservice that failed to implement global exception handling. When automated tests flooded the endpoint with malformed payloads, the backend threw an unhandled SQL syntax error. Instead of returning a sterile JSON error message, the web framework printed a 120 line raw stack trace containing the internal database hostname, database username, and unmasked connection string password. Security researchers discovered the flaw within three hours of release.',
-      takeaway: 'Never permit backend stack traces or database connection strings to leak to clients. Always write automated security assertions in Postman verifying that error responses do not contain keywords like "SQLException", "password", or "traceback".'
+      incident: 'The Infinite Retry Loop That Took Down A Production Payment Cluster',
+      context: 'An automated testing bot was programmed to retry any non-200 response until success. When the backend payment cluster began rejecting requests with 422 Unprocessable Entity due to expired cards, 50 parallel test runners entered infinite retry loops, firing 80,000 requests per minute and causing a complete cluster outage.',
+      takeaway: 'Never retry semantic client errors (4xx). Strictly bound retry attempts with maximum counts and backoff intervals.'
     },
     {
       type: 'triage',
-      title: 'War Room Triage: The Fatal SyntaxError on Server Crash Pages',
-      scenario: 'During midnight CI regression, the upstream gateway crashes and returns an HTML 502 Bad Gateway page. Your test script executes: const data = pm.response.json(). The test runner halts immediately with: "JSONError: Unexpected token < in JSON at position 0". How do you safeguard your assertion suite from crashing?',
+      title: 'Triage Drill: The Crashing Non-JSON 502',
+      scenario: 'Your test suite executes every midnight. Last night, an upstream microservice restarted, returning 502 Bad Gateway. Your test suite failed with: SyntaxError: Unexpected token < in JSON at position 0, preventing remaining test suites from running.',
       options: [
-        'Change the request method from POST to GET.',
-        'Wrap the JSON parsing call in a try catch block and assert status code before attempting to inspect properties.',
-        'Increase the request timeout in Postman settings to 60 seconds.',
-        'Convert the HTML page to XML inside the Pre request script.'
+        {
+          label: 'The server rejected the request because the Content-Type header was missing.',
+          correct: false,
+          explanation: 'The request was received, but the upstream proxy generated an HTML error page.'
+        },
+        {
+          label: 'The script called pm.response.json() directly without wrapping it in a try-catch block.',
+          correct: true,
+          explanation: 'When edge proxies return HTML error bodies, calling JSON.parse() throws an unhandled SyntaxError. Defensive try-catch prevents the crash.'
+        },
+        {
+          label: 'The test suite failed because Newman does not support HTTP 502 responses.',
+          correct: false,
+          explanation: 'Newman supports all HTTP status codes; the failure was an unhandled JavaScript exception in the test script.'
+        }
       ],
-      answerIndex: 1,
-      debrief: 'Defensive parsing saves automation suites! When an upstream proxy fails, it returns an HTML document starting with <!DOCTYPE html>. Calling pm.response.json() throws a fatal SyntaxError because HTML cannot be parsed as JSON. Wrapping parsing in a try catch block or checking the response Content Type keeps the runner alive!',
-      traps: [
-        'Changing the HTTP method does not fix gateway crash parsing.',
-        '',
-        'Increasing timeout does not prevent non JSON responses.',
-        'Pre request scripts run before response arrival and cannot alter server response types.'
-      ]
+      debrief: 'Always wrap response JSON deserialization in try-catch blocks to survive non-JSON error payloads gracefully.'
     },
-    {
-      type: 'heading',
-      text: 'Step 5: Review and Practice',
-    },
-    {
-      type: 'guess',
-      prompt: 'Why should you wrap pm.response.json() in a try catch block when testing error scenarios?',
-      options: [
-        'Because try catch makes the network call run faster',
-        'Because server errors (such as 502 or 503) often return HTML pages that cause pm.response.json() to throw a SyntaxError and crash the test suite',
-        'Because Postman requires try catch for all HTTP GET requests',
-        'Because try catch automatically encrypts the response',
-      ],
-      answerIndex: 1,
-      explain: 'When servers crash or time out, gateways like Nginx or cloud load balancers return raw HTML error pages. Attempting to parse HTML as JSON throws a fatal SyntaxError unless guarded by try catch.',
-    },
+
     {
       type: 'quiz',
-      items: [
-        [
-          'What is a soft error in API testing?',
-          'A soft error happens when an endpoint incorrectly returns a 200 OK status code despite the business action failing. Testers must inspect body properties to catch them.',
-        ],
-        [
-          'Why must API tests assert that response bodies never leak database stack traces?',
-          'Stack traces expose database table names, SQL query syntax, and server file paths to potential attackers, creating serious security vulnerabilities.',
-        ],
+      title: 'Knowledge Check: Error Retry Eligibility',
+      question: 'Which of the following HTTP status codes should NEVER be automatically retried by a resilience test loop?',
+      options: [
+        '502 Bad Gateway',
+        '503 Service Unavailable',
+        '504 Gateway Timeout',
+        '400 Bad Request'
       ],
+      correctAnswer: 3,
+      explanation: '400 Bad Request is a permanent client semantic rejection. Retrying the identical invalid payload will always produce the identical rejection and wastes server capacity.'
     },
     {
       type: 'takeaways',
-      items: [
-        'Negative testing validates that APIs fail safely, return correct 4xx codes, and never crash with unhandled 500 exceptions.',
-        'Use defensive try catch blocks around pm.response.json() to handle HTML error pages gracefully.',
-        'Assert both status codes and response body fields to detect deceptive soft errors.',
-        'Use collection state flags and postman.setNextRequest() to build self healing test workflows.',
-      ],
+      title: 'Senior Savior Takeaways',
+      points: [
+        'A test suite that only verifies 200 OK is a placebo; build the Negative Testing Matrix across 400, 401, 403, 404, 429, and 500.',
+        'Wrap response deserialization in try catch blocks to survive raw HTML error pages from proxies.',
+        'Only retry transient gateway faults (502, 503, 504); never retry 4xx semantic client rejections.',
+        'Sanitize console logs: redact bearer tokens and passwords at the source before logging to cloud runners.'
+      ]
     },
     {
       type: 'victory-milestone',
-      badge: 'MISSION 3 PHASE 1 CLEARED',
-      rank: 'ENTERPRISE RESILIENCE SPECIALIST',
-      title: 'Architectural Triumph: Production Negative Matrix & Defensive Resilience Mastered',
-      summary: 'You moved beyond fragile happy paths into battle hardened production engineering. You mastered the comprehensive negative testing matrix (400, 401, 403, 404, 409, 429, 500), shielded your test runner with defensive try catch deserialization, intercepted dangerous soft 200 failures, and engineered self healing recovery loops.',
-      powers: [
-        'Deploying the complete production negative testing matrix to guarantee graceful backend failure modes',
-        'Defensive JavaScript scripting: safe try catch parsing that survives raw HTML cloud gateway crashes',
-        'Exposing deceptive soft 200 errors by coupling HTTP status assertions with payload business status checks',
-        'Security auditing: intercepting database stack traces, SQL syntax leaks, and internal file path disclosures',
-        'Engineering self healing test loops using collection flags and dynamic workflow redirection',
-      ],
-      disastersPrevented: [
-        'Prevented severe security vulnerabilities where SQL error traces leak database schemas to malicious actors',
-        'Stopped critical false positive passes where tests report green on failed business transactions',
-        'Eliminated brittle CI test suite crashes caused by unhandled load balancer HTML timeout pages',
-      ],
-      warRoomTakeaway: 'Any junior tester can verify that a system works when everything is perfect. A true lead automation architect proves that the system stands tall, refuses to leak secrets, and recovers automatically when everything goes wrong.',
+      badge: 'Milestone 3.1 Cleared',
+      title: 'Resilience & Error Handling Mastered',
+      summary: 'You have hardened test suites against unexpected HTML crashes, asserted the Negative Testing Matrix, implemented log credential sanitizers, and built bounded self-healing retry loops.',
+      nextStep: 'Proceed to Chapter 10 to decouple frontend development from backend delays with Mock Servers and JSON Schema Contracts.'
     },
     {
       type: 'cliffhanger',
-      title: 'Continuing Mission 3: Postman Mock Servers and Contracts',
-      text: 'Our test suite is resilient and self healing. In Chapter 10, we advance into Postman Mock Servers and JSON Schema Contracts: validating structural data integrity before servers even exist, simulating dependencies, and unblocking parallel QA workflows in Agile sprints!',
-    },
-  ],
+      time: '04:00 AM',
+      location: 'Apex Frontend Engineering Studio',
+      alert: 'DEVELOPMENT BLOCKER STANDOFF',
+      speaker: 'Ananya Sen',
+      speech: 'Backend team is three days behind on the Science Library API! My entire UI sprint is blocked!',
+      context: 'Ananya slams her laptop shut in frustration. The frontend team cannot build or test their user interface because the backend API does not exist yet. Chapter 10 Mock Servers and JSON Schema Contracts begins!',
+      nextLessonId: 'mock-servers-and-contracts'
+    }
+  ]
 }
