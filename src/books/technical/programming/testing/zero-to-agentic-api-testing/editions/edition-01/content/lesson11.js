@@ -6,11 +6,11 @@ import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson11 = {
-  id: 'oauth2-authentication',
+  id: 'oauth-token-auth',
   icon: '',
   title: 'OAuth 2.0 and Modern Token Authentication',
   shortTitle: 'OAuth 2.0 Authentication',
-  subtitle: 'Master authorization flows, token lifecycles, PKCE handshakes, and securing API test collections.',
+  subtitle: 'The four roles, Authorization Code grant handshake, automated token exchange scripts, global variables, and Bearer token chaining.',
   tags: ['OAuth 2.0', 'Tokens', 'Authentication', 'Authorization', 'PKCE', 'IDOR', 'Security'],
   blocks: [
     {
@@ -544,22 +544,30 @@ if (status === 401) {
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: Protecting Secrets in Exported Collections',
-      question: 'Which environment variable column should hold sensitive credentials to prevent them from being exported in collection JSON files?',
+      type: 'guess',
+      prompt: 'Which environment variable column should hold sensitive credentials to prevent them from being exported in collection JSON files?',
       options: [
         'Initial Value',
         'Current Value',
         'Global Value',
-        'Persisted Value'
+        'Persisted Value',
       ],
-      correctAnswer: 1,
-      explanation: 'Current Values remain strictly in local memory and are never exported to shared JSON files or synchronized to team workspaces.'
+      answerIndex: 1,
+      explain: 'Current Values remain strictly in local memory and are never exported to shared JSON files or synchronized to team workspaces.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'Which environment variable column should hold sensitive credentials to prevent them from being exported in collection JSON files?',
+          'Current Value. Current Values remain strictly in local memory and are never exported to shared JSON files or synchronized to team workspaces.',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'Tokens assert identity; URL parameters only request filters. Prevent IDOR by verifying claims.',
         'Use PKCE for public clients to prevent authorization code interception without client secrets.',
         'Automate token acquisition in pre-request scripts using pm.sendRequest() to keep suites autonomous.',
@@ -571,6 +579,17 @@ if (status === 401) {
       badge: 'Milestone 3.3 Cleared',
       title: 'OAuth 2.0 & Token Security Mastered',
       summary: 'You have eliminated IDOR vulnerabilities, automated dynamic Bearer token acquisition with PKCE, clarified 401 vs 403 semantics, and safeguarded credentials with the Current-Only vault pattern.',
+      powers: [
+        'Understanding the four OAuth 2.0 roles and the Hotel Keycard Analogy',
+        'Configuring the Authorization Code handshake with PKCE and Client Credentials',
+        'Automating token acquisition and refresh cycles inside Pre-request scripts',
+        'Chaining Bearer tokens across downstream requests with Current Value security'
+      ],
+      disastersPrevented: [
+        'Eliminated Insecure Direct Object Reference (IDOR) vulnerabilities across all routes',
+        'Prevented CI runner failures caused by expired static access tokens',
+        'Guaranteed that shared collection exports never contain sensitive credentials'
+      ],
       nextStep: 'Proceed to Chapter 12 to tackle legacy enterprise protocols with SOAP WebServices and XML Parsing.'
     },
     {

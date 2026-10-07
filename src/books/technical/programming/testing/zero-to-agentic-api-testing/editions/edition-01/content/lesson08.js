@@ -559,22 +559,30 @@ console.log("Environment value:", envIsbn);`,
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: Iteration Data Lifecycle',
-      question: 'What happens to values stored in pm.iterationData when the collection moves to the next row in the data file?',
+      type: 'guess',
+      prompt: 'What happens to values stored in pm.iterationData when the collection moves to the next row in the data file?',
       options: [
         'They are merged into the Collection scope permanently.',
         'They are overwritten by the values from the next row in the data file.',
         'They persist in memory and can be accessed with pm.previousIterationData.',
-        'They are exported automatically to an audit log file.'
+        'They are exported automatically to an audit log file.',
       ],
-      correctAnswer: 1,
-      explanation: 'Iteration data is scoped strictly to the current row. When the iteration concludes, the data dictionary is replaced with the next row values.'
+      answerIndex: 1,
+      explain: 'Iteration data is scoped strictly to the current row. When the iteration concludes, the data dictionary is replaced with the next row values.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'What happens to values stored in pm.iterationData when the collection moves to the next row in the data file?',
+          'They are overwritten by the values from the next row in the data file.. Iteration data is scoped strictly to the current row. When the iteration concludes, the data dictionary is replaced with the next row values.',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'Data Driven Testing parameterizes request templates with external CSV or JSON rows.',
         'Beware the invisible UTF-8 BOM (EF BB BF) prepended by Excel; strip it to prevent undefined key lookups.',
         'Quote strings containing commas per RFC 4180 to prevent catastrophic column shifting.',
@@ -586,6 +594,17 @@ console.log("Environment value:", envIsbn);`,
       badge: 'Milestone 2.5 Cleared',
       title: 'Data Driven Mass Ingestion Mastered',
       summary: 'You have automated massive batch runs with external data files, diagnosed the Byte Order Mark trap, enforced RFC 4180 compliance, and isolated iteration state.',
+      powers: [
+        'Decoupling test logic from test datasets using external CSV and JSON data files',
+        'Reading iteration data dynamically via pm.iterationData.get() and placeholders',
+        'Neutralizing the Excel UTF-8 Byte Order Mark (BOM) in preflight file lints',
+        'Enforcing RFC 4180 quotes on comma-containing fields to prevent column shifts'
+      ],
+      disastersPrevented: [
+        'Prevented silent batch ingestion crashes caused by invisible Excel BOM bytes',
+        'Stopped catastrophic column-shift errors that convert status codes into NaN',
+        'Eliminated state leakage across iterations via automated pre-request sweeps'
+      ],
       nextStep: 'Proceed to Chapter 09 to harden test suites against negative responses, rate limits, and network flakiness.'
     },
     {

@@ -622,22 +622,30 @@ pm.environment.clear();                         // Wipes all keys from Environme
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: Variable Scopes & Security',
-      question: 'Which variable scope is best suited for an authentication token that should be shared across all folders in a single collection, but must never leak into other collections?',
+      type: 'guess',
+      prompt: 'Which variable scope is best suited for an authentication token that should be shared across all folders in a single collection, but must never leak into other collections?',
       options: [
         'Global Scope',
         'Collection Scope',
         'Data Scope',
-        'Local Scope'
+        'Local Scope',
       ],
-      correctAnswer: 1,
-      explanation: 'Collection Scope provides self contained variables that are shared across all requests in that collection, but are completely isolated from other collections in the workspace.'
+      answerIndex: 1,
+      explain: 'Collection Scope provides self contained variables that are shared across all requests in that collection, but are completely isolated from other collections in the workspace.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'Which variable scope is best suited for an authentication token that should be shared across all folders in a single collection, but must never leak into other collections?',
+          'Collection Scope. Collection Scope provides self contained variables that are shared across all requests in that collection, but are completely isolated from other collections in the workspace.',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'Precedence hierarchy: Local outranks Data, Data outranks Environment, Environment outranks Collection, Collection outranks Global.',
         'Always leave Initial Value blank for sensitive credentials. Use Current Value for session memory.',
         'Use Pre request scripts to generate dynamic timestamps (Date.now()) to guarantee collision free regression runs.',
@@ -649,6 +657,17 @@ pm.environment.clear();                         // Wipes all keys from Environme
       badge: 'Milestone 2.3 Cleared',
       title: 'Variable Scopes & Dynamic Environments Mastered',
       summary: 'You have eliminated hardcoded URLs with double curly braces, mastered the five scope tiers, safeguarded secrets with Current Values, and implemented collision free dynamic key generation.',
+      powers: [
+        'Eliminating hardcoded URLs using double curly brace syntax',
+        'Mastering the 5 scope tiers and the precedence override stack',
+        'Safeguarding cloud credentials by isolating Initial Values from Current Values',
+        'Generating dynamic collision free keys in Pre-request scripts'
+      ],
+      disastersPrevented: [
+        'Prevented accidental live production database overwrites during local testing runs',
+        'Stopped duplicate key collisions from crashing subsequent automated regression suites',
+        'Eliminated hardcoded credentials from leaking into public Git repositories'
+      ],
       nextStep: 'Proceed to Chapter 07 to chain AddBook, GetBook, and DeleteBook requests dynamically and parse complex nested JSON arrays.'
     },
     {

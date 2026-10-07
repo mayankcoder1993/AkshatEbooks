@@ -6,11 +6,11 @@ import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson12 = {
-  id: 'soap-webservices-and-xml',
+  id: 'soap-and-xml',
   icon: '',
   title: 'SOAP WebServices and XML Parsing',
   shortTitle: 'SOAP & XML Parsing',
-  subtitle: 'Legacy enterprise protocols, WSDL specifications, XML envelopes, SOAPAction headers, and xml2Json parsing.',
+  subtitle: 'Crafting XML envelopes, setting SOAP headers, and converting responses into JavaScript objects with xml2Json.',
   tags: ['SOAP', 'XML', 'WSDL', 'xml2Json', 'SOAPAction', 'Enterprise', 'Mainframe'],
   blocks: [
     {
@@ -540,22 +540,30 @@ console.log("Extracted Value:", result.trim());`,
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: SOAP Fault Responsibility',
-      question: 'In a SOAP Fault element, which faultcode value indicates that the client submitted invalid or malformed data?',
+      type: 'guess',
+      prompt: 'In a SOAP Fault element, which faultcode value indicates that the client submitted invalid or malformed data?',
       options: [
         'soap:Server',
         'soap:Client',
         'soap:VersionMismatch',
-        'soap:MustUnderstand'
+        'soap:MustUnderstand',
       ],
-      correctAnswer: 1,
-      explanation: 'soap:Client indicates that the request was malformed or contained invalid parameters, equivalent to an HTTP 4xx client error.'
+      answerIndex: 1,
+      explain: 'soap:Client indicates that the request was malformed or contained invalid parameters, equivalent to an HTTP 4xx client error.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'In a SOAP Fault element, which faultcode value indicates that the client submitted invalid or malformed data?',
+          'soap:Client. soap:Client indicates that the request was malformed or contained invalid parameters, equivalent to an HTTP 4xx client error.',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'SOAP requests travel inside structured XML envelopes consisting of Envelope, Header, and Body elements.',
         'SOAP 1.1 requires the SOAPAction HTTP header for routing before XML parsing occurs.',
         'Use xml2Json to deserialize XML in test scripts, and use bracket notation to traverse namespaced keys.',
@@ -567,6 +575,17 @@ console.log("Extracted Value:", result.trim());`,
       badge: 'Milestone 3.4 Cleared',
       title: 'SOAP WebServices & XML Parsing Mastered',
       summary: 'You have conquered legacy enterprise protocols, configured SOAPAction headers, deserialized XML with xml2Json, navigated namespaced objects, and unlocked thirty million rupees in student funds.',
+      powers: [
+        'Constructing valid SOAP 1.2 XML request envelopes with headers and bodies',
+        'Configuring Content-Type and SOAPAction routing headers per WSDL rules',
+        'Converting rigid XML responses into navigable JavaScript objects with xml2Json',
+        'Asserting SOAP Fault elements including faultcode and faultstring branches'
+      ],
+      disastersPrevented: [
+        'Prevented government scholarship batch freezes by bridging legacy enterprise systems',
+        'Stopped false test failures caused by unescaped ghost whitespace using trim',
+        'Eliminated JSON parser crashes on XML bodies through pre-assertion conversion'
+      ],
       nextStep: 'Proceed to Chapter 13 to automate continuous integration gates and headless execution with Newman.'
     },
     {

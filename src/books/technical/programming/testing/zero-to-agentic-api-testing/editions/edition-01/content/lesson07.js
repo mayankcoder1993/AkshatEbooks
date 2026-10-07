@@ -574,22 +574,30 @@ const totalInventoryValue = books.reduce((sum, b) => sum + (b.price * b.stock), 
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: Array Accumulation',
-      question: 'Which JavaScript array method is best suited for summing the prices of all items in an order array to verify total invoice accuracy?',
+      type: 'guess',
+      prompt: 'Which JavaScript array method is best suited for summing the prices of all items in an order array to verify total invoice accuracy?',
       options: [
         'Array.prototype.find()',
         'Array.prototype.map()',
         'Array.prototype.reduce()',
-        'Array.prototype.filter()'
+        'Array.prototype.filter()',
       ],
-      correctAnswer: 2,
-      explanation: 'reduce() iterates over an array and accumulates values into a single result (such as a sum or aggregate count).'
+      answerIndex: 2,
+      explain: 'reduce() iterates over an array and accumulates values into a single result (such as a sum or aggregate count).',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'Which JavaScript array method is best suited for summing the prices of all items in an order array to verify total invoice accuracy?',
+          'Array.prototype.reduce(). reduce() iterates over an array and accumulates values into a single result (such as a sum or aggregate count).',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'Automate property transfer in Tests scripts: capture dynamic IDs and save them to Collection scope.',
         'Use optional chaining (?.) to traverse multi tier enterprise JSON payloads safely without TypeError crashes.',
         'Master the big four array methods: find() for search, filter() for subsets, map() for projections, reduce() for totals.',
@@ -601,6 +609,17 @@ const totalInventoryValue = books.reduce((sum, b) => sum + (b.price * b.stock), 
       badge: 'Milestone 2.4 Cleared',
       title: 'Request Chaining & Array Pipelines Mastered',
       summary: 'You have automated dynamic property transfer across HTTP boundaries, mastered defensive optional chaining, and implemented functional array pipelines to audit complex budgets.',
+      powers: [
+        'Extracting dynamic properties from response bodies into collection scope',
+        'Interpolating captured IDs into subsequent GET and DELETE requests',
+        'Traversing complex multi-tier nested JSON payloads using optional chaining',
+        'Transforming and aggregating arrays using find, filter, map, and reduce'
+      ],
+      disastersPrevented: [
+        'Eliminated manual copy-paste errors that trigger false 404 Not Found failures',
+        'Prevented unhandled null pointer crashes when traversing optional payload fields',
+        'Stopped math calculation discrepancies from slipping past financial audits'
+      ],
       nextStep: 'Proceed to Chapter 08 to scale from single requests to mass ingestion with Data Driven Testing.'
     },
     {

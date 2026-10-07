@@ -89,7 +89,7 @@
       },
       {
         "id": "mock-servers-and-contracts",
-        "title": "Postman Mock Servers and JSON Schema Contracts",
+        "title": "Mock Servers and JSON Schema Contracts",
         "subtitle": "Contract first development, JSON Schema validation, building hosted Mock Servers, and unblocking parallel QA in Agile sprints."
       },
       {

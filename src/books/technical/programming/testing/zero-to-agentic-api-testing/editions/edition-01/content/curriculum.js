@@ -144,7 +144,7 @@ export const CURRICULUM_ROADMAP = [
       },
       {
         id: 'mock-servers-and-contracts',
-        title: 'Postman Mock Servers and JSON Schema Contracts',
+        title: 'Mock Servers and JSON Schema Contracts',
         topics: [
           'Contract First API Development and JSON Schema Fundamentals',
           'Identifying Field Type Mismatches and Missing Properties',

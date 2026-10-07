@@ -7,11 +7,11 @@ import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson13 = {
-  id: 'headless-ci-newman',
+  id: 'newman-cicd-execution',
   icon: '',
-  title: 'Headless Test Execution with Newman and Continuous Integration',
+  title: 'Headless Test Execution with Newman and CI CD',
   shortTitle: 'Headless CI with Newman',
-  subtitle: 'Automate command line execution, build GitHub Actions quality gates, generate HTML reports, and implement agentic self healing loops.',
+  subtitle: 'Command line collection runs, rich HTML Extra reports, and automated pipeline integration.',
   tags: ['Newman', 'CI/CD', 'GitHub Actions', 'HTML Extra', 'Quality Gate', 'Exit Codes', 'Agentic Testing'],
   blocks: [
     {
@@ -554,22 +554,30 @@ fi`,
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: Newman Exit Codes',
-      question: 'What process exit code does Newman return to the operating system when at least one assertion in a collection fails?',
+      type: 'guess',
+      prompt: 'What process exit code does Newman return to the operating system when at least one assertion in a collection fails?',
       options: [
         '0',
         '1',
         '200',
-        '-1'
+        '-1',
       ],
-      correctAnswer: 1,
-      explanation: 'In Unix standard conventions, exit code 0 indicates success. Newman returns exit code 1 when one or more assertions fail.'
+      answerIndex: 1,
+      explain: 'In Unix standard conventions, exit code 0 indicates success. Newman returns exit code 1 when one or more assertions fail.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'What process exit code does Newman return to the operating system when at least one assertion in a collection fails?',
+          '1. In Unix standard conventions, exit code 0 indicates success. Newman returns exit code 1 when one or more assertions fail.',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'Newman runs collections headlessly in CLI and CI containers without a desktop interface.',
         'The exit code is the only voice the deployment pipeline obeys: 0 ships, 1 halts.',
         'Never mask failures with || true in CI scripts; let failures fail loudly.',
@@ -581,6 +589,17 @@ fi`,
       badge: 'All 13 Chapters Cleared',
       title: 'Graduation: Lead API Quality Architect',
       summary: 'You have mastered the complete journey from raw HTTP wire bytes to autonomous CI/CD quality gates, OAuth 2.0 PKCE security, SOAP mainframes, and agentic testing.',
+      powers: [
+        'Executing collections headlessly via the Newman CLI inside CI/CD containers',
+        'Configuring GitHub Actions workflows with TARGET_ENV production guard gates',
+        'Exporting dark-mode interactive HTML Extra diagnostic reports',
+        'Enforcing the non-zero exit code release gate (exit 0 vs exit 1) without shell masking'
+      ],
+      disastersPrevented: [
+        'Prevented catastrophic duplicate student fees from reaching national production',
+        'Stopped defective pull requests from silently merging through masked || true commands',
+        'Quarantined intermittent flaky tests with scheduled triage and named owners'
+      ],
       nextStep: 'Congratulations! You are officially certified as a Lead API Quality Architect.'
     },
     {

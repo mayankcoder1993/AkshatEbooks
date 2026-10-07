@@ -6,11 +6,11 @@ import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
 import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson09 = {
-  id: 'advanced-error-handling',
+  id: 'error-handling-resilience',
   icon: '',
   title: 'Advanced Error Handling and Resilience Testing',
   shortTitle: 'Error Handling and Resilience',
-  subtitle: 'Harden test suites against production unpredictability, negative matrices, and self healing retry loops.',
+  subtitle: 'Negative testing matrix, safe JSON parsing, preventing secret leaks, and self healing workflow loops.',
   tags: ['Error Handling', 'Negative Testing', 'Resilience', 'Retry Loop', 'Log Sanitization', 'Try Catch'],
   blocks: [
     {
@@ -554,22 +554,30 @@ if (statusCode === 200 || statusCode === 201) {
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: Error Retry Eligibility',
-      question: 'Which of the following HTTP status codes should NEVER be automatically retried by a resilience test loop?',
+      type: 'guess',
+      prompt: 'Which of the following HTTP status codes should NEVER be automatically retried by a resilience test loop?',
       options: [
         '502 Bad Gateway',
         '503 Service Unavailable',
         '504 Gateway Timeout',
-        '400 Bad Request'
+        '400 Bad Request',
       ],
-      correctAnswer: 3,
-      explanation: '400 Bad Request is a permanent client semantic rejection. Retrying the identical invalid payload will always produce the identical rejection and wastes server capacity.'
+      answerIndex: 3,
+      explain: '400 Bad Request is a permanent client semantic rejection. Retrying the identical invalid payload will always produce the identical rejection and wastes server capacity.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'Which of the following HTTP status codes should NEVER be automatically retried by a resilience test loop?',
+          '400 Bad Request. 400 Bad Request is a permanent client semantic rejection. Retrying the identical invalid payload will always produce the identical rejection and wastes server capacity.',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'A test suite that only verifies 200 OK is a placebo; build the Negative Testing Matrix across 400, 401, 403, 404, 429, and 500.',
         'Wrap response deserialization in try catch blocks to survive raw HTML error pages from proxies.',
         'Only retry transient gateway faults (502, 503, 504); never retry 4xx semantic client rejections.',
@@ -581,6 +589,17 @@ if (statusCode === 200 || statusCode === 201) {
       badge: 'Milestone 3.1 Cleared',
       title: 'Resilience & Error Handling Mastered',
       summary: 'You have hardened test suites against unexpected HTML crashes, asserted the Negative Testing Matrix, implemented log credential sanitizers, and built bounded self-healing retry loops.',
+      powers: [
+        'Implementing a comprehensive Negative Testing Matrix across six HTTP refusal codes',
+        'Wrapping JSON response parsing in defensive try catch blocks to survive gateway HTML',
+        'Asserting rate limiting contracts including HTTP 429 and Retry-After headers',
+        'Constructing bounded self-healing retry loops with exponential backoff'
+      ],
+      disastersPrevented: [
+        'Prevented false green test suites from masking production inventory race conditions',
+        'Stopped unhandled HTML 502/503 error pages from aborting entire test runs',
+        'Eliminated credential leaks in CI runner logs through automated sanitization'
+      ],
       nextStep: 'Proceed to Chapter 10 to decouple frontend development from backend delays with Mock Servers and JSON Schema Contracts.'
     },
     {

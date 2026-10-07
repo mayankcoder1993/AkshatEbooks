@@ -10,7 +10,7 @@ export const lesson10 = {
   icon: '',
   title: 'Mock Servers and JSON Schema Contracts',
   shortTitle: 'Mock Servers & Contracts',
-  subtitle: 'Contract first design, JSON Schema Draft 07 validation, hosted mock servers, and query matching.',
+  subtitle: 'Contract first development, JSON Schema validation, building hosted Mock Servers, and unblocking parallel QA in Agile sprints.',
   tags: ['Mock Servers', 'JSON Schema', 'Draft 07', 'Contract First', 'Ajv', 'GraphQL'],
   blocks: [
     {
@@ -573,22 +573,30 @@ pm.test("Validate with JSON Schema", function() {
     },
 
     {
-      type: 'quiz',
-      title: 'Knowledge Check: Contract First Workflow',
-      question: 'In a Contract First API development lifecycle, which artifact is created and agreed upon before any backend implementation code is written?',
+      type: 'guess',
+      prompt: 'In a Contract First API development lifecycle, which artifact is created and agreed upon before any backend implementation code is written?',
       options: [
         'The database migration scripts',
         'The JSON Schema or OpenAPI specification',
         'The production deployment Helm charts',
-        'The end-to-end Selenium test suite'
+        'The end-to-end Selenium test suite',
       ],
-      correctAnswer: 1,
-      explanation: 'Contract First design mandates that the API contract (JSON Schema or OpenAPI) is authored and approved before writing frontend or backend code.'
+      answerIndex: 1,
+      explain: 'Contract First design mandates that the API contract (JSON Schema or OpenAPI) is authored and approved before writing frontend or backend code.',
+    },
+    {
+      type: 'quiz',
+      items: [
+        [
+          'In a Contract First API development lifecycle, which artifact is created and agreed upon before any backend implementation code is written?',
+          'The JSON Schema or OpenAPI specification. Contract First design mandates that the API contract (JSON Schema or OpenAPI) is authored and approved before writing frontend or backend code.',
+        ],
+      ],
     },
     {
       type: 'takeaways',
       title: 'Senior Savior Takeaways',
-      points: [
+      items: [
         'Contract First design: agree on JSON Schema Draft 07 before writing implementation code.',
         'Deploy hosted mock servers with query parameter matching to decouple frontend and backend schedules.',
         'Use the identical JSON Schema for mock generation, frontend contract, and CI acceptance tests.',
@@ -600,6 +608,17 @@ pm.test("Validate with JSON Schema", function() {
       badge: 'Milestone 3.2 Cleared',
       title: 'Mock Servers & Contracts Mastered',
       summary: 'You have decoupled parallel development teams using hosted mock servers, authored JSON Schema Draft 07 contracts, verified live responses with Ajv, and audited GraphQL response payloads.',
+      powers: [
+        'Adopting the Contract First paradigm using JSON Schema Draft 07 specifications',
+        'Deploying hosted Mock Servers matching query parameters and paths',
+        'Simulating network latency skeletons to validate mobile loading UI states',
+        'Asserting response contracts using Ajv schema validators in test scripts'
+      ],
+      disastersPrevented: [
+        'Unblocked agile sprint development weeks before backend deployment',
+        'Prevented temporary hardcoded mocks from polluting production client bundles',
+        'Caught payload schema regressions instantly before code reached staging'
+      ],
       nextStep: 'Proceed to Chapter 11 to master modern token security with OAuth 2.0 and PKCE authorization flows.'
     },
     {
