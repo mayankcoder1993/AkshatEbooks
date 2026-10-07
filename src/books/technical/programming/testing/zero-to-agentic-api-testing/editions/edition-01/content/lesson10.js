@@ -1,460 +1,616 @@
 import mockServerImg from '../assets/postman-mock-servers-agile.jpg'
-import graphqlImg from '../assets/graphql-vs-rest-architecture.jpg'
+import warRoomWideImg from '../assets/apex-campus-crisis-war-room.jpg'
+import warRoomPanel1Img from '../assets/war-room-panel-1-the-crisis.jpg'
+import warRoomPanel2Img from '../assets/war-room-panel-2-the-standoff.jpg'
+import warRoomPanel3Img from '../assets/war-room-panel-3-invisible-wire.jpg'
+import warRoomPanel4Img from '../assets/war-room-panel-4-first-principles.jpg'
 
 export const lesson10 = {
   id: 'mock-servers-and-contracts',
   icon: '',
-  title: 'Postman Mock Servers and JSON Schema Contracts',
-  shortTitle: 'Mock Servers and Contracts',
-  subtitle: 'Contract first development, JSON Schema validation, building hosted Mock Servers, and unblocking parallel QA in Agile sprints.',
-  tags: ['Mock Servers', 'JSON Schema', 'Contract Testing', 'Agile Sprints', 'GraphQL'],
+  title: 'Mock Servers and JSON Schema Contracts',
+  shortTitle: 'Mock Servers & Contracts',
+  subtitle: 'Contract first design, JSON Schema Draft 07 validation, hosted mock servers, and query matching.',
+  tags: ['Mock Servers', 'JSON Schema', 'Draft 07', 'Contract First', 'Ajv', 'GraphQL'],
   blocks: [
     {
       type: 'mission-hud',
-      mission: 'Mission 3: Hardening for Enterprise Production and CI CD',
-      phase: 'Phase 2 of 5: Mock Servers & Schema Contracts',
-      rank: 'Rank: Contract Architecture Specialist',
+      mission: 'Mission 3: Enterprise Quality Engineering & Resilience Testing',
+      phase: 'Phase 2 of 5: Mock Servers & Contract Verification',
+      rank: 'Rank: Contract Integration Architect',
       status: 'ACTIVE'
     },
     {
       type: 'chapter-opener',
-      missionBadge: 'MISSION 3 · PHASE 1 OF 4',
-      missionTitle: 'Enterprise Resilience and CI CD Quality Gates',
-      missionCrisis: 'Agile Sprint Simulation: Contract First Testing with Mock Servers',
-      missionContext: 'In modern fast paced engineering sprints, QA automation engineers face a classic roadblock: backend developers spend two weeks building database schemas and business logic. If testers wait for live endpoints before writing tests, QA becomes the release bottleneck. We must unblock parallel testing by adopting contract first development, writing JSON Schema contracts, and spinning up hosted Postman Mock Servers.',
-      missionObjective: 'Build JSON Schema contract validators, configure Postman Mock Servers with Examples, and compare REST with GraphQL.',
-      targetSystems: 'Postman Hosted Mock Server · JSON Schema Validator · GraphQL Query Resolver',
-      achieve: 'Unblock Agile testing sprints and prevent contract drift by mastering JSON Schema validation, hosted Postman Mock Servers, and modern GraphQL query architectures.',
-      how: 'Define strict array schemas matching production REST contracts, configure cloud mock examples, execute seamless mock to live environment flips, and parameterize GraphQL queries.',
-      carry: 'Production grade schema validation and mock virtualization techniques that prepare you for enterprise OAuth 2.0 security in Chapter 11.'
+      missionBadge: 'MISSION 3 · PHASE 2 OF 5',
+      missionTitle: 'Enterprise Quality Engineering & Resilience Testing',
+      missionCrisis: 'The Stalled Sprint Review and Backend Blocker Crisis',
+      missionContext: 'At 04:15 AM in the Agile Team Suite, Ananya and Vikram stare at a sprint board covered in red BLOCKED sticky notes. The sprint review is four hours away, and the backend team is three days behind delivering the new Science Library API. Vikram has rebuilt his UI four times against four guessed payload shapes. Akshay and Sameer introduce Contract First design using JSON Schema Draft 07 and API Testing Workbench Hosted Mock Servers.',
+      missionObjective: 'Define immutable contracts with JSON Schema Draft 07, spin up hosted mock servers with query parameter matching, validate live responses with Ajv, and audit GraphQL partial error lies.',
+      targetSystems: 'API Testing Workbench Hosted Mock Engine · JSON Schema Draft 07 Validator · Ajv Testing Engine · GraphQL Client Bridge',
+      difficulty: 'INTERMEDIATE',
+      estimatedTime: '30 MINUTES',
+      prerequisites: 'Chapter 09: Advanced Error Handling and Resilience Testing'
     },
     {
       type: 'mission-tracker',
-      badge: 'MISSION 3 PROGRESS · STEP 2 OF 5',
-      title: 'Continuing Mission 3: Contract Testing and Agile Simulation',
-      text: 'In modern fast paced engineering sprints, QA automation engineers face a classic dilemma: backend developers spend eight to ten days building database models and business logic. If testers wait for live endpoints before writing scripts, testing turns into a painful bottleneck. In this chapter, we master the modern solution: defining rigid JSON Schema contracts, spinning up hosted Postman Mock Servers with Examples and query parameter matching, and exploring modern query architectures like GraphQL alongside REST.',
-    },
-    {
-      type: 'heading',
-      text: 'Step 1: Contract First Development and JSON Schema Fundamentals',
-    },
-    {
-      type: 'paragraph',
-      text: 'Rather than writing code first and guessing payloads later, mature engineering teams practice **contract first API design**. Before writing a single line of backend code, product managers, frontend engineers, and QA automation testers agree on a formal schema defining every request, response, status code, and data type.',
-    },
-    {
-      type: 'paragraph',
-      text: 'The international standard for defining these contracts is **JSON Schema**. A JSON Schema acts like a blueprint for your JSON data: specifying mandatory fields, data types such as string or integer, value boundaries, and nested object rules.',
-    },
-    {
-      type: 'code',
-      filename: 'book-contract-schema.json',
-      lines: [
-        '{',
-        '  "$schema": "http://json-schema.org/draft-07/schema#",',
-        '  "type": "array",',
-        '  "items": {',
-        '    "type": "object",',
-        '    "required": ["book_name", "isbn", "aisle"],',
-        '    "properties": {',
-        '      "book_name": { "type": "string" },',
-        '      "isbn": { "type": "string", "minLength": 3 },',
-        '      "aisle": { "type": "string" }',
-        '    }',
-        '  }',
-        '}',
+      currentPhase: 'Phase 2: Mock Servers & Schema Contracts',
+      totalPhases: 5,
+      completedSteps: [
+        'Advanced Error Handling and Resilience Testing (Chapter 09)'
       ],
+      currentStep: 'Mock Servers and JSON Schema Contracts',
+      upcomingSteps: [
+        'OAuth 2.0 and Modern Token Authentication (Chapter 11)'
+      ]
     },
+
+    // =========================================================================
+    // GRAPHIC COMIC ARC : SIX SCENES FROM MASTER STORY LEDGER
+    // =========================================================================
     {
-      type: 'callout',
-      variant: 'note',
-      title: 'The Array Trap in REST Search Endpoints',
-      paragraphs: [
-        'A frequent pitfall among freshers is declaring the root type as object when inspecting query endpoints.',
-        'In RESTful services, search endpoints like GET /v1/books?id=... return a list of matching entries even when only one record matches. The root container is an array ([]) rather than a single object ({}).',
-        'Declaring type: "object" against an array response immediately triggers a schema mismatch failure. Always verify whether the root token is a curly bracket or an open square bracket!',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 2: Validating JSON Schema Contracts in Postman',
-    },
-    {
-      type: 'paragraph',
-      text: 'Postman includes the industry standard schema validator library **tv4** directly in its test sandbox. We break down the schema validation assertion into three focused chunks:',
-    },
-    {
-      type: 'chunked-code',
-      badge: 'CONTRACT VALIDATION CHUNKS',
-      title: 'JSON Schema Validation Architecture',
-      intro: 'Guarantees structural and type integrity:',
-      chunks: [
+      type: 'storyboard',
+      badge: 'GRAPHIC COMIC : SIX SCENES',
+      title: 'The Red Sticky Standoff and the Contract First Mock',
+      intro: 'Follow apprentice Akshay, Principal Systems Architect Sameer, and Frontend Lead Ananya in the Agile War Room as sprint deadlines loom, guessing games stall UI development, and hosted mock servers decouple frontend and backend teams.',
+      panels: [
         {
-          label: 'Chunk 1: Defining Contract Schema',
-          filename: 'schema-contract.js',
-          code: 'const schemaContract = {\n    type: "array",\n    items: {\n        type: "object",\n        required: ["book_name", "isbn", "aisle"],\n        properties: {\n            book_name: { type: "string" },\n            isbn: { type: "string" },\n            aisle: { type: "string" }\n        }\n    }\n};',
-          title: 'The Architectural Contract Blueprint',
-          explanation: 'Specifies that the response is an array of book objects with required string properties.',
-          keyTakeaway: 'The contract acts as the immutable standard between frontend and backend teams.'
+          title: 'Scene 1: 04:15 AM: The Agile War Room and Red BLOCKED Sticky Notes',
+          time: '04:15 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomWideImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/apex-campus-crisis-war-room.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Ananya and Akshay in front of a sprint board covered in red BLOCKED sticky notes.',
+            caption: 'Agile War Room: Sprint review is in four hours, but the backend Science Library API has not landed.'
+          },
+          replyImage: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Ananya pointing at the sprint board in stalled frustration.',
+            caption: 'The Sprint Blocker: Frontend engineers cannot build UI when the backend API is delayed.'
+          },
+          dialogue: {
+            speaker: 'Ananya',
+            speech: 'Sprint review is in four hours! The Science Library API is three days late! My entire frontend sprint is blocked!',
+            replySpeaker: 'Akshay',
+            replySpeech: 'What if I hardcode mock JSON directly into your mobile bundle until the backend catches up?'
+          },
+          scene: 'At 04:15 AM, red BLOCKED cards cover the Agile War Room board. The sprint review is four hours away and the backend team is three days late on the Science Library API. Akshay suggests hardcoding static JSON into the frontend app.',
+          realization: 'Hardcoding static JSON into frontend bundles creates technical debt, masks network serialization issues, and leaks into production.'
         },
         {
-          label: 'Chunk 2: Executing Schema Matcher',
-          filename: 'schema-matcher.js',
-          code: 'const responseData = pm.response.json();\npm.test("Response body strictly satisfies the JSON Schema contract", function () {\n    const validationResult = tv4.validate(responseData, schemaContract);\n    pm.expect(validationResult, "Schema validation failed: " + JSON.stringify(tv4.error)).to.be.true;\n});',
-          title: 'Evaluating Structural Compliance',
-          explanation: 'Validates that the received JSON payload adheres strictly to every constraint in the blueprint.',
-          keyTakeaway: 'tv4 evaluates missing fields and type mismatches across deep hierarchies.'
+          title: 'Scene 2: 04:19 AM: Four Guesses and the Coordination Ache',
+          time: '04:19 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer stopping Akshay from inserting hardcoded mocks.',
+            caption: 'The Shortcut Refused: Hardcoded mocks mask HTTP serialization and leak into production.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Whiteboard showing four different conflicting response payload shapes.',
+            caption: 'Payload Drift: Changing field names across four guessed versions breaks mobile parsing.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'Client hardcoded mocks bloat bundles and mask wire defects. Contract first: agree the schema before code.',
+            replySpeaker: 'Ananya',
+            replySpeech: 'Vikram rebuilt his UI four times against four guessed response shapes! We need an immutable contract!'
+          },
+          scene: 'Sameer rejects hardcoded mocks. He reveals that senior engineer Vikram rebuilt his React Native UI four times because backend engineers kept changing field names. Sameer mandates the Contract First architecture.',
+          realization: 'Without a formal machine readable contract, parallel development degenerates into brittle guessing games.'
         },
         {
-          label: 'Chunk 3: Diagnostic Pinpoint Logging',
-          filename: 'schema-error-diagnostics.js',
-          code: 'if (!tv4.validate(responseData, schemaContract)) {\n    console.error("Contract violation at " + tv4.error.dataPath + ": " + tv4.error.message);\n}',
-          title: 'Pinpointing Offending Fields',
-          explanation: 'If validation fails, logs the exact JSON path and the specific violation reason in the Postman Console.',
-          keyTakeaway: 'Diagnostic logging eliminates guesswork when diagnosing schema rejections.'
+          title: 'Scene 3: 04:25 AM: The JSON Schema Draft 07 Foundation',
+          time: '04:25 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay writing JSON Schema Draft 07 defining required types and field constraints.',
+            caption: 'Contract Definition: Drafting the JSON Schema Draft-07 specification defining /v1/books.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Sameer and Ananya signing off on the schema specification on the glass screen.',
+            caption: 'Immutable Sign-off: The schema defines required fields, string formats, and numerical ranges.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Draft 07 schema defined: id is UUID, rating floats from 1.0 to 5.0, availableCopies integer minimum zero.',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Both teams sign the schema. The contract is immutable. Now spin up the hosted mock server.'
+          },
+          scene: 'Akshay writes a formal JSON Schema Draft 07 defining the /v1/books endpoint: mandatory keys, UUID types, numerical rating ranges, and array limits. Both frontend and backend leads sign off on the specification.',
+          realization: 'JSON Schema Draft 07 provides an unambiguous, enforceable specification that both frontend and backend teams can build against.'
+        },
+        {
+          title: 'Scene 4: 04:31 AM: The Hosted Mock Server and Query Matching',
+          time: '04:31 AM',
+          layout: 'duo',
+          image: {
+            src: mockServerImg,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-mock-servers-agile.jpg',
+            w: 1408,
+            h: 768,
+            alt: 'Architecture visual of hosted mock server returning photorealistic responses in 8ms.',
+            caption: 'Hosted Mock Server: Matching ?category=science and returning photorealistic responses in 8ms.'
+          },
+          replyImage: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Ananya repointing the mobile app base URL to the mock endpoint.',
+            caption: 'Mobile App Unblocked: Live HTTP wire calls render books with real star ratings.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Mock server live in the cloud! Query parameter matching ?category=science returns live books in 8ms!',
+            replySpeaker: 'Ananya',
+            replySpeech: 'I repointed the mobile baseUrl! The UI rendered science book cards with real star ratings!'
+          },
+          scene: 'Akshay publishes a Hosted Mock Server in the API Testing Workbench. He creates example pairs matching query parameters (?category=science) returning realistic book objects. Ananya repoints her mobile client and renders the UI in minutes.',
+          realization: 'Hosted mock servers with query matching unblock frontend development while backend implementation is in progress.'
+        },
+        {
+          title: 'Scene 5: 04:41 AM: Schema Validation as Acceptance Test with Ajv',
+          time: '04:41 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel3Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-3-invisible-wire.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay executing Ajv schema validation script in the workbench Tests tab.',
+            caption: 'Automated Gate: Validating live payloads against the signed JSON Schema specification with Ajv.'
+          },
+          replyImage: {
+            src: warRoomPanel2Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-2-the-standoff.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Console display showing Ajv validation passing with 0 errors.',
+            caption: 'Single Truth Artifact: The same schema doc serves as mock spec and backend CI test.'
+          },
+          dialogue: {
+            speaker: 'Akshay',
+            speech: 'Ajv.validate(schema, pm.response.json()); Live response validated against our Draft 07 schema!',
+            replySpeaker: 'Sameer',
+            replySpeech: 'Write the schema once, enforce everywhere. The mock spec is now the backend CI acceptance gate.'
+          },
+          scene: 'Akshay adds an Ajv schema validation test to the collection. When the backend service eventually deploys, the identical schema used to generate mocks acts as the automated acceptance gate in the CI pipeline.',
+          realization: 'Reusing the same JSON Schema for both mocks and CI acceptance tests guarantees zero contract drift.'
+        },
+        {
+          title: 'Scene 6: 04:55 AM: GraphQL Field Selection and The Polite 200 Lie',
+          time: '04:55 AM',
+          layout: 'duo',
+          image: {
+            src: warRoomPanel1Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-1-the-crisis.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Monitor displaying GraphQL response with HTTP 200 OK and errors array populated.',
+            caption: 'The Polite 200 Lie: GraphQL returns HTTP 200 OK even when queries fail partially.'
+          },
+          replyImage: {
+            src: warRoomPanel4Img,
+            file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/war-room-panel-4-first-principles.jpg',
+            w: 1376,
+            h: 768,
+            alt: 'Akshay and Sameer reviewing passing tests in the Agile War Room.',
+            caption: 'Sprint Saved: Frontend unblocked, contracts signed, and sprint review demo ready.'
+          },
+          dialogue: {
+            speaker: 'Sameer',
+            speech: 'An HTTP 200 containing an errors array is still an error. Never trust status lines alone in GraphQL.',
+            replySpeaker: 'Ananya',
+            replySpeech: 'Sprint review is saved! The mobile app is tested and running live ahead of schedule!'
+          },
+          scene: 'Sameer demonstrates testing GraphQL APIs: a GraphQL endpoint will politely return 200 OK even when execution fails, embedding failures in an errors array. Akshay writes body checks to catch the polite 200 lie. The sprint demo is saved.',
+          realization: 'In GraphQL and RPC APIs, HTTP 200 does not guarantee success; always inspect the response body payload.'
         }
       ]
     },
-    {
-      type: 'predict-output',
-      badge: 'IMAGINE & PREDICT',
-      prompt: 'If a backend update changes the aisle field from string "42" to a number 42, how will this schema test react?',
-      options: [
-        'The test fails immediately: tv4 flags a type mismatch because number was received where string was required',
-        'The test passes green because JSON automatically converts numbers to strings',
-        'Postman ignores the schema and passes the status code',
-        'The server rolls back the database'
-      ],
-      answerIndex: 0,
-      revealTitle: 'Schema Type Mismatch Confirmation',
-      explanation: 'Schema drift caught instantly! JSON Schema is strictly typed: tv4 flags an AssertionError with message "Invalid type: number (expected string) at /0/aisle". This protects mobile apps from crashing before bad code reaches production!'
-    },
+
+    // =========================================================================
+    // TECHNICAL ARCHITECTURE & DEEP DIVE
+    // =========================================================================
     {
       type: 'heading',
-      text: 'Step 3: The Agile Dilemma and Postman Mock Servers',
+      level: 2,
+      text: 'The Architecture of Contract First Mocking'
     },
     {
       type: 'image',
-      layout: 'stacked',
-      badge: 'AGILE SIMULATION',
-      title: 'Postman Mock Servers: Enabling Fast Parallel Agile Development',
-      text: 'When starting a sprint, waiting ten days for backend microservices stalls everyone. Postman Mock Servers eliminate this blocker by simulating real web servers in the cloud. By defining JSON request examples, frontend and testing teams simulate production behavior weeks before real code lands.',
       src: mockServerImg,
       file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/postman-mock-servers-agile.jpg',
       w: 1408,
       h: 768,
-      alt: 'Postman Mock Server agile workflow showing contract schema creating mock server, enabling parallel development for frontend and QA teams before flipping to live backend.',
-      caption: 'Unblocking parallel QA and frontend development using hosted Postman Mock Servers.',
-      points: [
-        'Sprint Day 1 (Contract Definition): Frontend, Backend, and QA agree on request paths, parameters, and response schemas.',
-        'Sprint Day 2 (Mock Server Spin Up): A hosted Postman Mock Server is launched with Examples matching the agreed specification.',
-        'Sprint Days 2 to 9 (Parallel Development): Frontend developers build UI screens and QA engineers build complete automated assertion suites against the mock server.',
-        'Sprint Day 10 (Deployment and Environment Flip): Backend deploys live microservices to QA. Testers flip the environment variable from Mock URL to Live URL with zero code rewrites.',
-      ],
+      title: 'Hosted Mock Server & Contract Validation Pipeline',
+      text: 'Contract First design decouples frontend and backend engineering. The JSON Schema Draft 07 contract drives both the hosted mock server and continuous integration acceptance tests.',
+      alt: 'Architecture diagram showing contract first lifecycle with mock server and schema validation.',
+      caption: 'The Contract First Loop: The same schema doc serves as mock spec and backend CI test.'
     },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 1 : HOSTED MOCK SERVER WITH QUERY MATCHING
+    // =========================================================================
     {
-      type: 'heading',
-      text: 'Step 4: Configuring Examples and Matching Query Parameters',
-    },
-    {
-      type: 'paragraph',
-      text: 'A Postman Mock Server functions by inspecting **Examples** attached to requests in your collection. You can create multiple Examples for a single endpoint to simulate different business scenarios and query parameters. You can download our sample mock response examples: [Download Science Mock Example JSON](/materials/zero-to-agentic-api-testing/lesson-10/mock-example-science.json) and [Download Literature Mock Example JSON](/materials/zero-to-agentic-api-testing/lesson-10/mock-example-literature.json):',
-    },
-    {
-      type: 'steps',
-      items: [
-        'Open any request in your Postman collection and click the three dots icon to select Add Example.',
-        'Provide the expected HTTP status code: such as 200 OK for happy paths or 404 Not Found for negative flows.',
-        'Paste the mock JSON response body in the Example editor and click Save.',
-        'To simulate query parameter matching, add the parameter (such as ?category=science) in the Example URL. When a caller requests that specific query, Postman Mock Server returns that tailored Example!',
-      ],
-    },
-    {
-      type: 'terminal',
-      command: 'Calling Hosted Postman Mock Server via cURL',
-      lines: [
-        'curl https://9b12c8a1-42ef-49bb-b12e.mock.pstmn.io/v1/books?category=science',
-        'HTTP/1.1 200 OK',
-        'Content-Type: application/json; charset=utf-8',
-        'x-srv-span: mock-server-edge-01',
-        '{',
-        '  "category": "science",',
-        '  "total_records": 1,',
-        '  "books": [',
-        '    { "book_name": "Full Stack API Automation", "isbn": "SCI941", "aisle": 42, "author": "Dr. Sarah Chen" }',
-        '  ]',
-        '}',
-      ],
-    },
-    {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: Forgetting to Save the Example Before Testing',
-      paragraphs: [
-        'When creating mock responses in Postman, students often edit the Example body and immediately fire a request to the mock URL, only to receive a 404 Not Found or generic default payload.',
-        'Postman Mock Servers in the cloud only know about Examples that have been saved to the cloud workspace.',
-        'Always press Save on the Example tab before sending requests to the mock server endpoint.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Step 5: Seamless Environment Toggling: From Mock to Live QA',
-    },
-    {
-      type: 'paragraph',
-      text: 'Because our collection references `{{base_url}}` rather than hardcoded URLs, transitioning from the mock server to the live deployment requires zero test script modifications.',
-    },
-    {
-      type: 'code',
-      filename: 'environment-variables-comparison.json',
-      lines: [
-        '// During Sprint Week 1 (Targeting Mock Server)',
-        '{',
-        '  "environment": "Campus Mock Server",',
-        '  "base_url": "https://9b12c8a1-42ef-49bb-b12e.mock.pstmn.io"',
-        '}',
-        '',
-        '// During Sprint Week 2 (Targeting Live Deployed Backend)',
-        '{',
-        '  "environment": "Campus Live QA Cluster",',
-        '  "base_url": "https://qa-api.campuslibrary.org"',
-        '}',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'On deployment day, simply click the Postman Environment dropdown and select Campus Live QA Cluster. When you hit Run Collection, every assertion, property transfer, and test logic written during Week 1 immediately validates the real production codebase!',
-    },
-    {
-      type: 'heading',
-      text: 'Step 6: Modern Query Architectures: Testing GraphQL Alongside REST',
-    },
-    {
-      type: 'paragraph',
-      text: 'In enterprise architectures, QA engineers increasingly encounter **GraphQL** alongside standard REST endpoints. To understand why GraphQL exists, consider the student academic portal on our university campus.',
-    },
-    {
-      type: 'image',
-      layout: 'stacked',
-      badge: 'QUERY ARCHITECTURES',
-      title: 'REST vs GraphQL Architecture: Single Request Precise Data Resolution',
-      text: 'To display a single student profile screen, a REST client might call four separate endpoints (students, departments, courses, loans), multiplying mobile network latency and returning unwanted fields. GraphQL solves this by exposing a single endpoint where clients declare the exact fields required in one roundtrip.',
-      src: graphqlImg,
-      file: 'src/books/technical/programming/testing/zero-to-agentic-api-testing/editions/edition-01/assets/graphql-vs-rest-architecture.jpg',
-      w: 1408,
-      h: 768,
-      alt: 'Architectural comparison between REST and GraphQL contrasting multiple round trips with single endpoint resolution.',
-      caption: 'REST vs GraphQL: Eliminating over fetching and under fetching with a single unified query.',
-      points: [
-        'Left Panel (REST 4 Network Roundtrips): The client must execute four separate HTTP requests over mobile networks (GET /students, GET /departments, GET /courses, GET /loans), multiplying latency.',
-        'Left Panel (Over Fetching and Under Fetching): Each REST endpoint returns unwanted data that the client discards, while forcing multiple trips to assemble a single screen.',
-        'Right Panel (GraphQL 1 Single Unified Query): The client dispatches one POST request to /graphql requesting the exact nested fields required.',
-        'Right Panel (Single Payload Resolution): The GraphQL server contacts backend services in parallel and delivers one consolidated JSON response in a single network roundtrip.',
-      ],
-    },
-    {
-      type: 'heading',
-      text: 'Revisiting the Chapter 1 Book Inquiry in GraphQL',
-    },
-    {
-      type: 'paragraph',
-      text: 'Recall our comparison in Chapter 1: when asking for a book record, a standard REST endpoint returns the entire rigid database schema (including aisle, ISBN, price, copies, and timestamps), whether the client needs them or not. In GraphQL, the client asks specifically for the desired fields, such as title and author:',
-    },
-    {
-      type: 'code',
-      filename: 'book-graphql-query.graphql',
-      lines: [
-        '# Parameterized book query with dynamic variable',
-        'query GetBookDetails($bookId: ID!) {',
-        '  book(id: $bookId) {',
-        '    title',
-        '    author',
-        '  }',
-        '}',
-      ],
-    },
-    {
-      type: 'paragraph',
-      text: 'When dispatched with variable `{ "bookId": "1" }`, the GraphQL engine contacts the catalog repository and returns only the requested attributes: `{ "data": { "book": { "title": "Clean Architecture", "author": "Robert Martin" } } }`. If the client subsequently needs the price, the frontend engineer simply adds `price` to the query string without waiting for backend engineers to deploy a new REST endpoint version.',
-    },
-    {
-      type: 'heading',
-      text: 'Live Exploration: Testing the Public Rick and Morty GraphQL API',
-    },
-    {
-      type: 'paragraph',
-      text: 'To practice testing GraphQL against a live production endpoint without configuring local mock servers or authentication credentials, engineers often explore the public Rick and Morty GraphQL service at `https://rickandmortyapi.com/graphql`. Here is a live parameterized query fetching character details and nested location coordinates:',
-    },
-    {
-      type: 'code',
-      filename: 'rick-and-morty-query.graphql',
-      lines: [
-        '# Live query against public https://rickandmortyapi.com/graphql',
-        'query GetCharacterProfile($characterId: ID!) {',
-        '  character(id: $characterId) {',
-        '    name',
-        '    status',
-        '    species',
-        '    origin {',
-        '      name',
-        '    }',
-        '  }',
-        '}',
-      ],
-    },
-    {
-      type: 'api-inspector',
-      title: 'Live Interactive Wire Inspector: Public Rick and Morty GraphQL Query',
-      method: 'POST',
-      url: 'https://rickandmortyapi.com/graphql',
-      headers: {
-        'Content-Type': 'application/json'
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 1 : HOSTED MOCK SERVER',
+      title: 'Query Matching Mock Server: GET /v1/books?category=science',
+      scenario: 'Dispatch request to the hosted mock server. The mock engine evaluates query parameters and returns the matching saved science books example in 8ms.',
+      config: {
+        method: 'GET',
+        path: '/v1/books?category=science',
+        activeTab: 'Params'
       },
-      requestBody: {
-        query: 'query GetCharacterProfile($characterId: ID!) { character(id: $characterId) { name status species origin { name } } }',
-        variables: { characterId: '1' }
+      tabs: {
+        params: [
+          { key: 'category', value: 'science', desc: 'Category filter for book recommendations' }
+        ],
+        headers: [
+          { key: 'x-mock-match-request-body', value: 'true' },
+          { key: 'Accept', value: 'application/json' }
+        ],
+        body: '',
+        tests: '// Validate mock response structure\nconst res = pm.response.json();\npm.test("Status is 200 OK from Mock Server", function() {\n  pm.response.to.have.status(200);\n});\n\npm.test("Returns science books matching query", function() {\n  pm.expect(res.category).to.eql("science");\n  pm.expect(res.items).to.be.an("array").that.is.not.empty;\n  pm.expect(res.items[0].rating).to.be.at.least(4.0);\n});'
       },
-      status: '200 OK',
-      time: '142 ms',
-      size: '388 B',
-      responseBody: {
-        data: {
-          character: {
-            name: 'Rick Sanchez',
-            status: 'Alive',
-            species: 'Human',
-            origin: {
-              name: 'Earth (C-137)'
+      response: {
+        status: '200 OK',
+        time: '8ms',
+        size: '512B',
+        body: JSON.stringify({
+          category: "science",
+          total: 2,
+          items: [
+            {
+              id: "550e8400-e29b-41d4-a716-446655440000",
+              title: "A Brief History of Time",
+              author: "Stephen Hawking",
+              rating: 4.8,
+              availableCopies: 5
+            },
+            {
+              id: "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+              title: "Cosmos",
+              author: "Carl Sagan",
+              rating: 4.9,
+              availableCopies: 3
             }
-          }
-        }
+          ]
+        }, null, 2)
       },
-      assertions: [
-        'GraphQL status code is 200 OK',
-        'Response contains data object without errors',
-        'Character name matches Rick Sanchez',
-        'Origin name matches Earth (C-137)'
+      notes: [
+        'Hosted mock servers simulate real HTTP backends with zero code required.',
+        'Query matching ensures distinct query parameters return distinct, realistic mock responses.'
       ]
     },
+
+    // =========================================================================
+    // WORKBENCH SCREEN 2 : JSON SCHEMA DRAFT-07 VALIDATION WITH AJV
+    // =========================================================================
     {
-      type: 'paragraph',
-      text: 'While queries retrieve data, **Mutations** create, update, or delete data in GraphQL. A key advantage of mutations is hybrid retrieval: when you create a new lab location or research character, GraphQL immediately returns the newly generated ID in the response:',
+      type: 'comic-workbench',
+      badge: 'INTERACTIVE WORKBENCH 2 : SCHEMA VALIDATOR WITH AJV',
+      title: 'Automated Contract Acceptance Gate with JSON Schema Draft 07',
+      scenario: 'Validate live response payload against JSON Schema Draft 07. The Ajv engine verifies field types, mandatory properties, and numerical rating ranges.',
+      config: {
+        method: 'GET',
+        path: '/v1/books/550e8400-e29b-41d4-a716-446655440000',
+        activeTab: 'Tests'
+      },
+      tabs: {
+        params: [],
+        headers: [
+          { key: 'Accept', value: 'application/json' }
+        ],
+        body: '',
+        tests: 'const schema = {\n  "$schema": "http://json-schema.org/draft-07/schema#",\n  "type": "object",\n  "required": ["id", "title", "rating", "availableCopies"],\n  "properties": {\n    "id": { "type": "string", "format": "uuid" },\n    "title": { "type": "string" },\n    "rating": { "type": "number", "minimum": 1.0, "maximum": 5.0 },\n    "availableCopies": { "type": "integer", "minimum": 0 }\n  }\n};\n\npm.test("Response adheres to Draft 07 schema", function() {\n  pm.response.to.have.jsonSchema(schema);\n});'
+      },
+      response: {
+        status: '200 OK',
+        time: '11ms',
+        size: '342B',
+        body: JSON.stringify({
+          id: "550e8400-e29b-41d4-a716-446655440000",
+          title: "A Brief History of Time",
+          rating: 4.8,
+          availableCopies: 5
+        }, null, 2)
+      },
+      notes: [
+        'pm.response.to.have.jsonSchema(schema) uses the Ajv validation engine under the hood.',
+        'Schema assertions fail loudly if any required field is absent or if types mismatch.'
+      ]
+    },
+
+    // =========================================================================
+    // FOUR PART PEDAGOGICAL CARDS (SENIOR SAVIOR CONTRACTS)
+    // =========================================================================
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 1 : CONTRACT FIRST WITH JSON SCHEMA',
+      title: 'Contract First Design with JSON Schema Draft 07',
+      subtitle: 'Eliminating cross team integration drift through formal schema specifications',
+      input: {
+        method: 'SPECIFICATION',
+        url: 'JSON Schema Draft 07 Document defining /v1/books',
+        desc: 'Formal JSON Schema Draft 07 defining required fields, types, and constraints.',
+        code: '{\n  "$schema": "http://json-schema.org/draft-07/schema#",\n  "type": "object",\n  "required": ["id", "title", "rating", "availableCopies"]\n}'
+      },
+      underTheHood: {
+        desc: 'Schema acts as an immutable structural contract agreed upon before writing implementation code.',
+        steps: [
+          'Teams define resource contracts before opening IDEs or writing business logic.',
+          'Draft 07 specifies primitive types, formats, required arrays, and numeric boundaries.',
+          'Frontend engineers build components and tests against the schema.',
+          'Backend engineers write controllers to satisfy the schema.',
+          'Prevents weeks of integration rework and payload guessing games.'
+        ]
+      },
+      output: {
+        status: 'SIGNED CONTRACT',
+        time: '0ms',
+        desc: 'Single contract artifact eliminates payload drift and ambiguity across teams.',
+        body: JSON.stringify({
+          contractVersion: "Draft-07",
+          status: "IMMUTABLE_SIGNED",
+          alignedTeams: ["Frontend", "Backend", "QA"]
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'The first deliverable in any API project is the contract, not the code.',
+        rule: 'Agree on the JSON Schema before writing line one of backend or frontend code.',
+        trap: 'Starting backend development without a signed schema, leading to four rebuilds of the frontend UI.'
+      }
     },
     {
-      type: 'code',
-      filename: 'campus-graphql-mutation.graphql',
-      lines: [
-        '# Mutation creating new campus research entities in one call',
-        'mutation RegisterEntities {',
-        '  createLocation(name: "Innovation Robotics Lab", type: "North Wing", dimension: "Lab 4") {',
-        '    id',
-        '  }',
-        '  createCharacter(name: "Dr. Elena Rostova", status: "Active", gender: "Female") {',
-        '    id',
-        '  }',
-        '}',
-      ],
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 2 : HOSTED MOCK SERVERS & QUERY MATCHING',
+      title: 'Hosted Mock Servers and Example Matching',
+      subtitle: 'Simulating cloud backends with photorealistic latency and query routing',
+      input: {
+        method: 'GET',
+        url: '{{mockUrl}}/v1/books?category=science',
+        desc: 'Request routed to an API Testing Workbench Hosted Mock Server.',
+        code: 'GET {{mockUrl}}/v1/books?category=science\nx-mock-match-request-body: true'
+      },
+      underTheHood: {
+        desc: 'Mock engine evaluates method, URL path, headers, and query parameters to select examples.',
+        steps: [
+          'Cloud mock engine receives incoming HTTP request.',
+          'Evaluates path, query parameters, and custom headers against saved collection examples.',
+          'Selects best matching example (e.g. 200 for science, 404 for unknown).',
+          'Simulates configurable network latency (e.g. 8ms to 200ms).',
+          'Returns photorealistic JSON payload without requiring backend deployment.'
+        ]
+      },
+      output: {
+        status: '200 OK',
+        time: '8ms',
+        desc: 'Photorealistic mock response unblocks frontend engineering immediately.',
+        body: JSON.stringify({
+          category: "science",
+          total: 2,
+          mocked: true
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'A mock server that only returns success teaches false confidence.',
+        rule: 'Always configure error (404, 500) and empty state examples on mock servers.',
+        trap: 'Building mock servers that only return happy path 200 responses, hiding edge cases from UI clients.'
+      }
     },
     {
-      type: 'callout',
-      variant: 'tip',
-      title: 'Fresher Trap to Avoid: All GraphQL Calls Use HTTP POST',
-      paragraphs: [
-        'In REST, you use GET to read records and POST to write records.',
-        'In GraphQL, while queries can technically be sent via GET query parameters, industry standard practice packages the query syntax and variables into a JSON payload body and dispatches using HTTP POST.',
-        'In Postman, select POST, choose Body > GraphQL, paste your query on the left and your JSON variables on the right.',
-      ],
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 3 : SCHEMA ACCEPTANCE GATES VIA AJV',
+      title: 'Schema Validation as Acceptance Test via Ajv',
+      subtitle: 'Enforcing immutable contracts as automated continuous integration gates',
+      input: {
+        method: 'TEST SCRIPT',
+        url: 'pm.response.to.have.jsonSchema(schema)',
+        desc: 'Automated test validating live response against signed Draft 07 schema.',
+        code: 'pm.test("Response matches Draft 07 contract", function() {\n  pm.response.to.have.jsonSchema(bookSchema);\n});'
+      },
+      underTheHood: {
+        desc: 'Ajv validator evaluates live payload against compiled schema rules in memory.',
+        steps: [
+          'V8 sandbox compiles Draft 07 JSON Schema using Ajv engine.',
+          'Evaluates response body against required keys, types, and constraints.',
+          'Any missing field, type mismatch, or out of range number fails assertion.',
+          'Provides detailed structural error path on failure (e.g. data.rating should be >= 1.0).',
+          'Serves as mandatory gating check in CI/CD pipeline before merging code.'
+        ]
+      },
+      output: {
+        status: 'CONTRACT VALIDATED',
+        time: '3ms',
+        desc: 'Live payload verified against specification; CI gate passes green.',
+        body: JSON.stringify({
+          schemaValid: true,
+          errors: null,
+          gateStatus: "PASSED"
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'Write the schema once, enforce it everywhere.',
+        rule: 'The same schema document must serve as mock spec, frontend contract, and CI gate.',
+        trap: 'Maintaining separate documents for mock specifications and test assertions, causing contract drift.'
+      }
     },
+    {
+      type: 'quad-card',
+      badge: 'PEDAGOGICAL CONTRACT 4 : GRAPHQL FIELD SELECTION & POLITE 200',
+      title: 'GraphQL Field Selection and the Polite 200 Trap',
+      subtitle: 'Catching partial execution errors concealed behind HTTP 200 OK status lines',
+      input: {
+        method: 'POST',
+        url: '{{baseUrl}}/graphql',
+        desc: 'GraphQL query requesting specific fields with partial server execution failure.',
+        code: 'pm.test("GraphQL errors array is empty", function() {\n  const res = pm.response.json();\n  pm.expect(res.errors).to.be.undefined;\n});'
+      },
+      underTheHood: {
+        desc: 'GraphQL specification returns HTTP 200 OK even when execution resolvers throw errors.',
+        steps: [
+          'Client sends GraphQL query requesting fields across multiple resolvers.',
+          'One resolver fails due to database timeout or permission rejection.',
+          'GraphQL engine responds with HTTP 200 OK status code.',
+          'Response payload contains partial data object alongside a non empty errors array.',
+          'Naive status checks report false green passes; body inspection reveals truth.'
+        ]
+      },
+      output: {
+        status: 'BODY VERIFIED',
+        time: '12ms',
+        desc: 'Errors array inspected directly; contract truthfully fails if errors present.',
+        body: JSON.stringify({
+          data: { book: null },
+          errors: [{ message: "Database connection failed", code: "INTERNAL_ERROR" }]
+        }, null, 2)
+      },
+      seniorSavior: {
+        aphorism: 'An HTTP 200 containing an error payload is still a lie.',
+        rule: 'In GraphQL and RPC APIs, assert the JSON body structure, never the status line alone.',
+        trap: 'Relying solely on HTTP 200 status assertions, missing silent partial failures in GraphQL responses.'
+      }
+    },
+
+    // =========================================================================
+    // POST DRILLS & QUIZ
+    // =========================================================================
+    {
+      type: 'heading',
+      level: 2,
+      text: 'JSON Schema vs Chai Property Assertions'
+    },
+    {
+      type: 'chunked-code',
+      title: 'Comparing Verification Approaches',
+      code: `// Approach A: Manual Chai property assertions (verbose, brittle)
+pm.test("Validate book manually", function() {
+  const data = pm.response.json();
+  pm.expect(data).to.have.property("id").that.is.a("string");
+  pm.expect(data).to.have.property("rating").that.is.a("number");
+  pm.expect(data.rating).to.be.within(1.0, 5.0);
+  pm.expect(data).to.have.property("availableCopies").that.is.an("integer");
+});
+
+// Approach B: JSON Schema Draft 07 (declarative, standardized, shareable)
+const bookSchema = {
+  type: "object",
+  required: ["id", "rating", "availableCopies"],
+  properties: {
+    id: { type: "string" },
+    rating: { type: "number", minimum: 1.0, maximum: 5.0 },
+    availableCopies: { type: "integer", minimum: 0 }
+  }
+};
+pm.test("Validate with JSON Schema", function() {
+  pm.response.to.have.jsonSchema(bookSchema);
+});`,
+      chunks: [
+        {
+          lines: '1-8',
+          label: 'Manual Chai Assertions',
+          explanation: 'Requires writing multiple imperative checks that must be manually updated when payloads change.'
+        },
+        {
+          lines: '10-22',
+          label: 'Declarative JSON Schema',
+          explanation: 'Standardized specification that can be shared across mock servers, documentation, and CI gates.'
+        }
+      ]
+    },
+
     {
       type: 'battle-scar',
-      metric: 'Enterprise Contract Outage',
-      title: 'The Silent Schema Drift Outage: When a Type Flip Crashed Native Mobile Apps',
-      context: 'A retail engineering team updated an inventory API endpoint. The property in_stock_count was changed from integer 42 to string "42" to accommodate out of stock text badges. Desktop web browsers handled the loose type coercion without complaint, but the native iOS and Android mobile apps crashed instantly on startup with fatal JSON decoding errors: Expected Int but received String. Because test suites had only verified HTTP 200 status codes without schema contract checks, the defect reached the public app store, crashing the app for over two million customers.',
-      takeaway: 'Never rely on HTTP 200 status checks alone. Rigid JSON Schema assertions with tv4 or ajv ensure property names and data types strictly adhere to contracts before production deployment.'
+      incident: 'The Four-Month Integration Standoff That Sunk A Mobile Release',
+      context: 'A financial institution spent four months building mobile and backend applications in parallel without an agreed schema. When both systems integrated during staging, 85% of field names differed ("account_number" vs "accNum"). The resulting architectural rewrite delayed the launch by five months and cost $1.2M.',
+      takeaway: 'Adopt Contract First design: sign off on machine-readable JSON Schema specifications before writing code.'
     },
     {
       type: 'triage',
-      title: 'War Room Triage: The Cryptic Contract Failure',
-      scenario: 'You write a contract test in Postman: pm.expect(tv4.validate(data, schema)).to.be.true. The assertion fails during sprint testing, but the test runner prints only "AssertionError: expected false to be true", offering zero clues on which field broke. What debugging technique instantly pinpoints the schema defect?',
+      title: 'Triage Drill: The Polite 200 Trap',
+      scenario: 'You run an automated test against a GraphQL endpoint. The test asserts: pm.response.to.have.status(200). The test passes green. However, the mobile app displays an empty screen with a spinner.',
       options: [
-        'Inspect tv4.error.message and tv4.error.dataPath to log the exact property and type violation.',
-        'Restart Postman and run the collection again.',
-        'Change the schema data type from object to string.',
-        'Delete all required fields from the JSON Schema blueprint.'
+        {
+          label: 'The server rejected the request because GraphQL requires HTTP POST.',
+          correct: false,
+          explanation: 'The request was sent and answered with 200 OK.'
+        },
+        {
+          label: 'The GraphQL server returned 200 OK with an errors array in the body, which was never asserted.',
+          correct: true,
+          explanation: 'GraphQL servers return HTTP 200 OK even when queries fail. Test suites must verify that res.errors is undefined.'
+        },
+        {
+          label: 'The mobile app network cache is corrupt and must be cleared.',
+          correct: false,
+          explanation: 'The root cause is unverified errors in the GraphQL response body.'
+        }
       ],
-      answerIndex: 0,
-      debrief: 'Extract the validation error details! The tv4 library stores full diagnostic information in tv4.error. Logging tv4.error.message alongside tv4.error.dataPath pinpoints the exact offending JSON key (such as /books/0/isbn) and the specific reason (such as "type string expected, integer received").',
-      traps: [
-        '',
-        'Restarting the app will not fix an invalid schema match.',
-        'Modifying the schema type breaks the intended data validation.',
-        'Removing required fields defeats the entire purpose of contract validation.'
-      ]
+      debrief: 'In GraphQL, HTTP 200 OK only indicates that the query was received, not that it executed successfully. Always assert the absence of errors in the response body.'
     },
-    {
-      type: 'heading',
-      text: 'Step 7: Review and Practice',
-    },
-    {
-      type: 'guess',
-      prompt: 'How does a Postman Mock Server determine which response payload to return when an incoming request arrives?',
-      options: [
-        'It randomly generates fictional data on every single request',
-        'It matches the incoming request method, path, headers, and query parameters against saved Examples in the collection',
-        'It connects to a live MySQL database in the cloud',
-        'It asks the user to manually type the response in the desktop window',
-      ],
-      answerIndex: 1,
-      explain: 'Postman Mock Servers inspect incoming HTTP requests and compare them with the saved Examples in the collection, returning the Example that best matches the method, URL path, and query parameters.',
-    },
+
     {
       type: 'quiz',
-      items: [
-        [
-          'What is contract first development, and why does it benefit software testing teams?',
-          'Contract first development defines the formal API schema before developers write backend code. It allows QA and frontend engineers to build tests and user interfaces in parallel against mock servers rather than waiting for backend completion.',
-        ],
-        [
-          'What is the primary difference between REST and GraphQL data retrieval?',
-          'REST endpoints return a fixed response structure determined by the server, often leading to over fetching or under fetching. GraphQL allows clients to specify the exact fields they require in a single query dispatched to one endpoint.',
-        ],
+      title: 'Knowledge Check: Contract First Workflow',
+      question: 'In a Contract First API development lifecycle, which artifact is created and agreed upon before any backend implementation code is written?',
+      options: [
+        'The database migration scripts',
+        'The JSON Schema or OpenAPI specification',
+        'The production deployment Helm charts',
+        'The end-to-end Selenium test suite'
       ],
+      correctAnswer: 1,
+      explanation: 'Contract First design mandates that the API contract (JSON Schema or OpenAPI) is authored and approved before writing frontend or backend code.'
     },
     {
       type: 'takeaways',
-      items: [
-        'Contract first API design establishes agreed JSON schemas before backend coding begins.',
-        'JSON Schema validation with tv4 catches missing keys and subtle data type mismatches.',
-        'Postman Mock Servers provide cloud hosted simulations powered by saved collection Examples.',
-        'Using Examples with query parameters simulates diverse real world response flows.',
-        'Toggling base_url environment variables transitions test suites seamlessly from Mock to live QA.',
-        'GraphQL eliminates over fetching and under fetching by allowing clients to request exact fields across multiple domains in a single POST query.',
-      ],
+      title: 'Senior Savior Takeaways',
+      points: [
+        'Contract First design: agree on JSON Schema Draft 07 before writing implementation code.',
+        'Deploy hosted mock servers with query parameter matching to decouple frontend and backend schedules.',
+        'Use the identical JSON Schema for mock generation, frontend contract, and CI acceptance tests.',
+        'Beware the polite 200 lie in GraphQL: always assert that the errors array in the response body is undefined.'
+      ]
     },
     {
       type: 'victory-milestone',
-      badge: 'MISSION 3 PHASE 2 CLEARED',
-      rank: 'ENTERPRISE CONTRACT & PROTOCOL ARCHITECT',
-      title: 'Architectural Triumph: Agile Mock Simulation & Dual REST GraphQL Contracts Mastered',
-      summary: 'You solved the universal Agile sprint dilemma! Instead of idling for weeks waiting for backend developers to finish server code, you authored formal JSON Schema contracts, spun up hosted Postman Mock Servers, parameterized response Examples, and conquered modern GraphQL query architectures alongside REST.',
-      powers: [
-        'Authoring formal JSON Schema specifications that enforce field types, mandatory properties, and data bounds',
-        'Deploying Postman hosted Mock Servers to simulate edge cases and unblock frontend and QA teams on Day 1 of sprints',
-        'Fine tuning mock responses using query parameter matching and custom Example payloads',
-        'Executing dual protocol automation: commanding both traditional REST endpoints and modern GraphQL queries and mutations',
-        'Seamless environment switching: transitioning automated suites from Mock to Live servers with one variable swap',
-      ],
-      disastersPrevented: [
-        'Eliminated two week sprint bottlenecks where testers sit idle waiting for backend database deployments',
-        'Prevented mobile application crashes caused by unexpected field type mutations (such as string IDs turning into integers)',
-        'Stopped mobile network throttling and payload bloat by leveraging GraphQL targeted field resolution',
-      ],
-      warRoomTakeaway: 'The highest leverage QA engineers do not wait for software to be built. They write the contract, stand up the mock server, and have the full automated regression suite ready the second the backend goes live.',
+      badge: 'Milestone 3.2 Cleared',
+      title: 'Mock Servers & Contracts Mastered',
+      summary: 'You have decoupled parallel development teams using hosted mock servers, authored JSON Schema Draft 07 contracts, verified live responses with Ajv, and audited GraphQL response payloads.',
+      nextStep: 'Proceed to Chapter 11 to master modern token security with OAuth 2.0 and PKCE authorization flows.'
     },
     {
       type: 'cliffhanger',
-      title: 'Continuing Mission 3: Enterprise Identity and Token Security',
-      text: 'With contract schemas, mock servers, and GraphQL fundamentals mastered, we encounter enterprise identity gateways. In Chapter 11, we explore OAuth 2.0 and Modern Token Authentication: executing automated token exchanges, managing global access tokens, and testing secured microservice endpoints!',
-    },
-  ],
+      time: '05:00 AM',
+      location: 'Apex Security Operations Center',
+      alert: 'UNAUTHORIZED PRIVILEGE ESCALATION',
+      speaker: 'Akshay Sharma',
+      speech: 'Changing studentId from 104 to 101 returned the entire campus grading ledger!',
+      context: 'Akshay stumbles upon an Insecure Direct Object Reference (IDOR) flaw in the campus portal. A simple query parameter change exposes private records. Sameer steps in: modern token security with OAuth 2.0 and PKCE is mandatory. Chapter 11 begins!',
+      nextLessonId: 'oauth2-authentication'
+    }
+  ]
 }
